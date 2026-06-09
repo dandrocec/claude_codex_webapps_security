@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://security-research/specs/catalog.schema.json",
+  "title": "Application Spec Catalog",
+  "description": "Catalog of application specifications to be generated and analysed.",
+  "type": "array",
+  "minItems": 0,
+  "maxItems": 100,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "spec_id",
+      "name",
+      "tier",
+      "category",
+      "language",
+      "framework",
+      "port",
+      "functional_requirements",
+      "target_classes"
+    ],
+    "properties": {
+      "spec_id": {
+        "type": "string",
+        "description": "Unique stable identifier for the spec, e.g. 'S001'.",
+        "pattern": "^S[0-9]{3}$"
+      },
+      "name": {
+        "type": "string",
+        "description": "Human-readable name of the application.",
+        "minLength": 1
+      },
+      "tier": {
+        "type": "string",
+        "description": "Complexity / risk tier.",
+        "enum": ["T1", "T2", "T3", "T4"]
+      },
+      "category": {
+        "type": "string",
+        "description": "Application domain category, e.g. 'auth', 'ecommerce', 'file-upload'.",
+        "minLength": 1
+      },
+      "language": {
+        "type": "string",
+        "description": "Primary implementation language, e.g. 'python', 'javascript', 'typescript'.",
+        "minLength": 1
+      },
+      "framework": {
+        "type": "string",
+        "description": "Primary framework, e.g. 'flask', 'express', 'fastapi'.",
+        "minLength": 1
+      },
+      "port": {
+        "type": "integer",
+        "description": "TCP port the app listens on.",
+        "minimum": 1,
+        "maximum": 65535
+      },
+      "functional_requirements": {
+        "type": "array",
+        "description": "List of functional requirements the generated app must satisfy.",
+        "items": { "type": "string", "minLength": 1 },
+        "minItems": 1
+      },
+      "target_classes": {
+        "type": "array",
+        "description": "List of vulnerability classes intentionally in scope for this spec.",
+        "items": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

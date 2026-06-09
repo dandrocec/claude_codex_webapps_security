@@ -1,0 +1,1 @@
+run_id,spec_id,tool,prompt_variant,tier,language,vuln_class,owasp_category,cwe,severity,cvss,detection_method,tool_name,status,notes
