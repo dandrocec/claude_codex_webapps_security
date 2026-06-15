@@ -1,0 +1,14 @@
+{
+    "name": "example/php-guestbook",
+    "description": "A minimal PHP guestbook: visitors leave a name and message, stored in SQLite and shown newest-first.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
+    },
+    "scripts": {
+        "start": "php -S localhost:5029"
+    }
+}

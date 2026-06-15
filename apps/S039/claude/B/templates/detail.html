@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ event['title'] }}{% endblock %}
+{% block content %}
+  <article class="event-detail">
+    <h1>{{ event['title'] }}</h1>
+    <p class="event-meta">
+      <span class="date">{{ event['event_date'] }}</span>
+      <span class="loc">{{ event['location'] }}</span>
+      <span class="org">Organised by {{ event['organiser_name'] }}</span>
+    </p>
+    {# Preserve author line breaks; value is still auto-escaped by Jinja. #}
+    <div class="description">{{ event['description'] }}</div>
+
+    {% if current_user.is_authenticated and current_user.id == event['organiser_id'] %}
+      <div class="owner-actions">
+        <a class="btn" href="{{ url_for('events.edit', event_id=event['id']) }}">Edit</a>
+        <form class="inline" method="post"
+              action="{{ url_for('events.delete', event_id=event['id']) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    {% endif %}
+  </article>
+  <p><a href="{{ url_for('events.index') }}">&larr; Back to all events</a></p>
+{% endblock %}

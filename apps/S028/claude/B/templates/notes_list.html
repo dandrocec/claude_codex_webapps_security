@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}My notes · Notes{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>My notes</h1>
+  <a class="btn" href="{{ url_for('create_note') }}">+ New note</a>
+</div>
+
+{% if notes %}
+  <ul class="notes">
+    {% for note in notes %}
+      <li class="card note">
+        <div class="note-head">
+          <h2>{{ note.title }}</h2>
+          <time>{{ note.updated_at }}</time>
+        </div>
+        {% if note.body %}<p class="note-body">{{ note.body }}</p>{% endif %}
+        <div class="note-actions">
+          <a href="{{ url_for('edit_note', note_id=note.id) }}">Edit</a>
+          <form action="{{ url_for('delete_note', note_id=note.id) }}"
+                method="post" class="inline"
+                onsubmit="return confirm('Delete this note?');">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="linkbtn danger">Delete</button>
+          </form>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="empty">You don't have any notes yet. <a href="{{ url_for('create_note') }}">Create your first one.</a></p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,37 @@
+<%- include('partials/header', { title: heading }) %>
+
+<section class="form-wrap">
+  <h1><%= heading %></h1>
+  <form action="<%= action %>" method="post" enctype="multipart/form-data" class="stack">
+    <label>
+      Title
+      <input type="text" name="title" required
+             value="<%= project ? project.title : '' %>" />
+    </label>
+    <label>
+      Description
+      <textarea name="description" rows="4"><%= project ? project.description : '' %></textarea>
+    </label>
+    <label>
+      Link (URL)
+      <input type="url" name="link" placeholder="https://example.com"
+             value="<%= project ? project.link : '' %>" />
+    </label>
+    <label>
+      Image
+      <input type="file" name="image" accept="image/*" />
+    </label>
+    <% if (project && project.image) { %>
+      <div class="current-image">
+        <p class="muted">Current image (leave file empty to keep it):</p>
+        <img class="thumb" src="<%= project.image %>" alt="<%= project.title %>" />
+      </div>
+    <% } %>
+    <div class="form-actions">
+      <button type="submit" class="btn">Save</button>
+      <a class="btn ghost" href="/admin">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ heading }} · Reading List{% endblock %}
+{% block content %}
+  <h1>{{ heading }}</h1>
+  <form method="post" class="card form">
+    {{ form.csrf_token }}
+    <p>
+      {{ form.title.label }}
+      {{ form.title(autofocus=true) }}
+      {% for e in form.title.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    </p>
+    <p>
+      {{ form.author.label }}
+      {{ form.author() }}
+      {% for e in form.author.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    </p>
+    <p>
+      {{ form.status.label }}
+      {{ form.status() }}
+      {% for e in form.status.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    </p>
+    <p>
+      {{ form.rating.label }}
+      {{ form.rating() }}
+      {% for e in form.rating.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    </p>
+    {{ form.submit(class="btn") }}
+    <a href="{{ url_for('books.index') }}" class="btn btn-ghost">Cancel</a>
+  </form>
+{% endblock %}

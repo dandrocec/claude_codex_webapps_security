@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}My events{% endblock %}
+
+{% block content %}
+  <h1>My events</h1>
+  <p><a class="btn" href="{{ url_for('create_event') }}">New event</a></p>
+
+  {% if events %}
+    <ul class="event-list">
+      {% for event in events %}
+        <li class="event-card">
+          <div class="event-date">{{ event.date.strftime('%a %d %b %Y') }}</div>
+          <div class="event-body">
+            <h2><a href="{{ url_for('event_detail', event_id=event.id) }}">{{ event.title }}</a></h2>
+            <p class="event-meta">📍 {{ event.location }}</p>
+          </div>
+          <div class="event-actions">
+            <a href="{{ url_for('edit_event', event_id=event.id) }}">Edit</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">You haven't created any events yet.</p>
+  {% endif %}
+{% endblock %}

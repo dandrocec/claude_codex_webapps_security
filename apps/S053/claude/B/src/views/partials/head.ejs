@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= appName %></title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="/static/js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/"><%= appName %></a>
+    <nav>
+      <% if (currentUser) { %>
+        <a href="/admin">Dashboard</a>
+        <form class="inline" method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link-btn">Log out (<%= currentUser.username %>)</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Owner login</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">

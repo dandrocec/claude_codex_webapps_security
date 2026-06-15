@@ -1,0 +1,33 @@
+<%- include('../partials/head') %>
+
+<p><a href="/admin">&larr; Back to list</a></p>
+<h1><%= mode === 'edit' ? 'Edit FAQ' : 'Add FAQ' %></h1>
+
+<% if (errors) { %>
+  <ul class="errors">
+    <% errors.forEach(function (msg) { %><li><%= msg %></li><% }); %>
+  </ul>
+<% } %>
+
+<form class="card" method="post" action="<%= action %>">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <label for="category">Category</label>
+  <input type="text" id="category" name="category" value="<%= faq.category %>"
+         required maxlength="100" placeholder="e.g. Billing">
+
+  <label for="question">Question</label>
+  <input type="text" id="question" name="question" value="<%= faq.question %>"
+         required minlength="3" maxlength="500">
+
+  <label for="answer">Answer</label>
+  <textarea id="answer" name="answer" rows="6" required
+            minlength="3" maxlength="5000"><%= faq.answer %></textarea>
+
+  <div class="form-actions">
+    <button type="submit"><%= mode === 'edit' ? 'Save changes' : 'Create FAQ' %></button>
+    <a class="cancel" href="/admin">Cancel</a>
+  </div>
+</form>
+
+<%- include('../partials/foot') %>

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}New paste{% endblock %}
+{% block content %}
+  <h1>New paste</h1>
+  <form method="post" action="{{ url_for('index') }}">
+    {{ form.csrf_token }}
+    {{ form.content(rows=16, placeholder="Paste your text here…", maxlength=100000) }}
+    {% if form.content.errors %}
+      <ul class="errors">
+        {% for error in form.content.errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    <button type="submit">Create paste</button>
+  </form>
+  {% if not current_user %}
+    <p class="hint">Tip: <a href="{{ url_for('login') }}">log in</a> to keep track of your pastes.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+<%- include('../partials/head') %>
+
+<div class="admin-head">
+  <h1>Manage FAQs</h1>
+  <a class="btn" href="/admin/faqs/new">+ Add FAQ</a>
+</div>
+
+<% if (items.length === 0) { %>
+  <p class="empty">You haven&rsquo;t created any FAQs yet.</p>
+<% } else { %>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Order</th>
+        <th>Category</th>
+        <th>Question</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.forEach(function (faq) { %>
+        <tr>
+          <td class="order">
+            <form class="inline" method="post" action="/admin/faqs/<%= faq.id %>/reorder">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="direction" value="up">
+              <button type="submit" class="link-btn" title="Move up" aria-label="Move up">&uarr;</button>
+            </form>
+            <form class="inline" method="post" action="/admin/faqs/<%= faq.id %>/reorder">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="direction" value="down">
+              <button type="submit" class="link-btn" title="Move down" aria-label="Move down">&darr;</button>
+            </form>
+          </td>
+          <td><%= faq.category %></td>
+          <td><%= faq.question %></td>
+          <td class="actions">
+            <a href="/admin/faqs/<%= faq.id %>/edit">Edit</a>
+            <form class="inline" method="post" action="/admin/faqs/<%= faq.id %>/delete"
+                  onsubmit="return confirm('Delete this FAQ?');">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit" class="link-btn danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('../partials/foot') %>

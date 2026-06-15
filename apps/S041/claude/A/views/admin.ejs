@@ -1,0 +1,82 @@
+<%- include('partials/header', { title: 'Admin · FAQ editor' }) %>
+
+<h1>FAQ editor</h1>
+
+<section class="card form-section">
+  <h2><%= editing ? 'Edit question' : 'Add a question' %></h2>
+
+  <form
+    class="form"
+    method="post"
+    action="<%= editing ? '/admin/faqs/' + editing.id + '/edit' : '/admin/faqs' %>"
+  >
+    <label>
+      Category
+      <input
+        type="text"
+        name="category"
+        list="category-list"
+        required
+        value="<%= editing ? editing.category : '' %>"
+        placeholder="e.g. Billing"
+      >
+      <datalist id="category-list">
+        <% categories.forEach(function (c) { %><option value="<%= c %>"></option><% }); %>
+      </datalist>
+    </label>
+
+    <label>
+      Question
+      <input type="text" name="question" required value="<%= editing ? editing.question : '' %>">
+    </label>
+
+    <label>
+      Answer
+      <textarea name="answer" rows="4" required><%= editing ? editing.answer : '' %></textarea>
+    </label>
+
+    <div class="actions">
+      <button type="submit"><%= editing ? 'Save changes' : 'Add question' %></button>
+      <% if (editing) { %><a class="clear" href="/admin">Cancel</a><% } %>
+    </div>
+  </form>
+</section>
+
+<h2>Existing questions</h2>
+
+<% if (grouped.length === 0) { %>
+  <p class="empty">No questions yet — add your first one above.</p>
+<% } %>
+
+<% grouped.forEach(function (group) { %>
+  <section class="category admin-category">
+    <h3><%= group.category %></h3>
+    <ul class="admin-list">
+      <% group.items.forEach(function (item, i) { %>
+        <li class="admin-item">
+          <div class="admin-text">
+            <strong><%= item.question %></strong>
+            <p><%= item.answer %></p>
+          </div>
+          <div class="admin-controls">
+            <form method="post" action="/admin/faqs/<%= item.id %>/move" class="inline">
+              <input type="hidden" name="direction" value="up">
+              <button type="submit" class="icon-btn" title="Move up" <%= i === 0 ? 'disabled' : '' %>>↑</button>
+            </form>
+            <form method="post" action="/admin/faqs/<%= item.id %>/move" class="inline">
+              <input type="hidden" name="direction" value="down">
+              <button type="submit" class="icon-btn" title="Move down" <%= i === group.items.length - 1 ? 'disabled' : '' %>>↓</button>
+            </form>
+            <a class="btn-sm" href="/admin?edit=<%= item.id %>">Edit</a>
+            <form method="post" action="/admin/faqs/<%= item.id %>/delete" class="inline"
+                  onsubmit="return confirm('Delete this question?');">
+              <button type="submit" class="btn-sm danger">Delete</button>
+            </form>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+  </section>
+<% }); %>
+
+<%- include('partials/footer') %>

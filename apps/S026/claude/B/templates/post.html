@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ post['title'] }} — Flask Blog{% endblock %}
+
+{% block content %}
+<article class="post">
+  <h1>{{ post['title'] }}</h1>
+  <div class="post-meta">
+    by {{ post['username'] }} · {{ post['created_at'] }}
+    {% if post['updated_at'] != post['created_at'] %}
+      · edited {{ post['updated_at'] }}
+    {% endif %}
+  </div>
+
+  {# Jinja2 autoescaping renders the body as text, not HTML -> XSS-safe.
+     Newlines are preserved purely with CSS (white-space: pre-wrap). #}
+  <div class="post-body">{{ post['body'] }}</div>
+
+  {% if current_user.is_authenticated and current_user.id == post['author_id'] %}
+    <div class="post-actions">
+      <a class="button" href="{{ url_for('edit_post', post_id=post['id']) }}">Edit</a>
+      <form action="{{ url_for('delete_post', post_id=post['id']) }}" method="post"
+            class="inline" data-confirm="Delete this post?">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="button button-danger">Delete</button>
+      </form>
+    </div>
+  {% endif %}
+</article>
+
+<p><a href="{{ url_for('index') }}">← Back to all posts</a></p>
+{% endblock %}

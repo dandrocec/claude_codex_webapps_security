@@ -1,0 +1,22 @@
+{
+    "name": "darko/quotes-app",
+    "description": "A small PHP app where logged-in users submit quotes and visitors browse approved ones.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:5046 -t public public/router.php"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

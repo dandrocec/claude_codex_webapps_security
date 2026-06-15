@@ -1,0 +1,9 @@
+<%- include('partials/header', { title: 'Error ' + statusCode }) %>
+
+<section class="card">
+  <h1>Error <%= statusCode %></h1>
+  <p><%= message %></p>
+  <p><a href="/tasks">Back to my tasks</a></p>
+</section>
+
+<%- include('partials/footer') %>

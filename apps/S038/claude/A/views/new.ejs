@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<div class="form-wrap">
+  <h1>Post a job</h1>
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+  <form action="/jobs" method="POST" class="form">
+    <label>Title
+      <input type="text" name="title" value="<%= values.title || '' %>" required />
+    </label>
+    <label>Company
+      <input type="text" name="company" value="<%= values.company || '' %>" required />
+    </label>
+    <label>Location
+      <input type="text" name="location" value="<%= values.location || '' %>" required />
+    </label>
+    <label>Description
+      <textarea name="description" rows="8" required><%= values.description || '' %></textarea>
+    </label>
+    <button type="submit" class="btn">Publish listing</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

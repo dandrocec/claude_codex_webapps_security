@@ -1,0 +1,22 @@
+<%- include('partials/header', { title: 'Register' }) %>
+
+<section class="card">
+  <h1>Create an account</h1>
+  <%- include('partials/errors') %>
+  <form action="/register" method="POST" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" required
+           minlength="3" maxlength="32"
+           value="<%= values.username || '' %>" autofocus>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required
+           minlength="8" maxlength="128">
+
+    <button type="submit">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Log in</a></p>
+</section>
+
+<%- include('partials/footer') %>

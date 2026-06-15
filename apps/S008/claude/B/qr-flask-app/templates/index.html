@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Generate a QR code{% endblock %}
+
+{% block content %}
+  <h1>Generate a QR code</h1>
+  <p class="muted">Enter any text or a URL and we'll turn it into a QR code image.</p>
+
+  <form method="post" action="{{ url_for('index') }}" class="card" novalidate>
+    {{ form.csrf_token }}
+
+    <label for="content">{{ form.content.label.text }}</label>
+    {{ form.content(id="content", maxlength="1800",
+                    placeholder="https://example.com or any text",
+                    autofocus=true) }}
+
+    {% if form.content.errors %}
+      <ul class="errors">
+        {% for error in form.content.errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+
+    {{ form.submit(class="btn") }}
+  </form>
+
+  {% if not current_user.is_authenticated %}
+    <p class="muted small">
+      <a href="{{ url_for('register') }}">Create an account</a> to keep a private
+      history of your generated codes.
+    </p>
+  {% endif %}
+{% endblock %}

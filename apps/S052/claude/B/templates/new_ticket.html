@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}New ticket{% endblock %}
+{% block content %}
+  <h1>Submit a ticket</h1>
+  <form method="post" action="{{ url_for('new_ticket') }}" class="card" novalidate>
+    {{ form.csrf_token }}
+    {{ field(form.subject) }}
+    {{ field(form.description) }}
+    {{ field(form.priority) }}
+    <button type="submit" class="primary">Submit ticket</button>
+  </form>
+{% endblock %}

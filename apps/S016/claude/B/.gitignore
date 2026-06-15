@@ -1,0 +1,4 @@
+/.env
+/vendor/
+/data/votes.json
+/data/votes.json.tmp

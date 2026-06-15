@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<section class="card countdown" data-target="<%= event.target_at %>">
+  <p class="muted">Counting down to</p>
+  <h1 class="event-label"><%= event.label %></h1>
+
+  <div class="timer" id="timer" aria-live="polite">
+    <div class="unit"><span class="num" data-days>--</span><span class="lbl">days</span></div>
+    <div class="unit"><span class="num" data-hours>--</span><span class="lbl">hours</span></div>
+    <div class="unit"><span class="num" data-minutes>--</span><span class="lbl">minutes</span></div>
+    <div class="unit"><span class="num" data-seconds>--</span><span class="lbl">seconds</span></div>
+  </div>
+
+  <p class="target-when muted">Target: <span id="target-readable"></span></p>
+  <p><a href="/">← All countdowns</a></p>
+</section>
+<script src="/js/countdown.js" defer></script>
+<%- include('partials/footer') %>

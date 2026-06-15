@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= typeof pageTitle !== 'undefined' ? pageTitle : 'Survey Builder' %></title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">📋 Survey Builder</a>
+    <nav>
+      <% if (currentUser) { %>
+        <span class="muted">Signed in as <strong><%= currentUser.username %></strong></span>
+        <a href="/surveys/new">+ New survey</a>
+        <form action="/logout" method="post" class="inline">
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">

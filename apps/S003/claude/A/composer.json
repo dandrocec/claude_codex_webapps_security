@@ -1,0 +1,12 @@
+{
+    "name": "demo/tip-calculator",
+    "description": "A single-page PHP tip calculator (bill, tip %, people -> tip, total, per person).",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0"
+    },
+    "scripts": {
+        "start": "php -S localhost:5003"
+    }
+}

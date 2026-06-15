@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calc API</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 32rem;
+      margin: 4rem auto;
+      padding: 0 1rem;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 1.5rem; }
+    form { display: flex; gap: 0.5rem; margin: 1.5rem 0; }
+    input[type="text"] {
+      flex: 1;
+      padding: 0.6rem 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 0.6rem 1.1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover { background: #1d4ed8; }
+    #result {
+      font-size: 1.25rem;
+      min-height: 1.5rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      background: #f4f4f5;
+    }
+    #result.error { background: #fee2e2; color: #b91c1c; }
+    .hint { color: #6b7280; font-size: 0.875rem; }
+  </style>
+</head>
+<body>
+  <h1>Math Expression Calculator</h1>
+  <p class="hint">Enter an expression like <code>2 + 3 * 4</code> and click Calculate.</p>
+
+  <form id="calc-form">
+    <input type="text" id="expression" name="expression" value="2 + 3 * 4" autocomplete="off" />
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const form = document.getElementById('calc-form');
+    const input = document.getElementById('expression');
+    const resultEl = document.getElementById('result');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      resultEl.className = '';
+      resultEl.textContent = 'Calculating…';
+
+      try {
+        const res = await fetch('/calc', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ expression: input.value }),
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          resultEl.className = 'error';
+          resultEl.textContent = 'Error: ' + (data.error || 'Unknown error');
+          return;
+        }
+
+        resultEl.textContent = data.expression + ' = ' + data.result;
+      } catch (err) {
+        resultEl.className = 'error';
+        resultEl.textContent = 'Request failed: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>

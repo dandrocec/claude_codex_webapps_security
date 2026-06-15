@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<div class="page-head">
+  <h1>Browse jobs</h1>
+  <form action="/" method="GET" class="search">
+    <input type="text" name="q" value="<%= q %>" placeholder="Search by keyword..." />
+    <button type="submit">Search</button>
+    <% if (q) { %><a class="clear" href="/">Clear</a><% } %>
+  </form>
+</div>
+
+<% if (q) { %>
+  <p class="muted"><%= jobs.length %> result(s) for &ldquo;<%= q %>&rdquo;</p>
+<% } %>
+
+<% if (jobs.length === 0) { %>
+  <p class="empty">No job listings found.</p>
+<% } else { %>
+  <ul class="job-list">
+    <% jobs.forEach(function (job) { %>
+      <li class="job-card">
+        <h2><a href="/jobs/<%= job.id %>"><%= job.title %></a></h2>
+        <p class="job-meta">
+          <strong><%= job.company %></strong> &middot; <%= job.location %>
+        </p>
+        <p class="job-snippet"><%= job.description.slice(0, 160) %><%= job.description.length > 160 ? '…' : '' %></p>
+        <p class="muted">Posted by <%= job.poster %></p>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+  <h1>All feedback</h1>
+
+  <%
+    // Helper to build a sort link that toggles direction on the active column.
+    function sortLink(col, label) {
+      const nextDir = (sort === col && dir === 'ASC') ? 'desc' : 'asc';
+      const arrow = sort === col ? (dir === 'ASC' ? ' ▲' : ' ▼') : '';
+      return `<a href="/reviews?sort=${col}&dir=${nextDir}">${label}${arrow}</a>`;
+    }
+  %>
+
+  <% if (rows.length === 0) { %>
+    <p class="muted">No feedback submitted yet.</p>
+  <% } else { %>
+    <table class="card table">
+      <thead>
+        <tr>
+          <th><%- sortLink('category', 'Category') %></th>
+          <th><%- sortLink('rating', 'Rating') %></th>
+          <th>Comment</th>
+          <th><%- sortLink('created_at', 'Submitted') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% rows.forEach(function (r) { %>
+          <tr>
+            <td><span class="tag"><%= r.category %></span></td>
+            <td class="stars" title="<%= r.rating %> / 5"><%= '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating) %></td>
+            <td><%= r.comment %></td>
+            <td class="muted"><%= r.created_at %> UTC</td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+
+<%- include('partials/footer') %>

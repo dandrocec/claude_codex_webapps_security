@@ -1,0 +1,12 @@
+{
+    "name": "demo/php-contact-form",
+    "description": "A minimal PHP contact form that stores submissions in a local file and lists them.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4"
+    },
+    "scripts": {
+        "start": "php -S 127.0.0.1:5012"
+    }
+}

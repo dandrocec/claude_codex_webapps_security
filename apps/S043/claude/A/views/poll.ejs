@@ -1,0 +1,65 @@
+<%- include('partials/header') %>
+
+<article class="card">
+  <h1><%= poll.question %></h1>
+  <p class="meta">by <%= poll.author %></p>
+
+  <% if (!hasVoted) { %>
+    <form method="post" action="/polls/<%= poll.id %>/vote" class="vote-form">
+      <% options.forEach(function (o) { %>
+        <label class="choice">
+          <input type="radio" name="option_id" value="<%= o.id %>" required>
+          <span><%= o.text %></span>
+        </label>
+      <% }); %>
+      <button type="submit">Vote</button>
+    </form>
+  <% } else { %>
+    <p class="voted-note">✓ You've voted in this poll. Live results below.</p>
+  <% } %>
+
+  <h2>Results <span class="muted" id="total"></span></h2>
+  <canvas id="chart" height="220"></canvas>
+</article>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+  const pollId = <%= poll.id %>;
+  const ctx = document.getElementById('chart');
+  let chart;
+
+  async function refresh() {
+    const res = await fetch(`/polls/${pollId}/results.json`);
+    if (!res.ok) return;
+    const data = await res.json();
+    document.getElementById('total').textContent =
+      `· ${data.total} vote${data.total === 1 ? '' : 's'}`;
+
+    const labels = data.options.map(o => o.text);
+    const counts = data.options.map(o => o.votes);
+
+    if (!chart) {
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{ label: 'Votes', data: counts, backgroundColor: '#4f46e5' }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: { x: { beginAtZero: true, ticks: { precision: 0 } } },
+          plugins: { legend: { display: false } }
+        }
+      });
+    } else {
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = counts;
+      chart.update();
+    }
+  }
+
+  refresh();
+  setInterval(refresh, 3000); // live updates
+</script>
+
+<%- include('partials/footer') %>

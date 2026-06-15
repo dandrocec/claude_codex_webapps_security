@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<div class="form-wrap">
+  <h1>Edit listing</h1>
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+  <form action="/jobs/<%= job.id %>" method="POST" class="form">
+    <label>Title
+      <input type="text" name="title" value="<%= job.title %>" required />
+    </label>
+    <label>Company
+      <input type="text" name="company" value="<%= job.company %>" required />
+    </label>
+    <label>Location
+      <input type="text" name="location" value="<%= job.location %>" required />
+    </label>
+    <label>Description
+      <textarea name="description" rows="8" required><%= job.description %></textarea>
+    </label>
+    <div class="actions">
+      <button type="submit" class="btn">Save changes</button>
+      <a class="btn btn-secondary" href="/jobs/<%= job.id %>">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

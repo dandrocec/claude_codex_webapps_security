@@ -1,0 +1,94 @@
+<%- include('partials/header') %>
+
+<section class="month-bar">
+  <form method="get" action="/" class="inline month-picker">
+    <label for="month">Month</label>
+    <input id="month" name="month" type="month" value="<%= month.value %>" />
+    <button type="submit" class="secondary">View</button>
+  </form>
+  <div class="total">
+    <span class="total-label"><%= month.label %> total</span>
+    <span class="total-amount">$<%= total %></span>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Add an expense</h2>
+
+  <% if (formError) { %>
+    <ul class="errors"><li><%= formError %></li></ul>
+  <% } %>
+
+  <form method="post" action="/expenses?month=<%= month.value %>" class="expense-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <div class="field">
+      <label for="amount">Amount</label>
+      <input id="amount" name="amount" type="text" inputmode="decimal"
+             placeholder="0.00" value="<%= values.amount || '' %>" required />
+    </div>
+
+    <div class="field">
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <% categories.forEach(function (c) { %>
+          <option value="<%= c %>" <%= values.category === c ? 'selected' : '' %>><%= c %></option>
+        <% }); %>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="spent_on">Date</label>
+      <input id="spent_on" name="spent_on" type="date"
+             value="<%= values.spent_on || '' %>" required />
+    </div>
+
+    <div class="field grow">
+      <label for="note">Note</label>
+      <input id="note" name="note" type="text" maxlength="200"
+             value="<%= values.note || '' %>" placeholder="optional" />
+    </div>
+
+    <button type="submit" class="primary">Add</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Expenses</h2>
+  <% if (expenses.length === 0) { %>
+    <p class="muted">No expenses recorded for this month yet.</p>
+  <% } else { %>
+    <table class="expenses">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Note</th>
+          <th class="num">Amount</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% expenses.forEach(function (e) { %>
+          <tr>
+            <td><%= e.spent_on %></td>
+            <td><%= e.category %></td>
+            <td><%= e.note %></td>
+            <td class="num">$<%= e.amountDisplay %></td>
+            <td class="actions">
+              <a class="link-btn" href="/expenses/<%= e.id %>/edit">Edit</a>
+              <form class="inline" method="post"
+                    action="/expenses/<%= e.id %>/delete"
+                    onsubmit="return confirm('Delete this expense?');">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="link-btn danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

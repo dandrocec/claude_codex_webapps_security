@@ -1,0 +1,115 @@
+:root {
+  --bg: #f6f7f9;
+  --fg: #1f2328;
+  --muted: #57606a;
+  --border: #d0d7de;
+  --add-bg: #e6ffec;
+  --add-border: #a6e3b4;
+  --remove-bg: #ffebe9;
+  --remove-border: #f0aeb0;
+  --accent: #0969da;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+h1 { margin-bottom: 0.25rem; }
+.subtitle { margin-top: 0; color: var(--muted); }
+
+.error {
+  background: var(--remove-bg);
+  border: 1px solid var(--remove-border);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+.panes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .panes { grid-template-columns: 1fr; }
+}
+
+.pane { display: flex; flex-direction: column; }
+.pane span { font-weight: 600; margin-bottom: 0.35rem; }
+
+textarea {
+  width: 100%;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.9rem;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  resize: vertical;
+  background: #fff;
+  color: var(--fg);
+}
+
+button {
+  margin-top: 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(1.05); }
+
+.results { margin-top: 2.5rem; }
+
+.legend { margin-bottom: 0.5rem; }
+.chip {
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  margin-right: 0.5rem;
+}
+.chip.add { background: var(--add-bg); border: 1px solid var(--add-border); }
+.chip.remove { background: var(--remove-bg); border: 1px solid var(--remove-border); }
+
+.diff {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.88rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.diff td { padding: 0.1rem 0.6rem; vertical-align: top; }
+.diff td.marker {
+  width: 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  user-select: none;
+  border-right: 1px solid var(--border);
+}
+.diff td.line { white-space: pre-wrap; word-break: break-word; }
+
+.diff tr.add { background: var(--add-bg); }
+.diff tr.remove { background: var(--remove-bg); }
+
+.empty { color: var(--muted); }
+
+a { color: var(--accent); }

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Weekly totals · Time Tracker{% endblock %}
+{% block content %}
+<h1>Weekly totals</h1>
+{% if weekly_data %}
+  {% for week in weekly_data %}
+  <div class="card">
+    <h2 style="margin-top:0;font-size:1.05rem;">
+      Week of {{ week.start.isoformat() }} – {{ week.end.isoformat() }}
+      <span class="muted">· {{ "%.2f"|format(week.total) }} h total</span>
+    </h2>
+    <table>
+      <thead><tr><th>Project</th><th>Hours</th></tr></thead>
+      <tbody>
+        {% for project, hours in week.projects %}
+        <tr><td>{{ project }}</td><td>{{ "%.2f"|format(hours) }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+{% else %}
+<p class="muted">No data yet. <a href="{{ url_for('index') }}">Log some time</a> to see weekly totals.</p>
+{% endif %}
+{% endblock %}

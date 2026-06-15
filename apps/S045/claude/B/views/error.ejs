@@ -1,0 +1,10 @@
+<%- include('partials/header') %>
+<section class="card narrow">
+  <h1><%= status %> · <%= title %></h1>
+  <p class="alert error"><%= message %></p>
+  <% if (typeof detail !== 'undefined' && detail) { %>
+    <p class="muted">Detail (development only): <%= detail %></p>
+  <% } %>
+  <p><a href="/files">Back to my files</a></p>
+</section>
+<%- include('partials/footer') %>

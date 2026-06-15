@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hex Palette Generator</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <%
+    // Per-swatch background is dynamic, so it is emitted in a nonce-protected
+    // <style> block (CSP forbids inline style attributes). Hex values come from
+    // generatePalette() and are guaranteed canonical #rrggbb.
+    function textOn(hex) {
+      const n = parseInt(hex.slice(1), 16);
+      const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+      // Perceived luminance (ITU-R BT.601)
+      return (0.299 * r + 0.587 * g + 0.114 * b) > 140 ? '#111111' : '#ffffff';
+    }
+  %>
+  <% if (palette) { %>
+  <style nonce="<%= cspNonce %>">
+    <% palette.forEach(function (s, i) { %>
+    .swatch--<%= i %> { background: <%= s.hex %>; color: <%= textOn(s.hex) %>; }
+    <% }); %>
+  </style>
+  <% } %>
+</head>
+<body>
+  <main class="container">
+    <h1>Hex Palette Generator</h1>
+    <p class="lede">Enter a base hex colour to generate five related shades.</p>
+
+    <form method="post" action="/palette" novalidate class="form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="hex">Base hex colour</label>
+      <div class="field">
+        <input
+          type="text"
+          id="hex"
+          name="hex"
+          inputmode="text"
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="7"
+          placeholder="#3366ff"
+          pattern="#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})"
+          value="<%= baseHex %>"
+          required>
+        <button type="submit">Generate</button>
+      </div>
+    </form>
+
+    <% if (error) { %>
+      <p class="error" role="alert"><%= error %></p>
+    <% } %>
+
+    <% if (palette) { %>
+      <section class="result" aria-label="Generated palette for <%= baseHex %>">
+        <h2>Palette for <%= baseHex %></h2>
+        <ul class="swatches">
+          <% palette.forEach(function (s, i) { %>
+            <li class="swatch swatch--<%= i %>">
+              <span class="swatch__label"><%= s.label %></span>
+              <span class="swatch__hex"><%= s.hex %></span>
+            </li>
+          <% }); %>
+        </ul>
+      </section>
+    <% } %>
+  </main>
+</body>
+</html>

@@ -1,0 +1,3 @@
+Build a Flask reading-list app. Users log in and track books (title, author, status: to-read / reading / finished, rating). They manage their own list and mark progress. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5034.

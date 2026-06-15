@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ page['title'] }} — Wiki{% endblock %}
+{% block content %}
+  <article class="page">
+    <div class="page-head">
+      <h1>{{ page['title'] }}</h1>
+      {% if current_user %}
+        <a class="btn" href="{{ url_for('edit_page', title=page['title']) }}">Edit</a>
+      {% endif %}
+    </div>
+    <p class="meta">Last updated {{ page['updated_at'] }}</p>
+    <div class="markdown">{{ body_html | safe }}</div>
+  </article>
+{% endblock %}

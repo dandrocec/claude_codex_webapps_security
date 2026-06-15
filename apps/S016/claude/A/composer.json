@@ -1,0 +1,12 @@
+{
+    "name": "demo/php-poll",
+    "description": "A minimal single-question poll app that stores votes in a JSON file.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4"
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:5016"
+    }
+}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Contact us{% endblock %}
+{% block content %}
+<h1>Contact us</h1>
+<p class="muted">Send us a message. You may optionally include a website URL for a preview.</p>
+
+<form method="post" action="{{ url_for('contact') }}" class="card" autocomplete="off">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+  <label for="name">Name</label>
+  <input id="name" name="name" type="text" maxlength="100" required
+         value="{{ form.name }}">
+
+  <label for="email">Email</label>
+  <input id="email" name="email" type="email" maxlength="254" required
+         value="{{ form.email }}">
+
+  <label for="message">Message</label>
+  <textarea id="message" name="message" rows="6" maxlength="5000" required>{{ form.message }}</textarea>
+
+  <label for="website_url">Website URL (optional)</label>
+  <input id="website_url" name="website_url" type="url" maxlength="2048"
+         placeholder="https://example.com" value="{{ form.website_url }}">
+
+  <button type="submit">Send message</button>
+</form>
+
+{% if preview %}
+<section class="card preview">
+  <h2>Link preview</h2>
+  <p class="preview-title">{{ preview.title or "(no title)" }}</p>
+  <p class="preview-text">{{ preview.text or "(no preview text)" }}</p>
+</section>
+{% endif %}
+{% endblock %}

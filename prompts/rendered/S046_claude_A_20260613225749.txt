@@ -1,0 +1,3 @@
+Build a PHP quotes app. Logged-in users submit quotes (text + author); a public page lists all approved quotes and lets visitors filter by author. Submitters can edit their own quotes. Store data in a database.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5046.

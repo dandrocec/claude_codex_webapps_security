@@ -1,0 +1,776 @@
+ Image csj/s020-claude-b Building 
+ Image csj/s017-claude-a Building 
+ Image csj/s016-claude-a Building 
+ Image csj/s020-claude-a Building 
+ Image csj/s019-claude-a Building 
+ Image csj/s016-claude-b Building 
+ Image csj/s018-claude-b Building 
+ Image csj/s019-claude-b Building 
+ Image csj/s018-claude-a Building 
+ Image csj/s017-claude-b Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 6.43kB done
+#1 DONE 0.0s
+
+#2 [s019-claude-a internal] load build definition from Dockerfile.python
+#2 transferring dockerfile: 1.76kB done
+#2 DONE 0.0s
+
+#3 [s016-claude-a internal] load build definition from Dockerfile.php
+#3 transferring dockerfile: 2.13kB done
+#3 DONE 0.0s
+
+#4 [s020-claude-b internal] load build definition from Dockerfile.node
+#4 transferring dockerfile: 1.84kB done
+#4 DONE 0.0s
+
+#5 [s020-claude-b internal] load metadata for docker.io/library/node:22-slim
+#5 ...
+
+#6 [auth] library/composer:pull token for registry-1.docker.io
+#6 DONE 0.0s
+
+#7 [auth] library/php:pull token for registry-1.docker.io
+#7 DONE 0.0s
+
+#8 [auth] library/node:pull token for registry-1.docker.io
+#8 DONE 0.0s
+
+#9 [auth] library/python:pull token for registry-1.docker.io
+#9 DONE 0.0s
+
+#10 [s019-claude-a internal] load metadata for docker.io/library/python:3.12-slim
+#10 DONE 1.5s
+
+#5 [s020-claude-a internal] load metadata for docker.io/library/node:22-slim
+#5 DONE 1.5s
+
+#11 [s016-claude-b internal] load metadata for docker.io/library/composer:latest
+#11 DONE 1.5s
+
+#12 [s018-claude-a internal] load .dockerignore
+#12 transferring context: 2B done
+#12 DONE 0.0s
+
+#13 [s020-claude-b internal] load .dockerignore
+#13 transferring context: 2B done
+#13 DONE 0.0s
+
+#14 [s018-claude-b internal] load .dockerignore
+#14 transferring context: 2B done
+#14 DONE 0.0s
+
+#15 [s020-claude-a internal] load .dockerignore
+#15 transferring context: 2B done
+#15 DONE 0.0s
+
+#16 [s016-claude-b internal] load metadata for docker.io/library/php:apache
+#16 DONE 1.6s
+
+#17 [s017-claude-a internal] load .dockerignore
+#17 transferring context: 2B done
+#17 DONE 0.0s
+
+#18 [s019-claude-b internal] load .dockerignore
+#18 transferring context: 2B done
+#18 DONE 0.0s
+
+#19 [s017-claude-b internal] load .dockerignore
+#19 transferring context: 2B done
+#19 DONE 0.1s
+
+#20 [s019-claude-a internal] load .dockerignore
+#20 transferring context: 2B done
+#20 DONE 0.1s
+
+#21 [s016-claude-a internal] load .dockerignore
+#21 transferring context: 2B done
+#21 DONE 0.0s
+
+#22 [s016-claude-a internal] load build context
+#22 DONE 0.0s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 resolve docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 ...
+
+#24 [s018-claude-a internal] load build context
+#24 transferring context: 8.53kB done
+#24 DONE 0.0s
+
+#25 [s020-claude-b internal] load build context
+#25 transferring context: 15.23kB done
+#25 DONE 0.0s
+
+#26 [s020-claude-a internal] load build context
+#26 transferring context: 5.94kB done
+#26 DONE 0.1s
+
+#27 [s018-claude-b internal] load build context
+#27 transferring context: 36.49kB done
+#27 DONE 0.1s
+
+#28 [s016-claude-b internal] load .dockerignore
+#28 transferring context: 2B done
+#28 DONE 0.1s
+
+#29 [s019-claude-a internal] load build context
+#29 transferring context: 6.80kB done
+#29 DONE 0.2s
+
+#23 [s016-claude-b stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 resolve docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f 0.0s done
+#23 ...
+
+#30 [s017-claude-b internal] load build context
+#30 transferring context: 15.64kB done
+#30 DONE 0.2s
+
+#31 [s017-claude-a internal] load build context
+#31 transferring context: 6.28kB done
+#31 DONE 0.2s
+
+#32 [s019-claude-b internal] load build context
+#32 transferring context: 15.95kB done
+#32 DONE 0.2s
+
+#22 [s016-claude-a internal] load build context
+#22 transferring context: 8.50kB done
+#22 DONE 0.2s
+
+#33 [s016-claude-b internal] load build context
+#33 transferring context: 25.94kB done
+#33 DONE 0.2s
+
+#34 [s019-claude-b 1/4] FROM docker.io/library/python:3.12-slim@sha256:2eb3cdf88d45b1c304d593dfe77f431e00ca13c6e707416a259ed3987d5c6aa8
+#34 resolve docker.io/library/python:3.12-slim@sha256:2eb3cdf88d45b1c304d593dfe77f431e00ca13c6e707416a259ed3987d5c6aa8 0.0s done
+#34 sha256:4b6b2afbcb1ea17577af7be93b9dfd8431a3e3a1dc834ede13df40147db94d77 0B / 12.11MB 0.2s
+#34 sha256:6dc8148c4b61cf7dd8cff2c6146ffb5855f3d0cc2770312e6795a8fd68072e02 249B / 249B 0.3s done
+#34 sha256:6ec7f4e699d76dee8107525bf275ad5506fc96ae25aeaf21fbd1633853ed49a2 0B / 1.29MB 0.2s
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 0B / 29.79MB 0.2s
+#34 ...
+
+#35 [s016-claude-b] FROM docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497
+#35 resolve docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497 0.0s done
+#35 DONE 0.7s
+
+#34 [s019-claude-b 1/4] FROM docker.io/library/python:3.12-slim@sha256:2eb3cdf88d45b1c304d593dfe77f431e00ca13c6e707416a259ed3987d5c6aa8
+#34 sha256:4b6b2afbcb1ea17577af7be93b9dfd8431a3e3a1dc834ede13df40147db94d77 2.10MB / 12.11MB 0.3s
+#34 sha256:6dc8148c4b61cf7dd8cff2c6146ffb5855f3d0cc2770312e6795a8fd68072e02 249B / 249B 0.3s done
+#34 sha256:4b6b2afbcb1ea17577af7be93b9dfd8431a3e3a1dc834ede13df40147db94d77 5.24MB / 12.11MB 0.5s
+#34 sha256:4b6b2afbcb1ea17577af7be93b9dfd8431a3e3a1dc834ede13df40147db94d77 7.34MB / 12.11MB 0.6s
+#34 sha256:6ec7f4e699d76dee8107525bf275ad5506fc96ae25aeaf21fbd1633853ed49a2 1.29MB / 1.29MB 0.6s done
+#34 sha256:4b6b2afbcb1ea17577af7be93b9dfd8431a3e3a1dc834ede13df40147db94d77 12.11MB / 12.11MB 0.8s done
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 4.19MB / 29.79MB 0.8s
+#34 sha256:4b6b2afbcb1ea17577af7be93b9dfd8431a3e3a1dc834ede13df40147db94d77 12.11MB / 12.11MB 0.8s done
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 6.29MB / 29.79MB 0.9s
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 9.44MB / 29.79MB 1.1s
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 11.53MB / 29.79MB 1.2s
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 15.73MB / 29.79MB 1.4s
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 18.87MB / 29.79MB 1.5s
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 20.97MB / 29.79MB 1.7s
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 23.07MB / 29.79MB 1.8s
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 26.21MB / 29.79MB 2.0s
+#34 sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 29.79MB / 29.79MB 2.1s done
+#34 extracting sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97
+#34 extracting sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 0.6s done
+#34 extracting sha256:72c03230f1363a3fb61d2f98504cf168bad3fe22f511ad2005dc021515d7ce97 0.6s done
+#34 extracting sha256:6ec7f4e699d76dee8107525bf275ad5506fc96ae25aeaf21fbd1633853ed49a2 0.1s done
+#34 extracting sha256:4b6b2afbcb1ea17577af7be93b9dfd8431a3e3a1dc834ede13df40147db94d77
+#34 extracting sha256:4b6b2afbcb1ea17577af7be93b9dfd8431a3e3a1dc834ede13df40147db94d77 0.2s done
+#34 extracting sha256:6dc8148c4b61cf7dd8cff2c6146ffb5855f3d0cc2770312e6795a8fd68072e02 0.0s done
+#34 extracting sha256:6dc8148c4b61cf7dd8cff2c6146ffb5855f3d0cc2770312e6795a8fd68072e02 0.0s done
+#34 DONE 3.4s
+
+#36 [s019-claude-b 2/4] WORKDIR /app
+#36 DONE 0.1s
+
+#37 [s019-claude-a 3/4] COPY . /app
+#37 DONE 0.0s
+
+#38 [s020-claude-a 1/4] FROM docker.io/library/node:22-slim@sha256:bc077cd3bf65ac6f8b2dd997fd9b6d30c8ef52c49297d5a087c94f5653759e6f
+#38 resolve docker.io/library/node:22-slim@sha256:bc077cd3bf65ac6f8b2dd997fd9b6d30c8ef52c49297d5a087c94f5653759e6f 0.0s done
+#38 sha256:6122a3c9fecb1517028667d439f706ed4441beeaf316b5f4f18f5d912be0e0f4 448B / 448B 0.3s done
+#38 sha256:005e091ec5205320dae7839c58761274f4adbf008e9c0b29b94b7a4c37f5f56c 1.71MB / 1.71MB 0.4s done
+#38 sha256:419ef9ca8c7d654daa20932f9c6fbb8b17e74be0fa0d54045a6b1847ebbab25a 29.36MB / 49.93MB 2.6s
+#38 sha256:911b8249aa1ae1cbce06c9d7e1d0985b6e6db95465e7eef2ec918aa2475794eb 3.31kB / 3.31kB 0.2s done
+#38 sha256:b9136609bef0128191aa157637b98dd7b98e52154ca60c18258d65957a01c6d0 18.87MB / 28.24MB 2.1s
+#38 ...
+
+#39 [s017-claude-b 3/4] COPY . /app
+#39 DONE 0.0s
+
+#40 [s019-claude-b 3/4] COPY . /app
+#40 DONE 0.0s
+
+#41 [s017-claude-a 3/4] COPY . /app
+#41 DONE 0.1s
+
+#38 [s020-claude-a 1/4] FROM docker.io/library/node:22-slim@sha256:bc077cd3bf65ac6f8b2dd997fd9b6d30c8ef52c49297d5a087c94f5653759e6f
+#38 sha256:b9136609bef0128191aa157637b98dd7b98e52154ca60c18258d65957a01c6d0 20.97MB / 28.24MB 2.3s
+#38 sha256:419ef9ca8c7d654daa20932f9c6fbb8b17e74be0fa0d54045a6b1847ebbab25a 35.65MB / 49.93MB 2.9s
+#38 sha256:b9136609bef0128191aa157637b98dd7b98e52154ca60c18258d65957a01c6d0 24.12MB / 28.24MB 2.4s
+#38 sha256:b9136609bef0128191aa157637b98dd7b98e52154ca60c18258d65957a01c6d0 26.21MB / 28.24MB 2.6s
+#38 sha256:419ef9ca8c7d654daa20932f9c6fbb8b17e74be0fa0d54045a6b1847ebbab25a 39.85MB / 49.93MB 3.2s
+#38 sha256:b9136609bef0128191aa157637b98dd7b98e52154ca60c18258d65957a01c6d0 28.24MB / 28.24MB 2.7s done
+#38 extracting sha256:b9136609bef0128191aa157637b98dd7b98e52154ca60c18258d65957a01c6d0
+#38 sha256:419ef9ca8c7d654daa20932f9c6fbb8b17e74be0fa0d54045a6b1847ebbab25a 42.99MB / 49.93MB 3.3s
+#38 sha256:419ef9ca8c7d654daa20932f9c6fbb8b17e74be0fa0d54045a6b1847ebbab25a 47.19MB / 49.93MB 3.5s
+#38 sha256:419ef9ca8c7d654daa20932f9c6fbb8b17e74be0fa0d54045a6b1847ebbab25a 49.93MB / 49.93MB 3.6s done
+#38 extracting sha256:b9136609bef0128191aa157637b98dd7b98e52154ca60c18258d65957a01c6d0 0.7s done
+#38 extracting sha256:911b8249aa1ae1cbce06c9d7e1d0985b6e6db95465e7eef2ec918aa2475794eb 0.0s done
+#38 extracting sha256:419ef9ca8c7d654daa20932f9c6fbb8b17e74be0fa0d54045a6b1847ebbab25a
+#38 extracting sha256:419ef9ca8c7d654daa20932f9c6fbb8b17e74be0fa0d54045a6b1847ebbab25a 1.0s done
+#38 extracting sha256:005e091ec5205320dae7839c58761274f4adbf008e9c0b29b94b7a4c37f5f56c
+#38 extracting sha256:005e091ec5205320dae7839c58761274f4adbf008e9c0b29b94b7a4c37f5f56c 0.0s done
+#38 extracting sha256:6122a3c9fecb1517028667d439f706ed4441beeaf316b5f4f18f5d912be0e0f4 0.0s done
+#38 DONE 5.8s
+
+#42 [s018-claude-a 2/4] WORKDIR /app
+#42 DONE 0.2s
+
+#35 [s016-claude-a] FROM docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497
+#35 sha256:b5979eedbc3c59f7dc4e7898c37426fa17e47c175ea8b36be7c43b14768abd23 93B / 93B 0.3s done
+#35 sha256:ceeebb1c9ff22257db03bcddc11d7d0bc4e2e9010e02b3af18d5adb0a94358f3 418B / 418B 0.2s done
+#35 sha256:d24a32bc3485f9d1a1462d7eae64f81ec01930ef6d6109c01a09c7d907b79441 1.05MB / 1.05MB 0.8s done
+#35 sha256:acc0bdb672e631d3ea0a4936e5e8af277cb340e6f4324093878dab190b0323a6 258B / 258B 0.2s done
+#35 sha256:6cfa3487cc04ed57638bf705320ea3a327c27813420f98633e29489bede7e113 17.83MB / 31.89MB 3.3s
+#35 sha256:fd40180fcb180475e23c54359836d65693599e62ab311e0496a420e1b160bdd6 23.24kB / 23.24kB 0.2s done
+#35 sha256:bbaa2b5042ebbbe740a84b544ecce389d952c2cddfa157cdaf601defe284c363 2.45kB / 2.45kB 0.2s done
+#35 sha256:399909e7c420dbfdb84d4ab87c20c5d80b5c27539ba5a922fa1b16d3c94ec684 22.80MB / 22.80MB 1.4s done
+#35 sha256:4f765cbf69390ee21751a543244a5de8e0a9e8e547a695f88be0216c2b71dcfa 486B / 486B 0.2s done
+#35 sha256:19dc19e1c0bad58da34b8c12b696f0caea74deeba6ad71224f02800d8a2d4129 11.53MB / 14.42MB 1.1s
+#35 sha256:c9306d8986c54d88716638e932c65895c9da939b93ab385534c278e380995edd 224B / 224B 0.2s done
+#35 sha256:f03b878ed4b0c32142a9debaf795074fcfb7f97bada684da3d7970499ec8250c 933B / 933B 0.2s done
+#35 ...
+
+#43 [s018-claude-a 3/4] COPY . /app
+#43 DONE 0.1s
+
+#44 [s020-claude-b 3/4] COPY . /app
+#44 DONE 0.1s
+
+#45 [s020-claude-a 3/4] COPY . /app
+#45 DONE 0.1s
+
+#46 [s018-claude-b 3/4] COPY . /app
+#46 DONE 0.1s
+
+#35 [s016-claude-a] FROM docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497
+#35 sha256:19dc19e1c0bad58da34b8c12b696f0caea74deeba6ad71224f02800d8a2d4129 14.42MB / 14.42MB 1.2s done
+#35 ...
+
+#47 [s018-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#47 ...
+
+#35 [s016-claude-b] FROM docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497
+#35 sha256:6cfa3487cc04ed57638bf705320ea3a327c27813420f98633e29489bede7e113 31.89MB / 31.89MB 4.7s done
+#35 sha256:19dc19e1c0bad58da34b8c12b696f0caea74deeba6ad71224f02800d8a2d4129 14.42MB / 14.42MB 1.2s done
+#35 sha256:5eec522a523cd8996ce78e3a99e19af531a6e82199d7b3d922ea42dc16bbf6ab 5.98MB / 5.98MB 0.5s done
+#35 sha256:9b70e313681f44d32991ec943f89228bc91d7431d4a84feafc269a76e3f96a63 3.87MB / 3.87MB 0.4s done
+#35 extracting sha256:9b70e313681f44d32991ec943f89228bc91d7431d4a84feafc269a76e3f96a63 0.1s done
+#35 extracting sha256:5eec522a523cd8996ce78e3a99e19af531a6e82199d7b3d922ea42dc16bbf6ab 0.1s done
+#35 extracting sha256:f03b878ed4b0c32142a9debaf795074fcfb7f97bada684da3d7970499ec8250c 0.0s done
+#35 extracting sha256:c9306d8986c54d88716638e932c65895c9da939b93ab385534c278e380995edd 0.0s done
+#35 extracting sha256:19dc19e1c0bad58da34b8c12b696f0caea74deeba6ad71224f02800d8a2d4129 0.1s done
+#35 extracting sha256:4f765cbf69390ee21751a543244a5de8e0a9e8e547a695f88be0216c2b71dcfa 0.0s done
+#35 extracting sha256:399909e7c420dbfdb84d4ab87c20c5d80b5c27539ba5a922fa1b16d3c94ec684 0.6s done
+#35 DONE 7.9s
+
+#35 [s016-claude-b] FROM docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497
+#35 extracting sha256:399909e7c420dbfdb84d4ab87c20c5d80b5c27539ba5a922fa1b16d3c94ec684 0.6s done
+#35 extracting sha256:bbaa2b5042ebbbe740a84b544ecce389d952c2cddfa157cdaf601defe284c363 0.0s done
+#35 extracting sha256:fd40180fcb180475e23c54359836d65693599e62ab311e0496a420e1b160bdd6 0.0s done
+#35 extracting sha256:6cfa3487cc04ed57638bf705320ea3a327c27813420f98633e29489bede7e113
+#35 ...
+
+#48 [s019-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#48 2.161 Collecting Flask<4.0,>=3.0 (from -r requirements.txt (line 1))
+#48 2.445   Downloading flask-3.1.3-py3-none-any.whl.metadata (3.2 kB)
+#48 2.533 Collecting blinker>=1.9.0 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#48 2.570   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#48 2.635 Collecting click>=8.1.3 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#48 2.656   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#48 2.694 Collecting itsdangerous>=2.2.0 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#48 2.734   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#48 2.830 Collecting jinja2>=3.1.2 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#48 2.901   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#48 3.042 Collecting markupsafe>=2.1.1 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#48 3.064   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#48 3.110 Collecting werkzeug>=3.1.0 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#48 3.140   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#48 3.199 Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+#48 3.386 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#48 3.443 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#48 3.531 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#48 3.577 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#48 3.702 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#48 3.768 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#48 3.876 Installing collected packages: markupsafe, itsdangerous, click, blinker, werkzeug, jinja2, Flask
+#48 4.333 Successfully installed Flask-3.1.3 blinker-1.9.0 click-8.4.1 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 werkzeug-3.1.8
+#48 4.335 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#48 4.437 
+#48 4.437 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#48 4.437 [notice] To update, run: pip install --upgrade pip
+#48 DONE 4.6s
+
+#49 [s017-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#49 2.175 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#49 2.427   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#49 2.534 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#49 2.568   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#49 2.623 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#49 2.642   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#49 2.682 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#49 2.717   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#49 2.827 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#49 2.898   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#49 2.968 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#49 3.001   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#49 3.114 Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->Flask==3.0.3->-r requirements.txt (line 1))
+#49 3.149   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#49 3.236 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#49 3.395 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#49 3.444 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#49 3.554 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#49 3.598 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#49 3.714 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#49 3.841 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#49 3.872 Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, Flask
+#49 4.330 Successfully installed Flask-3.0.3 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.8 blinker-1.9.0 click-8.4.1 itsdangerous-2.2.0
+#49 4.331 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#49 4.430 
+#49 4.430 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#49 4.430 [notice] To update, run: pip install --upgrade pip
+#49 DONE 4.6s
+
+#50 [s017-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#50 2.211 Collecting Flask<4.0,>=3.0 (from -r requirements.txt (line 1))
+#50 2.441   Downloading flask-3.1.3-py3-none-any.whl.metadata (3.2 kB)
+#50 2.533 Collecting Flask-WTF<2.0,>=1.2 (from -r requirements.txt (line 2))
+#50 2.572   Downloading flask_wtf-1.3.0-py3-none-any.whl.metadata (3.4 kB)
+#50 2.629 Collecting blinker>=1.9.0 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#50 2.646   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#50 2.696 Collecting click>=8.1.3 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#50 2.752   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#50 2.857 Collecting itsdangerous>=2.2.0 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#50 2.921   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#50 2.994 Collecting jinja2>=3.1.2 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#50 3.018   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#50 3.115 Collecting markupsafe>=2.1.1 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#50 3.150   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#50 3.249 Collecting werkzeug>=3.1.0 (from Flask<4.0,>=3.0->-r requirements.txt (line 1))
+#50 3.319   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#50 3.404 Collecting wtforms (from Flask-WTF<2.0,>=1.2->-r requirements.txt (line 2))
+#50 3.452   Downloading wtforms-3.2.2-py3-none-any.whl.metadata (4.9 kB)
+#50 3.490 Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+#50 3.582 Downloading flask_wtf-1.3.0-py3-none-any.whl (13 kB)
+#50 3.622 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#50 3.686 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#50 3.751 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#50 3.799 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#50 3.855 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#50 3.883 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#50 3.937 Downloading wtforms-3.2.2-py3-none-any.whl (158 kB)
+#50 3.987 Installing collected packages: markupsafe, itsdangerous, click, blinker, wtforms, werkzeug, jinja2, Flask, Flask-WTF
+#50 4.501 Successfully installed Flask-3.1.3 Flask-WTF-1.3.0 blinker-1.9.0 click-8.4.1 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 werkzeug-3.1.8 wtforms-3.2.2
+#50 4.501 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#50 4.633 
+#50 4.633 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#50 4.633 [notice] To update, run: pip install --upgrade pip
+#50 DONE 4.8s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 sha256:6e6ccfd620af9b10d9d9e9e5663cea68c99d49b3da93c67ae686a93abdaa83b4 890B / 890B 0.2s done
+#23 sha256:84e65e80bb236b62d43f77bef99e9191c61ec3b03313962da839a97acb3805b4 246B / 246B 0.2s done
+#23 sha256:42990ece05e5decbbd46e88b4f3e3faf2c4ea9f8a4786adefb3d7c9f634c6124 2.46kB / 2.46kB 0.2s done
+#23 sha256:3c6bbd9ceb7a04381977c4503ee39bb4d5dc6e044596a65cf7057cb8a3208b8d 15.17MB / 15.17MB 1.2s done
+#23 sha256:5bbf2005cda7c13e8e2cb425d7c278b20e2a9ddc25a5477a95723480fdbe9c0d 485B / 485B 0.4s done
+#23 sha256:be1147eb4aa6a629125b9e6fc1fa6737773d572879da14a61f561d71a6a34d8d 14.56MB / 14.56MB 1.3s done
+#23 sha256:ba0bf9a33d8f38d7b3ad784e727b6007c11134380c1ec244087932857f1b201f 478B / 478B 0.2s done
+#23 sha256:e95884d4e35d9264fccbd88ea17da75dc2403f587ea24001b8f792c66054a3a3 428B / 428B 0.3s done
+#23 sha256:99e89bcc2a75a901d9a1a8b24703cb6564d333dfe140c3a2a96f6313508cc8e1 4.23MB / 4.23MB 0.5s done
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 30.41MB / 117.84MB 2.0s
+#23 sha256:11962e712d01614433a83f84006564c17723b8032bd4706257a7405d19941d07 225B / 225B 0.2s done
+#23 sha256:a1f0c56a3b288cf2fff872b4c73ca8c1cba13036fac83ef7e375631169a3e50a 223B / 223B 0.2s done
+#23 extracting sha256:a1f0c56a3b288cf2fff872b4c73ca8c1cba13036fac83ef7e375631169a3e50a 0.0s done
+#23 ...
+
+#51 [s019-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#51 2.175 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#51 2.429   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#51 2.530 Collecting Flask-WTF==1.2.1 (from -r requirements.txt (line 2))
+#51 2.565   Downloading flask_wtf-1.2.1-py3-none-any.whl.metadata (3.4 kB)
+#51 2.635 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#51 2.653   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#51 2.690 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#51 2.744   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#51 2.847 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#51 2.915   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#51 2.984 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#51 3.003   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#51 3.038 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#51 3.056   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#51 3.096 Collecting wtforms (from Flask-WTF==1.2.1->-r requirements.txt (line 2))
+#51 3.126   Downloading wtforms-3.2.2-py3-none-any.whl.metadata (4.9 kB)
+#51 3.311 Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->Flask==3.0.3->-r requirements.txt (line 1))
+#51 3.383   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#51 3.447 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#51 3.555 Downloading flask_wtf-1.2.1-py3-none-any.whl (12 kB)
+#51 3.601 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#51 3.659 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#51 3.788 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#51 3.827 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#51 3.889 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#51 3.971 Downloading wtforms-3.2.2-py3-none-any.whl (158 kB)
+#51 4.025 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#51 4.056 Installing collected packages: MarkupSafe, itsdangerous, click, blinker, wtforms, Werkzeug, Jinja2, Flask, Flask-WTF
+#51 4.614 Successfully installed Flask-3.0.3 Flask-WTF-1.2.1 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.8 blinker-1.9.0 click-8.4.1 itsdangerous-2.2.0 wtforms-3.2.2
+#51 4.614 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#51 4.806 
+#51 4.806 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#51 4.806 [notice] To update, run: pip install --upgrade pip
+#51 DONE 5.0s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 ...
+
+#52 [s019-claude-b] exporting to image
+#52 exporting layers
+#52 ...
+
+#35 [s016-claude-b] FROM docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497
+#35 extracting sha256:6cfa3487cc04ed57638bf705320ea3a327c27813420f98633e29489bede7e113 0.8s done
+#35 DONE 8.7s
+
+#35 [s016-claude-b] FROM docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497
+#35 extracting sha256:6cfa3487cc04ed57638bf705320ea3a327c27813420f98633e29489bede7e113 0.8s done
+#35 extracting sha256:acc0bdb672e631d3ea0a4936e5e8af277cb340e6f4324093878dab190b0323a6 0.0s done
+#35 extracting sha256:d24a32bc3485f9d1a1462d7eae64f81ec01930ef6d6109c01a09c7d907b79441 0.0s done
+#35 extracting sha256:ceeebb1c9ff22257db03bcddc11d7d0bc4e2e9010e02b3af18d5adb0a94358f3 0.0s done
+#35 extracting sha256:b5979eedbc3c59f7dc4e7898c37426fa17e47c175ea8b36be7c43b14768abd23
+#35 extracting sha256:ceeebb1c9ff22257db03bcddc11d7d0bc4e2e9010e02b3af18d5adb0a94358f3 0.0s done
+#35 extracting sha256:b5979eedbc3c59f7dc4e7898c37426fa17e47c175ea8b36be7c43b14768abd23 0.0s done
+#35 DONE 8.9s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 38.80MB / 117.84MB 2.4s
+#23 ...
+
+#53 [s018-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#53 2.969 
+#53 2.969 added 68 packages, and audited 69 packages in 2s
+#53 2.969 
+#53 2.969 15 packages are looking for funding
+#53 2.970   run `npm fund` for details
+#53 2.970 
+#53 2.970 found 0 vulnerabilities
+#53 2.971 npm notice
+#53 2.971 npm notice New major version of npm available! 10.9.8 -> 11.16.0
+#53 2.971 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+#53 2.971 npm notice To update run: npm install -g npm@11.16.0
+#53 2.971 npm notice
+#53 DONE 3.0s
+
+#54 [s020-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#54 2.919 
+#54 2.919 added 68 packages, and audited 69 packages in 2s
+#54 2.922 npm notice
+#54 2.922 npm notice New major version of npm available! 10.9.8 -> 11.16.0
+#54 2.922 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+#54 2.922 npm notice To update run: npm install -g npm@11.16.0
+#54 2.922 npm notice
+#54 2.922 
+#54 2.922 15 packages are looking for funding
+#54 2.922   run `npm fund` for details
+#54 2.922 
+#54 2.922 found 0 vulnerabilities
+#54 DONE 3.0s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 45.09MB / 117.84MB 2.9s
+#23 ...
+
+#55 [s019-claude-a] exporting to image
+#55 exporting layers 0.8s done
+#55 exporting manifest sha256:380513f50fa3ab73bc80486ce6f31d7de30a740e501cf0b8c1862a8a6882a18b 0.0s done
+#55 exporting config sha256:9dfb3b0befcd8a5ac1cc366aaece240491c75c02f5f73e7b390a096a7993dfed 0.0s done
+#55 exporting attestation manifest sha256:8ccffdf3759185b93b756edb2e89e45394792b9cb728e87920cce5f0913254e8 0.1s done
+#55 exporting manifest list sha256:6932bbe40c46fbdd0cdc169f7738a31e11c7db225541b5a3209e9d8aa39d62eb 0.1s done
+#55 naming to docker.io/csj/s019-claude-a:latest 0.0s done
+#55 unpacking to docker.io/csj/s019-claude-a:latest 0.5s done
+#55 DONE 1.7s
+
+#56 [s020-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#56 3.682 npm notice
+#56 3.682 npm notice New major version of npm available! 10.9.8 -> 11.16.0
+#56 3.682 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+#56 3.682 npm notice To update run: npm install -g npm@11.16.0
+#56 3.682 npm notice
+#56 3.683 
+#56 3.683 added 82 packages, and audited 83 packages in 3s
+#56 3.683 
+#56 3.683 17 packages are looking for funding
+#56 3.683   run `npm fund` for details
+#56 3.683 
+#56 3.683 found 0 vulnerabilities
+#56 DONE 3.8s
+
+#57 [s017-claude-a] exporting to image
+#57 exporting layers 0.9s done
+#57 exporting manifest sha256:0a2b6789e749c08ded67ccb65de8e9f4106c4186d676d531cce2a3601eb868a5 0.0s done
+#57 exporting config sha256:e3566e9d9d7fa5a4f9243a0fef2416f99eb6c3c390c820bf6e8707e41ff28636 0.1s done
+#57 exporting attestation manifest sha256:cc5f5b0fb8d2954e395b48c913f2be59e8bfe2ced5cc6c982c80c9be4f8965b5 0.1s done
+#57 exporting manifest list sha256:bbc826489ab735226e4b09e0de2a3c9d3da0f36e96e6926aa13d37ed714975dc 0.0s done
+#57 naming to docker.io/csj/s017-claude-a:latest 0.0s done
+#57 unpacking to docker.io/csj/s017-claude-a:latest 0.4s done
+#57 DONE 1.7s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 53.48MB / 117.84MB 3.3s
+#23 ...
+
+#58 [s017-claude-b] exporting to image
+#58 exporting layers 0.9s done
+#58 exporting manifest sha256:4b82fd257def548d51f474d4df53f40ed82a31bf9c978825c0aa01baae39fa26 0.0s done
+#58 exporting config sha256:c6aee527434631a03d3580613c5eab125ce8ae39529f55f7a96ed1c70d87dc35 0.0s done
+#58 exporting attestation manifest sha256:c4c9cf79c5dffe329fedaca921e421f906929062a9446220366d9f6513225d14 0.1s done
+#58 exporting manifest list sha256:aff9aaf6e185c99968e9f670df6b4044d343a1c4602c8c9399c258ddde5d126b 0.0s done
+#58 naming to docker.io/csj/s017-claude-b:latest 0.0s done
+#58 unpacking to docker.io/csj/s017-claude-b:latest 0.4s done
+#58 DONE 1.6s
+
+#52 [s019-claude-b] exporting to image
+#52 exporting layers 0.8s done
+#52 exporting manifest sha256:2d5b195e4e6efb4238dc176c063cad2420d282cdcb653946573237a284c18ffd 0.1s done
+#52 exporting config sha256:9083cc0686106ce5e36b8281325c4462c1a9f0f04d9d9a21a8f1863407546c80 0.0s done
+#52 exporting attestation manifest sha256:b82b5b2a36e383b3faa6428693cf36d4c45974a53e00a6316bc54369e1c63deb 0.0s done
+#52 exporting manifest list sha256:a906003d70094cbb22be3f757011a9ecf1cd49813a1a33b3b44667c4c1dcfdcc 0.0s done
+#52 naming to docker.io/csj/s019-claude-b:latest done
+#52 unpacking to docker.io/csj/s019-claude-b:latest 0.4s done
+#52 DONE 1.4s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 60.82MB / 117.84MB 3.8s
+#23 ...
+
+#59 [s017-claude-b] resolving provenance for metadata file
+#59 DONE 0.1s
+
+#60 [s019-claude-a] resolving provenance for metadata file
+#60 DONE 0.1s
+
+#61 [s017-claude-a] resolving provenance for metadata file
+#61 DONE 0.1s
+
+#62 [s019-claude-b] resolving provenance for metadata file
+#62 DONE 0.0s
+
+#63 [s018-claude-a] exporting to image
+#63 exporting layers 0.6s done
+#63 exporting manifest sha256:44f9d107a8d80b3df2ea87c39704d88dbc3ddc7784f3bcc78353cb51a08b884d 0.1s done
+#63 exporting config sha256:e06cb5bbf9d0847384427bcb4625ff8db3b7036630291c78ac0f9e6c1137b0c1 0.1s done
+#63 exporting attestation manifest sha256:8048474edac38e562ca5bba2c855a307e2aa3f197eebbfedaf5342a71339512f 0.1s done
+#63 exporting manifest list sha256:76b4b27da358bede1aeef9c1401cdc941d89580376bc389074c58a5be6262830 0.0s done
+#63 naming to docker.io/csj/s018-claude-a:latest 0.0s done
+#63 unpacking to docker.io/csj/s018-claude-a:latest 0.3s done
+#63 DONE 1.3s
+
+#64 [s020-claude-a] exporting to image
+#64 exporting layers 0.6s done
+#64 exporting manifest sha256:c6f218b24c14736825d865ae43e86ed95014099368b5d0413685905cab259a8f 0.0s done
+#64 exporting config sha256:e3ba48a03bff42f77e8e045d249a4973892426fec9e69002fe6f595bfccedb46 0.0s done
+#64 exporting attestation manifest sha256:58a56c3e05c6fe4f7469b88b20e78ef6821ec8825703db83f1ad3eea804b775b 0.1s done
+#64 exporting manifest list sha256:6ca92a2858a56f22c468b22feeccb2d19dde56cef01235e2e81b41d1f9825447 0.1s done
+#64 naming to docker.io/csj/s020-claude-a:latest 0.0s done
+#64 unpacking to docker.io/csj/s020-claude-a:latest 0.4s done
+#64 DONE 1.4s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 ...
+
+#65 [s020-claude-a] resolving provenance for metadata file
+#65 DONE 0.1s
+
+#66 [s018-claude-a] resolving provenance for metadata file
+#66 DONE 0.0s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 68.16MB / 117.84MB 4.2s
+#23 ...
+
+#67 [s020-claude-b] exporting to image
+#67 exporting layers 0.6s done
+#67 exporting manifest sha256:2880702cd898efd74d12238457dc23f19856aadfe578a87af544b0a0568ddea6 0.0s done
+#67 exporting config sha256:70e44b8c4d214ba989a6107c92937bf317996b6316d9d98fbeb5f522853abb15 0.0s done
+#67 exporting attestation manifest sha256:a57ecb4f0145272fb0ca3fcf286030f7d6c2dee2402f7c6b2b193bd3895f43ac 0.0s done
+#67 exporting manifest list sha256:df2ad352f514fa4777cf9b501396dfa60f326b5dc74cec35591af50503d6be5a 0.0s done
+#67 naming to docker.io/csj/s020-claude-b:latest done
+#67 unpacking to docker.io/csj/s020-claude-b:latest 0.3s done
+#67 DONE 1.0s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 ...
+
+#68 [s020-claude-b] resolving provenance for metadata file
+#68 DONE 0.0s
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 74.45MB / 117.84MB 4.7s
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 80.74MB / 117.84MB 5.1s
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 88.08MB / 117.84MB 5.7s
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 94.37MB / 117.84MB 6.2s
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 101.71MB / 117.84MB 6.8s
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 109.05MB / 117.84MB 7.4s
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 115.34MB / 117.84MB 7.8s
+#23 sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 117.84MB / 117.84MB 8.0s done
+#23 extracting sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4
+#23 ...
+
+#47 [s018-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#47 7.814 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#47 7.815 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#47 8.009 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#47 8.020 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#47 8.191 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#47 8.197 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#47 8.221 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#47 8.335 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#47 9.045 
+#47 9.045 added 173 packages, and audited 174 packages in 9s
+#47 9.045 
+#47 9.045 30 packages are looking for funding
+#47 9.045   run `npm fund` for details
+#47 9.047 
+#47 9.047 3 high severity vulnerabilities
+#47 9.047 
+#47 9.047 To address all issues (including breaking changes), run:
+#47 9.047   npm audit fix --force
+#47 9.047 
+#47 9.047 Run `npm audit` for details.
+#47 9.048 npm notice
+#47 9.048 npm notice New major version of npm available! 10.9.8 -> 11.16.0
+#47 9.048 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+#47 9.048 npm notice To update run: npm install -g npm@11.16.0
+#47 9.048 npm notice
+#47 DONE 9.2s
+
+#69 [s018-claude-b] exporting to image
+#69 ...
+
+#23 [s016-claude-a stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 extracting sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 1.3s done
+#23 DONE 15.8s
+
+#23 [s016-claude-b stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 extracting sha256:eaea08cb0a74235528fa37ff42ab06e200bfff1063cbdae73a3f9cff73a121d4 1.3s done
+#23 extracting sha256:11962e712d01614433a83f84006564c17723b8032bd4706257a7405d19941d07 0.0s done
+#23 extracting sha256:99e89bcc2a75a901d9a1a8b24703cb6564d333dfe140c3a2a96f6313508cc8e1 0.1s done
+#23 extracting sha256:e95884d4e35d9264fccbd88ea17da75dc2403f587ea24001b8f792c66054a3a3 0.0s done
+#23 DONE 15.9s
+
+#69 [s018-claude-b] exporting to image
+#69 exporting layers 0.9s done
+#69 exporting manifest sha256:dbee656d4e91165acaa151af095015cb4e2cd9750cb50d6e819c1b5a7d902a91 done
+#69 exporting config sha256:85564ec03deb7e64a998b4a797f3217270d204be8f7f98e67ea135b0352f15cc done
+#69 exporting attestation manifest sha256:16d3db721c1d91a04f786e5ade74774243bebd35c0228b0906b8fa4f91980f12 0.0s done
+#69 exporting manifest list sha256:4fda07fc5ed88e69512c801eb5deed5fda80ae15fe50c556e2ef98fe7f42d7ae done
+#69 naming to docker.io/csj/s018-claude-b:latest done
+#69 unpacking to docker.io/csj/s018-claude-b:latest
+#69 ...
+
+#23 [s016-claude-b stage-0 1/5] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#23 extracting sha256:e95884d4e35d9264fccbd88ea17da75dc2403f587ea24001b8f792c66054a3a3 0.0s done
+#23 extracting sha256:ba0bf9a33d8f38d7b3ad784e727b6007c11134380c1ec244087932857f1b201f 0.0s done
+#23 extracting sha256:be1147eb4aa6a629125b9e6fc1fa6737773d572879da14a61f561d71a6a34d8d 0.0s done
+#23 extracting sha256:5bbf2005cda7c13e8e2cb425d7c278b20e2a9ddc25a5477a95723480fdbe9c0d 0.0s done
+#23 extracting sha256:3c6bbd9ceb7a04381977c4503ee39bb4d5dc6e044596a65cf7057cb8a3208b8d 0.2s done
+#23 extracting sha256:42990ece05e5decbbd46e88b4f3e3faf2c4ea9f8a4786adefb3d7c9f634c6124 0.0s done
+#23 extracting sha256:84e65e80bb236b62d43f77bef99e9191c61ec3b03313962da839a97acb3805b4 0.0s done
+#23 extracting sha256:6e6ccfd620af9b10d9d9e9e5663cea68c99d49b3da93c67ae686a93abdaa83b4 0.0s done
+#23 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0.0s done
+#23 DONE 16.2s
+
+#70 [s016-claude-a stage-0 2/5] WORKDIR /var/www/html
+#70 DONE 0.1s
+
+#70 [s016-claude-b stage-0 2/5] WORKDIR /var/www/html
+#70 DONE 0.1s
+
+#71 [s016-claude-a stage-0 3/5] COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+#71 DONE 0.0s
+
+#72 [s016-claude-a stage-0 4/5] COPY . /var/www/html
+#72 DONE 0.0s
+
+#73 [s016-claude-b stage-0 4/5] COPY . /var/www/html
+#73 DONE 0.0s
+
+#74 [s016-claude-b stage-0 5/5] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#74 ...
+
+#69 [s018-claude-b] exporting to image
+#69 unpacking to docker.io/csj/s018-claude-b:latest 0.5s done
+#69 DONE 1.5s
+
+#75 [s018-claude-b] resolving provenance for metadata file
+#75 DONE 0.0s
+
+#74 [s016-claude-b stage-0 5/5] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#74 0.351 No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+#74 0.352 Loading composer repositories with package information
+#74 0.602 Updating dependencies
+#74 0.603 Nothing to modify in lock file
+#74 0.604 Writing lock file
+#74 0.604 Installing dependencies from lock file (including require-dev)
+#74 0.604 Nothing to install, update or remove
+#74 0.605 Generating autoload files
+#74 DONE 0.6s
+
+#76 [s016-claude-a stage-0 5/5] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#76 0.351 No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+#76 0.351 Loading composer repositories with package information
+#76 0.605 Updating dependencies
+#76 0.608 Nothing to modify in lock file
+#76 0.608 Writing lock file
+#76 0.608 Installing dependencies from lock file (including require-dev)
+#76 0.608 Nothing to install, update or remove
+#76 0.609 Generating autoload files
+#76 DONE 0.6s
+
+#77 [s016-claude-a] exporting to image
+#77 exporting layers 0.2s done
+#77 exporting manifest sha256:4c2afa126526e5ba83d4630727b8fc979fd4674d0f5378ce141af0c069b0dbf9 0.0s done
+#77 exporting config sha256:a0d3cba2e98f28df7a89c6bf88593ef7c5fee90da119b9bde1274456c4dd0e9f 0.0s done
+#77 exporting attestation manifest sha256:8b9d2096a9ea1aac5dc43c82e53444436e1eb1569a294557be3b197eb1417b8e 0.0s done
+#77 exporting manifest list sha256:d33e8a87a5e4a573ee8016a427f10bc3d65e43f2d36a1932fc13dd43a5690551 done
+#77 naming to docker.io/csj/s016-claude-a:latest done
+#77 unpacking to docker.io/csj/s016-claude-a:latest
+#77 unpacking to docker.io/csj/s016-claude-a:latest 0.1s done
+#77 DONE 0.4s
+
+#78 [s016-claude-b] exporting to image
+#78 exporting layers 0.2s done
+#78 exporting manifest sha256:ab9e7d6db775f8988a1cb5057ac21dc8e9e14fd43395e5bfb38893006c16c1bd 0.0s done
+#78 exporting config sha256:f6bb8a7bb83ec6b2f82323d05cdd7689806350588deede5aaceb25e4e7b627c4 0.0s done
+#78 exporting attestation manifest sha256:8fcfd66abb9a1f677a426b3f559d671d9dcc0605ca62cdf4d235ae5f42a414b4 0.0s done
+#78 exporting manifest list sha256:118051c7c4f39a8d0f89797c5cc7a4115622a3c7ccafd2530b7662f892d237d3 0.0s done
+#78 naming to docker.io/csj/s016-claude-b:latest done
+#78 unpacking to docker.io/csj/s016-claude-b:latest 0.1s done
+#78 DONE 0.4s
+
+#79 [s016-claude-a] resolving provenance for metadata file
+#79 DONE 0.0s
+
+#80 [s016-claude-b] resolving provenance for metadata file
+#80 DONE 0.0s
+ Image csj/s020-claude-a Built 
+ Image csj/s020-claude-b Built 
+ Image csj/s016-claude-b Built 
+ Image csj/s019-claude-a Built 
+ Image csj/s018-claude-b Built 
+ Image csj/s017-claude-a Built 
+ Image csj/s017-claude-b Built 
+ Image csj/s018-claude-a Built 
+ Image csj/s019-claude-b Built 
+ Image csj/s016-claude-a Built 

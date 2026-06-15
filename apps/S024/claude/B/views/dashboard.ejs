@@ -1,0 +1,62 @@
+<%- include('partials/header', { title: 'Dashboard' }) %>
+
+<header class="topbar">
+  <h1>Redirects</h1>
+  <form method="post" action="/logout" class="inline">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <span class="who">Signed in as <%= username %></span>
+    <button type="submit" class="link">Log out</button>
+  </form>
+</header>
+
+<section>
+  <h2>Add a redirect</h2>
+  <%- include('partials/errors', { errors: errors }) %>
+  <form method="post" action="/redirects">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label for="key">Key</label>
+    <input id="key" name="key" type="text" required maxlength="64"
+           pattern="[a-zA-Z0-9_-]+" placeholder="docs"
+           value="<%= values.key || '' %>" />
+
+    <label for="destination">Destination URL</label>
+    <input id="destination" name="destination" type="url" required
+           maxlength="2048" placeholder="https://example.com/page"
+           value="<%= values.destination || '' %>" />
+
+    <button type="submit">Save redirect</button>
+  </form>
+</section>
+
+<section>
+  <h2>Your redirects</h2>
+  <% if (!redirects.length) { %>
+    <p class="muted">No redirects yet. Add one above.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr><th>Key</th><th>Link</th><th>Destination</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% redirects.forEach(function (r) { %>
+          <tr>
+            <td><%= r.key %></td>
+            <td>
+              <a href="/go?to=<%= encodeURIComponent(r.key) %>">/go?to=<%= r.key %></a>
+            </td>
+            <td class="dest"><%= r.destination %></td>
+            <td>
+              <form method="post" action="/redirects/<%= r.id %>/delete">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

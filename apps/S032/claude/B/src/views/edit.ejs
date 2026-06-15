@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+
+<section class="card auth-card">
+  <h1>Edit expense</h1>
+
+  <% if (errors.length) { %>
+    <ul class="errors">
+      <% errors.forEach(function (e) { %>
+        <li><%= e.msg %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+
+  <form method="post" action="/expenses/<%= expense.id %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label for="amount">Amount</label>
+    <input id="amount" name="amount" type="text" inputmode="decimal"
+           value="<%= expense.amountDisplay %>" required />
+
+    <label for="category">Category</label>
+    <select id="category" name="category" required>
+      <% categories.forEach(function (c) { %>
+        <option value="<%= c %>" <%= expense.category === c ? 'selected' : '' %>><%= c %></option>
+      <% }); %>
+    </select>
+
+    <label for="spent_on">Date</label>
+    <input id="spent_on" name="spent_on" type="date"
+           value="<%= expense.spent_on %>" required />
+
+    <label for="note">Note</label>
+    <input id="note" name="note" type="text" maxlength="200"
+           value="<%= expense.note %>" placeholder="optional" />
+
+    <div class="row">
+      <button type="submit" class="primary">Save changes</button>
+      <a class="secondary" href="/">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

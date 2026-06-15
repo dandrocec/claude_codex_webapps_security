@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}What's your name?{% endblock %}
+{% block content %}
+  <h1>What's your name?</h1>
+  <form method="post" action="{{ url_for('index') }}" novalidate>
+    {# CSRF token for protection against cross-site request forgery #}
+    {{ form.csrf_token }}
+    <div class="field">
+      {{ form.name.label }}
+      {{ form.name(autocomplete="off", maxlength="50", autofocus=true) }}
+      {% if form.name.errors %}
+        <ul class="errors">
+          {% for error in form.name.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    {{ form.submit(class="btn") }}
+  </form>
+{% endblock %}

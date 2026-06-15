@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit event' if event else 'New event' }}{% endblock %}
+
+{% block content %}
+  <h1>{{ 'Edit event' if event else 'New event' }}</h1>
+
+  <form method="post" class="form">
+    <label>
+      Title
+      <input type="text" name="title" maxlength="200" required
+             value="{{ event.title if event else '' }}">
+    </label>
+
+    <label>
+      Date
+      <input type="date" name="date" required
+             value="{{ event.date.isoformat() if event else '' }}">
+    </label>
+
+    <label>
+      Location
+      <input type="text" name="location" maxlength="200" required
+             value="{{ event.location if event else '' }}">
+    </label>
+
+    <label>
+      Description
+      <textarea name="description" rows="6">{{ event.description if event else '' }}</textarea>
+    </label>
+
+    <button type="submit" class="btn">{{ 'Save changes' if event else 'Create event' }}</button>
+  </form>
+{% endblock %}

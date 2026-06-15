@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit draft' if draft else 'New draft' }} — Newsletter Manager{% endblock %}
+{% block content %}
+{% set subject_val = form.subject if form else (draft['subject'] if draft else '') %}
+{% set body_val = form.body if form else (draft['body'] if draft else '') %}
+<div class="card">
+  <h1>{{ 'Edit draft' if draft else 'New draft' }}</h1>
+  <form method="post"
+        action="{{ url_for('edit_draft', draft_id=draft['id']) if draft else url_for('new_draft') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <label for="subject">Subject</label>
+    <input id="subject" name="subject" type="text" maxlength="200"
+           value="{{ subject_val }}" required>
+
+    <label for="body">Body</label>
+    <textarea id="body" name="body" rows="14" maxlength="20000"
+              required>{{ body_val }}</textarea>
+
+    <div class="form-actions">
+      <button type="submit" class="primary">Save draft</button>
+      <a class="btn ghost" href="{{ url_for('drafts') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

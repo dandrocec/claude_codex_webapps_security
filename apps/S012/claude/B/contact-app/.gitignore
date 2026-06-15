@@ -1,0 +1,9 @@
+# Runtime data (submissions) — never commit
+/data/
+
+# Local environment / secrets
+.env
+
+# Composer
+/vendor/
+composer.lock

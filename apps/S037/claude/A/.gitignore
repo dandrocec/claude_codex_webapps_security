@@ -1,0 +1,4 @@
+/data/*.sqlite
+/public/uploads/*
+!/public/uploads/.htaccess
+/vendor/

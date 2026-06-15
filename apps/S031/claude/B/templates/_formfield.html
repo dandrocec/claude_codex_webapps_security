@@ -1,0 +1,17 @@
+{# Reusable field renderer: label, widget, and any validation errors.
+   Values are autoescaped by Jinja (context-aware HTML encoding). #}
+{% macro field(f, rows=None) %}
+  <div class="field">
+    {{ f.label }}
+    {% if rows %}
+      {{ f(rows=rows) }}
+    {% else %}
+      {{ f() }}
+    {% endif %}
+    {% if f.errors %}
+      <ul class="field-errors">
+        {% for error in f.errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endmacro %}

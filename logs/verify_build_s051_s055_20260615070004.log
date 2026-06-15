@@ -1,0 +1,13 @@
+ Image csj/s051-claude-a Building 
+ Image csj/s052-claude-b Building 
+ Image csj/s053-claude-b Building 
+ Image csj/s054-claude-b Building 
+ Image csj/s053-claude-a Building 
+ Image csj/s051-claude-b Building 
+ Image csj/s055-claude-a Building 
+ Image csj/s052-claude-a Building 
+ Image csj/s054-claude-a Building 
+ Image csj/s055-claude-b Building 
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+BUILD_EXIT=1

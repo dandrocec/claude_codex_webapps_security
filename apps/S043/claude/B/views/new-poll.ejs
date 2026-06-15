@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<h1>Create a poll</h1>
+
+<% if (errors && errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(function (e) { %><li><%= e %></li><% }) %>
+  </ul>
+<% } %>
+
+<form method="post" action="/polls" class="card form" id="poll-form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Question
+    <input type="text" name="question" value="<%= values.question || '' %>"
+           required minlength="3" maxlength="280" placeholder="What should we have for lunch?">
+  </label>
+
+  <fieldset id="options">
+    <legend>Options (2–10)</legend>
+    <% (values.options && values.options.length ? values.options : ['', '']).forEach(function (opt) { %>
+      <input type="text" name="options" class="option-input" value="<%= opt %>"
+             maxlength="200" placeholder="Option">
+    <% }) %>
+  </fieldset>
+
+  <button type="button" id="add-option" class="secondary">+ Add option</button>
+  <button type="submit">Create poll</button>
+</form>
+
+<script src="/static/js/new-poll.js"></script>
+
+<%- include('partials/footer') %>

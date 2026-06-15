@@ -1,0 +1,47 @@
+<%- include('partials/header', { title: mode === 'edit' ? 'Edit listing' : 'Post a job' }) %>
+
+<h1><%= mode === 'edit' ? 'Edit listing' : 'Post a job' %></h1>
+
+<% if (errors && errors.length) { %>
+  <ul class="form-errors">
+    <% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %>
+  </ul>
+<% } %>
+
+<%
+  // For edit mode we post back to /jobs/:id; for new we post to /jobs.
+  var action = mode === 'edit' ? ('/jobs/' + (job ? job.id : values.id)) : '/jobs';
+%>
+<form method="POST" action="<%= action %>" class="job-form" novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <label>
+    Title
+    <input type="text" name="title" maxlength="120" required
+           value="<%= values.title || '' %>">
+  </label>
+
+  <label>
+    Company
+    <input type="text" name="company" maxlength="120" required
+           value="<%= values.company || '' %>">
+  </label>
+
+  <label>
+    Location
+    <input type="text" name="location" maxlength="120" required
+           value="<%= values.location || '' %>">
+  </label>
+
+  <label>
+    Description
+    <textarea name="description" rows="8" maxlength="5000" required><%= values.description || '' %></textarea>
+  </label>
+
+  <div class="actions">
+    <button type="submit" class="button"><%= mode === 'edit' ? 'Save changes' : 'Post job' %></button>
+    <a class="button button-secondary" href="<%= mode === 'edit' && job ? ('/jobs/' + job.id) : '/' %>">Cancel</a>
+  </div>
+</form>
+
+<%- include('partials/footer') %>

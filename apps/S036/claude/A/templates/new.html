@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}New page — Wiki{% endblock %}
+{% block content %}
+  <h1>New page</h1>
+  <form method="post" class="editform">
+    <label>Title
+      <input type="text" name="title" placeholder="Page title" required autofocus>
+    </label>
+    <div class="actions">
+      <button type="submit" class="btn">Continue</button>
+      <a href="{{ url_for('index') }}">Cancel</a>
+    </div>
+  </form>
+{% endblock %}

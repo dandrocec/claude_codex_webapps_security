@@ -1,0 +1,12 @@
+{
+  "name": "password-strength-checker",
+  "version": "1.0.0",
+  "description": "Express app that rates password strength based on length and character variety.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

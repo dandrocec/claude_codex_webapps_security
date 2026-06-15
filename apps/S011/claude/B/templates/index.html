@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+{% if user %}
+  <h1>Resize an image</h1>
+  <form class="card" method="post" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="image">Image file (JPEG, PNG, GIF or WEBP, max 8&nbsp;MB)</label>
+    <input type="file" id="image" name="image" accept="image/png,image/jpeg,image/gif,image/webp" required>
+
+    <label for="width">Target width (pixels)</label>
+    <input type="number" id="width" name="width" min="1" max="5000" value="320" required>
+
+    <p><button type="submit">Resize</button></p>
+  </form>
+
+  <h2>Your thumbnails</h2>
+  {% if images %}
+    <table>
+      <thead><tr><th>Name</th><th>Size</th><th>Created</th><th></th></tr></thead>
+      <tbody>
+        {% for img in images %}
+          <tr>
+            <td><a href="{{ url_for('result', image_id=img['id']) }}">{{ img['original_name'] }}</a></td>
+            <td>{{ img['width'] }}×{{ img['height'] }}</td>
+            <td class="muted">{{ img['created_at'][:19] }}</td>
+            <td>
+              <form method="post" action="{{ url_for('delete_image', image_id=img['id']) }}"
+                    onsubmit="return confirm('Delete this thumbnail?')">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="muted">No thumbnails yet. Upload an image above to get started.</p>
+  {% endif %}
+{% else %}
+  <h1>Image Resizer</h1>
+  <p>A small Flask app that resizes images into thumbnails.</p>
+  <p>
+    <a class="btn" href="{{ url_for('register') }}">Create an account</a>
+    <a class="btn secondary" href="{{ url_for('login') }}">Log in</a>
+  </p>
+{% endif %}
+{% endblock %}

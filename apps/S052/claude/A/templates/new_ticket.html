@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}New Ticket{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Submit a Ticket</h1>
+  <form method="post">
+    <label for="subject">Subject</label>
+    <input id="subject" name="subject" maxlength="200" autofocus required>
+
+    <label for="priority">Priority</label>
+    <select id="priority" name="priority" required>
+      {% for p in priorities %}
+        <option value="{{ p }}"{% if p == 'Medium' %} selected{% endif %}>{{ p }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description" required></textarea>
+
+    <p>
+      <button class="btn" type="submit">Submit Ticket</button>
+      <a class="btn secondary" href="{{ url_for('tickets') }}">Cancel</a>
+    </p>
+  </form>
+</div>
+{% endblock %}

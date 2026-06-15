@@ -1,0 +1,34 @@
+<%- include('../partials/header') %>
+  <div class="page-head">
+    <h1>Responses</h1>
+    <a class="btn-secondary" href="/surveys/<%= survey.id %>">&larr; Back to survey</a>
+  </div>
+  <p class="muted"><%= survey.title %> — <%= responses.length %> response(s)</p>
+
+  <% if (responses.length === 0) { %>
+    <p class="muted">No responses yet. Share the public link to start collecting answers.</p>
+  <% } else { %>
+    <div class="table-scroll">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Submitted</th>
+            <% questions.forEach(function (q) { %>
+              <th><%= q.text %></th>
+            <% }); %>
+          </tr>
+        </thead>
+        <tbody>
+          <% responses.forEach(function (r) { %>
+            <tr>
+              <td><%= r.submitted_at %></td>
+              <% questions.forEach(function (q) { %>
+                <td><%= (byResponse.get(r.id) && byResponse.get(r.id)[q.id]) || '' %></td>
+              <% }); %>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+<%- include('../partials/footer') %>

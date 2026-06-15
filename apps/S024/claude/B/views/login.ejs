@@ -1,0 +1,21 @@
+<%- include('partials/header', { title: 'Log in' }) %>
+
+<h1>Log in</h1>
+<%- include('partials/errors', { errors: errors }) %>
+
+<form method="post" action="/login" autocomplete="off">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+  <label for="username">Username</label>
+  <input id="username" name="username" type="text" required
+         value="<%= values.username || '' %>" maxlength="32" />
+
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" required maxlength="200" />
+
+  <button type="submit">Log in</button>
+</form>
+
+<p>Need an account? <a href="/register">Register</a></p>
+
+<%- include('partials/footer') %>

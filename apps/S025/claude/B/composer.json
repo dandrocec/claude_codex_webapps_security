@@ -1,0 +1,25 @@
+{
+    "name": "demo/email-subscription",
+    "description": "A small, security-hardened PHP email-subscription app (no external runtime dependencies).",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
+    },
+    "autoload": {
+        "files": [
+            "src/env.php",
+            "src/helpers.php",
+            "src/Database.php"
+        ]
+    },
+    "scripts": {
+        "start": "php -S 127.0.0.1:5025 -t public",
+        "hash": "php bin/generate-admin-hash.php"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

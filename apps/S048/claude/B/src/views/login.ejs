@@ -1,0 +1,34 @@
+<%- include('partials/header', { title: 'Reviewer Login' }) %>
+
+<h1>Reviewer login</h1>
+
+<% if (error) { %>
+  <div class="alert error" role="alert"><%= error %></div>
+<% } %>
+
+<form method="POST" action="/login" class="card" novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+  <label for="username">Username</label>
+  <input
+    id="username"
+    name="username"
+    type="text"
+    autocomplete="username"
+    value="<%= values.username %>"
+    required
+  />
+
+  <label for="password">Password</label>
+  <input
+    id="password"
+    name="password"
+    type="password"
+    autocomplete="current-password"
+    required
+  />
+
+  <button type="submit" class="btn">Log in</button>
+</form>
+
+<%- include('partials/footer') %>

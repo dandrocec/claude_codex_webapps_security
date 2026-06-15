@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback Portal</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">📝 Feedback Portal</a>
+    <nav>
+      <a href="/">Submit</a>
+      <% if (isReviewer) { %>
+        <a href="/reviews">Reviews</a>
+        <form action="/logout" method="post" class="inline">
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Reviewer login</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">

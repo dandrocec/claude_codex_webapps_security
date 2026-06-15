@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Upcoming events{% endblock %}
+
+{% block content %}
+  <h1>Upcoming events</h1>
+
+  {% if events %}
+    <ul class="event-list">
+      {% for event in events %}
+        <li class="event-card">
+          <div class="event-date">{{ event.date.strftime('%a %d %b %Y') }}</div>
+          <div class="event-body">
+            <h2><a href="{{ url_for('event_detail', event_id=event.id) }}">{{ event.title }}</a></h2>
+            <p class="event-meta">📍 {{ event.location }} · by {{ event.organiser.username }}</p>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">No upcoming events yet.
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('create_event') }}">Create the first one.</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a> to add one.
+      {% endif %}
+    </p>
+  {% endif %}
+{% endblock %}

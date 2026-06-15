@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — submitted messages</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: .5rem .6rem; text-align: left; vertical-align: top; }
+    th { background: #f5f5f5; }
+    .muted { color: #666; font-size: .9rem; }
+    nav { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <nav><a href="{{ url_for('index') }}">&larr; Back to form</a></nav>
+  <h1>Submitted messages</h1>
+
+  {% if not messages %}
+    <p class="muted">No messages yet.</p>
+  {% else %}
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>When (UTC)</th><th>Name</th><th>Email</th>
+          <th>Message</th><th>URL</th><th>Preview title</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in messages %}
+          <tr>
+            <td>{{ m["id"] }}</td>
+            <td class="muted">{{ m["created_at"] }}</td>
+            <td>{{ m["name"] }}</td>
+            <td>{{ m["email"] }}</td>
+            <td>{{ m["message"] }}</td>
+            <td>{% if m["url"] %}{{ m["url"] }}{% else %}<span class="muted">—</span>{% endif %}</td>
+            <td>{% if m["preview"] %}{{ m["preview"] }}{% else %}<span class="muted">—</span>{% endif %}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</body>
+</html>

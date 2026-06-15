@@ -1,0 +1,21 @@
+{
+    "name": "example/php-poll",
+    "description": "A small, security-hardened single-question poll application in plain PHP.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Poll\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:5016 -t public"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

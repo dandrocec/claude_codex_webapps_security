@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<div class="card auth-card">
+  <h1>Create an account</h1>
+  <form action="/register" method="POST" class="form">
+    <label>
+      Username <span class="hint">(min 3 characters)</span>
+      <input type="text" name="username" required autofocus />
+    </label>
+    <label>
+      Password <span class="hint">(min 6 characters)</span>
+      <input type="password" name="password" required />
+    </label>
+    <button class="btn" type="submit">Register</button>
+  </form>
+  <p class="muted">Already registered? <a href="/login">Log in</a>.</p>
+</div>
+
+<%- include('partials/footer') %>

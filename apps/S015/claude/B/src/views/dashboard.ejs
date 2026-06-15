@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+<section class="card">
+  <h1>New countdown</h1>
+
+  <% if (errors.length) { %>
+    <ul class="errors">
+      <% errors.forEach(function (e) { %><li><%= e %></li><% }); %>
+    </ul>
+  <% } %>
+
+  <form action="/events" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label for="label">Event label</label>
+    <input id="label" name="label" type="text" required maxlength="120"
+           placeholder="e.g. Project launch" value="<%= values.label || '' %>" />
+
+    <label for="target">Target date &amp; time</label>
+    <input id="target" name="target" type="datetime-local" required
+           value="<%= values.target || '' %>" />
+
+    <button type="submit">Create countdown</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Your countdowns</h2>
+  <% if (!events.length) { %>
+    <p class="muted">You have no countdowns yet. Create one above.</p>
+  <% } else { %>
+    <ul class="event-list">
+      <% events.forEach(function (ev) { %>
+        <li>
+          <a href="/events/<%= ev.id %>"><%= ev.label %></a>
+          <span class="muted"><%= ev.target_at %></span>
+          <form action="/events/<%= ev.id %>/delete" method="post" class="inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button type="submit" class="link-btn danger">Delete</button>
+          </form>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

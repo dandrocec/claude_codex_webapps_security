@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact us</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+    label { display: block; margin-top: 1rem; font-weight: 600; }
+    input, textarea { width: 100%; padding: .5rem; box-sizing: border-box; margin-top: .25rem; }
+    button { margin-top: 1rem; padding: .6rem 1.2rem; font-size: 1rem; cursor: pointer; }
+    .errors { background: #fdecea; color: #611a15; padding: .75rem 1rem; border-radius: 6px; }
+    .ok { background: #edf7ed; color: #1e4620; padding: .75rem 1rem; border-radius: 6px; }
+    .preview { border: 1px solid #ddd; border-radius: 6px; padding: .75rem 1rem; margin-top: 1rem; }
+    .preview .err { color: #b00020; }
+    .muted { color: #666; font-size: .9rem; }
+    nav { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <nav><a href="{{ url_for('admin') }}">Admin &rarr;</a></nav>
+  <h1>Contact us</h1>
+
+  {% if submitted %}
+    <p class="ok">Thanks! Your message has been received.</p>
+    {% if preview %}
+      <div class="preview">
+        {% if preview.error %}
+          <p class="err">Preview unavailable: {{ preview.error }}</p>
+        {% else %}
+          <p class="muted">Preview of {{ preview.url }}</p>
+          <strong>{{ preview.title }}</strong>
+          {% for line in preview.lines %}<p>{{ line }}</p>{% endfor %}
+        {% endif %}
+      </div>
+    {% endif %}
+    <p><a href="{{ url_for('index') }}">Send another</a></p>
+  {% else %}
+    {% if errors %}
+      <div class="errors">
+        <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+      </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('index') }}">
+      <label>Name
+        <input type="text" name="name" value="{{ form.name if form else '' }}" required>
+      </label>
+      <label>Email
+        <input type="email" name="email" value="{{ form.email if form else '' }}" required>
+      </label>
+      <label>Message
+        <textarea name="message" rows="5" required>{{ form.message if form else '' }}</textarea>
+      </label>
+      <label>Website URL <span class="muted">(optional)</span>
+        <input type="url" name="url" placeholder="https://example.com" value="{{ form.url if form else '' }}">
+      </label>
+      <button type="submit">Send</button>
+    </form>
+  {% endif %}
+</body>
+</html>

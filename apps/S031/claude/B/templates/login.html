@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+  <h1>Log in</h1>
+  <form method="post" novalidate class="card-form">
+    {{ form.csrf_token }}
+    {{ field(form.username) }}
+    {{ field(form.password) }}
+    {{ form.submit(class="btn") }}
+  </form>
+  <p>No account yet? <a href="{{ url_for('register') }}">Register</a>.</p>
+{% endblock %}

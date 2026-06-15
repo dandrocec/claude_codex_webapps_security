@@ -1,0 +1,57 @@
+<%- include('../partials/header', { title: 'My bookmarks' }) %>
+
+<div class="page-head">
+  <h1>My bookmarks</h1>
+  <a class="button" href="/bookmarks/new">+ Add bookmark</a>
+</div>
+
+<% if (allTags.length) { %>
+  <div class="tag-filter">
+    <span>Filter:</span>
+    <a class="tag <%= filterTag ? '' : 'active' %>" href="/bookmarks">All</a>
+    <% allTags.forEach(function (t) { %>
+      <a class="tag <%= filterTag === t ? 'active' : '' %>"
+         href="/bookmarks?tag=<%= encodeURIComponent(t) %>"><%= t %></a>
+    <% }); %>
+  </div>
+<% } %>
+
+<% if (!bookmarks.length) { %>
+  <p class="empty">
+    <% if (filterTag) { %>
+      No bookmarks tagged “<%= filterTag %>”.
+    <% } else { %>
+      You have no bookmarks yet. <a href="/bookmarks/new">Add your first one</a>.
+    <% } %>
+  </p>
+<% } else { %>
+  <ul class="bookmark-list">
+    <% bookmarks.forEach(function (b) { %>
+      <li class="card bookmark">
+        <div class="bookmark-main">
+          <a class="bookmark-title" href="<%= b.url %>" target="_blank" rel="noopener noreferrer nofollow">
+            <%= b.title %>
+          </a>
+          <div class="bookmark-url"><%= b.url %></div>
+          <% if (b.tags) { %>
+            <div class="bookmark-tags">
+              <% tagsToArray(b.tags).forEach(function (t) { %>
+                <a class="tag" href="/bookmarks?tag=<%= encodeURIComponent(t) %>"><%= t %></a>
+              <% }); %>
+            </div>
+          <% } %>
+        </div>
+        <div class="bookmark-actions">
+          <a class="button small" href="/bookmarks/<%= b.id %>/edit">Edit</a>
+          <form class="inline" method="post" action="/bookmarks/<%= b.id %>/delete"
+                onsubmit="return confirm('Delete this bookmark?');">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="button small danger">Delete</button>
+          </form>
+        </div>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<%- include('../partials/footer') %>

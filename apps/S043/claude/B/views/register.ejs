@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<h1>Register</h1>
+
+<% if (errors && errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(function (e) { %><li><%= e %></li><% }) %>
+  </ul>
+<% } %>
+
+<form method="post" action="/register" class="card form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Username
+    <input type="text" name="username" value="<%= values.username || '' %>"
+           autocomplete="username" required minlength="3" maxlength="32"
+           pattern="[a-zA-Z0-9_]+">
+  </label>
+  <label>Password
+    <input type="password" name="password" autocomplete="new-password" required minlength="8">
+  </label>
+  <button type="submit">Create account</button>
+</form>
+
+<p class="muted">Already registered? <a href="/login">Log in</a>.</p>
+
+<%- include('partials/footer') %>

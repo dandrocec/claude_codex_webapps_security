@@ -1,0 +1,18 @@
+<%- include('partials/header', { title: 'Edit Task' }) %>
+
+<section class="card">
+  <h1>Edit task</h1>
+  <%- include('partials/errors') %>
+  <form action="/tasks/<%= task.id %>/edit" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text" required maxlength="200"
+           value="<%= task.title %>" autofocus>
+    <div class="row">
+      <button type="submit">Save</button>
+      <a class="link-btn" href="/tasks">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Paste {{ paste['id'] }}{% endblock %}
+{% block content %}
+  <h1>Paste</h1>
+  <p class="meta">Created {{ paste['created_at'] }} UTC</p>
+
+  {# {{ paste['content'] }} is autoescaped by Jinja2 -> stored text cannot run as HTML/JS. #}
+  <pre class="paste">{{ paste['content'] }}</pre>
+
+  <p class="actions">
+    <a href="{{ url_for('index') }}">New paste</a>
+    {% if current_user and current_user['id'] == paste['owner_id'] %}
+      <form class="inline" method="post" action="{{ url_for('delete_paste', paste_id=paste['id']) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="danger">Delete</button>
+      </form>
+    {% endif %}
+  </p>
+{% endblock %}

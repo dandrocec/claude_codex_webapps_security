@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pollr</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">🗳️ Pollr</a>
+    <nav>
+      <% if (currentUser) { %>
+        <a href="/polls/new">New poll</a>
+        <span class="who">Hi, <%= currentUser.username %></span>
+        <form action="/logout" method="post" class="inline">
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert"><%= error %></div>
+    <% } %>

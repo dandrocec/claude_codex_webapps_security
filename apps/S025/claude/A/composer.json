@@ -1,0 +1,14 @@
+{
+    "name": "demo/email-subscription",
+    "description": "A minimal PHP email-subscription app with a confirmation and a subscribers list.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
+    },
+    "scripts": {
+        "start": "php -S localhost:5025 -t public"
+    }
+}

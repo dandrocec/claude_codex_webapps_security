@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}My QR codes{% endblock %}
+
+{% block content %}
+  <h1>My QR codes</h1>
+
+  {% if not items %}
+    <p class="muted">You haven't generated any codes yet.
+      <a href="{{ url_for('index') }}">Make one.</a></p>
+  {% else %}
+    <ul class="qrlist">
+      {% for item in items %}
+        <li class="card qrrow">
+          <img class="qr-thumb" src="{{ url_for('qr_image', qr_id=item.id) }}"
+               alt="QR code" width="96" height="96">
+          <div class="qrmeta">
+            <span class="mono">{{ item.content }}</span>
+            <span class="muted small">{{ item.created_at.strftime('%Y-%m-%d %H:%M UTC') }}</span>
+          </div>
+          <div class="qractions">
+            <a class="btn small" href="{{ url_for('qr_download', qr_id=item.id) }}">Download</a>
+            <form method="post" action="{{ url_for('qr_delete', qr_id=item.id) }}" class="inline">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="btn small danger">Delete</button>
+            </form>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

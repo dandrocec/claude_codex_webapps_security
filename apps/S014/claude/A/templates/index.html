@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspirational Quotes</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --accent: #38bdf8;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            background: radial-gradient(circle at top, #1e293b, var(--bg));
+            color: var(--text);
+            padding: 1.5rem;
+        }
+        .card {
+            background: var(--card);
+            max-width: 600px;
+            width: 100%;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        blockquote {
+            margin: 0 0 1rem;
+            font-size: 1.5rem;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+        blockquote::before { content: "\201C"; }
+        blockquote::after { content: "\201D"; }
+        .author {
+            color: var(--accent);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+        button {
+            background: var(--accent);
+            color: #082f49;
+            border: none;
+            padding: 0.85rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.1s ease, opacity 0.2s ease;
+        }
+        button:hover { opacity: 0.9; }
+        button:active { transform: scale(0.97); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <blockquote id="quote-text">{{ quote.text }}</blockquote>
+        <div class="author" id="quote-author">&mdash; {{ quote.author }}</div>
+        <button id="new-quote">Show another quote</button>
+    </div>
+
+    <script>
+        const button = document.getElementById("new-quote");
+        const textEl = document.getElementById("quote-text");
+        const authorEl = document.getElementById("quote-author");
+
+        button.addEventListener("click", async () => {
+            button.disabled = true;
+            try {
+                const res = await fetch("/api/quote");
+                const quote = await res.json();
+                textEl.textContent = quote.text;
+                authorEl.innerHTML = "&mdash; " + quote.author;
+            } catch (err) {
+                authorEl.textContent = "Could not load a quote. Please try again.";
+            } finally {
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

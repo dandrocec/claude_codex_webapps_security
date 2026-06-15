@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}My Tickets{% endblock %}
+{% block content %}
+<div class="card">
+  <div style="display:flex; align-items:center;">
+    <h1 style="margin:0;">My Tickets</h1>
+    <span style="flex:1"></span>
+    <a class="btn" href="{{ url_for('new_ticket') }}">+ New Ticket</a>
+  </div>
+</div>
+
+<div class="card">
+  {% if tickets %}
+  <table>
+    <thead>
+      <tr><th>#</th><th>Subject</th><th>Priority</th><th>Status</th><th>Created</th></tr>
+    </thead>
+    <tbody>
+      {% for t in tickets %}
+      <tr>
+        <td>{{ t['id'] }}</td>
+        <td><a class="link" href="{{ url_for('ticket_detail', ticket_id=t['id']) }}">{{ t['subject'] }}</a></td>
+        <td><span class="pill pri-{{ t['priority'] }}">{{ t['priority'] }}</span></td>
+        <td><span class="pill st-{{ t['status'] }}">{{ t['status'] }}</span></td>
+        <td class="muted">{{ t['created_at'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">You have no tickets yet. <a class="link" href="{{ url_for('new_ticket') }}">Submit your first one.</a></p>
+  {% endif %}
+</div>
+{% endblock %}

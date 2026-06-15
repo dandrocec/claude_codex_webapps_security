@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }} · Reading List{% endblock %}
+{% block content %}
+  <h1>Error {{ code }}</h1>
+  <p>{{ message }}</p>
+  <p><a href="{{ url_for('books.index') }}">Back to my books</a></p>
+{% endblock %}

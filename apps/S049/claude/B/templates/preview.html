@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Preview — {{ draft['subject'] }}{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-head">
+    <h1>Draft preview</h1>
+    <div class="actions">
+      <a href="{{ url_for('edit_draft', draft_id=draft['id']) }}">Edit</a>
+      <a href="{{ url_for('drafts') }}">Back to drafts</a>
+    </div>
+  </div>
+  <p class="muted">This is how the newsletter would look to your
+    {{ subscriber_count }} subscriber{{ '' if subscriber_count == 1 else 's' }}.</p>
+</div>
+
+<!-- The preview renders the body as plain text (white-space: pre-wrap).
+     Autoescaping is on, so any HTML in the body is shown literally, never executed. -->
+<div class="email-frame">
+  <div class="email">
+    <div class="email-head">
+      <div class="email-from">From: Your Newsletter &lt;you@example.com&gt;</div>
+      <div class="email-subject">{{ draft['subject'] }}</div>
+    </div>
+    <div class="email-body">{{ draft['body'] }}</div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+# Local SQLite database (recreated automatically on first run)
+/data/*.sqlite
+
+# Uploaded listing photos
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Composer
+/vendor/

@@ -1,0 +1,62 @@
+<%- include('partials/head', { pageTitle: survey.title }) %>
+<div class="page-head">
+  <h1><%= survey.title %></h1>
+  <a class="muted" href="/">← Back</a>
+</div>
+<% if (survey.description) { %><p class="muted"><%= survey.description %></p><% } %>
+
+<div class="card share">
+  <h2>Public response link</h2>
+  <p class="muted">Share this link — anyone can answer without logging in.</p>
+  <div class="share-row">
+    <input id="share-url" type="text" readonly value="<%= shareUrl %>" />
+    <button type="button" class="btn-secondary" onclick="copyShare()">Copy</button>
+    <a class="btn-secondary" href="<%= shareUrl %>" target="_blank" rel="noopener">Open</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="page-head">
+    <h2>Responses (<%= responses.length %>)</h2>
+    <form method="post" action="/surveys/<%= survey.id %>/delete"
+          onsubmit="return confirm('Delete this survey and all responses?');">
+      <button type="submit" class="link-btn danger">Delete survey</button>
+    </form>
+  </div>
+
+  <% if (responses.length === 0) { %>
+    <p class="muted">No responses yet. Share the link above to start collecting answers.</p>
+  <% } else { %>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Submitted</th>
+            <% questions.forEach(function (q) { %><th><%= q.label %></th><% }); %>
+          </tr>
+        </thead>
+        <tbody>
+          <% responses.forEach(function (r, i) { %>
+            <tr>
+              <td><%= responses.length - i %></td>
+              <td class="nowrap"><%= r.created_at %></td>
+              <% questions.forEach(function (q) { %>
+                <td><%= (byResponse.get(r.id) || {})[q.id] || '' %></td>
+              <% }); %>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+
+<script>
+  function copyShare() {
+    const el = document.getElementById('share-url');
+    el.select();
+    navigator.clipboard.writeText(el.value);
+  }
+</script>
+<%- include('partials/foot') %>

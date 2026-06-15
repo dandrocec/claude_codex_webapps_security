@@ -1,0 +1,3 @@
+Build a Flask notes app. Users register and log in, then create, edit, and delete personal notes (title + body). The notes list shows only the current user's notes. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5028.

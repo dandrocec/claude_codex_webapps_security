@@ -1,0 +1,156 @@
+The app is complete. Here's what I built — a plain PHP 8 + SQLite app (no DB server, no third-party packages).
+
+## What's included
+
+```
+composer.json        Dependency manifest (php >=8.1, ext-pdo, ext-pdo_sqlite)
+schema.sql           SQLite schema, applied automatically on first run
+README.md            Setup + walkthrough
+public/
+  index.php          Front controller + routing
+  router.php         Router for PHP's built-in server
+  style.css
+src/
+  Database.php       PDO/SQLite connection, auto-migrate + seed
+  Auth.php           Session auth: login, register, guards
+  Quote.php          List / filter-by-author / create / edit / approve
+  helpers.php        HTML escaping, CSRF, flash, redirect
+  views/             home, login, register, submit, edit, mine, admin, error, layout
+```
+
+## How to run (port 5046)
+
+```bash
+php -S 0.0.0.0:5046 -t public public/router.php
+```
+
+Then open http://localhost:5046. The SQLite file, schema, and demo data are created on first request — no `composer install` needed. Demo logins: `admin/admin123` (can approve) and `alice/alice123` (submitter).
+
+## How the requirements map
+
+- **Logged-in users submit quotes (text + author)** — `?page=submit`, guarded by `Auth::requireLogin()`.
+- **Public page lists approved quotes + filter by author** — `?page=home`, `Quote::approved($author)` with an author dropdown.
+- **Submitters edit their own quotes** — `?page=edit&id=N`, with an ownership check (403 otherwise); editing re-queues for approval.
+- **Approval workflow** — new/edited quotes are `approved=0` and only appear publicly after an admin approves them in `?page=admin`.
+- **Database** — SQLite via PDO, schema in `schema.sql`.
+
+Security basics are in place: hashed passwords (`password_hash`), CSRF tokens on every POST form, all output HTML-escaped, parameterized queries.
+
+## One caveat on verification
+
+I could **not execute the app myself** — running `php` in this environment requires an approval that wasn't granted, so every lint/smoke-test attempt was blocked. The code is complete and I reviewed it by hand (and fixed one real bug found in review: SQLite's PDO driver rejects reusing the same named placeholder twice, so the login query now uses two distinct params).
+
+If you run the command above and hit anything, paste the output and I'll fix it. If you'd like, I can also approve-and-run a quick smoke test once you allow `php` in this session.
+
+Want me to add anything — quote deletion, pagination, or a delete-account flow?
+run_id S046_claude_A_20260614201051: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S046\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S046_claude_A_20260614201051.txt  (sha256 bc8285602e082e70...)
+  logged to logs/commands.log and logs/sessions.csv
+The `php` CLI requires an interactive approval that isn't coming through in this session, so I couldn't execute the smoke test myself. The code is complete and I've reviewed it carefully (and fixed one real bug — see below). Here's what I built.
+
+## What was built
+
+A complete, secure PHP quotes app (PHP 8.1+, PDO + SQLite, zero third-party deps):
+
+```
+public/index.php        Front controller + router (web root)
+public/css/app.css      Styles (external file — no inline CSS/JS, for strict CSP)
+public/.htaccess        Apache rewrite + dotfile denial (only needed under Apache)
+src/bootstrap.php       Autoload, .env, secure session, security headers, error handling
+src/Env.php             .env loader (secrets from environment)
+src/Database.php        PDO wrapper (prepared statements, emulation off)
+src/Auth.php            Register/login, password_hash, session fixation defence, RBAC
+src/Csrf.php            Synchronizer-token CSRF protection
+src/Quote.php           Quote data access + input validation/sanitisation
+src/Controllers/        Auth, Quote, Admin
+templates/              Output-encoded views (e() everywhere)
+bin/                    init-db.php, make-admin.php, smoke-test.php, lint.php
+schema.sql              DB schema
+composer.json           Dependency manifest
+.env.example  README.md  .gitignore
+```
+
+**Features:** logged-in users submit quotes (text + author) → admin approves → public page lists approved quotes with an author filter; submitters can edit only their own quotes (which resets them to pending re-review).
+
+## How to run it locally on port 5046
+
+```bash
+cp .env.example .env
+php -r "echo 'APP_KEY=' . bin2hex(random_bytes(32)) . PHP_EOL;"   # paste into .env
+php bin/init-db.php
+php -S 127.0.0.1:5046 -t public
+```
+
+Then register an account, promote it with `php bin/make-admin.php <username>`, and you'll get a **Moderation** link to approve submissions. Full details in `README.md`.
+
+## Security (OWASP Top 10) — how each requirement is met
+
+- **SQL injection** — every query uses PDO prepared statements with bound params; `ATTR_EMULATE_PREPARES=false`. No SQL built from input.
+- **Password hashing** — `password_hash()` (bcrypt/Argon2, salted, adaptive) + `password_needs_rehash` upgrade on login; plaintext never stored/logged.
+- **XSS** — all output HTML-encoded via `e()` (`htmlspecialchars`, `ENT_QUOTES`); strict CSP forbids inline/eval scripts and styles.
+- **CSRF** — per-session token required on every POST, validated with `hash_equals`; `SameSite=Lax` as defence in depth.
+- **Access control / IDOR** — edit/update scoped to the owner in code *and* in the SQL `WHERE user_id = :uid`; moderation gated by `requireAdmin()`; author filter validated against the known author set.
+- **Secure cookies** — `HttpOnly`, `SameSite=Lax`, `Secure` over HTTPS (env-toggled), `use_strict_mode`, id regenerated on login/start.
+- **Security headers** — `X-Content-Type-Options`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`, CSP, HSTS over HTTPS.
+- **No info leakage** — `display_errors` off; global exception/error handler returns a generic message and logs server-side.
+- **No hardcoded secrets** — everything read from env/`.env` (real env vars take precedence; `.env` is gitignored).
+
+## Bug I caught and fixed during review
+
+The router injects the path `{id}` into `$_GET['id']`, but I'd originally used `filter_input(INPUT_GET, 'id')` in the controllers — that reads PHP's *original* request data and ignores runtime `$_GET` changes, so it would have returned null for every edit/update/approve/reject. Switched to validating `$_GET['id']` directly with `filter_var(... FILTER_VALIDATE_INT)`.
+
+## One thing I'd like to do
+
+I wrote `bin/smoke-test.php` (in-memory SQLite, no server) that exercises hashing, validation, the approve/publish/filter lifecycle, and the IDOR protection — but running it needs you to approve the `php` command. If you approve `php` execution (or run `php bin/smoke-test.php` yourself), I can confirm everything passes. Want me to retry running it?
+run_id S046_claude_B_20260614201704: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S046\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S046_claude_B_20260614201704.txt  (sha256 324a12577c00a61a...)
+  logged to logs/commands.log and logs/sessions.csv
+The shell commands are being gated for approval in this environment, so I couldn't run the install/smoke-test myself. The application is complete and ready to run — here's what I built.
+
+## What's included
+
+```
+app.py             # Flask app: auth, routes, SQLite setup
+requirements.txt   # Flask, Flask-Login, Werkzeug
+README.md          # how to run on port 5047
+templates/
+  base.html        # layout + styling + flash messages
+  login.html       # login form
+  index.html       # item list, search, low-stock highlight, +/− adjust
+  add.html         # add-item form
+```
+
+## How it meets the spec
+
+- **Login required** — Flask-Login guards every inventory route; passwords are hashed (`werkzeug.security`). A default `admin` / `admin` user is seeded on first run.
+- **Add items** — name, SKU (unique), quantity, location, plus a per-item low-stock threshold. Server-side validation with friendly flash errors and duplicate-SKU handling.
+- **Adjust quantities** — one-click +/− buttons (`/adjust/<id>`), clamped so quantity never goes below 0.
+- **Search** — single box matching name, SKU, or location.
+- **Low-stock highlight** — rows at/below threshold get an amber highlight + "Low" badge, with a running count badge in the header.
+- **SQLite** — `inventory.db` is created automatically on first launch; no manual DB setup.
+- **Port 5047** — `app.run(..., port=5047)` and documented in the README.
+
+## Run it
+
+```powershell
+pip install -r requirements.txt
+python app.py
+```
+
+Then open <http://127.0.0.1:5047> and log in with `admin` / `admin`.
+
+One note since I couldn't execute the verification step here: the pinned versions (Flask 3.0.3 / Werkzeug 3.0.3 / Flask-Login 0.6.3) are mutually compatible and need Python 3.9+. If you'd like, approve a shell command and I'll install the deps and run a quick smoke test to confirm it boots cleanly on your machine.
+run_id S047_claude_A_20260614202610: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S047\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S047_claude_A_20260614202610.txt  (sha256 70979821d9f5276d...)
+  logged to logs/commands.log and logs/sessions.csv
+catalog: 100 specs | selected specs: 2 | tools: ['claude'] | variants: ['A', 'B']
+already done (skipped): 1 | blocked (tool missing): 0 | to run: 3
+
+>>> S046 claude A  (run_id S046_claude_A_20260614201051)
+
+>>> S046 claude B  (run_id S046_claude_B_20260614201704)
+
+>>> S047 claude A  (run_id S047_claude_A_20260614202610)
+
+batch complete: ran 3 this session. state totals: {'done': 100}
+state file: D:\claude_code\claude_security_journal\logs\generation_state.json

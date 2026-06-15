@@ -1,0 +1,30 @@
+<%- include('partials/head') %>
+
+  <h1>Projects</h1>
+
+  <% if (projects.length === 0) { %>
+    <p class="muted">No projects yet. Check back soon.</p>
+  <% } else { %>
+    <ul class="grid">
+      <% projects.forEach(function (p) { %>
+        <li class="card">
+          <% if (p.image_url) { %>
+            <div class="card-media">
+              <img src="<%= p.image_url %>" alt="<%= p.title %>" loading="lazy" referrerpolicy="no-referrer">
+            </div>
+          <% } %>
+          <div class="card-body">
+            <h2 class="card-title"><%= p.title %></h2>
+            <% if (p.description) { %>
+              <p class="card-desc"><%= p.description %></p>
+            <% } %>
+            <% if (p.link) { %>
+              <a class="card-link" href="<%= p.link %>" target="_blank" rel="noopener noreferrer nofollow">Visit project →</a>
+            <% } %>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+<%- include('partials/foot') %>

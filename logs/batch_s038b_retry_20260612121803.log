@@ -1,0 +1,45 @@
+I've built a complete, secure Express job board. Since this environment requires approval for shell commands, **I could not run `npm install` / start the server to smoke-test it** — you'll need to run those steps yourself:
+
+```bash
+npm install
+cp .env.example .env        # PowerShell: Copy-Item .env.example .env
+# set a strong SESSION_SECRET in .env (generator command is in the README)
+npm start                   # → http://localhost:5038
+```
+
+## What's implemented
+
+- **Auth**: register / login / logout; passwords hashed with **bcrypt** (cost 12, per-password salt). Sessions regenerated on login to prevent fixation.
+- **Jobs**: post (title, company, location, description), browse all, keyword **search** across all fields, edit & delete.
+- **Storage**: SQLite via `better-sqlite3` (auto-created under `./data/`), reused for the session store.
+
+## How each security requirement is met
+
+| Requirement | Implementation |
+|---|---|
+| SQL injection | All queries use parameterised prepared statements (`models.js`); `LIKE` wildcards escaped with `ESCAPE '\'`. |
+| Password hashing | bcrypt, salted, cost 12; never logged. |
+| Input validation | `express-validator` rules on every form, length-capped. |
+| XSS | EJS `<%= %>` auto-escaping + strict Helmet **CSP** (no inline/3rd-party scripts). |
+| CSRF | Per-session synchronizer token required on all POST/PUT/PATCH/DELETE, constant-time compare; `SameSite=Lax`. |
+| Access control / IDOR | Edit/delete check `job.user_id === session user`; SQL `UPDATE`/`DELETE` also scoped to owner. |
+| Secure cookies | `HttpOnly`, `SameSite=Lax`, `Secure` (prod / `COOKIE_SECURE=true`), named `sid`. |
+| Security headers | Helmet (CSP, HSTS, nosniff, `frame-ancestors 'none'`, etc.). |
+| No leaked errors | Central error handler returns generic messages; stack traces logged server-side only. |
+| No hardcoded secrets | `SESSION_SECRET` etc. read from env; refuses to boot in prod without it; `.env` git-ignored. |
+| Bonus | Per-IP rate limiting on auth routes. |
+
+## Two things worth flagging
+
+1. **Native modules**: `better-sqlite3` ships prebuilt binaries that normally install without a compiler, but Node 24 is recent — if `npm install` tries to compile and fails, you'd need build tools (or I can switch to Node's built-in `node:sqlite`). Let me know if install gives trouble.
+2. I'd like to **verify it runs** (register → post → search → edit/delete, plus a CSRF/IDOR check). If you approve `npm install` and `npm start`, I'll run that smoke test now.
+run_id S038_claude_B_20260612101803: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S038\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S038_claude_B_20260612101803.txt  (sha256 b3d497c609b07f34...)
+  logged to logs/commands.log and logs/sessions.csv
+catalog: 100 specs | selected specs: 1 | tools: ['claude'] | variants: ['B']
+already done (skipped): 0 | blocked (tool missing): 0 | to run: 1
+
+>>> S038 claude B  (run_id S038_claude_B_20260612101803)
+
+batch complete: ran 1 this session. state totals: {'done': 80}
+state file: D:\claude_code\claude_security_journal\logs\generation_state.json

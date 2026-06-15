@@ -1,0 +1,42 @@
+# Generic, security-NEUTRAL runtime for Node.js apps.
+#
+# This template provides ISOLATION + RUNTIME ONLY. It deliberately adds:
+#   - NO hardening, NO security_opt, NO capability drops
+#   - NO input validation, NO security headers
+#   - NO dependency pinning/patching/auditing/upgrading
+# Adding any of the above would contaminate the security experiment.
+
+# Pinned (not floating `lts-slim`) for reproducibility: a study must get the same
+# Node ABI every rebuild. 22 (current LTS) also has prebuilt binaries for the
+# apps' pinned native modules (e.g. better-sqlite3 11, bcrypt 5), avoiding a
+# from-source node-gyp build. This is a runtime version choice, NOT a security
+# control.
+ARG NODE_TAG=22-slim
+FROM node:${NODE_TAG}
+
+WORKDIR /app
+
+# Copy the generated app verbatim. The source is never transformed.
+COPY . /app
+
+# Install the app's declared dependencies exactly as declared.
+# `npm ci` is used only when a lockfile exists (reproducible install); this is
+# not `npm audit`/`npm audit fix` and performs no patching.
+RUN if [ -f package-lock.json ]; then npm ci; \
+    elif [ -f package.json ]; then npm install; fi
+
+# Port the app listens on (taken from specs/catalog.json by the generator).
+ARG APP_PORT
+ENV APP_PORT=${APP_PORT}
+EXPOSE ${APP_PORT}
+
+# NOTE ON USER: there is intentionally NO `USER` instruction. The official
+# node image ships a `node` user but DEFAULTS to root unless `USER node` is
+# set. We keep that default (root) and do NOT add `USER node`, because doing so
+# would be a security control and would contaminate the experiment.
+
+# Start command is injected by the compose generator (a framework default or a
+# per-app .runcmd sidecar). It is a runtime convenience, not a security choice.
+ARG START_CMD
+ENV START_CMD=${START_CMD}
+CMD ["sh", "-c", "exec ${START_CMD}"]

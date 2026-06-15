@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: #fff;
+            padding: 2rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+            width: 320px;
+        }
+        h1 {
+            font-size: 1.4rem;
+            margin-top: 0;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 1rem 0 0.35rem;
+            font-size: 0.9rem;
+            color: #444;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 0.6rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 1.25rem;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover { background: #1d4ed8; }
+        .result {
+            margin-top: 1.25rem;
+            padding: 0.75rem;
+            background: #ecfdf5;
+            color: #065f46;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .error {
+            margin-top: 1.25rem;
+            padding: 0.75rem;
+            background: #fef2f2;
+            color: #991b1b;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Temperature Converter</h1>
+        <form method="post">
+            <label for="value">Value</label>
+            <input type="text" id="value" name="value" value="{{ value }}"
+                   placeholder="e.g. 100" autofocus>
+
+            <label for="direction">Direction</label>
+            <select id="direction" name="direction">
+                <option value="c2f" {% if direction == "c2f" %}selected{% endif %}>
+                    Celsius → Fahrenheit
+                </option>
+                <option value="f2c" {% if direction == "f2c" %}selected{% endif %}>
+                    Fahrenheit → Celsius
+                </option>
+            </select>
+
+            <button type="submit">Convert</button>
+        </form>
+
+        {% if result %}
+        <div class="result">{{ result }}</div>
+        {% endif %}
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>

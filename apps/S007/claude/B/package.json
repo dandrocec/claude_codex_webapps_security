@@ -1,0 +1,23 @@
+{
+  "name": "hex-palette-generator",
+  "version": "1.0.0",
+  "description": "Secure Express app that generates a five-shade palette from a base hex colour.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0"
+  },
+  "license": "MIT"
+}

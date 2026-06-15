@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+
+<h1>My Habits</h1>
+
+<% if (errors && errors.length) { %>
+  <ul class="alert alert-error">
+    <% errors.forEach(function (e) { %>
+      <li><%= e %></li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<div class="card">
+  <form action="/habits" method="POST" class="add-habit">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="text" name="name" placeholder="New habit (e.g. Drink water)"
+           required minlength="1" maxlength="100" aria-label="New habit name">
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>
+
+<% if (habits.length === 0) { %>
+  <p class="muted">No habits yet. Add your first one above!</p>
+<% } else { %>
+  <ul class="habit-list">
+    <% habits.forEach(function (h) { %>
+      <li class="habit <%= h.doneToday ? 'done' : '' %>">
+        <div class="habit-main">
+          <span class="habit-name"><%= h.name %></span>
+          <span class="streak" title="Current streak">
+            🔥 <%= h.streak %> day<%= h.streak === 1 ? '' : 's' %>
+          </span>
+        </div>
+        <div class="habit-actions">
+          <form action="/habits/<%= h.id %>/toggle" method="POST" class="inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="btn <%= h.doneToday ? 'btn-done' : 'btn-todo' %>">
+              <%= h.doneToday ? '✓ Done today' : 'Mark done' %>
+            </button>
+          </form>
+          <form action="/habits/<%= h.id %>/delete" method="POST" class="inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="btn btn-danger" aria-label="Delete habit">✕</button>
+          </form>
+        </div>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

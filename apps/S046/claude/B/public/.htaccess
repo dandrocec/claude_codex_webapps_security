@@ -1,0 +1,13 @@
+# Apache front-controller routing (only needed if serving via Apache, not the
+# built-in PHP server). Sends every non-file request to index.php.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Never serve dotfiles such as .env if the docroot is misconfigured.
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Register &middot; The Daily Flask{% endblock %}
+{% block content %}
+    <h1>Register as an author</h1>
+    <form method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autofocus>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Create account</button>
+    </form>
+    <p style="margin-top:1rem;font-family:system-ui,sans-serif;font-size:.9rem;">
+        Already have an account? <a href="{{ url_for('login') }}">Log in</a>.
+    </p>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+  <h1>Register</h1>
+  <form method="post" action="{{ url_for('register') }}">
+    {{ form.csrf_token }}
+    <label>Username {{ form.username(autocomplete="username") }}</label>
+    {% if form.username.errors %}
+      <ul class="errors">{% for e in form.username.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+    {% endif %}
+    <label>Password {{ form.password(autocomplete="new-password") }}</label>
+    {% if form.password.errors %}
+      <ul class="errors">{% for e in form.password.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+    {% endif %}
+    <button type="submit">Create account</button>
+  </form>
+  <p class="hint">Passwords must be at least 8 characters.</p>
+{% endblock %}

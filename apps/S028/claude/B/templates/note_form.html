@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit note" if mode == "edit" else "New note" }} · Notes{% endblock %}
+{% block content %}
+<h1>{{ "Edit note" if mode == "edit" else "New note" }}</h1>
+<form method="post" class="card form">
+  {{ form.csrf_token }}
+  <label for="title">Title</label>
+  {{ form.title(id="title", autofocus=true, maxlength="200") }}
+  {% for err in form.title.errors %}<p class="field-error">{{ err }}</p>{% endfor %}
+
+  <label for="body">Body</label>
+  {{ form.body(id="body", rows="10") }}
+  {% for err in form.body.errors %}<p class="field-error">{{ err }}</p>{% endfor %}
+
+  <div class="form-actions">
+    <button type="submit">{{ "Save changes" if mode == "edit" else "Create note" }}</button>
+    <a class="btn-secondary" href="{{ url_for('list_notes') }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

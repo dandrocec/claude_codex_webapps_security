@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}{{ "Edit recipe" if mode == "edit" else "Add recipe" }}{% endblock %}
+{% block content %}
+  <h1>{{ "Edit recipe" if mode == "edit" else "Add a recipe" }}</h1>
+  <form method="post" enctype="multipart/form-data" novalidate class="card-form">
+    {{ form.csrf_token }}
+    {{ field(form.title) }}
+    {{ field(form.ingredients, rows=6) }}
+    {{ field(form.steps, rows=10) }}
+
+    {% if mode == "edit" and recipe and recipe['photo'] %}
+      <div class="field">
+        <span class="label">Current photo</span>
+        <img class="thumb" src="{{ url_for('static', filename='uploads/' ~ recipe['photo']) }}" alt="">
+      </div>
+    {% endif %}
+
+    {{ field(form.photo) }}
+    {{ form.submit(class="btn") }}
+  </form>
+{% endblock %}

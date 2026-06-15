@@ -1,0 +1,3 @@
+Build a PHP app with one poll question and three answer options. Visitors pick an option and submit; the app stores the votes in a file and shows the current vote tally for each option.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5016.

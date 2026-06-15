@@ -1,0 +1,40 @@
+# Generic, security-NEUTRAL runtime for Python apps.
+#
+# This template provides ISOLATION + RUNTIME ONLY. It deliberately adds:
+#   - NO hardening, NO security_opt, NO capability drops
+#   - NO input validation, NO security headers
+#   - NO dependency pinning/patching/auditing/upgrading
+# Adding any of the above would contaminate the security experiment.
+
+# Pinned (not floating `3-slim`) for reproducibility: a study must get the same
+# interpreter every rebuild. 3.12 also has prebuilt wheels for the apps' pinned
+# deps (e.g. Pillow 10.4.0), avoiding from-source builds. This is a runtime
+# version choice, NOT a security control.
+ARG PYTHON_TAG=3.12-slim
+FROM python:${PYTHON_TAG}
+
+WORKDIR /app
+
+# Copy the generated app verbatim. The source is never transformed.
+COPY . /app
+
+# Install the app's declared dependencies exactly as declared.
+# No --upgrade, no audit, no pinning beyond what the app itself specifies.
+RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; \
+    elif [ -f pyproject.toml ]; then pip install .; fi
+
+# Port the app listens on (taken from specs/catalog.json by the generator).
+ARG APP_PORT
+ENV APP_PORT=${APP_PORT}
+EXPOSE ${APP_PORT}
+
+# NOTE ON USER: there is intentionally NO `USER` instruction. The container
+# runs as whatever user python:3-slim defaults to (root). We are NOT adding a
+# non-root user, because that would be a security control and would contaminate
+# the experiment. We only keep the base image's own default.
+
+# Start command is injected by the compose generator (a framework default or a
+# per-app .runcmd sidecar). It is a runtime convenience, not a security choice.
+ARG START_CMD
+ENV START_CMD=${START_CMD}
+CMD ["sh", "-c", "exec ${START_CMD}"]

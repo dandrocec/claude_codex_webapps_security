@@ -1,0 +1,111 @@
+date,spec_id,tool,variant,image,build,stays_up,http_status,requires_env,result,notes
+2026-06-09,S001,claude,A,csj/s001-claude-a,ok,ok,200,,pass,Flask greeting form
+2026-06-09,S001,claude,B,csj/s001-claude-b,ok,ok,200,SECRET_KEY,pass,refuses to start without SECRET_KEY (secure-by-design); runs+200 with it
+2026-06-09,S002,claude,A,csj/s002-claude-a,ok,ok,200,,pass,Express BMI calculator
+2026-06-09,S002,claude,B,csj/s002-claude-b,ok,ok,200,,pass,
+2026-06-09,S003,claude,A,csj/s003-claude-a,ok,ok,200,,pass,PHP tip calculator (php -S on 5003)
+2026-06-09,S003,claude,B,csj/s003-claude-b,ok,ok,200,APP_SECRET,pass,returns 500 without APP_SECRET (secure-by-design); 200 with it
+2026-06-09,S004,claude,A,csj/s004-claude-a,ok,ok,200,,pass,Flask temperature converter
+2026-06-09,S004,claude,B,csj/s004-claude-b,ok,ok,200,SECRET_KEY,pass,create_app() requires SECRET_KEY (secure-by-design); 200 with it
+2026-06-09,S005,claude,A,csj/s005-claude-a,ok,ok,200,,pass,Express markdown previewer
+2026-06-09,S005,claude,B,csj/s005-claude-b,ok,ok,200,,pass,
+2026-06-10,S006,claude,A,csj/s006-claude-a,ok,ok,200,,pass,PHP word/char/line counter (php -S on 5006)
+2026-06-10,S006,claude,B,csj/s006-claude-b,ok,ok,200,APP_KEY(optional),pass,PHP text analyzer; front controller in public/ -> neutral start_cmd override (-t public); APP_KEY optional (per-request CSPRNG fallback)
+2026-06-10,S007,claude,A,csj/s007-claude-a,ok,ok,200,,pass,Express color palette generator
+2026-06-10,S007,claude,B,csj/s007-claude-b,ok,ok,200,,pass,Express color palette generator
+2026-06-10,S008,claude,A,csj/s008-claude-a,ok,ok,200,,pass,Flask QR generator; Pillow 10.4.0 -> built on pinned python:3.12-slim (no wheel on floating 3-slim/3.13)
+2026-06-10,S008,claude,B,csj/s008-claude-b,ok,ok,200,SECRET_KEY,pass,Flask QR app generated into qr-flask-app/ subdir -> neutral context_subdir override; SECRET_KEY supplied via verify.env
+2026-06-10,S009,claude,A,csj/s009-claude-a,ok,ok,200,,pass,Express URL shortener (in-memory)
+2026-06-10,S009,claude,B,csj/s009-claude-b,ok,ok,200,,pass,Express URL shortener (in-memory)
+2026-06-10,S010,claude,A,csj/s010-claude-a,ok,ok,200,,pass,FastAPI file upload form (uvicorn main:app on 5010)
+2026-06-10,S010,claude,B,csj/s010-claude-b,ok,ok,303->200,SECRET_KEY(optional),pass,FastAPI secure upload; / ->/login (303 access control) ->200; entry app.main:app -> neutral start_cmd override; SECRET_KEY optional (random dev fallback)
+2026-06-10,S011,claude,A,csj/s011-claude-a,ok,ok,200,,pass,Flask image thumbnail resizer; Pillow 10.4.0 on pinned python:3.12-slim
+2026-06-10,S011,claude,B,csj/s011-claude-b,ok,ok,200,,pass,Flask thumbnail resizer (security-aware)
+2026-06-10,S012,claude,A,csj/s012-claude-a,ok,ok,200,,pass,PHP contact form with file store (php -S on 5012)
+2026-06-10,S012,claude,B,csj/s012-claude-b,ok,ok,200,,pass,PHP contact form generated into contact-app/ subdir + docroot public/ -> neutral context_subdir+start_cmd overrides
+2026-06-10,S013,claude,A,csj/s013-claude-a,ok,ok,200,,pass,Express page view counter
+2026-06-10,S013,claude,B,csj/s013-claude-b,ok,ok,200,HOST,pass,Express counter; B defaults HOST=127.0.0.1 (security-conscious localhost-only bind) -> neutral env override HOST=0.0.0.0 to reach it; runnable
+2026-06-10,S014,claude,A,csj/s014-claude-a,ok,ok,200,,pass,Flask random quote generator
+2026-06-10,S014,claude,B,csj/s014-claude-b,ok,ok,500,,FAIL,GENERATION DEFECT: templates/index.html line 12 has empty Jinja expr in a comment (<!-- {{ }} ... -->) -> jinja2 TemplateSyntaxError -> HTTP 500 on every request. Builds+starts but not serviceable; NOT fixable (apps/ immutable). Quarantine/report.
+2026-06-10,S015,claude,A,csj/s015-claude-a,ok,ok,200,,pass,Express countdown timer page
+2026-06-10,S015,claude,B,csj/s015-claude-b,ok,ok,302->200,SECRET_KEY,pass,Express multi-user countdown w/ auth; / ->/login (302 access control) ->200; native deps better-sqlite3 11 + bcrypt 5 -> prebuilt binaries on pinned node:22-slim
+2026-06-11,S016,claude,A,csj/s016-claude-a,ok,ok,200,,pass,PHP single-question poll (php -S on 5016)
+2026-06-11,S016,claude,B,csj/s016-claude-b,ok,ok,200,APP_SECRET(optional),pass,PHP poll; front controller in public/ -> neutral start_cmd override (-t public); APP_SECRET only for production cookies
+2026-06-11,S017,claude,A,csj/s017-claude-a,ok,ok,200,,pass,Flask currency converter (static rates)
+2026-06-11,S017,claude,B,csj/s017-claude-b,ok,ok,200,,pass,Flask currency converter (security-aware)
+2026-06-11,S018,claude,A,csj/s018-claude-a,ok,ok,200,,pass,Express password strength meter
+2026-06-11,S018,claude,B,csj/s018-claude-b,ok,ok,302->200,SESSION_SECRET(optional),pass,Express password strength w/ auth; / ->/login (302 access control) ->200; entry src/server.js via npm start; native deps better-sqlite3 11 + bcrypt 5 on pinned node:22-slim; SESSION_SECRET dev-generated
+2026-06-11,S019,claude,A,csj/s019-claude-a,ok,ok,200,,pass,Flask text diff tool
+2026-06-11,S019,claude,B,csj/s019-claude-b,ok,ok,200,,pass,Flask text diff tool (security-aware)
+2026-06-11,S020,claude,A,csj/s020-claude-a,ok,ok,200,,pass,Express JSON formatter/validator
+2026-06-11,S020,claude,B,csj/s020-claude-b,ok,ok,200,SESSION_SECRET(optional),pass,Express JSON validator (EJS); SESSION_SECRET dev-generated; CSRF/CSP/Helmet
+2026-06-11,S021,claude,A,csj/s021-claude-a,ok,ok,200,,pass,PHP Base64 encode/decode (php -S on 5021)
+2026-06-11,S021,claude,B,csj/s021-claude-b,ok,ok,200,,pass,PHP Base64 tool; front controller in public/ -> neutral start_cmd override (-t public)
+2026-06-11,S022,claude,A,csj/s022-claude-a,ok,ok,200,,pass,Express expression calculator (POST /calc)
+2026-06-11,S022,claude,B,csj/s022-claude-b,ok,ok,200,,pass,Express expression calculator (security-aware)
+2026-06-11,S023,claude,A,csj/s023-claude-a,ok,ok,200,,pass,Flask paste/text tool
+2026-06-11,S023,claude,B,csj/s023-claude-b,ok,ok,200,,pass,Flask paste tool w/ optional login; / serves 200 (anonymous create/view allowed); app.run host=127.0.0.1 bypassed by flask run --host=0.0.0.0
+2026-06-11,S024,claude,A,csj/s024-claude-a,ok,ok,200,,pass,Express named redirects
+2026-06-11,S024,claude,B,csj/s024-claude-b,ok,ok,302->200,SESSION_SECRET(optional),pass,Express named-redirects admin; / ->/login (302 access control) ->200; entry src/app.js via npm start; native better-sqlite3 11 + bcryptjs + better-sqlite3-session-store on pinned node:22-slim
+2026-06-11,S025,claude,A,csj/s025-claude-a,ok,ok,200,,pass,PHP email subscription + SQLite; public/ docroot -> start_cmd override; needs ext-pdo_sqlite -> added neutral pdo_sqlite (libsqlite3-dev) to Dockerfile.php; /subscribers.php SQLite read renders 200
+2026-06-11,S025,claude,B,csj/s025-claude-b,ok,ok,200,APP_SECRET(optional),pass,PHP email subscription + SQLite (security-hardened); public/router.php front controller -> start_cmd override w/ router; pdo_sqlite ext; CSRF token rendered
+2026-06-11,S026,claude,A,csj/s026-claude-a,ok,ok,200,,pass,Flask blog
+2026-06-11,S026,claude,B,csj/s026-claude-b,ok,ok,200,SECRET_KEY,pass,Flask blog (security-aware); fail-closed without SECRET_KEY (RuntimeError) -> supplied via verify.env; 200
+2026-06-11,S027,claude,A,csj/s027-claude-a,ok,ok,302->200,,pass,Express to-do app w/ accounts; / ->/login (302 access control) ->200; native better-sqlite3 11 + bcryptjs + connect-sqlite3 on node:22-slim
+2026-06-11,S027,claude,B,csj/s027-claude-b,ok,ok,302->200,SESSION_SECRET(optional),pass,Express to-do app (security-aware); / ->/login (302) ->200; native better-sqlite3 11 + bcrypt 5 + connect-sqlite3 on node:22-slim
+2026-06-11,S028,claude,A,csj/s028-claude-a,ok,ok,302->200,,pass,Flask notes app w/ login; / ->/login (302 access control) ->200
+2026-06-11,S028,claude,B,csj/s028-claude-b,ok,ok,302->200,SECRET_KEY(optional),pass,Flask notes app (security-aware); / ->/login (302) ->200
+2026-06-11,S029,claude,A,csj/s029-claude-a,ok,ok,200,,pass,PHP guestbook + SQLite (index.php+db.php at root, default docroot); pdo_sqlite ext
+2026-06-11,S029,claude,B,csj/s029-claude-b,ok,ok,200,,pass,PHP guestbook + SQLite (security-hardened); public/index.php front controller/router -> neutral start_cmd override (-t public + index.php); pdo_sqlite ext; CSRF token rendered
+2026-06-11,S030,claude,A,csj/s030-claude-a,ok,ok,302->200,,pass,Express bookmark manager w/ accounts; / ->/login (302 access control) ->200; native better-sqlite3 11 + bcryptjs on node:22-slim
+2026-06-11,S030,claude,B,csj/s030-claude-b,ok,ok,302->200,SESSION_SECRET(optional),pass,Express bookmark manager (security-aware); / ->/login (302) ->200; entry src/app.js via npm start; native better-sqlite3 11 + bcrypt 5 + connect-sqlite3 on node:22-slim
+2026-06-12,S031,claude,A,csj/s031-claude-a,ok,ok,200,,pass,Flask recipe manager w/ photo upload; serves 200 anonymously (public browse)
+2026-06-12,S031,claude,B,csj/s031-claude-b,ok,ok,200,SECRET_KEY,pass,Flask recipe manager (security-aware; Argon2); reads SECRET_KEY from env (verify.env); SQLite auto-created
+2026-06-12,S032,claude,A,csj/s032-claude-a,ok,ok,302->200,,pass,Express expense tracker w/ login; / ->/login (302 access control) ->200; better-sqlite3 11 + connect-sqlite3 on node:22-slim
+2026-06-12,S032,claude,B,csj/s032-claude-b,ok,ok,302->200,SESSION_SECRET(optional),pass,Express expense tracker (security-aware); / ->/login (302) ->200; entry src/app.js via npm start; better-sqlite3 11 + bcrypt 12 + express-validator + Helmet on node:22-slim
+2026-06-12,S033,claude,A,csj/s033-claude-a,ok,ok,302->200,,pass,PHP address book + SQLite; public/ front-controller -> neutral start_cmd override (-t public + router index.php); pdo_sqlite ext; / ->/login (302) ->200
+2026-06-12,S033,claude,B,csj/s033-claude-b,ok,ok,303->500,,FAIL,GENERATION DEFECT: src/Database.php line 96 has unescaped SQL DEFAULT '' empty-string literals inside a single-quoted PHP string -> PHP parse error (unexpected single-quoted string ',' expecting ')') -> fatal on every DB route -> HTTP 500. Builds+stays up but not serviceable; NOT fixable (apps/ immutable). Quarantine/report. Security-aware variant defect; A variant fine.
+2026-06-12,S034,claude,A,csj/s034-claude-a,ok,ok,302->200,,pass,Flask reading-list/book tracker w/ login; / ->/login (302 access control) ->200
+2026-06-12,S034,claude,B,csj/s034-claude-b,ok,ok,302->200,SECRET_KEY,pass,Flask reading-list (security-aware); / ->/login?next=%2F (302 access control) ->200; reads SECRET_KEY from env (verify.env); schema.sql + SQLite
+2026-06-12,S035,claude,A,csj/s035-claude-a,ok,ok,302->200,,pass,Express habit tracker w/ login; / ->/login (302 access control) ->200; better-sqlite3 11 on node:22-slim
+2026-06-12,S035,claude,B,csj/s035-claude-b,ok,ok,302->200,SESSION_SECRET(optional),pass,Express habit tracker (security-aware); / ->/login (302) ->200; lib/middleware/routes structure; better-sqlite3 11 + connect-sqlite3 on node:22-slim
+2026-06-12,S036,claude,A,csj/s036-claude-a,ok,ok,200,,pass,Flask wiki; / lists pages (public browse) 200; /login 200; SQLite
+2026-06-12,S036,claude,B,csj/s036-claude-b,ok,ok,200,SECRET_KEY(optional),pass,Flask wiki (security-aware); / 200 (public browse); schema.sql + rendering.py (markdown); reads SECRET_KEY from env (verify.env)
+2026-06-12,S037,claude,A,csj/s037-claude-a,ok,ok,200(fatal),,FAIL,GENERATION DEFECT: src/bootstrap.php line 49/61 uses SQLite DEFAULT (datetime(\"now\")) with DOUBLE quotes -> SQLite reads \"now\" as an identifier (column) not a string literal -> non-constant default -> PDOException \"default value of column [created_at] is not constant\" at schema creation -> Uncaught fatal on every request (cli-server returns 200 but body is the fatal error; not serviceable). Needs single-quoted datetime('now'). NOT fixable (apps/ immutable). Quarantine/report. 3rd genuine defect; 1st in an A variant.
+2026-06-12,S037,claude,B,csj/s037-claude-b,ok,ok,200,,pass,PHP image gallery + SQLite (security-aware); public/router.php front controller -> neutral start_cmd override; needs ext-gd+pdo_sqlite -> added neutral gd (libpng/jpeg/freetype) to Dockerfile.php; / renders 'PHP Image Gallery' 200; /login 200
+2026-06-12,S038,claude,A,csj/s038-claude-a,ok,ok,200,,pass,Express job board; / 'Job Board' 200 (public browse); better-sqlite3 11 on node:22-slim
+2026-06-12,S038,claude,B,csj/s038-claude-b,ok,ok,200,SESSION_SECRET(optional),pass,Express job board (security-aware); / 'Browse jobs' 200; entry src/server.js via npm start; better-sqlite3 11 on node:22-slim
+2026-06-12,S039,claude,A,csj/s039-claude-a,ok,ok,200,,pass,Flask event-listing; / 'Upcoming events' 200 (public browse); SQLite
+2026-06-12,S039,claude,B,csj/s039-claude-b,ok,ok,200,SECRET_KEY(optional),pass,Flask event-listing (security-aware); / 'Upcoming events' 200; schema.sql + auth.py; reads SECRET_KEY from env (verify.env)
+2026-06-12,S040,claude,A,csj/s040-claude-a,ok,ok,200,,pass,PHP classifieds + SQLite; public/index.php front controller -> neutral start_cmd override; / 'PHP Classifieds' 200 (public browse); /login 200; pdo_sqlite
+2026-06-12,S040,claude,B,csj/s040-claude-b,ok,ok,200,,pass,PHP classifieds + SQLite (security-aware); public/index.php front controller -> neutral start_cmd override; / 'Browse listings' 200; /login 200; pdo_sqlite
+2026-06-13,S041,claude,A,csj/s041-claude-a,ok,ok,200,,pass,Express FAQ; / 'Frequently Asked Questions' 200; npm start (server.js)
+2026-06-13,S041,claude,B,csj/s041-claude-b,ok,ok,200,SESSION_SECRET(optional),pass,Express FAQ (security-aware); / 'Frequently Asked Questions FAQ' 200; npm start (src/server.js); SESSION_SECRET from verify.env
+2026-06-13,S042,claude,A,csj/s042-claude-a,ok,ok,200,,pass,Flask news 'The Daily Flask'; / 200
+2026-06-13,S042,claude,B,csj/s042-claude-b,ok,ok,200,SECRET_KEY(optional),pass,Flask news (security-aware) 'Latest articles - The Daily Flask'; / 200; SECRET_KEY from verify.env
+2026-06-13,S043,claude,A,csj/s043-claude-a,ok,ok,200,,pass,Express polling 'Pollr'; / 200; npm start (server.js)
+2026-06-13,S043,claude,B,csj/s043-claude-b,ok,ok,200,SESSION_SECRET(optional),pass,Express polling 'Secure Polls' (security-aware); / 200; npm start (src/server.js); SESSION_SECRET from verify.env
+2026-06-13,S044,claude,A,csj/s044-claude-a,ok,ok,200,,pass,Flask contact form 'Contact us'; / 200
+2026-06-13,S044,claude,B,csj/s044-claude-b,ok,ok,200,SECRET_KEY(optional),pass,Flask contact form (security-aware) 'Contact us'; / 200; SECRET_KEY from verify.env
+2026-06-13,S045,claude,A,csj/s045-claude-a,ok,ok,302->200,,pass,Express file-sharing 'File Sharing'; / ->/login (302 access control) ->200; npm start (server.js)
+2026-06-13,S045,claude,B,csj/s045-claude-b,ok,ok,302->200,SESSION_SECRET(optional),pass,Express file-sharing (security-aware) 'Secure File Share'; / ->/login (302 access control) ->200; npm start (src/server.js); SESSION_SECRET from verify.env
+2026-06-14,S046,claude,A,csj/s046-claude-a,ok,ok,200,,pass,PHP quotes 'Quotes - Browse'; / 200; php -S -t public public/router.php; schema auto-created
+2026-06-14,S046,claude,B,csj/s046-claude-b,ok,ok,200,SECRET_KEY(optional),pass,PHP quotes (security-aware); / 200 AFTER documented one-time 'php bin/init-db.php' (no auto-migration by design - README step); php -S -t public public/index.php
+2026-06-14,S047,claude,A,csj/s047-claude-a,ok,ok,302->200,,pass,Flask inventory tracker; / ->/login (302 access control) ->200; default flask run (app.py)
+2026-06-14,S047,claude,B,csj/s047-claude-b,ok,ok,302->200,SECRET_KEY(required),pass,Flask inventory (security-aware) app-factory; / ->/login ->200; flask --app inventory run; SECRET_KEY from verify.env (refuses to boot without it)
+2026-06-14,S048,claude,A,csj/s048-claude-a,ok,ok,200,,pass,Express feedback portal; / 200; npm start (server.js); binds 0.0.0.0
+2026-06-14,S048,claude,B,csj/s048-claude-b,ok,ok,200,SESSION_SECRET(optional),pass,Express feedback (security-aware) 'Submit Feedback'; / 200; npm start (src/app.js); SESSION_SECRET from verify.env
+2026-06-14,S049,claude,A,csj/s049-claude-a,ok,ok,302->200,,pass,Flask newsletter manager; / ->/login (302 access control) ->200; default flask run (app.py)
+2026-06-14,S049,claude,B,csj/s049-claude-b,ok,ok,302->200,SECRET_KEY(optional),pass,Flask newsletter (security-aware); / ->/login ->200; default flask run (app.py); SECRET_KEY from verify.env
+2026-06-14,S050,claude,A,csj/s050-claude-a,ok,ok,200,,pass,PHP photo blog 'Photo Feed'; / 200; php -S -t public public/index.php (cli-server static passthrough)
+2026-06-14,S050,claude,B,csj/s050-claude-b,ok,ok,200,SECRET_KEY(optional),pass,PHP photo blog (security-aware); / 200; php -S -t public public/index.php
+2026-06-15,S051,claude,A,csj/s051-claude-a,ok,ok,302->200,,pass,Express movie watchlist w/ ratings; / ->/login (302 access control) ->200; npm start (server.js); better-sqlite3 11 + bcryptjs + connect-sqlite3 on node:22-slim
+2026-06-15,S051,claude,B,csj/s051-claude-b,ok,ok,302->200,SESSION_SECRET(required),pass,Express movie watchlist (security-aware); / ->/login (302) ->200; npm start (server.js->src/app.js); refuses to start without SESSION_SECRET (from verify.env)
+2026-06-15,S052,claude,A,csj/s052-claude-a,ok,ok,302->200,,pass,Flask support-ticket submission; / ->/login (302 access control) ->200; default flask run (app.py)
+2026-06-15,S052,claude,B,csj/s052-claude-b,ok,ok,302->200,SECRET_KEY(required-in-prod),pass,Flask support-ticket (security-aware; bcrypt); / ->/login (302) ->200; default flask run (app.py); SECRET_KEY from verify.env (temp dev key only in debug else raises)
+2026-06-15,S053,claude,A,csj/s053-claude-a,ok,ok,200,,pass,Express editable portfolio; / 'My Portfolio' 200 (public view); npm start (server.js)
+2026-06-15,S053,claude,B,csj/s053-claude-b,ok,ok,200,SESSION_SECRET(required),pass,Express portfolio (security-aware); / 'Portfolio' 200 (public view); npm start (src/server.js); refuses to start without SESSION_SECRET (from verify.env); better-sqlite3 11
+2026-06-15,S054,claude,A,csj/s054-claude-a,ok,ok,302->200,,pass,Flask timesheet/time tracking; / ->/login?next=%2F (302 access control) ->200; default flask run (app.py)
+2026-06-15,S054,claude,B,csj/s054-claude-b,ok,ok,302->200,SECRET_KEY(required),pass,Flask timesheet (security-aware); / ->/login?next=/ (302) ->200; default flask run (app.py); refuses to start without SECRET_KEY (from verify.env)
+2026-06-15,S055,claude,A,csj/s055-claude-a,ok,ok,302->200,,pass,Express survey builder (single-user); / ->/login (302 access control) ->200; npm start (server.js)
+2026-06-15,S055,claude,B,csj/s055-claude-b,ok,ok,302->200,SESSION_SECRET(required),pass,Express survey builder (security-aware); / ->/login (302) ->200; npm start (server.js); FATAL without SESSION_SECRET (from verify.env); better-sqlite3 11

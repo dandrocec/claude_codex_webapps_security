@@ -1,0 +1,17 @@
+{
+    "name": "example/php-image-gallery",
+    "description": "A small, security-hardened PHP image gallery: authenticated upload with captions and a public thumbnail gallery.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-fileinfo": "*",
+        "ext-gd": "*",
+        "ext-session": "*"
+    },
+    "scripts": {
+        "start": "php -S 127.0.0.1:5037 -t public public/router.php"
+    }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>URL Shortener</h1>
+      <p class="subtitle">Paste a long link and get a short code.</p>
+
+      <% if (error) { %>
+        <p class="error" role="alert"><%= error %></p>
+      <% } %>
+
+      <form method="POST" action="/shorten" class="shorten-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <label for="url">Long URL</label>
+        <input
+          type="url"
+          id="url"
+          name="url"
+          placeholder="https://example.com/very/long/path"
+          required
+          maxlength="2048"
+          autocomplete="off"
+        />
+        <button type="submit">Shorten</button>
+      </form>
+
+      <section>
+        <h2>Codes created this session</h2>
+        <% if (links.length === 0) { %>
+          <p class="muted">No links yet.</p>
+        <% } else { %>
+          <ul class="links">
+            <% links.forEach(function (link) { %>
+              <li>
+                <a class="code" href="/<%= link.code %>"><%= link.code %></a>
+                <span class="arrow">&rarr;</span>
+                <span class="target"><%= link.url %></span>
+              </li>
+            <% }); %>
+          </ul>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>

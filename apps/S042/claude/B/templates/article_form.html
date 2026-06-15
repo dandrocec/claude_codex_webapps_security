@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit article" if mode == "edit" else "New article" }} — The Daily Flask{% endblock %}
+{% block content %}
+  <h1>{{ "Edit article" if mode == "edit" else "New article" }}</h1>
+
+  <form method="post"
+        action="{{ url_for('edit_article', article_id=article_id) if mode == 'edit' else url_for('new_article') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Title
+      <input type="text" name="title" value="{{ title }}" maxlength="200" required>
+    </label>
+    <label>Body
+      <textarea name="body" rows="14" maxlength="20000" required>{{ body }}</textarea>
+    </label>
+    <button type="submit" class="button">{{ "Save changes" if mode == "edit" else "Publish" }}</button>
+    <a class="cancel" href="{{ url_for('index') }}">Cancel</a>
+  </form>
+{% endblock %}

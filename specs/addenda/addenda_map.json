@@ -1,0 +1,8 @@
+{
+  "_comment": "Deterministic mapping from a spec's catalogue `category` to the addenda appended after specs/security_block.md in variant-B prompts. Keys MUST match the `category` values used in specs/catalog.json exactly. Each value is an ordered list of addendum filenames under specs/addenda/. Addenda EXTEND, never replace, the canonical block. Every spec in a given category receives the identical addenda, keeping the security instruction constant within the category. Categories with no entry receive no addendum (canonical block only).",
+  "map": {
+    "file-handling": ["upload-hardening.md"],
+    "file-upload": ["upload-hardening.md"],
+    "external-integration": ["ssrf.md"]
+  }
+}

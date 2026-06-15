@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+<section class="card auth">
+  <h2>Create an account</h2>
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+  <form method="POST" action="/register">
+    <input type="text" name="username" placeholder="Username (3+ chars)" required autofocus />
+    <input type="password" name="password" placeholder="Password (6+ chars)" required />
+    <button type="submit">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Log in</a>.</p>
+</section>
+
+<%- include('partials/footer') %>

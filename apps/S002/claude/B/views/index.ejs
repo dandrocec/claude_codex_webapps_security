@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>BMI Calculator</h1>
+
+      <% if (errors && errors.length) { %>
+        <ul class="errors" role="alert">
+          <% errors.forEach(function (error) { %>
+            <li><%= error %></li>
+          <% }); %>
+        </ul>
+      <% } %>
+
+      <form method="POST" action="/bmi" novalidate>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+        <label for="height">Height (cm)</label>
+        <input
+          id="height"
+          name="height"
+          type="number"
+          inputmode="decimal"
+          step="0.1"
+          min="50"
+          max="300"
+          required
+        />
+
+        <label for="weight">Weight (kg)</label>
+        <input
+          id="weight"
+          name="weight"
+          type="number"
+          inputmode="decimal"
+          step="0.1"
+          min="2"
+          max="500"
+          required
+        />
+
+        <button type="submit">Calculate BMI</button>
+      </form>
+
+      <% if (result) { %>
+        <section class="result" aria-live="polite">
+          <h2>Your result</h2>
+          <p class="bmi-value">BMI: <strong><%= result.bmi %></strong></p>
+          <p class="bmi-category">Category: <strong><%= result.category %></strong></p>
+        </section>
+      <% } %>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+
+<p><a href="/">← All polls</a></p>
+
+<h1><%= poll.question %></h1>
+<p class="meta">Created by <%= poll.owner %></p>
+
+<% if (typeof voteError !== 'undefined' && voteError) { %>
+  <ul class="errors"><li><%= voteError %></li></ul>
+<% } %>
+
+<% if (!alreadyVoted) { %>
+  <form method="post" action="/polls/<%= poll.id %>/vote" class="card form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <fieldset>
+      <legend>Cast your vote</legend>
+      <% options.forEach(function (o) { %>
+        <label class="choice">
+          <input type="radio" name="optionId" value="<%= o.id %>" required>
+          <%= o.label %>
+        </label>
+      <% }) %>
+    </fieldset>
+    <button type="submit">Vote</button>
+  </form>
+<% } else { %>
+  <p class="muted">You've already voted in this poll. Live results below.</p>
+<% } %>
+
+<h2>Results</h2>
+<canvas id="results-chart"
+        data-poll-id="<%= poll.id %>"
+        height="220" aria-label="Bar chart of poll results" role="img"></canvas>
+
+<% if (isOwner) { %>
+  <form method="post" action="/polls/<%= poll.id %>/delete" class="danger" id="delete-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit" class="danger-btn">Delete poll</button>
+  </form>
+<% } %>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"
+        crossorigin="anonymous"></script>
+<script src="/static/js/poll.js"></script>
+
+<%- include('partials/footer') %>

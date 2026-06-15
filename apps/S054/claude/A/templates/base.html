@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Time Tracker{% endblock %}</title>
+  <style>
+    :root { --fg: #1f2933; --muted: #647280; --accent: #2563eb; --bg: #f7f8fa; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--fg); background: var(--bg); margin: 0; line-height: 1.5;
+    }
+    header {
+      background: #fff; border-bottom: 1px solid #e4e7eb;
+      padding: 0.85rem 1.5rem; display: flex; align-items: center; gap: 1.25rem;
+    }
+    header .brand { font-weight: 700; font-size: 1.1rem; }
+    header nav { display: flex; gap: 1rem; margin-left: auto; align-items: center; }
+    header a { color: var(--accent); text-decoration: none; }
+    header a:hover { text-decoration: underline; }
+    main { max-width: 880px; margin: 1.5rem auto; padding: 0 1.5rem; }
+    h1 { font-size: 1.4rem; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; }
+    th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #eef1f4; }
+    th { background: #f0f3f7; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+    .card { background: #fff; border: 1px solid #e4e7eb; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem; }
+    label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
+    input, textarea {
+      width: 100%; padding: 0.5rem 0.6rem; border: 1px solid #cdd5df;
+      border-radius: 6px; font: inherit; margin-bottom: 0.75rem;
+    }
+    .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .row > div { flex: 1; min-width: 140px; }
+    button {
+      background: var(--accent); color: #fff; border: 0; padding: 0.55rem 1rem;
+      border-radius: 6px; font: inherit; cursor: pointer;
+    }
+    button:hover { background: #1d4ed8; }
+    button.link { background: none; color: #b91c1c; padding: 0; }
+    button.link:hover { text-decoration: underline; }
+    .flashes { list-style: none; padding: 0; margin: 0 0 1.25rem; }
+    .flashes li { padding: 0.6rem 0.85rem; border-radius: 6px; margin-bottom: 0.5rem; }
+    .flashes .error { background: #fde8e8; color: #9b1c1c; }
+    .flashes .success { background: #def7ec; color: #03543f; }
+    .muted { color: var(--muted); }
+    .auth { max-width: 360px; margin: 3rem auto; }
+  </style>
+</head>
+<body>
+  {% if current_user.is_authenticated %}
+  <header>
+    <span class="brand">⏱ Time Tracker</span>
+    <nav>
+      <a href="{{ url_for('index') }}">Entries</a>
+      <a href="{{ url_for('weekly') }}">Weekly totals</a>
+      <span class="muted">{{ current_user.username }}</span>
+      <a href="{{ url_for('logout') }}">Log out</a>
+    </nav>
+  </header>
+  {% endif %}
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

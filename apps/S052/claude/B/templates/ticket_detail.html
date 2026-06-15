@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Ticket #{{ ticket["id"] }}{% endblock %}
+{% block content %}
+  <p><a href="{{ url_for('tickets') }}">&larr; Back to my tickets</a></p>
+  <article class="card">
+    <h1>{{ ticket["subject"] }}</h1>
+    <p class="meta">
+      <span class="badge p-{{ ticket['priority'] }}">{{ ticket["priority"]|capitalize }}</span>
+      <span class="badge s-{{ ticket['status'] }}">{{ ticket["status"]|replace('_',' ')|capitalize }}</span>
+      <span class="muted">Ticket #{{ ticket["id"] }} · opened {{ ticket["created_at"] }}</span>
+    </p>
+    <h2>Description</h2>
+    <p class="desc">{{ ticket["description"] }}</p>
+  </article>
+{% endblock %}

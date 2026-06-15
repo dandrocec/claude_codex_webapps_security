@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Upcoming events{% endblock %}
+{% block content %}
+  <h1>Upcoming events</h1>
+  {% if events %}
+    <ul class="event-list">
+      {% for event in events %}
+        <li class="event-card">
+          <a class="event-title" href="{{ url_for('events.detail', event_id=event['id']) }}">
+            {{ event['title'] }}
+          </a>
+          <div class="event-meta">
+            <span class="date">{{ event['event_date'] }}</span>
+            <span class="loc">{{ event['location'] }}</span>
+            <span class="org">by {{ event['organiser_name'] }}</span>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">No upcoming events yet.</p>
+  {% endif %}
+{% endblock %}

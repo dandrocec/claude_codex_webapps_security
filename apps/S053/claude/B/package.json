@@ -1,0 +1,27 @@
+{
+  "name": "secure-portfolio",
+  "version": "1.0.0",
+  "description": "A secure Node.js/Express portfolio site with an owner admin and a public project grid.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "init-db": "node src/scripts/init-db.js",
+    "create-owner": "node src/scripts/create-owner.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "connect-sqlite3": "^0.9.15",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "express-validator": "^7.2.0",
+    "helmet": "^8.0.0"
+  }
+}

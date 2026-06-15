@@ -1,0 +1,19 @@
+<%- include('partials/header', { title: 'Owner login' }) %>
+
+<section class="form-wrap">
+  <h1>Owner login</h1>
+  <% if (error) { %><p class="alert"><%= error %></p><% } %>
+  <form action="/login" method="post" class="stack">
+    <label>
+      Username
+      <input type="text" name="username" required autofocus />
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" required />
+    </label>
+    <button type="submit" class="btn">Log in</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

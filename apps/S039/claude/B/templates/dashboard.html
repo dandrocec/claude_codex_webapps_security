@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}My events{% endblock %}
+{% block content %}
+  <h1>My events</h1>
+  <p><a class="btn" href="{{ url_for('events.create') }}">+ New event</a></p>
+  {% if events %}
+    <table class="event-table">
+      <thead>
+        <tr><th>Title</th><th>Date</th><th>Location</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        {% for event in events %}
+          <tr>
+            <td><a href="{{ url_for('events.detail', event_id=event['id']) }}">{{ event['title'] }}</a></td>
+            <td>{{ event['event_date'] }}</td>
+            <td>{{ event['location'] }}</td>
+            <td class="row-actions">
+              <a href="{{ url_for('events.edit', event_id=event['id']) }}">Edit</a>
+              <form class="inline" method="post"
+                    action="{{ url_for('events.delete', event_id=event['id']) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="linkbtn danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="empty">You haven't created any events yet.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/expenses">💸 Expense Tracker</a>
+    <nav>
+      <% if (currentUser) { %>
+        <span class="user">Hi, <%= currentUser %></span>
+        <form action="/logout" method="post" class="inline">
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">

@@ -1,0 +1,941 @@
+ Image csj/s021-claude-a Building 
+ Image csj/s021-claude-b Building 
+ Image csj/s025-claude-b Building 
+ Image csj/s025-claude-a Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.71kB done
+#1 DONE 0.0s
+
+#2 [s021-claude-a internal] load build definition from Dockerfile.php
+#2 transferring dockerfile: 2.84kB done
+#2 DONE 0.0s
+
+#3 [auth] library/php:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [auth] library/composer:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#5 [s021-claude-a internal] load metadata for docker.io/library/composer:latest
+#5 DONE 0.8s
+
+#6 [s025-claude-b internal] load metadata for docker.io/library/php:apache
+#6 DONE 0.8s
+
+#7 [s021-claude-a internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [s025-claude-a internal] load .dockerignore
+#8 transferring context: 2B done
+#8 DONE 0.0s
+
+#9 [s025-claude-b internal] load .dockerignore
+#9 transferring context: 2B done
+#9 DONE 0.0s
+
+#10 [s021-claude-b internal] load .dockerignore
+#10 transferring context: 2B done
+#10 DONE 0.0s
+
+#11 [s021-claude-b] FROM docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497
+#11 resolve docker.io/library/composer:latest@sha256:65a161be39c6d30053492f46dcb4f3fe7a8beb6a1bcf92f79d5b41aa45604497 0.0s done
+#11 DONE 0.0s
+
+#12 [s025-claude-b stage-0 1/6] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#12 resolve docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f 0.0s done
+#12 DONE 0.0s
+
+#13 [s021-claude-b internal] load build context
+#13 transferring context: 14.37kB done
+#13 DONE 0.0s
+
+#14 [s021-claude-a internal] load build context
+#14 transferring context: 5.17kB done
+#14 DONE 0.0s
+
+#15 [s025-claude-a internal] load build context
+#15 transferring context: 8.36kB done
+#15 DONE 0.0s
+
+#16 [s025-claude-b internal] load build context
+#16 transferring context: 27.30kB done
+#16 DONE 0.0s
+
+#17 [s021-claude-b stage-0 4/6] COPY . /var/www/html
+#17 CACHED
+
+#18 [s025-claude-b stage-0 4/6] COPY . /var/www/html
+#18 CACHED
+
+#19 [s025-claude-a stage-0 2/6] WORKDIR /var/www/html
+#19 CACHED
+
+#20 [s025-claude-a stage-0 3/6] COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+#20 CACHED
+
+#21 [s021-claude-a stage-0 4/6] COPY . /var/www/html
+#21 CACHED
+
+#22 [s025-claude-a stage-0 4/6] COPY . /var/www/html
+#22 CACHED
+
+#23 [s021-claude-a stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#23 0.556 Hit:1 http://deb.debian.org/debian trixie InRelease
+#23 0.571 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#23 0.594 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#23 0.613 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9671 kB]
+#23 1.212 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+#23 1.236 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [212 kB]
+#23 1.719 Fetched 9979 kB in 1s (7734 kB/s)
+#23 1.719 Reading package lists...
+#23 2.105 Reading package lists...
+#23 2.512 Building dependency tree...
+#23 2.634 Reading state information...
+#23 2.797 Suggested packages:
+#23 2.797   sqlite3-doc
+#23 2.825 The following NEW packages will be installed:
+#23 2.825   libsqlite3-dev
+#23 2.875 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+#23 2.875 Need to get 1109 kB of archives.
+#23 2.875 After this operation, 3480 kB of additional disk space will be used.
+#23 2.875 Get:1 http://deb.debian.org/debian trixie/main amd64 libsqlite3-dev amd64 3.46.1-7+deb13u1 [1109 kB]
+#23 3.135 debconf: unable to initialize frontend: Dialog
+#23 3.135 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#23 3.135 debconf: falling back to frontend: Readline
+#23 3.142 debconf: unable to initialize frontend: Readline
+#23 3.142 debconf: (This frontend requires a controlling tty.)
+#23 3.142 debconf: falling back to frontend: Teletype
+#23 3.146 debconf: unable to initialize frontend: Teletype
+#23 3.146 debconf: (This frontend requires a controlling tty.)
+#23 3.146 debconf: falling back to frontend: Noninteractive
+#23 3.613 Fetched 1109 kB in 0s (7567 kB/s)
+#23 3.634 Selecting previously unselected package libsqlite3-dev:amd64.
+#23 3.634 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15584 files and directories currently installed.)
+#23 3.671 Preparing to unpack .../libsqlite3-dev_3.46.1-7+deb13u1_amd64.deb ...
+#23 3.674 Unpacking libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#23 3.733 Setting up libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#23 4.580 Configuring for:
+#23 4.580 PHP Version:             8.5
+#23 4.580 PHP Api Version:         20250925
+#23 4.580 Zend Module Api No:      20250925
+#23 4.580 Zend Extension Api No:   420250925
+#23 4.982 checking for grep that handles long lines and -e... /usr/bin/grep
+#23 4.984 checking for egrep... /usr/bin/grep -E
+#23 4.984 checking for a sed that does not truncate output... /usr/bin/sed
+#23 5.007 checking build system type... x86_64-pc-linux-gnu
+#23 5.010 checking host system type... x86_64-pc-linux-gnu
+#23 5.010 checking target system type... x86_64-pc-linux-gnu
+#23 5.033 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#23 5.062 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#23 5.070 checking for gawk... no
+#23 5.071 checking for nawk... nawk
+#23 5.071 checking if nawk is broken... no
+#23 5.073 checking for pkg-config... /usr/bin/pkg-config
+#23 5.073 checking pkg-config is at least version 0.9.0... yes
+#23 5.076 checking for cc... cc
+#23 5.098 checking whether the C compiler works... yes
+#23 5.175 checking for C compiler default output file name... a.out
+#23 5.176 checking for suffix of executables... 
+#23 5.198 checking whether we are cross compiling... no
+#23 5.236 checking for suffix of object files... o
+#23 5.250 checking whether the compiler supports GNU C... yes
+#23 5.263 checking whether cc accepts -g... yes
+#23 5.277 checking for cc option to enable C11 features... none needed
+#23 5.316 checking how to run the C preprocessor... cc -E
+#23 5.353 checking for egrep -e... (cached) /usr/bin/grep -E
+#23 5.353 checking for icc... no
+#23 5.360 checking for suncc... no
+#23 5.367 checking for system library directory... lib
+#23 5.367 checking if compiler supports -Wl,-rpath,... yes
+#23 5.403 checking for PHP prefix... /usr/local
+#23 5.403 checking for PHP includes... -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib
+#23 5.403 checking for PHP extension directory... /usr/local/lib/php/extensions/no-debug-non-zts-20250925
+#23 5.403 checking for PHP installed headers prefix... /usr/local/include/php
+#23 5.403 checking if debugging is enabled... no
+#23 5.420 checking if PHP is built with thread safety (ZTS)... no
+#23 5.430 
+#23 5.430 Configuring extension
+#23 5.430 checking for sqlite 3 support for PDO... yes, shared
+#23 5.431 checking for PDO includes... /usr/local/include/php/ext
+#23 5.431 checking for sqlite3 >= 3.7.17... yes
+#23 5.439 checking for sqlite3_close_v2 in -lsqlite3... yes
+#23 5.472 checking for sqlite3_column_table_name in -lsqlite3... yes
+#23 5.499 checking for sqlite3_load_extension in -lsqlite3... yes
+#23 5.532 
+#23 5.532 Configuring libtool
+#23 5.532 checking for a sed that does not truncate output... /usr/bin/sed
+#23 5.535 checking for ld used by cc... /usr/bin/ld
+#23 5.540 checking if the linker (/usr/bin/ld) is GNU ld... yes
+#23 5.541 checking for /usr/bin/ld option to reload object files... -r
+#23 5.541 checking for BSD-compatible nm... /usr/bin/nm -B
+#23 5.544 checking whether ln -s works... yes
+#23 5.544 checking how to recognize dependent libraries... pass_all
+#23 5.562 checking for stdio.h... yes
+#23 5.574 checking for stdlib.h... yes
+#23 5.590 checking for string.h... yes
+#23 5.604 checking for inttypes.h... yes
+#23 5.620 checking for stdint.h... yes
+#23 5.635 checking for strings.h... yes
+#23 5.650 checking for sys/stat.h... yes
+#23 5.665 checking for sys/types.h... yes
+#23 5.679 checking for unistd.h... yes
+#23 5.696 checking for dlfcn.h... yes
+#23 5.713 checking the maximum length of command line arguments... 1572864
+#23 5.717 checking command to parse /usr/bin/nm -B output from cc object... ok
+#23 5.760 checking for objdir... .libs
+#23 5.763 checking for ar... ar
+#23 5.763 checking for ranlib... ranlib
+#23 5.763 checking for strip... strip
+#23 5.798 checking if cc supports -fno-rtti -fno-exceptions... no
+#23 5.813 checking for cc option to produce PIC... -fPIC
+#23 5.813 checking if cc PIC flag -fPIC works... yes
+#23 5.827 checking if cc static flag -static works... yes
+#23 5.899 checking if cc supports -c -o file.o... yes
+#23 5.918 checking whether the cc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+#23 5.927 checking whether -lc should be explicitly linked in... no
+#23 5.943 checking dynamic linker characteristics... GNU/Linux ld.so
+#23 5.955 checking how to hardcode library paths into programs... immediate
+#23 5.955 checking whether stripping libraries is possible... yes
+#23 5.958 checking if libtool supports shared libraries... yes
+#23 5.958 checking whether to build shared libraries... yes
+#23 5.958 checking whether to build static libraries... no
+#23 6.066 
+#23 6.066 creating libtool
+#23 6.078 appending configuration tag "CXX" to libtool
+#23 6.083 
+#23 6.083 Generating files
+#23 6.095 configure: creating build directories
+#23 6.111 configure: creating Makefile
+#23 6.113 configure: patching config.h.in
+#23 6.116 configure: creating ./config.status
+#23 6.153 config.status: creating config.h
+#23 6.178 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -o pdo_sqlite.lo  -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo
+#23 6.242 mkdir .libs
+#23 6.244  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo  -fPIC -DPIC -o .libs/pdo_sqlite.o
+#23 6.463 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -o sqlite_driver.lo  -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo
+#23 6.532  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo  -fPIC -DPIC -o .libs/sqlite_driver.o
+#23 ...
+
+#24 [s021-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#24 0.561 Hit:1 http://deb.debian.org/debian trixie InRelease
+#24 0.577 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#24 0.602 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#24 0.618 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9671 kB]
+#24 1.449 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+#24 1.464 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [212 kB]
+#24 1.907 Fetched 9979 kB in 1s (6762 kB/s)
+#24 1.907 Reading package lists...
+#24 2.300 Reading package lists...
+#24 2.740 Building dependency tree...
+#24 2.891 Reading state information...
+#24 3.093 Suggested packages:
+#24 3.093   sqlite3-doc
+#24 3.119 The following NEW packages will be installed:
+#24 3.119   libsqlite3-dev
+#24 3.165 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+#24 3.165 Need to get 1109 kB of archives.
+#24 3.165 After this operation, 3480 kB of additional disk space will be used.
+#24 3.165 Get:1 http://deb.debian.org/debian trixie/main amd64 libsqlite3-dev amd64 3.46.1-7+deb13u1 [1109 kB]
+#24 3.358 debconf: unable to initialize frontend: Dialog
+#24 3.358 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#24 3.358 debconf: falling back to frontend: Readline
+#24 3.362 debconf: unable to initialize frontend: Readline
+#24 3.362 debconf: (This frontend requires a controlling tty.)
+#24 3.362 debconf: falling back to frontend: Teletype
+#24 3.365 debconf: unable to initialize frontend: Teletype
+#24 3.365 debconf: (This frontend requires a controlling tty.)
+#24 3.365 debconf: falling back to frontend: Noninteractive
+#24 3.830 Fetched 1109 kB in 0s (7745 kB/s)
+#24 3.851 Selecting previously unselected package libsqlite3-dev:amd64.
+#24 3.851 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15584 files and directories currently installed.)
+#24 3.857 Preparing to unpack .../libsqlite3-dev_3.46.1-7+deb13u1_amd64.deb ...
+#24 3.862 Unpacking libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#24 3.926 Setting up libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#24 4.761 Configuring for:
+#24 4.761 PHP Version:             8.5
+#24 4.761 PHP Api Version:         20250925
+#24 4.761 Zend Module Api No:      20250925
+#24 4.761 Zend Extension Api No:   420250925
+#24 5.162 checking for grep that handles long lines and -e... /usr/bin/grep
+#24 5.164 checking for egrep... /usr/bin/grep -E
+#24 5.165 checking for a sed that does not truncate output... /usr/bin/sed
+#24 5.189 checking build system type... x86_64-pc-linux-gnu
+#24 5.193 checking host system type... x86_64-pc-linux-gnu
+#24 5.193 checking target system type... x86_64-pc-linux-gnu
+#24 5.214 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#24 5.245 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#24 5.254 checking for gawk... no
+#24 5.254 checking for nawk... nawk
+#24 5.255 checking if nawk is broken... no
+#24 5.257 checking for pkg-config... /usr/bin/pkg-config
+#24 5.257 checking pkg-config is at least version 0.9.0... yes
+#24 5.258 checking for cc... cc
+#24 5.277 checking whether the C compiler works... yes
+#24 5.301 checking for C compiler default output file name... a.out
+#24 5.302 checking for suffix of executables... 
+#24 5.324 checking whether we are cross compiling... no
+#24 5.351 checking for suffix of object files... o
+#24 5.364 checking whether the compiler supports GNU C... yes
+#24 5.378 checking whether cc accepts -g... yes
+#24 5.390 checking for cc option to enable C11 features... none needed
+#24 5.421 checking how to run the C preprocessor... cc -E
+#24 5.457 checking for egrep -e... (cached) /usr/bin/grep -E
+#24 5.457 checking for icc... no
+#24 5.465 checking for suncc... no
+#24 5.472 checking for system library directory... lib
+#24 5.472 checking if compiler supports -Wl,-rpath,... yes
+#24 5.511 checking for PHP prefix... /usr/local
+#24 5.511 checking for PHP includes... -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib
+#24 5.511 checking for PHP extension directory... /usr/local/lib/php/extensions/no-debug-non-zts-20250925
+#24 5.511 checking for PHP installed headers prefix... /usr/local/include/php
+#24 5.511 checking if debugging is enabled... no
+#24 5.521 checking if PHP is built with thread safety (ZTS)... no
+#24 5.531 
+#24 5.531 Configuring extension
+#24 5.531 checking for sqlite 3 support for PDO... yes, shared
+#24 5.532 checking for PDO includes... /usr/local/include/php/ext
+#24 5.532 checking for sqlite3 >= 3.7.17... yes
+#24 5.540 checking for sqlite3_close_v2 in -lsqlite3... yes
+#24 5.569 checking for sqlite3_column_table_name in -lsqlite3... yes
+#24 5.599 checking for sqlite3_load_extension in -lsqlite3... yes
+#24 5.631 
+#24 5.631 Configuring libtool
+#24 5.631 checking for a sed that does not truncate output... /usr/bin/sed
+#24 5.633 checking for ld used by cc... /usr/bin/ld
+#24 5.637 checking if the linker (/usr/bin/ld) is GNU ld... yes
+#24 5.639 checking for /usr/bin/ld option to reload object files... -r
+#24 5.639 checking for BSD-compatible nm... /usr/bin/nm -B
+#24 5.641 checking whether ln -s works... yes
+#24 5.641 checking how to recognize dependent libraries... pass_all
+#24 5.652 checking for stdio.h... yes
+#24 5.664 checking for stdlib.h... yes
+#24 5.678 checking for string.h... yes
+#24 5.692 checking for inttypes.h... yes
+#24 5.708 checking for stdint.h... yes
+#24 5.724 checking for strings.h... yes
+#24 5.737 checking for sys/stat.h... yes
+#24 5.752 checking for sys/types.h... yes
+#24 5.767 checking for unistd.h... yes
+#24 5.784 checking for dlfcn.h... yes
+#24 5.802 checking the maximum length of command line arguments... 1572864
+#24 5.807 checking command to parse /usr/bin/nm -B output from cc object... ok
+#24 5.849 checking for objdir... .libs
+#24 5.852 checking for ar... ar
+#24 5.853 checking for ranlib... ranlib
+#24 5.853 checking for strip... strip
+#24 5.886 checking if cc supports -fno-rtti -fno-exceptions... no
+#24 5.901 checking for cc option to produce PIC... -fPIC
+#24 5.901 checking if cc PIC flag -fPIC works... yes
+#24 5.917 checking if cc static flag -static works... yes
+#24 5.961 checking if cc supports -c -o file.o... yes
+#24 5.980 checking whether the cc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+#24 5.989 checking whether -lc should be explicitly linked in... no
+#24 6.006 checking dynamic linker characteristics... GNU/Linux ld.so
+#24 6.017 checking how to hardcode library paths into programs... immediate
+#24 6.017 checking whether stripping libraries is possible... yes
+#24 6.019 checking if libtool supports shared libraries... yes
+#24 6.019 checking whether to build shared libraries... yes
+#24 6.019 checking whether to build static libraries... no
+#24 6.126 
+#24 6.126 creating libtool
+#24 6.138 appending configuration tag "CXX" to libtool
+#24 6.142 
+#24 6.142 Generating files
+#24 6.154 configure: creating build directories
+#24 6.170 configure: creating Makefile
+#24 6.173 configure: patching config.h.in
+#24 6.174 configure: creating ./config.status
+#24 6.210 config.status: creating config.h
+#24 6.233 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -o pdo_sqlite.lo  -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo
+#24 6.295 mkdir .libs
+#24 6.298  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo  -fPIC -DPIC -o .libs/pdo_sqlite.o
+#24 6.478 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -o sqlite_driver.lo  -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo
+#24 6.548  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo  -fPIC -DPIC -o .libs/sqlite_driver.o
+#24 6.807 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -o sqlite_statement.lo  -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo
+#24 6.875  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo  -fPIC -DPIC -o .libs/sqlite_statement.o
+#24 7.008 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -o sqlite_sql_parser.lo  -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo
+#24 7.071  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo  -fPIC -DPIC -o .libs/sqlite_sql_parser.o
+#24 7.161 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=link cc -shared -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wl,-O1 -pie  -o pdo_sqlite.la -export-dynamic -avoid-version -prefer-pic -module -rpath /usr/src/php/ext/pdo_sqlite/modules  pdo_sqlite.lo sqlite_driver.lo sqlite_statement.lo sqlite_sql_parser.lo -lsqlite3
+#24 7.235 cc -shared  .libs/pdo_sqlite.o .libs/sqlite_driver.o .libs/sqlite_statement.o .libs/sqlite_sql_parser.o  -lsqlite3  -Wl,-O1 -Wl,-soname -Wl,pdo_sqlite.so -o .libs/pdo_sqlite.so
+#24 7.249 creating pdo_sqlite.la
+#24 ...
+
+#25 [s025-claude-a stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#25 0.557 Hit:1 http://deb.debian.org/debian trixie InRelease
+#25 0.571 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#25 0.595 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#25 0.613 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9671 kB]
+#25 1.358 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+#25 1.372 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [212 kB]
+#25 1.831 Fetched 9979 kB in 1s (7106 kB/s)
+#25 1.831 Reading package lists...
+#25 2.222 Reading package lists...
+#25 2.657 Building dependency tree...
+#25 2.810 Reading state information...
+#25 3.003 Suggested packages:
+#25 3.003   sqlite3-doc
+#25 3.031 The following NEW packages will be installed:
+#25 3.032   libsqlite3-dev
+#25 3.082 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+#25 3.082 Need to get 1109 kB of archives.
+#25 3.082 After this operation, 3480 kB of additional disk space will be used.
+#25 3.082 Get:1 http://deb.debian.org/debian trixie/main amd64 libsqlite3-dev amd64 3.46.1-7+deb13u1 [1109 kB]
+#25 3.280 debconf: unable to initialize frontend: Dialog
+#25 3.280 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#25 3.280 debconf: falling back to frontend: Readline
+#25 3.285 debconf: unable to initialize frontend: Readline
+#25 3.285 debconf: (This frontend requires a controlling tty.)
+#25 3.285 debconf: falling back to frontend: Teletype
+#25 3.287 debconf: unable to initialize frontend: Teletype
+#25 3.287 debconf: (This frontend requires a controlling tty.)
+#25 3.287 debconf: falling back to frontend: Noninteractive
+#25 3.738 Fetched 1109 kB in 0s (8489 kB/s)
+#25 3.756 Selecting previously unselected package libsqlite3-dev:amd64.
+#25 3.756 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15584 files and directories currently installed.)
+#25 3.762 Preparing to unpack .../libsqlite3-dev_3.46.1-7+deb13u1_amd64.deb ...
+#25 3.765 Unpacking libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#25 3.828 Setting up libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#25 4.673 Configuring for:
+#25 4.673 PHP Version:             8.5
+#25 4.673 PHP Api Version:         20250925
+#25 4.673 Zend Module Api No:      20250925
+#25 4.673 Zend Extension Api No:   420250925
+#25 5.061 checking for grep that handles long lines and -e... /usr/bin/grep
+#25 5.063 checking for egrep... /usr/bin/grep -E
+#25 5.064 checking for a sed that does not truncate output... /usr/bin/sed
+#25 5.086 checking build system type... x86_64-pc-linux-gnu
+#25 5.090 checking host system type... x86_64-pc-linux-gnu
+#25 5.090 checking target system type... x86_64-pc-linux-gnu
+#25 5.112 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#25 5.141 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#25 5.149 checking for gawk... no
+#25 5.149 checking for nawk... nawk
+#25 5.149 checking if nawk is broken... no
+#25 5.151 checking for pkg-config... /usr/bin/pkg-config
+#25 5.151 checking pkg-config is at least version 0.9.0... yes
+#25 5.152 checking for cc... cc
+#25 5.173 checking whether the C compiler works... yes
+#25 5.196 checking for C compiler default output file name... a.out
+#25 5.197 checking for suffix of executables... 
+#25 5.221 checking whether we are cross compiling... no
+#25 5.249 checking for suffix of object files... o
+#25 5.264 checking whether the compiler supports GNU C... yes
+#25 5.276 checking whether cc accepts -g... yes
+#25 5.289 checking for cc option to enable C11 features... none needed
+#25 5.317 checking how to run the C preprocessor... cc -E
+#25 5.354 checking for egrep -e... (cached) /usr/bin/grep -E
+#25 5.354 checking for icc... no
+#25 5.360 checking for suncc... no
+#25 5.367 checking for system library directory... lib
+#25 5.367 checking if compiler supports -Wl,-rpath,... yes
+#25 5.405 checking for PHP prefix... /usr/local
+#25 5.405 checking for PHP includes... -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib
+#25 5.405 checking for PHP extension directory... /usr/local/lib/php/extensions/no-debug-non-zts-20250925
+#25 5.405 checking for PHP installed headers prefix... /usr/local/include/php
+#25 5.405 checking if debugging is enabled... no
+#25 5.420 checking if PHP is built with thread safety (ZTS)... no
+#25 5.430 
+#25 5.430 Configuring extension
+#25 5.430 checking for sqlite 3 support for PDO... yes, shared
+#25 5.431 checking for PDO includes... /usr/local/include/php/ext
+#25 5.431 checking for sqlite3 >= 3.7.17... yes
+#25 5.439 checking for sqlite3_close_v2 in -lsqlite3... yes
+#25 5.471 checking for sqlite3_column_table_name in -lsqlite3... yes
+#25 5.499 checking for sqlite3_load_extension in -lsqlite3... yes
+#25 5.533 
+#25 5.533 Configuring libtool
+#25 5.533 checking for a sed that does not truncate output... /usr/bin/sed
+#25 5.536 checking for ld used by cc... /usr/bin/ld
+#25 5.539 checking if the linker (/usr/bin/ld) is GNU ld... yes
+#25 5.541 checking for /usr/bin/ld option to reload object files... -r
+#25 5.542 checking for BSD-compatible nm... /usr/bin/nm -B
+#25 5.544 checking whether ln -s works... yes
+#25 5.544 checking how to recognize dependent libraries... pass_all
+#25 5.562 checking for stdio.h... yes
+#25 5.575 checking for stdlib.h... yes
+#25 5.589 checking for string.h... yes
+#25 5.604 checking for inttypes.h... yes
+#25 5.620 checking for stdint.h... yes
+#25 5.635 checking for strings.h... yes
+#25 5.649 checking for sys/stat.h... yes
+#25 5.665 checking for sys/types.h... yes
+#25 5.679 checking for unistd.h... yes
+#25 5.696 checking for dlfcn.h... yes
+#25 5.712 checking the maximum length of command line arguments... 1572864
+#25 5.717 checking command to parse /usr/bin/nm -B output from cc object... ok
+#25 5.760 checking for objdir... .libs
+#25 5.763 checking for ar... ar
+#25 5.763 checking for ranlib... ranlib
+#25 5.764 checking for strip... strip
+#25 5.798 checking if cc supports -fno-rtti -fno-exceptions... no
+#25 5.813 checking for cc option to produce PIC... -fPIC
+#25 5.813 checking if cc PIC flag -fPIC works... yes
+#25 5.826 checking if cc static flag -static works... yes
+#25 5.899 checking if cc supports -c -o file.o... yes
+#25 5.918 checking whether the cc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+#25 5.927 checking whether -lc should be explicitly linked in... no
+#25 5.943 checking dynamic linker characteristics... GNU/Linux ld.so
+#25 5.955 checking how to hardcode library paths into programs... immediate
+#25 5.955 checking whether stripping libraries is possible... yes
+#25 5.959 checking if libtool supports shared libraries... yes
+#25 5.959 checking whether to build shared libraries... yes
+#25 5.959 checking whether to build static libraries... no
+#25 6.066 
+#25 6.066 creating libtool
+#25 6.078 appending configuration tag "CXX" to libtool
+#25 6.083 
+#25 6.083 Generating files
+#25 6.095 configure: creating build directories
+#25 6.111 configure: creating Makefile
+#25 6.113 configure: patching config.h.in
+#25 6.116 configure: creating ./config.status
+#25 6.153 config.status: creating config.h
+#25 6.178 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -o pdo_sqlite.lo  -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo
+#25 6.241 mkdir .libs
+#25 6.242  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo  -fPIC -DPIC -o .libs/pdo_sqlite.o
+#25 6.463 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -o sqlite_driver.lo  -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo
+#25 6.534  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo  -fPIC -DPIC -o .libs/sqlite_driver.o
+#25 6.786 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -o sqlite_statement.lo  -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo
+#25 6.853  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo  -fPIC -DPIC -o .libs/sqlite_statement.o
+#25 6.981 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -o sqlite_sql_parser.lo  -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo
+#25 7.047  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo  -fPIC -DPIC -o .libs/sqlite_sql_parser.o
+#25 7.137 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=link cc -shared -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wl,-O1 -pie  -o pdo_sqlite.la -export-dynamic -avoid-version -prefer-pic -module -rpath /usr/src/php/ext/pdo_sqlite/modules  pdo_sqlite.lo sqlite_driver.lo sqlite_statement.lo sqlite_sql_parser.lo -lsqlite3
+#25 7.208 cc -shared  .libs/pdo_sqlite.o .libs/sqlite_driver.o .libs/sqlite_statement.o .libs/sqlite_sql_parser.o  -lsqlite3  -Wl,-O1 -Wl,-soname -Wl,pdo_sqlite.so -o .libs/pdo_sqlite.so
+#25 7.222 creating pdo_sqlite.la
+#25 7.228 (cd .libs && rm -f pdo_sqlite.la && ln -s ../pdo_sqlite.la pdo_sqlite.la)
+#25 7.230 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=install cp ./pdo_sqlite.la /usr/src/php/ext/pdo_sqlite/modules
+#25 7.249 cp ./.libs/pdo_sqlite.so /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.so
+#25 7.253 cp ./.libs/pdo_sqlite.lai /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.la
+#25 7.265 PATH="$PATH:/sbin" ldconfig -n /usr/src/php/ext/pdo_sqlite/modules
+#25 7.269 ----------------------------------------------------------------------
+#25 7.269 Libraries have been installed in:
+#25 7.269    /usr/src/php/ext/pdo_sqlite/modules
+#25 7.269 
+#25 7.269 If you ever happen to want to link against installed libraries
+#25 7.269 in a given directory, LIBDIR, you must either use libtool, and
+#25 7.269 specify the full pathname of the library, or use the `-LLIBDIR'
+#25 7.269 flag during linking and do at least one of the following:
+#25 7.269    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+#25 7.269      during execution
+#25 7.269    - add LIBDIR to the `LD_RUN_PATH' environment variable
+#25 7.269      during linking
+#25 7.269    - use the `-Wl,--rpath -Wl,LIBDIR' linker flag
+#25 7.269    - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+#25 7.269 
+#25 7.269 See any operating system documentation about shared libraries for
+#25 7.269 more information, such as the ld(1) and ld.so(8) manual pages.
+#25 7.270 ----------------------------------------------------------------------
+#25 7.272 
+#25 7.273 Build complete.
+#25 7.274 Don't forget to run 'make test'.
+#25 7.276 
+#25 7.334 + strip --strip-all modules/pdo_sqlite.so
+#25 ...
+
+#24 [s021-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#24 7.255 (cd .libs && rm -f pdo_sqlite.la && ln -s ../pdo_sqlite.la pdo_sqlite.la)
+#24 7.257 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=install cp ./pdo_sqlite.la /usr/src/php/ext/pdo_sqlite/modules
+#24 7.278 cp ./.libs/pdo_sqlite.so /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.so
+#24 7.281 cp ./.libs/pdo_sqlite.lai /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.la
+#24 7.293 PATH="$PATH:/sbin" ldconfig -n /usr/src/php/ext/pdo_sqlite/modules
+#24 7.295 ----------------------------------------------------------------------
+#24 7.295 Libraries have been installed in:
+#24 7.295    /usr/src/php/ext/pdo_sqlite/modules
+#24 7.295 
+#24 7.295 If you ever happen to want to link against installed libraries
+#24 7.295 in a given directory, LIBDIR, you must either use libtool, and
+#24 7.295 specify the full pathname of the library, or use the `-LLIBDIR'
+#24 7.295 flag during linking and do at least one of the following:
+#24 7.296    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+#24 7.296      during execution
+#24 7.296    - add LIBDIR to the `LD_RUN_PATH' environment variable
+#24 7.296      during linking
+#24 7.296    - use the `-Wl,--rpath -Wl,LIBDIR' linker flag
+#24 7.296    - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+#24 7.296 
+#24 7.296 See any operating system documentation about shared libraries for
+#24 7.296 more information, such as the ld(1) and ld.so(8) manual pages.
+#24 7.296 ----------------------------------------------------------------------
+#24 7.297 
+#24 7.298 Build complete.
+#24 7.299 Don't forget to run 'make test'.
+#24 7.300 
+#24 7.339 + strip --strip-all modules/pdo_sqlite.so
+#24 7.357 Installing shared extensions:     /usr/local/lib/php/extensions/no-debug-non-zts-20250925/
+#24 7.412 
+#24 7.412 warning: pdo_sqlite (pdo_sqlite) is already loaded!
+#24 7.412 
+#24 7.413 find . -name \*.gcno -o -name \*.gcda | xargs rm -f
+#24 7.416 find . -name \*.lo -o -name \*.o -o -name \*.dep | xargs rm -f
+#24 7.419 find . -name \*.la -o -name \*.a | xargs rm -f
+#24 7.422 find . -name \*.so | xargs rm -f
+#24 7.424 find . -name .libs -a -type d|xargs rm -rf
+#24 7.428 rm -f libphp.la        modules/* libs/*
+#24 7.429 rm -f ext/opcache/jit/ir/gen_ir_fold_hash
+#24 7.431 rm -f ext/opcache/jit/ir/minilua
+#24 7.432 rm -f ext/opcache/jit/ir/ir_fold_hash.h
+#24 7.434 rm -f ext/opcache/jit/ir/ir_emit_x86.h
+#24 7.435 rm -f ext/opcache/jit/ir/ir_emit_aarch64.h
+#24 DONE 7.9s
+
+#23 [s021-claude-a stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#23 6.786 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -o sqlite_statement.lo  -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo
+#23 6.853  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo  -fPIC -DPIC -o .libs/sqlite_statement.o
+#23 6.981 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -o sqlite_sql_parser.lo  -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo
+#23 7.045  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo  -fPIC -DPIC -o .libs/sqlite_sql_parser.o
+#23 7.136 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=link cc -shared -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wl,-O1 -pie  -o pdo_sqlite.la -export-dynamic -avoid-version -prefer-pic -module -rpath /usr/src/php/ext/pdo_sqlite/modules  pdo_sqlite.lo sqlite_driver.lo sqlite_statement.lo sqlite_sql_parser.lo -lsqlite3
+#23 7.206 cc -shared  .libs/pdo_sqlite.o .libs/sqlite_driver.o .libs/sqlite_statement.o .libs/sqlite_sql_parser.o  -lsqlite3  -Wl,-O1 -Wl,-soname -Wl,pdo_sqlite.so -o .libs/pdo_sqlite.so
+#23 7.219 creating pdo_sqlite.la
+#23 7.225 (cd .libs && rm -f pdo_sqlite.la && ln -s ../pdo_sqlite.la pdo_sqlite.la)
+#23 7.226 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=install cp ./pdo_sqlite.la /usr/src/php/ext/pdo_sqlite/modules
+#23 7.247 cp ./.libs/pdo_sqlite.so /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.so
+#23 7.250 cp ./.libs/pdo_sqlite.lai /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.la
+#23 7.263 PATH="$PATH:/sbin" ldconfig -n /usr/src/php/ext/pdo_sqlite/modules
+#23 7.269 ----------------------------------------------------------------------
+#23 7.269 Libraries have been installed in:
+#23 7.269    /usr/src/php/ext/pdo_sqlite/modules
+#23 7.269 
+#23 7.269 If you ever happen to want to link against installed libraries
+#23 7.269 in a given directory, LIBDIR, you must either use libtool, and
+#23 7.269 specify the full pathname of the library, or use the `-LLIBDIR'
+#23 7.269 flag during linking and do at least one of the following:
+#23 7.269    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+#23 7.269      during execution
+#23 7.269    - add LIBDIR to the `LD_RUN_PATH' environment variable
+#23 7.269      during linking
+#23 7.269    - use the `-Wl,--rpath -Wl,LIBDIR' linker flag
+#23 7.269    - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+#23 7.269 
+#23 7.269 See any operating system documentation about shared libraries for
+#23 7.269 more information, such as the ld(1) and ld.so(8) manual pages.
+#23 7.270 ----------------------------------------------------------------------
+#23 7.271 
+#23 7.272 Build complete.
+#23 7.273 Don't forget to run 'make test'.
+#23 7.274 
+#23 7.334 + strip --strip-all modules/pdo_sqlite.so
+#23 7.352 Installing shared extensions:     /usr/local/lib/php/extensions/no-debug-non-zts-20250925/
+#23 7.406 
+#23 7.406 warning: pdo_sqlite (pdo_sqlite) is already loaded!
+#23 7.406 
+#23 7.408 find . -name \*.gcno -o -name \*.gcda | xargs rm -f
+#23 7.411 find . -name \*.lo -o -name \*.o -o -name \*.dep | xargs rm -f
+#23 7.415 find . -name \*.la -o -name \*.a | xargs rm -f
+#23 7.418 find . -name \*.so | xargs rm -f
+#23 7.421 find . -name .libs -a -type d|xargs rm -rf
+#23 7.424 rm -f libphp.la        modules/* libs/*
+#23 7.426 rm -f ext/opcache/jit/ir/gen_ir_fold_hash
+#23 7.427 rm -f ext/opcache/jit/ir/minilua
+#23 7.428 rm -f ext/opcache/jit/ir/ir_fold_hash.h
+#23 7.430 rm -f ext/opcache/jit/ir/ir_emit_x86.h
+#23 7.431 rm -f ext/opcache/jit/ir/ir_emit_aarch64.h
+#23 DONE 7.9s
+
+#25 [s025-claude-a stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#25 7.353 Installing shared extensions:     /usr/local/lib/php/extensions/no-debug-non-zts-20250925/
+#25 7.406 
+#25 7.406 warning: pdo_sqlite (pdo_sqlite) is already loaded!
+#25 7.406 
+#25 7.408 find . -name \*.gcno -o -name \*.gcda | xargs rm -f
+#25 7.410 find . -name \*.lo -o -name \*.o -o -name \*.dep | xargs rm -f
+#25 7.413 find . -name \*.la -o -name \*.a | xargs rm -f
+#25 7.416 find . -name \*.so | xargs rm -f
+#25 7.418 find . -name .libs -a -type d|xargs rm -rf
+#25 7.422 rm -f libphp.la        modules/* libs/*
+#25 7.423 rm -f ext/opcache/jit/ir/gen_ir_fold_hash
+#25 7.425 rm -f ext/opcache/jit/ir/minilua
+#25 7.426 rm -f ext/opcache/jit/ir/ir_fold_hash.h
+#25 7.427 rm -f ext/opcache/jit/ir/ir_emit_x86.h
+#25 7.429 rm -f ext/opcache/jit/ir/ir_emit_aarch64.h
+#25 DONE 7.9s
+
+#26 [s025-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#26 0.556 Hit:1 http://deb.debian.org/debian trixie InRelease
+#26 0.572 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#26 0.594 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#26 0.615 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9671 kB]
+#26 1.249 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+#26 1.264 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [212 kB]
+#26 1.745 Fetched 9979 kB in 1s (7568 kB/s)
+#26 1.745 Reading package lists...
+#26 2.128 Reading package lists...
+#26 2.539 Building dependency tree...
+#26 2.663 Reading state information...
+#26 2.828 Suggested packages:
+#26 2.828   sqlite3-doc
+#26 2.856 The following NEW packages will be installed:
+#26 2.856   libsqlite3-dev
+#26 2.904 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+#26 2.904 Need to get 1109 kB of archives.
+#26 2.904 After this operation, 3480 kB of additional disk space will be used.
+#26 2.904 Get:1 http://deb.debian.org/debian trixie/main amd64 libsqlite3-dev amd64 3.46.1-7+deb13u1 [1109 kB]
+#26 3.135 debconf: unable to initialize frontend: Dialog
+#26 3.135 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#26 3.135 debconf: falling back to frontend: Readline
+#26 3.142 debconf: unable to initialize frontend: Readline
+#26 3.142 debconf: (This frontend requires a controlling tty.)
+#26 3.142 debconf: falling back to frontend: Teletype
+#26 3.145 debconf: unable to initialize frontend: Teletype
+#26 3.145 debconf: (This frontend requires a controlling tty.)
+#26 3.145 debconf: falling back to frontend: Noninteractive
+#26 3.613 Fetched 1109 kB in 0s (7512 kB/s)
+#26 3.634 Selecting previously unselected package libsqlite3-dev:amd64.
+#26 3.634 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15584 files and directories currently installed.)
+#26 3.671 Preparing to unpack .../libsqlite3-dev_3.46.1-7+deb13u1_amd64.deb ...
+#26 3.674 Unpacking libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#26 3.734 Setting up libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#26 4.580 Configuring for:
+#26 4.580 PHP Version:             8.5
+#26 4.580 PHP Api Version:         20250925
+#26 4.580 Zend Module Api No:      20250925
+#26 4.580 Zend Extension Api No:   420250925
+#26 4.982 checking for grep that handles long lines and -e... /usr/bin/grep
+#26 4.983 checking for egrep... /usr/bin/grep -E
+#26 4.984 checking for a sed that does not truncate output... /usr/bin/sed
+#26 5.008 checking build system type... x86_64-pc-linux-gnu
+#26 5.011 checking host system type... x86_64-pc-linux-gnu
+#26 5.011 checking target system type... x86_64-pc-linux-gnu
+#26 5.033 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#26 5.061 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#26 5.070 checking for gawk... no
+#26 5.070 checking for nawk... nawk
+#26 5.070 checking if nawk is broken... no
+#26 5.072 checking for pkg-config... /usr/bin/pkg-config
+#26 5.072 checking pkg-config is at least version 0.9.0... yes
+#26 5.076 checking for cc... cc
+#26 5.098 checking whether the C compiler works... yes
+#26 5.176 checking for C compiler default output file name... a.out
+#26 5.176 checking for suffix of executables... 
+#26 5.199 checking whether we are cross compiling... no
+#26 5.236 checking for suffix of object files... o
+#26 5.250 checking whether the compiler supports GNU C... yes
+#26 5.263 checking whether cc accepts -g... yes
+#26 5.277 checking for cc option to enable C11 features... none needed
+#26 5.316 checking how to run the C preprocessor... cc -E
+#26 5.353 checking for egrep -e... (cached) /usr/bin/grep -E
+#26 5.354 checking for icc... no
+#26 5.361 checking for suncc... no
+#26 5.367 checking for system library directory... lib
+#26 5.367 checking if compiler supports -Wl,-rpath,... yes
+#26 5.404 checking for PHP prefix... /usr/local
+#26 5.404 checking for PHP includes... -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib
+#26 5.404 checking for PHP extension directory... /usr/local/lib/php/extensions/no-debug-non-zts-20250925
+#26 5.404 checking for PHP installed headers prefix... /usr/local/include/php
+#26 5.404 checking if debugging is enabled... no
+#26 5.420 checking if PHP is built with thread safety (ZTS)... no
+#26 5.430 
+#26 5.430 Configuring extension
+#26 5.430 checking for sqlite 3 support for PDO... yes, shared
+#26 5.431 checking for PDO includes... /usr/local/include/php/ext
+#26 5.431 checking for sqlite3 >= 3.7.17... yes
+#26 5.439 checking for sqlite3_close_v2 in -lsqlite3... yes
+#26 5.471 checking for sqlite3_column_table_name in -lsqlite3... yes
+#26 5.499 checking for sqlite3_load_extension in -lsqlite3... yes
+#26 5.532 
+#26 5.532 Configuring libtool
+#26 5.533 checking for a sed that does not truncate output... /usr/bin/sed
+#26 5.535 checking for ld used by cc... /usr/bin/ld
+#26 5.539 checking if the linker (/usr/bin/ld) is GNU ld... yes
+#26 5.541 checking for /usr/bin/ld option to reload object files... -r
+#26 5.541 checking for BSD-compatible nm... /usr/bin/nm -B
+#26 5.544 checking whether ln -s works... yes
+#26 5.544 checking how to recognize dependent libraries... pass_all
+#26 5.562 checking for stdio.h... yes
+#26 5.575 checking for stdlib.h... yes
+#26 5.589 checking for string.h... yes
+#26 5.604 checking for inttypes.h... yes
+#26 5.620 checking for stdint.h... yes
+#26 5.635 checking for strings.h... yes
+#26 5.650 checking for sys/stat.h... yes
+#26 5.665 checking for sys/types.h... yes
+#26 5.679 checking for unistd.h... yes
+#26 5.696 checking for dlfcn.h... yes
+#26 5.713 checking the maximum length of command line arguments... 1572864
+#26 5.717 checking command to parse /usr/bin/nm -B output from cc object... ok
+#26 5.760 checking for objdir... .libs
+#26 5.763 checking for ar... ar
+#26 5.763 checking for ranlib... ranlib
+#26 5.764 checking for strip... strip
+#26 5.798 checking if cc supports -fno-rtti -fno-exceptions... no
+#26 5.813 checking for cc option to produce PIC... -fPIC
+#26 5.813 checking if cc PIC flag -fPIC works... yes
+#26 5.827 checking if cc static flag -static works... yes
+#26 5.899 checking if cc supports -c -o file.o... yes
+#26 5.918 checking whether the cc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+#26 5.927 checking whether -lc should be explicitly linked in... no
+#26 5.943 checking dynamic linker characteristics... GNU/Linux ld.so
+#26 5.955 checking how to hardcode library paths into programs... immediate
+#26 5.955 checking whether stripping libraries is possible... yes
+#26 5.958 checking if libtool supports shared libraries... yes
+#26 5.958 checking whether to build shared libraries... yes
+#26 5.958 checking whether to build static libraries... no
+#26 6.066 
+#26 6.066 creating libtool
+#26 6.078 appending configuration tag "CXX" to libtool
+#26 6.083 
+#26 6.083 Generating files
+#26 6.095 configure: creating build directories
+#26 6.110 configure: creating Makefile
+#26 6.113 configure: patching config.h.in
+#26 6.115 configure: creating ./config.status
+#26 6.153 config.status: creating config.h
+#26 6.178 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -o pdo_sqlite.lo  -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo
+#26 6.241 mkdir .libs
+#26 6.242  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo  -fPIC -DPIC -o .libs/pdo_sqlite.o
+#26 6.463 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -o sqlite_driver.lo  -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo
+#26 6.531  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo  -fPIC -DPIC -o .libs/sqlite_driver.o
+#26 6.787 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -o sqlite_statement.lo  -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo
+#26 6.854  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo  -fPIC -DPIC -o .libs/sqlite_statement.o
+#26 6.981 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -o sqlite_sql_parser.lo  -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo
+#26 7.048  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo  -fPIC -DPIC -o .libs/sqlite_sql_parser.o
+#26 7.136 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=link cc -shared -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wl,-O1 -pie  -o pdo_sqlite.la -export-dynamic -avoid-version -prefer-pic -module -rpath /usr/src/php/ext/pdo_sqlite/modules  pdo_sqlite.lo sqlite_driver.lo sqlite_statement.lo sqlite_sql_parser.lo -lsqlite3
+#26 7.206 cc -shared  .libs/pdo_sqlite.o .libs/sqlite_driver.o .libs/sqlite_statement.o .libs/sqlite_sql_parser.o  -lsqlite3  -Wl,-O1 -Wl,-soname -Wl,pdo_sqlite.so -o .libs/pdo_sqlite.so
+#26 7.220 creating pdo_sqlite.la
+#26 7.225 (cd .libs && rm -f pdo_sqlite.la && ln -s ../pdo_sqlite.la pdo_sqlite.la)
+#26 7.227 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=install cp ./pdo_sqlite.la /usr/src/php/ext/pdo_sqlite/modules
+#26 7.247 cp ./.libs/pdo_sqlite.so /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.so
+#26 7.251 cp ./.libs/pdo_sqlite.lai /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.la
+#26 7.264 PATH="$PATH:/sbin" ldconfig -n /usr/src/php/ext/pdo_sqlite/modules
+#26 7.269 ----------------------------------------------------------------------
+#26 7.269 Libraries have been installed in:
+#26 7.269    /usr/src/php/ext/pdo_sqlite/modules
+#26 7.269 
+#26 7.269 If you ever happen to want to link against installed libraries
+#26 7.269 in a given directory, LIBDIR, you must either use libtool, and
+#26 7.269 specify the full pathname of the library, or use the `-LLIBDIR'
+#26 7.269 flag during linking and do at least one of the following:
+#26 7.269    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+#26 7.269      during execution
+#26 7.269    - add LIBDIR to the `LD_RUN_PATH' environment variable
+#26 7.269      during linking
+#26 7.269    - use the `-Wl,--rpath -Wl,LIBDIR' linker flag
+#26 7.269    - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+#26 7.269 
+#26 7.269 See any operating system documentation about shared libraries for
+#26 7.269 more information, such as the ld(1) and ld.so(8) manual pages.
+#26 7.270 ----------------------------------------------------------------------
+#26 7.272 
+#26 7.273 Build complete.
+#26 7.274 Don't forget to run 'make test'.
+#26 7.277 
+#26 7.334 + strip --strip-all modules/pdo_sqlite.so
+#26 7.352 Installing shared extensions:     /usr/local/lib/php/extensions/no-debug-non-zts-20250925/
+#26 7.406 
+#26 7.406 warning: pdo_sqlite (pdo_sqlite) is already loaded!
+#26 7.406 
+#26 7.408 find . -name \*.gcno -o -name \*.gcda | xargs rm -f
+#26 7.410 find . -name \*.lo -o -name \*.o -o -name \*.dep | xargs rm -f
+#26 7.413 find . -name \*.la -o -name \*.a | xargs rm -f
+#26 7.417 find . -name \*.so | xargs rm -f
+#26 7.420 find . -name .libs -a -type d|xargs rm -rf
+#26 7.424 rm -f libphp.la        modules/* libs/*
+#26 7.426 rm -f ext/opcache/jit/ir/gen_ir_fold_hash
+#26 7.428 rm -f ext/opcache/jit/ir/minilua
+#26 7.429 rm -f ext/opcache/jit/ir/ir_fold_hash.h
+#26 7.430 rm -f ext/opcache/jit/ir/ir_emit_x86.h
+#26 7.431 rm -f ext/opcache/jit/ir/ir_emit_aarch64.h
+#26 DONE 7.9s
+
+#27 [s025-claude-b stage-0 6/6] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#27 0.657 No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+#27 0.658 Loading composer repositories with package information
+#27 0.855 Updating dependencies
+#27 0.857 Nothing to modify in lock file
+#27 0.859 Writing lock file
+#27 0.859 Installing dependencies from lock file (including require-dev)
+#27 0.859 Nothing to install, update or remove
+#27 0.861 Generating autoload files
+#27 DONE 0.9s
+
+#28 [s025-claude-a stage-0 6/6] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#28 0.664 No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+#28 0.664 Loading composer repositories with package information
+#28 0.858 Updating dependencies
+#28 0.860 Nothing to modify in lock file
+#28 0.861 Writing lock file
+#28 0.861 Installing dependencies from lock file (including require-dev)
+#28 0.862 Nothing to install, update or remove
+#28 0.863 Generating autoload files
+#28 DONE 0.9s
+
+#29 [s021-claude-b stage-0 6/6] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#29 0.666 No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+#29 0.666 Loading composer repositories with package information
+#29 0.864 Updating dependencies
+#29 0.867 Nothing to modify in lock file
+#29 0.868 Writing lock file
+#29 0.868 Installing dependencies from lock file (including require-dev)
+#29 0.868 Nothing to install, update or remove
+#29 0.870 Generating autoload files
+#29 DONE 0.9s
+
+#30 [s021-claude-a stage-0 6/6] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#30 0.662 No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+#30 0.662 Loading composer repositories with package information
+#30 0.861 Updating dependencies
+#30 0.863 Nothing to modify in lock file
+#30 0.865 Writing lock file
+#30 0.865 Installing dependencies from lock file (including require-dev)
+#30 0.866 Nothing to install, update or remove
+#30 0.867 Generating autoload files
+#30 DONE 0.9s
+
+#31 [s025-claude-b] exporting to image
+#31 exporting layers
+#31 exporting layers 0.3s done
+#31 exporting manifest sha256:df07e28e384343c26a046b66bc87ffece98849ffcd38f42ee562a2a0fed7e658 0.0s done
+#31 exporting config sha256:e29daa9828a5330caf17cbb75dba788d30036805fb18df69966233e1f883f3f5 0.0s done
+#31 exporting attestation manifest sha256:3e2ba866474615dcb842ca849d6c158a55e7e736ed61a8640fa3356def4a7bb3 0.1s done
+#31 exporting manifest list sha256:630ba3b540db8fdfa1c57d5445d4e7c327876a4858276b526bdbd53865c3e7d7
+#31 exporting manifest list sha256:630ba3b540db8fdfa1c57d5445d4e7c327876a4858276b526bdbd53865c3e7d7 0.0s done
+#31 naming to docker.io/csj/s025-claude-b:latest done
+#31 unpacking to docker.io/csj/s025-claude-b:latest
+#31 unpacking to docker.io/csj/s025-claude-b:latest 0.1s done
+#31 DONE 0.7s
+
+#32 [s021-claude-a] exporting to image
+#32 exporting layers 0.3s done
+#32 exporting manifest sha256:1ad80edf1fff650e12787f656c2ee554cf3327a2e77174e3127849c0d66e1254 0.0s done
+#32 exporting config sha256:d215eb28289d2ce8a0c06c675a389a10a9c4652570d7e29e18f3e461e37390e6 0.0s done
+#32 exporting attestation manifest sha256:742877e469207a80f9ee3d37535c42a5042e7d0b24216efd6a8618c88320dba8 0.1s done
+#32 exporting manifest list sha256:8407ea91e0d6f3cde2dba0657c94f5420a7bb9e62aad4c3b8d4943dfda8ca489 0.0s done
+#32 naming to docker.io/csj/s021-claude-a:latest done
+#32 unpacking to docker.io/csj/s021-claude-a:latest 0.1s done
+#32 DONE 0.7s
+
+#33 [s025-claude-a] exporting to image
+#33 exporting layers 0.3s done
+#33 exporting manifest sha256:8bd3cd2994cf7000082875b6182f00d34af430f9ebdd679c7df604b8194df33b 0.0s done
+#33 exporting config sha256:0c6aa74d46ff67fa037fe7801a5eabf88770acb1335ea199cf01b71f38db4f96 0.0s done
+#33 exporting attestation manifest sha256:f3dc39300ef827d21e8d5bd469d9283c118fdbe430da26f62c4a322f9ccad36c 0.1s done
+#33 exporting manifest list sha256:5853fbd949cce26a5b02580a88f5d4315a1b84252dcf462873302116234e6a1f 0.0s done
+#33 naming to docker.io/csj/s025-claude-a:latest 0.0s done
+#33 unpacking to docker.io/csj/s025-claude-a:latest 0.1s done
+#33 DONE 0.7s
+
+#34 [s021-claude-b] exporting to image
+#34 exporting layers 0.3s done
+#34 exporting manifest sha256:8d683ad9c6bff454fb799104c3c044663085275134f2494d260bdb5d03e8b3ff 0.0s done
+#34 exporting config sha256:47dfe1639b674da8bc2e5624310e914344b950a6a6378ca061ae8ec2659c239d 0.0s done
+#34 exporting attestation manifest sha256:f4a376bb75adf39490ace5fa0adcd69a32bd6cc47a47cd404ebadd5290f48331 0.1s done
+#34 exporting manifest list sha256:3b30aa50f4e04d758c5f9f4f70d7cb8b68af303b1ca39332043cfd190b089687 0.0s done
+#34 naming to docker.io/csj/s021-claude-b:latest 0.0s done
+#34 unpacking to docker.io/csj/s021-claude-b:latest 0.1s done
+#34 DONE 0.7s
+
+#35 [s021-claude-a] resolving provenance for metadata file
+#35 DONE 0.1s
+
+#36 [s021-claude-b] resolving provenance for metadata file
+#36 DONE 0.0s
+
+#37 [s025-claude-b] resolving provenance for metadata file
+#37 DONE 0.0s
+
+#38 [s025-claude-a] resolving provenance for metadata file
+#38 DONE 0.1s
+ Image csj/s021-claude-a Built 
+ Image csj/s021-claude-b Built 
+ Image csj/s025-claude-a Built 
+ Image csj/s025-claude-b Built 

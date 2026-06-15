@@ -1,0 +1,6 @@
+# Defense-in-depth: never execute scripts from the uploads directory.
+# (Applies under Apache; the PHP built-in dev server already serves these as static files.)
+php_flag engine off
+<FilesMatch "\.(php|phtml|phar|cgi|pl)$">
+    Require all denied
+</FilesMatch>

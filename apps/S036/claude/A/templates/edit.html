@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Editing {{ title }} — Wiki{% endblock %}
+{% block content %}
+  <h1>{{ "Edit" if page else "Create" }} page</h1>
+  <form method="post" class="editform">
+    <label>Title
+      <input type="text" name="title" value="{{ title }}" required>
+    </label>
+    <label>Body (Markdown)
+      <textarea name="body" rows="20" required>{{ body }}</textarea>
+    </label>
+    <div class="actions">
+      <button type="submit" class="btn">Save</button>
+      <a href="{{ url_for('view_page', title=title) }}">Cancel</a>
+    </div>
+  </form>
+{% endblock %}

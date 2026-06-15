@@ -1,0 +1,19 @@
+{
+    "name": "example/php-image-gallery",
+    "description": "A small PHP image gallery: logged-in users upload captioned images, a public page shows thumbnails linking to the full image.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-gd": "*",
+        "ext-fileinfo": "*"
+    },
+    "scripts": {
+        "start": "php -S localhost:5037 -t public"
+    },
+    "config": {
+        "platform-check": false
+    }
+}

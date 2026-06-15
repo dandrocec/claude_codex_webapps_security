@@ -1,0 +1,12 @@
+{
+  "name": "countdown-app",
+  "version": "1.0.0",
+  "description": "Express app that counts down to a user-supplied target date with a custom event label.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

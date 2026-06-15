@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Text Diff</title>
+  <style>
+    :root {
+      --bg: #f6f8fa;
+      --border: #d0d7de;
+      --add-bg: #e6ffec;
+      --add-marker: #2da44e;
+      --remove-bg: #ffebe9;
+      --remove-marker: #cf222e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: var(--bg);
+      color: #1f2328;
+    }
+    h1 { margin-top: 0; }
+    form { max-width: 1100px; }
+    .inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .inputs label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: .35rem;
+    }
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      padding: .6rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      resize: vertical;
+    }
+    button {
+      margin-top: 1rem;
+      padding: .55rem 1.2rem;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: #1f883d;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover { background: #1a7f37; }
+    .diff {
+      max-width: 1100px;
+      margin-top: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+    }
+    .diff-row {
+      display: flex;
+      white-space: pre-wrap;
+      word-break: break-word;
+      padding: 2px 0;
+    }
+    .diff-row .marker {
+      flex: 0 0 2ch;
+      text-align: center;
+      user-select: none;
+      color: #57606a;
+    }
+    .diff-row .content { flex: 1; padding-right: .6rem; }
+    .diff-row.add { background: var(--add-bg); }
+    .diff-row.add .marker { color: var(--add-marker); }
+    .diff-row.remove { background: var(--remove-bg); }
+    .diff-row.remove .marker { color: var(--remove-marker); }
+    .legend { margin-top: 1rem; font-size: 13px; color: #57606a; }
+    .legend span { display: inline-block; padding: 1px 8px; border-radius: 4px; margin-right: .5rem; }
+    .legend .add { background: var(--add-bg); color: var(--add-marker); }
+    .legend .remove { background: var(--remove-bg); color: var(--remove-marker); }
+    .empty { color: #57606a; font-style: italic; }
+  </style>
+</head>
+<body>
+  <h1>Line-by-line Text Diff</h1>
+  <form method="post">
+    <div class="inputs">
+      <div>
+        <label for="text_a">Original</label>
+        <textarea id="text_a" name="text_a" placeholder="Paste the original text here...">{{ text_a }}</textarea>
+      </div>
+      <div>
+        <label for="text_b">Modified</label>
+        <textarea id="text_b" name="text_b" placeholder="Paste the modified text here...">{{ text_b }}</textarea>
+      </div>
+    </div>
+    <button type="submit">Compute diff</button>
+  </form>
+
+  {% if diff_rows is not none %}
+    <div class="legend">
+      <span class="add">+ added</span>
+      <span class="remove">&minus; removed</span>
+    </div>
+    {% if diff_rows %}
+      <div class="diff">
+        {% for row in diff_rows %}
+          <div class="diff-row {{ row.tag }}">
+            <span class="marker">{% if row.tag == 'add' %}+{% elif row.tag == 'remove' %}-{% else %}&nbsp;{% endif %}</span>
+            <span class="content">{{ row.text }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="empty">Both inputs are empty — nothing to compare.</p>
+    {% endif %}
+  {% endif %}
+</body>
+</html>

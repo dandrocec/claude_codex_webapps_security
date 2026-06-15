@@ -1,0 +1,128 @@
+:root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --ink: #1f2933;
+    --muted: #6b7280;
+    --line: #e2e8f0;
+    --primary: #3563e9;
+    --primary-d: #244bce;
+    --danger: #dc2626;
+    --ok-bg: #ecfdf5;
+    --ok-ink: #065f46;
+    --err-bg: #fef2f2;
+    --err-ink: #991b1b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+}
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.5rem;
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 700; font-size: 1.15rem; color: var(--ink); }
+.topbar nav { display: flex; align-items: center; gap: 1rem; }
+.who { color: var(--muted); font-size: 0.9rem; }
+
+.container { max-width: 920px; margin: 2rem auto; padding: 0 1.25rem; }
+.auth { max-width: 420px; margin: 3rem auto; padding: 0 1.25rem; }
+
+.page-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+h1 { font-size: 1.5rem; margin: 0; }
+
+.flash {
+    background: var(--ok-bg); color: var(--ok-ink);
+    border: 1px solid #a7f3d0; border-radius: 8px;
+    padding: 0.7rem 1rem; margin-bottom: 1.25rem;
+}
+.errors {
+    background: var(--err-bg); color: var(--err-ink);
+    border: 1px solid #fecaca; border-radius: 8px;
+    padding: 0.5rem 1rem; margin-bottom: 1.25rem;
+}
+.errors ul { margin: 0.25rem 0; padding-left: 1.2rem; }
+
+.searchbar { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+.searchbar input[type="search"] {
+    flex: 1; padding: 0.55rem 0.75rem;
+    border: 1px solid var(--line); border-radius: 8px; font-size: 1rem;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+.form label { display: block; margin-bottom: 1rem; font-weight: 600; font-size: 0.9rem; }
+.form input, .form textarea {
+    display: block; width: 100%; margin-top: 0.35rem;
+    padding: 0.55rem 0.7rem; font-size: 1rem; font-family: inherit;
+    border: 1px solid var(--line); border-radius: 8px; font-weight: 400;
+}
+.req { color: var(--danger); }
+.form-actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+
+.btn {
+    display: inline-block; cursor: pointer;
+    padding: 0.5rem 0.95rem; font-size: 0.9rem; font-family: inherit;
+    border: 1px solid var(--line); border-radius: 8px;
+    background: var(--card); color: var(--ink); text-decoration: none;
+}
+.btn:hover { background: #f1f5f9; text-decoration: none; }
+.btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.btn.primary:hover { background: var(--primary-d); }
+.btn.ghost { background: transparent; }
+.btn.danger { color: var(--danger); border-color: #fecaca; }
+.btn.danger:hover { background: var(--err-bg); }
+.btn.small { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
+.link {
+    background: none; border: none; cursor: pointer;
+    color: var(--primary); font: inherit; padding: 0;
+}
+.inline { display: inline; }
+
+table.contacts {
+    width: 100%; border-collapse: collapse;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+}
+table.contacts th, table.contacts td {
+    text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line);
+    vertical-align: top;
+}
+table.contacts th { background: #f8fafc; font-size: 0.8rem; text-transform: uppercase; color: var(--muted); }
+table.contacts tr:last-child td { border-bottom: none; }
+.actions { white-space: nowrap; }
+.actions .inline { margin-left: 0.25rem; }
+
+.empty { color: var(--muted); background: var(--card); border: 1px dashed var(--line);
+    border-radius: 12px; padding: 2rem; text-align: center; }
+.muted { color: var(--muted); font-size: 0.9rem; }
+
+@media (max-width: 600px) {
+    table.contacts thead { display: none; }
+    table.contacts, table.contacts tbody, table.contacts tr, table.contacts td { display: block; width: 100%; }
+    table.contacts tr { border-bottom: 2px solid var(--line); padding: 0.5rem 0; }
+    table.contacts td { border: none; padding: 0.3rem 0.9rem; }
+    table.contacts td::before { content: attr(data-label) ": "; font-weight: 600; color: var(--muted); }
+    .actions::before { content: ""; }
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Currency Converter</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="card">
+    <h1>Currency Converter</h1>
+
+    <form method="post" action="{{ url_for('index') }}" novalidate>
+      {# CSRF token: required for this state-changing POST. #}
+      {{ form.csrf_token }}
+
+      <div class="field">
+        {{ form.amount.label }}
+        {{ form.amount(type="number", step="0.01", min="0", inputmode="decimal",
+                       placeholder="0.00") }}
+        {% for err in form.amount.errors %}
+          <p class="error">{{ err }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="row">
+        <div class="field">
+          {{ form.source.label }}
+          {{ form.source() }}
+          {% for err in form.source.errors %}
+            <p class="error">{{ err }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="field swap" aria-hidden="true">→</div>
+
+        <div class="field">
+          {{ form.target.label }}
+          {{ form.target() }}
+          {% for err in form.target.errors %}
+            <p class="error">{{ err }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <button type="submit">Convert</button>
+    </form>
+
+    {% if result %}
+      {# Every value here is auto-escaped by Jinja2. #}
+      <div class="result" role="status">
+        <p class="amount">
+          {{ "%.2f"|format(result.amount) }} {{ result.source }}
+          =
+          <strong>{{ "%.2f"|format(result.converted) }} {{ result.target }}</strong>
+        </p>
+      </div>
+    {% endif %}
+  </main>
+</body>
+</html>

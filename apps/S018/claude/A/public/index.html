@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Strength Checker</title>
+  <style>
+    :root { --weak: #d64545; --medium: #d9a441; --strong: #2e9e5b; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #f4f5f7; color: #1f2430; margin: 0;
+      display: flex; min-height: 100vh; align-items: center; justify-content: center;
+    }
+    .card {
+      background: #fff; padding: 2rem; border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08); width: 100%; max-width: 420px;
+    }
+    h1 { font-size: 1.4rem; margin: 0 0 1rem; }
+    label { display: block; font-size: 0.9rem; margin-bottom: 0.4rem; font-weight: 600; }
+    input[type="password"], input[type="text"] {
+      width: 100%; padding: 0.65rem 0.75rem; font-size: 1rem;
+      border: 1px solid #cbd2dc; border-radius: 8px;
+    }
+    .row { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; font-size: 0.85rem; }
+    .meter { height: 8px; background: #e3e7ee; border-radius: 999px; margin-top: 1rem; overflow: hidden; }
+    .meter > span { display: block; height: 100%; width: 0; transition: width 0.25s, background 0.25s; }
+    .rating { font-weight: 700; text-transform: capitalize; margin-top: 0.75rem; }
+    ul { margin: 0.5rem 0 0; padding-left: 1.2rem; font-size: 0.9rem; color: #4a5160; }
+    .weak { color: var(--weak); }
+    .medium { color: var(--medium); }
+    .strong { color: var(--strong); }
+    .bg-weak { background: var(--weak); }
+    .bg-medium { background: var(--medium); }
+    .bg-strong { background: var(--strong); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Password Strength Checker</h1>
+    <label for="password">Candidate password</label>
+    <input type="password" id="password" autocomplete="off" placeholder="Type a password…" />
+    <div class="row">
+      <input type="checkbox" id="show" />
+      <label for="show" style="margin:0;font-weight:400;">Show password</label>
+    </div>
+
+    <div class="meter"><span id="bar"></span></div>
+    <div class="rating" id="rating">—</div>
+    <ul id="feedback"></ul>
+  </div>
+
+  <script>
+    const input = document.getElementById('password');
+    const show = document.getElementById('show');
+    const bar = document.getElementById('bar');
+    const ratingEl = document.getElementById('rating');
+    const feedbackEl = document.getElementById('feedback');
+
+    show.addEventListener('change', () => {
+      input.type = show.checked ? 'text' : 'password';
+    });
+
+    let timer;
+    input.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(check, 200);
+    });
+
+    async function check() {
+      const password = input.value;
+      try {
+        const res = await fetch('/check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password }),
+        });
+        const data = await res.json();
+        render(data);
+      } catch (err) {
+        ratingEl.textContent = 'Error contacting server';
+      }
+    }
+
+    function render(data) {
+      const pct = Math.round((data.score / 6) * 100);
+      bar.style.width = pct + '%';
+      bar.className = 'bg-' + data.rating;
+
+      ratingEl.textContent = data.rating;
+      ratingEl.className = 'rating ' + data.rating;
+
+      feedbackEl.innerHTML = '';
+      (data.feedback || []).forEach((tip) => {
+        const li = document.createElement('li');
+        li.textContent = tip;
+        feedbackEl.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

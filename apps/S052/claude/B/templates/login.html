@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+  <h1>Log in</h1>
+  <form method="post" action="{{ url_for('login') }}" class="card" novalidate>
+    {{ form.csrf_token }}
+    {{ field(form.username) }}
+    {{ field(form.password) }}
+    <button type="submit" class="primary">Log in</button>
+  </form>
+  <p class="muted">No account yet? <a href="{{ url_for('register') }}">Register</a>.</p>
+{% endblock %}

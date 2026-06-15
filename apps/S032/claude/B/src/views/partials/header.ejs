@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">💰 Expense Tracker</a>
+    <nav>
+      <% if (typeof currentUser !== 'undefined' && currentUser) { %>
+        <span class="user">Hi, <%= currentUser.username %></span>
+        <form class="inline" method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">

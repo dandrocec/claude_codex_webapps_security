@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Log in · Time Tracker{% endblock %}
+{% block content %}
+<div class="card narrow">
+  <h1>Log in</h1>
+  <form method="post" action="{{ url_for('login') }}">
+    {{ form.csrf_token }}
+    <label>{{ form.username.label }}
+      {{ form.username(autocomplete="username", autofocus=true) }}
+    </label>
+    {% for e in form.username.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+
+    <label>{{ form.password.label }}
+      {{ form.password(autocomplete="current-password") }}
+    </label>
+    {% for e in form.password.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+
+    <button type="submit" class="btn primary">Log in</button>
+  </form>
+  <p class="muted">No account? <a href="{{ url_for('register') }}">Register</a></p>
+</div>
+{% endblock %}

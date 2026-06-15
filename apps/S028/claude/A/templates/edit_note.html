@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit note" if note else "New note" }}{% endblock %}
+{% block content %}
+  <h1>{{ "Edit note" if note else "New note" }}</h1>
+  <form method="post" class="card">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title"
+           value="{{ form.title if form.title is defined else (note.title if note else '') }}"
+           autofocus required>
+    <label for="body">Body</label>
+    <textarea id="body" name="body">{{ form.body if form.body is defined else (note.body if note else '') }}</textarea>
+    <p class="actions">
+      <button type="submit">Save</button>
+      <a class="btn secondary" href="{{ url_for('notes') }}">Cancel</a>
+    </p>
+  </form>
+{% endblock %}

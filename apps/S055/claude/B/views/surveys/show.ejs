@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+  <div class="page-head">
+    <h1><%= survey.title %></h1>
+    <a class="btn" href="/surveys/<%= survey.id %>/responses">View responses (<%= responseCount %>)</a>
+  </div>
+
+  <% if (survey.description) { %>
+    <p class="muted"><%= survey.description %></p>
+  <% } %>
+
+  <section class="card">
+    <h2>Share link</h2>
+    <p>Anyone with this link can submit a response:</p>
+    <p><a href="<%= shareUrl %>"><%= shareUrl %></a></p>
+  </section>
+
+  <section class="card">
+    <h2>Questions</h2>
+    <ol>
+      <% questions.forEach(function (q) { %>
+        <li><%= q.text %></li>
+      <% }); %>
+    </ol>
+  </section>
+
+  <form action="/surveys/<%= survey.id %>/delete" method="post"
+        onsubmit="return confirm('Delete this survey and all its responses?');">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit" class="danger">Delete survey</button>
+  </form>
+<%- include('../partials/footer') %>

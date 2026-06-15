@@ -1,0 +1,12 @@
+{
+    "name": "demo/base64-tool",
+    "description": "A tiny PHP web app to Base64-encode or decode text.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0"
+    },
+    "scripts": {
+        "start": "php -S localhost:5021"
+    }
+}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Register — Wiki{% endblock %}
+{% block content %}
+  <h1>Register</h1>
+  <form method="post" class="authform">
+    <label>Username <input type="text" name="username" required autofocus></label>
+    <label>Password <input type="password" name="password" required></label>
+    <button type="submit" class="btn">Create account</button>
+  </form>
+  <p>Already have an account? <a href="{{ url_for('login') }}">Log in</a>.</p>
+{% endblock %}

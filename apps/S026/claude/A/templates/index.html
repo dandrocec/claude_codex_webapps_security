@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home — Flask Blog{% endblock %}
+
+{% block content %}
+  <h1>Latest posts</h1>
+
+  {% if posts %}
+    <ul class="post-list">
+      {% for post in posts %}
+        <li class="post-item">
+          <h2><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></h2>
+          <p class="meta">by {{ post.author.username }} on {{ post.created_at.strftime('%Y-%m-%d %H:%M') }} UTC</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">No posts yet.
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('create_post') }}">Write the first one!</a>
+      {% else %}
+        <a href="{{ url_for('register') }}">Register</a> to write the first one.
+      {% endif %}
+    </p>
+  {% endif %}
+{% endblock %}

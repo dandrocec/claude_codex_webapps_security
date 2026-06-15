@@ -1,0 +1,33 @@
+<%- include('partials/header', { title: 'My Portfolio' }) %>
+
+<section class="hero">
+  <h1>Selected work</h1>
+  <p>A collection of projects I've built.</p>
+</section>
+
+<% if (projects.length === 0) { %>
+  <p class="empty">No projects yet — check back soon.</p>
+<% } else { %>
+  <div class="grid">
+    <% projects.forEach(function (p) { %>
+      <article class="card">
+        <% if (p.image) { %>
+          <div class="card-media">
+            <img src="<%= p.image %>" alt="<%= p.title %>" loading="lazy" />
+          </div>
+        <% } %>
+        <div class="card-body">
+          <h2><%= p.title %></h2>
+          <% if (p.description) { %><p><%= p.description %></p><% } %>
+          <% if (p.link) { %>
+            <a class="card-link" href="<%= p.link %>" target="_blank" rel="noopener noreferrer">
+              View project &rarr;
+            </a>
+          <% } %>
+        </div>
+      </article>
+    <% }); %>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

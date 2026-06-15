@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}My Recipes{% endblock %}
+{% block content %}
+  <h1>My Recipes</h1>
+  {% if recipes %}
+    <div class="grid">
+      {% for recipe in recipes %}
+        <div class="card">
+          <a href="{{ url_for('view_recipe', recipe_id=recipe.id) }}">
+            {% if recipe.photo %}
+              <img class="card-img" src="{{ url_for('static', filename='uploads/' ~ recipe.photo) }}" alt="{{ recipe.title }}">
+            {% else %}
+              <div class="card-img placeholder">No photo</div>
+            {% endif %}
+            <div class="card-body"><h3>{{ recipe.title }}</h3></div>
+          </a>
+          <div class="actions card-actions">
+            <a class="btn" href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}">Edit</a>
+            <form method="post" action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}" onsubmit="return confirm('Delete this recipe?');">
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="muted">You haven't added any recipes yet. <a href="{{ url_for('new_recipe') }}">Add one!</a></p>
+  {% endif %}
+{% endblock %}

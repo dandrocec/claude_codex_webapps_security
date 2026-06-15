@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<article class="job-detail">
+  <a class="back" href="/">&larr; Back to listings</a>
+  <h1><%= job.title %></h1>
+  <p class="job-meta">
+    <strong><%= job.company %></strong> &middot; <%= job.location %>
+  </p>
+  <p class="muted">Posted by <%= job.poster %> on <%= job.created_at %></p>
+
+  <div class="job-body">
+    <% job.description.split('\n').forEach(function (line) { %>
+      <p><%= line %></p>
+    <% }); %>
+  </div>
+
+  <% if (currentUser && currentUser.id === job.user_id) { %>
+    <div class="actions">
+      <a class="btn" href="/jobs/<%= job.id %>/edit">Edit</a>
+      <form action="/jobs/<%= job.id %>/delete" method="POST" class="inline"
+            onsubmit="return confirm('Delete this listing?');">
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  <% } %>
+</article>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}My pastes{% endblock %}
+{% block content %}
+  <h1>My pastes</h1>
+  {% if pastes %}
+    <ul class="paste-list">
+      {% for p in pastes %}
+        <li>
+          <a href="{{ url_for('view_paste', paste_id=p['id']) }}">{{ p['id'] }}</a>
+          <span class="meta">{{ p['created_at'] }} UTC</span>
+          <form class="inline" method="post" action="{{ url_for('delete_paste', paste_id=p['id']) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="danger">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have no pastes yet. <a href="{{ url_for('index') }}">Create one</a>.</p>
+  {% endif %}
+{% endblock %}

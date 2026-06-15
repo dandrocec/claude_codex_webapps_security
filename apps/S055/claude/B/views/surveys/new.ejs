@@ -1,0 +1,34 @@
+<%- include('../partials/header') %>
+  <section class="card">
+    <h1>New Survey</h1>
+    <% if (errors.length) { %>
+      <ul class="errors">
+        <% errors.forEach(function (e) { %><li><%= e %></li><% }); %>
+      </ul>
+    <% } %>
+    <form action="/surveys" method="post">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Title
+        <input type="text" name="title" maxlength="200" value="<%= values.title %>" required>
+      </label>
+      <label>Description (optional)
+        <textarea name="description" maxlength="1000" rows="3"><%= values.description %></textarea>
+      </label>
+
+      <fieldset>
+        <legend>Questions</legend>
+        <p class="muted">Fill in one question per line. Empty lines are ignored.</p>
+        <div id="questions">
+          <% values.questions.forEach(function (q) { %>
+            <input type="text" name="questions[]" maxlength="500"
+                   placeholder="Question text" value="<%= q %>">
+          <% }); %>
+        </div>
+        <button type="button" id="add-question" class="btn-secondary">+ Add question</button>
+      </fieldset>
+
+      <button type="submit">Create survey</button>
+    </form>
+  </section>
+  <script src="/static/new-survey.js"></script>
+<%- include('../partials/footer') %>

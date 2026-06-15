@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}My Books{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2>Add a book</h2>
+  <form method="post" action="{{ url_for('add_book') }}">
+    <div class="row">
+      <div>
+        <label for="title">Title</label>
+        <input id="title" name="title" required>
+      </div>
+      <div>
+        <label for="author">Author</label>
+        <input id="author" name="author" required>
+      </div>
+      <div>
+        <label for="status">Status</label>
+        <select id="status" name="status">
+          {% for s in statuses %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+        </select>
+      </div>
+      <button type="submit">Add</button>
+    </div>
+  </form>
+</div>
+
+<div class="card">
+  <div class="filters">
+    <a href="{{ url_for('books') }}" class="{{ 'active' if not active_status }}">All</a>
+    {% for s in statuses %}
+      <a href="{{ url_for('books', status=s) }}"
+         class="{{ 'active' if active_status == s }}">{{ s }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+{% if not books %}
+  <div class="card muted">No books yet. Add your first one above.</div>
+{% endif %}
+
+{% for book in books %}
+<div class="card book">
+  <div>
+    <h3>{{ book.title }}</h3>
+    <div class="meta">by {{ book.author }}</div>
+    <div style="margin-top:.4rem">
+      <span class="badge">{{ book.status }}</span>
+      {% if book.rating %}<span class="meta">· {{ "★" * book.rating }}{{ "☆" * (5 - book.rating) }}</span>{% endif %}
+    </div>
+  </div>
+  <div>
+    <form method="post" action="{{ url_for('update_book', book_id=book.id) }}" class="inline">
+      <select name="status">
+        {% for s in statuses %}
+          <option value="{{ s }}" {{ 'selected' if book.status == s }}>{{ s }}</option>
+        {% endfor %}
+      </select>
+      <select name="rating">
+        <option value="" {{ 'selected' if not book.rating }}>– rating –</option>
+        {% for n in range(1, 6) %}
+          <option value="{{ n }}" {{ 'selected' if book.rating == n }}>{{ n }} ★</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="secondary">Save</button>
+    </form>
+    <form method="post" action="{{ url_for('delete_book', book_id=book.id) }}"
+          style="margin-top:.4rem"
+          onsubmit="return confirm('Remove this book?');">
+      <button type="submit" class="danger">Delete</button>
+    </form>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{
+  "name": "visit-counter",
+  "version": "1.0.0",
+  "description": "A single-page Express app that counts and persists page visits.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

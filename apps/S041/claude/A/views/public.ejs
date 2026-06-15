@@ -1,0 +1,38 @@
+<%- include('partials/header', { title: 'Frequently Asked Questions' }) %>
+
+<h1>Frequently Asked Questions</h1>
+
+<form class="filter" action="/" method="get" role="search">
+  <input
+    type="search"
+    name="q"
+    value="<%= q %>"
+    placeholder="Filter by keyword…"
+    aria-label="Filter FAQs by keyword"
+    autofocus
+  >
+  <button type="submit">Filter</button>
+  <% if (q) { %><a class="clear" href="/">Clear</a><% } %>
+</form>
+
+<% if (q) { %>
+  <p class="result-count"><%= total %> result<%= total === 1 ? '' : 's' %> for “<%= q %>”.</p>
+<% } %>
+
+<% if (grouped.length === 0) { %>
+  <p class="empty">No FAQs found<%= q ? ' for that keyword.' : ' yet.' %></p>
+<% } %>
+
+<% grouped.forEach(function (group) { %>
+  <section class="category">
+    <h2><%= group.category %></h2>
+    <% group.items.forEach(function (item) { %>
+      <details class="faq">
+        <summary><%= item.question %></summary>
+        <div class="answer"><%= item.answer %></div>
+      </details>
+    <% }); %>
+  </section>
+<% }); %>
+
+<%- include('partials/footer') %>

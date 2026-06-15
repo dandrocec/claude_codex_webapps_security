@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<section class="card">
+  <h1>Log in</h1>
+
+  <% if (notice) { %><p class="notice"><%= notice %></p><% } %>
+
+  <% if (errors.length) { %>
+    <ul class="errors">
+      <% errors.forEach(function (e) { %><li><%= e %></li><% }); %>
+    </ul>
+  <% } %>
+
+  <form action="/login" method="post" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" required
+           value="<%= values.username || '' %>" />
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required />
+
+    <button type="submit">Log in</button>
+  </form>
+
+  <p>No account yet? <a href="/register">Register</a>.</p>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,122 @@
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --ink: #1f2933;
+  --muted: #66707a;
+  --accent: #2563eb;
+  --danger: #dc2626;
+  --border: #e2e6ea;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand { font-weight: 700; text-decoration: none; color: var(--ink); }
+.topbar nav { display: flex; align-items: center; gap: 1rem; }
+.topbar a { color: var(--accent); text-decoration: none; }
+.user { color: var(--muted); }
+
+main { max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+h1 { margin-top: 0; font-size: 1.4rem; }
+
+label { display: block; margin: 0.75rem 0 0.25rem; font-weight: 600; }
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+button:hover { opacity: 0.92; }
+
+.inline { display: inline; margin: 0; }
+.inline button { margin: 0; }
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.link-btn.danger { color: var(--danger); }
+
+.add-form {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem;
+}
+.add-form input { flex: 1; }
+.add-form button { margin: 0; }
+
+.task-list { list-style: none; padding: 0; margin: 0; }
+.task {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.task .title { flex: 1; }
+.task.done .title { text-decoration: line-through; color: var(--muted); }
+.task .actions { display: flex; gap: 0.75rem; align-items: center; }
+.check {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.errors {
+  background: #fef2f2;
+  border: 1px solid #f5c2c2;
+  color: var(--danger);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  margin: 0 0 1rem;
+}
+
+.muted { color: var(--muted); }
+.row { display: flex; align-items: center; gap: 1rem; }
+.foot { text-align: center; color: var(--muted); padding: 2rem 0; }

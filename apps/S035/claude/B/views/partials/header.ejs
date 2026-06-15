@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · Habit Tracker</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">🔥 Habit Tracker</a>
+    <% if (currentUser) { %>
+      <nav class="nav">
+        <span class="nav-user">Signed in as <strong><%= currentUser.username %></strong></span>
+        <form action="/logout" method="POST" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="btn btn-link">Log out</button>
+        </form>
+      </nav>
+    <% } %>
+  </header>
+  <main class="container">

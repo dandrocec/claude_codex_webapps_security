@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+  <h1>Log in</h1>
+  <form method="post" class="stack">
+    {{ form.hidden_tag() }}
+    <div class="field">
+      {{ form.username.label }}
+      {{ form.username(maxlength=32, autocomplete="username") }}
+      {% for e in form.username.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    </div>
+    <div class="field">
+      {{ form.password.label }}
+      {{ form.password(maxlength=128, autocomplete="current-password") }}
+      {% for e in form.password.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    </div>
+    {{ form.submit(class="btn") }}
+  </form>
+  <p>No account? <a href="{{ url_for('auth.register') }}">Register</a></p>
+{% endblock %}

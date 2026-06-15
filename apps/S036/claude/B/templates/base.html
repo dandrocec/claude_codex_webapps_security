@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Wiki{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('index') }}">📖 Wiki</a>
+    <form class="search" action="{{ url_for('search') }}" method="get" role="search">
+      <input type="text" name="q" placeholder="Search titles…"
+             value="{{ request.args.get('q', '') }}" maxlength="120">
+      <button type="submit">Search</button>
+    </form>
+    <nav>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('create_page') }}">New page</a>
+        <span class="user">{{ current_user.username }}</span>
+        <form class="inline" action="{{ url_for('logout') }}" method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="linklike">Log out</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="flash flash-{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <small>A small, security-focused Flask wiki.</small>
+  </footer>
+</body>
+</html>

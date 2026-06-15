@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Admin — messages{% endblock %}
+{% block content %}
+<h1>Submitted messages</h1>
+{% if not messages %}
+  <p class="muted">No messages yet.</p>
+{% else %}
+  <p class="muted">{{ messages|length }} message(s).</p>
+  {% for m in messages %}
+    <article class="card msg">
+      <div class="msg-head">
+        <strong>{{ m.name }}</strong>
+        &lt;{{ m.email }}&gt;
+        <span class="muted">· {{ m.created_at }}</span>
+      </div>
+      <p class="msg-body">{{ m.message }}</p>
+      {% if m.website_url %}
+        <p class="muted">URL: {{ m.website_url }}</p>
+        {% if m.preview_title or m.preview_text %}
+          <div class="preview">
+            <p class="preview-title">{{ m.preview_title or "(no title)" }}</p>
+            <p class="preview-text">{{ m.preview_text or "" }}</p>
+          </div>
+        {% endif %}
+      {% endif %}
+      <form method="post"
+            action="{{ url_for('delete_message', message_id=m.id) }}"
+            class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="danger">Delete</button>
+      </form>
+    </article>
+  {% endfor %}
+{% endif %}
+{% endblock %}

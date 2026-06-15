@@ -1,0 +1,36 @@
+<%- include('layout-head') %>
+
+<section class="card">
+  <h1>Your habits</h1>
+  <p class="muted">Today is <%= today %>. Tick a habit once per day to keep its streak alive.</p>
+
+  <form class="add" method="post" action="/habits">
+    <input type="text" name="name" placeholder="New habit (e.g. Drink water)" maxlength="100" required>
+    <button type="submit">Add</button>
+  </form>
+
+  <% if (habits.length === 0) { %>
+    <p class="empty">No habits yet — add your first one above.</p>
+  <% } else { %>
+    <ul class="habits">
+      <% habits.forEach(function (h) { %>
+        <li class="habit <%= h.doneToday ? 'done' : '' %>">
+          <form class="inline grow" method="post" action="/habits/<%= h.id %>/toggle">
+            <button class="tick" type="submit" title="Toggle today">
+              <%= h.doneToday ? '☑' : '☐' %>
+            </button>
+            <span class="name"><%= h.name %></span>
+          </form>
+          <span class="streak" title="Current streak">🔥 <%= h.streak %></span>
+          <span class="total" title="Total days completed"><%= h.total %> total</span>
+          <form class="inline" method="post" action="/habits/<%= h.id %>/delete"
+                onsubmit="return confirm('Delete this habit?');">
+            <button class="link danger" type="submit">Delete</button>
+          </form>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
+
+<%- include('layout-foot') %>

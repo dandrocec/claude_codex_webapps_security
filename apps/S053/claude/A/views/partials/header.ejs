@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= typeof title !== 'undefined' ? title : 'Portfolio' %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">My Portfolio</a>
+    <nav>
+      <% if (currentUser) { %>
+        <a href="/admin">Dashboard</a>
+        <form action="/logout" method="post" class="inline">
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Owner login</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">

@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<h1>Polls</h1>
+
+<% if (polls.length === 0) { %>
+  <p class="muted">No polls yet.
+    <% if (currentUser) { %><a href="/polls/new">Create the first one</a>.<% } else { %><a href="/login">Log in</a> to create one.<% } %>
+  </p>
+<% } else { %>
+  <ul class="poll-list">
+    <% polls.forEach(function (p) { %>
+      <li>
+        <a href="/polls/<%= p.id %>"><%= p.question %></a>
+        <span class="meta">by <%= p.owner %> · <%= p.total_votes %> vote<%= p.total_votes === 1 ? '' : 's' %></span>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

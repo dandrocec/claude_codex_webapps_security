@@ -1,0 +1,50 @@
+<%- include('partials/header', { title: 'Submit Feedback' }) %>
+
+<h1>Share your feedback</h1>
+<p class="muted">Tell us what you think. All fields are required.</p>
+
+<% if (submitted) { %>
+  <div class="alert success" role="status">Thank you! Your feedback was submitted.</div>
+<% } %>
+
+<% if (errors && errors.length) { %>
+  <div class="alert error" role="alert">
+    <ul>
+      <% errors.forEach(function (msg) { %>
+        <li><%= msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
+<form method="POST" action="/feedback" class="card" novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+  <label for="category">Category</label>
+  <select id="category" name="category" required>
+    <option value="" disabled <%= values.category ? '' : 'selected' %>>Choose a category…</option>
+    <% categories.forEach(function (cat) { %>
+      <option value="<%= cat %>" <%= values.category === cat ? 'selected' : '' %>><%= cat %></option>
+    <% }) %>
+  </select>
+
+  <label for="rating">Rating (1–5)</label>
+  <input
+    id="rating"
+    name="rating"
+    type="number"
+    min="1"
+    max="5"
+    step="1"
+    inputmode="numeric"
+    value="<%= values.rating %>"
+    required
+  />
+
+  <label for="comment">Comment</label>
+  <textarea id="comment" name="comment" rows="5" maxlength="2000" required><%= values.comment %></textarea>
+
+  <button type="submit" class="btn">Submit feedback</button>
+</form>
+
+<%- include('partials/footer') %>

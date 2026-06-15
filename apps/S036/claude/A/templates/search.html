@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Search — Wiki{% endblock %}
+{% block content %}
+  <h1>Search</h1>
+  <form action="{{ url_for('search') }}" method="get" class="searchbox big">
+    <input type="search" name="q" value="{{ q }}" placeholder="Search titles…" autofocus>
+    <button type="submit">Search</button>
+  </form>
+
+  {% if q %}
+    <p class="meta">{{ results|length }} result(s) for “{{ q }}”.</p>
+    {% if results %}
+      <ul class="pagelist">
+        {% for page in results %}
+          <li>
+            <a href="{{ url_for('view_page', title=page['title']) }}">{{ page['title'] }}</a>
+            <span class="meta">updated {{ page['updated_at'] }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endif %}
+{% endblock %}

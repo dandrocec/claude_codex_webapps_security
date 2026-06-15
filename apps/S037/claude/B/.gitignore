@@ -1,0 +1,6 @@
+/.env
+/vendor/
+/storage/database.sqlite
+/storage/database.sqlite-journal
+/storage/uploads/*
+!/storage/uploads/.gitkeep

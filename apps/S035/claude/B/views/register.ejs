@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<div class="card auth-card">
+  <h1>Create an account</h1>
+
+  <% if (errors && errors.length) { %>
+    <ul class="alert alert-error">
+      <% errors.forEach(function (e) { %>
+        <li><%= e %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+
+  <form action="/register" method="POST" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username"
+           value="<%= values.username || '' %>" required
+           minlength="3" maxlength="30" autofocus>
+    <small class="hint">3-30 characters: letters, numbers, _ . -</small>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required minlength="8">
+    <small class="hint">At least 8 characters.</small>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+
+  <p class="muted">Already have an account? <a href="/login">Log in</a></p>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,19 @@
+{
+    "name": "example/classifieds",
+    "description": "A secure PHP classifieds site (post items for sale, browse, search).",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-fileinfo": "*"
+    },
+    "autoload": {
+        "files": [
+            "src/bootstrap.php"
+        ]
+    },
+    "scripts": {
+        "start": "php -S 127.0.0.1:5040 -t public public/index.php"
+    }
+}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Thumbnail{% endblock %}
+{% block content %}
+<h1>Your thumbnail</h1>
+<div class="card">
+  <p><strong>{{ image['original_name'] }}</strong></p>
+  <img class="thumb" src="{{ url_for('raw_image', image_id=image['id']) }}"
+       alt="Resized thumbnail" width="{{ image['width'] }}" height="{{ image['height'] }}">
+  <p class="muted">{{ image['width'] }} × {{ image['height'] }} px &middot; {{ image['img_format'] }}</p>
+  <p>
+    <a class="btn" href="{{ url_for('download_image', image_id=image['id']) }}">Download</a>
+    <a class="btn secondary" href="{{ url_for('index') }}">Back</a>
+  </p>
+</div>
+{% endblock %}

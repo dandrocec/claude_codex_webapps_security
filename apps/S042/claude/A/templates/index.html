@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Latest stories</h1>
+    {% if not articles %}
+        <p>No articles have been published yet.
+           {% if current_author %}<a href="{{ url_for('publish') }}">Write the first one.</a>
+           {% else %}<a href="{{ url_for('login') }}">Log in as an author</a> to publish one.{% endif %}
+        </p>
+    {% endif %}
+    {% for art in articles %}
+        <article class="post">
+            <h2><a href="{{ url_for('article', article_id=art['id']) }}" style="color:#1a1a1a;text-decoration:none;">{{ art['title'] }}</a></h2>
+            <div class="meta">
+                By {{ art['author'] }} &middot; {{ art['created_at'] }} &middot;
+                {{ art['comment_count'] }} comment{{ '' if art['comment_count'] == 1 else 's' }}
+            </div>
+            <p class="body-text">{{ art['body'][:240] }}{% if art['body']|length > 240 %}&hellip;{% endif %}</p>
+            <a href="{{ url_for('article', article_id=art['id']) }}">Read more &rarr;</a>
+        </article>
+        {% if not loop.last %}<hr class="rule">{% endif %}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Register — Wiki{% endblock %}
+{% block content %}
+  <h1>Create an account</h1>
+  <form method="post" class="stacked" action="{{ url_for('register') }}">
+    {{ form.csrf_token }}
+
+    <label for="username">{{ form.username.label.text }}</label>
+    {{ form.username(id="username", maxlength=32) }}
+    {% for err in form.username.errors %}<span class="field-error">{{ err }}</span>{% endfor %}
+
+    <label for="password">{{ form.password.label.text }}</label>
+    {{ form.password(id="password", maxlength=128) }}
+    {% for err in form.password.errors %}<span class="field-error">{{ err }}</span>{% endfor %}
+
+    <label for="confirm">{{ form.confirm.label.text }}</label>
+    {{ form.confirm(id="confirm", maxlength=128) }}
+    {% for err in form.confirm.errors %}<span class="field-error">{{ err }}</span>{% endfor %}
+
+    {{ form.submit(class="primary") }}
+  </form>
+  <p>Already registered? <a href="{{ url_for('login') }}">Log in</a>.</p>
+{% endblock %}

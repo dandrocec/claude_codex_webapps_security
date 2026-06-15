@@ -1,0 +1,56 @@
+<%- include('partials/header') %>
+
+<div class="page-head">
+  <h1>Your bookmarks</h1>
+  <a class="btn" href="/bookmarks/new">+ New bookmark</a>
+</div>
+
+<% if (allTags.length) { %>
+  <div class="tag-filter">
+    <a class="chip <%= activeTag ? '' : 'chip-active' %>" href="/">All</a>
+    <% allTags.forEach(function (tag) { %>
+      <a class="chip <%= activeTag === tag ? 'chip-active' : '' %>"
+         href="/?tag=<%= encodeURIComponent(tag) %>"><%= tag %></a>
+    <% }); %>
+  </div>
+<% } %>
+
+<% if (!bookmarks.length) { %>
+  <p class="empty">
+    <% if (activeTag) { %>
+      No bookmarks tagged <strong><%= activeTag %></strong>.
+      <a href="/">Clear filter</a>.
+    <% } else { %>
+      You have no bookmarks yet. <a href="/bookmarks/new">Add your first one</a>.
+    <% } %>
+  </p>
+<% } else { %>
+  <ul class="bookmark-list">
+    <% bookmarks.forEach(function (b) { %>
+      <li class="bookmark">
+        <div class="bookmark-main">
+          <a class="bookmark-title" href="<%= b.url %>" target="_blank" rel="noopener noreferrer">
+            <%= b.title %>
+          </a>
+          <span class="bookmark-url"><%= b.url %></span>
+          <% if (b.tagList.length) { %>
+            <div class="bookmark-tags">
+              <% b.tagList.forEach(function (tag) { %>
+                <a class="chip chip-mini" href="/?tag=<%= encodeURIComponent(tag) %>"><%= tag %></a>
+              <% }); %>
+            </div>
+          <% } %>
+        </div>
+        <div class="bookmark-actions">
+          <a class="btn btn-sm btn-ghost" href="/bookmarks/<%= b.id %>/edit">Edit</a>
+          <form action="/bookmarks/<%= b.id %>/delete" method="POST" class="inline"
+                onsubmit="return confirm('Delete this bookmark?');">
+            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+          </form>
+        </div>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

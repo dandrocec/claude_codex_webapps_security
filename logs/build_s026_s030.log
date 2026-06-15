@@ -1,0 +1,1087 @@
+ Image csj/s026-claude-a Building 
+ Image csj/s028-claude-b Building 
+ Image csj/s027-claude-a Building 
+ Image csj/s029-claude-a Building 
+ Image csj/s028-claude-a Building 
+ Image csj/s026-claude-b Building 
+ Image csj/s030-claude-a Building 
+ Image csj/s029-claude-b Building 
+ Image csj/s027-claude-b Building 
+ Image csj/s030-claude-b Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 6.46kB done
+#1 DONE 0.0s
+
+#2 [s029-claude-b internal] load build definition from Dockerfile.php
+#2 transferring dockerfile: 2.84kB done
+#2 DONE 0.0s
+
+#3 [s026-claude-b internal] load build definition from Dockerfile.python
+#3 transferring dockerfile: 1.76kB done
+#3 DONE 0.0s
+
+#4 [s030-claude-b internal] load build definition from Dockerfile.node
+#4 transferring dockerfile: 1.84kB done
+#4 DONE 0.0s
+
+#5 [s027-claude-a internal] load metadata for docker.io/library/node:22-slim
+#5 ...
+
+#6 [auth] library/php:pull token for registry-1.docker.io
+#6 DONE 0.0s
+
+#7 [auth] library/composer:pull token for registry-1.docker.io
+#7 DONE 0.0s
+
+#8 [auth] library/python:pull token for registry-1.docker.io
+#8 DONE 0.0s
+
+#9 [auth] library/node:pull token for registry-1.docker.io
+#9 DONE 0.0s
+
+#10 [s028-claude-b internal] load metadata for docker.io/library/python:3.12-slim
+#10 ...
+
+#11 [s029-claude-a internal] load metadata for docker.io/library/php:apache
+#11 DONE 1.1s
+
+#12 [s029-claude-a internal] load metadata for docker.io/library/composer:latest
+#12 DONE 1.1s
+
+#13 [s029-claude-a internal] load .dockerignore
+#13 transferring context: 2B done
+#13 DONE 0.0s
+
+#14 [s029-claude-b internal] load .dockerignore
+#14 transferring context: 2B done
+#14 DONE 0.0s
+
+#15 [s029-claude-a] FROM docker.io/library/composer:latest@sha256:c883af18892268b3b8369c4a39c08f80b393383e79d80b75140a3ea489dbbb78
+#15 resolve docker.io/library/composer:latest@sha256:c883af18892268b3b8369c4a39c08f80b393383e79d80b75140a3ea489dbbb78 0.0s done
+#15 DONE 0.0s
+
+#16 [s029-claude-a stage-0 1/6] FROM docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f
+#16 resolve docker.io/library/php:apache@sha256:9d0144a8daeb9e1607c6d94350ff2415c1f620769e26f4d6b98d1b20405bf37f 0.0s done
+#16 DONE 0.0s
+
+#17 [s029-claude-a internal] load build context
+#17 transferring context: 8.54kB done
+#17 DONE 0.0s
+
+#18 [s029-claude-a stage-0 2/6] WORKDIR /var/www/html
+#18 CACHED
+
+#19 [s029-claude-b internal] load build context
+#19 transferring context: 38.76kB done
+#19 DONE 0.0s
+
+#20 [s029-claude-a stage-0 3/6] COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+#20 CACHED
+
+#21 [s029-claude-a stage-0 4/6] COPY . /var/www/html
+#21 DONE 0.0s
+
+#22 [s029-claude-b stage-0 4/6] COPY . /var/www/html
+#22 DONE 0.0s
+
+#5 [s030-claude-a internal] load metadata for docker.io/library/node:22-slim
+#5 DONE 1.3s
+
+#10 [s026-claude-a internal] load metadata for docker.io/library/python:3.12-slim
+#10 DONE 1.3s
+
+#23 [s027-claude-a internal] load .dockerignore
+#23 transferring context: 2B done
+#23 DONE 0.0s
+
+#24 [s030-claude-b internal] load .dockerignore
+#24 transferring context: 2B done
+#24 DONE 0.0s
+
+#25 [s027-claude-b internal] load .dockerignore
+#25 transferring context: 2B done
+#25 DONE 0.0s
+
+#26 [s026-claude-b internal] load .dockerignore
+#26 transferring context: 2B done
+#26 DONE 0.0s
+
+#27 [s028-claude-a internal] load .dockerignore
+#27 transferring context: 2B done
+#27 DONE 0.0s
+
+#28 [s030-claude-a 1/4] FROM docker.io/library/node:22-slim@sha256:e21fc383b50d5347dc7a9f1cae45b8f4e2f0d39f7ade28e4eef7d2934522b752
+#28 resolve docker.io/library/node:22-slim@sha256:e21fc383b50d5347dc7a9f1cae45b8f4e2f0d39f7ade28e4eef7d2934522b752 0.0s done
+#28 DONE 0.0s
+
+#29 [s028-claude-b internal] load .dockerignore
+#29 transferring context: 2B done
+#29 DONE 0.0s
+
+#30 [s026-claude-a internal] load .dockerignore
+#30 transferring context: 2B done
+#30 DONE 0.0s
+
+#31 [s030-claude-a internal] load .dockerignore
+#31 transferring context: 2B done
+#31 DONE 0.1s
+
+#32 [s026-claude-a 1/4] FROM docker.io/library/python:3.12-slim@sha256:a39549e211a16149edf74e5fdc9ef03a6767e46cd987c5048b6659b6c9904c94
+#32 resolve docker.io/library/python:3.12-slim@sha256:a39549e211a16149edf74e5fdc9ef03a6767e46cd987c5048b6659b6c9904c94 0.0s done
+#32 DONE 0.0s
+
+#33 [s027-claude-a internal] load build context
+#33 transferring context: 15.84kB done
+#33 DONE 0.0s
+
+#34 [s030-claude-b internal] load build context
+#34 transferring context: 37.47kB 0.0s done
+#34 DONE 0.0s
+
+#35 [s026-claude-b internal] load build context
+#35 transferring context: 30.89kB 0.0s done
+#35 DONE 0.0s
+
+#36 [s027-claude-b 2/4] WORKDIR /app
+#36 CACHED
+
+#37 [s028-claude-b internal] load build context
+#37 transferring context: 29.92kB 0.0s done
+#37 DONE 0.0s
+
+#38 [s027-claude-a 3/4] COPY . /app
+#38 DONE 0.0s
+
+#39 [s027-claude-b internal] load build context
+#39 transferring context: 27.33kB 0.0s done
+#39 DONE 0.1s
+
+#40 [s030-claude-a internal] load build context
+#40 transferring context: 20.92kB done
+#40 DONE 0.1s
+
+#41 [s028-claude-a internal] load build context
+#41 transferring context: 12.60kB 0.0s done
+#41 DONE 0.1s
+
+#42 [s026-claude-a internal] load build context
+#42 transferring context: 16.35kB done
+#42 DONE 0.1s
+
+#43 [s028-claude-b 2/4] WORKDIR /app
+#43 CACHED
+
+#44 [s030-claude-b 3/4] COPY . /app
+#44 DONE 0.0s
+
+#45 [s028-claude-b 3/4] COPY . /app
+#45 DONE 0.0s
+
+#46 [s026-claude-b 3/4] COPY . /app
+#46 DONE 0.1s
+
+#47 [s027-claude-b 3/4] COPY . /app
+#47 DONE 0.1s
+
+#48 [s027-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#48 ...
+
+#49 [s030-claude-a 3/4] COPY . /app
+#49 DONE 0.1s
+
+#50 [s028-claude-a 3/4] COPY . /app
+#50 DONE 0.1s
+
+#51 [s026-claude-a 3/4] COPY . /app
+#51 DONE 0.1s
+
+#52 [s026-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#52 1.926 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#52 2.009   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#52 2.041 Collecting Flask-SQLAlchemy==3.1.1 (from -r requirements.txt (line 2))
+#52 2.058   Downloading flask_sqlalchemy-3.1.1-py3-none-any.whl.metadata (3.4 kB)
+#52 2.090 Collecting Flask-Login==0.6.3 (from -r requirements.txt (line 3))
+#52 2.110   Downloading Flask_Login-0.6.3-py3-none-any.whl.metadata (5.8 kB)
+#52 2.162 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#52 2.177   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#52 2.217 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#52 2.233   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#52 2.272 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#52 2.287   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#52 2.327 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#52 2.345   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#52 2.381 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#52 2.398   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#52 2.672 Collecting sqlalchemy>=2.0.16 (from Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#52 2.691   Downloading sqlalchemy-2.0.50-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+#52 2.776 Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->Flask==3.0.3->-r requirements.txt (line 1))
+#52 2.792   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#52 2.897 Collecting greenlet>=1 (from sqlalchemy>=2.0.16->Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#52 2.914   Downloading greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#52 2.954 Collecting typing-extensions>=4.6.0 (from sqlalchemy>=2.0.16->Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#52 2.974   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#52 3.015 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#52 3.058 Downloading flask_sqlalchemy-3.1.1-py3-none-any.whl (25 kB)
+#52 3.083 Downloading Flask_Login-0.6.3-py3-none-any.whl (17 kB)
+#52 3.103 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#52 3.124 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#52 3.156 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#52 3.183 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#52 3.219 Downloading sqlalchemy-2.0.50-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.4 MB)
+#52 3.383    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 22.1 MB/s eta 0:00:00
+#52 3.400 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#52 3.450 Downloading greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (611 kB)
+#52 3.503    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 611.4/611.4 kB 13.1 MB/s eta 0:00:00
+#52 3.522 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#52 3.546 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#52 3.576 Installing collected packages: typing-extensions, MarkupSafe, itsdangerous, greenlet, click, blinker, Werkzeug, sqlalchemy, Jinja2, Flask, Flask-SQLAlchemy, Flask-Login
+#52 ...
+
+#53 [s028-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#53 1.997 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#53 2.079   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#53 2.111 Collecting Flask-Login==0.6.3 (from -r requirements.txt (line 2))
+#53 2.127   Downloading Flask_Login-0.6.3-py3-none-any.whl.metadata (5.8 kB)
+#53 2.162 Collecting Flask-WTF==1.2.1 (from -r requirements.txt (line 3))
+#53 2.181   Downloading flask_wtf-1.2.1-py3-none-any.whl.metadata (3.4 kB)
+#53 2.221 Collecting WTForms==3.1.2 (from -r requirements.txt (line 4))
+#53 2.238   Downloading wtforms-3.1.2-py3-none-any.whl.metadata (5.3 kB)
+#53 2.313 Collecting bcrypt==4.1.3 (from -r requirements.txt (line 5))
+#53 2.330   Downloading bcrypt-4.1.3-cp39-abi3-manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+#53 2.375 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#53 2.394   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#53 2.431 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#53 2.447   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#53 2.477 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#53 2.498   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#53 2.531 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#53 2.546   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#53 2.574 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#53 2.590   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#53 2.660 Collecting markupsafe (from WTForms==3.1.2->-r requirements.txt (line 4))
+#53 2.678   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#53 2.714 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#53 2.756 Downloading Flask_Login-0.6.3-py3-none-any.whl (17 kB)
+#53 2.793 Downloading flask_wtf-1.2.1-py3-none-any.whl (12 kB)
+#53 2.823 Downloading wtforms-3.1.2-py3-none-any.whl (145 kB)
+#53 2.866 Downloading bcrypt-4.1.3-cp39-abi3-manylinux_2_28_x86_64.whl (283 kB)
+#53 2.907 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#53 2.931 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#53 2.965 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#53 2.992 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#53 3.025 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#53 3.049 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#53 3.110 Installing collected packages: markupsafe, itsdangerous, click, blinker, bcrypt, WTForms, Werkzeug, Jinja2, Flask, Flask-WTF, Flask-Login
+#53 3.572 Successfully installed Flask-3.0.3 Flask-Login-0.6.3 Flask-WTF-1.2.1 Jinja2-3.1.6 WTForms-3.1.2 Werkzeug-3.1.8 bcrypt-4.1.3 blinker-1.9.0 click-8.4.1 itsdangerous-2.2.0 markupsafe-3.0.3
+#53 3.574 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#53 3.663 
+#53 3.663 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#53 3.663 [notice] To update, run: pip install --upgrade pip
+#53 DONE 3.9s
+
+#54 [s028-claude-b] exporting to image
+#54 exporting layers
+#54 ...
+
+#55 [s026-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#55 1.987 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#55 2.070   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#55 2.103 Collecting Flask-Login==0.6.3 (from -r requirements.txt (line 2))
+#55 2.119   Downloading Flask_Login-0.6.3-py3-none-any.whl.metadata (5.8 kB)
+#55 2.155 Collecting Flask-WTF==1.2.1 (from -r requirements.txt (line 3))
+#55 2.172   Downloading flask_wtf-1.2.1-py3-none-any.whl.metadata (3.4 kB)
+#55 2.207 Collecting WTForms==3.1.2 (from -r requirements.txt (line 4))
+#55 2.224   Downloading wtforms-3.1.2-py3-none-any.whl.metadata (5.3 kB)
+#55 2.269 Collecting argon2-cffi==23.1.0 (from -r requirements.txt (line 5))
+#55 2.286   Downloading argon2_cffi-23.1.0-py3-none-any.whl.metadata (5.2 kB)
+#55 2.328 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#55 2.343   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#55 2.377 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#55 2.394   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#55 2.432 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#55 2.448   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#55 2.489 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#55 2.507   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#55 2.536 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#55 2.551   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#55 2.623 Collecting markupsafe (from WTForms==3.1.2->-r requirements.txt (line 4))
+#55 2.640   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#55 2.685 Collecting argon2-cffi-bindings (from argon2-cffi==23.1.0->-r requirements.txt (line 5))
+#55 2.701   Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (7.4 kB)
+#55 2.830 Collecting cffi>=1.0.1 (from argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 5))
+#55 2.846   Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#55 2.888 Collecting pycparser (from cffi>=1.0.1->argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 5))
+#55 2.905   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#55 2.960 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#55 3.005 Downloading Flask_Login-0.6.3-py3-none-any.whl (17 kB)
+#55 3.032 Downloading flask_wtf-1.2.1-py3-none-any.whl (12 kB)
+#55 3.067 Downloading wtforms-3.1.2-py3-none-any.whl (145 kB)
+#55 3.113 Downloading argon2_cffi-23.1.0-py3-none-any.whl (15 kB)
+#55 3.138 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#55 3.160 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#55 3.195 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#55 3.220 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#55 3.257 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#55 3.297 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#55 3.353 Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (87 kB)
+#55 3.382 Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
+#55 3.447 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#55 3.475 Installing collected packages: pycparser, markupsafe, itsdangerous, click, blinker, WTForms, Werkzeug, Jinja2, cffi, Flask, argon2-cffi-bindings, Flask-WTF, Flask-Login, argon2-cffi
+#55 4.119 Successfully installed Flask-3.0.3 Flask-Login-0.6.3 Flask-WTF-1.2.1 Jinja2-3.1.6 WTForms-3.1.2 Werkzeug-3.1.8 argon2-cffi-23.1.0 argon2-cffi-bindings-25.1.0 blinker-1.9.0 cffi-2.0.0 click-8.4.1 itsdangerous-2.2.0 markupsafe-3.0.3 pycparser-3.0
+#55 4.119 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#55 4.211 
+#55 4.211 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#55 4.211 [notice] To update, run: pip install --upgrade pip
+#55 DONE 4.4s
+
+#54 [s028-claude-b] exporting to image
+#54 exporting layers 0.6s done
+#54 exporting manifest sha256:a2ea03af66b2ce3fc22a1a634565f51f4a66105d54df35613e47be42057678ce 0.0s done
+#54 exporting config sha256:8d27b17e733e297d4d7a31f3a73a2267449ff48b0118ca223d8fcd11ebd9803b 0.0s done
+#54 exporting attestation manifest sha256:f88e51657fb05ef98eb61b14fd78407ac58c25fa2a8795569f8fb494e83f18f6 0.0s done
+#54 exporting manifest list sha256:2a8b3d02787f2624c739d63808bebd93505115cbfd64133b3ed4b767823af6d3 0.0s done
+#54 naming to docker.io/csj/s028-claude-b:latest done
+#54 unpacking to docker.io/csj/s028-claude-b:latest
+#54 unpacking to docker.io/csj/s028-claude-b:latest 0.3s done
+#54 DONE 1.1s
+
+#56 [s028-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#56 1.931 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#56 2.013   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#56 2.046 Collecting Flask-SQLAlchemy==3.1.1 (from -r requirements.txt (line 2))
+#56 2.062   Downloading flask_sqlalchemy-3.1.1-py3-none-any.whl.metadata (3.4 kB)
+#56 2.105 Collecting Werkzeug==3.0.3 (from -r requirements.txt (line 3))
+#56 2.124   Downloading werkzeug-3.0.3-py3-none-any.whl.metadata (3.7 kB)
+#56 2.164 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#56 2.181   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#56 2.224 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#56 2.240   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#56 2.281 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#56 2.297   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#56 2.330 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#56 2.346   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#56 2.600 Collecting sqlalchemy>=2.0.16 (from Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#56 2.618   Downloading sqlalchemy-2.0.50-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+#56 2.693 Collecting MarkupSafe>=2.1.1 (from Werkzeug==3.0.3->-r requirements.txt (line 3))
+#56 2.710   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#56 2.836 Collecting greenlet>=1 (from sqlalchemy>=2.0.16->Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#56 2.856   Downloading greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#56 2.895 Collecting typing-extensions>=4.6.0 (from sqlalchemy>=2.0.16->Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#56 2.911   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#56 2.943 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#56 2.986 Downloading flask_sqlalchemy-3.1.1-py3-none-any.whl (25 kB)
+#56 3.019 Downloading werkzeug-3.0.3-py3-none-any.whl (227 kB)
+#56 3.060 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#56 3.084 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#56 3.111 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#56 3.136 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#56 3.165 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#56 3.193 Downloading sqlalchemy-2.0.50-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.4 MB)
+#56 3.385    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 18.2 MB/s eta 0:00:00
+#56 3.401 Downloading greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (611 kB)
+#56 3.451    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 611.4/611.4 kB 12.0 MB/s eta 0:00:00
+#56 3.471 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#56 3.515 Installing collected packages: typing-extensions, MarkupSafe, itsdangerous, greenlet, click, blinker, Werkzeug, sqlalchemy, Jinja2, Flask, Flask-SQLAlchemy
+#56 5.077 Successfully installed Flask-3.0.3 Flask-SQLAlchemy-3.1.1 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.0.3 blinker-1.9.0 click-8.4.1 greenlet-3.5.1 itsdangerous-2.2.0 sqlalchemy-2.0.50 typing-extensions-4.15.0
+#56 ...
+
+#57 [s028-claude-b] resolving provenance for metadata file
+#57 DONE 0.0s
+
+#56 [s028-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#56 5.078 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#56 ...
+
+#58 [s029-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#58 0.577 Hit:1 http://deb.debian.org/debian trixie InRelease
+#58 0.585 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#58 0.610 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#58 0.633 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9671 kB]
+#58 1.160 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+#58 1.174 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [212 kB]
+#58 1.767 Fetched 9979 kB in 1s (7517 kB/s)
+#58 1.767 Reading package lists...
+#58 2.263 Reading package lists...
+#58 2.829 Building dependency tree...
+#58 3.042 Reading state information...
+#58 3.309 Suggested packages:
+#58 3.309   sqlite3-doc
+#58 3.358 The following NEW packages will be installed:
+#58 3.361   libsqlite3-dev
+#58 3.418 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+#58 3.418 Need to get 1109 kB of archives.
+#58 3.418 After this operation, 3480 kB of additional disk space will be used.
+#58 3.418 Get:1 http://deb.debian.org/debian trixie/main amd64 libsqlite3-dev amd64 3.46.1-7+deb13u1 [1109 kB]
+#58 3.681 debconf: unable to initialize frontend: Dialog
+#58 3.681 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#58 3.681 debconf: falling back to frontend: Readline
+#58 3.688 debconf: unable to initialize frontend: Readline
+#58 3.688 debconf: (This frontend requires a controlling tty.)
+#58 3.688 debconf: falling back to frontend: Teletype
+#58 3.692 debconf: unable to initialize frontend: Teletype
+#58 3.692 debconf: (This frontend requires a controlling tty.)
+#58 3.692 debconf: falling back to frontend: Noninteractive
+#58 4.326 Fetched 1109 kB in 0s (7725 kB/s)
+#58 4.365 Selecting previously unselected package libsqlite3-dev:amd64.
+#58 4.365 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15584 files and directories currently installed.)
+#58 4.425 Preparing to unpack .../libsqlite3-dev_3.46.1-7+deb13u1_amd64.deb ...
+#58 4.430 Unpacking libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#58 4.504 Setting up libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#58 ...
+
+#52 [s026-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#52 5.255 Successfully installed Flask-3.0.3 Flask-Login-0.6.3 Flask-SQLAlchemy-3.1.1 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.8 blinker-1.9.0 click-8.4.1 greenlet-3.5.1 itsdangerous-2.2.0 sqlalchemy-2.0.50 typing-extensions-4.15.0
+#52 5.256 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#52 5.373 
+#52 5.373 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#52 5.373 [notice] To update, run: pip install --upgrade pip
+#52 DONE 5.7s
+
+#59 [s026-claude-b] exporting to image
+#59 exporting layers 0.9s done
+#59 exporting manifest sha256:4348a24c1b3fb20b499e64d51fd2f77a2fc7caba9f3d636747cc497569ca3c81 0.0s done
+#59 exporting config sha256:a131348297556c5747c5dd37be348ed60d5e4523520b64419697ab97a2c5273e 0.0s done
+#59 exporting attestation manifest sha256:cf778f98c1815d5a1e46ff58ecc9729aa9d6289e075fd4c2d0068013380172cf 0.0s done
+#59 exporting manifest list sha256:0eb7e86b54ae338f91df476ebf0faae34865f479f0f48e2c1f95e2181ea4fbed 0.0s done
+#59 naming to docker.io/csj/s026-claude-b:latest done
+#59 unpacking to docker.io/csj/s026-claude-b:latest
+#59 unpacking to docker.io/csj/s026-claude-b:latest 0.4s done
+#59 DONE 1.5s
+
+#56 [s028-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#56 5.195 
+#56 5.195 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#56 5.195 [notice] To update, run: pip install --upgrade pip
+#56 DONE 5.7s
+
+#60 [s028-claude-a] exporting to image
+#60 ...
+
+#61 [s026-claude-b] resolving provenance for metadata file
+#61 DONE 0.0s
+
+#62 [s030-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#62 5.244 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#62 6.077 
+#62 6.077 added 118 packages, and audited 119 packages in 5s
+#62 6.077 
+#62 6.077 24 packages are looking for funding
+#62 6.077   run `npm fund` for details
+#62 6.079 
+#62 6.079 found 0 vulnerabilities
+#62 6.081 npm notice
+#62 6.081 npm notice New major version of npm available! 10.9.8 -> 11.16.0
+#62 6.081 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+#62 6.081 npm notice To update run: npm install -g npm@11.16.0
+#62 6.081 npm notice
+#62 DONE 6.2s
+
+#58 [s029-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#58 6.411 Configuring for:
+#58 6.411 PHP Version:             8.5
+#58 6.411 PHP Api Version:         20250925
+#58 6.411 Zend Module Api No:      20250925
+#58 6.411 Zend Extension Api No:   420250925
+#58 6.933 checking for grep that handles long lines and -e... /usr/bin/grep
+#58 6.935 checking for egrep... /usr/bin/grep -E
+#58 6.937 checking for a sed that does not truncate output... /usr/bin/sed
+#58 6.966 checking build system type... x86_64-pc-linux-gnu
+#58 6.970 checking host system type... x86_64-pc-linux-gnu
+#58 6.971 checking target system type... x86_64-pc-linux-gnu
+#58 7.009 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#58 7.050 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#58 7.065 checking for gawk... no
+#58 7.065 checking for nawk... nawk
+#58 7.065 checking if nawk is broken... no
+#58 7.068 checking for pkg-config... /usr/bin/pkg-config
+#58 7.068 checking pkg-config is at least version 0.9.0... yes
+#58 7.073 checking for cc... cc
+#58 7.106 checking whether the C compiler works... yes
+#58 7.209 checking for C compiler default output file name... a.out
+#58 7.210 checking for suffix of executables... 
+#58 7.246 checking whether we are cross compiling... no
+#58 7.302 checking for suffix of object files... o
+#58 7.326 checking whether the compiler supports GNU C... yes
+#58 7.360 checking whether cc accepts -g... yes
+#58 7.380 checking for cc option to enable C11 features... none needed
+#58 7.435 checking how to run the C preprocessor... cc -E
+#58 7.488 checking for egrep -e... (cached) /usr/bin/grep -E
+#58 7.488 checking for icc... no
+#58 7.501 checking for suncc... no
+#58 7.509 checking for system library directory... lib
+#58 7.509 checking if compiler supports -Wl,-rpath,... yes
+#58 7.569 checking for PHP prefix... /usr/local
+#58 7.569 checking for PHP includes... -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib
+#58 7.569 checking for PHP extension directory... /usr/local/lib/php/extensions/no-debug-non-zts-20250925
+#58 7.569 checking for PHP installed headers prefix... /usr/local/include/php
+#58 7.569 checking if debugging is enabled... no
+#58 7.591 checking if PHP is built with thread safety (ZTS)... no
+#58 7.607 
+#58 7.607 Configuring extension
+#58 7.607 checking for sqlite 3 support for PDO... yes, shared
+#58 7.607 checking for PDO includes... /usr/local/include/php/ext
+#58 7.607 checking for sqlite3 >= 3.7.17... yes
+#58 7.623 checking for sqlite3_close_v2 in -lsqlite3... yes
+#58 7.670 checking for sqlite3_column_table_name in -lsqlite3... yes
+#58 7.712 checking for sqlite3_load_extension in -lsqlite3... yes
+#58 7.760 
+#58 7.760 Configuring libtool
+#58 7.760 checking for a sed that does not truncate output... /usr/bin/sed
+#58 7.763 checking for ld used by cc... /usr/bin/ld
+#58 7.769 checking if the linker (/usr/bin/ld) is GNU ld... yes
+#58 7.772 checking for /usr/bin/ld option to reload object files... -r
+#58 7.772 checking for BSD-compatible nm... /usr/bin/nm -B
+#58 7.775 checking whether ln -s works... yes
+#58 7.775 checking how to recognize dependent libraries... pass_all
+#58 7.803 checking for stdio.h... yes
+#58 7.825 checking for stdlib.h... yes
+#58 7.851 checking for string.h... yes
+#58 7.878 checking for inttypes.h... yes
+#58 7.906 checking for stdint.h... yes
+#58 7.943 checking for strings.h... yes
+#58 7.970 checking for sys/stat.h... yes
+#58 7.996 checking for sys/types.h... yes
+#58 8.025 checking for unistd.h... yes
+#58 8.051 checking for dlfcn.h... yes
+#58 8.081 checking the maximum length of command line arguments... 1572864
+#58 8.087 checking command to parse /usr/bin/nm -B output from cc object... ok
+#58 8.165 checking for objdir... .libs
+#58 8.168 checking for ar... ar
+#58 8.168 checking for ranlib... ranlib
+#58 8.168 checking for strip... strip
+#58 8.230 checking if cc supports -fno-rtti -fno-exceptions... no
+#58 8.256 checking for cc option to produce PIC... -fPIC
+#58 8.257 checking if cc PIC flag -fPIC works... yes
+#58 8.284 checking if cc static flag -static works... yes
+#58 8.380 checking if cc supports -c -o file.o... yes
+#58 ...
+
+#63 [s026-claude-a] exporting to image
+#63 exporting layers 1.6s done
+#63 exporting manifest sha256:42b972d100b57c1946733bd2d55bda2f434647c695d9c1a1be93ac4eb7bb3f05 0.0s done
+#63 exporting config sha256:1f9a5823dfaa778763792f684458ecfa44b0a2d97e1f82bf9553129eaffed59e 0.0s done
+#63 exporting attestation manifest sha256:f5a4af28b2f373314ef9c985c6d084055428b92f34171e768cacf21e477ffa8e 0.1s done
+#63 exporting manifest list sha256:629f584ec62b9c21d69bc577d2bda1ed5ed3d317f0159160ee470783ce3be514 0.1s done
+#63 naming to docker.io/csj/s026-claude-a:latest 0.0s done
+#63 unpacking to docker.io/csj/s026-claude-a:latest 0.6s done
+#63 DONE 2.5s
+
+#58 [s029-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#58 8.407 checking whether the cc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+#58 8.421 checking whether -lc should be explicitly linked in... no
+#58 8.445 checking dynamic linker characteristics... GNU/Linux ld.so
+#58 8.461 checking how to hardcode library paths into programs... immediate
+#58 8.461 checking whether stripping libraries is possible... yes
+#58 8.464 checking if libtool supports shared libraries... yes
+#58 8.464 checking whether to build shared libraries... yes
+#58 8.464 checking whether to build static libraries... no
+#58 ...
+
+#60 [s028-claude-a] exporting to image
+#60 exporting layers 1.6s done
+#60 exporting manifest sha256:34b8c8b764ed9877794089196b749e8f0a0dd8e00329b77c2f6e75990701dba2 0.0s done
+#60 exporting config sha256:4966af1fbb401901a981eb0450bb7f5eb2fd76d9c014c04a2d04b0a11b4ebb01 0.0s done
+#60 exporting attestation manifest sha256:879279a81477f170d158f4dc467c2efece59730fca0b589f4e91fe1ac16d2ff2 0.1s done
+#60 exporting manifest list sha256:8e6083adc720ff76d1cca8c7a429ed6977fcf44875dc43a678510326051e3718 0.1s done
+#60 naming to docker.io/csj/s028-claude-a:latest 0.0s done
+#60 unpacking to docker.io/csj/s028-claude-a:latest 0.6s done
+#60 DONE 2.5s
+
+#58 [s029-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#58 8.649 
+#58 8.649 creating libtool
+#58 ...
+
+#64 [s030-claude-a] exporting to image
+#64 exporting layers 1.1s done
+#64 exporting manifest sha256:419af33316f601cadba5f4a25db59c679dcf6cd7eb9985527c0b2eaed7388171 0.1s done
+#64 exporting config sha256:cd9c91c36c67b8f3bdbd316995ced87709a7c5433db76c3598f44c767d9b6616 0.0s done
+#64 exporting attestation manifest sha256:1cd5d72baf8a9726d2b8b5f541fd6649428000bd3eb00ed318aa0aa85f7a54b8 0.1s done
+#64 exporting manifest list sha256:6409d0e388edc3d26e10772a1b4942ce6cbbf268bdcecae45c32182dcdc26dc2 0.0s done
+#64 naming to docker.io/csj/s030-claude-a:latest done
+#64 unpacking to docker.io/csj/s030-claude-a:latest 0.6s done
+#64 DONE 2.1s
+
+#58 [s029-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#58 8.670 appending configuration tag "CXX" to libtool
+#58 8.677 
+#58 8.677 Generating files
+#58 8.703 configure: creating build directories
+#58 8.732 configure: creating Makefile
+#58 8.735 configure: patching config.h.in
+#58 8.739 configure: creating ./config.status
+#58 8.817 config.status: creating config.h
+#58 8.848 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -o pdo_sqlite.lo  -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo
+#58 ...
+
+#65 [s026-claude-a] resolving provenance for metadata file
+#65 DONE 0.1s
+
+#66 [s030-claude-a] resolving provenance for metadata file
+#66 DONE 0.1s
+
+#67 [s028-claude-a] resolving provenance for metadata file
+#67 DONE 0.0s
+
+#58 [s029-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#58 8.948 mkdir .libs
+#58 8.950  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo  -fPIC -DPIC -o .libs/pdo_sqlite.o
+#58 9.294 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -o sqlite_driver.lo  -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo
+#58 9.427  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo  -fPIC -DPIC -o .libs/sqlite_driver.o
+#58 ...
+
+#68 [s027-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#68 7.408 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#68 7.465 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#68 7.526 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#68 7.576 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#68 7.580 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#68 7.641 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#68 8.016 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#68 8.067 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#68 8.223 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#68 9.253 
+#68 9.253 added 205 packages, and audited 206 packages in 8s
+#68 9.253 
+#68 9.253 27 packages are looking for funding
+#68 9.253   run `npm fund` for details
+#68 9.257 
+#68 9.257 7 vulnerabilities (2 low, 5 high)
+#68 9.257 
+#68 9.257 To address all issues, run:
+#68 9.257   npm audit fix
+#68 9.257 
+#68 9.257 Run `npm audit` for details.
+#68 9.258 npm notice
+#68 9.258 npm notice New major version of npm available! 10.9.8 -> 11.16.0
+#68 9.258 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+#68 9.258 npm notice To update run: npm install -g npm@11.16.0
+#68 9.258 npm notice
+#68 DONE 9.5s
+
+#48 [s027-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#48 7.473 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#48 7.504 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#48 7.543 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#48 7.850 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#48 7.927 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#48 7.929 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#48 7.932 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#48 7.977 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#48 8.003 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#48 8.030 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#48 8.144 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#48 8.215 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#48 9.267 
+#48 9.267 added 223 packages, and audited 224 packages in 9s
+#48 9.268 
+#48 9.268 31 packages are looking for funding
+#48 9.268   run `npm fund` for details
+#48 9.272 
+#48 9.272 9 vulnerabilities (2 low, 7 high)
+#48 9.272 
+#48 9.272 To address issues that do not require attention, run:
+#48 9.272   npm audit fix
+#48 9.272 
+#48 9.272 To address all issues (including breaking changes), run:
+#48 9.272   npm audit fix --force
+#48 9.272 
+#48 9.272 Run `npm audit` for details.
+#48 9.276 npm notice
+#48 9.276 npm notice New major version of npm available! 10.9.8 -> 11.16.0
+#48 9.276 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+#48 9.276 npm notice To update run: npm install -g npm@11.16.0
+#48 9.276 npm notice
+#48 DONE 9.4s
+
+#69 [s030-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#69 7.501 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#69 7.565 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#69 7.615 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#69 7.939 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#69 7.985 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#69 7.998 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#69 8.003 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#69 8.046 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#69 8.085 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#69 8.105 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#69 8.242 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#69 8.360 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#69 9.502 
+#69 9.502 added 223 packages, and audited 224 packages in 9s
+#69 9.502 
+#69 9.502 31 packages are looking for funding
+#69 9.502   run `npm fund` for details
+#69 9.505 
+#69 9.505 9 vulnerabilities (2 low, 7 high)
+#69 9.505 
+#69 9.505 To address issues that do not require attention, run:
+#69 9.505   npm audit fix
+#69 9.505 
+#69 9.505 To address all issues (including breaking changes), run:
+#69 9.505   npm audit fix --force
+#69 9.505 
+#69 9.505 Run `npm audit` for details.
+#69 9.506 npm notice
+#69 9.506 npm notice New major version of npm available! 10.9.8 -> 11.16.0
+#69 9.506 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+#69 9.506 npm notice To update run: npm install -g npm@11.16.0
+#69 9.506 npm notice
+#69 DONE 9.6s
+
+#58 [s029-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#58 9.802 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -o sqlite_statement.lo  -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo
+#58 9.875  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo  -fPIC -DPIC -o .libs/sqlite_statement.o
+#58 ...
+
+#70 [s029-claude-a stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#70 0.580 Hit:1 http://deb.debian.org/debian trixie InRelease
+#70 0.589 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#70 0.614 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#70 0.634 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9671 kB]
+#70 1.139 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+#70 1.154 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [212 kB]
+#70 1.745 Fetched 9979 kB in 1s (7669 kB/s)
+#70 1.745 Reading package lists...
+#70 2.238 Reading package lists...
+#70 2.804 Building dependency tree...
+#70 3.012 Reading state information...
+#70 3.292 Suggested packages:
+#70 3.292   sqlite3-doc
+#70 3.335 The following NEW packages will be installed:
+#70 3.336   libsqlite3-dev
+#70 3.402 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+#70 3.402 Need to get 1109 kB of archives.
+#70 3.402 After this operation, 3480 kB of additional disk space will be used.
+#70 3.402 Get:1 http://deb.debian.org/debian trixie/main amd64 libsqlite3-dev amd64 3.46.1-7+deb13u1 [1109 kB]
+#70 3.685 debconf: unable to initialize frontend: Dialog
+#70 3.685 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#70 3.685 debconf: falling back to frontend: Readline
+#70 3.692 debconf: unable to initialize frontend: Readline
+#70 3.692 debconf: (This frontend requires a controlling tty.)
+#70 3.692 debconf: falling back to frontend: Teletype
+#70 3.697 debconf: unable to initialize frontend: Teletype
+#70 3.697 debconf: (This frontend requires a controlling tty.)
+#70 3.697 debconf: falling back to frontend: Noninteractive
+#70 4.332 Fetched 1109 kB in 0s (7772 kB/s)
+#70 4.369 Selecting previously unselected package libsqlite3-dev:amd64.
+#70 4.369 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15584 files and directories currently installed.)
+#70 4.429 Preparing to unpack .../libsqlite3-dev_3.46.1-7+deb13u1_amd64.deb ...
+#70 4.434 Unpacking libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#70 4.507 Setting up libsqlite3-dev:amd64 (3.46.1-7+deb13u1) ...
+#70 6.404 Configuring for:
+#70 6.404 PHP Version:             8.5
+#70 6.404 PHP Api Version:         20250925
+#70 6.404 Zend Module Api No:      20250925
+#70 6.404 Zend Extension Api No:   420250925
+#70 6.942 checking for grep that handles long lines and -e... /usr/bin/grep
+#70 6.944 checking for egrep... /usr/bin/grep -E
+#70 6.946 checking for a sed that does not truncate output... /usr/bin/sed
+#70 6.974 checking build system type... x86_64-pc-linux-gnu
+#70 6.978 checking host system type... x86_64-pc-linux-gnu
+#70 6.978 checking target system type... x86_64-pc-linux-gnu
+#70 7.012 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#70 7.056 shtool:echo:Warning: unable to determine terminal sequence for bold mode
+#70 7.069 checking for gawk... no
+#70 7.070 checking for nawk... nawk
+#70 7.071 checking if nawk is broken... no
+#70 7.074 checking for pkg-config... /usr/bin/pkg-config
+#70 7.074 checking pkg-config is at least version 0.9.0... yes
+#70 7.076 checking for cc... cc
+#70 7.108 checking whether the C compiler works... yes
+#70 7.213 checking for C compiler default output file name... a.out
+#70 7.214 checking for suffix of executables... 
+#70 7.250 checking whether we are cross compiling... no
+#70 7.305 checking for suffix of object files... o
+#70 7.327 checking whether the compiler supports GNU C... yes
+#70 7.353 checking whether cc accepts -g... yes
+#70 7.376 checking for cc option to enable C11 features... none needed
+#70 7.437 checking how to run the C preprocessor... cc -E
+#70 7.494 checking for egrep -e... (cached) /usr/bin/grep -E
+#70 7.494 checking for icc... no
+#70 7.505 checking for suncc... no
+#70 7.513 checking for system library directory... lib
+#70 7.513 checking if compiler supports -Wl,-rpath,... yes
+#70 7.573 checking for PHP prefix... /usr/local
+#70 7.573 checking for PHP includes... -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib
+#70 7.573 checking for PHP extension directory... /usr/local/lib/php/extensions/no-debug-non-zts-20250925
+#70 7.573 checking for PHP installed headers prefix... /usr/local/include/php
+#70 7.573 checking if debugging is enabled... no
+#70 7.595 checking if PHP is built with thread safety (ZTS)... no
+#70 7.615 
+#70 7.615 Configuring extension
+#70 7.615 checking for sqlite 3 support for PDO... yes, shared
+#70 7.615 checking for PDO includes... /usr/local/include/php/ext
+#70 7.615 checking for sqlite3 >= 3.7.17... yes
+#70 7.630 checking for sqlite3_close_v2 in -lsqlite3... yes
+#70 7.676 checking for sqlite3_column_table_name in -lsqlite3... yes
+#70 7.714 checking for sqlite3_load_extension in -lsqlite3... yes
+#70 7.763 
+#70 7.763 Configuring libtool
+#70 7.763 checking for a sed that does not truncate output... /usr/bin/sed
+#70 7.767 checking for ld used by cc... /usr/bin/ld
+#70 7.773 checking if the linker (/usr/bin/ld) is GNU ld... yes
+#70 7.775 checking for /usr/bin/ld option to reload object files... -r
+#70 7.775 checking for BSD-compatible nm... /usr/bin/nm -B
+#70 7.778 checking whether ln -s works... yes
+#70 7.779 checking how to recognize dependent libraries... pass_all
+#70 7.807 checking for stdio.h... yes
+#70 7.827 checking for stdlib.h... yes
+#70 7.853 checking for string.h... yes
+#70 7.880 checking for inttypes.h... yes
+#70 7.906 checking for stdint.h... yes
+#70 7.929 checking for strings.h... yes
+#70 7.959 checking for sys/stat.h... yes
+#70 7.986 checking for sys/types.h... yes
+#70 8.011 checking for unistd.h... yes
+#70 8.049 checking for dlfcn.h... yes
+#70 8.075 checking the maximum length of command line arguments... 1572864
+#70 8.082 checking command to parse /usr/bin/nm -B output from cc object... ok
+#70 8.164 checking for objdir... .libs
+#70 8.168 checking for ar... ar
+#70 8.168 checking for ranlib... ranlib
+#70 8.168 checking for strip... strip
+#70 8.234 checking if cc supports -fno-rtti -fno-exceptions... no
+#70 8.261 checking for cc option to produce PIC... -fPIC
+#70 8.261 checking if cc PIC flag -fPIC works... yes
+#70 8.279 checking if cc static flag -static works... yes
+#70 8.384 checking if cc supports -c -o file.o... yes
+#70 8.419 checking whether the cc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+#70 8.432 checking whether -lc should be explicitly linked in... no
+#70 8.456 checking dynamic linker characteristics... GNU/Linux ld.so
+#70 8.471 checking how to hardcode library paths into programs... immediate
+#70 8.471 checking whether stripping libraries is possible... yes
+#70 8.473 checking if libtool supports shared libraries... yes
+#70 8.473 checking whether to build shared libraries... yes
+#70 8.473 checking whether to build static libraries... no
+#70 8.668 
+#70 8.668 creating libtool
+#70 8.690 appending configuration tag "CXX" to libtool
+#70 8.696 
+#70 8.696 Generating files
+#70 8.718 configure: creating build directories
+#70 8.748 configure: creating Makefile
+#70 8.752 configure: patching config.h.in
+#70 8.755 configure: creating ./config.status
+#70 8.816 config.status: creating config.h
+#70 8.852 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -o pdo_sqlite.lo  -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo
+#70 8.954 mkdir .libs
+#70 8.961  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/pdo_sqlite.c -MMD -MF pdo_sqlite.dep -MT pdo_sqlite.lo  -fPIC -DPIC -o .libs/pdo_sqlite.o
+#70 9.295 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -o sqlite_driver.lo  -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo
+#70 9.422  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_driver.c -MMD -MF sqlite_driver.dep -MT sqlite_driver.lo  -fPIC -DPIC -o .libs/sqlite_driver.o
+#70 9.808 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -o sqlite_statement.lo  -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo
+#70 9.882  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_statement.c -MMD -MF sqlite_statement.dep -MT sqlite_statement.lo  -fPIC -DPIC -o .libs/sqlite_statement.o
+#70 10.02 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -o sqlite_sql_parser.lo  -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo
+#70 10.09  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo  -fPIC -DPIC -o .libs/sqlite_sql_parser.o
+#70 10.19 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=link cc -shared -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wl,-O1 -pie  -o pdo_sqlite.la -export-dynamic -avoid-version -prefer-pic -module -rpath /usr/src/php/ext/pdo_sqlite/modules  pdo_sqlite.lo sqlite_driver.lo sqlite_statement.lo sqlite_sql_parser.lo -lsqlite3
+#70 10.26 cc -shared  .libs/pdo_sqlite.o .libs/sqlite_driver.o .libs/sqlite_statement.o .libs/sqlite_sql_parser.o  -lsqlite3  -Wl,-O1 -Wl,-soname -Wl,pdo_sqlite.so -o .libs/pdo_sqlite.so
+#70 10.28 creating pdo_sqlite.la
+#70 10.28 (cd .libs && rm -f pdo_sqlite.la && ln -s ../pdo_sqlite.la pdo_sqlite.la)
+#70 10.29 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=install cp ./pdo_sqlite.la /usr/src/php/ext/pdo_sqlite/modules
+#70 10.31 cp ./.libs/pdo_sqlite.so /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.so
+#70 ...
+
+#58 [s029-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#58 10.02 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE    -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -o sqlite_sql_parser.lo  -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo
+#58 10.09  cc -I. -I/usr/src/php/ext/pdo_sqlite -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pdo_sqlite/sqlite_sql_parser.c -MMD -MF sqlite_sql_parser.dep -MT sqlite_sql_parser.lo  -fPIC -DPIC -o .libs/sqlite_sql_parser.o
+#58 10.18 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=link cc -shared -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wl,-O1 -pie  -o pdo_sqlite.la -export-dynamic -avoid-version -prefer-pic -module -rpath /usr/src/php/ext/pdo_sqlite/modules  pdo_sqlite.lo sqlite_driver.lo sqlite_statement.lo sqlite_sql_parser.lo -lsqlite3
+#58 10.26 cc -shared  .libs/pdo_sqlite.o .libs/sqlite_driver.o .libs/sqlite_statement.o .libs/sqlite_sql_parser.o  -lsqlite3  -Wl,-O1 -Wl,-soname -Wl,pdo_sqlite.so -o .libs/pdo_sqlite.so
+#58 10.27 creating pdo_sqlite.la
+#58 10.28 (cd .libs && rm -f pdo_sqlite.la && ln -s ../pdo_sqlite.la pdo_sqlite.la)
+#58 10.28 /bin/bash /usr/src/php/ext/pdo_sqlite/libtool --tag=CC --mode=install cp ./pdo_sqlite.la /usr/src/php/ext/pdo_sqlite/modules
+#58 10.30 cp ./.libs/pdo_sqlite.so /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.so
+#58 10.31 cp ./.libs/pdo_sqlite.lai /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.la
+#58 10.32 PATH="$PATH:/sbin" ldconfig -n /usr/src/php/ext/pdo_sqlite/modules
+#58 10.32 ----------------------------------------------------------------------
+#58 10.32 Libraries have been installed in:
+#58 10.32    /usr/src/php/ext/pdo_sqlite/modules
+#58 10.32 
+#58 10.32 If you ever happen to want to link against installed libraries
+#58 10.32 in a given directory, LIBDIR, you must either use libtool, and
+#58 10.32 specify the full pathname of the library, or use the `-LLIBDIR'
+#58 10.32 flag during linking and do at least one of the following:
+#58 10.32    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+#58 10.32      during execution
+#58 10.32    - add LIBDIR to the `LD_RUN_PATH' environment variable
+#58 10.32      during linking
+#58 10.32    - use the `-Wl,--rpath -Wl,LIBDIR' linker flag
+#58 10.32    - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+#58 10.32 
+#58 10.32 See any operating system documentation about shared libraries for
+#58 10.32 more information, such as the ld(1) and ld.so(8) manual pages.
+#58 10.33 ----------------------------------------------------------------------
+#58 10.33 
+#58 10.33 Build complete.
+#58 10.33 Don't forget to run 'make test'.
+#58 10.33 
+#58 10.38 + strip --strip-all modules/pdo_sqlite.so
+#58 10.40 Installing shared extensions:     /usr/local/lib/php/extensions/no-debug-non-zts-20250925/
+#58 10.46 
+#58 10.46 warning: pdo_sqlite (pdo_sqlite) is already loaded!
+#58 10.46 
+#58 10.46 find . -name \*.gcno -o -name \*.gcda | xargs rm -f
+#58 10.46 find . -name \*.lo -o -name \*.o -o -name \*.dep | xargs rm -f
+#58 10.47 find . -name \*.la -o -name \*.a | xargs rm -f
+#58 10.47 find . -name \*.so | xargs rm -f
+#58 10.47 find . -name .libs -a -type d|xargs rm -rf
+#58 10.48 rm -f libphp.la        modules/* libs/*
+#58 10.48 rm -f ext/opcache/jit/ir/gen_ir_fold_hash
+#58 10.48 rm -f ext/opcache/jit/ir/minilua
+#58 10.48 rm -f ext/opcache/jit/ir/ir_fold_hash.h
+#58 10.48 rm -f ext/opcache/jit/ir/ir_emit_x86.h
+#58 10.48 rm -f ext/opcache/jit/ir/ir_emit_aarch64.h
+#58 ...
+
+#70 [s029-claude-a stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#70 10.31 cp ./.libs/pdo_sqlite.lai /usr/src/php/ext/pdo_sqlite/modules/pdo_sqlite.la
+#70 10.32 PATH="$PATH:/sbin" ldconfig -n /usr/src/php/ext/pdo_sqlite/modules
+#70 10.33 ----------------------------------------------------------------------
+#70 10.33 Libraries have been installed in:
+#70 10.33    /usr/src/php/ext/pdo_sqlite/modules
+#70 10.33 
+#70 10.33 If you ever happen to want to link against installed libraries
+#70 10.33 in a given directory, LIBDIR, you must either use libtool, and
+#70 10.33 specify the full pathname of the library, or use the `-LLIBDIR'
+#70 10.33 flag during linking and do at least one of the following:
+#70 10.33    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+#70 10.33      during execution
+#70 10.33    - add LIBDIR to the `LD_RUN_PATH' environment variable
+#70 10.33      during linking
+#70 10.33    - use the `-Wl,--rpath -Wl,LIBDIR' linker flag
+#70 10.33    - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+#70 10.33 
+#70 10.33 See any operating system documentation about shared libraries for
+#70 10.33 more information, such as the ld(1) and ld.so(8) manual pages.
+#70 10.33 ----------------------------------------------------------------------
+#70 10.33 
+#70 10.33 Build complete.
+#70 10.33 Don't forget to run 'make test'.
+#70 10.33 
+#70 10.38 + strip --strip-all modules/pdo_sqlite.so
+#70 10.40 Installing shared extensions:     /usr/local/lib/php/extensions/no-debug-non-zts-20250925/
+#70 10.46 
+#70 10.46 warning: pdo_sqlite (pdo_sqlite) is already loaded!
+#70 10.46 
+#70 10.46 find . -name \*.gcno -o -name \*.gcda | xargs rm -f
+#70 10.47 find . -name \*.lo -o -name \*.o -o -name \*.dep | xargs rm -f
+#70 10.47 find . -name \*.la -o -name \*.a | xargs rm -f
+#70 10.47 find . -name \*.so | xargs rm -f
+#70 10.48 find . -name .libs -a -type d|xargs rm -rf
+#70 10.48 rm -f libphp.la        modules/* libs/*
+#70 10.48 rm -f ext/opcache/jit/ir/gen_ir_fold_hash
+#70 10.48 rm -f ext/opcache/jit/ir/minilua
+#70 10.48 rm -f ext/opcache/jit/ir/ir_fold_hash.h
+#70 10.48 rm -f ext/opcache/jit/ir/ir_emit_x86.h
+#70 10.49 rm -f ext/opcache/jit/ir/ir_emit_aarch64.h
+#70 DONE 11.1s
+
+#58 [s029-claude-b stage-0 5/6] RUN apt-get update     && apt-get install -y --no-install-recommends libsqlite3-dev     && docker-php-ext-install pdo_sqlite     && rm -rf /var/lib/apt/lists/*
+#58 DONE 11.1s
+
+#71 [s029-claude-b stage-0 6/6] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#71 0.513 No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+#71 0.513 Loading composer repositories with package information
+#71 ...
+
+#72 [s027-claude-a] exporting to image
+#72 exporting layers 1.4s done
+#72 exporting manifest sha256:5eaddc0056b9bb48ae177d5599817b67deb3708050ebfae77e85a62ba163c578 0.0s done
+#72 exporting config sha256:4f8610efa55490fdcc9417ac67503668331d298f4d5eff48ba832372612ecf95 0.0s done
+#72 exporting attestation manifest sha256:d64c6fa213180094a540baa145faadb9b9be68b2ef83bf41bcd21b514d2ef8d2 0.0s done
+#72 exporting manifest list sha256:39307523c9e618c259462984084fb9b6c86ae829d04f2a91a35c9605efae14f3 0.0s done
+#72 naming to docker.io/csj/s027-claude-a:latest done
+#72 unpacking to docker.io/csj/s027-claude-a:latest 0.5s done
+#72 DONE 2.0s
+
+#71 [s029-claude-b stage-0 6/6] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#71 0.712 Updating dependencies
+#71 0.715 Nothing to modify in lock file
+#71 0.716 Writing lock file
+#71 0.716 Installing dependencies from lock file (including require-dev)
+#71 0.717 Nothing to install, update or remove
+#71 0.719 Generating autoload files
+#71 DONE 1.0s
+
+#73 [s027-claude-a] resolving provenance for metadata file
+#73 DONE 0.0s
+
+#74 [s029-claude-a stage-0 6/6] RUN if [ -f composer.json ]; then composer install --no-interaction; fi
+#74 0.530 No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+#74 0.531 Loading composer repositories with package information
+#74 0.714 Updating dependencies
+#74 0.716 Nothing to modify in lock file
+#74 0.717 Writing lock file
+#74 0.717 Installing dependencies from lock file (including require-dev)
+#74 0.719 Nothing to install, update or remove
+#74 0.725 Generating autoload files
+#74 DONE 0.9s
+
+#75 [s029-claude-a] exporting to image
+#75 ...
+
+#76 [s027-claude-b] exporting to image
+#76 exporting layers 1.6s done
+#76 exporting manifest sha256:197390400774ecd26d6035a7fefcaf225e8d9d2918d7e8a6e6c32061db32c05c 0.0s done
+#76 exporting config sha256:d62e6a41b3faefcaaea3cc22db86ac7771270c996ca0c17bcbe1a477774587cc 0.0s done
+#76 exporting attestation manifest sha256:e1be573c9868e07dafd1e3188938fa05a5c9aad012aa21b5ac78352427697750 0.0s done
+#76 exporting manifest list sha256:862c0e9042a6e8a68d44cfbda8733945623e58ce18ed96e9c56a9b5ce722b76a 0.0s done
+#76 naming to docker.io/csj/s027-claude-b:latest done
+#76 unpacking to docker.io/csj/s027-claude-b:latest 0.8s done
+#76 DONE 2.5s
+
+#77 [s030-claude-b] exporting to image
+#77 exporting layers 1.5s done
+#77 exporting manifest sha256:4e39de01ad4770630f46aa1025b5a108ec4f9e77518fdc816c60e09ee94cf8b3 0.0s done
+#77 exporting config sha256:36c714f4b53e99eb287f087f8520d98b2110ecdbf8536f33cdb87c7bac41b7e0 0.0s done
+#77 exporting attestation manifest sha256:4ce9187ea2d8d275144dce66441051560f84b5c646ccfbf281b440bb0d6690cd 0.0s done
+#77 exporting manifest list sha256:451e7b850e8c518c1032504653afdad65c72582acc4ec5cf6e9a6e2c41b74f13 0.0s done
+#77 naming to docker.io/csj/s030-claude-b:latest done
+#77 unpacking to docker.io/csj/s030-claude-b:latest 0.8s done
+#77 DONE 2.4s
+
+#75 [s029-claude-a] exporting to image
+#75 exporting layers 0.3s done
+#75 exporting manifest sha256:68773886fe174506c3c10daf58ea497305ebcc410d2432c16fc7308ef0124117 0.1s done
+#75 exporting config sha256:a805e88bdd4f0aa15fb28af50c49385a99b2f25b187fd5fbd2d0ce9dc737a200
+#75 exporting config sha256:a805e88bdd4f0aa15fb28af50c49385a99b2f25b187fd5fbd2d0ce9dc737a200 0.0s done
+#75 exporting attestation manifest sha256:5f92ff363db3779be62e34413da7ca3dbca705cb2a86bfe5da26f62b43cce429 0.0s done
+#75 exporting manifest list sha256:89d9f778ec08a0ca35921e42a5fed09e995bc4c50c15838722c935a8491c778d 0.0s done
+#75 naming to docker.io/csj/s029-claude-a:latest done
+#75 unpacking to docker.io/csj/s029-claude-a:latest
+#75 ...
+
+#78 [s027-claude-b] resolving provenance for metadata file
+#78 DONE 0.1s
+
+#75 [s029-claude-a] exporting to image
+#75 unpacking to docker.io/csj/s029-claude-a:latest 0.1s done
+#75 DONE 0.6s
+
+#79 [s030-claude-b] resolving provenance for metadata file
+#79 DONE 0.0s
+
+#80 [s029-claude-b] exporting to image
+#80 exporting layers 0.3s done
+#80 exporting manifest sha256:e382749ae4bf0e3b864cd73b093dfc558cb7fee7f880b315c927ee87b1c7256f 0.0s done
+#80 exporting config sha256:c8151ca8fd4b20b2a8bbdcc532011fe47a618619800b2abfa049febd3f97dbe3 0.0s done
+#80 exporting attestation manifest sha256:18aa3981c55fe8080bc72f3a041b15262455fb34c9e2ecdb71adf9f250a00e09 0.0s done
+#80 exporting manifest list sha256:681be39bedec4cc0177dad055c9c7dabc93b3cb03cefc71b7017210c89fe7263 0.0s done
+#80 naming to docker.io/csj/s029-claude-b:latest done
+#80 unpacking to docker.io/csj/s029-claude-b:latest 0.1s done
+#80 DONE 0.5s
+
+#81 [s029-claude-a] resolving provenance for metadata file
+#81 DONE 0.0s
+
+#82 [s029-claude-b] resolving provenance for metadata file
+#82 DONE 0.0s
+ Image csj/s030-claude-a Built 
+ Image csj/s030-claude-b Built 
+ Image csj/s027-claude-a Built 
+ Image csj/s029-claude-a Built 
+ Image csj/s028-claude-a Built 
+ Image csj/s029-claude-b Built 
+ Image csj/s026-claude-a Built 
+ Image csj/s027-claude-b Built 
+ Image csj/s028-claude-b Built 
+ Image csj/s026-claude-b Built 

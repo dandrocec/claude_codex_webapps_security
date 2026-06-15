@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · Newsletter Manager{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="stats">
+  <a class="card stat" href="{{ url_for('subscribers') }}">
+    <span class="stat-number">{{ sub_count }}</span>
+    <span class="stat-label">Subscriber{{ '' if sub_count == 1 else 's' }}</span>
+  </a>
+  <a class="card stat" href="{{ url_for('drafts') }}">
+    <span class="stat-number">{{ draft_count }}</span>
+    <span class="stat-label">Draft{{ '' if draft_count == 1 else 's' }}</span>
+  </a>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <h2>Recent drafts</h2>
+    <a class="btn btn-primary" href="{{ url_for('new_draft') }}">+ New draft</a>
+  </div>
+  {% if recent_drafts %}
+    <ul class="list">
+      {% for d in recent_drafts %}
+        <li>
+          <a href="{{ url_for('edit_draft', draft_id=d.id) }}">
+            {{ d.subject or '(no subject)' }}
+          </a>
+          <span class="muted">updated {{ d.updated_at }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="muted">No drafts yet. Create your first one.</p>
+  {% endif %}
+</div>
+{% endblock %}

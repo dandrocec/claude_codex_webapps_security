@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit post' if post else 'New post' }} — Flask Blog{% endblock %}
+
+{% block content %}
+  <h1>{{ 'Edit post' if post else 'New post' }}</h1>
+
+  <form method="post" class="form">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" maxlength="200"
+           value="{{ post.title if post else '' }}" required>
+
+    <label for="body">Body</label>
+    <textarea id="body" name="body" rows="12" required>{{ post.body if post else '' }}</textarea>
+
+    <button class="btn" type="submit">{{ 'Save changes' if post else 'Publish' }}</button>
+    <a class="cancel" href="{{ url_for('post_detail', post_id=post.id) if post else url_for('index') }}">Cancel</a>
+  </form>
+{% endblock %}

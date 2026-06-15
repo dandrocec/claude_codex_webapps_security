@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Items · Inventory Tracker{% endblock %}
+{% block content %}
+<div class="toolbar">
+  <form class="search" method="get" action="{{ url_for('index') }}">
+    <input type="text" name="q" placeholder="Search name, SKU, or location…"
+           value="{{ query }}">
+    <button type="submit">Search</button>
+    {% if query %}
+      <a class="button-link" href="{{ url_for('index') }}"><button type="button" class="secondary">Clear</button></a>
+    {% endif %}
+  </form>
+  <a class="button-link" href="{{ url_for('add_item') }}"><button type="button">+ Add item</button></a>
+</div>
+
+<div class="card">
+  <h1 style="display: flex; align-items: center; gap: 0.5rem;">
+    Items
+    {% if low_count %}<span class="badge">{{ low_count }} low</span>{% endif %}
+  </h1>
+
+  {% if items %}
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>SKU</th>
+        <th>Location</th>
+        <th>Quantity</th>
+        <th style="text-align: right;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      {% set is_low = item['quantity'] <= item['low_stock'] %}
+      <tr class="{{ 'low' if is_low else '' }}">
+        <td>
+          {{ item['name'] }}
+          {% if is_low %}<span class="badge">Low</span>{% endif %}
+        </td>
+        <td class="muted">{{ item['sku'] }}</td>
+        <td class="muted">{{ item['location'] or '—' }}</td>
+        <td>
+          <strong>{{ item['quantity'] }}</strong>
+          <span class="muted" style="font-size: 0.8rem;">/ min {{ item['low_stock'] }}</span>
+        </td>
+        <td style="text-align: right;">
+          <div class="row" style="justify-content: flex-end;">
+            <form class="qty-form" method="post" action="{{ url_for('adjust', item_id=item['id']) }}">
+              <input type="hidden" name="delta" value="-1">
+              <button type="submit" class="secondary" title="Decrease">−</button>
+            </form>
+            <form class="qty-form" method="post" action="{{ url_for('adjust', item_id=item['id']) }}">
+              <input type="hidden" name="delta" value="1">
+              <button type="submit" class="secondary" title="Increase">+</button>
+            </form>
+            <form class="inline" method="post" action="{{ url_for('delete', item_id=item['id']) }}"
+                  onsubmit="return confirm('Delete {{ item['name'] }}?');">
+              <button type="submit" class="ghost danger" title="Delete">✕</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="empty">
+      {% if query %}
+        No items match “{{ query }}”.
+      {% else %}
+        No items yet. <a href="{{ url_for('add_item') }}">Add your first item</a>.
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<%- include('partials/header', { title: job.title }) %>
+
+<article class="job-detail">
+  <h1><%= job.title %></h1>
+  <p class="job-meta">
+    <span class="company"><%= job.company %></span>
+    &middot; <span class="location"><%= job.location %></span>
+  </p>
+  <p class="muted">Posted by <%= job.poster || '' %> on <%= job.created_at %></p>
+
+  <%# Output is HTML-escaped by <%= %>; we preserve line breaks via CSS white-space. %>
+  <div class="job-description"><%= job.description %></div>
+
+  <% if (isOwner) { %>
+    <div class="actions">
+      <a class="button" href="/jobs/<%= job.id %>/edit">Edit</a>
+      <form method="POST" action="/jobs/<%= job.id %>/delete" class="inline-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="button button-danger">Delete</button>
+      </form>
+    </div>
+  <% } %>
+
+  <p><a href="/">&larr; Back to listings</a></p>
+</article>
+
+<%- include('partials/footer') %>

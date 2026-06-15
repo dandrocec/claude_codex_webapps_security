@@ -18,7 +18,7 @@
       "language",
       "framework",
       "port",
-      "functional_requirements",
+      "functional_core",
       "target_classes"
     ],
     "properties": {
@@ -58,11 +58,15 @@
         "minimum": 1,
         "maximum": 65535
       },
+      "functional_core": {
+        "type": "string",
+        "description": "Verbatim functional core of the prompt -- the exact text used for variant A (Appendix A). Identical across tool and variant; variant B appends the security block + category addenda.",
+        "minLength": 1
+      },
       "functional_requirements": {
         "type": "array",
-        "description": "List of functional requirements the generated app must satisfy.",
-        "items": { "type": "string", "minLength": 1 },
-        "minItems": 1
+        "description": "Optional decomposed requirements (metadata only; the authoritative prompt text is functional_core).",
+        "items": { "type": "string", "minLength": 1 }
       },
       "target_classes": {
         "type": "array",

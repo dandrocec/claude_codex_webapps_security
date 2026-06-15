@@ -1,0 +1,42 @@
+<%- include('partials/header', { title: 'My Tasks' }) %>
+
+<section class="card">
+  <h1>My Tasks</h1>
+  <%- include('partials/errors') %>
+
+  <form action="/tasks" method="POST" class="add-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input name="title" type="text" placeholder="What needs doing?"
+           required maxlength="200" autofocus>
+    <button type="submit">Add</button>
+  </form>
+
+  <% if (!tasks.length) { %>
+    <p class="muted">No tasks yet. Add your first one above.</p>
+  <% } else { %>
+    <ul class="task-list">
+      <% tasks.forEach(function (task) { %>
+        <li class="task <%= task.completed ? 'done' : '' %>">
+          <form action="/tasks/<%= task.id %>/toggle" method="POST" class="inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="check" title="Toggle complete">
+              <%= task.completed ? '☑' : '☐' %>
+            </button>
+          </form>
+
+          <span class="title"><%= task.title %></span>
+
+          <span class="actions">
+            <a class="link-btn" href="/tasks/<%= task.id %>/edit">Edit</a>
+            <form action="/tasks/<%= task.id %>/delete" method="POST" class="inline">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit" class="link-btn danger">Delete</button>
+            </form>
+          </span>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

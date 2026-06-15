@@ -25,7 +25,7 @@ DEFAULT_SCHEMA = REPO_ROOT / "specs" / "catalog.schema.json"
 
 def _load_json(path: Path) -> object:
     try:
-        with path.open(encoding="utf-8") as fh:
+        with path.open(encoding="utf-8-sig") as fh:
             return json.load(fh)
     except FileNotFoundError:
         print(f"error: file not found: {path}", file=sys.stderr)

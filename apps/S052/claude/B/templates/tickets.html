@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}My tickets{% endblock %}
+{% block content %}
+  <div class="row-between">
+    <h1>My tickets</h1>
+    <a class="primary btn" href="{{ url_for('new_ticket') }}">New ticket</a>
+  </div>
+
+  {% if tickets %}
+    <table class="tickets">
+      <thead>
+        <tr><th>#</th><th>Subject</th><th>Priority</th><th>Status</th><th>Created</th></tr>
+      </thead>
+      <tbody>
+        {% for t in tickets %}
+          <tr>
+            <td>{{ t["id"] }}</td>
+            <td><a href="{{ url_for('view_ticket', ticket_id=t['id']) }}">{{ t["subject"] }}</a></td>
+            <td><span class="badge p-{{ t['priority'] }}">{{ t["priority"]|capitalize }}</span></td>
+            <td><span class="badge s-{{ t['status'] }}">{{ t["status"]|replace('_',' ')|capitalize }}</span></td>
+            <td>{{ t["created_at"] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="muted">You have no tickets yet. <a href="{{ url_for('new_ticket') }}">Create one</a>.</p>
+  {% endif %}
+{% endblock %}

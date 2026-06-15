@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Temperature Converter</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="card">
+    <h1>Temperature Converter</h1>
+
+    <form method="post" action="{{ url_for('index') }}" novalidate>
+      {{ form.csrf_token }}
+
+      <div class="field">
+        {{ form.value.label }}
+        {{ form.value(step="any", inputmode="decimal", autocomplete="off") }}
+        {% for error in form.value.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <fieldset class="field">
+        <legend>{{ form.direction.label.text }}</legend>
+        {% for subfield in form.direction %}
+          <label class="radio">{{ subfield }} {{ subfield.label.text }}</label>
+        {% endfor %}
+        {% for error in form.direction.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+      </fieldset>
+
+      {{ form.submit(class="btn") }}
+    </form>
+
+    {% if result %}
+      <div class="result" role="status">
+        <p><strong>{{ result.input }}</strong> = <strong>{{ result.output }}</strong></p>
+      </div>
+    {% endif %}
+  </main>
+</body>
+</html>

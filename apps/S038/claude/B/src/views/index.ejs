@@ -1,0 +1,38 @@
+<%- include('partials/header', { title: 'Browse jobs' }) %>
+
+<h1>Job listings</h1>
+
+<form method="GET" action="/" class="search-form" role="search">
+  <input
+    type="search"
+    name="q"
+    value="<%= q %>"
+    placeholder="Search by title, company, location…"
+    aria-label="Search jobs"
+    maxlength="100">
+  <button type="submit">Search</button>
+  <% if (q) { %><a class="clear-link" href="/">Clear</a><% } %>
+</form>
+
+<% if (q) { %>
+  <p class="muted"><%= jobs.length %> result(s) for &ldquo;<%= q %>&rdquo;</p>
+<% } %>
+
+<% if (jobs.length === 0) { %>
+  <p class="muted">No job listings found.</p>
+<% } else { %>
+  <ul class="job-list">
+    <% jobs.forEach(function (job) { %>
+      <li class="job-card">
+        <h2><a href="/jobs/<%= job.id %>"><%= job.title %></a></h2>
+        <p class="job-meta">
+          <span class="company"><%= job.company %></span>
+          &middot; <span class="location"><%= job.location %></span>
+        </p>
+        <p class="muted">Posted by <%= job.poster %></p>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

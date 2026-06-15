@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+  <section class="card">
+    <h1><%= survey.title %></h1>
+    <% if (survey.description) { %>
+      <p class="muted"><%= survey.description %></p>
+    <% } %>
+
+    <% if (submitted) { %>
+      <div class="success">
+        <p>Thanks! Your response has been recorded.</p>
+      </div>
+    <% } else { %>
+      <form action="/s/<%= survey.public_token %>" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <% questions.forEach(function (q) { %>
+          <label><%= q.text %>
+            <input type="text" name="q_<%= q.id %>" maxlength="2000">
+          </label>
+        <% }); %>
+        <button type="submit">Submit response</button>
+      </form>
+    <% } %>
+  </section>
+<%- include('../partials/footer') %>

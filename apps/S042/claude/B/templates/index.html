@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Latest articles — The Daily Flask{% endblock %}
+{% block content %}
+  <h1>Latest articles</h1>
+
+  {% if articles %}
+    <ul class="article-list">
+      {% for a in articles %}
+        <li>
+          <a class="article-title" href="{{ url_for('view_article', article_id=a.id) }}">{{ a.title }}</a>
+          <span class="meta">by {{ a.author }} · {{ a.created_at }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No articles have been published yet.</p>
+    {% if current_user %}
+      <p><a href="{{ url_for('new_article') }}">Write the first one →</a></p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

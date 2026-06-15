@@ -1,0 +1,3 @@
+Build a Flask event-listing app. Logged-in users create events (title, date, location, description); a public page lists upcoming events sorted by date. Organisers manage their own events. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5039.

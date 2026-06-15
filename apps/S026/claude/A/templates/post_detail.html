@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} — Flask Blog{% endblock %}
+
+{% block content %}
+  <article class="post">
+    <h1>{{ post.title }}</h1>
+    <p class="meta">by {{ post.author.username }} on {{ post.created_at.strftime('%Y-%m-%d %H:%M') }} UTC</p>
+    <div class="post-body">{{ post.body }}</div>
+
+    {% if current_user.is_authenticated and current_user.id == post.user_id %}
+      <div class="post-actions">
+        <a class="btn" href="{{ url_for('edit_post', post_id=post.id) }}">Edit</a>
+        <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post"
+              onsubmit="return confirm('Delete this post?');">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+      </div>
+    {% endif %}
+  </article>
+
+  <p><a href="{{ url_for('index') }}">&larr; Back to all posts</a></p>
+{% endblock %}

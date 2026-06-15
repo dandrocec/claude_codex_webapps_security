@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}Register{% endblock %}
+{% block content %}
+  <h1>Create an account</h1>
+  <form method="post" novalidate class="card-form">
+    {{ form.csrf_token }}
+    {{ field(form.username) }}
+    {{ field(form.email) }}
+    {{ field(form.password) }}
+    {{ field(form.confirm) }}
+    {{ form.submit(class="btn") }}
+  </form>
+  <p>Already have an account? <a href="{{ url_for('login') }}">Log in</a>.</p>
+{% endblock %}

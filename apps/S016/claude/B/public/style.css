@@ -1,0 +1,158 @@
+:root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --accent: #38bdf8;
+    --accent-strong: #0ea5e9;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --bar-bg: #334155;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.card {
+    width: 100%;
+    max-width: 30rem;
+    background: var(--card);
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    line-height: 1.3;
+}
+
+h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+}
+
+.flash {
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid var(--accent-strong);
+    color: var(--text);
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.vote-form fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+}
+
+.vote-form legend {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 0.85rem;
+    margin-bottom: 0.5rem;
+    background: #0b1220;
+    border: 1px solid #334155;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+}
+
+.option:hover { border-color: var(--accent); }
+
+button {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #04121c;
+    background: var(--accent);
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+button:hover { background: var(--accent-strong); }
+
+.results ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.results li { margin-bottom: 1rem; }
+
+.results li.mine .result-label { color: var(--accent); font-weight: 600; }
+
+.result-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+}
+
+.result-count { color: var(--muted); }
+
+.bar {
+    height: 10px;
+    background: var(--bar-bg);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+    border-radius: 6px;
+    transition: width 0.3s ease;
+}
+
+.total {
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+/* Predefined bar widths (5% steps) so no inline styles are needed,
+   keeping a strict Content-Security-Policy with no 'unsafe-inline'. */
+.w0   { width: 0; }
+.w5   { width: 5%; }
+.w10  { width: 10%; }
+.w15  { width: 15%; }
+.w20  { width: 20%; }
+.w25  { width: 25%; }
+.w30  { width: 30%; }
+.w35  { width: 35%; }
+.w40  { width: 40%; }
+.w45  { width: 45%; }
+.w50  { width: 50%; }
+.w55  { width: 55%; }
+.w60  { width: 60%; }
+.w65  { width: 65%; }
+.w70  { width: 70%; }
+.w75  { width: 75%; }
+.w80  { width: 80%; }
+.w85  { width: 85%; }
+.w90  { width: 90%; }
+.w95  { width: 95%; }
+.w100 { width: 100%; }

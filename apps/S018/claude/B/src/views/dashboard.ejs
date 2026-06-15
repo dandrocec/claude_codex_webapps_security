@@ -1,0 +1,74 @@
+<%- include('partials/header') %>
+
+<h1>Check a password's strength</h1>
+<p class="muted">The password you type is rated on the server and never saved.
+   You may optionally save the <em>rating</em> (not the password) for reference.</p>
+
+<%- include('partials/errors') %>
+
+<form action="/check" method="post" class="card" autocomplete="off">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <label for="password">Candidate password</label>
+  <input type="password" id="password" name="password" required maxlength="200" autofocus>
+
+  <label for="label">Label (optional, if saving)</label>
+  <input type="text" id="label" name="label" maxlength="60" placeholder="e.g. My email password">
+
+  <label class="checkbox">
+    <input type="checkbox" name="save" value="true"> Save this rating to my history
+  </label>
+
+  <button type="submit">Check strength</button>
+</form>
+
+<% if (result) { %>
+  <section class="result rating-<%= result.rating %>" aria-live="polite">
+    <h2>Rating: <span class="badge"><%= result.rating.toUpperCase() %></span></h2>
+    <p>Score: <%= result.score %> / <%= result.maxScore %>
+       &middot; Length checked: <%= candidateLength %> characters</p>
+    <% if (result.feedback.length) { %>
+      <h3>How to improve</h3>
+      <ul>
+        <% result.feedback.forEach(function (tip) { %>
+          <li><%= tip %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+    <% if (savedLabel) { %>
+      <p class="saved-note">Saved rating under label "<%= savedLabel %>".</p>
+    <% } %>
+  </section>
+<% } %>
+
+<section class="history">
+  <h2>Your saved ratings</h2>
+  <% if (!checks.length) { %>
+    <p class="muted">No saved ratings yet.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr><th>Label</th><th>Rating</th><th>Score</th><th>When</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% checks.forEach(function (c) { %>
+          <tr>
+            <td><%= c.label %></td>
+            <td><span class="badge rating-<%= c.rating %>"><%= c.rating %></span></td>
+            <td><%= c.score %></td>
+            <td><%= c.created_at %></td>
+            <td>
+              <form action="/checks/<%= c.id %>/delete" method="post" class="inline"
+                    onsubmit="return confirm('Delete this saved rating?');">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="link-button danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

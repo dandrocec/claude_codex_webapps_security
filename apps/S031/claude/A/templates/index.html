@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Browse Recipes{% endblock %}
+{% block content %}
+  <h1>All Recipes</h1>
+  {% if recipes %}
+    <div class="grid">
+      {% for recipe in recipes %}
+        <a class="card" href="{{ url_for('view_recipe', recipe_id=recipe.id) }}">
+          {% if recipe.photo %}
+            <img class="card-img" src="{{ url_for('static', filename='uploads/' ~ recipe.photo) }}" alt="{{ recipe.title }}">
+          {% else %}
+            <div class="card-img placeholder">No photo</div>
+          {% endif %}
+          <div class="card-body">
+            <h3>{{ recipe.title }}</h3>
+            <p class="muted">by {{ recipe.author.username }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="muted">No recipes yet. {% if current_user.is_authenticated %}<a href="{{ url_for('new_recipe') }}">Add the first one!</a>{% else %}<a href="{{ url_for('register') }}">Register</a> to add one.{% endif %}</p>
+  {% endif %}
+{% endblock %}

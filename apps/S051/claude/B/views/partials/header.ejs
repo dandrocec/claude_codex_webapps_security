@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= typeof title !== 'undefined' ? title : 'Movie Watchlist' %></title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/movies">🎬 Watchlist</a>
+    <nav>
+      <% if (currentUser) { %>
+        <span class="who">Hi, <%= currentUser.username %></span>
+        <form action="/logout" method="post" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">

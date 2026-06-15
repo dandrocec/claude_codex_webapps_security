@@ -1,0 +1,45 @@
+<%- include('partials/head') %>
+
+  <div class="card">
+    <h1>Your tasks</h1>
+
+    <form class="add-form" method="POST" action="/tasks">
+      <input type="text" name="title" placeholder="What needs doing?" autofocus required />
+      <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+
+    <% if (tasks.length === 0) { %>
+      <p class="muted empty">Nothing here yet. Add your first task above.</p>
+    <% } else { %>
+      <ul class="task-list">
+        <% tasks.forEach(function (task) { %>
+          <li class="task <%= task.done ? 'is-done' : '' %>">
+            <form method="POST" action="/tasks/<%= task.id %>/toggle" class="inline">
+              <button type="submit" class="check" title="Toggle complete">
+                <%= task.done ? '☑' : '☐' %>
+              </button>
+            </form>
+
+            <% if (editId === task.id) { %>
+              <form method="POST" action="/tasks/<%= task.id %>/edit" class="edit-form">
+                <input type="text" name="title" value="<%= task.title %>" autofocus required />
+                <button class="btn btn-small btn-primary" type="submit">Save</button>
+                <a class="btn btn-small btn-ghost" href="/tasks">Cancel</a>
+              </form>
+            <% } else { %>
+              <span class="title"><%= task.title %></span>
+              <span class="actions">
+                <a class="btn btn-small btn-ghost" href="/tasks?edit=<%= task.id %>">Edit</a>
+                <form method="POST" action="/tasks/<%= task.id %>/delete" class="inline"
+                      onsubmit="return confirm('Delete this task?');">
+                  <button class="btn btn-small btn-danger" type="submit">Delete</button>
+                </form>
+              </span>
+            <% } %>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+
+<%- include('partials/foot') %>

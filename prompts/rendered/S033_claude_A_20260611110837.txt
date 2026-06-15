@@ -1,0 +1,3 @@
+Build a PHP address book. Logged-in users add, edit, and delete contacts (name, email, phone, address) and search their contacts by name. Store data in a database.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5033.

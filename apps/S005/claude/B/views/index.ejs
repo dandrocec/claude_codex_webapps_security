@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Markdown Preview</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Markdown Preview</h1>
+    <p class="subtitle">Paste Markdown below and click <strong>Render</strong> to preview it safely.</p>
+
+    <% if (error) { %>
+      <div class="alert" role="alert"><%= error %></div>
+    <% } %>
+
+    <form method="POST" action="/render" autocomplete="off">
+      <!-- CSRF synchronizer token -->
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="markdown" class="visually-hidden">Markdown input</label>
+      <textarea
+        id="markdown"
+        name="markdown"
+        rows="14"
+        placeholder="# Hello&#10;&#10;Type some **Markdown** here..."
+      ><%= markdown %></textarea>
+      <button type="submit">Render</button>
+    </form>
+
+    <% if (renderedHtml !== null) { %>
+      <section class="output" aria-label="Rendered output">
+        <h2>Rendered output</h2>
+        <!-- renderedHtml is sanitised server-side with DOMPurify before embedding -->
+        <div class="rendered"><%- renderedHtml %></div>
+      </section>
+    <% } %>
+  </main>
+</body>
+</html>

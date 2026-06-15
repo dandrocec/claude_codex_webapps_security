@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSON Validator &amp; Formatter</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>JSON Validator &amp; Formatter</h1>
+    <p class="subtitle">Paste JSON below and submit to validate and pretty-print it.</p>
+
+    <form method="post" action="/validate" autocomplete="off">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="json">JSON input</label>
+      <textarea id="json" name="json" rows="14" spellcheck="false"
+        placeholder='{ "hello": "world" }'><%= input %></textarea>
+      <button type="submit">Validate &amp; Format</button>
+    </form>
+
+    <% if (error) { %>
+      <div class="result error" role="alert">
+        <h2>Invalid JSON</h2>
+        <p><%= error %></p>
+      </div>
+    <% } else if (formatted !== null) { %>
+      <div class="result ok">
+        <h2>Valid JSON</h2>
+        <pre><code><%= formatted %></code></pre>
+      </div>
+    <% } %>
+  </main>
+</body>
+</html>

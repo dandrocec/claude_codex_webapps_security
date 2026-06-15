@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Log in · Notes{% endblock %}
+{% block content %}
+<h1>Log in</h1>
+<form method="post" class="card form">
+  {{ form.csrf_token }}
+  <label for="username">Username</label>
+  {{ form.username(id="username", autocomplete="username", autofocus=true) }}
+  {% for err in form.username.errors %}<p class="field-error">{{ err }}</p>{% endfor %}
+
+  <label for="password">Password</label>
+  {{ form.password(id="password", autocomplete="current-password") }}
+  {% for err in form.password.errors %}<p class="field-error">{{ err }}</p>{% endfor %}
+
+  <button type="submit">Log in</button>
+</form>
+<p>No account yet? <a href="{{ url_for('register') }}">Register</a>.</p>
+{% endblock %}

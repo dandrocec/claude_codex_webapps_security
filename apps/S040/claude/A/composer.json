@@ -1,0 +1,23 @@
+{
+    "name": "demo/php-classifieds",
+    "description": "A small classifieds marketplace built with plain PHP, PDO and SQLite.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-fileinfo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:5040 -t public public/index.php"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

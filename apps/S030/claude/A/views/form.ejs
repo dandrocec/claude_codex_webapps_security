@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<div class="page-head">
+  <h1><%= mode === 'edit' ? 'Edit bookmark' : 'New bookmark' %></h1>
+</div>
+
+<form class="card form"
+      action="<%= mode === 'edit' ? '/bookmarks/' + bookmark.id : '/bookmarks' %>"
+      method="POST">
+  <label>
+    Title
+    <input type="text" name="title" required
+           value="<%= bookmark ? bookmark.title : '' %>"
+           placeholder="My favourite article" />
+  </label>
+
+  <label>
+    URL
+    <input type="text" name="url" required
+           value="<%= bookmark ? bookmark.url : '' %>"
+           placeholder="https://example.com" />
+  </label>
+
+  <label>
+    Tags <span class="hint">(comma-separated)</span>
+    <input type="text" name="tags"
+           value="<%= bookmark ? bookmark.tags : '' %>"
+           placeholder="reading, work, javascript" />
+  </label>
+
+  <div class="form-actions">
+    <button class="btn" type="submit">
+      <%= mode === 'edit' ? 'Save changes' : 'Create bookmark' %>
+    </button>
+    <a class="btn btn-ghost" href="/">Cancel</a>
+  </div>
+</form>
+
+<%- include('partials/footer') %>

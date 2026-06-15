@@ -1,0 +1,49 @@
+<%- include('partials/head', { pageTitle: 'New survey' }) %>
+<div class="page-head">
+  <h1>New survey</h1>
+  <a class="muted" href="/">← Back</a>
+</div>
+
+<% if (error) { %><p class="error"><%= error %></p><% } %>
+
+<form method="post" action="/surveys" class="card">
+  <label>Survey title
+    <input name="title" required autofocus placeholder="e.g. Customer satisfaction" />
+  </label>
+  <label>Description (optional)
+    <textarea name="description" rows="2" placeholder="Shown to people answering the survey"></textarea>
+  </label>
+
+  <h2>Questions</h2>
+  <div id="questions"></div>
+  <button type="button" class="btn-secondary" id="add-question">+ Add question</button>
+
+  <div class="actions">
+    <button type="submit">Create survey</button>
+  </div>
+</form>
+
+<template id="question-template">
+  <div class="question-row card-inset">
+    <div class="q-head">
+      <strong class="q-num"></strong>
+      <button type="button" class="link-btn remove-q">remove</button>
+    </div>
+    <label>Question text
+      <input name="q_label" placeholder="Type your question" />
+    </label>
+    <label>Type
+      <select name="q_type">
+        <option value="text">Short text</option>
+        <option value="textarea">Long text</option>
+        <option value="choice">Multiple choice</option>
+      </select>
+    </label>
+    <label class="options-field" style="display:none">Options (one per line)
+      <textarea name="q_options" rows="3" placeholder="Option A&#10;Option B&#10;Option C"></textarea>
+    </label>
+  </div>
+</template>
+
+<script src="/new-survey.js"></script>
+<%- include('partials/foot') %>

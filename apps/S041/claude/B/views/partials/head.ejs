@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> &middot; FAQ</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="/">FAQ</a>
+  <nav>
+    <% if (currentUser) { %>
+      <span class="who">Signed in as <%= currentUser.username %></span>
+      <a href="/admin">Manage</a>
+      <form class="inline" method="post" action="/logout">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="link-btn">Log out</button>
+      </form>
+    <% } else { %>
+      <a href="/">Public page</a>
+      <a href="/login">Editor login</a>
+    <% } %>
+  </nav>
+</header>
+<main class="container">

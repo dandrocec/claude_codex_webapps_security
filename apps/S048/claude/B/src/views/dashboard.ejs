@@ -1,0 +1,41 @@
+<%- include('partials/header', { title: 'Reviewer Dashboard' }) %>
+
+<%
+  // Helper to build a sort link that toggles direction on the active column.
+  function sortLink(column, label) {
+    var nextDir = (sort === column && dir === 'asc') ? 'desc' : 'asc';
+    var arrow = '';
+    if (sort === column) { arrow = dir === 'asc' ? ' ▲' : ' ▼'; }
+    return '<a href="/dashboard?sort=' + column + '&dir=' + nextDir + '">' + label + arrow + '</a>';
+  }
+%>
+
+<h1>All feedback</h1>
+<p class="muted"><%= rows.length %> submission<%= rows.length === 1 ? '' : 's' %>.</p>
+
+<% if (rows.length === 0) { %>
+  <p>No feedback has been submitted yet.</p>
+<% } else { %>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th><%- sortLink('category', 'Category') %></th>
+        <th><%- sortLink('rating', 'Rating') %></th>
+        <th>Comment</th>
+        <th><%- sortLink('created_at', 'Submitted') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% rows.forEach(function (row) { %>
+        <tr>
+          <td><%= row.category %></td>
+          <td><%= row.rating %>/5</td>
+          <td class="comment-cell"><%= row.comment %></td>
+          <td class="muted nowrap"><%= row.created_at %> UTC</td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/footer') %>

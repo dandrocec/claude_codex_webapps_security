@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ page['title'] }} — Wiki{% endblock %}
+{% block content %}
+  <article class="page">
+    <h1>{{ page['title'] }}</h1>
+    <p class="meta">
+      by {{ page['author'] }} · created {{ page['created_at'] }} ·
+      updated {{ page['updated_at'] }}
+    </p>
+
+    {# rendered_body is sanitised server-side with bleach before display. #}
+    <div class="page-body">{{ rendered_body | safe }}</div>
+
+    {% if current_user.is_authenticated and current_user.id == page['author_id'] %}
+      <p><a href="{{ url_for('edit_page', page_id=page['id']) }}">Edit this page</a></p>
+    {% endif %}
+  </article>
+{% endblock %}

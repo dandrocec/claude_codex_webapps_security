@@ -1,0 +1,33 @@
+<%- include('partials/head', { pageTitle: survey.title }) %>
+<div class="card narrow">
+  <% if (submitted) { %>
+    <h1>✅ Thank you!</h1>
+    <p>Your response to <strong><%= survey.title %></strong> has been recorded.</p>
+    <a class="btn" href="/s/<%= survey.public_id %>">Submit another response</a>
+  <% } else { %>
+    <h1><%= survey.title %></h1>
+    <% if (survey.description) { %><p class="muted"><%= survey.description %></p><% } %>
+    <form method="post" action="/s/<%= survey.public_id %>">
+      <% questions.forEach(function (q) {
+           const options = JSON.parse(q.options || '[]'); %>
+        <div class="field">
+          <label class="q-label"><%= q.label %></label>
+          <% if (q.type === 'textarea') { %>
+            <textarea name="question_<%= q.id %>" rows="3"></textarea>
+          <% } else if (q.type === 'choice') { %>
+            <% options.forEach(function (opt) { %>
+              <label class="radio">
+                <input type="radio" name="question_<%= q.id %>" value="<%= opt %>" />
+                <%= opt %>
+              </label>
+            <% }); %>
+          <% } else { %>
+            <input type="text" name="question_<%= q.id %>" />
+          <% } %>
+        </div>
+      <% }); %>
+      <button type="submit">Submit response</button>
+    </form>
+  <% } %>
+</div>
+<%- include('partials/foot') %>

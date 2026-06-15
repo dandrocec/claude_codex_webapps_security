@@ -1,0 +1,21 @@
+{
+  "name": "json-validator",
+  "version": "1.0.0",
+  "description": "Paste JSON, validate it, and get a neatly indented version or a helpful error message.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0"
+  },
+  "license": "MIT"
+}

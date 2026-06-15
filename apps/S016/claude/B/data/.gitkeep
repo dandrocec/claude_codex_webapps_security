@@ -1,0 +1,2 @@
+# Vote data is written here at runtime (votes.json). This file keeps the
+# directory under version control while the generated data stays ignored.

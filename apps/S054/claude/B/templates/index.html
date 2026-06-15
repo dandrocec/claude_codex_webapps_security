@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}My Week · Time Tracker{% endblock %}
+{% block content %}
+
+<div class="grid">
+  <section class="card">
+    <h1>Log time</h1>
+    <form method="post" action="{{ url_for('add_entry') }}" class="entry-form">
+      {{ form.csrf_token }}
+      <label>{{ form.project.label }}
+        {{ form.project(maxlength=100, placeholder="e.g. Website redesign") }}
+      </label>
+      <label>{{ form.entry_date.label }}
+        {{ form.entry_date() }}
+      </label>
+      <label>{{ form.hours.label }}
+        {{ form.hours(step="0.25", min="0", max="24", placeholder="0.00") }}
+      </label>
+      <label>{{ form.note.label }}
+        {{ form.note(maxlength=500, rows=3, placeholder="Optional") }}
+      </label>
+      <button type="submit" class="btn primary">Add entry</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <div class="week-nav">
+      <a class="btn" href="{{ url_for('index', week=prev_week) }}">← Prev</a>
+      <h2>{{ week_start.strftime('%b %d') }} – {{ week_end.strftime('%b %d, %Y') }}</h2>
+      <a class="btn" href="{{ url_for('index', week=next_week) }}">Next →</a>
+    </div>
+
+    <h3>Weekly totals</h3>
+    {% if totals %}
+      <table class="table">
+        <thead><tr><th>Project</th><th class="num">Hours</th></tr></thead>
+        <tbody>
+          {% for project, hrs in totals %}
+            <tr><td>{{ project }}</td><td class="num">{{ '%.2f'|format(hrs) }}</td></tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr><th>Total</th><th class="num">{{ '%.2f'|format(grand_total) }}</th></tr>
+        </tfoot>
+      </table>
+    {% else %}
+      <p class="muted">No entries this week yet.</p>
+    {% endif %}
+  </section>
+</div>
+
+<section class="card">
+  <h3>Entries</h3>
+  {% if entries %}
+    <table class="table">
+      <thead>
+        <tr><th>Date</th><th>Project</th><th class="num">Hours</th><th>Note</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for e in entries %}
+          <tr>
+            <td>{{ e['entry_date'] }}</td>
+            <td>{{ e['project'] }}</td>
+            <td class="num">{{ '%.2f'|format(e['hours']) }}</td>
+            <td>{{ e['note'] }}</td>
+            <td>
+              <form method="post"
+                    action="{{ url_for('delete_entry', entry_id=e['id']) }}"
+                    class="inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="link-btn danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="muted">No entries for this week.</p>
+  {% endif %}
+</section>
+
+{% endblock %}

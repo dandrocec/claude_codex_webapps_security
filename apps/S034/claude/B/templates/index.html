@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}My books · Reading List{% endblock %}
+{% block content %}
+  <h1>My books</h1>
+
+  {% if not books %}
+    <p class="empty">No books yet. <a href="{{ url_for('books.add') }}">Add your first one</a>.</p>
+  {% else %}
+    <table class="books">
+      <thead>
+        <tr><th>Title</th><th>Author</th><th>Status</th><th>Rating</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+          <tr>
+            <td>{{ book["title"] }}</td>
+            <td>{{ book["author"] }}</td>
+            <td><span class="status status-{{ book['status'] }}">{{ book["status"] }}</span></td>
+            <td>{% if book["rating"] %}{{ "★" * book["rating"] }}{% else %}—{% endif %}</td>
+            <td class="actions">
+              <a href="{{ url_for('books.edit', book_id=book['id']) }}">Edit</a>
+              <form method="post"
+                    action="{{ url_for('books.delete', book_id=book['id']) }}"
+                    class="inline"
+                    onsubmit="return confirm('Delete this book?');">
+                {{ delete_form.csrf_token }}
+                <button type="submit" class="linkbtn danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ heading }} — Flask Blog{% endblock %}
+
+{% block content %}
+<h1>{{ heading }}</h1>
+
+<form method="post" class="form">
+  {{ form.csrf_token }}
+
+  <label for="title">Title</label>
+  {{ form.title(id="title", maxlength="200") }}
+  {% for error in form.title.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+
+  <label for="body">Body</label>
+  {{ form.body(id="body", rows="14") }}
+  {% for error in form.body.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+
+  {{ form.submit(class="button") }}
+  <a class="button button-secondary" href="{{ url_for('index') }}">Cancel</a>
+</form>
+{% endblock %}

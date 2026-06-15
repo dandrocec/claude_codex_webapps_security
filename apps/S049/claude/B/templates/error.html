@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }} — Newsletter Manager{% endblock %}
+{% block content %}
+<div class="card narrow center">
+  <h1>Error {{ code }}</h1>
+  <p>{{ message }}</p>
+  <a class="btn ghost" href="{{ url_for('index') }}">Go home</a>
+</div>
+{% endblock %}

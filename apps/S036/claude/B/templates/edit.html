@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ "New page" if mode == "create" else "Edit page" }} — Wiki{% endblock %}
+{% block content %}
+  <h1>{{ "New page" if mode == "create" else "Edit page" }}</h1>
+
+  <form method="post" class="stacked"
+        action="{{ url_for('create_page') if mode == 'create'
+                  else url_for('edit_page', page_id=page['id']) }}">
+    {{ form.csrf_token }}
+
+    <label for="title">{{ form.title.label.text }}</label>
+    {{ form.title(id="title", maxlength=120) }}
+    {% for err in form.title.errors %}<span class="field-error">{{ err }}</span>{% endfor %}
+
+    <label for="body">{{ form.body.label.text }}</label>
+    {{ form.body(id="body", rows=18) }}
+    {% for err in form.body.errors %}<span class="field-error">{{ err }}</span>{% endfor %}
+
+    <p class="hint">Markdown is supported. HTML is sanitised for safety.</p>
+    {{ form.submit(class="primary") }}
+  </form>
+{% endblock %}

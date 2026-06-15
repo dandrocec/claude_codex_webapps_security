@@ -1,0 +1,3 @@
+Build a Node.js/Express survey builder. A logged-in user creates surveys with multiple questions, shares a public response link, and views collected responses in a table. Store data in a database.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5055.

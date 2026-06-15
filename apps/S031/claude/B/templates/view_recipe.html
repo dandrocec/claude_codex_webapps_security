@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ recipe['title'] }}{% endblock %}
+{% block content %}
+  <article class="recipe">
+    <h1>{{ recipe['title'] }}</h1>
+    <p class="meta">by {{ recipe['username'] }} · {{ recipe['created_at'][:10] }}</p>
+
+    {% if recipe['photo'] %}
+      <img class="hero" src="{{ url_for('static', filename='uploads/' ~ recipe['photo']) }}" alt="Photo of {{ recipe['title'] }}">
+    {% endif %}
+
+    <h2>Ingredients</h2>
+    {# pre-wrap preserves the user's line breaks; text is autoescaped. #}
+    <div class="prewrap">{{ recipe['ingredients'] }}</div>
+
+    <h2>Steps</h2>
+    <div class="prewrap">{{ recipe['steps'] }}</div>
+
+    {% if current_user.is_authenticated and current_user.id == recipe['user_id'] %}
+      <div class="actions">
+        <a class="btn" href="{{ url_for('edit_recipe', recipe_id=recipe['id']) }}">Edit</a>
+        <form action="{{ url_for('delete_recipe', recipe_id=recipe['id']) }}" method="post"
+              data-confirm="Delete this recipe?" class="inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    {% endif %}
+  </article>
+{% endblock %}

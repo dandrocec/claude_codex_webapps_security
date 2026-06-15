@@ -1,0 +1,44 @@
+<%- include('partials/header', { title: 'Dashboard' }) %>
+
+<section class="admin-head">
+  <h1>Manage projects</h1>
+  <a class="btn" href="/admin/projects/new">+ New project</a>
+</section>
+
+<% if (projects.length === 0) { %>
+  <p class="empty">No projects yet. Add your first one.</p>
+<% } else { %>
+  <table class="admin-table">
+    <thead>
+      <tr><th>Image</th><th>Title</th><th>Link</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <% projects.forEach(function (p) { %>
+        <tr>
+          <td>
+            <% if (p.image) { %>
+              <img class="thumb" src="<%= p.image %>" alt="<%= p.title %>" />
+            <% } else { %>
+              <span class="muted">—</span>
+            <% } %>
+          </td>
+          <td><%= p.title %></td>
+          <td>
+            <% if (p.link) { %>
+              <a href="<%= p.link %>" target="_blank" rel="noopener noreferrer">link</a>
+            <% } else { %><span class="muted">—</span><% } %>
+          </td>
+          <td class="actions">
+            <a class="btn small" href="/admin/projects/<%= p.id %>/edit">Edit</a>
+            <form action="/admin/projects/<%= p.id %>/delete" method="post" class="inline"
+                  onsubmit="return confirm('Delete this project?');">
+              <button type="submit" class="btn small danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/footer') %>

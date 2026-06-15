@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Search — Wiki{% endblock %}
+{% block content %}
+  <h1>Search results</h1>
+  {% if query %}
+    <p>Results for “{{ query }}”:</p>
+    {% if results %}
+      <ul class="page-list">
+        {% for page in results %}
+          <li>
+            <a href="{{ url_for('view_page', page_id=page['id']) }}">{{ page['title'] }}</a>
+            <span class="meta">by {{ page['author'] }} · updated {{ page['updated_at'] }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No pages match that title.</p>
+    {% endif %}
+  {% else %}
+    <p>Enter a title to search.</p>
+  {% endif %}
+{% endblock %}

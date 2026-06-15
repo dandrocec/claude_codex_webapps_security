@@ -1,0 +1,28 @@
+<%- include('../partials/header', { title: 'Add bookmark' }) %>
+
+<h1>Add a bookmark</h1>
+<%- include('../partials/errors', { errors: errors }) %>
+
+<form method="post" action="/bookmarks" class="card form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <label for="title">Title</label>
+  <input id="title" name="title" type="text" maxlength="200" required
+         value="<%= values.title || '' %>">
+
+  <label for="url">URL</label>
+  <input id="url" name="url" type="url" maxlength="2048" required
+         placeholder="https://example.com" value="<%= values.url || '' %>">
+
+  <label for="tags">Tags</label>
+  <input id="tags" name="tags" type="text" maxlength="500"
+         placeholder="comma, separated, tags" value="<%= values.tags || '' %>">
+  <small>Separate tags with commas.</small>
+
+  <div class="form-actions">
+    <button type="submit">Save</button>
+    <a class="button ghost" href="/bookmarks">Cancel</a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inspirational Quote</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="card">
+    <h1>Daily Inspiration</h1>
+    <!-- {{ }} is autoescaped by Jinja2 -> safe against XSS. -->
+    <blockquote id="quote-text">&ldquo;{{ quote.text }}&rdquo;</blockquote>
+    <p class="author" id="quote-author">&mdash; {{ quote.author }}</p>
+    <button id="new-quote" type="button">Show another quote</button>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

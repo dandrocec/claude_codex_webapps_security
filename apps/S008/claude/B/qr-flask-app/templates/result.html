@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Your QR code{% endblock %}
+
+{% block content %}
+  <h1>Your QR code</h1>
+
+  <div class="card center">
+    <img class="qr" src="data:image/png;base64,{{ image_b64 }}"
+         alt="QR code for the entered content" width="280" height="280">
+
+    <p class="encoded">Encoded: <span class="mono">{{ content }}</span></p>
+
+    {# Stateless download: re-submits the same content (CSRF-protected). #}
+    <form method="post" action="{{ url_for('download_anonymous') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="content" value="{{ content }}">
+      <button type="submit" class="btn">Download PNG</button>
+    </form>
+
+    {% if qr_id %}
+      <p class="muted small">Saved to <a href="{{ url_for('history') }}">your codes</a>.</p>
+    {% endif %}
+  </div>
+
+  <p><a href="{{ url_for('index') }}">&larr; Generate another</a></p>
+{% endblock %}

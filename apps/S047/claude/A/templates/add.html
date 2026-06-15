@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Add item · Inventory Tracker{% endblock %}
+{% block content %}
+<div class="card" style="max-width: 520px;">
+  <h1>Add item</h1>
+  <form method="post">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="{{ form.get('name', '') }}" required>
+
+    <label for="sku">SKU</label>
+    <input type="text" id="sku" name="sku" value="{{ form.get('sku', '') }}" required>
+
+    <div class="row">
+      <div style="flex: 1;">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="quantity" min="0"
+               value="{{ form.get('quantity', '0') }}">
+      </div>
+      <div style="flex: 1;">
+        <label for="low_stock">Low-stock threshold</label>
+        <input type="number" id="low_stock" name="low_stock" min="0"
+               value="{{ form.get('low_stock', '5') }}">
+      </div>
+    </div>
+
+    <label for="location">Location</label>
+    <input type="text" id="location" name="location" value="{{ form.get('location', '') }}">
+
+    <div style="margin-top: 1.2rem;" class="row">
+      <button type="submit">Save item</button>
+      <a class="button-link" href="{{ url_for('index') }}"><button type="button" class="secondary">Cancel</button></a>
+    </div>
+  </form>
+</div>
+{% endblock %}

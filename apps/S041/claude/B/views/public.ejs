@@ -1,0 +1,43 @@
+<%- include('partials/head') %>
+
+<h1>Frequently Asked Questions</h1>
+
+<form class="filter" method="get" action="/">
+  <label for="q" class="sr-only">Filter questions</label>
+  <input
+    type="search"
+    id="q"
+    name="q"
+    placeholder="Filter by keyword&hellip;"
+    value="<%= query %>"
+    maxlength="100"
+    autocomplete="off">
+  <button type="submit">Filter</button>
+  <% if (query) { %><a class="clear" href="/">Clear</a><% } %>
+</form>
+
+<% if (groups.length === 0) { %>
+  <p class="empty">
+    <% if (query) { %>
+      No FAQs match &ldquo;<%= query %>&rdquo;.
+    <% } else { %>
+      No FAQs have been published yet.
+    <% } %>
+  </p>
+<% } else { %>
+  <p class="result-count"><%= totalCount %> result<%= totalCount === 1 ? '' : 's' %></p>
+  <% groups.forEach(function (entry) { %>
+    <% var category = entry[0]; var items = entry[1]; %>
+    <section class="category">
+      <h2><%= category %></h2>
+      <% items.forEach(function (faq) { %>
+        <details class="faq">
+          <summary><%= faq.question %></summary>
+          <div class="answer"><%= faq.answer %></div>
+        </details>
+      <% }); %>
+    </section>
+  <% }); %>
+<% } %>
+
+<%- include('partials/foot') %>

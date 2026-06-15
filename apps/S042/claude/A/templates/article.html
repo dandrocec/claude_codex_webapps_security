@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ article['title'] }} &middot; The Daily Flask{% endblock %}
+{% block content %}
+    <article class="post">
+        <h1>{{ article['title'] }}</h1>
+        <div class="meta">By {{ article['author'] }} &middot; {{ article['created_at'] }}</div>
+        <p class="body-text">{{ article['body'] }}</p>
+    </article>
+
+    <hr class="rule">
+
+    <section id="comments">
+        <h2>Comments ({{ comments|length }})</h2>
+        {% if not comments %}
+            <p>No comments yet. Be the first to comment.</p>
+        {% endif %}
+        {% for c in comments %}
+            <div class="comment">
+                <div class="meta"><strong>{{ c['author_name'] }}</strong> &middot; {{ c['created_at'] }}</div>
+                <div class="body-text">{{ c['body'] }}</div>
+            </div>
+        {% endfor %}
+
+        <h3>Leave a comment</h3>
+        <form method="post" action="{{ url_for('add_comment', article_id=article['id']) }}">
+            <label for="author_name">Your name (optional)</label>
+            <input type="text" id="author_name" name="author_name" placeholder="Anonymous">
+            <label for="body">Comment</label>
+            <textarea id="body" name="body" required></textarea>
+            <button type="submit">Post comment</button>
+        </form>
+    </section>
+
+    <p style="margin-top:1.5rem;"><a href="{{ url_for('index') }}">&larr; Back to all stories</a></p>
+{% endblock %}

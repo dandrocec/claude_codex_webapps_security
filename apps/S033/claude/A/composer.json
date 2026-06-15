@@ -1,0 +1,14 @@
+{
+    "name": "addressbook/addressbook",
+    "description": "A simple multi-user PHP address book with SQLite storage.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:5033 -t public public/index.php"
+    }
+}

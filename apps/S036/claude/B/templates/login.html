@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Log in — Wiki{% endblock %}
+{% block content %}
+  <h1>Log in</h1>
+  <form method="post" class="stacked"
+        action="{{ url_for('login', next=request.args.get('next')) if request.args.get('next') else url_for('login') }}">
+    {{ form.csrf_token }}
+
+    <label for="username">{{ form.username.label.text }}</label>
+    {{ form.username(id="username", maxlength=32) }}
+    {% for err in form.username.errors %}<span class="field-error">{{ err }}</span>{% endfor %}
+
+    <label for="password">{{ form.password.label.text }}</label>
+    {{ form.password(id="password", maxlength=128) }}
+    {% for err in form.password.errors %}<span class="field-error">{{ err }}</span>{% endfor %}
+
+    {{ form.submit(class="primary") }}
+  </form>
+  <p>No account? <a href="{{ url_for('register') }}">Register</a>.</p>
+{% endblock %}

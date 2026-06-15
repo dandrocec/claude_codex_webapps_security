@@ -1,0 +1,41 @@
+<%- include('partials/header') %>
+
+  <h1>Share your feedback</h1>
+
+  <% if (submitted) { %>
+    <div class="alert success">Thanks! Your feedback has been recorded.</div>
+  <% } %>
+  <% if (error) { %>
+    <div class="alert error"><%= error %></div>
+  <% } %>
+
+  <form action="/feedback" method="post" class="card form">
+    <label>
+      Category
+      <select name="category" required>
+        <option value="" disabled selected>Choose a category…</option>
+        <% categories.forEach(function (c) { %>
+          <option value="<%= c %>"><%= c %></option>
+        <% }); %>
+      </select>
+    </label>
+
+    <fieldset class="rating">
+      <legend>Rating</legend>
+      <% for (let i = 1; i <= 5; i++) { %>
+        <label class="rating-option">
+          <input type="radio" name="rating" value="<%= i %>" required />
+          <span><%= i %></span>
+        </label>
+      <% } %>
+    </fieldset>
+
+    <label>
+      Comment
+      <textarea name="comment" rows="5" placeholder="Tell us what's on your mind…" required></textarea>
+    </label>
+
+    <button type="submit" class="btn primary">Submit feedback</button>
+  </form>
+
+<%- include('partials/footer') %>

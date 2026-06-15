@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Preview · Newsletter Manager{% endblock %}
+{% block content %}
+<div class="card-head bare">
+  <h1>Preview</h1>
+  <a class="btn" href="{{ url_for('edit_draft', draft_id=draft.id) }}">← Back to editing</a>
+</div>
+
+<p class="muted">
+  This is how the newsletter would look when delivered to your
+  {{ sub_count }} subscriber{{ '' if sub_count == 1 else 's' }}.
+</p>
+
+<div class="email-preview">
+  <div class="email-meta">
+    <div><span class="email-label">From:</span> {{ session.username }} &lt;newsletter@example.com&gt;</div>
+    <div><span class="email-label">Subject:</span> <strong>{{ draft.subject or '(no subject)' }}</strong></div>
+  </div>
+  <div class="email-body">
+    {% if draft.body.strip() %}
+      <p>{{ draft.body | nl2br }}</p>
+    {% else %}
+      <p class="muted">(empty body)</p>
+    {% endif %}
+  </div>
+  <div class="email-footer">
+    You are receiving this because you subscribed to our newsletter.
+    <a href="#">Unsubscribe</a>
+  </div>
+</div>
+{% endblock %}

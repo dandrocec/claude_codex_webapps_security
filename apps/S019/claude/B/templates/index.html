@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Text Diff</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main>
+    <h1>Text Diff</h1>
+    <p class="subtitle">Paste two versions of a text and compare them line by line.</p>
+
+    {% if error %}
+      <p class="error" role="alert">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('diff') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="panes">
+        <label class="pane">
+          <span>Original</span>
+          <textarea name="left" rows="14" maxlength="{{ max_chars }}"
+                    spellcheck="false" placeholder="Paste the original text…">{{ left }}</textarea>
+        </label>
+        <label class="pane">
+          <span>Modified</span>
+          <textarea name="right" rows="14" maxlength="{{ max_chars }}"
+                    spellcheck="false" placeholder="Paste the modified text…">{{ right }}</textarea>
+        </label>
+      </div>
+      <button type="submit">Compare</button>
+    </form>
+
+    {% if diff_rows is not none %}
+      <section class="results" aria-label="Differences">
+        <h2>Differences</h2>
+        {% if diff_rows %}
+          <div class="legend">
+            <span class="chip add">added</span>
+            <span class="chip remove">removed</span>
+          </div>
+          <table class="diff">
+            <tbody>
+              {% for row in diff_rows %}
+                <tr class="{{ row.tag }}">
+                  <td class="marker" aria-hidden="true">{% if row.tag == 'add' %}+{% elif row.tag == 'remove' %}-{% endif %}</td>
+                  <td class="line">{{ row.html }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p class="empty">The two texts are identical.</p>
+        {% endif %}
+      </section>
+    {% endif %}
+  </main>
+</body>
+</html>

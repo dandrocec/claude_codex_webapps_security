@@ -1,0 +1,13 @@
+{
+    "name": "demo/text-stats",
+    "description": "A small PHP web app that counts characters, words, and lines in submitted text.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "ext-mbstring": "*"
+    },
+    "scripts": {
+        "start": "php -S localhost:5006"
+    }
+}
