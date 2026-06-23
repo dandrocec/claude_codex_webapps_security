@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+<p class="crumbs"><a href="/">My Folders</a> / <%= folder.name %></p>
+<section class="card">
+  <h1>📂 <%= folder.name %></h1>
+  <% if (documents.length === 0) { %>
+    <p class="muted">This folder is empty.</p>
+  <% } else { %>
+    <table class="data">
+      <thead><tr><th>Name</th><th>Type</th><th>Latest</th><th>Updated</th></tr></thead>
+      <tbody>
+        <% documents.forEach(function (d) { %>
+          <tr>
+            <td><a href="/documents/<%= d.id %>">📄 <%= d.name %></a></td>
+            <td><%= d.mime_type || '—' %></td>
+            <td>v<%= d.version_number || 0 %></td>
+            <td><%= d.updated_at || d.created_at %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<section class="card">
+  <h2>Upload a document</h2>
+  <form method="post" action="/folders/<%= folder.id %>/documents" enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Display name (optional)
+      <input name="name" maxlength="120" placeholder="Defaults to the file name">
+    </label>
+    <label>File
+      <input type="file" name="file" required>
+    </label>
+    <p class="muted">Allowed: PDF, PNG, JPEG, GIF, plain text. Validated by file content.</p>
+    <button type="submit">Upload</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

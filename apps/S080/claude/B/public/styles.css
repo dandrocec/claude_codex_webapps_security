@@ -1,0 +1,93 @@
+:root {
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --border: #d9dce1;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --danger: #b91c1c;
+  --ok: #15803d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+header.topbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+header.topbar a { color: var(--text); text-decoration: none; font-weight: 500; }
+header.topbar a:hover { color: var(--primary); }
+header.topbar .brand { font-weight: 700; }
+header.topbar .spacer { margin-left: auto; }
+header.topbar .role { color: var(--muted); font-size: 0.85rem; }
+
+main { max-width: 880px; margin: 1.5rem auto; padding: 0 1.5rem; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+h1 { font-size: 1.4rem; margin-top: 0; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 0.55rem 0.5rem; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; }
+
+label { display: block; font-weight: 500; margin: 0.75rem 0 0.25rem; }
+input, select {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+.btn:hover { opacity: 0.92; }
+.btn.secondary { background: #e5e7eb; color: var(--text); }
+.btn.danger { background: var(--danger); }
+
+.errors {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: var(--danger);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+.errors ul { margin: 0; padding-left: 1.1rem; }
+
+.pill { font-size: 0.78rem; padding: 0.15rem 0.5rem; border-radius: 999px; }
+.pill.fulfilled { background: #dcfce7; color: var(--ok); }
+.pill.cancelled { background: #fee2e2; color: var(--danger); }
+.muted { color: var(--muted); }
+.low { color: var(--danger); font-weight: 600; }
+.actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }

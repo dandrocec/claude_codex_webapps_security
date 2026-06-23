@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_formfields.html" import render_field %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+  <div class="card narrow">
+    <h1>Log in</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.password) }}
+      {{ form.submit(class="btn primary") }}
+    </form>
+    <p class="muted">No account yet? <a href="{{ url_for('auth.register') }}">Register</a>.</p>
+  </div>
+{% endblock %}

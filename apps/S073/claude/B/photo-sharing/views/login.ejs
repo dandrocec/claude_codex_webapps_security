@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+<h1>Log in</h1>
+<% if (errors && errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %>
+  </ul>
+<% } %>
+<form action="/login" method="post" class="card form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Username
+    <input type="text" name="username" value="<%= values.username || '' %>" required autocomplete="username">
+  </label>
+  <label>Password
+    <input type="password" name="password" required autocomplete="current-password">
+  </label>
+  <button type="submit">Log in</button>
+</form>
+<p>Need an account? <a href="/register">Register</a>.</p>
+<%- include('partials/footer') %>

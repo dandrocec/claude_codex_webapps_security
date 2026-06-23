@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ product['name'] }} &middot; Simple Shop{% endblock %}
+
+{% block content %}
+  <p><a href="{{ url_for('catalogue') }}">&larr; Back to catalogue</a></p>
+
+  <article class="product-detail">
+    <h1>{{ product['name'] }}</h1>
+    <p class="price">${{ '%.2f'|format(product['price']) }}</p>
+    <p class="description">{{ product['description'] }}</p>
+    <form method="post"
+          action="{{ url_for('add_to_cart', product_id=product['id']) }}">
+      <button type="submit">Add to cart</button>
+    </form>
+  </article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+
+    <form class="comment-form" method="post"
+          action="{{ url_for('add_comment', product_id=product['id']) }}">
+      <input type="text" name="author" placeholder="Your name (optional)">
+      <textarea name="body" rows="3" placeholder="Write a comment…" required></textarea>
+      <button type="submit">Post comment</button>
+    </form>
+
+    {% for comment in comments %}
+      <div class="comment">
+        <p class="comment-meta">
+          <strong>{{ comment['author'] }}</strong>
+          <span class="date">{{ comment['created_at'] }}</span>
+        </p>
+        <p class="comment-body">{{ comment['body'] }}</p>
+      </div>
+    {% else %}
+      <p>No comments yet. Be the first!</p>
+    {% endfor %}
+  </section>
+{% endblock %}

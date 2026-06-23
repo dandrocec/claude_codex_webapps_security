@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+<div class="card">
+  <h1>Stock levels</h1>
+  <% if (products.length === 0) { %>
+    <p class="muted">No products yet.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr><th>SKU</th><th>Name</th><th>In stock</th>
+        <% if (currentUser.role === 'manager') { %><th></th><% } %></tr>
+      </thead>
+      <tbody>
+        <% products.forEach(function (p) { %>
+          <tr>
+            <td><%= p.sku %></td>
+            <td><%= p.name %></td>
+            <td class="<%= p.stock <= 5 ? 'low' : '' %>"><%= p.stock %></td>
+            <% if (currentUser.role === 'manager') { %>
+              <td><a href="/products/<%= p.id %>/edit">Adjust</a></td>
+            <% } %>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+  <% if (currentUser.role === 'manager') { %>
+    <a class="btn" href="/products/new">Add product</a>
+  <% } %>
+</div>
+<%- include('../partials/footer') %>

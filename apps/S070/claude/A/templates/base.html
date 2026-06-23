@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Recruiting{% endblock %}</title>
+  <style>
+    :root { --accent:#2b6cb0; --bg:#f7fafc; --border:#e2e8f0; --muted:#718096; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+           color:#1a202c; background:var(--bg); line-height:1.5; }
+    header { background:#fff; border-bottom:1px solid var(--border); }
+    .bar { max-width:920px; margin:0 auto; padding:14px 20px; display:flex;
+           align-items:center; gap:18px; }
+    .bar a.brand { font-weight:700; font-size:1.15rem; color:var(--accent);
+                   text-decoration:none; }
+    .bar nav { margin-left:auto; display:flex; gap:14px; align-items:center; }
+    .bar nav a { color:#2d3748; text-decoration:none; }
+    .bar nav a:hover { color:var(--accent); }
+    main { max-width:920px; margin:0 auto; padding:24px 20px; }
+    .card { background:#fff; border:1px solid var(--border); border-radius:10px;
+            padding:18px 20px; margin-bottom:16px; }
+    .card h3 { margin:0 0 6px; }
+    .muted { color:var(--muted); font-size:.9rem; }
+    a.btn, button.btn { display:inline-block; background:var(--accent); color:#fff;
+        border:none; padding:9px 16px; border-radius:7px; cursor:pointer;
+        text-decoration:none; font-size:.95rem; }
+    a.btn.secondary, button.btn.secondary { background:#fff; color:var(--accent);
+        border:1px solid var(--accent); }
+    a.btn:hover, button.btn:hover { opacity:.92; }
+    label { display:block; font-weight:600; margin:12px 0 4px; }
+    input, textarea, select { width:100%; padding:9px 10px; border:1px solid var(--border);
+        border-radius:7px; font-size:.95rem; font-family:inherit; }
+    textarea { min-height:120px; resize:vertical; }
+    .flash { padding:11px 14px; border-radius:8px; margin-bottom:12px; }
+    .flash.error { background:#fff5f5; color:#9b2c2c; border:1px solid #feb2b2; }
+    .flash.success { background:#f0fff4; color:#276749; border:1px solid #9ae6b4; }
+    .tag { display:inline-block; background:#edf2f7; color:#4a5568; padding:2px 9px;
+           border-radius:99px; font-size:.78rem; }
+    .inline { display:inline; }
+    .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    pre.letter { white-space:pre-wrap; font-family:inherit; background:var(--bg);
+        padding:12px; border-radius:8px; border:1px solid var(--border); margin:8px 0 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <a class="brand" href="{{ url_for('index') }}">Recruit</a>
+      <nav>
+        <a href="{{ url_for('index') }}">Jobs</a>
+        {% if current_user %}
+          <a href="{{ url_for('dashboard') }}">Dashboard</a>
+          {% if current_user.is_employer %}
+            <a href="{{ url_for('new_job') }}">Post a job</a>
+          {% endif %}
+          <span class="muted">{{ current_user.name }} ({{ current_user.role }})</span>
+          <form class="inline" method="post" action="{{ url_for('logout') }}">
+            <button class="btn secondary" type="submit">Log out</button>
+          </form>
+        {% else %}
+          <a href="{{ url_for('login') }}">Log in</a>
+          <a class="btn" href="{{ url_for('register') }}">Sign up</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

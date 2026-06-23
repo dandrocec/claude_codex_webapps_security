@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Payment result &middot; Tiny Shop{% endblock %}
+{% block content %}
+  {% if paid is none %}
+    <h1>Order not found</h1>
+    <p>We couldn't find that order. <a href="{{ url_for('main.orders') }}">View your orders</a>.</p>
+  {% elif paid %}
+    <h1>Payment received &#10003;</h1>
+    <p>Thank you! Order #{{ order['id'] }} is now paid.</p>
+    <p><a class="btn" href="{{ url_for('main.order_detail', order_id=order['id']) }}">View order</a></p>
+  {% else %}
+    <h1>Payment pending</h1>
+    <p>Order #{{ order['id'] }} hasn't been confirmed yet.</p>
+    <p><a class="btn" href="{{ url_for('main.orders') }}">View your orders</a></p>
+  {% endif %}
+{% endblock %}

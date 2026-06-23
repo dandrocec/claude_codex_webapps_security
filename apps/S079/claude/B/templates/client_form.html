@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "_form_helpers.html" import render_field %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+  <h1>{{ title }}</h1>
+  <form method="post" class="card">
+    {{ form.csrf_token }}
+    {{ render_field(form.name) }}
+    {{ render_field(form.email, type="email") }}
+    {{ render_field(form.address) }}
+    <div class="form-actions">
+      <button type="submit" class="btn">Save</button>
+      <a class="btn ghost" href="{{ url_for('clients') }}">Cancel</a>
+    </div>
+  </form>
+{% endblock %}

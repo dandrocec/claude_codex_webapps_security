@@ -1,0 +1,11 @@
+{% macro field(f, **kwargs) %}
+  <div class="form-row">
+    {{ f.label }}
+    {{ f(**kwargs) }}
+    {% if f.errors %}
+      <ul class="field-errors">
+        {% for e in f.errors %}<li>{{ e }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endmacro %}

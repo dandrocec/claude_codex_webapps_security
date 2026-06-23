@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <div class="card-head">
+    <h1>My Quizzes</h1>
+    <a class="btn" href="/quizzes/new">+ New quiz</a>
+  </div>
+
+  <% if (quizzes.length === 0) { %>
+    <p>You haven't created any quizzes yet.</p>
+  <% } else { %>
+    <ul class="list">
+      <% quizzes.forEach(function (q) { %>
+        <li>
+          <div>
+            <a href="/quizzes/<%= q.id %>/manage"><strong><%= q.title %></strong></a>
+            <span class="badge <%= q.published ? 'ok' : 'muted' %>">
+              <%= q.published ? 'Published' : 'Draft' %>
+            </span>
+          </div>
+          <% if (q.description) { %><p class="desc"><%= q.description %></p><% } %>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

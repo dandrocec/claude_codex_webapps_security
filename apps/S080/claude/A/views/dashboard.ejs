@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<h1>Dashboard</h1>
+<p>Welcome, <strong><%= currentUser.username %></strong>. You are signed in as a
+  <strong><%= currentUser.role %></strong>.</p>
+
+<div class="grid">
+  <a class="card tile" href="/products">
+    <h2>Stock levels</h2>
+    <p>View current quantities for every product.</p>
+  </a>
+  <a class="card tile" href="/orders/new">
+    <h2>Process order</h2>
+    <p>Fulfil an order and decrement stock.</p>
+  </a>
+  <a class="card tile" href="/orders">
+    <h2>Orders</h2>
+    <p>Browse previously fulfilled orders.</p>
+  </a>
+  <% if (currentUser.role === 'manager') { %>
+    <a class="card tile" href="/products/new">
+      <h2>Add product</h2>
+      <p>Create a new product and set its stock.</p>
+    </a>
+  <% } %>
+</div>
+
+<% if (currentUser.role === 'clerk') { %>
+  <p class="hint">As a clerk you can view stock and process orders.
+    Managing products and adjusting stock levels requires a manager account.</p>
+<% } %>
+
+<%- include('partials/footer') %>

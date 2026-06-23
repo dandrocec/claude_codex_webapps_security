@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Review: {{ post['title'] }} — Quill{% endblock %}
+{% block content %}
+  <h1>Review submission</h1>
+  <article class="article preview">
+    <h2>{{ post['title'] }}</h2>
+    <p class="meta">by {{ post['author'] }} · submitted {{ post['created_at'] }}</p>
+    <div class="body">{{ post['body'] }}</div>
+  </article>
+
+  <form method="post" class="card form">
+    {{ form.csrf_token }}
+    <label>{{ form.review_note.label }}{{ form.review_note(rows=3) }}</label>
+    {% for e in form.review_note.errors %}<small class="field-error">{{ e }}</small>{% endfor %}
+    <div class="row-gap">
+      {{ form.approve(class="btn") }}
+      {{ form.reject(class="btn danger") }}
+    </div>
+  </form>
+  <p><a href="{{ url_for('dashboard') }}">← Back to queue</a></p>
+{% endblock %}

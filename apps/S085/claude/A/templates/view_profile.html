@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ p['full_name'] or 'Candidate' }} · Recruitment Portal{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('candidates') if current_user.is_recruiter else url_for('dashboard') }}">&larr; Back</a></p>
+
+<article class="card">
+  <h1>{{ p['full_name'] or '(unnamed candidate)' }}</h1>
+  {% if p['headline'] %}<p class="muted">{{ p['headline'] }}</p>{% endif %}
+  {% if p['location'] %}<p>📍 {{ p['location'] }}</p>{% endif %}
+  {% if current_user.is_recruiter %}<p>✉️ {{ p['email'] }}</p>{% endif %}
+
+  {% if p['bio'] %}
+    <h3>About</h3>
+    <p>{{ p['bio'] }}</p>
+  {% endif %}
+
+  <h3>Skills</h3>
+  {% if skills %}
+    <ul class="skill-tags">
+      {% for s in skills %}<li>{{ s }}</li>{% endfor %}
+    </ul>
+  {% else %}
+    <p class="muted">No skills listed.</p>
+  {% endif %}
+
+  <h3>Resume</h3>
+  {% if p['resume_filename'] %}
+    <a class="btn" href="{{ url_for('download_resume', user_id=p['user_id']) }}">Download resume</a>
+  {% else %}
+    <p class="muted">No resume uploaded.</p>
+  {% endif %}
+
+  {% if is_owner %}
+    <p style="margin-top:1rem"><a href="{{ url_for('edit_profile') }}">Edit this profile</a></p>
+  {% endif %}
+</article>
+{% endblock %}

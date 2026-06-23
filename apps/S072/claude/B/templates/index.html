@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+  <section class="hero">
+    <h1>Welcome to MemberHub</h1>
+    {% if current_user %}
+      <p>Hello, {{ current_user['display_name'] }}. You are on the
+        <strong>{{ current_user['tier'] }}</strong> tier.</p>
+      {% if current_user['tier'] == 'premium' or current_user['is_admin'] %}
+        <p><a class="btn" href="{{ url_for('main.premium') }}">Go to premium content →</a></p>
+      {% else %}
+        <p>Premium content is locked. Ask an admin to upgrade your account.</p>
+      {% endif %}
+    {% else %}
+      <p>A simple members' area with free and premium tiers.</p>
+      <p>
+        <a class="btn" href="{{ url_for('auth.register') }}">Create a free account</a>
+        <a class="btn btn-ghost" href="{{ url_for('auth.login') }}">Sign in</a>
+      </p>
+    {% endif %}
+  </section>
+
+  <section class="tiers">
+    <div class="card">
+      <h2>Free</h2>
+      <ul>
+        <li>Access to the public area</li>
+        <li>Manage your profile</li>
+      </ul>
+    </div>
+    <div class="card card-premium">
+      <h2>Premium</h2>
+      <ul>
+        <li>Everything in Free</li>
+        <li>Exclusive premium content</li>
+      </ul>
+    </div>
+  </section>
+{% endblock %}

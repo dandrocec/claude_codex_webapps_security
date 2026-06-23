@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+
+<section class="card auth">
+  <h1>Create an account</h1>
+  <form method="post" action="/register">
+    <label>Username
+      <input name="username" autocomplete="username" minlength="3" maxlength="32" required autofocus />
+    </label>
+    <label>Password
+      <input name="password" type="password" autocomplete="new-password" minlength="6" required />
+    </label>
+    <button type="submit">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Log in</a>.</p>
+</section>
+
+<%- include('partials/footer') %>

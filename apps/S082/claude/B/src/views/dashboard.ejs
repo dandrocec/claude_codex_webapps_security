@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+<h1>My Files</h1>
+
+<form method="post" action="/upload" enctype="multipart/form-data" class="card">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Upload a file (max <%= maxMib %> MiB; PNG, JPG, GIF, WEBP, PDF)
+    <input type="file" name="file" required>
+  </label>
+  <button type="submit">Upload</button>
+</form>
+
+<% if (files.length === 0) { %>
+  <p class="muted">You have no files yet.</p>
+<% } else { %>
+  <table class="list">
+    <thead>
+      <tr><th>Name</th><th>Type</th><th>Size</th><th>Uploaded</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <% files.forEach(function (f) { %>
+        <tr>
+          <td><%= f.original_name %></td>
+          <td><%= f.mime_type %></td>
+          <td><%= (f.size / 1024).toFixed(1) %> KiB</td>
+          <td><%= f.created_at %></td>
+          <td class="actions">
+            <a href="/files/<%= f.id %>/download">Download</a>
+            <form class="inline" method="post" action="/shares">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="fileId" value="<%= f.id %>">
+              <button type="submit" class="link-btn">Create share link</button>
+            </form>
+            <form class="inline" method="post" action="/files/<%= f.id %>/delete">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit" class="link-btn danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } %>
+<%- include('partials/footer') %>

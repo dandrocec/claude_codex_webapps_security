@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Admin &middot; Orders{% endblock %}
+{% block content %}
+  <h1>All orders</h1>
+  {% if orders %}
+    <table class="table">
+      <thead><tr><th>#</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        {% for o in orders %}
+          <tr>
+            <td>{{ o['id'] }}</td>
+            <td>{{ o['user_email'] }}</td>
+            <td>{{ o['created_at'] }}</td>
+            <td>{{ o['total_cents'] | money }}</td>
+            <td><span class="status status-{{ o['status'] }}">{{ o['status'] }}</span></td>
+            <td><a href="{{ url_for('admin.order_detail', order_id=o['id']) }}">View</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No orders yet.</p>
+  {% endif %}
+{% endblock %}

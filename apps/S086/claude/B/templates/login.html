@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Sign in · Admin Dashboard{% endblock %}
+{% block content %}
+<div class="card" style="max-width:380px;margin:3rem auto;">
+  <h2 style="margin-top:0;">Administrator sign in</h2>
+  <form method="post" action="{{ url_for('login') }}" novalidate>
+    {{ form.csrf_token }}
+    <label for="username">Username</label>
+    {{ form.username(id="username", autocomplete="username") }}
+    {% for e in form.username.errors %}<div class="err">{{ e }}</div>{% endfor %}
+
+    <label for="password">Password</label>
+    {{ form.password(id="password", autocomplete="current-password") }}
+    {% for e in form.password.errors %}<div class="err">{{ e }}</div>{% endfor %}
+
+    <div style="margin-top:1.25rem;">
+      {{ form.submit(class="btn primary") }}
+    </div>
+  </form>
+</div>
+{% endblock %}

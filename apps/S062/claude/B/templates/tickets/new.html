@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}New ticket · Helpdesk{% endblock %}
+{% block content %}
+<div class="card narrow">
+  <h1>Open a ticket</h1>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <label>{{ form.subject.label }}{{ form.subject() }}</label>
+    {% for e in form.subject.errors %}<small class="err">{{ e }}</small>{% endfor %}
+
+    <label>{{ form.body.label }}{{ form.body(rows=8) }}</label>
+    {% for e in form.body.errors %}<small class="err">{{ e }}</small>{% endfor %}
+
+    {{ form.submit(class="btn") }}
+    <a class="btn ghost" href="{{ url_for('tickets.index') }}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

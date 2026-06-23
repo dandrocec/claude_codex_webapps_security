@@ -1,0 +1,18 @@
+<%- include('../partials/header') %>
+<h1>My tickets</h1>
+<% if (!tickets.length) { %>
+  <p>You have no tickets yet. <a href="/events">Browse events</a>.</p>
+<% } else { %>
+  <ul class="event-list">
+    <% tickets.forEach(function (t) { %>
+      <li class="card">
+        <h2><a href="/events/<%= t.event_id %>"><%= t.event_name %></a></h2>
+        <p class="meta">
+          <% if (t.event_date) { %><span><%= t.event_date %></span> · <% } %>
+          Ticket #<%= t.id %> · purchased <%= t.purchased_at %> UTC
+        </p>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+<%- include('../partials/footer') %>

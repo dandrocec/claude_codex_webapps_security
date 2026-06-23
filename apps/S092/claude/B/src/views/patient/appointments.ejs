@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>My appointments</h1>
+  <p><a class="btn" href="/appointments/new">Book a new appointment</a></p>
+  <% if (!appointments.length) { %>
+    <p>You have no appointments yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>When</th><th>Doctor</th><th>Reason</th><th>Status</th></tr></thead>
+      <tbody>
+        <% appointments.forEach(function (a) { %>
+          <tr>
+            <td><%= a.scheduled_at %></td>
+            <td><%= a.doctor_name %></td>
+            <td><%= a.reason %></td>
+            <td><span class="status status-<%= a.status %>"><%= a.status %></span></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

@@ -1,0 +1,75 @@
+<%- include('partials/header', { pageTitle: item.title }) %>
+
+<p><a class="back" href="/">← Back to all auctions</a></p>
+
+<article class="detail">
+  <h1><%= item.title %></h1>
+  <p class="detail__seller">Listed by <strong><%= item.seller %></strong></p>
+
+  <% if (item.description) { %>
+    <p class="detail__desc"><%= item.description %></p>
+  <% } %>
+
+  <div class="detail__status">
+    <div>
+      <span class="label"><%= item.highestBidder ? 'Current highest bid' : 'Starting price' %></span>
+      <span class="amount big"><%= money(item.currentPrice) %></span>
+      <% if (item.highestBidder) { %>
+        <span class="muted">by <%= item.highestBidder %></span>
+      <% } %>
+    </div>
+    <div>
+      <% if (item.ended) { %>
+        <span class="status status--ended">Auction ended <%= dateTime(item.end_time) %></span>
+      <% } else { %>
+        <span class="status status--open">Ends <%= dateTime(item.end_time) %></span>
+      <% } %>
+    </div>
+  </div>
+
+  <% if (item.ended) { %>
+    <div class="result">
+      <% if (item.highestBidder) { %>
+        🏆 <strong><%= item.highestBidder %></strong> won this item for <%= money(item.currentPrice) %>.
+      <% } else { %>
+        This auction ended with no bids.
+      <% } %>
+    </div>
+  <% } else { %>
+    <% if (error) { %><p class="error"><%= error %></p><% } %>
+    <form class="bid-form" method="POST" action="/items/<%= item.id %>/bids">
+      <label>
+        Your name
+        <input type="text" name="bidder" required placeholder="e.g. Alice">
+      </label>
+      <label>
+        Bid amount (min <%= money(item.minNextBid) %>)
+        <input type="number" name="amount" step="0.01" min="<%= item.minNextBid %>"
+               value="<%= item.minNextBid.toFixed(2) %>" required>
+      </label>
+      <button type="submit">Place bid</button>
+    </form>
+  <% } %>
+</article>
+
+<section class="bids">
+  <h2>Bid history (<%= bids.length %>)</h2>
+  <% if (bids.length === 0) { %>
+    <p class="empty">No bids yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Bidder</th><th>Amount</th><th>Placed</th></tr></thead>
+      <tbody>
+        <% bids.forEach((b, i) => { %>
+          <tr class="<%= i === 0 ? 'leading' : '' %>">
+            <td><%= b.bidder %><%= i === 0 ? ' 👑' : '' %></td>
+            <td><%= money(b.amount) %></td>
+            <td><%= dateTime(b.created_at) %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

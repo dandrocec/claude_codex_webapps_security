@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<div class="auth">
+  <h1>Create your account</h1>
+  <form action="/register" method="post" class="form">
+    <label>Username <input type="text" name="username" required autofocus
+      pattern="[a-zA-Z0-9_]{3,20}" title="3-20 letters, numbers, or underscore"></label>
+    <label>Password <input type="password" name="password" minlength="6" required></label>
+    <button type="submit">Register</button>
+  </form>
+  <p>Already have an account? <a href="/login">Login</a></p>
+</div>
+<%- include('partials/footer') %>

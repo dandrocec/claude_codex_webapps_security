@@ -1,0 +1,26 @@
+{
+    "name": "example/php-forum",
+    "description": "A small, security-hardened discussion forum (boards, threads, replies) built with plain PHP + PDO/SQLite.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "files": [
+            "src/config.php",
+            "src/db.php",
+            "src/helpers.php"
+        ]
+    },
+    "scripts": {
+        "serve": "php -S 127.0.0.1:5058 router.php",
+        "promote": "php bin/promote.php"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

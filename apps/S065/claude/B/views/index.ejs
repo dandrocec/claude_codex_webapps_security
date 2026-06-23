@@ -1,0 +1,24 @@
+<%- include('partials/header', { title: 'Questions' }) %>
+
+<h1>Questions</h1>
+
+<% if (questions.length === 0) { %>
+  <p>No questions yet. <% if (currentUser) { %><a href="/questions/new">Ask the first one</a>.<% } else { %><a href="/register">Register</a> to ask one.<% } %></p>
+<% } %>
+
+<ul class="question-list">
+  <% questions.forEach(function (q) { %>
+    <li>
+      <div class="stats">
+        <span class="score"><%= q.score %></span> votes
+        <span class="answers <%= q.has_accepted ? 'accepted' : '' %>"><%= q.answer_count %></span> answers
+      </div>
+      <div class="summary">
+        <a class="qtitle" href="/questions/<%= q.id %>"><%= q.title %></a>
+        <div class="meta">asked by <%= q.author %> on <%= q.created_at %></div>
+      </div>
+    </li>
+  <% }); %>
+</ul>
+
+<%- include('partials/footer') %>

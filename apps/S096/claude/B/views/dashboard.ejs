@@ -1,0 +1,120 @@
+<%- include('partials/header') %>
+
+<%
+  function fmt(ts) {
+    if (!ts) return '—';
+    return new Date(Number(ts)).toLocaleString();
+  }
+  function statusClass(s) {
+    if (s >= 500) return 'st-5xx';
+    if (s >= 400) return 'st-4xx';
+    return 'st-2xx';
+  }
+%>
+
+<h1>Dashboard</h1>
+
+<% if (flash) { %>
+  <% if (flash.type === 'key') { %>
+    <div class="alert alert-success">
+      <p><strong>Your new API key</strong> — copy it now, it will not be shown again:</p>
+      <div class="key-reveal">
+        <code id="new-key"><%= flash.newKey %></code>
+        <button type="button" class="btn small" data-copy="#new-key">Copy</button>
+      </div>
+    </div>
+  <% } else { %>
+    <ul class="alert alert-<%= flash.type === 'success' ? 'success' : 'error' %>">
+      <% (flash.messages || []).forEach(function (m) { %><li><%= m %></li><% }) %>
+    </ul>
+  <% } %>
+<% } %>
+
+<section class="stats">
+  <div class="stat"><span class="num"><%= summary.total %></span><span class="lbl">Total requests</span></div>
+  <div class="stat"><span class="num"><%= summary.last_24h %></span><span class="lbl">Last 24h</span></div>
+  <div class="stat"><span class="num"><%= summary.ok %></span><span class="lbl">2xx/3xx</span></div>
+  <div class="stat"><span class="num"><%= summary.errors %></span><span class="lbl">4xx/5xx</span></div>
+</section>
+
+<section class="card">
+  <h2>Create an API key</h2>
+  <form method="post" action="/keys" class="row-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>Label
+      <input type="text" name="label" required maxlength="60" placeholder="e.g. mobile-app" />
+    </label>
+    <label>Rate limit <span class="muted">(req/min)</span>
+      <input type="number" name="rateLimit" min="1" max="100000"
+             placeholder="<%= defaultRateLimit %>" />
+    </label>
+    <button type="submit" class="btn">Generate key</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Your API keys</h2>
+  <% if (!keys.length) { %>
+    <p class="muted">No keys yet. Generate one above.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr><th>Label</th><th>Prefix</th><th>Limit</th><th>Requests</th><th>Last used</th><th>Status</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% keys.forEach(function (k) { var u = perKeyMap.get(k.id) || {}; %>
+          <tr class="<%= k.revoked ? 'revoked' : '' %>">
+            <td><%= k.label %></td>
+            <td><code><%= k.key_prefix %>…</code></td>
+            <td><%= k.rate_limit %>/min</td>
+            <td><%= u.total || 0 %></td>
+            <td><%= fmt(u.last_used) %></td>
+            <td><%= k.revoked ? 'Revoked' : 'Active' %></td>
+            <td>
+              <% if (!k.revoked) { %>
+                <form method="post" action="/keys/<%= k.id %>/revoke" class="inline"
+                      data-confirm="Revoke this key? This cannot be undone.">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                  <button type="submit" class="btn small danger">Revoke</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<section class="card">
+  <h2>How to call the gateway</h2>
+  <p class="muted">Send requests to <code>/gateway/*</code> with your key. They are proxied to
+    <code><%= backendUrl %></code> and counted against your rate limit.</p>
+  <pre><code>curl http://localhost:5096/gateway/get \
+  -H "x-api-key: YOUR_API_KEY"</code></pre>
+</section>
+
+<section class="card">
+  <h2>Recent activity</h2>
+  <% if (!recent.length) { %>
+    <p class="muted">No requests yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Time</th><th>Key</th><th>Method</th><th>Path</th><th>Status</th><th>ms</th></tr></thead>
+      <tbody>
+        <% recent.forEach(function (r) { %>
+          <tr>
+            <td><%= fmt(r.ts) %></td>
+            <td><code><%= r.key_prefix %>…</code></td>
+            <td><%= r.method %></td>
+            <td class="path"><%= r.path %></td>
+            <td><span class="badge <%= statusClass(r.status) %>"><%= r.status %></span></td>
+            <td><%= r.duration_ms %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

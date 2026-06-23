@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Apply: {{ job.title }}{% endblock %}
+{% block content %}
+  <h1>Apply: {{ job.title }}</h1>
+  <form method="post" enctype="multipart/form-data" class="stacked">
+    {{ form.csrf_token }}
+    <label>{{ form.cover_letter.label }} {{ form.cover_letter(rows=8) }}</label>
+    {% for e in form.cover_letter.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.resume.label }} {{ form.resume(accept=".pdf,.doc,.docx") }}</label>
+    {% for e in form.resume.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    <small class="hint">Accepted: PDF, DOC, DOCX. Max 5&nbsp;MB.</small>
+
+    {{ form.submit(class="btn") }}
+  </form>
+{% endblock %}

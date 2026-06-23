@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Editor dashboard — Quill{% endblock %}
+{% block content %}
+  <h1>Review queue</h1>
+  <p class="muted">Posts submitted by authors and awaiting your decision.</p>
+  <table class="table">
+    <thead><tr><th>Title</th><th>Author</th><th>Submitted</th><th></th></tr></thead>
+    <tbody>
+      {% for post in queue %}
+        <tr>
+          <td>{{ post['title'] }}</td>
+          <td>{{ post['author'] }}</td>
+          <td>{{ post['created_at'] }}</td>
+          <td><a class="btn small" href="{{ url_for('review_post', post_id=post['id']) }}">Review</a></td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" class="muted">The queue is empty. Nicely done.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Recently reviewed by you</h2>
+  <table class="table">
+    <thead><tr><th>Title</th><th>Author</th><th>Decision</th><th>When</th></tr></thead>
+    <tbody>
+      {% for post in reviewed %}
+        <tr>
+          <td>{{ post['title'] }}</td>
+          <td>{{ post['author'] }}</td>
+          <td><span class="status status-{{ post['status'] }}">{{ post['status'] }}</span></td>
+          <td>{{ post['updated_at'] }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" class="muted">No reviews yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

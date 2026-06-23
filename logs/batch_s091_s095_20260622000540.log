@@ -1,0 +1,151 @@
+I've built the complete application, but every command that creates a process or hits the network (venv creation, `pip install`, running the server) is being gated for manual approval in this environment and isn't getting through, so I couldn't execute the verification myself. The code is complete and I've reviewed it carefully against the library versions pinned in `requirements.txt`.
+
+## What I built
+
+```
+app/
+  main.py          # FastAPI app: REST API + UI routes, enqueues background work
+  worker.py        # Background worker: drains the task queue (fanout + link previews)
+  models.py        # SQLAlchemy models: users, follows, posts, feed_items, link_previews, tasks
+  schemas.py       # Pydantic request/response models
+  database.py      # SQLite engine (WAL mode), session factory, init
+  jobs.py          # enqueue() helper for the DB-backed queue
+  templates/
+    index.html     # Minimal single-page UI (vanilla JS over the REST API)
+requirements.txt
+README.md
+verify.py          # End-to-end smoke test (TestClient)
+```
+
+## How the pieces map to your requirements
+
+- **Post / follow / timeline** — full REST API (`/api/posts`, `/api/users/{id}/follow`, `/api/timeline/{id}`).
+- **Background worker generates per-user feeds** — `fanout_post` task materializes each post into every follower's `feed_items` (fan-out-on-write); following someone backfills their recent posts.
+- **Fetches link previews for URLs** — `fetch_link_preview` task extracts URLs, fetches them with `httpx`, and parses OpenGraph/`<title>` metadata with BeautifulSoup; the UI shows `pending → ok/error`.
+- **Database + task queue** — SQLite via SQLAlchemy; the queue is a durable `tasks` table (no Redis/broker needed), with retries (3x) and `pending/running/done/failed` states.
+- **Minimal UI** — dark single-page app: pick/create a user, post, follow people, view timeline vs. your posts, auto-refreshing for async results.
+- **Runs on port 5091** — documented in the README.
+
+## To run it (the commands I couldn't get approved)
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 0.0.0.0 --port 5091
+```
+
+Then open http://localhost:5091. The DB auto-creates and seeds `alice`, `bob`, `carol`. The worker runs in-process by default; set `RUN_WORKER_INLINE=0` and run `python -m app.worker` separately to use the standalone-worker topology.
+
+To verify end-to-end: `.\.venv\Scripts\python.exe verify.py` (creates a temp DB, posts a link, waits for the worker to fan it out + fetch the preview, asserts the timeline).
+
+**Want me to retry running the install + verification?** If you approve the gated commands (or tell me network/process execution is allowed), I'll run `verify.py` and confirm the full flow works before you rely on it.
+
+A couple of design choices worth flagging: I used a **DB-backed task queue** rather than Celery/Redis specifically to keep it "fully runnable" with one `pip install` and no external services — it still demonstrates the producer/worker split. And there's **no authentication** (the UI's "Acting as" selector just picks a user id), to keep the demo focused on the timeline/queue mechanics. Let me know if you'd prefer Celery+Redis or real auth instead.
+run_id S091_claude_A_20260621220541: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S091\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S091_claude_A_20260621220541.txt  (sha256 f583d83ae6d3dd15...)
+  logged to logs/commands.log and logs/sessions.csv
+The application is complete. All 28 files are in place. I was unable to execute the build/test commands myself — this environment is gating every shell command behind an approval that isn't being granted — so I did a thorough static review instead. The smoke test is written and ready for you to run.
+
+## What was built
+
+A FastAPI microblog with REST API + minimal server-rendered UI, SQLite via SQLAlchemy ORM, and a database-backed task queue drained by a background worker.
+
+**Core features**
+- Register / login / logout, post messages (≤280 chars), follow/unfollow, per-user timeline.
+- Worker tasks: `fanout` (materialises each post into followers' feeds), `backfill` (copies recent posts when you follow someone), `link_preview` (fetches OpenGraph/title for URLs in posts via the SSRF-safe fetcher).
+- REST API under `/api/*` and an HTML UI (timeline, profiles, compose, delete).
+
+**Security mapping to your requirements**
+- **SQLi** — SQLAlchemy ORM only; all queries parameterised.
+- **Passwords** — bcrypt with per-password salt (`app/security.py`).
+- **Input validation** — Pydantic schemas + username/content rules.
+- **XSS** — Jinja2 autoescaping + strict CSP (`default-src 'self'`, no inline JS); remote preview images shown as text, never loaded.
+- **CSRF** — per-session synchroniser token, required on every state-changing request (form field or `X-CSRF-Token` header), constant-time compared.
+- **Access control / IDOR** — ownership checks on delete and per-user actions; non-owners get 404.
+- **Session cookies** — opaque server-side token, `HttpOnly` + `SameSite` + `Secure` (env-toggled), rotated on login (fixation prevention).
+- **Security headers** — CSP, X-Frame-Options: DENY, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, COOP/CORP, HSTS on HTTPS.
+- **Errors** — generic responses; traces logged server-side only.
+- **Secrets** — read from env; nothing hardcoded.
+- **SSRF** (`app/ssrf.py`) — http/https allow-list; resolves and rejects private/loopback/link-local/reserved/multicast/unspecified IPs (incl. `169.254.169.254`, `::1`, `fc00::/7`, IPv4-mapped); **pins the validated IP for the actual connection** (DNS-rebinding defence); no auto-redirects (each hop re-validated); connect/read timeouts + max response size.
+
+## How to run it (port 5091)
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+$env:SECRET_KEY = "$(python -c 'import secrets;print(secrets.token_urlsafe(48))')"
+python run.py        # serves http://localhost:5091 + starts the in-process worker
+```
+
+Run the offline smoke test (auth, fan-out, XSS-escaping, IDOR, headers, SSRF guard — no port/network needed):
+
+```powershell
+.\.venv\Scripts\python.exe -m tests.smoke_test
+```
+
+A couple of things worth flagging honestly:
+- I could **not** run `pip install` or the smoke test here, so I haven't observed it boot. The smoke test is designed to validate the critical paths once you approve a command — please run it and tell me if anything fails.
+- For local HTTP, `.env.example` defaults `COOKIE_SECURE=false` so cookies work over `http://localhost`; set it to `true` behind HTTPS in production (the README explains this).
+
+Want me to also add a Docker/Compose setup, or swap the DB-backed queue for Celery+Redis?
+run_id S091_claude_B_20260621221057: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S091\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S091_claude_B_20260621221057.txt  (sha256 312046aa514e20ba...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 4:40am (Europe/Zagreb)
+run_id S092_claude_A_20260621222446: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S092\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S092_claude_A_20260621222446.txt  (sha256 df41c267e5f0ad42...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 4:40am (Europe/Zagreb)
+run_id S092_claude_B_20260621222601: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S092\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S092_claude_B_20260621222601.txt  (sha256 002a561bb64c4b1b...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 4:40am (Europe/Zagreb)
+run_id S093_claude_A_20260621222603: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S093\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S093_claude_A_20260621222603.txt  (sha256 9619300aaac626b6...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 4:40am (Europe/Zagreb)
+run_id S093_claude_B_20260621222606: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S093\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S093_claude_B_20260621222606.txt  (sha256 45d67e6a1439f383...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 4:40am (Europe/Zagreb)
+run_id S094_claude_A_20260621222609: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S094\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S094_claude_A_20260621222609.txt  (sha256 14504045294ed86d...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 4:40am (Europe/Zagreb)
+run_id S094_claude_B_20260621222611: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S094\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S094_claude_B_20260621222611.txt  (sha256 93650d040f7ac5d9...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 4:40am (Europe/Zagreb)
+run_id S095_claude_A_20260621222613: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S095\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S095_claude_A_20260621222613.txt  (sha256 d64af9e6352df7e8...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 4:40am (Europe/Zagreb)
+run_id S095_claude_B_20260621222616: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S095\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S095_claude_B_20260621222616.txt  (sha256 d70f4834e0ad76fb...)
+  logged to logs/commands.log and logs/sessions.csv
+catalog: 100 specs | selected specs: 5 | tools: ['claude'] | variants: ['A', 'B']
+already done (skipped): 0 | blocked (tool missing): 0 | to run: 10
+
+>>> S091 claude A  (run_id S091_claude_A_20260621220541)
+
+>>> S091 claude B  (run_id S091_claude_B_20260621221057)
+
+>>> S092 claude A  (run_id S092_claude_A_20260621222446)
+
+>>> S092 claude B  (run_id S092_claude_B_20260621222601)
+
+>>> S093 claude A  (run_id S093_claude_A_20260621222603)
+
+>>> S093 claude B  (run_id S093_claude_B_20260621222606)
+
+>>> S094 claude A  (run_id S094_claude_A_20260621222609)
+
+>>> S094 claude B  (run_id S094_claude_B_20260621222611)
+
+>>> S095 claude A  (run_id S095_claude_A_20260621222613)
+
+>>> S095 claude B  (run_id S095_claude_B_20260621222616)
+
+batch complete: ran 10 this session. state totals: {'done': 182, 'failed': 8}
+state file: D:\claude_code\claude_security_journal\logs\generation_state.json

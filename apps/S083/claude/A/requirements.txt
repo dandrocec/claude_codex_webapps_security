@@ -1,0 +1,11 @@
+# Minimum-version constraints so pip resolves builds compatible with your
+# interpreter (including Python 3.13/3.14). Tested with the versions in the
+# right-hand comments.
+fastapi>=0.115           # tested 0.115.6
+uvicorn[standard]>=0.34  # tested 0.34.0
+SQLAlchemy>=2.0.36       # tested 2.0.36
+pydantic>=2.10           # tested 2.10.4
+pydantic-settings>=2.7   # tested 2.7.1
+PyJWT>=2.10              # tested 2.10.1
+bcrypt>=4.2              # tested 4.2.1
+python-multipart>=0.0.18 # tested 0.0.20

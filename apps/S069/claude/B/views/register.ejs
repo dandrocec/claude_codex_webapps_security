@@ -1,0 +1,28 @@
+<%- include('partials/header', { title: 'Sign up' }) %>
+
+<h1>Create an account</h1>
+
+<% if (errors && errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %>
+  </ul>
+<% } %>
+
+<form method="post" action="/register" class="stacked">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <label for="display_name">Display name</label>
+  <input id="display_name" name="display_name" type="text" maxlength="80" value="<%= values.display_name || '' %>" required>
+
+  <label for="email">Email</label>
+  <input id="email" name="email" type="email" autocomplete="username" value="<%= values.email || '' %>" required>
+
+  <label for="password">Password (min 10 characters)</label>
+  <input id="password" name="password" type="password" autocomplete="new-password" minlength="10" required>
+
+  <button type="submit">Sign up</button>
+</form>
+
+<p>Already have an account? <a href="/login">Log in</a>.</p>
+
+<%- include('partials/footer') %>

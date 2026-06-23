@@ -1,0 +1,5 @@
+# Defense in depth: if this project is ever served by Apache, never expose the
+# storage directory (database + raw uploads) over HTTP. The app serves images
+# through the /image route instead.
+Require all denied
+Deny from all

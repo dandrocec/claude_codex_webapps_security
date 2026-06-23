@@ -1,0 +1,5 @@
+/vendor/
+/storage/*.sqlite
+/storage/*.sqlite-journal
+/storage/logs/*.log
+.env

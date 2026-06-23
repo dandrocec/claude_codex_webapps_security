@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Shop — Nimbus Store{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>Browse products</h1>
+  </div>
+
+  <form class="filters" method="get" action="{{ url_for('index') }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search products…">
+    {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
+    <button class="btn" type="submit">Search</button>
+    {% if q or active_category %}<a class="btn btn-ghost" href="{{ url_for('index') }}">Clear</a>{% endif %}
+  </form>
+
+  {% if categories %}
+  <div class="chips">
+    <a class="chip {{ 'active' if not active_category }}" href="{{ url_for('index', q=q) }}">All</a>
+    {% for c in categories %}
+      <a class="chip {{ 'active' if active_category == c }}" href="{{ url_for('index', category=c, q=q) }}">{{ c }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if products %}
+  <div class="grid">
+    {% for p in products %}
+      <div class="product-card card">
+        <a href="{{ url_for('product_detail', product_id=p.id) }}">
+          <img src="{{ p.image_url or 'https://via.placeholder.com/600x400?text=No+Image' }}" alt="{{ p.name }}">
+        </a>
+        <div class="body">
+          <span class="cat-tag">{{ p.category }}</span>
+          <h3><a href="{{ url_for('product_detail', product_id=p.id) }}">{{ p.name }}</a></h3>
+          {% if p.avg_rating %}
+            <div class="stars" title="{{ p.avg_rating }} / 5">
+              {{ '★' * (p.avg_rating | round(0, 'floor') | int) }}{{ '☆' * (5 - (p.avg_rating | round(0, 'floor') | int)) }}
+              <span class="muted">({{ p.reviews | length }})</span>
+            </div>
+          {% endif %}
+          <div class="price">{{ p.price_cents | money }}</div>
+          {% if p.in_stock %}
+            {% if current_user and not current_user.is_admin %}
+              <form method="post" action="{{ url_for('cart_add', product_id=p.id) }}" style="margin-top:auto">
+                <button class="btn btn-block" type="submit">Add to cart</button>
+              </form>
+            {% elif not current_user %}
+              <a class="btn btn-block" style="margin-top:auto" href="{{ url_for('login', next=url_for('product_detail', product_id=p.id)) }}">Log in to buy</a>
+            {% endif %}
+          {% else %}
+            <div class="oos" style="margin-top:auto">Out of stock</div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <div class="empty">No products found.</div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Microblog{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">microblog</a>
+    <nav>
+      {% if current_user %}
+        <a href="/u/{{ current_user.username }}">@{{ current_user.username }}</a>
+        <form class="inline" method="post" action="/logout">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      {% else %}
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="container">
+    {% if error %}<div class="alert error">Something went wrong ({{ error }}). Please try again.</div>{% endif %}
+    {% if notice %}<div class="alert notice">{{ notice }}</div>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <span>Microblog &middot; runs locally on port {{ request.url.port or 5091 }}</span>
+  </footer>
+</body>
+</html>

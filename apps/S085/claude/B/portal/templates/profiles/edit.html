@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import field %}
+{% block title %}My profile{% endblock %}
+{% block content %}
+  <h1>My profile</h1>
+
+  <form method="post" action="{{ url_for('profiles.edit_profile') }}" class="card">
+    {{ form.hidden_tag() }}
+    {{ field(form.full_name) }}
+    {{ field(form.headline) }}
+    {{ field(form.location) }}
+    {{ field(form.skills) }}
+    {{ field(form.bio, type='textarea') }}
+    {{ form.submit(class="btn") }}
+  </form>
+
+  <h2>Resume</h2>
+  <div class="card">
+    {% if profile.resume_filename %}
+      <p>Current resume:
+        <a href="{{ url_for('profiles.download_resume', profile_id=profile.id) }}">
+          {{ profile.resume_original or 'Download' }}
+        </a>
+      </p>
+    {% else %}
+      <p>No resume uploaded yet.</p>
+    {% endif %}
+    <form method="post" action="{{ url_for('profiles.upload_resume') }}"
+          enctype="multipart/form-data">
+      {{ resume_form.hidden_tag() }}
+      {{ resume_form.resume() }}
+      {{ resume_form.submit(class="btn") }}
+    </form>
+    <p class="muted">PDF or Word documents, up to 5 MB.</p>
+  </div>
+{% endblock %}

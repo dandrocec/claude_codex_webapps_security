@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<div class="page-head">
+  <h1>My learning</h1>
+  <a class="btn btn-secondary" href="/courses">Browse courses</a>
+</div>
+
+<% if (courses.length === 0) { %>
+  <p class="muted">You aren't enrolled in any courses yet. <a href="/courses">Find one to join.</a></p>
+<% } else { %>
+  <ul class="card-list">
+    <% courses.forEach((c) => {
+         const pct = c.lesson_count ? Math.round((c.completed_count / c.lesson_count) * 100) : 0; %>
+      <li class="card">
+        <h3><a href="/courses/<%= c.id %>"><%= c.title %></a></h3>
+        <p class="muted">by <%= c.instructor_name %></p>
+        <div class="progress"><div class="progress-bar" style="width: <%= pct %>%"></div></div>
+        <p class="meta"><%= c.completed_count %>/<%= c.lesson_count %> lessons complete (<%= pct %>%)</p>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+<%- include('partials/footer') %>

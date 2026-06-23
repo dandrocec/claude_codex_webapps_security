@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ product['name'] }} &mdash; Tiny Shop{% endblock %}
+
+{% block content %}
+<p><a href="{{ url_for('catalogue') }}">&larr; Back to catalogue</a></p>
+
+<article class="product-detail">
+  <h1>{{ product['name'] }}</h1>
+  <p class="price">{{ product['price_cents'] | money }}</p>
+  <p class="desc">{{ product['description'] }}</p>
+
+  <form method="post" action="{{ url_for('cart_add', product_id=product['id']) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Qty
+      <input type="number" name="qty" value="1" min="1" max="99" inputmode="numeric">
+    </label>
+    <button type="submit">Add to cart</button>
+  </form>
+</article>
+
+<section class="comments">
+  <h2>Comments</h2>
+
+  {% if g.user %}
+  <form method="post" action="{{ url_for('add_comment', product_id=product['id']) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="body">Leave a comment</label>
+    <textarea id="body" name="body" maxlength="1000" rows="3" required></textarea>
+    <button type="submit">Post comment</button>
+  </form>
+  {% else %}
+  <p><a href="{{ url_for('login', next=request.path) }}">Log in</a> to post a comment.</p>
+  {% endif %}
+
+  {% if comments %}
+  <ul class="comment-list">
+    {% for c in comments %}
+    <li class="comment">
+      <p class="meta"><strong>{{ c['username'] }}</strong>
+        <span class="when">{{ c['created_at'] }}</span></p>
+      <!-- Autoescaping ensures the comment body is HTML-encoded (XSS-safe). -->
+      <p class="body">{{ c['body'] }}</p>
+      {% if g.user and c['user_id'] == g.user['id'] %}
+      <form class="inline" method="post" action="{{ url_for('delete_comment', comment_id=c['id']) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="linklike danger">Delete</button>
+      </form>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No comments yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

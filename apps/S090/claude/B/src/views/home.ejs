@@ -1,0 +1,18 @@
+<%- include('partials/head', { title: 'Welcome' }) %>
+
+  <section class="hero">
+    <h1>Welcome</h1>
+    <p>Sign in with your GitHub account to see your personalised dashboard.</p>
+
+    <% if (typeof query !== 'undefined' && query && query.error) { %>
+      <p class="alert">Sign-in did not complete. Please try again.</p>
+    <% } %>
+
+    <a class="btn btn-primary" href="/auth/github">Sign in with GitHub</a>
+
+    <p class="muted">
+      We only request read access to your basic profile and repository list.
+    </p>
+  </section>
+
+<%- include('partials/foot') %>

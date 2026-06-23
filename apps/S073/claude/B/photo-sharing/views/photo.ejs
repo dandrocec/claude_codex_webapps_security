@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+<article class="card photo-detail">
+  <p><a href="/users/<%= photo.username %>" class="author"><%= photo.username %></a></p>
+  <img src="/uploads/<%= photo.filename %>" alt="<%= photo.caption || 'Photo by ' + photo.username %>">
+  <% if (photo.caption) { %><p class="caption"><%= photo.caption %></p><% } %>
+
+  <div class="meta">
+    <% if (currentUser) { %>
+      <form class="inline" action="/photos/<%= photo.id %>/like" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="linkbtn"><%= likedByMe ? '♥ Unlike' : '♡ Like' %></button>
+      </form>
+    <% } %>
+    <span><%= likeCount %> like<%= likeCount === 1 ? '' : 's' %></span>
+
+    <% if (currentUser && currentUser.id === photo.user_id) { %>
+      <form class="inline" action="/photos/<%= photo.id %>/delete" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="linkbtn danger">Delete</button>
+      </form>
+    <% } %>
+  </div>
+</article>
+
+<section class="card">
+  <h2>Comments</h2>
+  <% if (!comments.length) { %><p class="muted">No comments yet.</p><% } %>
+  <ul class="comments">
+    <% comments.forEach(function (c) { %>
+      <li>
+        <a href="/users/<%= c.username %>" class="author"><%= c.username %></a>
+        <span class="body"><%= c.body %></span>
+        <% if (currentUser && (currentUser.id === c.user_id || currentUser.id === photo.user_id)) { %>
+          <form class="inline" action="/comments/<%= c.id %>/delete" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="linkbtn danger small">delete</button>
+          </form>
+        <% } %>
+      </li>
+    <% }); %>
+  </ul>
+
+  <% if (currentUser) { %>
+    <form action="/photos/<%= photo.id %>/comments" method="post" class="form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Add a comment
+        <textarea name="body" rows="2" maxlength="1000" required></textarea>
+      </label>
+      <button type="submit">Comment</button>
+    </form>
+  <% } else { %>
+    <p class="muted"><a href="/login">Log in</a> to comment.</p>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

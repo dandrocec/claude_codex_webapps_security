@@ -1,0 +1,30 @@
+<%- include('partials/header', { title: 'Auctions' }) %>
+
+<h1>Open auctions</h1>
+
+<% if (!items.length) { %>
+  <p>No items listed yet. <% if (currentUser) { %><a href="/items/new">Be the first to sell something.</a><% } else { %><a href="/register">Register</a> to start selling.<% } %></p>
+<% } else { %>
+  <ul class="item-list">
+    <% items.forEach(function (it) { %>
+      <li class="item-card <%= it.ended ? 'ended' : '' %>">
+        <a class="item-title" href="/items/<%= it.id %>"><%= it.title %></a>
+        <div class="meta">
+          <span>Seller: <%= it.seller_name %></span>
+          <span>
+            <% if (it.highest_bid != null) { %>
+              Current bid: <%= it.highest_bid.toFixed(2) %>
+            <% } else { %>
+              Starting: <%= it.starting_price.toFixed(2) %>
+            <% } %>
+          </span>
+          <span class="status">
+            <% if (it.ended) { %>Ended<% } else { %>Ends <%= it.end_time %> UTC<% } %>
+          </span>
+        </div>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

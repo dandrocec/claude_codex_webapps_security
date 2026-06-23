@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<div class="page-head">
+  <h1>My appointments</h1>
+  <a class="btn" href="/patient/book">+ Book appointment</a>
+</div>
+
+<div class="card">
+  <% if (appointments.length === 0) { %>
+    <p class="muted">You have no appointments yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>When</th><th>Doctor</th><th>Reason</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        <% appointments.forEach(function (a) { %>
+          <tr>
+            <td><%= a.slot.replace('T', ' ') %></td>
+            <td><%= a.doctor_name %><% if (a.doctor_specialty) { %> <span class="muted">(<%= a.doctor_specialty %>)</span><% } %></td>
+            <td><%= a.reason %></td>
+            <td><span class="status status-<%= a.status %>"><%= a.status %></span></td>
+            <td>
+              <% if (a.status === 'requested' || a.status === 'confirmed') { %>
+                <form method="post" action="/patient/appointments/<%= a.id %>/cancel" class="inline">
+                  <button class="link danger" type="submit">Cancel</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<h2>My medical records</h2>
+<div class="card">
+  <% if (records.length === 0) { %>
+    <p class="muted">No records on file yet.</p>
+  <% } else { %>
+    <% records.forEach(function (r) { %>
+      <div class="record">
+        <div class="record-meta"><%= r.created_at %> · by <%= r.doctor_name %></div>
+        <div><strong>Diagnosis:</strong> <%= r.diagnosis || '—' %></div>
+        <div><strong>Treatment:</strong> <%= r.treatment || '—' %></div>
+        <% if (r.notes) { %><div><strong>Notes:</strong> <%= r.notes %></div><% } %>
+      </div>
+    <% }); %>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

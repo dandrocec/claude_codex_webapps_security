@@ -1,0 +1,18 @@
+{# Reusable macro that renders a WTForms field with its label and errors. #}
+{% macro render_field(field, rows=None) %}
+  <div class="field">
+    {{ field.label }}
+    {% if rows %}
+      {{ field(rows=rows) }}
+    {% else %}
+      {{ field() }}
+    {% endif %}
+    {% if field.errors %}
+      <ul class="errors">
+        {% for error in field.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endmacro %}

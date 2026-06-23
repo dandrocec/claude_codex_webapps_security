@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}My slots · Scheduler{% endblock %}
+{% block content %}
+<h1>Publish a slot</h1>
+<form method="post" action="{{ url_for('create_slot') }}" class="card form">
+  {{ form.csrf_token }}
+  <label>{{ form.start_time.label }}
+    {{ form.start_time() }}
+  </label>
+  {% for e in form.start_time.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+
+  <label>{{ form.end_time.label }}
+    {{ form.end_time() }}
+  </label>
+  {% for e in form.end_time.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+
+  <button type="submit">Publish slot</button>
+</form>
+
+<h2>Your slots</h2>
+{% if slots %}
+<table class="data">
+  <thead>
+    <tr><th>Start</th><th>End</th><th>Status</th><th>Booked by</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for s in slots %}
+    <tr>
+      <td>{{ s['start_time'] }}</td>
+      <td>{{ s['end_time'] }}</td>
+      <td><span class="badge badge-{{ s['status'] }}">{{ s['status'] }}</span></td>
+      <td>{{ s['client_email'] if s['client_email'] else '—' }}</td>
+      <td>
+        {% if s['status'] == 'open' %}
+        <form method="post" action="{{ url_for('delete_slot', slot_id=s['id']) }}" class="inline">
+          {{ action_form.csrf_token }}
+          <button type="submit" class="danger">Remove</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">You haven't published any slots yet.</p>
+{% endif %}
+{% endblock %}

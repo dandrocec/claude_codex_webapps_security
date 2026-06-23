@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Admin — MemberHub{% endblock %}
+{% block content %}
+  <div class="card">
+    <h1>Admin panel</h1>
+    <p class="muted">Change any member's tier.</p>
+    <table>
+      <tr>
+        <th>User</th><th>Role</th><th>Tier</th><th>Change tier</th>
+      </tr>
+      {% for u in users %}
+      <tr>
+        <td>{{ u['username'] }}</td>
+        <td>
+          {% if u['is_admin'] %}
+            <span class="badge admin">admin</span>
+          {% else %}
+            <span class="badge free">member</span>
+          {% endif %}
+        </td>
+        <td><span class="badge {{ u['tier'] }}">{{ u['tier'] }}</span></td>
+        <td>
+          <form class="inline" method="post"
+                action="{{ url_for('set_tier', user_id=u['id']) }}">
+            <select name="tier">
+              <option value="free"    {{ 'selected' if u['tier'] == 'free' }}>free</option>
+              <option value="premium" {{ 'selected' if u['tier'] == 'premium' }}>premium</option>
+            </select>
+            <button class="btn" type="submit">Update</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

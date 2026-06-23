@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · Recruitment Portal{% endblock %}
+{% block content %}
+<h1>My dashboard</h1>
+
+<div class="card">
+  <h3>{{ profile['full_name'] or 'Your profile is incomplete' }}</h3>
+  {% if profile['headline'] %}<p class="muted">{{ profile['headline'] }}</p>{% endif %}
+  {% if profile['location'] %}<p>📍 {{ profile['location'] }}</p>{% endif %}
+  {% if profile['bio'] %}<p>{{ profile['bio'] }}</p>{% endif %}
+
+  <p>
+    Resume:
+    {% if profile['resume_filename'] %}
+      <a href="{{ url_for('download_resume', user_id=current_user.id) }}">Download</a>
+    {% else %}
+      <span class="muted">not uploaded yet</span>
+    {% endif %}
+  </p>
+
+  <div class="cta">
+    <a class="btn" href="{{ url_for('edit_profile') }}">Edit profile</a>
+    <a class="btn btn-ghost" href="{{ url_for('view_profile', user_id=current_user.id) }}">
+      View public profile
+    </a>
+  </div>
+</div>
+{% endblock %}

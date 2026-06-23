@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Ticket #{{ ticket['id'] }}{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="inline" style="justify-content: space-between;">
+    <h1 style="margin:0">#{{ ticket['id'] }} — {{ ticket['subject'] }}</h1>
+    <span class="badge s-{{ ticket['status'] }}">{{ ticket['status'] }}</span>
+  </div>
+  <p class="muted" style="margin-bottom:0">
+    Opened by {{ ticket['customer'] }} on {{ ticket['created_at'] }}
+    · Assigned to {{ ticket['agent'] or 'nobody yet' }}
+  </p>
+  <p style="margin-top:6px"><a href="{{ url_for('index') }}">← Back to tickets</a></p>
+</div>
+
+{% if g.user['role'] == 'agent' %}
+<div class="card">
+  <h2>Agent controls</h2>
+  <div class="row">
+    <div>
+      <form method="post" action="{{ url_for('change_status', ticket_id=ticket['id']) }}" class="inline">
+        <label style="margin:0">Status</label>
+        <select name="status">
+          {% for s in statuses %}
+            <option value="{{ s }}" {% if s == ticket['status'] %}selected{% endif %}>{{ s }}</option>
+          {% endfor %}
+        </select>
+        <button class="btn secondary" type="submit">Update</button>
+      </form>
+    </div>
+    <div>
+      <form method="post" action="{{ url_for('assign_ticket', ticket_id=ticket['id']) }}" class="inline">
+        <label style="margin:0">Assign to</label>
+        <select name="agent_id">
+          <option value="">— unassigned —</option>
+          {% for a in agents %}
+            <option value="{{ a['id'] }}" {% if a['id'] == ticket['agent_id'] %}selected{% endif %}>
+              {{ a['username'] }}
+            </option>
+          {% endfor %}
+        </select>
+        <button class="btn secondary" type="submit">Assign</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="card">
+  <h2>Conversation</h2>
+  {% for r in replies %}
+    <div class="reply {{ 'agent' if r['author_role'] == 'agent' else '' }}">
+      <div class="who">
+        {{ r['author'] }}
+        <span class="muted">· {{ r['author_role'] }} · {{ r['created_at'] }}</span>
+      </div>
+      <div class="body">{{ r['body'] }}</div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <h2>Add a reply</h2>
+  <form method="post" action="{{ url_for('add_reply', ticket_id=ticket['id']) }}">
+    <textarea name="body" placeholder="Write your reply…"></textarea>
+    <div style="margin-top:12px"><button class="btn" type="submit">Send reply</button></div>
+  </form>
+</div>
+{% endblock %}

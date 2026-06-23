@@ -1,0 +1,57 @@
+catalog: 100 specs | selected specs: 1 | tools: ['claude'] | variants: ['B']
+already done (skipped): 0 | blocked (tool missing): 0 | to run: 1
+
+>>> S065 claude B  (run_id S065_claude_B_20260616222203)
+I've completed building the application. The `npm install` step requires your approval (it needs network access) and wasn't auto-granted in this session, so I couldn't run the live smoke test from here — but all code is written and syntax is sound. Here's what was delivered.
+
+## What was built
+
+A complete Express + SQLite Q&A site:
+
+```
+package.json            # dependency manifest
+.env.example            # config template (no secrets committed)
+.gitignore
+README.md               # run instructions (port 5065) + security notes
+src/
+  server.js             # entry: loads env, refuses to start without SESSION_SECRET
+  app.js                # Express wiring + all security middleware
+  db.js                 # SQLite connection, WAL, FK on, schema
+  models.js             # data access — 100% parameterised statements
+  middleware/security.js# CSRF, requireAuth, current-user loader
+  routes/auth.js        # register / login / logout
+  routes/questions.js   # questions, answers, votes, accept
+views/*.ejs             # auto-escaped templates
+public/style.css
+```
+
+## Feature coverage
+- **Questions & answers** — post, list, view.
+- **Voting** — one vote per user per item (DB `UNIQUE(user_id, target_type, target_id)`); re-click toggles off, opposite click switches.
+- **Accept answer** — only the question owner, enforced in the SQL `WHERE ... user_id = ?`.
+- **Sort by score** — answers ordered accepted-first, then `score DESC`.
+- **Database** — SQLite via `better-sqlite3`, auto-created under `./data/`.
+
+## Security (mapped to your requirements)
+- **SQLi** → every query is a prepared statement with bound params; no string-built SQL.
+- **Passwords** → bcrypt, work factor 12, per-password salt.
+- **Input validation** → `express-validator` length/charset bounds on all fields.
+- **XSS** → EJS `<%= %>` context-aware escaping everywhere + strict CSP (no inline JS).
+- **CSRF** → per-session synchroniser token on every POST, constant-time compare.
+- **Access control / IDOR** → ownership enforced in queries; users can't vote on their own posts; numeric IDs validated.
+- **Session cookies** → `HttpOnly`, `SameSite=Lax`, `Secure` (prod/`COOKIE_SECURE`), session regenerated on login/register.
+- **Headers** → `helmet` (CSP, nosniff, frame-ancestors none, no-referrer).
+- **Error handling** → central handler returns generic messages, logs details server-side only; no stack traces leaked.
+- **Secrets** → read from env; server exits if `SESSION_SECRET` is missing/short.
+- Bonus: rate limiting on auth and write routes.
+
+## To run it (port 5065)
+```bash
+npm install
+cp .env.example .env
+node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"   # paste into SESSION_SECRET
+npm start
+```
+Then open http://localhost:5065.
+
+One thing to note: both `better-sqlite3` and `bcrypt` are native modules, so `npm install` needs a build toolchain (prebuilt binaries normally cover Node 24 on Windows). If you approve the install, I can run it and do a live smoke test to confirm everything boots and the flows work end-to-end. Want me to proceed with that?

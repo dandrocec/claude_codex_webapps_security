@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Register · Microblog{% endblock %}
+{% block content %}
+<section class="form-card">
+  <h1>Create an account</h1>
+  <form method="post" action="/register">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>Username
+      <input type="text" name="username" autocomplete="username" required
+             minlength="3" maxlength="30" pattern="[A-Za-z0-9_]{3,30}"
+             title="3-30 characters: letters, digits, underscore">
+    </label>
+    <label>Password
+      <input type="password" name="password" autocomplete="new-password" required minlength="8">
+    </label>
+    <button type="submit">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Log in</a></p>
+</section>
+{% endblock %}

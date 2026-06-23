@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Express Chat</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Auth screen -->
+  <div id="auth-view" class="centered hidden">
+    <div class="card">
+      <h1>Express Chat</h1>
+      <div class="tabs">
+        <button id="tab-login" class="tab active">Log in</button>
+        <button id="tab-register" class="tab">Register</button>
+      </div>
+      <form id="auth-form">
+        <input id="auth-username" type="text" placeholder="Username" autocomplete="username" required />
+        <input id="auth-password" type="password" placeholder="Password" autocomplete="current-password" required />
+        <button type="submit" id="auth-submit">Log in</button>
+      </form>
+      <p id="auth-error" class="error"></p>
+    </div>
+  </div>
+
+  <!-- Chat screen -->
+  <div id="chat-view" class="app hidden">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span>Rooms</span>
+        <button id="logout-btn" class="link">Log out</button>
+      </div>
+      <ul id="room-list" class="room-list"></ul>
+      <form id="new-room-form" class="new-room">
+        <input id="new-room-name" type="text" placeholder="New room name" maxlength="50" />
+        <button type="submit">+</button>
+      </form>
+      <p id="room-error" class="error"></p>
+      <div class="me">Signed in as <strong id="me-username"></strong></div>
+    </aside>
+
+    <main class="chat">
+      <header class="chat-header">
+        <h2 id="current-room">Select a room</h2>
+      </header>
+      <div id="messages" class="messages"></div>
+      <form id="message-form" class="message-form hidden">
+        <input id="message-input" type="text" placeholder="Type a message…" maxlength="2000" autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

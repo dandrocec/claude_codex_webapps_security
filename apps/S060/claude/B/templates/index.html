@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Latest posts — Quill{% endblock %}
+{% block content %}
+  <h1>Latest posts</h1>
+  {% if not posts %}
+    <p class="muted">No posts published yet.</p>
+  {% endif %}
+  <ul class="post-list">
+    {% for post in posts %}
+      <li class="post-card">
+        <h2><a href="{{ url_for('view_post', post_id=post['id']) }}">{{ post['title'] }}</a></h2>
+        <p class="meta">by {{ post['author'] }} · {{ post['created_at'] }}</p>
+        <p class="excerpt">{{ post['body'][:200] }}{% if post['body']|length > 200 %}…{% endif %}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

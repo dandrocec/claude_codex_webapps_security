@@ -1,0 +1,50 @@
+<%- include('../partials/header') %>
+<div class="page-head">
+  <h1><%= course.title %></h1>
+  <% if (isOwner) { %>
+    <a class="btn" href="/courses/<%= course.id %>/lessons/new">+ Add lesson</a>
+  <% } %>
+</div>
+<p class="muted">by <%= course.instructor_name %></p>
+<p><%= course.description || '' %></p>
+
+<% if (!canViewContent) { %>
+  <div class="card lock">
+    <p>🔒 Course content is available to enrolled students only.</p>
+    <% if (currentUser.role === 'student') { %>
+      <form action="/courses/<%= course.id %>/enrol" method="post">
+        <button type="submit" class="btn">Enrol to unlock</button>
+      </form>
+    <% } %>
+  </div>
+<% } else { %>
+  <% if (enrolled) { %><span class="badge badge-ok">You are enrolled</span><% } %>
+  <% if (isOwner) { %><span class="badge">You own this course</span><% } %>
+
+  <h2>Lessons</h2>
+  <% if (lessons.length === 0) { %>
+    <p class="muted">No lessons yet.</p>
+  <% } else { %>
+    <ol class="lesson-list">
+      <% lessons.forEach((l) => {
+           const done = completedIds.has(l.id); %>
+        <li class="lesson <%= done ? 'done' : '' %>">
+          <div class="lesson-head">
+            <h3><%= l.title %></h3>
+            <% if (enrolled) { %>
+              <form action="/lessons/<%= l.id %>/complete" method="post" class="inline">
+                <button type="submit" class="btn btn-small <%= done ? 'btn-secondary' : '' %>">
+                  <%= done ? '✓ Completed (undo)' : 'Mark complete' %>
+                </button>
+              </form>
+            <% } %>
+          </div>
+          <% if (l.content) { %><p class="lesson-content"><%= l.content %></p><% } %>
+        </li>
+      <% }); %>
+    </ol>
+  <% } %>
+<% } %>
+
+<p><a href="/courses">← Back to catalogue</a></p>
+<%- include('../partials/footer') %>

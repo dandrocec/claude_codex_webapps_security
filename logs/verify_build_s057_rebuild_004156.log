@@ -1,0 +1,157 @@
+ Image csj/s057-claude-b Building 
+ Image csj/s057-claude-a Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.38kB done
+#1 DONE 0.0s
+
+#2 [s057-claude-b internal] load build definition from Dockerfile.python
+#2 transferring dockerfile: 1.76kB done
+#2 DONE 0.0s
+
+#3 [s057-claude-a internal] load metadata for docker.io/library/python:3.12-slim
+#3 DONE 1.3s
+
+#4 [s057-claude-a internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [s057-claude-b internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [s057-claude-a 1/4] FROM docker.io/library/python:3.12-slim@sha256:d764629ce0ddd8c71fd371e9901efb324a95789d2315a47db7e4d27e78f1b0e9
+#6 resolve docker.io/library/python:3.12-slim@sha256:d764629ce0ddd8c71fd371e9901efb324a95789d2315a47db7e4d27e78f1b0e9 0.0s done
+#6 DONE 0.0s
+
+#7 [s057-claude-a internal] load build context
+#7 transferring context: 15.05kB done
+#7 DONE 0.0s
+
+#8 [s057-claude-b internal] load build context
+#8 transferring context: 35.40kB 0.0s done
+#8 DONE 0.0s
+
+#9 [s057-claude-a 2/4] WORKDIR /app
+#9 CACHED
+
+#10 [s057-claude-a 3/4] COPY . /app
+#10 DONE 0.0s
+
+#11 [s057-claude-b 3/4] COPY . /app
+#11 DONE 0.0s
+
+#12 [s057-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#12 1.522 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#12 1.910   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#12 1.988 Collecting Flask-WTF==1.2.1 (from -r requirements.txt (line 2))
+#12 2.076   Downloading flask_wtf-1.2.1-py3-none-any.whl.metadata (3.4 kB)
+#12 2.190 Collecting argon2-cffi==23.1.0 (from -r requirements.txt (line 3))
+#12 2.291   Downloading argon2_cffi-23.1.0-py3-none-any.whl.metadata (5.2 kB)
+#12 2.398 Collecting python-dotenv==1.0.1 (from -r requirements.txt (line 4))
+#12 2.481   Downloading python_dotenv-1.0.1-py3-none-any.whl.metadata (23 kB)
+#12 2.636 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#12 2.717   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#12 2.811 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#12 2.888   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#12 2.953 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#12 3.059   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#12 3.175 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#12 3.249   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#12 3.306 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#12 3.356   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#12 3.440 Collecting wtforms (from Flask-WTF==1.2.1->-r requirements.txt (line 2))
+#12 3.497   Downloading wtforms-3.2.2-py3-none-any.whl.metadata (4.9 kB)
+#12 3.581 Collecting argon2-cffi-bindings (from argon2-cffi==23.1.0->-r requirements.txt (line 3))
+#12 3.644   Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (7.4 kB)
+#12 4.197 Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->Flask==3.0.3->-r requirements.txt (line 1))
+#12 4.285   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#12 4.558 Collecting cffi>=1.0.1 (from argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 3))
+#12 4.771   Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#12 4.890 Collecting pycparser (from cffi>=1.0.1->argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 3))
+#12 4.975   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#12 5.047 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#12 ...
+
+#13 [s057-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#13 1.526 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#13 1.904   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#13 2.018 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#13 2.087   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#13 2.192 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#13 2.249   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#13 2.399 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#13 2.485   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#13 2.562 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#13 2.629   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#13 2.704 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#13 2.795   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#13 2.969 Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->Flask==3.0.3->-r requirements.txt (line 1))
+#13 3.049   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#13 3.169 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#13 3.345 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#13 3.406 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#13 3.545 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#13 3.611 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#13 4.079 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#13 4.298 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#13 4.359 Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, Flask
+#13 4.581 Successfully installed Flask-3.0.3 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.8 blinker-1.9.0 click-8.4.1 itsdangerous-2.2.0
+#13 4.581 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#13 5.061 
+#13 5.061 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#13 5.061 [notice] To update, run: pip install --upgrade pip
+#13 DONE 5.1s
+
+#12 [s057-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#12 5.214 Downloading flask_wtf-1.2.1-py3-none-any.whl (12 kB)
+#12 ...
+
+#14 [s057-claude-a] exporting to image
+#14 exporting layers
+#14 exporting layers 0.4s done
+#14 exporting manifest sha256:015d07b0372a780ebe97a26ca4312cd63f1a8a6daecf7b4fbff868a933b64d66 done
+#14 exporting config sha256:0b21ad1a3a915bed15cf2e8d5c49ad9ea1ce4c34bb9657cb2e7dae20722a6850 done
+#14 exporting attestation manifest sha256:6818c5627206e3ee0e327a041aada774ef2fd18a44e197c99b8b37ac78d1d5db 0.0s done
+#14 exporting manifest list sha256:6d5e2a30ae53123a60950e63dbeb45b0bbbde40b4fe7c9564729971acdd6e925 done
+#14 naming to docker.io/csj/s057-claude-a:latest done
+#14 unpacking to docker.io/csj/s057-claude-a:latest 0.1s done
+#14 DONE 0.5s
+
+#15 [s057-claude-a] resolving provenance for metadata file
+#15 DONE 0.0s
+
+#12 [s057-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#12 5.284 Downloading argon2_cffi-23.1.0-py3-none-any.whl (15 kB)
+#12 5.396 Downloading python_dotenv-1.0.1-py3-none-any.whl (19 kB)
+#12 5.451 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#12 5.536 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#12 5.655 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#12 5.785 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#12 6.025 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#12 6.212 Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (87 kB)
+#12 6.415 Downloading wtforms-3.2.2-py3-none-any.whl (158 kB)
+#12 6.578 Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
+#12 6.846 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#12 6.956 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#12 6.988 Installing collected packages: python-dotenv, pycparser, MarkupSafe, itsdangerous, click, blinker, wtforms, Werkzeug, Jinja2, cffi, Flask, argon2-cffi-bindings, Flask-WTF, argon2-cffi
+#12 7.328 Successfully installed Flask-3.0.3 Flask-WTF-1.2.1 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.8 argon2-cffi-23.1.0 argon2-cffi-bindings-25.1.0 blinker-1.9.0 cffi-2.0.0 click-8.4.1 itsdangerous-2.2.0 pycparser-3.0 python-dotenv-1.0.1 wtforms-3.2.2
+#12 7.328 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#12 7.513 
+#12 7.513 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#12 7.513 [notice] To update, run: pip install --upgrade pip
+#12 DONE 7.6s
+
+#16 [s057-claude-b] exporting to image
+#16 exporting layers 0.5s done
+#16 exporting manifest sha256:292b271c5c3fec188084bd1c0c9de972dadbee13262d096c1d9564036c178a55 done
+#16 exporting config sha256:ead64e158c9d55cd7a1960687552196fc037728dc376ab9c6f209effd255ebfb done
+#16 exporting attestation manifest sha256:f0359c52a1182c8c97459c49584479de78918378de8532704a5962b2256afe92 0.0s done
+#16 exporting manifest list sha256:c563b4452f69ee6883474cb219a39b59dfc64ff19e499c9e1c1b922a5913395d done
+#16 naming to docker.io/csj/s057-claude-b:latest done
+#16 unpacking to docker.io/csj/s057-claude-b:latest 0.1s done
+#16 DONE 0.7s
+
+#17 [s057-claude-b] resolving provenance for metadata file
+#17 DONE 0.0s
+ Image csj/s057-claude-a Built 
+ Image csj/s057-claude-b Built 

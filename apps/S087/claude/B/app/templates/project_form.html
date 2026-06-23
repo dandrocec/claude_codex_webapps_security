@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit project" if project else "New project" }}{% endblock %}
+{% block content %}
+<h1>{{ "Edit project" if project else "New project" }}</h1>
+<form method="post"
+      action="{{ ('/projects/' ~ project.id ~ '/edit') if project else '/projects' }}"
+      class="card">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Name
+    <input type="text" name="name" required minlength="1" maxlength="120"
+           value="{{ project.name if project else '' }}">
+  </label>
+  <label>Description
+    <textarea name="description" rows="5" maxlength="2000">{{ project.description if project else '' }}</textarea>
+  </label>
+  <button type="submit">{{ "Save changes" if project else "Create project" }}</button>
+  <a class="btn-secondary" href="{{ ('/projects/' ~ project.id) if project else '/dashboard' }}">Cancel</a>
+</form>
+{% endblock %}

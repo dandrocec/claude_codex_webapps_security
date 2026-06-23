@@ -1,0 +1,116 @@
+<%- include('partials/header') %>
+<section class="card">
+  <h1>📄 <%= doc.name %></h1>
+  <p class="muted">Your access: <span class="badge"><%= level %></span></p>
+</section>
+
+<section class="card">
+  <h2>Version history</h2>
+  <table class="data">
+    <thead><tr><th>Version</th><th>Uploaded by</th><th>When</th><th>Note</th><th>Size</th><th></th><th></th></tr></thead>
+    <tbody>
+      <% versions.forEach(function (v) { %>
+        <tr<%- v.id === doc.current_version_id ? ' class="current"' : '' %>>
+          <td>v<%= v.version_number %><%= v.id === doc.current_version_id ? ' (current)' : '' %></td>
+          <td><%= v.uploader || 'unknown' %></td>
+          <td><%= v.created_at %></td>
+          <td><%= v.note || '' %></td>
+          <td><%= v.size %> B</td>
+          <td>
+            <a class="link-btn" href="/documents/<%= doc.id %>/versions/<%= v.id %>/download">Download</a>
+          </td>
+          <td>
+            <% if (canEdit && v.id !== doc.current_version_id) { %>
+              <form method="post" action="/documents/<%= doc.id %>/restore" class="inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="hidden" name="version_id" value="<%= v.id %>">
+                <button type="submit" class="link-btn">Restore</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</section>
+
+<% if (canEdit) { %>
+<section class="card">
+  <h2>Upload a new version</h2>
+  <form method="post" action="/documents/<%= doc.id %>/versions" enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>File <input type="file" name="file" required></label>
+    <label>Note (optional) <input name="note" maxlength="200"></label>
+    <button type="submit">Add version</button>
+  </form>
+</section>
+<% } %>
+
+<% if (isOwner) { %>
+<section class="card">
+  <h2>Sharing</h2>
+  <% if (shares.length === 0) { %>
+    <p class="muted">Not shared with anyone yet.</p>
+  <% } else { %>
+    <table class="data">
+      <thead><tr><th>Subject</th><th>Type</th><th>Permission</th><th></th></tr></thead>
+      <tbody>
+        <% shares.forEach(function (s) { %>
+          <tr>
+            <td><%= s.subject_label || '(removed)' %></td>
+            <td><%= s.subject_type %></td>
+            <td><span class="badge"><%= s.permission %></span></td>
+            <td>
+              <form method="post" action="/documents/<%= doc.id %>/shares/<%= s.id %>/delete" class="inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="link-btn danger">Remove</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+
+  <h3>Share with a user</h3>
+  <form method="post" action="/documents/<%= doc.id %>/shares" class="row">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="hidden" name="subject_type" value="user">
+    <input name="username" placeholder="username" required>
+    <select name="permission">
+      <option value="view">view</option>
+      <option value="edit">edit</option>
+    </select>
+    <button type="submit">Share</button>
+  </form>
+
+  <h3>Share with a group</h3>
+  <% if (myGroups.length === 0) { %>
+    <p class="muted">You have no groups. <a href="/groups">Create one</a> first.</p>
+  <% } else { %>
+    <form method="post" action="/documents/<%= doc.id %>/shares" class="row">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <input type="hidden" name="subject_type" value="group">
+      <select name="group_id">
+        <% myGroups.forEach(function (g) { %>
+          <option value="<%= g.id %>"><%= g.name %></option>
+        <% }); %>
+      </select>
+      <select name="permission">
+        <option value="view">view</option>
+        <option value="edit">edit</option>
+      </select>
+      <button type="submit">Share</button>
+    </form>
+  <% } %>
+</section>
+
+<section class="card">
+  <h2>Danger zone</h2>
+  <form method="post" action="/documents/<%= doc.id %>/delete" class="inline">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit" class="danger">Delete document</button>
+  </form>
+</section>
+<% } %>
+<%- include('partials/footer') %>

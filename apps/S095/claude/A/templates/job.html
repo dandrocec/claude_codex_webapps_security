@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Job #{{ job.id }} — Job Runner{% endblock %}
+{% block content %}
+  <p><a class="joblink" href="/">← Back to all jobs</a></p>
+  <div class="card">
+    <h1>Job #{{ job.id }}
+      <span class="badge {{ job.status }}" id="status">{{ job.status }}</span>
+    </h1>
+    <p class="muted">Submitted by {{ job.username }} ·
+       {{ job.created_at[:19].replace('T', ' ') }} ·
+       exit code: <span id="exit">{{ job.exit_code if job.exit_code is not none else '—' }}</span></p>
+    <h2>Command</h2>
+    <pre class="logs">{{ job.command }}</pre>
+    <h2>Output</h2>
+    <pre class="logs" id="output">{{ job.output }}</pre>
+  </div>
+
+  <script>
+    const jobId = {{ job.id }};
+    const terminal = new Set(["success", "failed"]);
+
+    async function poll() {
+      try {
+        const res = await fetch(`/api/jobs/${jobId}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        document.getElementById("output").textContent = data.output;
+        const badge = document.getElementById("status");
+        badge.textContent = data.status;
+        badge.className = "badge " + data.status;
+        document.getElementById("exit").textContent =
+          data.exit_code === null ? "—" : data.exit_code;
+        if (!terminal.has(data.status)) {
+          setTimeout(poll, 1000);
+        }
+      } catch (e) {
+        setTimeout(poll, 2000);
+      }
+    }
+
+    if (!terminal.has("{{ job.status }}")) {
+      poll();
+    }
+  </script>
+{% endblock %}

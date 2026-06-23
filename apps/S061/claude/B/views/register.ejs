@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+
+<h1>Create account</h1>
+
+<% if (errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %>
+  </ul>
+<% } %>
+
+<form action="/register" method="post" class="card form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+  <label>Name
+    <input type="text" name="name" maxlength="80" required value="<%= values.name || '' %>" />
+  </label>
+
+  <label>Email
+    <input type="email" name="email" maxlength="254" required value="<%= values.email || '' %>" />
+  </label>
+
+  <label>Password
+    <input type="password" name="password" minlength="8" maxlength="200" required />
+    <small>At least 8 characters.</small>
+  </label>
+
+  <fieldset>
+    <legend>I am a…</legend>
+    <label class="radio"><input type="radio" name="role" value="student" <%= values.role === 'instructor' ? '' : 'checked' %> /> Student</label>
+    <label class="radio"><input type="radio" name="role" value="instructor" <%= values.role === 'instructor' ? 'checked' : '' %> /> Instructor</label>
+  </fieldset>
+
+  <button type="submit" class="btn">Create account</button>
+</form>
+
+<p>Already registered? <a href="/login">Sign in</a>.</p>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,4 @@
+node_modules/
+auction.db
+auction.db-shm
+auction.db-wal

@@ -1,0 +1,24 @@
+<%- include('partials/head', { title: 'Your score' }) %>
+
+<h1>Results: <%= quiz.title %></h1>
+
+<div class="score card">
+  <div class="score-big"><%= percent %>%</div>
+  <p>You answered <strong><%= correct %></strong> of <strong><%= total %></strong> question<%= total === 1 ? '' : 's' %> correctly.</p>
+</div>
+
+<ul class="review">
+  <% review.forEach(function (r, i) { %>
+    <li class="<%= r.isCorrect ? 'ok' : 'bad' %>">
+      <span class="mark"><%= r.isCorrect ? '✓' : '✗' %></span>
+      <span><%= i + 1 %>. <%= r.text %></span>
+    </li>
+  <% }) %>
+</ul>
+
+<p>
+  <a class="btn" href="/quiz/<%= quiz.id %>">Retake quiz</a>
+  <a class="btn" href="/">Back to all quizzes</a>
+</p>
+
+<%- include('partials/foot') %>

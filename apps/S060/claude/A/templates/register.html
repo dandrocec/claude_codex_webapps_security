@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Register · Flask Blog{% endblock %}
+{% block content %}
+  <h1>Create an account</h1>
+  <div class="card">
+    <form method="post">
+      <label for="username">Username</label>
+      <input id="username" name="username" autofocus required>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required>
+      <label for="role">Role</label>
+      <select id="role" name="role">
+        <option value="reader">Reader — browse published posts</option>
+        <option value="author">Author — write &amp; submit posts</option>
+        <option value="editor">Editor — review submissions</option>
+      </select>
+      <div style="margin-top:1rem"><button class="btn" type="submit">Register</button></div>
+    </form>
+  </div>
+  <p class="muted">Already registered? <a href="{{ url_for('login') }}">Log in</a>.</p>
+{% endblock %}

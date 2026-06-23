@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Elections{% endblock %}
+{% block content %}
+  <h1>Elections</h1>
+  {% if not items %}
+    <p class="muted">No elections yet.</p>
+  {% endif %}
+  <ul class="cards">
+    {% for item in items %}
+      <li class="card">
+        <div class="card-head">
+          <a href="{{ url_for('view_election', election_id=item.e['id']) }}">
+            {{ item.e['title'] }}
+          </a>
+          <span class="badge badge-{{ item.status }}">{{ item.status }}</span>
+        </div>
+        {% if item.e['description'] %}
+          <p class="muted">{{ item.e['description'] }}</p>
+        {% endif %}
+        <p class="times">
+          Opens {{ item.e['open_at'] }} UTC · Closes {{ item.e['close_at'] }} UTC
+        </p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

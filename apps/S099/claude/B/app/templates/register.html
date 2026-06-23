@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<h1>Create an account</h1>
+{% for error in errors %}<p class="error">{{ error }}</p>{% endfor %}
+<form method="post" action="/register" class="card">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Username
+    <input type="text" name="username" value="{{ values.username | default('') }}"
+           autocomplete="username" required maxlength="64">
+  </label>
+  <label>Email
+    <input type="email" name="email" value="{{ values.email | default('') }}"
+           autocomplete="email" required maxlength="255">
+  </label>
+  <label>Password
+    <input type="password" name="password" autocomplete="new-password" required minlength="10">
+  </label>
+  <p class="hint">At least 10 characters.</p>
+  <button type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="/login">Log in</a></p>
+{% endblock %}

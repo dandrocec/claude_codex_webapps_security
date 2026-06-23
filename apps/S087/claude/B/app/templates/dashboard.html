@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+<div class="row-between">
+  <h1>Projects</h1>
+  <a class="btn" href="/projects/new">New project</a>
+</div>
+<p class="muted">
+  {% if current_user.is_admin %}
+    Showing all projects in {{ current_user.organisation.name }}.
+  {% else %}
+    Showing your projects.
+  {% endif %}
+</p>
+
+{% if projects %}
+<table class="table">
+  <thead><tr><th>Name</th><th>Owner</th><th>Created</th><th></th></tr></thead>
+  <tbody>
+  {% for p in projects %}
+    <tr>
+      <td><a href="/projects/{{ p.id }}">{{ p.name }}</a></td>
+      <td>{{ p.owner.email }}</td>
+      <td>{{ p.created_at.strftime('%Y-%m-%d') }}</td>
+      <td><a href="/projects/{{ p.id }}">Open</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty">No projects yet. <a href="/projects/new">Create one</a>.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<div class="card">
+  <h1>People</h1>
+  <p class="muted">Follow people to see their posts in your feed.</p>
+</div>
+
+<% if (people.length === 0) { %>
+  <div class="card empty"><p>No other users yet. Invite a friend to register!</p></div>
+<% } else { %>
+  <% people.forEach(function (u) { %>
+    <article class="post person">
+      <div>
+        <a class="name" href="/profile/<%= u.username %>"><%= displayNameOf(u) %></a>
+        <span class="handle">@<%= u.username %></span>
+        <% if (u.bio) { %><p class="body muted"><%= u.bio %></p><% } %>
+      </div>
+      <% if (u.is_following) { %>
+        <form action="/unfollow/<%= u.id %>" method="post" class="inline">
+          <button type="submit" class="secondary">Following</button>
+        </form>
+      <% } else { %>
+        <form action="/follow/<%= u.id %>" method="post" class="inline">
+          <button type="submit">Follow</button>
+        </form>
+      <% } %>
+    </article>
+  <% }) %>
+<% } %>
+
+<%- include('partials/footer') %>

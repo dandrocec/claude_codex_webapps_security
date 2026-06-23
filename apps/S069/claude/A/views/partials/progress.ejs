@@ -1,0 +1,13 @@
+<div class="progress">
+  <div class="progress-bar<%= c.funded ? ' is-funded' : '' %>" style="width: <%= c.pct %>%"></div>
+</div>
+<div class="progress-meta">
+  <span><strong><%= formatMoney(c.raised) %></strong> raised of <%= formatMoney(c.goal_cents) %></span>
+  <span><%= c.pct %>%</span>
+</div>
+<div class="progress-meta muted">
+  <span><%= c.backers %> backer<%= c.backers === 1 ? '' : 's' %></span>
+  <span>
+    <% if (c.expired) { %>Ended<% } else if (c.daysLeft === 0) { %>Ends today<% } else { %><%= c.daysLeft %> day<%= c.daysLeft === 1 ? '' : 's' %> left<% } %>
+  </span>
+</div>

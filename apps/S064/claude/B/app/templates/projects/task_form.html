@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from "_formfields.html" import render_field %}
+{% block title %}{{ "New task" if mode == "create" else "Edit task" }}{% endblock %}
+{% block content %}
+  <div class="card narrow">
+    <h1>{{ "New task" if mode == "create" else "Edit task" }} — {{ project.name }}</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      {{ render_field(form.title) }}
+      {{ render_field(form.description, rows=4) }}
+      {{ render_field(form.status) }}
+      {{ render_field(form.assignee_id) }}
+      {{ form.submit(class="btn primary") }}
+      <a class="btn" href="{{ url_for('projects.view_project', project_id=project.id) }}">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

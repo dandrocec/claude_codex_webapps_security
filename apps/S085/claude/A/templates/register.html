@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Register · Recruitment Portal{% endblock %}
+{% block content %}
+<h1>Create your account</h1>
+<form method="post" class="form">
+  <label>Email
+    <input type="email" name="email" value="{{ email or '' }}" required>
+  </label>
+  <label>Password <small>(min 6 characters)</small>
+    <input type="password" name="password" required>
+  </label>
+  <fieldset class="roles">
+    <legend>I am a…</legend>
+    <label class="radio">
+      <input type="radio" name="role" value="candidate"
+             {{ 'checked' if role != 'recruiter' else '' }}>
+      Candidate — build a profile & upload a resume
+    </label>
+    <label class="radio">
+      <input type="radio" name="role" value="recruiter"
+             {{ 'checked' if role == 'recruiter' else '' }}>
+      Recruiter — search & view candidates
+    </label>
+  </fieldset>
+  <button class="btn" type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="{{ url_for('login') }}">Log in</a>.</p>
+{% endblock %}

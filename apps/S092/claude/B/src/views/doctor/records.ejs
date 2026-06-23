@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>Records — <%= patient.full_name %></h1>
+  <p class="meta"><%= patient.email %> · <a href="/doctor/patients">back to patients</a></p>
+  <%- include('../partials/errors') %>
+
+  <h2>Add a record</h2>
+  <form method="post" action="/doctor/patients/<%= patient.id %>/records">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Title
+      <input type="text" name="title" value="<%= values.title || '' %>" required maxlength="120">
+    </label>
+    <label>Notes
+      <textarea name="notes" rows="4" required maxlength="5000"><%= values.notes || '' %></textarea>
+    </label>
+    <button type="submit">Save record</button>
+  </form>
+
+  <h2>Existing records</h2>
+  <% if (!records.length) { %>
+    <p>No records for this patient yet.</p>
+  <% } else { %>
+    <% records.forEach(function (r) { %>
+      <article class="record">
+        <h3><%= r.title %></h3>
+        <p class="meta">Updated <%= r.updated_at %></p>
+        <details>
+          <summary>Edit</summary>
+          <form method="post" action="/doctor/patients/<%= patient.id %>/records/<%= r.id %>">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <label>Title
+              <input type="text" name="title" value="<%= r.title %>" required maxlength="120">
+            </label>
+            <label>Notes
+              <textarea name="notes" rows="4" required maxlength="5000"><%= r.notes %></textarea>
+            </label>
+            <button type="submit">Update record</button>
+          </form>
+        </details>
+        <p><%= r.notes %></p>
+      </article>
+    <% }); %>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

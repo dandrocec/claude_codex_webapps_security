@@ -1,0 +1,17 @@
+{
+    "name": "marketplace/multi-vendor",
+    "description": "A multi-vendor PHP marketplace: vendors manage their own products and orders, buyers shop across all vendors with a single shared cart.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
+    },
+    "scripts": {
+        "start": "php -S localhost:5074 -t public public/index.php"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

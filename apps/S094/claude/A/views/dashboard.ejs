@@ -1,0 +1,150 @@
+<%- include('_head') %>
+
+<div class="stats">
+  <div class="stat"><b><%= stats.webhooks %></b><span>Webhooks</span></div>
+  <div class="stat"><b><%= stats.actions %></b><span>Actions</span></div>
+  <div class="stat"><b><%= stats.events %></b><span>Events</span></div>
+  <div class="stat"><b><%= stats.pending %></b><span>Pending</span></div>
+  <div class="stat"><b><%= stats.failed %></b><span>Failed</span></div>
+</div>
+
+<div class="grid cols-2" style="margin-bottom:20px;">
+  <!-- Register inbound webhook -->
+  <div class="card">
+    <h2>Register inbound webhook</h2>
+    <form method="post" action="/webhooks">
+      <label>Name</label>
+      <input name="name" placeholder="GitHub push events" required>
+      <label>Shared secret (optional, enables HMAC SHA-256 verification)</label>
+      <input name="secret" placeholder="leave blank for no verification">
+      <button type="submit">Create webhook</button>
+    </form>
+  </div>
+
+  <!-- Define outbound action -->
+  <div class="card">
+    <h2>Define outbound action</h2>
+    <% if (webhooks.length === 0) { %>
+      <p class="muted">Create a webhook first — actions fire when its events arrive.</p>
+    <% } else { %>
+    <form method="post" action="/actions">
+      <label>Name</label>
+      <input name="name" placeholder="Notify Slack" required>
+      <label>Trigger on webhook</label>
+      <select name="webhook_id" required>
+        <% webhooks.forEach(w => { %><option value="<%= w.id %>"><%= w.name %></option><% }) %>
+      </select>
+      <label>Target URL (your endpoint)</label>
+      <input name="target_url" type="url" placeholder="https://example.com/receive" required>
+      <div class="grid cols-2">
+        <div>
+          <label>Method</label>
+          <select name="method"><option>POST</option><option>PUT</option><option>PATCH</option></select>
+        </div>
+        <div>
+          <label>Max attempts</label>
+          <input name="max_attempts" type="number" min="1" value="5">
+        </div>
+      </div>
+      <label>Extra headers (JSON, optional)</label>
+      <input name="headers_json" placeholder='{"Authorization":"Bearer ..."}'>
+      <button type="submit">Create action</button>
+    </form>
+    <% } %>
+  </div>
+</div>
+
+<!-- Webhooks list -->
+<div class="card" style="margin-bottom:20px;">
+  <h2>Webhooks &amp; their inbound URLs</h2>
+  <% if (webhooks.length === 0) { %><p class="muted">No webhooks yet.</p><% } else { %>
+  <table>
+    <thead><tr><th>Name</th><th>Inbound URL (POST here)</th><th>Secret</th><th></th></tr></thead>
+    <tbody>
+    <% webhooks.forEach(w => { %>
+      <tr>
+        <td><%= w.name %></td>
+        <td class="mono url"><%= baseUrl %>/hooks/<%= w.slug %></td>
+        <td><%= w.secret ? '🔒 set' : '—' %></td>
+        <td>
+          <form class="inline" method="post" action="/webhooks/<%= w.id %>/delete" onsubmit="return confirm('Delete webhook and all its actions/events?')">
+            <button class="danger" type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+</div>
+
+<!-- Actions list -->
+<div class="card" style="margin-bottom:20px;">
+  <h2>Outbound actions</h2>
+  <% if (actions.length === 0) { %><p class="muted">No actions yet.</p><% } else { %>
+  <table>
+    <thead><tr><th>Name</th><th>On webhook</th><th>Method</th><th>Target URL</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+    <% actions.forEach(a => { %>
+      <tr>
+        <td><%= a.name %></td>
+        <td><%= a.webhook_name %></td>
+        <td class="mono"><%= a.method %></td>
+        <td class="mono url"><%= a.target_url %></td>
+        <td><span class="pill <%= a.enabled ? 'success' : 'off' %>"><%= a.enabled ? 'enabled' : 'disabled' %></span></td>
+        <td>
+          <form class="inline" method="post" action="/actions/<%= a.id %>/toggle"><button class="ghost" type="submit"><%= a.enabled ? 'Disable' : 'Enable' %></button></form>
+          <form class="inline" method="post" action="/actions/<%= a.id %>/delete" onsubmit="return confirm('Delete action?')"><button class="danger" type="submit">Delete</button></form>
+        </td>
+      </tr>
+    <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+</div>
+
+<div class="grid cols-2">
+  <!-- Recent events -->
+  <div class="card">
+    <h2>Recent events</h2>
+    <% if (events.length === 0) { %><p class="muted">No events received yet.</p><% } else { %>
+    <table>
+      <thead><tr><th>ID</th><th>Webhook</th><th>Received</th></tr></thead>
+      <tbody>
+      <% events.forEach(e => { %>
+        <tr>
+          <td><a href="/events/<%= e.id %>">#<%= e.id %></a></td>
+          <td><%= e.webhook_name %></td>
+          <td class="muted"><%= e.received_at %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+    <% } %>
+  </div>
+
+  <!-- Recent deliveries -->
+  <div class="card">
+    <h2>Recent deliveries</h2>
+    <% if (deliveries.length === 0) { %><p class="muted">No deliveries yet.</p><% } else { %>
+    <table>
+      <thead><tr><th>Action</th><th>Status</th><th>Att.</th><th>Code</th><th></th></tr></thead>
+      <tbody>
+      <% deliveries.forEach(d => { %>
+        <tr>
+          <td><%= d.action_name %><br><span class="muted">event <a href="/events/<%= d.event_id %>">#<%= d.event_id %></a></span></td>
+          <td><span class="pill <%= d.status %>"><%= d.status %></span><% if (d.last_error) { %><br><span class="muted mono"><%= d.last_error %></span><% } %></td>
+          <td><%= d.attempts %>/<%= d.max_attempts %></td>
+          <td class="mono"><%= d.last_status || '—' %></td>
+          <td>
+            <form class="inline" method="post" action="/deliveries/<%= d.id %>/retry"><button class="ghost" type="submit">Retry</button></form>
+          </td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+    <% } %>
+  </div>
+</div>
+
+<%- include('_foot') %>

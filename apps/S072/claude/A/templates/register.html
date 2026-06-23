@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Sign up — MemberHub{% endblock %}
+{% block content %}
+  <div class="card">
+    <h1>Create your account</h1>
+    <p class="muted">New accounts start on the free tier.</p>
+    <form method="post">
+      <label for="username">Username</label>
+      <input id="username" name="username" required autofocus>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required>
+      <p><button class="btn" type="submit">Sign up</button></p>
+    </form>
+    <p class="muted">Already have an account?
+      <a href="{{ url_for('login') }}">Log in</a>.</p>
+  </div>
+{% endblock %}

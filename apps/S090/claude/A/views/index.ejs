@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in · OAuth Demo</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>OAuth Demo</h1>
+    <p class="muted">Sign in with GitHub to see your personalised dashboard.</p>
+
+    <% if (typeof configured !== 'undefined' && !configured) { %>
+      <div class="warn">
+        OAuth credentials are not configured yet. Copy <code>.env.example</code> to
+        <code>.env</code>, add your GitHub client ID/secret, and restart the app.
+      </div>
+    <% } %>
+
+    <% if (currentUser) { %>
+      <p>You are signed in as <strong><%= currentUser.display_name || currentUser.username %></strong>.</p>
+      <a class="btn" href="/dashboard">Go to dashboard →</a>
+    <% } else { %>
+      <a class="btn" href="/auth/github">
+        <span>Sign in with GitHub</span>
+      </a>
+    <% } %>
+  </main>
+</body>
+</html>

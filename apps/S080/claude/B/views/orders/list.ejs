@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+<div class="card">
+  <h1>Orders</h1>
+  <% if (orders.length === 0) { %>
+    <p class="muted">No orders yet.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Product</th><th>Qty</th><th>Status</th>
+        <% if (currentUser.role === 'manager') { %><th>By</th><% } %>
+        <th>When</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(function (o) { %>
+          <tr>
+            <td><%= o.id %></td>
+            <td><%= o.product_name %> <span class="muted">(<%= o.product_sku %>)</span></td>
+            <td><%= o.quantity %></td>
+            <td><span class="pill <%= o.status %>"><%= o.status %></span></td>
+            <% if (currentUser.role === 'manager') { %><td><%= o.created_by_username %></td><% } %>
+            <td class="muted"><%= o.created_at %></td>
+            <td><a href="/orders/<%= o.id %>">View</a></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+  <a class="btn" href="/orders/new">New order</a>
+</div>
+<%- include('../partials/footer') %>

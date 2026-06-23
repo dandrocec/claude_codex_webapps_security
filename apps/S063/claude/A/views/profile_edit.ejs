@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+<div class="card narrow">
+  <h1>Edit your profile</h1>
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+  <form action="/profile/edit" method="post">
+    <label>
+      Display name
+      <input type="text" name="display_name" maxlength="50"
+             value="<%= user.display_name || '' %>" placeholder="How your name appears" />
+    </label>
+    <label>
+      Bio
+      <textarea name="bio" rows="3" maxlength="280"
+                placeholder="A few words about you (max 280 chars)"><%= user.bio || '' %></textarea>
+    </label>
+    <button type="submit">Save profile</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

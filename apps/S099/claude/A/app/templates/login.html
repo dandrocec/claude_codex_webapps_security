@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block body %}
+<div class="center">
+  <div class="card" style="max-width:380px">
+    <h1>Sign in</h1>
+    <p class="muted"><strong>{{ client.name }}</strong> is requesting access
+      ({{ scope }}).</p>
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+    <form method="post" action="/login">
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username" autofocus required>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <input type="hidden" name="client_id" value="{{ client.client_id }}">
+      <input type="hidden" name="redirect_uri" value="{{ redirect_uri }}">
+      <input type="hidden" name="scope" value="{{ scope }}">
+      <input type="hidden" name="state" value="{{ state }}">
+      <input type="hidden" name="nonce" value="{{ nonce }}">
+      <button type="submit">Sign in &amp; authorize</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

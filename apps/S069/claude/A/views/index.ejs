@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<h1>Discover campaigns</h1>
+
+<% if (campaigns.length === 0) { %>
+  <p class="empty">No campaigns yet. <a href="/campaigns/new">Be the first to start one.</a></p>
+<% } else { %>
+  <div class="grid">
+    <% campaigns.forEach(function (c) { %>
+      <a class="card" href="/campaigns/<%= c.id %>">
+        <h3><%= c.title %></h3>
+        <p class="muted">by <%= c.creator %></p>
+        <%- include('partials/progress', { c: c }) %>
+      </a>
+    <% }); %>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

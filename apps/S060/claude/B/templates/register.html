@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Register — Quill{% endblock %}
+{% block content %}
+  <h1>Create an account</h1>
+  <form method="post" class="card form" novalidate>
+    {{ form.csrf_token }}
+    <label>{{ form.username.label }}{{ form.username(autocomplete="username") }}</label>
+    {% for e in form.username.errors %}<small class="field-error">{{ e }}</small>{% endfor %}
+
+    <label>{{ form.email.label }}{{ form.email(autocomplete="email") }}</label>
+    {% for e in form.email.errors %}<small class="field-error">{{ e }}</small>{% endfor %}
+
+    <label>{{ form.role.label }}{{ form.role() }}</label>
+    {% for e in form.role.errors %}<small class="field-error">{{ e }}</small>{% endfor %}
+
+    <label>{{ form.password.label }}{{ form.password(autocomplete="new-password") }}</label>
+    {% for e in form.password.errors %}<small class="field-error">{{ e }}</small>{% endfor %}
+
+    <label>{{ form.confirm.label }}{{ form.confirm(autocomplete="new-password") }}</label>
+    {% for e in form.confirm.errors %}<small class="field-error">{{ e }}</small>{% endfor %}
+
+    {{ form.submit(class="btn") }}
+  </form>
+  <p class="muted">Already registered? <a href="{{ url_for('login') }}">Log in</a>.</p>
+{% endblock %}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %> · Clinic Portal</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">🏥 Clinic Portal</a>
+    <% if (currentUser) { %>
+      <nav class="nav">
+        <span class="who">
+          <%= currentUser.full_name %>
+          <span class="badge badge-<%= currentUser.role %>"><%= currentUser.role %></span>
+        </span>
+        <form method="post" action="/logout" class="inline">
+          <button class="link" type="submit">Log out</button>
+        </form>
+      </nav>
+    <% } %>
+  </header>
+  <main class="container">

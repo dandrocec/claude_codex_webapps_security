@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Tickets{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="inline" style="justify-content: space-between;">
+    <h1 style="margin:0">
+      {% if g.user['role'] == 'agent' %}All tickets{% else %}My tickets{% endif %}
+    </h1>
+    {% if g.user['role'] == 'customer' %}
+      <a class="btn" href="{{ url_for('new_ticket') }}" style="text-decoration:none">+ New ticket</a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="card">
+  {% if tickets %}
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Subject</th><th>Status</th>
+        {% if g.user['role'] == 'agent' %}<th>Customer</th>{% endif %}
+        <th>Agent</th><th>Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in tickets %}
+      <tr>
+        <td>{{ t['id'] }}</td>
+        <td><a href="{{ url_for('view_ticket', ticket_id=t['id']) }}">{{ t['subject'] }}</a></td>
+        <td><span class="badge s-{{ t['status'] }}">{{ t['status'] }}</span></td>
+        {% if g.user['role'] == 'agent' %}<td>{{ t['customer'] }}</td>{% endif %}
+        <td>{{ t['agent'] or '—' }}</td>
+        <td class="muted">{{ t['updated_at'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p class="muted">No tickets yet.
+      {% if g.user['role'] == 'customer' %}
+        <a href="{{ url_for('new_ticket') }}">Open your first one</a>.
+      {% endif %}
+    </p>
+  {% endif %}
+</div>
+{% endblock %}

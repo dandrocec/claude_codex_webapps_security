@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<h1>My bookings</h1>
+
+<% if (bookings.length === 0) { %>
+  <p>You have no bookings yet. <a href="/">Find an available room</a>.</p>
+<% } else { %>
+  <table class="list">
+    <thead>
+      <tr><th>Date</th><th>Time</th><th>Room</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% bookings.forEach(function (b) { %>
+        <tr>
+          <td><%= b.date %><% if (b.date < today) { %> <span class="past">(past)</span><% } %></td>
+          <td><%= b.slot %></td>
+          <td><%= b.room_name %></td>
+          <td>
+            <form action="/bookings/<%= b.id %>/cancel" method="post" class="inline">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit" class="cancel-btn">Cancel</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/footer') %>

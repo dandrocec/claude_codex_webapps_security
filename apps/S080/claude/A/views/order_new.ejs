@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<h1>Process order</h1>
+<p class="hint">Enter the quantity to ship for each product. The order is only
+  fulfilled if every line has enough stock; otherwise it is rejected and no
+  stock changes.</p>
+
+<form action="/orders" method="post">
+  <label class="narrow-field">Customer
+    <input type="text" name="customer" placeholder="Acme Corp" required />
+  </label>
+
+  <table>
+    <thead>
+      <tr>
+        <th>SKU</th>
+        <th>Name</th>
+        <th class="num">Available</th>
+        <th class="num">Order qty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(function (p) { %>
+        <tr>
+          <td><code><%= p.sku %></code></td>
+          <td><%= p.name %></td>
+          <td class="num"><%= p.quantity %></td>
+          <td class="num">
+            <input type="number" name="qty[<%= p.id %>]" min="0" max="<%= p.quantity %>" value="0" />
+          </td>
+        </tr>
+      <% }); %>
+      <% if (products.length === 0) { %>
+        <tr><td colspan="4" class="empty">No products available to order.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <button type="submit" class="primary">Fulfil order</button>
+</form>
+
+<%- include('partials/footer') %>

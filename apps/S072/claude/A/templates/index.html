@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Welcome — MemberHub{% endblock %}
+{% block content %}
+  <div class="card">
+    <h1>Welcome to MemberHub</h1>
+    <p class="muted">A simple membership site with free and premium tiers.</p>
+    {% if g.user %}
+      <p>You're logged in as <strong>{{ g.user['username'] }}</strong>.</p>
+      <a class="btn" href="{{ url_for('dashboard') }}">Go to your dashboard</a>
+    {% else %}
+      <p>Join for free, or unlock everything with premium.</p>
+      <a class="btn" href="{{ url_for('register') }}">Create a free account</a>
+      <a class="btn secondary" href="{{ url_for('login') }}">Log in</a>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>Membership tiers</h2>
+    <table>
+      <tr><th>Feature</th><th>Free</th><th>Premium</th></tr>
+      <tr><td>Free content library</td><td>✓</td><td>✓</td></tr>
+      <tr><td>Premium content library</td><td>—</td><td>✓</td></tr>
+      <tr><td>Tier-specific navigation</td><td>✓</td><td>✓</td></tr>
+    </table>
+  </div>
+{% endblock %}

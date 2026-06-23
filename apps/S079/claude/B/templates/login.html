@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from "_form_helpers.html" import render_field %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+  <h1>Log in</h1>
+  <form method="post" action="{{ url_for('login') }}" class="card narrow">
+    {{ form.csrf_token }}
+    {{ render_field(form.email, type="email") }}
+    {{ render_field(form.password) }}
+    <button type="submit" class="btn">Log in</button>
+  </form>
+  <p>No account? <a href="{{ url_for('register') }}">Register</a>.</p>
+{% endblock %}

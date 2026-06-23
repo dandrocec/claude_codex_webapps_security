@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · CRM</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">CRM</a>
+    <% if (currentUser) { %>
+      <nav class="nav">
+        <a href="/">Dashboard</a>
+        <a href="/contacts">Contacts</a>
+        <a href="/deals">Pipeline</a>
+      </nav>
+      <div class="user-box">
+        <span class="user-meta">
+          <%= currentUser.name %>
+          <span class="badge badge-<%= currentUser.role %>"><%= currentUser.role %></span>
+        </span>
+        <form method="post" action="/logout" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      </div>
+    <% } %>
+  </header>
+  <main class="container">

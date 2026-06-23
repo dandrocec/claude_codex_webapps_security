@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+
+<a href="/" class="back">← All campaigns</a>
+
+<div class="detail">
+  <div class="detail-main">
+    <h1><%= campaign.title %></h1>
+    <p class="muted">by <%= campaign.creator %></p>
+    <% if (campaign.description) { %>
+      <p class="description"><%= campaign.description %></p>
+    <% } %>
+
+    <h2>Backers</h2>
+    <% if (pledges.length === 0) { %>
+      <p class="empty">No pledges yet — be the first to back this.</p>
+    <% } else { %>
+      <ul class="pledges">
+        <% pledges.forEach(function (p) { %>
+          <li>
+            <span><%= p.backer %></span>
+            <strong><%= formatMoney(p.amount_cents) %></strong>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+
+  <aside class="detail-side">
+    <%- include('partials/progress', { c: campaign }) %>
+
+    <% if (campaign.funded) { %>
+      <p class="badge badge-success">🎉 Goal reached!</p>
+    <% } %>
+
+    <% if (campaign.expired) { %>
+      <p class="badge">This campaign has ended.</p>
+    <% } else { %>
+      <% if (error) { %><p class="alert"><%= error %></p><% } %>
+      <form method="POST" action="/campaigns/<%= campaign.id %>/pledge" class="form">
+        <label>
+          Your name
+          <input type="text" name="backer" required>
+        </label>
+        <label>
+          Pledge amount (USD)
+          <input type="number" name="amount" min="1" step="0.01" required>
+        </label>
+        <button type="submit" class="btn btn-primary">Back this campaign</button>
+      </form>
+    <% } %>
+  </aside>
+</div>
+
+<%- include('partials/footer') %>

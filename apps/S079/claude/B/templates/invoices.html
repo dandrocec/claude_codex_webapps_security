@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Invoices{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>Invoices</h1>
+    <a class="btn" href="{{ url_for('invoice_new') }}">New invoice</a>
+  </div>
+
+  {% if invoices %}
+    <table class="table">
+      <thead>
+        <tr><th>Number</th><th>Client</th><th>Issued</th><th>Status</th>
+            <th class="num">Total</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for v in invoices %}
+          {% set inv = v.row %}
+          <tr>
+            <td><a href="{{ url_for('invoice_view', invoice_id=inv.id) }}">{{ inv.number }}</a></td>
+            <td>{{ inv.client_name }}</td>
+            <td>{{ inv.issue_date }}</td>
+            <td><span class="badge badge-{{ inv.status }}">{{ inv.status }}</span></td>
+            <td class="num">{{ "%.2f"|format(v.total) }}</td>
+            <td class="actions">
+              <a href="{{ url_for('invoice_edit', invoice_id=inv.id) }}">Edit</a>
+              <form action="{{ url_for('invoice_delete', invoice_id=inv.id) }}"
+                    method="post" class="inline"
+                    onsubmit="return confirm('Delete this invoice?');">
+                {{ delete_form.csrf_token }}
+                <button type="submit" class="link-btn danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No invoices yet. <a href="{{ url_for('invoice_new') }}">Create one</a>.</p>
+  {% endif %}
+{% endblock %}

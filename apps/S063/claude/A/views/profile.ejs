@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+
+<div class="card profile-head">
+  <div class="profile-meta">
+    <h1><%= displayNameOf(profile) %></h1>
+    <p class="handle">@<%= profile.username %></p>
+    <% if (profile.bio) { %><p class="body"><%= profile.bio %></p><% } %>
+    <p class="muted stats">
+      <strong><%= counts.posts %></strong> posts &middot;
+      <strong><%= counts.following %></strong> following &middot;
+      <strong><%= counts.followers %></strong> followers
+    </p>
+  </div>
+  <div class="profile-actions">
+    <% if (isSelf) { %>
+      <a class="btnlink" href="/profile/edit">Edit profile</a>
+    <% } else if (isFollowing) { %>
+      <form action="/unfollow/<%= profile.id %>" method="post" class="inline">
+        <button type="submit" class="secondary">Following</button>
+      </form>
+    <% } else { %>
+      <form action="/follow/<%= profile.id %>" method="post" class="inline">
+        <button type="submit">Follow</button>
+      </form>
+    <% } %>
+  </div>
+</div>
+
+<% if (isSelf) { %>
+  <div class="card">
+    <form action="/posts" method="post" class="composer">
+      <textarea name="body" rows="3" maxlength="280" required
+                placeholder="Share a status update..."></textarea>
+      <button type="submit">Post</button>
+    </form>
+  </div>
+<% } %>
+
+<% if (posts.length === 0) { %>
+  <div class="card empty"><p class="muted">No posts yet.</p></div>
+<% } else { %>
+  <% posts.forEach(function (p) { %>
+    <article class="post">
+      <div class="post-head">
+        <a class="name" href="/profile/<%= profile.username %>"><%= displayNameOf(profile) %></a>
+        <span class="handle">@<%= profile.username %></span>
+        <span class="muted dot">&middot;</span>
+        <span class="muted time"><%= p.created_at %> UTC</span>
+      </div>
+      <p class="body"><%= p.body %></p>
+    </article>
+  <% }) %>
+<% } %>
+
+<%- include('partials/footer') %>

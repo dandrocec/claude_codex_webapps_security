@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}All pages{% endblock %}
+{% block content %}
+  <h1>All pages</h1>
+  {% if pages %}
+    <ul class="pagelist">
+      {% for p in pages %}
+        <li>
+          <a href="{{ url_for('view_page', slug=p.slug) }}">{{ p.title }}</a>
+          {% if p.editor_only %}<span class="badge">editor-only</span>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No pages yet.{% if current_user and current_user.role == 'editor' %}
+      <a href="{{ url_for('create_page') }}">Create the first one.</a>{% endif %}</p>
+  {% endif %}
+{% endblock %}

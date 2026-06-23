@@ -1,0 +1,23 @@
+<%- include('partials/header', { title: 'Ask a Question' }) %>
+
+<h1>Ask a Question</h1>
+
+<%- include('partials/errors') %>
+
+<form method="post" action="/questions" class="card">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>
+    Title
+    <input type="text" name="title" value="<%= values.title || '' %>"
+           required minlength="10" maxlength="150"
+           placeholder="Be specific and concise">
+  </label>
+  <label>
+    Body
+    <textarea name="body" rows="10" required minlength="20" maxlength="10000"
+              placeholder="Describe your problem in detail"><%= values.body || '' %></textarea>
+  </label>
+  <button type="submit">Post your question</button>
+</form>
+
+<%- include('partials/footer') %>

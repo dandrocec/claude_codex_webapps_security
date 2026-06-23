@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<h1>Log in</h1>
+{% for error in errors %}<p class="error">{{ error }}</p>{% endfor %}
+<form method="post" action="/login" class="card">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <input type="hidden" name="next" value="{{ next }}">
+  <label>Username
+    <input type="text" name="username" autocomplete="username" required maxlength="64">
+  </label>
+  <label>Password
+    <input type="password" name="password" autocomplete="current-password" required>
+  </label>
+  <button type="submit">Log in</button>
+</form>
+<p>No account? <a href="/register">Register</a></p>
+{% endblock %}

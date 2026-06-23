@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}New election{% endblock %}
+{% block content %}
+  <h1>Create an election</h1>
+  <div class="card">
+    <form method="post">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" value="{{ form.title or '' }}" required>
+
+      <label for="description">Description (optional)</label>
+      <textarea id="description" name="description">{{ form.description or '' }}</textarea>
+
+      <label for="candidates">Candidates (one per line, at least two)</label>
+      <textarea id="candidates" name="candidates"
+                placeholder="Alice Johnson&#10;Bob Smith&#10;Carol Lee">{{ form.candidates or '' }}</textarea>
+
+      <label for="open_time">Opens at</label>
+      <input type="datetime-local" id="open_time" name="open_time"
+             value="{{ form.open_time or '' }}" required>
+
+      <label for="close_time">Closes at</label>
+      <input type="datetime-local" id="close_time" name="close_time"
+             value="{{ form.close_time or '' }}" required>
+
+      <p style="margin-top:16px;">
+        <button class="btn" type="submit">Create election</button>
+        <a class="btn secondary" href="{{ url_for('index') }}">Cancel</a>
+      </p>
+    </form>
+  </div>
+{% endblock %}

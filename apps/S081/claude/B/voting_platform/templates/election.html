@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ election['title'] }}{% endblock %}
+{% block content %}
+  <h1>{{ election['title'] }}</h1>
+  <p><span class="badge badge-{{ status }}">{{ status }}</span></p>
+  {% if election['description'] %}<p>{{ election['description'] }}</p>{% endif %}
+  <p class="times">
+    Opens {{ election['open_at'] }} UTC · Closes {{ election['close_at'] }} UTC
+  </p>
+
+  {% if status == 'upcoming' %}
+    <p class="muted">Voting has not opened yet.</p>
+
+  {% elif status == 'open' %}
+    {% if already_voted %}
+      <p class="flash flash-success">
+        You have already voted. Results will appear when the election closes.
+      </p>
+    {% else %}
+      <form method="post" class="stack" novalidate>
+        {{ form.csrf_token }}
+        <fieldset>
+          <legend>Cast your vote</legend>
+          {% for value, label in form.candidate_id.choices %}
+            <label class="choice">
+              <input type="radio" name="candidate_id" value="{{ value }}" required>
+              {{ label }}
+            </label>
+          {% endfor %}
+        </fieldset>
+        {% for e in form.candidate_id.errors %}<span class="err">{{ e }}</span>{% endfor %}
+        <button type="submit">Submit vote</button>
+      </form>
+    {% endif %}
+
+  {% else %}{# closed #}
+    <h2>Results</h2>
+    <table class="results">
+      <thead><tr><th>Candidate</th><th>Votes</th><th>Share</th></tr></thead>
+      <tbody>
+      {% for r in results.rows %}
+        <tr>
+          <td>{{ r['name'] }}</td>
+          <td>{{ r['votes'] }}</td>
+          <td>
+            {% if results.total %}
+              {{ '%.1f'|format(100 * r['votes'] / results.total) }}%
+            {% else %}—{% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <p class="muted">Total votes: {{ results.total }}</p>
+  {% endif %}
+{% endblock %}

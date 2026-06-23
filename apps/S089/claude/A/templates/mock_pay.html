@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Sandbox Payment · Acme Shop{% endblock %}
+{% block content %}
+<div class="payment-box">
+  <div class="provider-badge">SANDBOX PAYMENT PROVIDER</div>
+  <h1>Complete your payment</h1>
+  <p>Order <strong>#{{ order.id }}</strong></p>
+  <p class="price big">{{ order.total_display }}</p>
+
+  <table class="table">
+    <tbody>
+      {% for item in order.items %}
+      <tr>
+        <td>{{ item.name }} &times; {{ item.quantity }}</td>
+        <td style="text-align:right">{{ item.line_total_display }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p class="muted">This is a simulated provider. Clicking “Pay” triggers a signed
+  webhook to this app, exactly like a real provider would, which marks the order
+  as paid. No real card is charged.</p>
+
+  <div class="pay-actions">
+    <form method="post" action="{{ url_for('mock_pay_confirm', session_id=order.provider_session_id) }}">
+      <button type="submit" class="primary big-btn">Pay {{ order.total_display }}</button>
+    </form>
+    <form method="post" action="{{ url_for('mock_pay_cancel', session_id=order.provider_session_id) }}">
+      <button type="submit" class="link-btn">Cancel payment</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

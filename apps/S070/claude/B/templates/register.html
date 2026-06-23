@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+  <h1>Create an account</h1>
+  <form method="post" class="stacked">
+    {{ form.csrf_token }}
+    <label>{{ form.full_name.label }} {{ form.full_name(maxlength=120) }}</label>
+    {% for e in form.full_name.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.email.label }} {{ form.email(maxlength=255) }}</label>
+    {% for e in form.email.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.password.label }} {{ form.password() }}</label>
+    {% for e in form.password.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.confirm.label }} {{ form.confirm() }}</label>
+    {% for e in form.confirm.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.role.label }} {{ form.role() }}</label>
+    {% for e in form.role.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+    {{ form.submit(class="btn") }}
+  </form>
+  <p>Already have an account? <a href="{{ url_for('login') }}">Log in</a>.</p>
+{% endblock %}

@@ -1,0 +1,52 @@
+<%- include('partials/head', { pageTitle: 'Board' }) %>
+  <div class="page-head">
+    <h1>Pipeline</h1>
+    <div class="page-actions">
+      <span class="scope">
+        <%= currentUser.role === 'manager' ? 'Viewing: whole team' : 'Viewing: your deals' %>
+      </span>
+      <a href="/deals/new" class="btn btn-primary">+ New deal</a>
+    </div>
+  </div>
+
+  <div class="board">
+    <% columns.forEach(function(col) { %>
+      <section class="column">
+        <header class="column-head">
+          <span class="column-title"><%= stageLabel(col.stage) %></span>
+          <span class="column-meta"><%= col.items.length %> · <%= money(col.total) %></span>
+        </header>
+        <div class="cards">
+          <% if (col.items.length === 0) { %>
+            <p class="empty">No deals</p>
+          <% } %>
+          <% col.items.forEach(function(d) {
+               var idx = STAGES.indexOf(d.stage);
+               var prev = idx > 0 ? STAGES[idx - 1] : null;
+               var next = idx < STAGES.length - 1 ? STAGES[idx + 1] : null;
+          %>
+            <article class="card">
+              <div class="card-title"><%= d.title %></div>
+              <div class="card-value"><%= money(d.value) %></div>
+              <% if (d.contact_name) { %><div class="card-meta">👤 <%= d.contact_name %></div><% } %>
+              <% if (currentUser.role === 'manager') { %>
+                <div class="card-meta owner">🧑‍💼 <%= d.owner_name %></div>
+              <% } %>
+              <div class="card-actions">
+                <form method="POST" action="/deals/<%= d.id %>/stage" class="inline">
+                  <input type="hidden" name="stage" value="<%= prev %>" />
+                  <button class="btn btn-mini" <%= prev ? '' : 'disabled' %> title="Move back">◀</button>
+                </form>
+                <a class="btn btn-mini" href="/deals/<%= d.id %>/edit" title="Edit">✎</a>
+                <form method="POST" action="/deals/<%= d.id %>/stage" class="inline">
+                  <input type="hidden" name="stage" value="<%= next %>" />
+                  <button class="btn btn-mini" <%= next ? '' : 'disabled' %> title="Move forward">▶</button>
+                </form>
+              </div>
+            </article>
+          <% }); %>
+        </div>
+      </section>
+    <% }); %>
+  </div>
+<%- include('partials/foot') %>

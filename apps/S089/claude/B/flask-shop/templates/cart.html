@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Cart &middot; Tiny Shop{% endblock %}
+{% block content %}
+  <h1>Your cart</h1>
+  {% if items %}
+    <table class="table">
+      <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th></th></tr></thead>
+      <tbody>
+        {% for product, qty in items %}
+          <tr>
+            <td>{{ product['name'] }}</td>
+            <td>{{ product['price_cents'] | money }}</td>
+            <td>
+              <form method="post" action="{{ url_for('main.cart_update') }}" class="inline">
+                {{ update_form.csrf_token }}
+                <input type="hidden" name="product_id" value="{{ product['id'] }}">
+                <input type="number" name="quantity" value="{{ qty }}" min="0" max="99" class="qty">
+                <button class="link-btn" type="submit">Update</button>
+              </form>
+            </td>
+            <td>
+              <form method="post" action="{{ url_for('main.cart_update') }}" class="inline">
+                {{ update_form.csrf_token }}
+                <input type="hidden" name="product_id" value="{{ product['id'] }}">
+                <input type="hidden" name="quantity" value="0">
+                <button class="link-btn danger" type="submit">Remove</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr><th>Total</th><td colspan="3">{{ total | money }}</td></tr>
+      </tfoot>
+    </table>
+
+    {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('main.checkout') }}">
+        {{ checkout_form.csrf_token }}
+        <button class="btn primary" type="submit">Checkout</button>
+      </form>
+    {% else %}
+      <p><a class="btn" href="{{ url_for('auth.login') }}">Log in to check out</a></p>
+    {% endif %}
+  {% else %}
+    <p>Your cart is empty. <a href="{{ url_for('main.index') }}">Browse products</a>.</p>
+  {% endif %}
+{% endblock %}

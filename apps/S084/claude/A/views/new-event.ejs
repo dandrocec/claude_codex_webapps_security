@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<h1>Create an Event</h1>
+<form action="/events" method="POST" class="form">
+  <label>Event name
+    <input type="text" name="name" required autofocus>
+  </label>
+  <label>Date (optional)
+    <input type="text" name="event_date" placeholder="e.g. 2026-09-12 19:00">
+  </label>
+  <label>Description (optional)
+    <textarea name="description" rows="3"></textarea>
+  </label>
+  <label>Number of tickets
+    <input type="number" name="total_tickets" min="1" value="100" required>
+  </label>
+  <button type="submit" class="btn">Create event</button>
+</form>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<header class="profile-head card">
+  <h1><%= profile.username %></h1>
+  <p class="muted">
+    <%= counts.photos %> photos · <%= counts.followers %> followers · <%= counts.following %> following
+  </p>
+  <% if (currentUser && !isSelf) { %>
+    <form class="inline" action="/users/<%= profile.username %>/follow" method="post">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit"><%= isFollowing ? 'Unfollow' : 'Follow' %></button>
+    </form>
+  <% } %>
+</header>
+
+<% if (!photos.length) { %>
+  <p class="muted">No photos yet.</p>
+<% } %>
+<div class="grid">
+  <% photos.forEach(function (p) { %>
+    <article class="card photo-card">
+      <a href="/photos/<%= p.id %>">
+        <img src="/uploads/<%= p.filename %>" alt="<%= p.caption || 'Photo' %>" loading="lazy">
+      </a>
+      <% if (p.caption) { %><p class="caption"><%= p.caption %></p><% } %>
+    </article>
+  <% }); %>
+</div>
+<%- include('partials/footer') %>

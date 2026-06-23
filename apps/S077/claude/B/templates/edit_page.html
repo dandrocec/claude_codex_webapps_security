@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Edit {{ page.title }}{% endblock %}
+{% block content %}
+  <h1>Edit: {{ page.title }}</h1>
+  <p class="muted">Slug <code>{{ page.slug }}</code> is fixed. Saving creates a new revision.</p>
+  <form method="post" class="stack">
+    {{ form.csrf_token }}
+    <label>{{ form.title.label }}{{ form.title() }}</label>
+    {% for e in form.title.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.content.label }}{{ form.content(rows=18) }}</label>
+    {% for e in form.content.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.comment.label }}{{ form.comment(placeholder="What changed?") }}</label>
+    <label class="check">{{ form.editor_only() }} {{ form.editor_only.label.text }}</label>
+    <button type="submit">Save revision</button>
+  </form>
+{% endblock %}

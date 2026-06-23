@@ -1,0 +1,58 @@
+<%- include('partials/header') %>
+
+<h1>Room availability</h1>
+
+<form action="/" method="get" class="dateform">
+  <label>
+    Date
+    <input type="date" name="date" value="<%= date %>">
+  </label>
+  <button type="submit">View</button>
+  <span class="hint">You can book up to <%= horizonDays %> days ahead.</span>
+</form>
+
+<div class="legend">
+  <span class="cell free">Free</span>
+  <span class="cell mine">Yours</span>
+  <span class="cell taken">Booked</span>
+</div>
+
+<div class="table-wrap">
+  <table class="grid">
+    <thead>
+      <tr>
+        <th class="room-col">Room</th>
+        <% slots.forEach(function (slot) { %><th><%= slot %></th><% }); %>
+      </tr>
+    </thead>
+    <tbody>
+      <% grid.forEach(function (row) { %>
+        <tr>
+          <th class="room-col">
+            <span class="room-name"><%= row.room.name %></span>
+            <small><%= row.room.description %></small>
+          </th>
+          <% row.cells.forEach(function (cell) { %>
+            <td class="cell <%= cell.status %>">
+              <% if (cell.status === 'free') { %>
+                <form action="/book" method="post">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <input type="hidden" name="room_id" value="<%= row.room.id %>">
+                  <input type="hidden" name="date" value="<%= date %>">
+                  <input type="hidden" name="slot" value="<%= cell.slot %>">
+                  <button type="submit" class="book-btn">Book</button>
+                </form>
+              <% } else if (cell.status === 'mine') { %>
+                <span class="label">Yours</span>
+              <% } else { %>
+                <span class="label">Booked</span>
+              <% } %>
+            </td>
+          <% }); %>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

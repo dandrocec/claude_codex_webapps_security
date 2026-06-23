@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Register — Ledger{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Create an account</h1>
+  <form method="post" action="{{ url_for('register') }}">
+    {{ form.csrf_token }}
+    <label for="username">Username</label>
+    {{ form.username(id="username", autocomplete="username") }}
+    {% for e in form.username.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+    <label for="password">Password</label>
+    {{ form.password(id="password", autocomplete="new-password") }}
+    {% for e in form.password.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+    <p class="hint">8-128 characters.</p>
+    <button type="submit">Register</button>
+  </form>
+  <p>Already have an account? <a href="{{ url_for('login') }}">Log in</a>.</p>
+</section>
+{% endblock %}

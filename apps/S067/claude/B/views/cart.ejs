@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+
+<h1>Your cart</h1>
+
+<% if (lines.length === 0) { %>
+  <p>Your cart is empty. <a href="/menu">Browse the menu</a>.</p>
+<% } else { %>
+  <table class="table">
+    <thead>
+      <tr><th>Item</th><th>Unit</th><th>Qty</th><th>Line total</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% lines.forEach(function (line) { %>
+        <tr>
+          <td><%= line.name %></td>
+          <td><%= formatPrice(line.unitPriceCents) %></td>
+          <td>
+            <form method="post" action="/cart/update/<%= line.id %>" class="inline">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="number" name="quantity" value="<%= line.quantity %>" min="0" max="50" class="qty">
+              <button type="submit" class="link-btn">Update</button>
+            </form>
+          </td>
+          <td><%= formatPrice(line.lineCents) %></td>
+          <td>
+            <form method="post" action="/cart/remove/<%= line.id %>" class="inline">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit" class="link-btn danger">Remove</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+    <tfoot>
+      <tr><th colspan="3">Total</th><th><%= formatPrice(totalCents) %></th><th></th></tr>
+    </tfoot>
+  </table>
+
+  <form method="post" action="/orders" class="stack">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit" class="primary">Place order</button>
+  </form>
+<% } %>
+
+<%- include('partials/footer') %>

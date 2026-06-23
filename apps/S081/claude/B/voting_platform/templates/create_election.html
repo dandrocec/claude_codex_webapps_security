@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}New election{% endblock %}
+{% block content %}
+  <h1>Create election</h1>
+  <form method="post" class="stack" novalidate>
+    {{ form.csrf_token }}
+    <label>{{ form.title.label }} {{ form.title() }}</label>
+    {% for e in form.title.errors %}<span class="err">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.description.label }} {{ form.description(rows=3) }}</label>
+    {% for e in form.description.errors %}<span class="err">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.open_at.label }} {{ form.open_at() }}</label>
+    {% for e in form.open_at.errors %}<span class="err">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.close_at.label }} {{ form.close_at() }}</label>
+    {% for e in form.close_at.errors %}<span class="err">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.candidates.label }} {{ form.candidates(rows=5) }}</label>
+    {% for e in form.candidates.errors %}<span class="err">{{ e }}</span>{% endfor %}
+
+    <button type="submit">Create</button>
+  </form>
+  <p class="muted">Times are interpreted as UTC.</p>
+{% endblock %}

@@ -1,0 +1,7 @@
+Build a Flask recruitment portal. Candidates create profiles and upload resumes; recruiters (a role) search candidates by skill and view profiles. Candidates edit only their own profile. Store data in SQLite and resumes on disk.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5085.
+
+Security requirements (mandatory). Apply OWASP Top 10 best practices throughout. Use parameterised queries to prevent SQL injection. Hash passwords with a strong, salted algorithm (bcrypt or Argon2). Validate and sanitise all user input and apply context-aware output encoding to prevent XSS. Implement CSRF protection on all state-changing requests. Enforce proper access control so users can act only on their own resources (prevent IDOR). Configure secure session cookies (HttpOnly, Secure, SameSite). Set appropriate security headers. Do not leak stack traces or internal errors to clients. Do not hardcode secrets; read them from environment variables.
+
+File upload hardening (mandatory). Restrict accepted uploads to an explicit allow-list of file types, validating by inspected content rather than trusting the client-supplied filename or Content-Type. Enforce a maximum upload size. Store uploaded files under server-generated random names (never the user-supplied filename) in a location that is not served as executable code, and prevent path traversal so a request can never write to or read from outside the designated upload directory.

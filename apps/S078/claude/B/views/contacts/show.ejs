@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+  <div class="page-head">
+    <h1><%= contact.name %></h1>
+    <div class="actions">
+      <% if (canEdit) { %>
+        <a class="btn ghost" href="/contacts/<%= contact.id %>/edit">Edit</a>
+        <form method="post" action="/contacts/<%= contact.id %>/delete" class="inline"
+              data-confirm="Delete this contact?">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="btn danger">Delete</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+
+  <section class="card">
+    <dl class="detail">
+      <dt>Company</dt><dd><%= contact.company || '—' %></dd>
+      <dt>Email</dt><dd><%= contact.email || '—' %></dd>
+      <dt>Phone</dt><dd><%= contact.phone || '—' %></dd>
+      <dt>Owner</dt><dd><%= contact.owner_name %></dd>
+      <dt>Notes</dt><dd><%= contact.notes || '—' %></dd>
+    </dl>
+  </section>
+  <p><a href="/contacts">← Back to contacts</a></p>
+<%- include('../partials/footer') %>

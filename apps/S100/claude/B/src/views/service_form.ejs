@@ -1,0 +1,56 @@
+<%- include('partials/head') %>
+<div class="page-head">
+  <h1><%= mode === 'create' ? 'Register service' : 'Edit service' %></h1>
+  <a class="btn btn-link" href="/">← Back</a>
+</div>
+
+<div class="card">
+  <form method="POST"
+        action="<%= mode === 'create' ? '/services' : '/services/' + service.id %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <label>Name
+      <input type="text" name="name" value="<%= service.name || '' %>" required maxlength="80" />
+    </label>
+
+    <label>Repository URL <span class="muted">(optional)</span>
+      <input type="url" name="repo_url" value="<%= service.repo_url || '' %>" maxlength="300"
+             placeholder="https://github.com/org/repo" />
+    </label>
+
+    <label>Description <span class="muted">(optional)</span>
+      <textarea name="description" rows="2" maxlength="1000"><%= service.description || '' %></textarea>
+    </label>
+
+    <fieldset class="steps">
+      <legend>Deployment steps</legend>
+      <p class="muted">Each step is a shell command run in order. A non-zero exit aborts the deployment. Service secrets are injected as environment variables.</p>
+      <div id="steps-list">
+        <% var steps = (service.steps && service.steps.length) ? service.steps : [{name:'',command:''}]; %>
+        <% steps.forEach(function (step) { %>
+          <div class="step-row">
+            <input type="text" name="step_name" placeholder="Step name" value="<%= step.name || '' %>" maxlength="80" />
+            <input type="text" name="step_command" placeholder="e.g. npm ci && npm test" value="<%= step.command || '' %>" maxlength="4000" />
+            <button type="button" class="btn btn-link remove-step">✕</button>
+          </div>
+        <% }); %>
+      </div>
+      <button type="button" class="btn btn-secondary" id="add-step">+ Add step</button>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">
+      <%= mode === 'create' ? 'Register service' : 'Save changes' %>
+    </button>
+  </form>
+</div>
+
+<template id="step-template">
+  <div class="step-row">
+    <input type="text" name="step_name" placeholder="Step name" maxlength="80" />
+    <input type="text" name="step_command" placeholder="e.g. npm ci && npm test" maxlength="4000" />
+    <button type="button" class="btn btn-link remove-step">✕</button>
+  </div>
+</template>
+
+<script src="/static/service_form.js"></script>
+<%- include('partials/foot') %>

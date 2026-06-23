@@ -1,0 +1,78 @@
+The application is complete. I built the full project but **could not run `npm install`/`npm start` myself** — every command execution (even `node --check`) is gated behind manual approval in this environment, so I verified the code by careful review rather than execution. You'll need to approve/run the install and start commands locally.
+
+## What was built
+
+A complete Express + SQLite photo-sharing app under `photo-sharing/`:
+
+- **Auth**: register/login/logout, bcrypt hashing (cost 12), session regeneration on login, generic error messages, rate-limited credential endpoints.
+- **Photos**: upload with caption, single-photo view, delete (owner-only).
+- **Social**: follow/unfollow, like/unlike, comments (deletable by comment author *or* photo owner).
+- **Feed**: recent photos from followed users plus your own.
+- **Profiles & discovery**: per-user gallery with follower/following counts, people list.
+
+## How to run (port 5073)
+
+```powershell
+cd photo-sharing
+npm install
+Copy-Item .env.example .env   # optionally set a real SESSION_SECRET
+npm start                     # → http://localhost:5073
+```
+
+`var/app.db` and `var/uploads/` are created automatically on first run.
+
+## Security mapping to your requirements
+
+| Requirement | Implementation |
+|---|---|
+| SQL injection | `better-sqlite3` prepared statements everywhere; no string-built SQL |
+| Password hashing | `bcryptjs`, cost 12, per-hash salt, constant-time compare |
+| Input validation / XSS | `express-validator` on all inputs; EJS `<%=%>` auto-escaping; strict CSP (no inline JS) |
+| CSRF | Synchronizer token in session, required on every POST, constant-time compare; `SameSite=Lax` |
+| Access control / IDOR | Ownership checks on every state-changing action; integer-validated IDs |
+| Session cookies | `HttpOnly`, `SameSite=Lax`, `Secure` in production |
+| Security headers | `helmet` (CSP, nosniff, frame-ancestors none, referrer policy); `x-powered-by` off |
+| No leaked errors | Central handler logs server-side, returns generic client messages |
+| No hardcoded secrets | All from env; refuses to start in prod without `SESSION_SECRET` |
+| Upload type allow-list | Validated by **magic bytes** (JPEG/PNG/GIF/WebP), not filename/Content-Type |
+| Upload size limit | `multer` `fileSize` (default 5 MB), single file; oversize → friendly 413 |
+| Random names / safe storage | 32-hex random names in `var/uploads` (outside static root), served via dedicated handler with explicit MIME + nosniff |
+| Path traversal | Write path verified inside upload dir; serve route accepts only `^[a-f0-9]{32}\.(jpg\|png\|gif\|webp)$` |
+
+A couple of design notes worth flagging: the `Secure` cookie flag is intentionally enabled only when `NODE_ENV=production` so the cookie still works over local HTTP (documented in the README), and sessions use the default in-memory store, which is fine for local/dev but should be swapped for a persistent store before any real deployment.
+
+Want me to add a persistent session store (e.g. SQLite-backed) or a small seed script so there's sample data to view on first launch?
+run_id S073_claude_B_20260618212942: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S073\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S073_claude_B_20260618212942.txt  (sha256 490aec0a43171a4d...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 11:50pm (Europe/Zagreb)
+run_id S074_claude_A_20260618213804: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S074\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S074_claude_A_20260618213804.txt  (sha256 91c258f02b362ccf...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 11:50pm (Europe/Zagreb)
+run_id S074_claude_B_20260618214121: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S074\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S074_claude_B_20260618214121.txt  (sha256 f9630f80bf1f77d2...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 11:50pm (Europe/Zagreb)
+run_id S075_claude_A_20260618214123: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S075\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S075_claude_A_20260618214123.txt  (sha256 9a32aec654361f9b...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 11:50pm (Europe/Zagreb)
+run_id S075_claude_B_20260618214126: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S075\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S075_claude_B_20260618214126.txt  (sha256 a242f722bc8254c0...)
+  logged to logs/commands.log and logs/sessions.csv
+catalog: 100 specs | selected specs: 3 | tools: ['claude'] | variants: ['A', 'B']
+already done (skipped): 1 | blocked (tool missing): 0 | to run: 5
+
+>>> S073 claude B  (run_id S073_claude_B_20260618212942)
+
+>>> S074 claude A  (run_id S074_claude_A_20260618213804)
+
+>>> S074 claude B  (run_id S074_claude_B_20260618214121)
+
+>>> S075 claude A  (run_id S075_claude_A_20260618214123)
+
+>>> S075 claude B  (run_id S075_claude_B_20260618214126)
+
+batch complete: ran 5 this session. state totals: {'done': 146, 'failed': 4}
+state file: D:\claude_code\claude_security_journal\logs\generation_state.json

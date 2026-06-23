@@ -668,5 +668,545 @@
     "run_id": "S055_claude_B_20260615045045",
     "exit": 0,
     "updated": "2026-06-15T04:55:29Z"
+  },
+  "S056|claude|A": {
+    "status": "done",
+    "run_id": "S056_claude_A_20260615051457",
+    "exit": 0,
+    "updated": "2026-06-15T05:17:19Z"
+  },
+  "S056|claude|B": {
+    "status": "done",
+    "run_id": "S056_claude_B_20260615051719",
+    "exit": 0,
+    "updated": "2026-06-15T05:21:12Z"
+  },
+  "S057|claude|A": {
+    "status": "done",
+    "run_id": "S057_claude_A_20260615052112",
+    "exit": 0,
+    "updated": "2026-06-15T05:23:12Z"
+  },
+  "S057|claude|B": {
+    "status": "done",
+    "run_id": "S057_claude_B_20260615052312",
+    "exit": 0,
+    "updated": "2026-06-15T05:27:37Z"
+  },
+  "S058|claude|A": {
+    "status": "done",
+    "run_id": "S058_claude_A_20260615052737",
+    "exit": 0,
+    "updated": "2026-06-15T05:32:32Z"
+  },
+  "S058|claude|B": {
+    "status": "done",
+    "run_id": "S058_claude_B_20260615214652",
+    "exit": 0,
+    "updated": "2026-06-15T21:53:51Z"
+  },
+  "S059|claude|A": {
+    "status": "done",
+    "run_id": "S059_claude_A_20260615215351",
+    "exit": 0,
+    "updated": "2026-06-15T21:57:11Z"
+  },
+  "S059|claude|B": {
+    "status": "done",
+    "run_id": "S059_claude_B_20260615215711",
+    "exit": 0,
+    "updated": "2026-06-15T22:06:29Z"
+  },
+  "S060|claude|A": {
+    "status": "done",
+    "run_id": "S060_claude_A_20260615220629",
+    "exit": 0,
+    "updated": "2026-06-15T22:10:00Z"
+  },
+  "S060|claude|B": {
+    "status": "done",
+    "run_id": "S060_claude_B_20260615221000",
+    "exit": 0,
+    "updated": "2026-06-15T22:16:21Z"
+  },
+  "S061|claude|A": {
+    "status": "done",
+    "run_id": "S061_claude_A_20260615230253",
+    "exit": 0,
+    "updated": "2026-06-15T23:08:14Z"
+  },
+  "S061|claude|B": {
+    "status": "done",
+    "run_id": "S061_claude_B_20260615230814",
+    "exit": 0,
+    "updated": "2026-06-15T23:15:07Z"
+  },
+  "S062|claude|A": {
+    "status": "done",
+    "run_id": "S062_claude_A_20260616170948",
+    "exit": 0,
+    "updated": "2026-06-16T17:13:05Z"
+  },
+  "S062|claude|B": {
+    "status": "done",
+    "run_id": "S062_claude_B_20260616171305",
+    "exit": 0,
+    "updated": "2026-06-16T17:19:20Z"
+  },
+  "S063|claude|A": {
+    "status": "done",
+    "run_id": "S063_claude_A_20260616171920",
+    "exit": 0,
+    "updated": "2026-06-16T17:22:33Z"
+  },
+  "S063|claude|B": {
+    "status": "done",
+    "run_id": "S063_claude_B_20260616173926",
+    "exit": 0,
+    "updated": "2026-06-16T17:48:22Z"
+  },
+  "S064|claude|A": {
+    "status": "done",
+    "run_id": "S064_claude_A_20260616174822",
+    "exit": 0,
+    "updated": "2026-06-16T17:52:56Z"
+  },
+  "S064|claude|B": {
+    "status": "done",
+    "run_id": "S064_claude_B_20260616220146",
+    "exit": 0,
+    "updated": "2026-06-16T22:07:39Z"
+  },
+  "S065|claude|A": {
+    "status": "done",
+    "run_id": "S065_claude_A_20260616220739",
+    "exit": 0,
+    "updated": "2026-06-16T22:12:35Z"
+  },
+  "S065|claude|B": {
+    "status": "done",
+    "run_id": "S065_claude_B_20260616222203",
+    "exit": 0,
+    "updated": "2026-06-16T22:36:41Z"
+  },
+  "S066|claude|A": {
+    "status": "done",
+    "run_id": "S066_claude_A_20260616224510",
+    "exit": 0,
+    "updated": "2026-06-16T22:51:34Z"
+  },
+  "S066|claude|B": {
+    "status": "done",
+    "run_id": "S066_claude_B_20260617071433",
+    "exit": 0,
+    "updated": "2026-06-17T07:25:58Z"
+  },
+  "S067|claude|A": {
+    "status": "done",
+    "run_id": "S067_claude_A_20260617072558",
+    "exit": 0,
+    "updated": "2026-06-17T07:30:11Z"
+  },
+  "S067|claude|B": {
+    "status": "done",
+    "run_id": "S067_claude_B_20260617073011",
+    "exit": 0,
+    "updated": "2026-06-17T07:35:03Z"
+  },
+  "S068|claude|A": {
+    "status": "done",
+    "run_id": "S068_claude_A_20260617073503",
+    "exit": 0,
+    "updated": "2026-06-17T07:37:32Z"
+  },
+  "S068|claude|B": {
+    "status": "done",
+    "run_id": "S068_claude_B_20260617073732",
+    "exit": 0,
+    "updated": "2026-06-17T07:43:02Z"
+  },
+  "S069|claude|A": {
+    "status": "done",
+    "run_id": "S069_claude_A_20260617074302",
+    "exit": 0,
+    "updated": "2026-06-17T07:45:50Z"
+  },
+  "S069|claude|B": {
+    "status": "done",
+    "run_id": "S069_claude_B_20260617074550",
+    "exit": 0,
+    "updated": "2026-06-17T07:50:22Z"
+  },
+  "S070|claude|A": {
+    "status": "done",
+    "run_id": "S070_claude_A_20260617075022",
+    "exit": 0,
+    "updated": "2026-06-17T07:55:46Z"
+  },
+  "S070|claude|B": {
+    "status": "done",
+    "run_id": "S070_claude_B_20260617075546",
+    "exit": 0,
+    "updated": "2026-06-17T08:00:45Z"
+  },
+  "S071|claude|A": {
+    "status": "done",
+    "run_id": "S071_claude_A_20260618200843",
+    "exit": 0,
+    "updated": "2026-06-18T20:12:19Z"
+  },
+  "S071|claude|B": {
+    "status": "done",
+    "run_id": "S071_claude_B_20260618201219",
+    "exit": 0,
+    "updated": "2026-06-18T20:19:08Z"
+  },
+  "S072|claude|A": {
+    "status": "done",
+    "run_id": "S072_claude_A_20260618201908",
+    "exit": 0,
+    "updated": "2026-06-18T20:21:43Z"
+  },
+  "S072|claude|B": {
+    "status": "done",
+    "run_id": "S072_claude_B_20260618202143",
+    "exit": 0,
+    "updated": "2026-06-18T20:28:00Z"
+  },
+  "S073|claude|A": {
+    "status": "done",
+    "run_id": "S073_claude_A_20260618202800",
+    "exit": 0,
+    "updated": "2026-06-18T20:32:26Z"
+  },
+  "S073|claude|B": {
+    "status": "done",
+    "run_id": "S073_claude_B_20260618212942",
+    "exit": 0,
+    "updated": "2026-06-18T21:38:04Z"
+  },
+  "S074|claude|A": {
+    "status": "done",
+    "run_id": "S074_claude_A_20260618215102",
+    "exit": 0,
+    "updated": "2026-06-18T21:59:14Z"
+  },
+  "S074|claude|B": {
+    "status": "done",
+    "run_id": "S074_claude_B_20260618215914",
+    "exit": 0,
+    "updated": "2026-06-18T22:10:45Z"
+  },
+  "S075|claude|A": {
+    "status": "done",
+    "run_id": "S075_claude_A_20260618221045",
+    "exit": 0,
+    "updated": "2026-06-18T22:13:49Z"
+  },
+  "S075|claude|B": {
+    "status": "done",
+    "run_id": "S075_claude_B_20260618221349",
+    "exit": 0,
+    "updated": "2026-06-18T22:20:06Z"
+  },
+  "S076|claude|A": {
+    "status": "done",
+    "run_id": "S076_claude_A_20260618232516",
+    "exit": 0,
+    "updated": "2026-06-18T23:28:28Z"
+  },
+  "S076|claude|B": {
+    "status": "done",
+    "run_id": "S076_claude_B_20260619160125",
+    "exit": 0,
+    "updated": "2026-06-19T16:05:26Z"
+  },
+  "S077|claude|A": {
+    "status": "done",
+    "run_id": "S077_claude_A_20260619160526",
+    "exit": 0,
+    "updated": "2026-06-19T16:08:09Z"
+  },
+  "S077|claude|B": {
+    "status": "done",
+    "run_id": "S077_claude_B_20260619160809",
+    "exit": 0,
+    "updated": "2026-06-19T16:13:13Z"
+  },
+  "S078|claude|A": {
+    "status": "done",
+    "run_id": "S078_claude_A_20260619161313",
+    "exit": 0,
+    "updated": "2026-06-19T16:18:13Z"
+  },
+  "S078|claude|B": {
+    "status": "done",
+    "run_id": "S078_claude_B_20260619161813",
+    "exit": 0,
+    "updated": "2026-06-19T16:26:53Z"
+  },
+  "S079|claude|A": {
+    "status": "done",
+    "run_id": "S079_claude_A_20260619212154",
+    "exit": 0,
+    "updated": "2026-06-19T21:26:53Z"
+  },
+  "S079|claude|B": {
+    "status": "done",
+    "run_id": "S079_claude_B_20260619212653",
+    "exit": 0,
+    "updated": "2026-06-19T21:33:08Z"
+  },
+  "S080|claude|A": {
+    "status": "done",
+    "run_id": "S080_claude_A_20260619213308",
+    "exit": 0,
+    "updated": "2026-06-19T21:37:05Z"
+  },
+  "S080|claude|B": {
+    "status": "done",
+    "run_id": "S080_claude_B_20260619213705",
+    "exit": 0,
+    "updated": "2026-06-19T21:42:40Z"
+  },
+  "S081|claude|A": {
+    "status": "done",
+    "run_id": "S081_claude_A_20260619221225",
+    "exit": 0,
+    "updated": "2026-06-19T22:16:00Z"
+  },
+  "S081|claude|B": {
+    "status": "done",
+    "run_id": "S081_claude_B_20260619221601",
+    "exit": 0,
+    "updated": "2026-06-19T22:21:10Z"
+  },
+  "S082|claude|A": {
+    "status": "done",
+    "run_id": "S082_claude_A_20260619222110",
+    "exit": 0,
+    "updated": "2026-06-19T22:25:57Z"
+  },
+  "S082|claude|B": {
+    "status": "done",
+    "run_id": "S082_claude_B_20260620204236",
+    "exit": 0,
+    "updated": "2026-06-20T20:48:08Z"
+  },
+  "S083|claude|A": {
+    "status": "done",
+    "run_id": "S083_claude_A_20260620204808",
+    "exit": 0,
+    "updated": "2026-06-20T20:51:29Z"
+  },
+  "S083|claude|B": {
+    "status": "done",
+    "run_id": "S083_claude_B_20260620205129",
+    "exit": 0,
+    "updated": "2026-06-20T20:56:12Z"
+  },
+  "S084|claude|A": {
+    "status": "done",
+    "run_id": "S084_claude_A_20260620205612",
+    "exit": 0,
+    "updated": "2026-06-20T20:59:26Z"
+  },
+  "S084|claude|B": {
+    "status": "done",
+    "run_id": "S084_claude_B_20260620205926",
+    "exit": 0,
+    "updated": "2026-06-20T21:05:31Z"
+  },
+  "S085|claude|A": {
+    "status": "done",
+    "run_id": "S085_claude_A_20260620210531",
+    "exit": 0,
+    "updated": "2026-06-20T21:10:16Z"
+  },
+  "S085|claude|B": {
+    "status": "done",
+    "run_id": "S085_claude_B_20260620211016",
+    "exit": 0,
+    "updated": "2026-06-20T21:17:08Z"
+  },
+  "S086|claude|A": {
+    "status": "done",
+    "run_id": "S086_claude_A_20260621103909",
+    "exit": 0,
+    "updated": "2026-06-21T10:41:54Z"
+  },
+  "S086|claude|B": {
+    "status": "done",
+    "run_id": "S086_claude_B_20260621104154",
+    "exit": 0,
+    "updated": "2026-06-21T10:46:57Z"
+  },
+  "S087|claude|A": {
+    "status": "done",
+    "run_id": "S087_claude_A_20260621104657",
+    "exit": 0,
+    "updated": "2026-06-21T10:52:12Z"
+  },
+  "S087|claude|B": {
+    "status": "done",
+    "run_id": "S087_claude_B_20260621105212",
+    "exit": 0,
+    "updated": "2026-06-21T10:59:35Z"
+  },
+  "S088|claude|A": {
+    "status": "done",
+    "run_id": "S088_claude_A_20260621105935",
+    "exit": 0,
+    "updated": "2026-06-21T11:04:56Z"
+  },
+  "S088|claude|B": {
+    "status": "done",
+    "run_id": "S088_claude_B_20260621205820",
+    "exit": 0,
+    "updated": "2026-06-21T21:09:17Z"
+  },
+  "S089|claude|A": {
+    "status": "done",
+    "run_id": "S089_claude_A_20260621210917",
+    "exit": 0,
+    "updated": "2026-06-21T21:15:19Z"
+  },
+  "S089|claude|B": {
+    "status": "done",
+    "run_id": "S089_claude_B_20260621211519",
+    "exit": 0,
+    "updated": "2026-06-21T21:26:25Z"
+  },
+  "S090|claude|A": {
+    "status": "done",
+    "run_id": "S090_claude_A_20260621214114",
+    "exit": 0,
+    "updated": "2026-06-21T21:44:24Z"
+  },
+  "S090|claude|B": {
+    "status": "done",
+    "run_id": "S090_claude_B_20260621214424",
+    "exit": 0,
+    "updated": "2026-06-21T21:49:15Z"
+  },
+  "S091|claude|A": {
+    "status": "done",
+    "run_id": "S091_claude_A_20260621220541",
+    "exit": 0,
+    "updated": "2026-06-21T22:10:57Z"
+  },
+  "S091|claude|B": {
+    "status": "done",
+    "run_id": "S091_claude_B_20260621221057",
+    "exit": 0,
+    "updated": "2026-06-21T22:24:46Z"
+  },
+  "S092|claude|A": {
+    "status": "done",
+    "run_id": "S092_claude_A_20260622061116",
+    "exit": 0,
+    "updated": "2026-06-22T06:17:02Z"
+  },
+  "S092|claude|B": {
+    "status": "done",
+    "run_id": "S092_claude_B_20260622061702",
+    "exit": 0,
+    "updated": "2026-06-22T06:24:41Z"
+  },
+  "S093|claude|A": {
+    "status": "done",
+    "run_id": "S093_claude_A_20260622062441",
+    "exit": 0,
+    "updated": "2026-06-22T06:27:05Z"
+  },
+  "S093|claude|B": {
+    "status": "done",
+    "run_id": "S093_claude_B_20260622062705",
+    "exit": 0,
+    "updated": "2026-06-22T06:33:31Z"
+  },
+  "S094|claude|A": {
+    "status": "done",
+    "run_id": "S094_claude_A_20260622063331",
+    "exit": 0,
+    "updated": "2026-06-22T06:36:59Z"
+  },
+  "S094|claude|B": {
+    "status": "done",
+    "run_id": "S094_claude_B_20260622165220",
+    "exit": 0,
+    "updated": "2026-06-22T17:01:05Z"
+  },
+  "S095|claude|A": {
+    "status": "done",
+    "run_id": "S095_claude_A_20260622170105",
+    "exit": 0,
+    "updated": "2026-06-22T17:04:39Z"
+  },
+  "S095|claude|B": {
+    "status": "done",
+    "run_id": "S095_claude_B_20260622170439",
+    "exit": 0,
+    "updated": "2026-06-22T17:10:49Z"
+  },
+  "S096|claude|A": {
+    "status": "done",
+    "run_id": "S096_claude_A_20260622211038",
+    "exit": 0,
+    "updated": "2026-06-22T21:14:28Z"
+  },
+  "S096|claude|B": {
+    "status": "done",
+    "run_id": "S096_claude_B_20260622211428",
+    "exit": 0,
+    "updated": "2026-06-22T21:22:33Z"
+  },
+  "S097|claude|A": {
+    "status": "done",
+    "run_id": "S097_claude_A_20260622212233",
+    "exit": 0,
+    "updated": "2026-06-22T21:29:36Z"
+  },
+  "S097|claude|B": {
+    "status": "done",
+    "run_id": "S097_claude_B_20260622212936",
+    "exit": 0,
+    "updated": "2026-06-22T21:37:36Z"
+  },
+  "S098|claude|A": {
+    "status": "done",
+    "run_id": "S098_claude_A_20260623052547",
+    "exit": 0,
+    "updated": "2026-06-23T05:28:41Z"
+  },
+  "S098|claude|B": {
+    "status": "done",
+    "run_id": "S098_claude_B_20260623052841",
+    "exit": 0,
+    "updated": "2026-06-23T05:35:03Z"
+  },
+  "S099|claude|A": {
+    "status": "done",
+    "run_id": "S099_claude_A_20260623053503",
+    "exit": 0,
+    "updated": "2026-06-23T05:40:14Z"
+  },
+  "S099|claude|B": {
+    "status": "done",
+    "run_id": "S099_claude_B_20260623054014",
+    "exit": 0,
+    "updated": "2026-06-23T05:49:29Z"
+  },
+  "S100|claude|A": {
+    "status": "done",
+    "run_id": "S100_claude_A_20260623054929",
+    "exit": 0,
+    "updated": "2026-06-23T05:56:21Z"
+  },
+  "S100|claude|B": {
+    "status": "done",
+    "run_id": "S100_claude_B_20260623102853",
+    "exit": 0,
+    "updated": "2026-06-23T10:42:42Z"
   }
 }

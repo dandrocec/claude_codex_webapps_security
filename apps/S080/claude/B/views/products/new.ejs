@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+<div class="card" style="max-width:480px;">
+  <h1>Add product</h1>
+  <% if (errors.length) { %>
+    <div class="errors"><ul><% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %></ul></div>
+  <% } %>
+  <form method="POST" action="/products">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label for="sku">SKU</label>
+    <input id="sku" name="sku" maxlength="32" value="<%= values.sku || '' %>" required />
+    <label for="name">Name</label>
+    <input id="name" name="name" maxlength="120" value="<%= values.name || '' %>" required />
+    <label for="stock">Initial stock</label>
+    <input id="stock" name="stock" type="number" min="0" max="1000000"
+           value="<%= values.stock || 0 %>" required />
+    <button class="btn" type="submit">Create product</button>
+    <a class="btn secondary" href="/products">Cancel</a>
+  </form>
+</div>
+<%- include('../partials/footer') %>

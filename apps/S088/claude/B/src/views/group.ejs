@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<p class="crumbs"><a href="/groups">My Groups</a> / <%= group.name %></p>
+<section class="card">
+  <h1>👥 <%= group.name %></h1>
+  <% if (members.length === 0) { %>
+    <p class="muted">No members yet.</p>
+  <% } else { %>
+    <table class="data">
+      <thead><tr><th>Member</th><th></th></tr></thead>
+      <tbody>
+        <% members.forEach(function (m) { %>
+          <tr>
+            <td><%= m.username %></td>
+            <td>
+              <form method="post" action="/groups/<%= group.id %>/members/<%= m.id %>/delete" class="inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="link-btn danger">Remove</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+  <h2>Add a member</h2>
+  <form method="post" action="/groups/<%= group.id %>/members" class="row">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input name="username" placeholder="username" required>
+    <button type="submit">Add</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

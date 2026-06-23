@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "_formfields.html" import render_field %}
+{% block title %}Members — {{ project.name }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>Members — {{ project.name }}</h1>
+    <a class="btn" href="{{ url_for('projects.view_project', project_id=project.id) }}">Back to board</a>
+  </div>
+
+  <ul class="member-list">
+    {% for m in memberships %}
+      <li class="card row">
+        <span>{{ m.user.username }} <span class="muted">({{ m.user.email }})</span></span>
+        <span class="badge">{{ m.role }}</span>
+        {% if is_owner and m.user_id != project.owner_id %}
+          <form class="inline" method="post"
+                action="{{ url_for('projects.remove_member', project_id=project.id, user_id=m.user_id) }}"
+                onsubmit="return confirm('Remove this member?');">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="link-btn danger">Remove</button>
+          </form>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if is_owner %}
+    <div class="card narrow">
+      <h2>Invite a member</h2>
+      <p class="muted">The person must already have a registered account.</p>
+      <form method="post" novalidate>
+        {{ form.hidden_tag() }}
+        {{ render_field(form.email) }}
+        {{ form.submit(class="btn primary") }}
+      </form>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Post a job{% endblock %}
+{% block content %}
+  <h1>Post a job</h1>
+  <div class="card" style="max-width:620px;">
+    <form method="post">
+      <label for="title">Title</label>
+      <input id="title" name="title" value="{{ form.get('title', '') }}" required>
+
+      <label for="location">Location</label>
+      <input id="location" name="location" value="{{ form.get('location', '') }}"
+             placeholder="Remote, New York, …">
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description">{{ form.get('description', '') }}</textarea>
+
+      <div style="margin-top:16px;">
+        <button class="btn" type="submit">Publish</button>
+        <a class="btn secondary" href="{{ url_for('dashboard') }}">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

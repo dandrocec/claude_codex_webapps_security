@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}New ticket{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Open a ticket</h1>
+  <form method="post">
+    <label for="subject">Subject</label>
+    <input id="subject" name="subject" style="width:100%" autofocus>
+    <label for="body">How can we help?</label>
+    <textarea id="body" name="body"></textarea>
+    <div style="margin-top:16px" class="inline">
+      <button class="btn" type="submit">Submit ticket</button>
+      <a href="{{ url_for('index') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<div class="votes">
+  <form method="post" action="/vote" class="inline">
+    <input type="hidden" name="post_type" value="<%= postType %>" />
+    <input type="hidden" name="post_id" value="<%= postId %>" />
+    <input type="hidden" name="value" value="1" />
+    <button type="submit" class="vote-btn <%= myVote === 1 ? 'active' : '' %>"
+            title="Vote up" <%= currentUser ? '' : 'disabled' %>>&#9650;</button>
+  </form>
+  <span class="score"><%= score %></span>
+  <form method="post" action="/vote" class="inline">
+    <input type="hidden" name="post_type" value="<%= postType %>" />
+    <input type="hidden" name="post_id" value="<%= postId %>" />
+    <input type="hidden" name="value" value="-1" />
+    <button type="submit" class="vote-btn <%= myVote === -1 ? 'active' : '' %>"
+            title="Vote down" <%= currentUser ? '' : 'disabled' %>>&#9660;</button>
+  </form>
+</div>

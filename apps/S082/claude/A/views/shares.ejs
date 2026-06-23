@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+
+<section class="card">
+  <h1>Share Links</h1>
+  <p class="muted">
+    Each link grants read-only access to a single file. Revoke a link at any time
+    to immediately cut off access.
+  </p>
+</section>
+
+<section class="card">
+  <% if (shares.length === 0) { %>
+    <p class="muted">No share links yet. Create one from the
+      <a href="/">My Files</a> page.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr><th>File</th><th>Link</th><th>Status</th><th>Created</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% shares.forEach(function (s) { %>
+          <% const url = baseUrl + '/s/' + s.token; %>
+          <tr class="<%= s.revoked ? 'is-revoked' : '' %>">
+            <td class="name"><%= s.original_name %></td>
+            <td>
+              <% if (s.revoked) { %>
+                <span class="muted">revoked</span>
+              <% } else { %>
+                <a href="<%= url %>" class="share-url"><%= url %></a>
+              <% } %>
+            </td>
+            <td>
+              <% if (s.revoked) { %>
+                <span class="badge badge-off">Revoked</span>
+              <% } else { %>
+                <span class="badge">Active</span>
+              <% } %>
+            </td>
+            <td class="muted"><%= s.created_at %> UTC</td>
+            <td class="actions">
+              <% if (!s.revoked) { %>
+                <form method="post" action="/shares/<%= s.id %>/revoke" class="inline"
+                      onsubmit="return confirm('Revoke this share link?');">
+                  <button type="submit" class="btn-sm danger">Revoke</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

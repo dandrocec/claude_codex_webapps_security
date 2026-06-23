@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Author dashboard — Quill{% endblock %}
+{% block content %}
+  <div class="row-between">
+    <h1>Your posts</h1>
+    <a class="btn" href="{{ url_for('new_post') }}">+ New post</a>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr><th>Title</th><th>Status</th><th>Updated</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+        <tr>
+          <td>{{ post['title'] }}</td>
+          <td><span class="status status-{{ post['status'] }}">{{ post['status'] }}</span>
+            {% if post['status'] == 'rejected' and post['review_note'] %}
+              <div class="note">Editor: {{ post['review_note'] }}</div>
+            {% endif %}
+          </td>
+          <td>{{ post['updated_at'] }}</td>
+          <td class="actions">
+            {% if post['status'] != 'approved' %}
+              <a href="{{ url_for('edit_post', post_id=post['id']) }}">Edit</a>
+            {% endif %}
+            {% if post['status'] in ['draft', 'rejected'] %}
+              <form action="{{ url_for('submit_post', post_id=post['id']) }}" method="post" class="inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="link-btn" type="submit">Submit</button>
+              </form>
+              <form action="{{ url_for('delete_post', post_id=post['id']) }}" method="post" class="inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="link-btn danger" type="submit">Delete</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" class="muted">No posts yet — write your first one.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

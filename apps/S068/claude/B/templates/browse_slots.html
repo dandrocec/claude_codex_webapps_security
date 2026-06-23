@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Browse slots · Scheduler{% endblock %}
+{% block content %}
+<h1>Available slots</h1>
+{% if slots %}
+<table class="data">
+  <thead>
+    <tr><th>Provider</th><th>Start</th><th>End</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for s in slots %}
+    <tr>
+      <td>{{ s['provider_email'] }}</td>
+      <td>{{ s['start_time'] }}</td>
+      <td>{{ s['end_time'] }}</td>
+      <td>
+        <form method="post" action="{{ url_for('book_slot', slot_id=s['id']) }}" class="inline">
+          {{ action_form.csrf_token }}
+          <button type="submit">Book</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">No open slots right now. Please check back later.</p>
+{% endif %}
+{% endblock %}

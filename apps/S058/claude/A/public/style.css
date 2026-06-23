@@ -1,0 +1,101 @@
+:root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --ink: #1f2330;
+    --muted: #6b7280;
+    --accent: #3b5bdb;
+    --accent-dark: #2f47ad;
+    --danger: #d6336c;
+    --border: #e3e6ec;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.5;
+}
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 1rem; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header / footer */
+.site-header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+}
+.site-header .container { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { font-weight: 700; font-size: 1.2rem; color: var(--ink); }
+.nav { display: flex; align-items: center; gap: 1rem; }
+.nav-user { color: var(--muted); }
+.badge {
+    background: var(--accent); color: #fff; font-size: .7rem; padding: .1rem .4rem;
+    border-radius: 4px; vertical-align: middle;
+}
+.site-footer { color: var(--muted); text-align: center; padding: 2rem 0; font-size: .85rem; }
+
+main.container { padding-top: 1.5rem; padding-bottom: 2rem; }
+
+h1 { font-size: 1.6rem; margin: .2rem 0 1rem; }
+h2 { font-size: 1.2rem; margin: 1.5rem 0 .75rem; }
+
+.muted { color: var(--muted); }
+.small { font-size: .85rem; }
+.empty { color: var(--muted); padding: 1.5rem 0; }
+
+.breadcrumb { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
+
+.page-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+
+/* Buttons */
+.btn {
+    display: inline-block; background: var(--accent); color: #fff; border: none;
+    padding: .55rem 1rem; border-radius: 6px; cursor: pointer; font-size: .95rem;
+}
+.btn:hover { background: var(--accent-dark); text-decoration: none; }
+.btn-small { padding: .3rem .6rem; font-size: .8rem; }
+.btn-danger { background: var(--danger); }
+.btn-danger:hover { background: #ad255a; }
+.link-button { background: none; border: none; color: var(--accent); cursor: pointer; font: inherit; padding: 0; }
+.link-button:hover { text-decoration: underline; }
+.inline { display: inline; }
+
+/* Boards list */
+.board-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+.board-item { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; }
+.board-name { font-size: 1.15rem; font-weight: 600; }
+.board-desc { margin: .3rem 0; color: var(--muted); }
+
+/* Thread table */
+.thread-table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.thread-table th, .thread-table td { text-align: left; padding: .7rem 1rem; border-bottom: 1px solid var(--border); }
+.thread-table thead th { background: #fafbfc; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+.thread-table tr:last-child td { border-bottom: none; }
+.thread-table .num { text-align: center; width: 5rem; }
+.thread-title { font-weight: 600; }
+
+/* Posts */
+.post { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.post.op { border-left: 4px solid var(--accent); }
+.post-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.post-meta { margin-bottom: .5rem; }
+.post-body { white-space: normal; word-wrap: break-word; }
+
+/* Forms */
+.form { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; display: grid; gap: 1rem; }
+.form.narrow, .reply-form { max-width: 420px; }
+.reply-form { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; margin-top: 1.5rem; max-width: none; }
+.form label, .reply-form label { display: grid; gap: .3rem; font-weight: 600; }
+.form input, .form textarea, .reply-form textarea {
+    width: 100%; padding: .55rem .7rem; border: 1px solid var(--border); border-radius: 6px;
+    font: inherit; font-weight: 400;
+}
+.reply-form textarea { margin-bottom: .8rem; }
+.form button, .reply-form button { justify-self: start; }
+
+.alert { background: #fff0f3; color: var(--danger); border: 1px solid #ffd6e0; padding: .7rem 1rem; border-radius: 6px; }

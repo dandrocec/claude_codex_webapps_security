@@ -1,0 +1,132 @@
+:root {
+  --bg: #f4f6fb;
+  --panel: #ffffff;
+  --border: #d9dee8;
+  --text: #1f2533;
+  --muted: #6b7280;
+  --primary: #2f6df6;
+  --primary-dark: #1f54cc;
+  --danger: #d83a3a;
+  --badge-owner: #6d28d9;
+  --badge-edit: #0f766e;
+  --badge-view: #475569;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.hidden { display: none !important; }
+.muted { color: var(--muted); font-size: 0.85rem; }
+.error { color: var(--danger); min-height: 1.2em; margin: 0.5rem 0 0; font-size: 0.9rem; }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+.brand { font-size: 1.15rem; margin: 0; }
+.userbar { display: flex; gap: 0.75rem; align-items: center; }
+
+button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+button:hover { background: var(--primary-dark); }
+button.danger { background: var(--danger); }
+button.secondary { background: #e5e7eb; color: var(--text); }
+
+input, select, textarea {
+  font: inherit;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  width: 100%;
+}
+
+/* Auth */
+.auth-view { display: flex; justify-content: center; padding: 3rem 1rem; }
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 360px;
+}
+.tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.tab { background: #eef1f7; color: var(--muted); flex: 1; }
+.tab.active { background: var(--primary); color: #fff; }
+.form { display: flex; flex-direction: column; gap: 0.75rem; }
+.form label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.85rem; color: var(--muted); }
+
+/* Workspace */
+.workspace { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 56px); }
+.sidebar { border-right: 1px solid var(--border); background: var(--panel); padding: 1rem; }
+.sidebar-head h2 { font-size: 1rem; margin: 0 0 0.75rem; }
+.new-doc { display: flex; gap: 0.4rem; margin-bottom: 1rem; }
+.new-doc input { flex: 1; }
+.doc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+.doc-list li {
+  padding: 0.55rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.doc-list li:hover { background: #f0f3fb; }
+.doc-list li.active { background: #e7eefe; border-color: #c5d6fb; }
+.doc-list .doc-name { font-weight: 600; font-size: 0.92rem; }
+.doc-list .doc-meta { font-size: 0.75rem; color: var(--muted); }
+
+.editor-pane { padding: 1.25rem 1.5rem; }
+.empty-state { color: var(--muted); margin-top: 2rem; }
+.editor-head { display: flex; align-items: center; gap: 0.75rem; }
+.doc-title { margin: 0; font-size: 1.25rem; }
+.save-status { margin: 0.25rem 0 0.75rem; min-height: 1em; }
+.doc-content {
+  width: 100%;
+  min-height: 320px;
+  resize: vertical;
+  line-height: 1.5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.doc-content:disabled { background: #f7f8fb; color: #444; }
+
+.badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--badge-view);
+}
+.badge.owner { background: var(--badge-owner); }
+.badge.edit { background: var(--badge-edit); }
+.badge.view { background: var(--badge-view); }
+
+.collab-panel { margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+.collab-panel h3 { font-size: 0.95rem; margin: 0 0 0.6rem; }
+.collab-list { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.collab-list li { display: flex; align-items: center; gap: 0.5rem; }
+.collab-list .cname { font-weight: 600; }
+.collab-list select { width: auto; }
+.collab-list .grow { flex: 1; }
+.invite-form { display: flex; gap: 0.4rem; align-items: center; }
+.invite-form input { flex: 1; }
+.invite-form select { width: auto; }

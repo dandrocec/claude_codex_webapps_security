@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticketing App</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">🎟️ Ticketing</a>
+    <nav>
+      <a href="/">Events</a>
+      <% if (currentUser) { %>
+        <% if (currentUser.role === 'organiser') { %>
+          <a href="/dashboard">My Events</a>
+          <a href="/events/new">New Event</a>
+        <% } else { %>
+          <a href="/my-tickets">My Tickets</a>
+        <% } %>
+        <span class="user">Hi, <%= currentUser.username %> (<%= currentUser.role %>)</span>
+        <form action="/logout" method="POST" class="inline">
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main>
+    <% if (flash) { %>
+      <div class="flash flash-<%= flash.type %>"><%= flash.message %></div>
+    <% } %>

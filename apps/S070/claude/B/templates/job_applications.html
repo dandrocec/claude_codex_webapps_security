@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Applications: {{ job.title }}{% endblock %}
+{% block content %}
+  <h1>Applications for &ldquo;{{ job.title }}&rdquo;</h1>
+  {% if applications %}
+    <table class="data-table">
+      <thead>
+        <tr><th>Applicant</th><th>Email</th><th>Cover letter</th><th>Resume</th><th>Status</th><th>Update</th></tr>
+      </thead>
+      <tbody>
+        {% for a in applications %}
+          <tr>
+            <td>{{ a.applicant }}</td>
+            <td>{{ a.applicant_email }}</td>
+            <td class="cover-cell">{{ a.cover_letter }}</td>
+            <td><a href="{{ url_for('download_resume', app_id=a.id) }}">Download ({{ a.resume_ext }})</a></td>
+            <td><span class="status status-{{ a.status }}">{{ a.status }}</span></td>
+            <td>
+              <form method="post" action="{{ url_for('update_status', app_id=a.id) }}" class="inline">
+                {{ status_form.csrf_token }}
+                {{ status_form.status() }}
+                {{ status_form.submit(class="btn btn-sm") }}
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No applications yet.</p>
+  {% endif %}
+  <p><a href="{{ url_for('dashboard') }}">&larr; Back to dashboard</a></p>
+{% endblock %}

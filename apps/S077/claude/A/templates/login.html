@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+  <h1>Log in</h1>
+  <form method="post" style="max-width:340px">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" autofocus>
+    <label for="password">Password</label>
+    <input type="text" id="password" name="password">
+    <p style="margin-top:1rem"><button class="btn" type="submit">Log in</button></p>
+  </form>
+  <div class="card muted">
+    <strong>Demo accounts</strong><br>
+    editor / editor — can create, edit, restore<br>
+    viewer / viewer — read-only
+  </div>
+{% endblock %}

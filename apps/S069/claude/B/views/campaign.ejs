@@ -1,0 +1,55 @@
+<%- include('partials/header', { title: campaign.title }) %>
+
+<article class="campaign">
+  <h1><%= campaign.title %></h1>
+  <p class="meta">by <%= campaign.creator_name %> &middot; Deadline: <%= campaign.deadline %>
+    <% if (campaign.expired) { %> &middot; <span class="ended">ended</span><% } %>
+  </p>
+
+  <div class="progress big" aria-label="<%= campaign.percent %>% funded">
+    <div class="progress-bar" style="width: <%= campaign.percent %>%"></div>
+  </div>
+  <p class="figures"><strong><%= campaign.raised_display %></strong> raised of <%= campaign.goal_display %> goal &middot; <%= campaign.percent %>%</p>
+
+  <p class="description"><%= campaign.description %></p>
+
+  <% if (errors && errors.length) { %>
+    <ul class="errors">
+      <% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %>
+    </ul>
+  <% } %>
+
+  <% if (currentUser && !isOwner && !campaign.expired) { %>
+    <form class="pledge-form" method="post" action="/campaigns/<%= campaign.id %>/pledge">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="amount">Pledge amount (USD)</label>
+      <div class="row">
+        <input id="amount" name="amount" type="text" inputmode="decimal" placeholder="25.00" required>
+        <button type="submit">Back this project</button>
+      </div>
+    </form>
+  <% } else if (!currentUser) { %>
+    <p><a href="/login">Log in</a> to back this project.</p>
+  <% } else if (isOwner) { %>
+    <p class="meta">This is your campaign.</p>
+    <form method="post" action="/campaigns/<%= campaign.id %>/delete" onsubmit="return confirm('Delete this campaign?');">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit" class="danger">Delete campaign</button>
+    </form>
+  <% } %>
+
+  <section class="pledges">
+    <h2>Recent backers</h2>
+    <% if (pledges.length === 0) { %>
+      <p class="empty">No pledges yet. Be the first!</p>
+    <% } else { %>
+      <ul class="pledge-list">
+        <% pledges.forEach(function (p) { %>
+          <li><strong><%= p.amount_display %></strong> from <%= p.backer_name %> <span class="meta">(<%= p.created_at %>)</span></li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </section>
+</article>
+
+<%- include('partials/footer') %>

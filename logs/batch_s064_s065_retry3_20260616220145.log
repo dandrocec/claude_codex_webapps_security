@@ -1,0 +1,125 @@
+The build is complete. Execution commands (venv/pip/python) are being blocked by this environment's permission policy, so I couldn't run a live smoke test from here — but the code is complete and self-consistent. Here's what I delivered.
+
+## What was built
+
+A Flask **Project Board** app — register/login, create projects, invite existing users as members, and manage tasks (todo/doing/done) with assignees on a Kanban board. Only project members can view or mutate a project; only the owner can edit/delete it or manage membership.
+
+```
+config.py            env-driven config (cookies, CSRF, size limits)
+run.py               dev entry point — http://127.0.0.1:5064
+requirements.txt     Flask, Flask-SQLAlchemy, Flask-WTF, Flask-Login, Flask-Bcrypt, WTForms, email-validator
+README.md            run instructions + security notes
+.env.example         secrets template
+app/
+  __init__.py        factory, security headers, error handlers
+  models.py          User / Project / Membership / Task (SQLAlchemy)
+  forms.py           WTForms validation + CSRF
+  auth.py            register / login / logout
+  projects.py        projects, members, tasks, board — access control lives here
+  main.py            index + /healthz
+  templates/         Jinja2 (auto-escaped) + error pages
+  static/style.css
+```
+
+## How the security requirements are met
+
+- **SQL injection** — all data access via SQLAlchemy (parameterised); no string-built SQL.
+- **Passwords** — bcrypt with per-password random salt (Flask-Bcrypt).
+- **Input validation** — every form length-bounded and validated server-side; status/assignee checked against allow-lists (`_validated_assignee` rejects non-members → also closes an IDOR vector).
+- **XSS** — Jinja2 auto-escaping + strict CSP (`script-src 'self'`, no inline JS; styles in a static file).
+- **CSRF** — `CSRFProtect` global; every state-changing POST (incl. logout, status move, deletes) carries a token.
+- **Access control / IDOR** — `_get_member_project` / `_get_owned_project` / `_get_project_task` gate every route; cross-project task access and non-member access return 404/403.
+- **Cookies** — `HttpOnly`, `SameSite=Lax`, `Secure` (env-toggled for HTTPS).
+- **Headers** — CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS over HTTPS.
+- **No leaked errors** — custom 400/403/404/413/500 pages; debug off by default; real errors only logged server-side.
+- **Secrets** — `SECRET_KEY`/`DATABASE_URL` from env; nothing hardcoded. Plus a 1 MB request cap.
+
+## Run it locally (port 5064)
+
+```bash
+python -m venv .venv
+.venv\Scripts\Activate.ps1          # macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+copy .env.example .env              # then set SECRET_KEY (python -c "import secrets;print(secrets.token_hex(32))")
+python run.py                       # http://127.0.0.1:5064
+```
+
+The SQLite DB auto-creates at `instance/app.db` on first run. Register two accounts to try the invite/assignee flow.
+
+One note worth flagging: I pinned the Flask-family packages but left their heavy transitive deps (SQLAlchemy, bcrypt) to float to the latest compatible release, which keeps install working on current Python (you have 3.14). If you'd like me to fully pin everything for reproducibility, or want me to add a smoke test you can run once the environment allows it, say the word.
+run_id S064_claude_B_20260616220146: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S064\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S064_claude_B_20260616220146.txt  (sha256 204952cf49607576...)
+  logged to logs/commands.log and logs/sessions.csv
+The application is complete. I built a full Q&A site, but I wasn't able to run `npm install` / `npm start` to verify it live — those commands were auto-denied in this sandbox. The code is finished and self-reviewed; you'll need to run the two commands below to start it.
+
+## What's built
+
+**Stack:** Node.js + Express + EJS templates + SQLite (`better-sqlite3`), with bcrypt-hashed passwords and session login.
+
+**Features, mapped to your requirements:**
+- **Post questions & answers** — any logged-in user (`POST /questions`, `POST /questions/:id/answers`).
+- **Vote up/down, one vote each** — enforced by a `PRIMARY KEY (user_id, post_type, post_id)` on the `votes` table; clicking the same arrow again toggles your vote off (`queries.js` → `castVote`).
+- **Accept an answer to your own question** — only the question's author sees/can use the Accept button; the server re-checks ownership (`POST /answers/:id/accept`, 403 otherwise).
+- **Answers sorted by score** — `ORDER BY (is accepted) DESC, score DESC, created_at ASC`, so the accepted answer pins to the top and the rest sort by net score.
+- **Stored in a database** — SQLite file `data.sqlite` (questions, answers, users, votes, and a sessions table).
+
+## How to run it (port 5065)
+
+```bash
+npm install
+npm start
+```
+Then open http://localhost:5065. Port is configurable via `PORT` (defaults to 5065). Full instructions and a quick walkthrough are in `README.md`.
+
+## Two things worth flagging
+- **One native dependency by design.** I dropped `connect-sqlite3` (which pulls in a second native module whose prebuilt binaries lag on Node 24/Windows and is the most likely cause of an `npm install` failure) and instead back sessions with a small SQLite store (`session-store.js`) on the same connection. So only `better-sqlite3` compiles.
+- **Unverified at runtime.** I could not execute `npm install` or start the server here. If `better-sqlite3`'s prebuilt binary isn't available for your exact Node 24.16 build, `npm install` will try to compile it (needs Windows build tools). If that happens, tell me and I can switch the data layer to Node 24's built-in `node:sqlite` to eliminate the native build entirely.
+
+Want me to retry the install/run now (if you can approve the command), or switch to the zero-native-dependency `node:sqlite` approach preemptively?
+run_id S065_claude_A_20260616220739: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S065\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S065_claude_A_20260616220739.txt  (sha256 75863db49f23287b...)
+  logged to logs/commands.log and logs/sessions.csv
+The `npm install` command needs your approval (it's prompting on your side). Once you approve it — or run it yourself — I can verify the app boots. Here's where things stand:
+
+## What I built
+
+A complete, secure Q&A site under `qa-site/`. All source files are written and the structure is ready to run.
+
+**Stack:** Express + EJS + SQLite (`better-sqlite3`), sessions in SQLite, bcrypt, helmet, express-validator.
+
+**Core features**
+- Register / login / logout
+- Ask questions, post answers
+- One up/down vote per user per item (UNIQUE constraint; re-voting toggles or flips)
+- Question owner accepts exactly one answer (transactional)
+- Answers sorted: accepted → score → oldest
+
+**Security (mapped to your requirements)**
+- **SQL injection** — every query is a prepared statement with bound params (`src/models.js`)
+- **Passwords** — bcrypt cost 12 with per-password salt
+- **XSS** — EJS auto-escaping (`<%= %>`) + strict CSP with no inline scripts
+- **CSRF** — synchronizer token verified on all non-safe requests, constant-time compare (`src/middleware/csrf.js`)
+- **Access control / IDOR** — owner checks + integer id validation on accept/vote routes
+- **Session cookies** — `HttpOnly`, `SameSite=Lax`, `Secure` (configurable for HTTPS), session regenerated on login to stop fixation
+- **Headers** — helmet
+- **Error handling** — real errors logged server-side, only generic message to client
+- **Secrets** — read from env (`SESSION_SECRET` required; app refuses to start without it); `.env.example` provided
+- Bonus: rate-limiting on auth, generic login errors to prevent user enumeration
+
+## To run it
+
+```powershell
+cd qa-site
+npm install          # ← this is what needs your approval (compiles better-sqlite3 + bcrypt)
+Copy-Item .env.example .env
+node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"   # paste into SESSION_SECRET in .env
+npm start
+```
+
+Then open http://localhost:5065.
+
+**Would you like me to:**
+1. Retry `npm install` (please approve the prompt), so I can confirm the server boots and routes work, or
+2. Leave it as-is for you to run manually?
+
+The one thing I can't fully guarantee without running it is that the native modules compile on your machine — that needs the C++ build toolchain (noted in the README under Requirements). If `better-sqlite3`/`bcrypt` fail to build, I can swap to pure-JS alternatives (`bcryptjs` and `node:sqlite`) so there's no compile step at all. Let me know.

@@ -1,0 +1,55 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>Create a quiz</h1>
+  <%- include('../partials/errors') %>
+
+  <form method="post" action="/quizzes" id="quiz-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <label>
+      Title
+      <input type="text" name="title" value="<%= values.title || '' %>" required maxlength="200">
+    </label>
+    <label>
+      Description (optional)
+      <textarea name="description" maxlength="2000" rows="2"><%= values.description || '' %></textarea>
+    </label>
+
+    <h2>Questions</h2>
+    <p class="hint">Add questions, give each at least two options, and mark the correct one.</p>
+
+    <div id="questions"></div>
+
+    <button type="button" id="add-question" class="btn-secondary">+ Add question</button>
+
+    <hr>
+    <label class="radio">
+      <input type="checkbox" name="publish"> Publish immediately (visible to students)
+    </label>
+    <button type="submit">Save quiz</button>
+  </form>
+</section>
+
+<!-- Template used by the external script to build question blocks. -->
+<template id="question-template">
+  <fieldset class="question-block">
+    <legend>Question</legend>
+    <label>
+      Question text
+      <input type="text" name="questions[IDX][text]" maxlength="1000" required>
+    </label>
+    <div class="options"></div>
+    <button type="button" class="btn-secondary add-option">+ Add option</button>
+    <button type="button" class="link-btn remove-question">Remove question</button>
+  </fieldset>
+</template>
+
+<template id="option-template">
+  <div class="option-row">
+    <input type="radio" name="questions[IDX][correct]" value="OPT" title="Mark as correct" required>
+    <input type="text" name="questions[IDX][options][]" maxlength="500" placeholder="Option text" required>
+  </div>
+</template>
+
+<script src="/static/js/new-quiz.js"></script>
+<%- include('../partials/footer') %>

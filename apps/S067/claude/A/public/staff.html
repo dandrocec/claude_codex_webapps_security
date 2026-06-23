@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasty Bites — Staff Console</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>👩‍🍳 Staff Console</h1>
+      <a class="staff-link" href="/">← Customer view</a>
+    </header>
+
+    <main class="staff-main">
+      <!-- Login -->
+      <section id="login-pane" class="login-pane hidden">
+        <h2>Staff sign in</h2>
+        <label>Username <input id="username" type="text" value="staff" /></label>
+        <label>Password <input id="password" type="password" placeholder="staff123" /></label>
+        <button id="login-btn" class="primary">Sign in</button>
+        <div id="login-error" class="error"></div>
+      </section>
+
+      <!-- Orders dashboard -->
+      <section id="orders-pane" class="orders-pane hidden">
+        <div class="orders-header">
+          <h2>Incoming orders</h2>
+          <div class="orders-controls">
+            <label class="auto">
+              <input id="auto-refresh" type="checkbox" checked /> Auto-refresh
+            </label>
+            <button id="refresh-btn">Refresh</button>
+            <button id="logout-btn">Log out</button>
+          </div>
+        </div>
+        <div id="orders" class="orders-list">Loading…</div>
+      </section>
+    </main>
+
+    <script src="/staff.js"></script>
+  </body>
+</html>

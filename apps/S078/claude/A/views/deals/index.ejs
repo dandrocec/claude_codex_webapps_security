@@ -1,0 +1,42 @@
+<%- include('../partials/head', { pageTitle: 'Deals' }) %>
+  <div class="page-head">
+    <h1>Deals</h1>
+    <div class="page-actions">
+      <span class="scope"><%= currentUser.role === 'manager' ? 'Whole team' : 'Yours' %></span>
+      <a href="/board" class="btn">Board view</a>
+      <a href="/deals/new" class="btn btn-primary">+ New deal</a>
+    </div>
+  </div>
+
+  <% if (deals.length === 0) { %>
+    <p class="empty">No deals yet. <a href="/deals/new">Add one</a>.</p>
+  <% } else { %>
+  <table class="data">
+    <thead>
+      <tr>
+        <th>Title</th><th>Stage</th><th>Value</th><th>Contact</th>
+        <% if (currentUser.role === 'manager') { %><th>Owner</th><% } %>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% deals.forEach(function(d) { %>
+        <tr>
+          <td><%= d.title %></td>
+          <td><span class="pill pill-<%= d.stage %>"><%= stageLabel(d.stage) %></span></td>
+          <td><%= money(d.value) %></td>
+          <td><%= d.contact_name || '—' %></td>
+          <% if (currentUser.role === 'manager') { %><td><%= d.owner_name %></td><% } %>
+          <td class="row-actions">
+            <a class="btn btn-mini" href="/deals/<%= d.id %>/edit">Edit</a>
+            <form method="POST" action="/deals/<%= d.id %>?_method=DELETE" class="inline"
+                  onsubmit="return confirm('Delete this deal?');">
+              <button class="btn btn-mini btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <% } %>
+<%- include('../partials/foot') %>

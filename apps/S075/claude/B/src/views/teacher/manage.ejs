@@ -1,0 +1,62 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <div class="card-head">
+    <h1><%= quiz.title %></h1>
+    <span class="badge <%= quiz.published ? 'ok' : 'muted' %>">
+      <%= quiz.published ? 'Published' : 'Draft' %>
+    </span>
+  </div>
+  <% if (quiz.description) { %><p class="desc"><%= quiz.description %></p><% } %>
+
+  <div class="actions">
+    <form class="inline" method="post" action="/quizzes/<%= quiz.id %>/publish">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit" class="btn-secondary">
+        <%= quiz.published ? 'Unpublish' : 'Publish' %>
+      </button>
+    </form>
+    <form class="inline" method="post" action="/quizzes/<%= quiz.id %>/delete"
+          data-confirm="Delete this quiz and all its attempts?">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit" class="link-btn danger">Delete quiz</button>
+    </form>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Questions &amp; answers</h2>
+  <% questions.forEach(function (q, i) { %>
+    <div class="question-view">
+      <p><strong><%= i + 1 %>.</strong> <%= q.text %></p>
+      <ul>
+        <% q.options.forEach(function (o) { %>
+          <li class="<%= o.is_correct ? 'correct' : '' %>">
+            <%= o.text %><% if (o.is_correct) { %> <span class="tag">correct</span><% } %>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+  <% }); %>
+</section>
+
+<section class="card">
+  <h2>Student attempts (<%= attempts.length %>)</h2>
+  <% if (attempts.length === 0) { %>
+    <p>No attempts yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Student</th><th>Score</th><th>When</th></tr></thead>
+      <tbody>
+        <% attempts.forEach(function (a) { %>
+          <tr>
+            <td><%= a.student_name %></td>
+            <td><%= a.score %> / <%= a.total %></td>
+            <td><%= a.created_at %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<script src="/static/js/confirm.js"></script>
+<%- include('../partials/footer') %>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "_post.html" import render_post %}
+{% block title %}@{{ profile_user.username }} · Microblog{% endblock %}
+{% block content %}
+<section class="profile-head">
+  <h1>@{{ profile_user.username }}</h1>
+  <p class="muted">Joined {{ profile_user.created_at.strftime('%Y-%m-%d') }}</p>
+  {% if can_follow %}
+    {% if following %}
+      <form class="inline" method="post" action="/u/{{ profile_user.username }}/unfollow">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button type="submit">Unfollow</button>
+      </form>
+    {% else %}
+      <form class="inline" method="post" action="/u/{{ profile_user.username }}/follow">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button type="submit">Follow</button>
+      </form>
+    {% endif %}
+  {% endif %}
+</section>
+
+<section class="feed">
+  {% if posts %}
+    {% for post in posts %}
+      {{ render_post(post, current_user, csrf_token) }}
+    {% endfor %}
+  {% else %}
+    <p class="empty">No posts yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

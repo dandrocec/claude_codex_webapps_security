@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · PhotoShare</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/feed">PhotoShare</a>
+    <nav>
+      <% if (currentUser) { %>
+        <a href="/feed">Feed</a>
+        <a href="/photos/new">Upload</a>
+        <a href="/users">People</a>
+        <a href="/users/<%= currentUser.username %>"><%= currentUser.username %></a>
+        <form class="inline" action="/logout" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="linkbtn">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">
+    <% (flash || []).forEach(function (f) { %>
+      <div class="flash flash-<%= f.type %>"><%= f.message %></div>
+    <% }); %>

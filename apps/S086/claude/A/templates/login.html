@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Log in — Admin Dashboard{% endblock %}
+{% block content %}
+<div class="login-wrap">
+  <div class="card login-card">
+    <h1>Admin Login</h1>
+    <p class="muted">Sign in to manage users and view site statistics.</p>
+    <form method="post" action="{{ url_for('login') }}">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" autofocus required>
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required>
+
+      <button class="btn btn-primary btn-block" type="submit">Log in</button>
+    </form>
+    <p class="muted small">Default admin — <code>admin</code> / <code>admin123</code></p>
+  </div>
+</div>
+{% endblock %}

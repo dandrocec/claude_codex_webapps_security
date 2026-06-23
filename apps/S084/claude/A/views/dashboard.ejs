@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<h1>My Events</h1>
+<p><a href="/events/new" class="btn">+ New event</a></p>
+
+<% if (events.length === 0) { %>
+  <p class="muted">You haven't created any events yet.</p>
+<% } else { %>
+  <table class="table">
+    <thead>
+      <tr><th>Event</th><th>Date</th><th>Sold</th><th>Available</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+      <% events.forEach(function (e) { %>
+        <tr>
+          <td><%= e.name %></td>
+          <td><%= e.event_date || '—' %></td>
+          <td><%= e.tickets_sold %></td>
+          <td><%= e.available > 0 ? e.available : '0 (sold out)' %></td>
+          <td><%= e.total_tickets %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/footer') %>

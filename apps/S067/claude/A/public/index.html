@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasty Bites — Order Online</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>🍽️ Tasty Bites</h1>
+      <a class="staff-link" href="/staff.html">Staff console →</a>
+    </header>
+
+    <main class="layout">
+      <section class="menu-pane">
+        <h2>Menu</h2>
+        <div id="menu" class="menu-grid">Loading menu…</div>
+      </section>
+
+      <aside class="cart-pane">
+        <h2>Your Cart</h2>
+        <div id="cart" class="cart-items">Your cart is empty.</div>
+
+        <div class="cart-total">
+          <span>Total</span>
+          <strong id="cart-total">$0.00</strong>
+        </div>
+        <p class="hint">Total shown is an estimate; the kitchen confirms the price on the server.</p>
+
+        <label class="name-field">
+          Your name
+          <input id="customer-name" type="text" placeholder="e.g. Alex" autocomplete="name" />
+        </label>
+
+        <button id="place-order" class="primary" disabled>Place order</button>
+        <div id="order-result" class="order-result"></div>
+      </aside>
+    </main>
+
+    <script src="/customer.js"></script>
+  </body>
+</html>

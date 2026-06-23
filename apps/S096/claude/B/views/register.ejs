@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<section class="card auth-card">
+  <h1>Create a developer account</h1>
+
+  <% if (errors && errors.length) { %>
+    <ul class="alert alert-error">
+      <% errors.forEach(function (e) { %><li><%= e %></li><% }) %>
+    </ul>
+  <% } %>
+
+  <form method="post" action="/register" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>
+      Email
+      <input type="email" name="email" required maxlength="254"
+             value="<%= values.email || '' %>" />
+    </label>
+    <label>
+      Password <span class="muted">(at least 10 characters)</span>
+      <input type="password" name="password" required minlength="10" />
+    </label>
+    <label>
+      Confirm password
+      <input type="password" name="confirm" required minlength="10" />
+    </label>
+    <button type="submit" class="btn">Register</button>
+  </form>
+
+  <p class="muted">Already registered? <a href="/login">Log in</a>.</p>
+</section>
+
+<%- include('partials/footer') %>

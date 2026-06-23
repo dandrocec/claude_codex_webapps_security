@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ product['name'] }} &middot; Tiny Shop{% endblock %}
+{% block content %}
+  <p><a href="{{ url_for('main.index') }}">&larr; Back to products</a></p>
+  <article class="detail">
+    <h1>{{ product['name'] }}</h1>
+    <p class="price big">{{ product['price_cents'] | money }}</p>
+    <p class="desc">{{ product['description'] }}</p>
+    <p class="stock">{{ product['stock'] }} in stock</p>
+
+    <form method="post" action="{{ url_for('main.cart_add') }}" class="addform">
+      {{ form.csrf_token }}
+      {{ form.product_id(value=product['id']) }}
+      <label>{{ form.quantity.label }}
+        {{ form.quantity(min=1, max=99) }}
+      </label>
+      {% for e in form.quantity.errors %}<span class="err">{{ e }}</span>{% endfor %}
+      <button class="btn" type="submit">Add to cart</button>
+    </form>
+  </article>
+{% endblock %}

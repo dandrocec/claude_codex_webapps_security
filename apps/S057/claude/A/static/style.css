@@ -1,0 +1,130 @@
+:root {
+  --accent: #2b6cb0;
+  --border: #e2e8f0;
+  --text: #1a202c;
+  --muted: #718096;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: #f7fafc;
+  line-height: 1.5;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.site-header nav a {
+  margin-left: 1.25rem;
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.card,
+.product-detail,
+.comment {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.card h2 { margin-top: 0; font-size: 1.1rem; }
+.card h2 a, .product-detail h1 a { text-decoration: none; color: var(--text); }
+
+.price { font-weight: 700; color: var(--accent); margin: 0.25rem 0; }
+.description { color: var(--muted); }
+
+button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+button:hover { opacity: 0.9; }
+
+.link-button {
+  background: none;
+  color: #c53030;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.comments { margin-top: 2rem; }
+.comment { margin-bottom: 0.75rem; }
+.comment-meta { margin: 0; font-size: 0.85rem; }
+.comment-meta .date { color: var(--muted); margin-left: 0.5rem; }
+.comment-body { margin: 0.25rem 0 0; }
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 480px;
+}
+.comment-form input,
+.comment-form textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: inherit;
+}
+.comment-form button { align-self: flex-start; }
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.cart-table th,
+.cart-table td {
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.total-label { text-align: right; font-weight: 700; }
+.total-value { font-weight: 700; color: var(--accent); }
+
+.site-footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 1.5rem;
+  font-size: 0.85rem;
+}

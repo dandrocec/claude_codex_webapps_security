@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+<div class="page-head">
+  <h1>Events</h1>
+  <a class="btn" href="/events/new">Create event</a>
+</div>
+
+<% if (!events.length) { %>
+  <p>No events yet. <a href="/events/new">Create the first one</a>.</p>
+<% } else { %>
+  <ul class="event-list">
+    <% events.forEach(function (e) { %>
+      <% var remaining = e.capacity - e.tickets_sold; %>
+      <li class="card">
+        <h2><a href="/events/<%= e.id %>"><%= e.name %></a></h2>
+        <p class="meta">
+          <% if (e.event_date) { %><span><%= e.event_date %></span> · <% } %>
+          by <%= e.organiser_email %>
+        </p>
+        <p>
+          <% if (remaining > 0) { %>
+            <span class="badge ok"><%= remaining %> of <%= e.capacity %> left</span>
+          <% } else { %>
+            <span class="badge sold">Sold out</span>
+          <% } %>
+        </p>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+<%- include('../partials/footer') %>

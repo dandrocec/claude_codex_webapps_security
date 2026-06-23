@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "_formfields.html" import render_field %}
+{% block title %}{{ "New project" if mode == "create" else "Edit project" }}{% endblock %}
+{% block content %}
+  <div class="card narrow">
+    <h1>{{ "New project" if mode == "create" else "Edit project" }}</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      {{ render_field(form.name) }}
+      {{ render_field(form.description, rows=4) }}
+      {{ form.submit(class="btn primary") }}
+      {% if mode == "edit" %}
+        <a class="btn" href="{{ url_for('projects.view_project', project_id=project.id) }}">Cancel</a>
+      {% else %}
+        <a class="btn" href="{{ url_for('projects.list_projects') }}">Cancel</a>
+      {% endif %}
+    </form>
+  </div>
+{% endblock %}

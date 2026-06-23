@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Search candidates{% endblock %}
+{% block content %}
+  <h1>Search candidates</h1>
+
+  <form method="get" action="{{ url_for('main.search') }}" class="searchbar">
+    {{ form.skill(placeholder="Skill, e.g. python", value=term) }}
+    {{ form.submit(class="btn") }}
+  </form>
+  {% for error in form.skill.errors %}
+    <span class="error-text">{{ error }}</span>
+  {% endfor %}
+
+  {% if term %}
+    <p class="muted">Results for skill “{{ term }}”:</p>
+  {% else %}
+    <p class="muted">Recently updated candidates:</p>
+  {% endif %}
+
+  {% if results %}
+    <ul class="cards">
+      {% for c in results %}
+        <li class="card">
+          <a class="cardtitle" href="{{ url_for('main.view_candidate', profile_id=c.id) }}">
+            {{ c.full_name }}
+          </a>
+          {% if c.headline %}<div>{{ c.headline }}</div>{% endif %}
+          {% if c.location %}<div class="muted">{{ c.location }}</div>{% endif %}
+          {% if c.skills %}<div class="skills">{{ c.skills }}</div>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No candidates found.</p>
+  {% endif %}
+{% endblock %}

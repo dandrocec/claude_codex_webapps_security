@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<div class="card narrow">
+  <h1>Add product</h1>
+  <form action="/products" method="post">
+    <label>SKU
+      <input type="text" name="sku" placeholder="WIDGET-005" required />
+    </label>
+    <label>Name
+      <input type="text" name="name" placeholder="Standard Widget" required />
+    </label>
+    <label>Initial quantity
+      <input type="number" name="quantity" min="0" value="0" required />
+    </label>
+    <button type="submit" class="primary">Create product</button>
+    <a class="button ghost" href="/products">Cancel</a>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

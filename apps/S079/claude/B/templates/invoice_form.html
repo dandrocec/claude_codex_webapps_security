@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% from "_form_helpers.html" import render_field %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+  <h1>{{ title }}</h1>
+  <form method="post" class="card">
+    {{ form.csrf_token }}
+    <div class="grid-2">
+      {{ render_field(form.client_id) }}
+      {{ render_field(form.number) }}
+      {{ render_field(form.issue_date, type="date") }}
+      {{ render_field(form.due_date, type="date") }}
+      {{ render_field(form.tax_rate) }}
+      {{ render_field(form.status) }}
+    </div>
+    {{ render_field(form.notes) }}
+
+    <h2>Line items</h2>
+    <table class="table" id="line-items">
+      <thead>
+        <tr><th>Description</th><th class="num">Qty</th>
+            <th class="num">Unit price</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for it in items %}
+          <tr class="line-item">
+            <td><input class="input" type="text" name="item_description"
+                       maxlength="500" value="{{ it.description }}"></td>
+            <td><input class="input num" type="number" step="any" min="0"
+                       name="item_quantity" value="{{ it.quantity }}"></td>
+            <td><input class="input num" type="number" step="any" min="0"
+                       name="item_unit_price" value="{{ it.unit_price }}"></td>
+            <td><button type="button" class="link-btn danger remove-row">Remove</button></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="button" class="btn ghost" id="add-row">Add line item</button>
+
+    <div class="form-actions">
+      <button type="submit" class="btn">Save invoice</button>
+      <a class="btn ghost" href="{{ url_for('invoices') }}">Cancel</a>
+    </div>
+  </form>
+
+  <template id="row-template">
+    <tr class="line-item">
+      <td><input class="input" type="text" name="item_description" maxlength="500"></td>
+      <td><input class="input num" type="number" step="any" min="0" name="item_quantity" value="1"></td>
+      <td><input class="input num" type="number" step="any" min="0" name="item_unit_price" value="0"></td>
+      <td><button type="button" class="link-btn danger remove-row">Remove</button></td>
+    </tr>
+  </template>
+
+  <script src="{{ url_for('static', filename='js/invoice.js') }}"></script>
+{% endblock %}

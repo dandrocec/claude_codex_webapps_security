@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard · OAuth Demo</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="card wide">
+    <header class="profile">
+      <% if (user.avatar_url) { %>
+        <img class="avatar" src="<%= user.avatar_url %>" alt="avatar" />
+      <% } %>
+      <div>
+        <h1>Welcome, <%= user.display_name || user.username %></h1>
+        <p class="muted">
+          Signed in via <%= user.provider %>
+          <% if (user.profile_url) { %>
+            · <a href="<%= user.profile_url %>" target="_blank" rel="noopener">view profile</a>
+          <% } %>
+        </p>
+      </div>
+      <form class="push-right" method="post" action="/logout">
+        <button class="btn ghost" type="submit">Log out</button>
+      </form>
+    </header>
+
+    <section>
+      <h2>Stored profile</h2>
+      <p class="muted">This basic profile is persisted in the app's database.</p>
+      <table class="kv">
+        <tr><th>Username</th><td><%= user.username || '—' %></td></tr>
+        <tr><th>Display name</th><td><%= user.display_name || '—' %></td></tr>
+        <tr><th>Provider ID</th><td><%= user.provider_id %></td></tr>
+        <tr><th>First seen</th><td><%= user.created_at %></td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Live account data</h2>
+      <p class="muted">Fetched from the GitHub API using your access token.</p>
+
+      <% if (apiError) { %>
+        <div class="warn">Couldn't load account data: <%= apiError %></div>
+      <% } else if (account) { %>
+        <div class="stats">
+          <div class="stat"><span class="num"><%= account.publicRepos %></span>public repos</div>
+          <div class="stat"><span class="num"><%= account.followers %></span>followers</div>
+          <div class="stat"><span class="num"><%= account.following %></span>following</div>
+        </div>
+
+        <h3>Recently updated repositories</h3>
+        <% if (account.repos.length === 0) { %>
+          <p class="muted">No repositories found.</p>
+        <% } else { %>
+          <ul class="repos">
+            <% account.repos.forEach(function (r) { %>
+              <li>
+                <a href="<%= r.url %>" target="_blank" rel="noopener"><%= r.name %></a>
+                <% if (r.language) { %><span class="tag"><%= r.language %></span><% } %>
+                <span class="muted">★ <%= r.stars %></span>
+                <% if (r.description) { %><div class="muted"><%= r.description %></div><% } %>
+              </li>
+            <% }); %>
+          </ul>
+        <% } %>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

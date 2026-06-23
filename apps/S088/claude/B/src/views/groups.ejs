@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<section class="card">
+  <h1>My Groups</h1>
+  <% if (groups.length === 0) { %>
+    <p class="muted">No groups yet. Create one to share documents with several people at once.</p>
+  <% } else { %>
+    <ul class="list">
+      <% groups.forEach(function (g) { %>
+        <li>
+          <a href="/groups/<%= g.id %>">👥 <%= g.name %></a>
+          <span class="muted"><%= g.member_count %> member(s)</span>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+  <form method="post" action="/groups" class="row">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input name="name" placeholder="New group name" maxlength="120" required>
+    <button type="submit">Create group</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

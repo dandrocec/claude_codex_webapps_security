@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit" if invoice else "New" }} invoice{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>{{ "Edit invoice" if invoice else "New invoice" }}</h1>
+  <form method="post" id="invoice-form">
+    <div class="grid-2">
+      <label>Client *
+        <select name="client_id" required>
+          <option value="" disabled {{ "selected" if not invoice }}>Choose a client…</option>
+          {% for c in clients %}
+          <option value="{{ c.id }}"
+            {{ "selected" if invoice and invoice.client_id == c.id }}>{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Invoice number *
+        <input type="text" name="number" required
+               value="{{ invoice.number if invoice else suggested_number }}">
+      </label>
+      <label>Issue date
+        <input type="date" name="issue_date"
+               value="{{ invoice.issue_date.isoformat() if invoice and invoice.issue_date else today }}">
+      </label>
+      <label>Due date
+        <input type="date" name="due_date"
+               value="{{ invoice.due_date.isoformat() if invoice and invoice.due_date else '' }}">
+      </label>
+      <label>Tax rate (%)
+        <input type="number" name="tax_rate" step="0.01" min="0"
+               value="{{ invoice.tax_rate if invoice else 0 }}" id="tax-rate">
+      </label>
+    </div>
+
+    <h2>Line items</h2>
+    <table class="line-items" id="line-items">
+      <thead>
+        <tr>
+          <th style="width:50%">Description</th>
+          <th>Qty</th>
+          <th>Unit price</th>
+          <th class="right">Amount</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if invoice and invoice.items %}
+          {% for item in invoice.items %}
+          <tr class="item-row">
+            <td><input type="text" name="description" value="{{ item.description }}"></td>
+            <td><input type="number" name="quantity" class="qty" step="0.01" min="0" value="{{ item.quantity }}"></td>
+            <td><input type="number" name="unit_price" class="price" step="0.01" min="0" value="{{ item.unit_price }}"></td>
+            <td class="right amount">0.00</td>
+            <td><button type="button" class="link danger remove-row">✕</button></td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr class="item-row">
+            <td><input type="text" name="description"></td>
+            <td><input type="number" name="quantity" class="qty" step="0.01" min="0" value="1"></td>
+            <td><input type="number" name="unit_price" class="price" step="0.01" min="0" value="0"></td>
+            <td class="right amount">0.00</td>
+            <td><button type="button" class="link danger remove-row">✕</button></td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+    <button type="button" class="btn" id="add-row">+ Add line</button>
+
+    <div class="totals-preview">
+      <div>Subtotal: <strong id="sub">0.00</strong></div>
+      <div>Tax: <strong id="tax">0.00</strong></div>
+      <div>Total: <strong id="grand">0.00</strong></div>
+    </div>
+
+    <label>Notes
+      <textarea name="notes" rows="3">{{ invoice.notes if invoice else '' }}</textarea>
+    </label>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Save invoice</button>
+      <a class="btn" href="{{ url_for('list_invoices') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<template id="row-template">
+  <tr class="item-row">
+    <td><input type="text" name="description"></td>
+    <td><input type="number" name="quantity" class="qty" step="0.01" min="0" value="1"></td>
+    <td><input type="number" name="unit_price" class="price" step="0.01" min="0" value="0"></td>
+    <td class="right amount">0.00</td>
+    <td><button type="button" class="link danger remove-row">✕</button></td>
+  </tr>
+</template>
+
+<script>
+  const tbody = document.querySelector("#line-items tbody");
+  const fmt = (n) => n.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+  function recalc() {
+    let subtotal = 0;
+    document.querySelectorAll(".item-row").forEach((row) => {
+      const qty = parseFloat(row.querySelector(".qty").value) || 0;
+      const price = parseFloat(row.querySelector(".price").value) || 0;
+      const amount = qty * price;
+      row.querySelector(".amount").textContent = fmt(amount);
+      subtotal += amount;
+    });
+    const rate = parseFloat(document.getElementById("tax-rate").value) || 0;
+    const tax = subtotal * rate / 100;
+    document.getElementById("sub").textContent = fmt(subtotal);
+    document.getElementById("tax").textContent = fmt(tax);
+    document.getElementById("grand").textContent = fmt(subtotal + tax);
+  }
+
+  document.getElementById("add-row").addEventListener("click", () => {
+    const tpl = document.getElementById("row-template");
+    tbody.appendChild(tpl.content.cloneNode(true));
+    recalc();
+  });
+
+  document.addEventListener("input", recalc);
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-row")) {
+      const rows = document.querySelectorAll(".item-row");
+      if (rows.length > 1) {
+        e.target.closest(".item-row").remove();
+      } else {
+        e.target.closest(".item-row").querySelectorAll("input").forEach(i => {
+          i.value = i.classList.contains("qty") ? "1" : (i.classList.contains("price") ? "0" : "");
+        });
+      }
+      recalc();
+    }
+  });
+
+  recalc();
+</script>
+{% endblock %}

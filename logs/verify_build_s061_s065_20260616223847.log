@@ -1,0 +1,788 @@
+ Image csj/s061-claude-b Building 
+ Image csj/s065-claude-a Building 
+ Image csj/s062-claude-b Building 
+ Image csj/s064-claude-b Building 
+ Image csj/s063-claude-a Building 
+ Image csj/s064-claude-a Building 
+ Image csj/s062-claude-a Building 
+ Image csj/s063-claude-b Building 
+ Image csj/s065-claude-b Building 
+ Image csj/s061-claude-a Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 6.38kB done
+#1 DONE 0.0s
+
+#2 [s062-claude-b internal] load build definition from Dockerfile.python
+#2 transferring dockerfile: 1.76kB 0.0s done
+#2 DONE 0.0s
+
+#3 [s065-claude-a internal] load build definition from Dockerfile.node
+#3 transferring dockerfile: 1.84kB done
+#3 DONE 0.0s
+
+#4 [s065-claude-b internal] load metadata for docker.io/library/node:22-slim
+#4 DONE 1.8s
+
+#5 [s064-claude-b internal] load metadata for docker.io/library/python:3.12-slim
+#5 DONE 1.8s
+
+#6 [s064-claude-a internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [s062-claude-b internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [s062-claude-a internal] load .dockerignore
+#8 transferring context: 2B done
+#8 DONE 0.0s
+
+#9 [s064-claude-a internal] load build context
+#9 DONE 0.0s
+
+#10 [s064-claude-b internal] load .dockerignore
+#10 transferring context: 2B done
+#10 DONE 0.0s
+
+#11 [s062-claude-b internal] load build context
+#11 DONE 0.0s
+
+#12 [s062-claude-a internal] load build context
+#12 DONE 0.0s
+
+#13 [s063-claude-a internal] load .dockerignore
+#13 transferring context: 2B done
+#13 DONE 0.0s
+
+#14 [s064-claude-b internal] load build context
+#14 DONE 0.0s
+
+#15 [s061-claude-b internal] load .dockerignore
+#15 transferring context: 2B done
+#15 DONE 0.1s
+
+#16 [s063-claude-a internal] load build context
+#16 DONE 0.0s
+
+#17 [s064-claude-b 1/4] FROM docker.io/library/python:3.12-slim@sha256:d764629ce0ddd8c71fd371e9901efb324a95789d2315a47db7e4d27e78f1b0e9
+#17 resolve docker.io/library/python:3.12-slim@sha256:d764629ce0ddd8c71fd371e9901efb324a95789d2315a47db7e4d27e78f1b0e9 0.0s done
+#17 DONE 0.0s
+
+#18 [s063-claude-b internal] load .dockerignore
+#18 transferring context: 2B done
+#18 DONE 0.1s
+
+#19 [s061-claude-a internal] load .dockerignore
+#19 transferring context: 2B 0.0s done
+#19 DONE 0.1s
+
+#20 [s065-claude-b internal] load .dockerignore
+#20 transferring context: 2B done
+#20 DONE 0.1s
+
+#21 [s061-claude-b 1/4] FROM docker.io/library/node:22-slim@sha256:e21fc383b50d5347dc7a9f1cae45b8f4e2f0d39f7ade28e4eef7d2934522b752
+#21 resolve docker.io/library/node:22-slim@sha256:e21fc383b50d5347dc7a9f1cae45b8f4e2f0d39f7ade28e4eef7d2934522b752
+#21 resolve docker.io/library/node:22-slim@sha256:e21fc383b50d5347dc7a9f1cae45b8f4e2f0d39f7ade28e4eef7d2934522b752 0.0s done
+#21 DONE 0.0s
+
+#22 [s065-claude-a internal] load .dockerignore
+#22 transferring context: 2B 0.0s done
+#22 DONE 0.1s
+
+#14 [s064-claude-b internal] load build context
+#14 transferring context: 48.34kB 0.0s done
+#14 DONE 0.0s
+
+#12 [s062-claude-a internal] load build context
+#12 transferring context: 25.53kB 0.0s done
+#12 DONE 0.0s
+
+#11 [s062-claude-b internal] load build context
+#11 transferring context: 41.59kB 0.0s done
+#11 DONE 0.0s
+
+#9 [s064-claude-a internal] load build context
+#9 transferring context: 21.03kB 0.0s done
+#9 DONE 0.1s
+
+#23 [s063-claude-b internal] load build context
+#23 transferring context: 38.46kB 0.0s done
+#23 DONE 0.1s
+
+#16 [s063-claude-a internal] load build context
+#16 transferring context: 24.27kB done
+#16 DONE 0.1s
+
+#24 [s062-claude-b 2/4] WORKDIR /app
+#24 CACHED
+
+#25 [s065-claude-b 2/4] WORKDIR /app
+#25 CACHED
+
+#26 [s061-claude-a internal] load build context
+#26 transferring context: 31.27kB 0.0s done
+#26 DONE 0.1s
+
+#27 [s061-claude-b internal] load build context
+#27 transferring context: 51.31kB 0.0s done
+#27 DONE 0.1s
+
+#28 [s065-claude-b internal] load build context
+#28 transferring context: 39.40kB 0.0s done
+#28 DONE 0.1s
+
+#29 [s065-claude-a internal] load build context
+#29 transferring context: 27.48kB 0.0s done
+#29 DONE 0.1s
+
+#30 [s064-claude-b 3/4] COPY . /app
+#30 DONE 0.1s
+
+#31 [s062-claude-a 3/4] COPY . /app
+#31 DONE 0.1s
+
+#32 [s062-claude-b 3/4] COPY . /app
+#32 DONE 0.1s
+
+#33 [s063-claude-b 3/4] COPY . /app
+#33 DONE 0.1s
+
+#34 [s064-claude-a 3/4] COPY . /app
+#34 DONE 0.1s
+
+#35 [s064-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#35 ...
+
+#36 [s063-claude-a 3/4] COPY . /app
+#36 DONE 0.1s
+
+#37 [s061-claude-a 3/4] COPY . /app
+#37 DONE 0.2s
+
+#38 [s065-claude-b 3/4] COPY . /app
+#38 DONE 0.1s
+
+#39 [s061-claude-b 3/4] COPY . /app
+#39 DONE 0.2s
+
+#40 [s065-claude-a 3/4] COPY . /app
+#40 DONE 0.2s
+
+#41 [s065-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#41 ...
+
+#35 [s064-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#35 2.742 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#35 3.163   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#35 3.300 Collecting Flask-SQLAlchemy==3.1.1 (from -r requirements.txt (line 2))
+#35 3.392   Downloading flask_sqlalchemy-3.1.1-py3-none-any.whl.metadata (3.4 kB)
+#35 3.511 Collecting Flask-Login==0.6.3 (from -r requirements.txt (line 3))
+#35 3.662   Downloading Flask_Login-0.6.3-py3-none-any.whl.metadata (5.8 kB)
+#35 4.382 Collecting Werkzeug==3.0.3 (from -r requirements.txt (line 4))
+#35 4.590   Downloading werkzeug-3.0.3-py3-none-any.whl.metadata (3.7 kB)
+#35 4.818 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#35 4.990   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#35 5.092 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#35 5.219   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#35 5.523 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#35 5.723   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#35 5.841 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#35 6.012   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#35 ...
+
+#42 [s064-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#42 2.817 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#42 3.190   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#42 3.342 Collecting Flask-SQLAlchemy==3.1.1 (from -r requirements.txt (line 2))
+#42 3.441   Downloading flask_sqlalchemy-3.1.1-py3-none-any.whl.metadata (3.4 kB)
+#42 3.570 Collecting Flask-WTF==1.2.1 (from -r requirements.txt (line 3))
+#42 3.750   Downloading flask_wtf-1.2.1-py3-none-any.whl.metadata (3.4 kB)
+#42 4.993 Collecting Flask-Login==0.6.3 (from -r requirements.txt (line 4))
+#42 5.080   Downloading Flask_Login-0.6.3-py3-none-any.whl.metadata (5.8 kB)
+#42 5.324 Collecting Flask-Bcrypt==1.0.1 (from -r requirements.txt (line 5))
+#42 5.526   Downloading Flask_Bcrypt-1.0.1-py3-none-any.whl.metadata (2.6 kB)
+#42 5.866 Collecting WTForms==3.1.2 (from -r requirements.txt (line 6))
+#42 6.031   Downloading wtforms-3.1.2-py3-none-any.whl.metadata (5.3 kB)
+#42 6.218 Collecting email-validator==2.1.1 (from -r requirements.txt (line 7))
+#42 6.622   Downloading email_validator-2.1.1-py3-none-any.whl.metadata (26 kB)
+#42 6.929 Collecting python-dotenv==1.0.1 (from -r requirements.txt (line 8))
+#42 7.067   Downloading python_dotenv-1.0.1-py3-none-any.whl.metadata (23 kB)
+#42 7.577 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 7.674   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#42 8.099 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 8.361   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#42 8.502 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 8.570   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#42 9.064 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 9.116   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#42 9.272 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 9.399   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#42 ...
+
+#43 [s063-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#43 ...
+
+#44 [s063-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#44 ...
+
+#45 [s062-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 2.728 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#45 3.205   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#45 3.461 Collecting Werkzeug==3.0.3 (from -r requirements.txt (line 2))
+#45 3.526   Downloading werkzeug-3.0.3-py3-none-any.whl.metadata (3.7 kB)
+#45 3.793 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#45 4.411   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#45 4.815 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#45 4.983   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#45 5.137 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#45 5.261   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#45 5.879 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#45 6.052   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#45 6.738 Collecting MarkupSafe>=2.1.1 (from Werkzeug==3.0.3->-r requirements.txt (line 2))
+#45 6.871   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#45 7.065 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#45 7.914 Downloading werkzeug-3.0.3-py3-none-any.whl (227 kB)
+#45 9.094 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#45 9.187 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#45 9.630 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#45 9.754 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#45 ...
+
+#46 [s065-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#46 ...
+
+#47 [s062-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#47 2.769 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#47 3.190   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#47 3.331 Collecting Flask-WTF==1.2.1 (from -r requirements.txt (line 2))
+#47 3.427   Downloading flask_wtf-1.2.1-py3-none-any.whl.metadata (3.4 kB)
+#47 3.541 Collecting WTForms==3.1.2 (from -r requirements.txt (line 3))
+#47 3.691   Downloading wtforms-3.1.2-py3-none-any.whl.metadata (5.3 kB)
+#47 4.278 Collecting argon2-cffi==23.1.0 (from -r requirements.txt (line 4))
+#47 4.517   Downloading argon2_cffi-23.1.0-py3-none-any.whl.metadata (5.2 kB)
+#47 5.262 Collecting email-validator==2.2.0 (from -r requirements.txt (line 5))
+#47 5.466   Downloading email_validator-2.2.0-py3-none-any.whl.metadata (25 kB)
+#47 6.567 Collecting python-dotenv==1.0.1 (from -r requirements.txt (line 6))
+#47 6.740   Downloading python_dotenv-1.0.1-py3-none-any.whl.metadata (23 kB)
+#47 7.563 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#47 7.660   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#47 8.094 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#47 8.347   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#47 8.498 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#47 8.558   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#47 8.994 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#47 9.075   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+#47 9.228 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#47 9.384   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#47 9.912 Collecting markupsafe (from WTForms==3.1.2->-r requirements.txt (line 3))
+#47 10.04   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#47 10.31 Collecting argon2-cffi-bindings (from argon2-cffi==23.1.0->-r requirements.txt (line 4))
+#47 10.44   Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (7.4 kB)
+#47 10.57 Collecting dnspython>=2.0.0 (from email-validator==2.2.0->-r requirements.txt (line 5))
+#47 10.61   Downloading dnspython-2.8.0-py3-none-any.whl.metadata (5.7 kB)
+#47 10.70 Collecting idna>=2.0.0 (from email-validator==2.2.0->-r requirements.txt (line 5))
+#47 ...
+
+#48 [s061-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#48 ...
+
+#49 [s061-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#49 ...
+
+#35 [s064-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#35 10.74 Collecting sqlalchemy>=2.0.16 (from Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#35 10.80   Downloading sqlalchemy-2.0.51-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+#35 ...
+
+#45 [s062-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 10.50 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#45 10.64 Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, Flask
+#45 11.03 Successfully installed Flask-3.0.3 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.0.3 blinker-1.9.0 click-8.4.1 itsdangerous-2.2.0
+#45 11.03 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#45 11.52 
+#45 11.52 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#45 11.52 [notice] To update, run: pip install --upgrade pip
+#45 DONE 11.7s
+
+#35 [s064-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#35 11.56 Collecting MarkupSafe>=2.1.1 (from Werkzeug==3.0.3->-r requirements.txt (line 4))
+#35 11.75   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#35 ...
+
+#50 [s062-claude-a] exporting to image
+#50 exporting layers 0.7s done
+#50 exporting manifest sha256:f9a0c2d97b48f415e87233508bf802ce9995a44d157a16148044913d56a8593c 0.0s done
+#50 exporting config sha256:eef125a09f31f4fcf710feeb9d8eaddf72c602182eb5e73cd37d798b9c767c85 0.0s done
+#50 exporting attestation manifest sha256:a7691d3aed7065214e767f7824f183b835c2abf7f437fa2e23d041a9c183e4e9 0.0s done
+#50 exporting manifest list sha256:bc9e6e9658a8931e094325e4159996bb379d5753ad8c30d3fe13dc1d43eeba29 0.0s done
+#50 naming to docker.io/csj/s062-claude-a:latest done
+#50 unpacking to docker.io/csj/s062-claude-a:latest 0.2s done
+#50 DONE 1.1s
+
+#51 [s062-claude-a] resolving provenance for metadata file
+#51 DONE 0.0s
+
+#47 [s062-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#47 10.74   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+#47 12.23 Collecting cffi>=1.0.1 (from argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 4))
+#47 12.42   Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#47 12.66 Collecting pycparser (from cffi>=1.0.1->argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 4))
+#47 12.85   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#47 13.11 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#47 15.04 Downloading flask_wtf-1.2.1-py3-none-any.whl (12 kB)
+#47 15.24 Downloading wtforms-3.1.2-py3-none-any.whl (145 kB)
+#47 ...
+
+#42 [s064-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#42 17.41 Collecting sqlalchemy>=2.0.16 (from Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#42 17.80   Downloading sqlalchemy-2.0.51-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+#42 18.76 Collecting bcrypt>=3.1.1 (from Flask-Bcrypt==1.0.1->-r requirements.txt (line 5))
+#42 18.92   Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (10 kB)
+#42 20.12 Collecting markupsafe (from WTForms==3.1.2->-r requirements.txt (line 6))
+#42 20.25   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#42 20.64 Collecting dnspython>=2.0.0 (from email-validator==2.1.1->-r requirements.txt (line 7))
+#42 20.81   Downloading dnspython-2.8.0-py3-none-any.whl.metadata (5.7 kB)
+#42 21.10 Collecting idna>=2.0.0 (from email-validator==2.1.1->-r requirements.txt (line 7))
+#42 21.27   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+#42 ...
+
+#46 [s065-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#46 23.41 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#46 ...
+
+#49 [s061-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#49 13.64 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#49 ...
+
+#44 [s063-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#44 20.85 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#44 20.85 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#44 21.08 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#44 21.38 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#44 21.45 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#44 21.45 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#44 21.70 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#44 22.89 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#44 23.81 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#44 ...
+
+#43 [s063-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#43 14.77 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#43 ...
+
+#46 [s065-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#46 24.76 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#46 25.11 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#46 ...
+
+#41 [s065-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#41 14.94 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#41 ...
+
+#48 [s061-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#48 23.94 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#48 24.67 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#48 24.83 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#48 25.28 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#48 25.28 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#48 26.49 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#48 26.67 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#48 26.70 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#48 26.95 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#48 27.77 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#48 27.77 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#48 ...
+
+#35 [s064-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#35 17.91 Collecting greenlet>=1 (from sqlalchemy>=2.0.16->Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#35 17.95   Downloading greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#35 18.23 Collecting typing-extensions>=4.6.0 (from sqlalchemy>=2.0.16->Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#35 18.26   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#35 18.30 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#35 18.44 Downloading flask_sqlalchemy-3.1.1-py3-none-any.whl (25 kB)
+#35 18.53 Downloading Flask_Login-0.6.3-py3-none-any.whl (17 kB)
+#35 18.60 Downloading werkzeug-3.0.3-py3-none-any.whl (227 kB)
+#35 18.94 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#35 19.02 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#35 19.35 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#35 19.56 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#35 19.86 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#35 19.99 Downloading sqlalchemy-2.0.51-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.4 MB)
+#35 ...
+
+#46 [s065-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#46 25.85 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#46 26.29 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#46 28.51 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#46 28.63 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#46 ...
+
+#47 [s062-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#47 19.38 Downloading argon2_cffi-23.1.0-py3-none-any.whl (15 kB)
+#47 20.00 Downloading email_validator-2.2.0-py3-none-any.whl (33 kB)
+#47 20.74 Downloading python_dotenv-1.0.1-py3-none-any.whl (19 kB)
+#47 21.15 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#47 21.46 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#47 24.14 Downloading dnspython-2.8.0-py3-none-any.whl (331 kB)
+#47 ...
+
+#42 [s064-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#42 29.29 Collecting greenlet>=1 (from sqlalchemy>=2.0.16->Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#42 29.51   Downloading greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#42 30.99 Collecting typing-extensions>=4.6.0 (from sqlalchemy>=2.0.16->Flask-SQLAlchemy==3.1.1->-r requirements.txt (line 2))
+#42 31.02   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#42 31.16 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#42 31.65 Downloading flask_sqlalchemy-3.1.1-py3-none-any.whl (25 kB)
+#42 31.86 Downloading flask_wtf-1.2.1-py3-none-any.whl (12 kB)
+#42 31.98 Downloading Flask_Login-0.6.3-py3-none-any.whl (17 kB)
+#42 32.15 Downloading Flask_Bcrypt-1.0.1-py3-none-any.whl (6.0 kB)
+#42 32.29 Downloading wtforms-3.1.2-py3-none-any.whl (145 kB)
+#42 33.24 Downloading email_validator-2.1.1-py3-none-any.whl (30 kB)
+#42 33.53 Downloading python_dotenv-1.0.1-py3-none-any.whl (19 kB)
+#42 ...
+
+#49 [s061-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#49 33.38 
+#49 33.38 added 117 packages, and audited 118 packages in 33s
+#49 33.38 
+#49 33.38 24 packages are looking for funding
+#49 33.38   run `npm fund` for details
+#49 33.39 
+#49 33.39 found 0 vulnerabilities
+#49 33.39 npm notice
+#49 33.39 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#49 33.39 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#49 33.39 npm notice To update run: npm install -g npm@11.17.0
+#49 33.39 npm notice
+#49 DONE 33.7s
+
+#42 [s064-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#42 33.74 Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (278 kB)
+#42 ...
+
+#41 [s065-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#41 34.23 
+#41 34.23 added 117 packages, and audited 118 packages in 33s
+#41 34.23 
+#41 34.23 24 packages are looking for funding
+#41 34.23   run `npm fund` for details
+#41 34.23 
+#41 34.23 found 0 vulnerabilities
+#41 34.24 npm notice
+#41 34.24 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#41 34.24 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#41 34.24 npm notice To update run: npm install -g npm@11.17.0
+#41 34.24 npm notice
+#41 DONE 34.4s
+
+#35 [s064-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#35 33.82    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 229.3 kB/s eta 0:00:00
+#35 33.92 Downloading greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (611 kB)
+#35 ...
+
+#52 [s061-claude-a] exporting to image
+#52 exporting layers 1.0s done
+#52 exporting manifest sha256:83912e90b5a424470865fa94285634f3cb7cbe34b1f638088c38e11492530d09 0.0s done
+#52 exporting config sha256:699bd9a1deb143961106d23836d6e3c6261e9bbde7ab60406faf35cafb28bd6c 0.0s done
+#52 exporting attestation manifest sha256:d82342d723b36db947d3d6393f75786deb40df9fc76a8d5ca8c2750c1807721c 0.0s done
+#52 exporting manifest list sha256:d5f52637e2596d144d3b178724bd08224f4251c3ad990129700312fb272e56b3 0.0s done
+#52 naming to docker.io/csj/s061-claude-a:latest done
+#52 unpacking to docker.io/csj/s061-claude-a:latest 0.4s done
+#52 DONE 1.6s
+
+#53 [s061-claude-a] resolving provenance for metadata file
+#53 DONE 0.0s
+
+#54 [s065-claude-a] exporting to image
+#54 exporting layers 1.2s done
+#54 exporting manifest sha256:70166a87f3927aaa90f0b4483b9e24ca15d5cd9c0b15422ccd76cf9a7e72a42a 0.0s done
+#54 exporting config sha256:af356a715f9964c21ebcafd25ba17d46336692333b73f1aa22856f001ef7c1b6 0.0s done
+#54 exporting attestation manifest sha256:7b19ca0b1129e0eec83f953f8008df51ba1c11a8736f5ad2fecf68ee972c48af 0.1s done
+#54 exporting manifest list sha256:58f68ce883d28e1467dcd8c7100921749dc17a959b01bfca195bde96b642312a
+#54 exporting manifest list sha256:58f68ce883d28e1467dcd8c7100921749dc17a959b01bfca195bde96b642312a 0.0s done
+#54 naming to docker.io/csj/s065-claude-a:latest done
+#54 unpacking to docker.io/csj/s065-claude-a:latest
+#54 unpacking to docker.io/csj/s065-claude-a:latest 0.5s done
+#54 DONE 1.9s
+
+#55 [s065-claude-a] resolving provenance for metadata file
+#55 DONE 0.0s
+
+#35 [s064-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#35 36.40    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 611.4/611.4 kB 206.7 kB/s eta 0:00:00
+#35 36.56 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#35 36.85 Installing collected packages: typing-extensions, MarkupSafe, itsdangerous, greenlet, click, blinker, Werkzeug, sqlalchemy, Jinja2, Flask, Flask-SQLAlchemy, Flask-Login
+#35 ...
+
+#48 [s061-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#48 30.65 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#48 37.45 
+#48 37.45 added 223 packages, and audited 224 packages in 37s
+#48 37.45 
+#48 37.45 31 packages are looking for funding
+#48 37.45   run `npm fund` for details
+#48 37.45 
+#48 37.45 9 vulnerabilities (2 low, 7 high)
+#48 37.45 
+#48 37.45 To address issues that do not require attention, run:
+#48 37.45   npm audit fix
+#48 37.45 
+#48 37.45 To address all issues (including breaking changes), run:
+#48 37.45   npm audit fix --force
+#48 37.45 
+#48 37.45 Run `npm audit` for details.
+#48 37.45 npm notice
+#48 37.45 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#48 37.45 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#48 37.45 npm notice To update run: npm install -g npm@11.17.0
+#48 37.45 npm notice
+#48 DONE 37.6s
+
+#43 [s063-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#43 37.91 
+#43 37.91 added 123 packages, and audited 124 packages in 37s
+#43 37.91 
+#43 37.91 27 packages are looking for funding
+#43 37.91   run `npm fund` for details
+#43 37.92 
+#43 37.92 found 0 vulnerabilities
+#43 37.92 npm notice
+#43 37.92 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#43 37.92 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#43 37.92 npm notice To update run: npm install -g npm@11.17.0
+#43 37.92 npm notice
+#43 DONE 38.0s
+
+#56 [s061-claude-b] exporting to image
+#56 ...
+
+#35 [s064-claude-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#35 38.63 Successfully installed Flask-3.0.3 Flask-Login-0.6.3 Flask-SQLAlchemy-3.1.1 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.0.3 blinker-1.9.0 click-8.4.1 greenlet-3.5.1 itsdangerous-2.2.0 sqlalchemy-2.0.51 typing-extensions-4.15.0
+#35 38.63 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#35 39.01 
+#35 39.01 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#35 39.01 [notice] To update, run: pip install --upgrade pip
+#35 DONE 39.3s
+
+#47 [s062-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#47 33.08 Downloading idna-3.18-py3-none-any.whl (65 kB)
+#47 33.69 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#47 33.87 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#47 34.55 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#47 34.69 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#47 36.05 Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (87 kB)
+#47 36.69 Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
+#47 37.62 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#47 37.76 Installing collected packages: python-dotenv, pycparser, markupsafe, itsdangerous, idna, dnspython, click, blinker, WTForms, Werkzeug, Jinja2, email-validator, cffi, Flask, argon2-cffi-bindings, Flask-WTF, argon2-cffi
+#47 38.67 Successfully installed Flask-3.0.3 Flask-WTF-1.2.1 Jinja2-3.1.6 WTForms-3.1.2 Werkzeug-3.1.8 argon2-cffi-23.1.0 argon2-cffi-bindings-25.1.0 blinker-1.9.0 cffi-2.0.0 click-8.4.1 dnspython-2.8.0 email-validator-2.2.0 idna-3.18 itsdangerous-2.2.0 markupsafe-3.0.3 pycparser-3.0 python-dotenv-1.0.1
+#47 38.67 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#47 39.04 
+#47 39.04 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#47 39.04 [notice] To update, run: pip install --upgrade pip
+#47 DONE 39.3s
+
+#57 [s062-claude-b] exporting to image
+#57 ...
+
+#58 [s063-claude-b] exporting to image
+#58 exporting layers 1.4s done
+#58 exporting manifest sha256:4f865ef04810b47b5cc0c5c9718045abeb21296fe3e0b936740be19c588d6353 0.0s done
+#58 exporting config sha256:93c906cb0e02241dedd9cefe0fcf6c2b7409234fb7507d4b76e93dbcb574ddf1 0.0s done
+#58 exporting attestation manifest sha256:5aecf3c24ea6bfcf646bdd58141cb96b0d1aee34ca37884730151cf236c1a47e 0.0s done
+#58 exporting manifest list sha256:227486fce7d9646aa7aad32cf3ffe2ef4d3bc9fed851771e40db84406a107a1a 0.0s done
+#58 naming to docker.io/csj/s063-claude-b:latest done
+#58 unpacking to docker.io/csj/s063-claude-b:latest 0.6s done
+#58 DONE 2.3s
+
+#57 [s062-claude-b] exporting to image
+#57 exporting layers 1.2s done
+#57 exporting manifest sha256:386c56722600bf1ac76d134d68636dc3b96ccf07871b3aba4c49ab805d5907bc 0.0s done
+#57 exporting config sha256:a1018ad5098f15ef085cc51f4add7a202ff4908b0103144491944f1bf55eda1c 0.0s done
+#57 exporting attestation manifest sha256:60c8168dc3333f6260bbfa9eab9be144d90077b41cbd0985e03fbad458d99239 0.1s done
+#57 exporting manifest list sha256:b0bfc2ade8198f1e9dec03ce9b329df458039e5c69899fdbc85784d328e02968
+#57 ...
+
+#59 [s063-claude-b] resolving provenance for metadata file
+#59 DONE 0.0s
+
+#57 [s062-claude-b] exporting to image
+#57 exporting manifest list sha256:b0bfc2ade8198f1e9dec03ce9b329df458039e5c69899fdbc85784d328e02968 0.0s done
+#57 naming to docker.io/csj/s062-claude-b:latest done
+#57 unpacking to docker.io/csj/s062-claude-b:latest
+#57 ...
+
+#46 [s065-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#46 30.74 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#46 31.15 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#46 31.35 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#46 31.37 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#46 32.50 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#46 ...
+
+#56 [s061-claude-b] exporting to image
+#56 exporting layers 2.0s done
+#56 exporting manifest sha256:4fbcef9ff0fe873d6786dc17f2b1d6a431f683c0b4f1dbb476f6550f69611d7d 0.0s done
+#56 exporting config sha256:8a171efaece8112f13bd850e81d6436a9efe7f9cf28ce6d2b98a4e86eb7de903 0.0s done
+#56 exporting attestation manifest sha256:32b322bb30b01985eb36b46d0e2adf55b8f26984aceec3095b2acbad48c84067 0.0s done
+#56 exporting manifest list sha256:e9d38ebf75bc616cadb6e2d30c92dcd8bf7ebfc12e0656afff32d35357ea86f9 0.0s done
+#56 naming to docker.io/csj/s061-claude-b:latest done
+#56 unpacking to docker.io/csj/s061-claude-b:latest 1.2s done
+#56 DONE 3.4s
+
+#57 [s062-claude-b] exporting to image
+#57 unpacking to docker.io/csj/s062-claude-b:latest 0.5s done
+#57 DONE 1.8s
+
+#60 [s061-claude-b] resolving provenance for metadata file
+#60 DONE 0.2s
+
+#61 [s062-claude-b] resolving provenance for metadata file
+#61 DONE 0.0s
+
+#62 [s064-claude-a] exporting to image
+#62 exporting layers 2.0s done
+#62 exporting manifest sha256:9ef65ba4847226d5392340233ff7161929d45aaa2bd58868e54a1f4bdb251fc5 0.0s done
+#62 exporting config sha256:44fbb372665f93688f163128971f95f9264231d0fd2b10f707673e59678cb049 0.0s done
+#62 exporting attestation manifest sha256:28631d7638f46bf46928978c8bbb6ce8cc23fa846465f34f82863713c70bf1fc 0.1s done
+#62 exporting manifest list sha256:104aec3b0aa22950db8199d80cd6f19329e109f2e5c7bf870c92d13ae394f950
+#62 exporting manifest list sha256:104aec3b0aa22950db8199d80cd6f19329e109f2e5c7bf870c92d13ae394f950 0.0s done
+#62 naming to docker.io/csj/s064-claude-a:latest done
+#62 unpacking to docker.io/csj/s064-claude-a:latest
+#62 unpacking to docker.io/csj/s064-claude-a:latest 0.5s done
+#62 DONE 2.8s
+
+#63 [s064-claude-a] resolving provenance for metadata file
+#63 DONE 0.0s
+
+#42 [s064-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#42 34.78 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#42 34.95 Downloading click-8.4.1-py3-none-any.whl (116 kB)
+#42 35.77 Downloading dnspython-2.8.0-py3-none-any.whl (331 kB)
+#42 37.62 Downloading idna-3.18-py3-none-any.whl (65 kB)
+#42 37.79 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#42 37.84 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#42 38.01 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#42 38.06 Downloading sqlalchemy-2.0.51-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.4 MB)
+#42 42.42    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 770.5 kB/s eta 0:00:00
+#42 42.51 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#42 43.01 Downloading greenlet-3.5.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (611 kB)
+#42 43.95    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 611.4/611.4 kB 674.2 kB/s eta 0:00:00
+#42 44.01 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#42 44.11 Installing collected packages: typing-extensions, python-dotenv, markupsafe, itsdangerous, idna, greenlet, dnspython, click, blinker, bcrypt, WTForms, Werkzeug, sqlalchemy, Jinja2, email-validator, Flask, Flask-WTF, Flask-SQLAlchemy, Flask-Login, Flask-Bcrypt
+#42 ...
+
+#46 [s065-claude-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#46 43.90 
+#46 43.90 added 223 packages, and audited 224 packages in 43s
+#46 43.90 
+#46 43.90 31 packages are looking for funding
+#46 43.90   run `npm fund` for details
+#46 43.90 
+#46 43.90 9 vulnerabilities (2 low, 7 high)
+#46 43.90 
+#46 43.90 To address issues that do not require attention, run:
+#46 43.90   npm audit fix
+#46 43.90 
+#46 43.90 To address all issues (including breaking changes), run:
+#46 43.90   npm audit fix --force
+#46 43.90 
+#46 43.90 Run `npm audit` for details.
+#46 43.90 npm notice
+#46 43.90 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#46 43.90 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#46 43.90 npm notice To update run: npm install -g npm@11.17.0
+#46 43.90 npm notice
+#46 DONE 44.1s
+
+#44 [s063-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#44 ...
+
+#64 [s065-claude-b] exporting to image
+#64 exporting layers 1.8s done
+#64 exporting manifest sha256:c4ae1b0351a8d4c894e922b627c74e3e4abaab496b6a8a931beb223d8f52d097 0.0s done
+#64 exporting config sha256:58f25bee283279625ada762f973369aedc6597e95f544e0cb7f0e4c306e9e264 0.0s done
+#64 exporting attestation manifest sha256:faea1855bf2c4f8f05acc5ca7bc83f710d2cfe2ec911de00977c5d31e6725902 0.0s done
+#64 exporting manifest list sha256:c1006049e5112536f763f8abd78a55d454de6902e3a78f124812b3b18ec5b058 0.0s done
+#64 naming to docker.io/csj/s065-claude-b:latest done
+#64 unpacking to docker.io/csj/s065-claude-b:latest
+#64 ...
+
+#42 [s064-claude-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#42 45.89 Successfully installed Flask-3.0.3 Flask-Bcrypt-1.0.1 Flask-Login-0.6.3 Flask-SQLAlchemy-3.1.1 Flask-WTF-1.2.1 Jinja2-3.1.6 WTForms-3.1.2 Werkzeug-3.1.8 bcrypt-5.0.0 blinker-1.9.0 click-8.4.1 dnspython-2.8.0 email-validator-2.1.1 greenlet-3.5.1 idna-3.18 itsdangerous-2.2.0 markupsafe-3.0.3 python-dotenv-1.0.1 sqlalchemy-2.0.51 typing-extensions-4.15.0
+#42 45.89 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#42 46.12 
+#42 46.12 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#42 46.12 [notice] To update, run: pip install --upgrade pip
+#42 DONE 46.4s
+
+#44 [s063-claude-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#44 46.16 
+#44 46.16 added 205 packages, and audited 206 packages in 45s
+#44 46.16 
+#44 46.16 27 packages are looking for funding
+#44 46.16   run `npm fund` for details
+#44 46.17 
+#44 46.17 7 vulnerabilities (2 low, 5 high)
+#44 46.17 
+#44 46.17 To address all issues, run:
+#44 46.17   npm audit fix
+#44 46.17 
+#44 46.17 Run `npm audit` for details.
+#44 46.17 npm notice
+#44 46.17 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#44 46.17 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#44 46.17 npm notice To update run: npm install -g npm@11.17.0
+#44 46.17 npm notice
+#44 DONE 46.3s
+
+#65 [s064-claude-b] exporting to image
+#65 ...
+
+#64 [s065-claude-b] exporting to image
+#64 unpacking to docker.io/csj/s065-claude-b:latest 0.8s done
+#64 DONE 2.7s
+
+#66 [s065-claude-b] resolving provenance for metadata file
+#66 DONE 0.0s
+
+#67 [s063-claude-a] exporting to image
+#67 exporting layers 2.0s done
+#67 exporting manifest sha256:09a66a1dc2cfe1010863b530b76443262df94fd0f9a760158c304a6e8381deb8 0.0s done
+#67 exporting config sha256:f47db9d282bcd1c5e64173f5d1d00f371d1527b13680acfa9acec4d8f51e6a17 0.0s done
+#67 exporting attestation manifest sha256:b7ccfe39508e08bd92b3678d4bbd48377f31841184767ba18a771eccdc16d6e7 0.0s done
+#67 exporting manifest list sha256:2ab683ce4224e0d1117f018c361eeaa22690f227d32d8c0205fdd741a68152cf
+#67 exporting manifest list sha256:2ab683ce4224e0d1117f018c361eeaa22690f227d32d8c0205fdd741a68152cf 0.0s done
+#67 naming to docker.io/csj/s063-claude-a:latest done
+#67 unpacking to docker.io/csj/s063-claude-a:latest
+#67 ...
+
+#65 [s064-claude-b] exporting to image
+#65 exporting layers 2.0s done
+#65 exporting manifest sha256:c9be0ffb5735013f197e733d9498f588ad5c7a6aaed2d36d5d09489063ea5eae 0.0s done
+#65 exporting config sha256:4fe9d3f2113573b3ace200d58d78fb89e40a62885f87d9ad15424a21728805df 0.0s done
+#65 exporting attestation manifest sha256:1ea210d97fa6b8d43fd401e53495c6a9813b11e3aeccb29a27a7196f7ab91a20 0.0s done
+#65 exporting manifest list sha256:c793c0a083b9b37d780a0f9a21c1b455e5ebc288b3c63b6c79f2d0ae66ad95cb 0.0s done
+#65 naming to docker.io/csj/s064-claude-b:latest done
+#65 unpacking to docker.io/csj/s064-claude-b:latest 0.4s done
+#65 DONE 2.6s
+
+#68 [s064-claude-b] resolving provenance for metadata file
+#68 DONE 0.0s
+
+#67 [s063-claude-a] exporting to image
+#67 unpacking to docker.io/csj/s063-claude-a:latest 0.8s done
+#67 DONE 2.9s
+
+#69 [s063-claude-a] resolving provenance for metadata file
+#69 DONE 0.0s
+ Image csj/s063-claude-b Built 
+ Image csj/s064-claude-a Built 
+ Image csj/s063-claude-a Built 
+ Image csj/s062-claude-b Built 
+ Image csj/s064-claude-b Built 
+ Image csj/s065-claude-a Built 
+ Image csj/s061-claude-a Built 
+ Image csj/s062-claude-a Built 
+ Image csj/s065-claude-b Built 
+ Image csj/s061-claude-b Built 

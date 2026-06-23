@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<a href="/" class="back">← Back</a>
+<h1>Start a campaign</h1>
+
+<% if (error) { %><p class="alert"><%= error %></p><% } %>
+
+<form method="POST" action="/campaigns" class="form">
+  <label>
+    Title
+    <input type="text" name="title" value="<%= form.title || '' %>" required>
+  </label>
+  <label>
+    Your name (creator)
+    <input type="text" name="creator" value="<%= form.creator || '' %>" required>
+  </label>
+  <label>
+    Description
+    <textarea name="description" rows="4"><%= form.description || '' %></textarea>
+  </label>
+  <div class="row">
+    <label>
+      Goal (USD)
+      <input type="number" name="goal" min="1" step="0.01" value="<%= form.goal || '' %>" required>
+    </label>
+    <label>
+      Deadline
+      <input type="date" name="deadline" value="<%= form.deadline || '' %>" required>
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary">Launch campaign</button>
+</form>
+
+<%- include('partials/footer') %>

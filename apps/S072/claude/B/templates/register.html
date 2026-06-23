@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% block title %}Register{% endblock %}
+{% block content %}
+  <h1>Create your account</h1>
+  <form method="post" action="{{ url_for('auth.register') }}" class="form" novalidate>
+    {{ form.csrf_token }}
+    {{ render_field(form.email, autocomplete="email") }}
+    {{ render_field(form.display_name, autocomplete="nickname") }}
+    {{ render_field(form.password, autocomplete="new-password") }}
+    {{ render_field(form.confirm, autocomplete="new-password") }}
+    <p class="hint">Password must be at least 12 characters.</p>
+    <button type="submit" class="btn">Register</button>
+  </form>
+  <p>Already a member? <a href="{{ url_for('auth.login') }}">Sign in</a>.</p>
+{% endblock %}

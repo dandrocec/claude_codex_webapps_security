@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<h1>Upcoming Events</h1>
+
+<% if (events.length === 0) { %>
+  <p class="muted">No events yet. <% if (currentUser && currentUser.role === 'organiser') { %><a href="/events/new">Create one</a>.<% } %></p>
+<% } %>
+
+<div class="cards">
+  <% events.forEach(function (e) { %>
+    <article class="card">
+      <h2><%= e.name %></h2>
+      <% if (e.event_date) { %><p class="date">📅 <%= e.event_date %></p><% } %>
+      <% if (e.description) { %><p><%= e.description %></p><% } %>
+      <p class="muted">Organised by <%= e.organiser_name %></p>
+      <p class="availability">
+        <% if (e.available > 0) { %>
+          <strong><%= e.available %></strong> / <%= e.total_tickets %> tickets left
+        <% } else { %>
+          <span class="soldout">SOLD OUT</span>
+        <% } %>
+      </p>
+
+      <% if (currentUser && currentUser.role === 'user') { %>
+        <% if (e.available > 0) { %>
+          <form action="/events/<%= e.id %>/buy" method="POST">
+            <button type="submit" class="btn">Buy ticket</button>
+          </form>
+        <% } else { %>
+          <button class="btn" disabled>Sold out</button>
+        <% } %>
+      <% } else if (!currentUser) { %>
+        <p class="muted"><a href="/login">Log in</a> as a user to buy.</p>
+      <% } %>
+    </article>
+  <% }); %>
+</div>
+
+<%- include('partials/footer') %>

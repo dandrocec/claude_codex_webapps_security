@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if product else 'New' }} Product — Admin{% endblock %}
+{% block content %}
+  <p><a href="{{ url_for('admin_products') }}">← Back to products</a></p>
+  <div class="page-head"><h1>{{ 'Edit product' if product else 'New product' }}</h1></div>
+
+  <form method="post" class="card form-card form-wide">
+    <div class="field">
+      <label>Name</label>
+      <input type="text" name="name" required
+             value="{{ form.get('name') if form else (product.name if product else '') }}">
+    </div>
+    <div class="field">
+      <label>Description</label>
+      <textarea name="description">{{ form.get('description') if form else (product.description if product else '') }}</textarea>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Price (USD)</label>
+        <input type="number" name="price" step="0.01" min="0" required
+               value="{{ form.get('price') if form else ('%.2f' % product.price if product else '') }}">
+      </div>
+      <div class="field">
+        <label>Stock</label>
+        <input type="number" name="stock" min="0" required
+               value="{{ form.get('stock') if form else (product.stock if product else 0) }}">
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Category</label>
+        <input type="text" name="category"
+               value="{{ form.get('category') if form else (product.category if product else '') }}">
+      </div>
+      <div class="field">
+        <label>Image URL</label>
+        <input type="text" name="image_url"
+               value="{{ form.get('image_url') if form else (product.image_url if product else '') }}">
+      </div>
+    </div>
+    <div class="field check">
+      {% set is_active = (form.get('is_active') == 'on') if form else (product.is_active if product else True) %}
+      <input type="checkbox" name="is_active" id="is_active" {{ 'checked' if is_active }}>
+      <label for="is_active" style="margin:0">Active (visible in storefront)</label>
+    </div>
+    <button class="btn" type="submit">{{ 'Save changes' if product else 'Create product' }}</button>
+  </form>
+{% endblock %}

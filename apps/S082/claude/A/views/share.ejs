@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<%
+  function fmtSize(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1024 / 1024).toFixed(1) + ' MB';
+  }
+%>
+
+<section class="card auth">
+  <h1>Shared file</h1>
+  <p class="muted">Shared by <strong>@<%= share.owner %></strong></p>
+  <div class="file-meta">
+    <div class="file-name"><%= share.original_name %></div>
+    <div class="muted"><%= fmtSize(share.size_bytes) %> · <%= share.mime_type %></div>
+  </div>
+  <a class="btn" href="/s/<%= share.token %>/download">Download file</a>
+</section>
+
+<%- include('partials/footer') %>

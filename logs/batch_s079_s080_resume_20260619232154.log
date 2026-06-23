@@ -1,0 +1,197 @@
+I've hit a consistent wall: this environment gates all `python`/`pip`/`venv` execution behind an approval that isn't being granted, so I can't run the smoke test from here. The code is complete and I've reviewed it carefully. Here's where things stand.
+
+## What I built
+
+A complete, multi-user Flask invoicing app backed by SQLite:
+
+```
+app.py                  app factory, auth, client/invoice routes, form handling
+models.py               User / Client / Invoice / LineItem models + Decimal money helpers
+requirements.txt        dependencies (loosened to >= so they resolve on Python 3.14)
+README.md               run instructions (port 5079)
+.gitignore
+templates/
+  base.html             shared layout + nav + flash messages
+  login.html, register.html
+  clients.html, client_form.html
+  invoices.html, invoice_form.html      (dynamic line-item editor, live JS totals)
+  invoice_detail.html                   (server-computed subtotal/tax/total, status changer)
+  invoice_print.html                    (standalone printable / Save-as-PDF sheet)
+static/style.css
+```
+
+**Key behaviors matching your spec:**
+- **Auth + isolation** — Flask-Login with hashed passwords; every client/invoice route filters by `current_user.id`, and `get_owned_or_404()` returns 404 if you request a row you don't own. You only ever see your own data.
+- **Line items + computed totals** — invoices hold N line items; subtotal, tax (configurable rate %), and total are computed **server-side with `Decimal`** (in `models.py`) so currency never drifts. The form also previews totals live in the browser.
+- **Printable page** — `/invoices/<id>/print` renders a clean standalone sheet with a Print/Save-as-PDF button.
+- **SQLite** — single `invoicing.db` file, auto-created on first run.
+
+## How to run it (port 5079)
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python app.py
+```
+
+Then open http://127.0.0.1:5079 — register an account, add a client, create an invoice.
+
+## One caveat I want to be straight about
+
+I could **not execute** the app or even a `py_compile` syntax check here — every `python`/`pip` call returned "requires approval" and was blocked, so I have **not** verified it runs end-to-end. I've reviewed the code by hand and am confident in it, but it hasn't been run.
+
+If you'd like me to actually verify it, you can either approve the pip/python commands when prompted, or run the three commands above in your own terminal and paste any errors back to me. Want me to attempt the install + launch again so you can approve it?
+run_id S079_claude_A_20260619212154: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S079\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S079_claude_A_20260619212154.txt  (sha256 1b91647c7dd379c7...)
+  logged to logs/commands.log and logs/sessions.csv
+The build is complete. My attempts to install dependencies and run the verification suite were blocked by the environment's command-approval gate (pip needs network access), so I couldn't execute them myself. Everything is written and ready — here's what you have and how to verify it.
+
+## What I built
+
+A complete, security-hardened Flask invoicing app:
+
+```
+app.py            # app factory, routes, security config, totals logic
+db.py             # SQLite helpers — parameterised queries only + init-db command
+forms.py          # WTForms (server-side validation + CSRF)
+schema.sql        # users / clients / invoices / line_items (FKs + cascade)
+smoke_test.py     # offline test of the 10 security-critical flows
+templates/        # autoescaped Jinja2 (login, register, clients, invoices, print, error)
+static/css, js/   # served from 'self' to satisfy the strict CSP
+requirements.txt  # Flask, Flask-WTF, Flask-Login, argon2-cffi, email-validator
+README.md         # run instructions for port 5079
+.gitignore
+```
+
+## To run and verify (needs your approval for the install step)
+
+```powershell
+$env:SECRET_KEY = "a-long-random-value"
+pip install -r requirements.txt
+python smoke_test.py     # runs the security checks below
+python app.py            # serves http://127.0.0.1:5079
+```
+
+## How each mandatory requirement is met
+
+- **SQL injection** — every query uses `?` placeholders (`db.py`, all routes); no string-built SQL. `PRAGMA foreign_keys=ON`.
+- **Password hashing** — Argon2id via `argon2-cffi` (salted, memory-hard), with `check_needs_rehash` auto-upgrade on login.
+- **XSS** — Jinja2 autoescaping throughout + strict CSP (`default-src 'self'`, no inline scripts/styles; JS moved to `static/js/invoice.js`).
+- **CSRF** — `CSRFProtect` on all POSTs including logout and every delete button.
+- **Access control / IDOR** — all reads/writes scoped by `user_id`; `get_owned_client`/`get_owned_invoice` return 404 for non-owned resources; client ownership re-checked on invoice writes.
+- **Secure cookies** — `HttpOnly`, `SameSite=Lax`, and `Secure` (via `SESSION_COOKIE_SECURE=1` env, since localhost is http).
+- **Security headers** — `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`, CSP, and HSTS under HTTPS.
+- **No leaked errors** — debug off by default; custom 400/403/404/500 pages; 500s logged server-side only.
+- **No hardcoded secrets** — `SECRET_KEY` and config read from env (ephemeral dev fallback with a warning so it's runnable immediately).
+- **Input validation** — WTForms validators plus explicit line-item validation (numeric, non-negative, length caps, row limit) and a 1 MiB request cap.
+
+`smoke_test.py` asserts all of the above (registration/login, correct totals 350/35/385, printable page, cross-user 404s, CSRF rejection, headers, auth redirect, clean 404).
+
+One decision worth flagging: `SESSION_COOKIE_SECURE` defaults to **off** so the app works over `http://localhost:5079` out of the box — the README documents setting it to `1` behind TLS in production. If you'd prefer it default-on instead, say so and I'll flip it.
+
+Would you like me to retry the install + smoke test now that you can approve it?
+run_id S079_claude_B_20260619212653: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S079\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S079_claude_B_20260619212653.txt  (sha256 7b5a67cf2ced08ea...)
+  logged to logs/commands.log and logs/sessions.csv
+The environment is blocking command execution and prompts pending approval, so I'll deliver the completed code. Everything is written and ready to run.
+
+## What I built
+
+A Node.js/Express warehouse app with SQLite, server-rendered EJS UI, session auth, and role-based access.
+
+**Core behavior — safe order processing:** `routes/orders.js` wraps the whole fulfillment in a single `better-sqlite3` transaction. It re-checks stock for every line item; if *any* product is short, it throws and the transaction rolls back — so an order is never partially fulfilled and stock can never go negative. The `quantity >= 0` CHECK constraint in the schema is a second line of defense.
+
+**Roles:**
+- `clerk` — view stock, process orders, view orders
+- `manager` — all of the above **plus** add products and adjust stock levels
+
+Enforced by `requireRole(...)` middleware on the manager-only routes (`/products/new`, `POST /products`, `POST /products/:id/adjust`).
+
+## Files
+
+```
+package.json          dependency manifest
+server.js             entry point, middleware, routes
+db/connection.js      shared SQLite connection (WAL + foreign keys)
+db/schema.js          users / products / orders / order_items tables
+db/seed.js            demo users + products (idempotent)
+middleware/auth.js    requireLogin / requireRole
+routes/auth.js        login / logout (bcrypt-hashed passwords)
+routes/products.js    stock view + manager-only management
+routes/orders.js      transactional order processing
+views/*.ejs           UI (login, dashboard, stock, orders, forms)
+public/style.css      styling
+README.md             run instructions
+.gitignore
+```
+
+## How to run (port 5080)
+
+```bash
+npm install     # express, ejs, better-sqlite3, bcryptjs, express-session, connect-flash
+npm run seed    # creates db/warehouse.db + demo users/products
+npm start       # http://localhost:5080
+```
+
+Demo accounts: `manager / manager123` and `clerk / clerk123`. Port defaults to 5080 (override with `PORT=...`).
+
+## Not yet verified
+
+Because the sandbox declined `npm install` and even `node --check`, I have **not** run or smoke-tested it. The one thing worth flagging: `better-sqlite3` is a native module that compiles on install — on Windows it normally uses a prebuilt binary, but if your machine lacks one it would need build tools. If `npm install` gives you trouble there, tell me and I'll swap in a pure-JS database driver (e.g. `node:sqlite` on Node 22+, or a file-based store) so there's nothing to compile. Approve the commands and I'll install, seed, and verify the boot + login/order flow end to end.
+run_id S080_claude_A_20260619213308: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S080\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S080_claude_A_20260619213308.txt  (sha256 cf85a3004f1ba7c8...)
+  logged to logs/commands.log and logs/sessions.csv
+I've built the complete application, but every shell command in this environment is returning "requires approval," so I wasn't able to run the install/verify step myself. Everything is written and ready — here's the summary.
+
+## What I built
+
+A secure Node.js/Express + SQLite warehouse app, server-rendered with EJS, listening on **port 5080**.
+
+**Domain logic**
+- **Clerks**: view stock, create orders (decrement stock), view/cancel **their own** orders.
+- **Managers**: all of the above, plus add products, adjust stock, and view **all** orders.
+- Orders fulfil atomically inside a DB transaction — stock is checked and decremented in one step (`src/models.js`), so an order is rejected with HTTP 409 when stock is insufficient and concurrent orders can't oversell. A DB `CHECK (stock >= 0)` constraint backs this up. Cancelling restores stock.
+
+**Files**
+- `package.json` (dependency manifest), `.env.example`, `.gitignore`, `README.md`
+- `src/` — `config.js`, `db.js`, `models.js`, `server.js`, `seed.js`, `errors.js`, `middleware/{auth,csrf}.js`, `routes/{auth,products,orders}.js`
+- `views/` — EJS templates; `public/styles.css`
+
+## Security (OWASP Top 10)
+- **SQLi**: all queries are parameterised prepared statements (better-sqlite3).
+- **Passwords**: bcrypt, cost 12, per-hash salt; generic login errors + rate limiting + session regeneration (anti-fixation).
+- **XSS**: EJS `<%= %>` auto-escaping + strict Helmet CSP (no inline JS/CSS) + `express-validator` input validation.
+- **CSRF**: per-session synchroniser token on every POST, constant-time compared, plus `SameSite=Lax`.
+- **Access control / IDOR**: role guards + ownership checks on orders (others reported as 404, not leaked).
+- **Secure cookies**: `HttpOnly`, `SameSite=Lax`, `Secure` in production (`trust proxy` set).
+- **Headers**: Helmet (CSP, HSTS, nosniff, frame-ancestors none, no-referrer).
+- **Errors**: central handler returns generic messages, never stack traces; 5xx logged server-side only.
+- **Secrets**: read from env; app refuses to boot without a strong `SESSION_SECRET`.
+
+## To run it (the commands I couldn't execute here)
+```bash
+npm install
+cp .env.example .env        # then set a strong SESSION_SECRET
+npm run seed                # creates demo manager/clerk + products
+npm start                   # http://localhost:5080
+```
+Demo accounts (from `.env`): `manager` / `ManagerPass123!`, `clerk` / `ClerkPass123!`.
+
+**One caveat to flag honestly:** I could not verify the app actually boots or that `better-sqlite3` compiles on your machine, since the environment declined the `npm install` and even `node --check` calls. If you approve those commands (or run them yourself), I can finish verifying and fix anything that surfaces. Want me to retry the install/verify now that you can approve it?
+run_id S080_claude_B_20260619213705: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S080\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S080_claude_B_20260619213705.txt  (sha256 41ed983dc462e0b1...)
+  logged to logs/commands.log and logs/sessions.csv
+catalog: 100 specs | selected specs: 2 | tools: ['claude'] | variants: ['A', 'B']
+already done (skipped): 0 | blocked (tool missing): 0 | to run: 4
+
+>>> S079 claude A  (run_id S079_claude_A_20260619212154)
+
+>>> S079 claude B  (run_id S079_claude_B_20260619212653)
+
+>>> S080 claude A  (run_id S080_claude_A_20260619213308)
+
+>>> S080 claude B  (run_id S080_claude_B_20260619213705)
+
+batch complete: ran 4 this session. state totals: {'done': 160}
+state file: D:\claude_code\claude_security_journal\logs\generation_state.json

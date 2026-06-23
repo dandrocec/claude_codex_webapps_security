@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}My appointments · Scheduler{% endblock %}
+{% block content %}
+  <h1>My appointments</h1>
+
+  <div class="card">
+    {% if appointments %}
+      <table>
+        <thead>
+          <tr><th>Start</th><th>End</th><th>Provider</th></tr>
+        </thead>
+        <tbody>
+          {% for slot in appointments %}
+            <tr>
+              <td>{{ slot['start_time'] | pretty_dt }}</td>
+              <td>{{ slot['end_time'] | pretty_dt }}</td>
+              <td>{{ slot['provider_name'] }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="muted">You have no appointments yet.
+         <a href="{{ url_for('browse') }}">Browse available slots</a>.</p>
+    {% endif %}
+  </div>
+{% endblock %}

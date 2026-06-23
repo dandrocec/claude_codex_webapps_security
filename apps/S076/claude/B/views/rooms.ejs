@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<section class="card">
+  <h1>Chat rooms</h1>
+  <% if (error) { %><p class="alert"><%= error %></p><% } %>
+
+  <form action="/rooms" method="post" class="row">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="text" name="name" placeholder="New room name"
+           required minlength="1" maxlength="50">
+    <button type="submit">Create room</button>
+  </form>
+
+  <% if (rooms.length === 0) { %>
+    <p class="muted">No rooms yet. Create the first one above!</p>
+  <% } else { %>
+    <ul class="room-list">
+      <% rooms.forEach(function (room) { %>
+        <li>
+          <a href="/rooms/<%= room.id %>"><%= room.name %></a>
+          <span class="meta">by <%= room.creator %> · <%= room.message_count %> message(s)</span>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

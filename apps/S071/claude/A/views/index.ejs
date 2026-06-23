@@ -1,0 +1,37 @@
+<%- include('partials/header', { pageTitle: 'Auction House — Browse' }) %>
+
+<h1>Open &amp; recent auctions</h1>
+
+<% if (items.length === 0) { %>
+  <p class="empty">No items listed yet. <a href="/items/new">Be the first to list one →</a></p>
+<% } else { %>
+  <ul class="card-grid">
+    <% items.forEach((item) => { %>
+      <li class="card <%= item.ended ? 'card--ended' : '' %>">
+        <a class="card__link" href="/items/<%= item.id %>">
+          <h2><%= item.title %></h2>
+        </a>
+        <p class="card__seller">by <%= item.seller %></p>
+        <p class="card__price">
+          <span class="label"><%= item.highestBidder ? 'Current bid' : 'Starting price' %></span>
+          <span class="amount"><%= money(item.currentPrice) %></span>
+        </p>
+        <% if (item.ended) { %>
+          <p class="status status--ended">
+            Ended ·
+            <% if (item.highestBidder) { %>
+              won by <strong><%= item.highestBidder %></strong>
+            <% } else { %>
+              no bids
+            <% } %>
+          </p>
+        <% } else { %>
+          <p class="status status--open">Ends <%= dateTime(item.end_time) %></p>
+        <% } %>
+        <a class="card__cta" href="/items/<%= item.id %>"><%= item.ended ? 'View result' : 'View &amp; bid' %></a>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

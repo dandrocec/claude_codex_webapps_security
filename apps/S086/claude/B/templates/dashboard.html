@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · Admin{% endblock %}
+{% block content %}
+
+<div class="card">
+  <div class="stats">
+    <div class="stat"><div class="n">{{ metrics.total }}</div><div class="l">Total users</div></div>
+    <div class="stat"><div class="n">{{ metrics.active }}</div><div class="l">Active</div></div>
+    <div class="stat"><div class="n">{{ metrics.inactive }}</div><div class="l">Inactive</div></div>
+    <div class="stat"><div class="n">{{ metrics.admins }}</div><div class="l">Admins</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <h2 style="margin:0;">Users</h2>
+    <a class="btn primary" href="{{ url_for('user_new') }}">+ New user</a>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th><th>Email</th><th>Role</th><th>Status</th>
+        <th>Created</th><th>Last login</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u["username"] }}</td>
+        <td>{{ u["email"] }}</td>
+        <td>
+          {% if u["is_admin"] %}<span class="badge admin">Admin</span>
+          {% else %}<span class="muted">User</span>{% endif %}
+        </td>
+        <td>
+          {% if u["is_active"] %}<span class="badge ok">Active</span>
+          {% else %}<span class="badge off">Inactive</span>{% endif %}
+        </td>
+        <td class="muted">{{ u["created_at"][:10] }}</td>
+        <td class="muted">{{ u["last_login"][:16] if u["last_login"] else "—" }}</td>
+        <td class="row-actions">
+          <a class="btn" href="{{ url_for('user_edit', user_id=u['id']) }}">Edit</a>
+          {% if u["is_active"] %}
+            <form class="inline" method="post"
+                  action="{{ url_for('user_deactivate', user_id=u['id']) }}">
+              {{ action_form.csrf_token }}
+              <button class="btn danger" type="submit"
+                {% if u['id'] == current_user['id'] %}disabled title="You cannot deactivate yourself"{% endif %}>
+                Deactivate
+              </button>
+            </form>
+          {% else %}
+            <form class="inline" method="post"
+                  action="{{ url_for('user_activate', user_id=u['id']) }}">
+              {{ action_form.csrf_token }}
+              <button class="btn" type="submit">Activate</button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7" class="muted">No users yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

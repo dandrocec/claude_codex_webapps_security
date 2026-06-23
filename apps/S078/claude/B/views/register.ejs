@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+  <section class="card narrow">
+    <h1>Create your account</h1>
+    <% if (errors && errors.length) { %>
+      <ul class="errors">
+        <% errors.forEach(function(e){ %><li><%= e.msg %></li><% }) %>
+      </ul>
+    <% } %>
+    <form method="post" action="/register">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Name
+        <input type="text" name="name" value="<%= values.name || '' %>" required maxlength="100">
+      </label>
+      <label>Email
+        <input type="email" name="email" value="<%= values.email || '' %>" required autocomplete="username" maxlength="200">
+      </label>
+      <label>Password
+        <input type="password" name="password" required minlength="10" autocomplete="new-password">
+        <small class="muted">At least 10 characters.</small>
+      </label>
+      <label>Role
+        <select name="role">
+          <option value="sales" <%= values.role === 'manager' ? '' : 'selected' %>>Sales</option>
+          <option value="manager" <%= values.role === 'manager' ? 'selected' : '' %>>Manager</option>
+        </select>
+      </label>
+      <button type="submit" class="btn">Register</button>
+    </form>
+    <p class="muted">Already have an account? <a href="/login">Log in</a></p>
+  </section>
+<%- include('partials/footer') %>

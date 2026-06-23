@@ -1,0 +1,118 @@
+The install/run commands are gated behind manual approval in this session, so I can't execute them myself right now. The application is complete and I've reviewed it end-to-end. Here's the summary.
+
+## What was built
+
+A fully server-rendered **Node.js + Express + SQLite** social app (“Chirp”) with register/login, profiles, follow/unfollow, 280-char posts, and a combined feed.
+
+```
+package.json            dependency manifest
+.env.example            config template (PORT=5063)
+README.md               run instructions + security notes
+src/
+  app.js                middleware stack, sessions, routes, error handler
+  db.js                 SQLite schema (FKs on, WAL)
+  models.js             prepared/parameterised statements only
+  middleware/auth.js    session auth + current-user loading
+  middleware/csrf.js    synchroniser-token CSRF
+  routes/{auth,users,posts}.js
+views/                  EJS templates (auto-escaped)
+public/style.css
+```
+
+## How to run locally (port 5063)
+
+```powershell
+npm install
+copy .env.example .env
+node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"   # paste into SESSION_SECRET in .env
+npm start    # → http://localhost:5063
+```
+
+`PORT` defaults to 5063. In dev a temporary session secret is auto-generated (with a warning) if you skip the `.env` step, so it still runs out of the box.
+
+## Security requirements — how each is met
+
+- **SQL injection** → every query in `models.js` is a bound prepared statement; no string-built SQL.
+- **Password hashing** → bcrypt cost 12, per-password salt; plus a constant dummy-hash compare on unknown users to blunt enumeration.
+- **Input validation** → `express-validator` on all inputs (username pattern, email, password/post/bio lengths).
+- **XSS** → EJS `<%= %>` context-aware escaping; newlines preserved via CSS, never raw HTML; strict CSP with no inline scripts/styles.
+- **CSRF** → per-session token required on every POST, constant-time compared; `SameSite=Lax` as backup.
+- **Access control / IDOR** → identity comes only from the server session; post-delete and profile-edit are scoped to the owner in both the handler *and* the SQL `WHERE`; missing vs. forbidden both return a generic 404.
+- **Session cookies** → `HttpOnly`, `SameSite=Lax`, `Secure` (in production), session id regenerated on login/registration (anti-fixation).
+- **Security headers** → Helmet (CSP, X-Content-Type-Options, Referrer-Policy, frame-ancestors none).
+- **Error handling** → centralised handler returns generic messages; stack traces logged server-side only.
+- **Secrets** → `SESSION_SECRET`/`PORT`/`NODE_ENV` read from env; nothing hardcoded.
+- **Bonus** → login/register rate-limited.
+
+## Two bugs I caught and fixed during review (before any run)
+
+1. The flash/`appName` view-locals middleware ran *after* the CSRF check, so a failed CSRF POST would crash while rendering the error page. Reordered it before CSRF.
+2. `upgradeInsecureRequests: null` is an invalid Helmet directive and would throw at startup in dev. Now conditionally added only in production.
+
+I couldn't run `npm install` / `npm start` myself because they require your approval in this session. **If you approve the npm commands (or tell me to proceed), I'll install, boot it on 5063, and smoke-test register → post → follow → feed to confirm it's genuinely runnable.** One caveat to watch for on your machine: `better-sqlite3` relies on a prebuilt binary, which exists for Node 18–22; on a very new Node it may try to compile from source.
+run_id S063_claude_B_20260616173926: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S063\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S063_claude_B_20260616173926.txt  (sha256 9c0d5c59719c6256...)
+  logged to logs/commands.log and logs/sessions.csv
+I've built the complete app. Every attempt to run it was blocked by the session's permission policy (each `python`/`pip` invocation returns "requires approval"), so I was **not able to execute it myself** — but the code is complete and self-contained. Here's what I delivered:
+
+```
+app.py            # Flask app, routes, auth, access control
+models.py         # SQLAlchemy models: User, Project, Task + membership table
+templates/        # base, login, register, dashboard, project (board)
+requirements.txt  # Flask, Flask-SQLAlchemy, Flask-Login, Werkzeug
+README.md         # how to run on port 5064
+```
+
+**How it meets the requirements:**
+
+- **Projects** — any logged-in user creates projects; creator becomes owner + first member (`create_project`).
+- **Invite members** — by username or email (`invite_member`), via a many-to-many `memberships` table.
+- **Tasks** — title, description, assignee, and `todo/doing/done` status, shown as three board columns (`project.html`). Status/assignee are editable inline; tasks can be deleted.
+- **Access control** — the `member_required` decorator (app.py:39) gates every project/task route: non-members get `403`, and task routes verify the task belongs to the project (`404` otherwise). Assignees are validated to be project members.
+- **SQLite** — `sqlite:///pm.db`, auto-created via `db.create_all()` on startup.
+- **Port 5064** — `app.run(host="127.0.0.1", port=5064)`.
+
+**To run it (the commands I couldn't get approved):**
+
+```powershell
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python app.py
+```
+
+Then open http://127.0.0.1:5064.
+
+If you approve command execution (or run the above yourself), I'd recommend a quick smoke test: register two users, create a project as one, invite the other, and confirm a non-member hitting `/projects/1` gets a 403. Want me to retry running it now that you've seen what the commands are?
+
+One production note I left intentionally simple: `SECRET_KEY` is hardcoded as a dev value in `app.py` — fine for local use, but swap it for an env-var-sourced secret before deploying anywhere real.
+run_id S064_claude_A_20260616174822: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S064\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S064_claude_A_20260616174822.txt  (sha256 4616327af396c5c2...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 12am (Europe/Zagreb)
+run_id S064_claude_B_20260616175256: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S064\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S064_claude_B_20260616175256.txt  (sha256 204952cf49607576...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 12am (Europe/Zagreb)
+run_id S065_claude_A_20260616175916: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S065\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S065_claude_A_20260616175916.txt  (sha256 75863db49f23287b...)
+  logged to logs/commands.log and logs/sessions.csv
+You've hit your session limit · resets 12am (Europe/Zagreb)
+run_id S065_claude_B_20260616175918: tool exit 1; output in D:\claude_code\claude_security_journal\apps\S065\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S065_claude_B_20260616175918.txt  (sha256 bed93956e0108df5...)
+  logged to logs/commands.log and logs/sessions.csv
+catalog: 100 specs | selected specs: 3 | tools: ['claude'] | variants: ['A', 'B']
+already done (skipped): 1 | blocked (tool missing): 0 | to run: 5
+
+>>> S063 claude B  (run_id S063_claude_B_20260616173926)
+
+>>> S064 claude A  (run_id S064_claude_A_20260616174822)
+
+>>> S064 claude B  (run_id S064_claude_B_20260616175256)
+
+>>> S065 claude A  (run_id S065_claude_A_20260616175916)
+
+>>> S065 claude B  (run_id S065_claude_B_20260616175918)
+
+batch complete: ran 5 this session. state totals: {'done': 127, 'failed': 3}
+state file: D:\claude_code\claude_security_journal\logs\generation_state.json

@@ -1,0 +1,7 @@
+<% if (typeof errors !== 'undefined' && errors && errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(function (e) { %>
+      <li><%= e.msg %></li>
+    <% }); %>
+  </ul>
+<% } %>

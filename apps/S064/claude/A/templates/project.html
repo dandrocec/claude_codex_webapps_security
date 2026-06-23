@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+<div class="row" style="justify-content:space-between;align-items:flex-start;">
+  <div>
+    <h1>{{ project.name }}</h1>
+    {% if project.description %}<p>{{ project.description }}</p>{% endif %}
+  </div>
+  <a class="btn ghost" href="{{ url_for('dashboard') }}">← All projects</a>
+</div>
+
+<div class="card">
+  <h3>Members</h3>
+  <p>{{ project.members | map(attribute='username') | join(', ') }}</p>
+  <form method="post" action="{{ url_for('invite_member', project_id=project.id) }}" class="row">
+    <input name="identifier" placeholder="username or email" required>
+    <button type="submit">Invite member</button>
+  </form>
+</div>
+
+<div class="card">
+  <h3>Add a task</h3>
+  <form method="post" action="{{ url_for('create_task', project_id=project.id) }}">
+    <div class="field">
+      <label>Title</label>
+      <input name="title" required>
+    </div>
+    <div class="field">
+      <label>Description</label>
+      <textarea name="description" rows="2"></textarea>
+    </div>
+    <div class="field">
+      <label>Assignee</label>
+      <select name="assignee_id">
+        <option value="">Unassigned</option>
+        {% for m in project.members %}
+          <option value="{{ m.id }}">{{ m.username }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit">Add task</button>
+  </form>
+</div>
+
+<div class="board">
+  {% for status in ['todo', 'doing', 'done'] %}
+    <div class="col">
+      <h3>{{ status }} ({{ columns[status]|length }})</h3>
+      {% for task in columns[status] %}
+        <div class="task">
+          <strong>{{ task.title }}</strong>
+          {% if task.description %}<div>{{ task.description }}</div>{% endif %}
+          <div class="meta">
+            Assignee: {{ task.assignee.username if task.assignee else 'Unassigned' }}
+          </div>
+
+          <form method="post" action="{{ url_for('update_task', project_id=project.id, task_id=task.id) }}" class="row" style="margin-top:.5rem;">
+            <select name="status">
+              {% for s in ['todo','doing','done'] %}
+                <option value="{{ s }}" {{ 'selected' if task.status == s }}>{{ s }}</option>
+              {% endfor %}
+            </select>
+            <select name="assignee_id">
+              <option value="">Unassigned</option>
+              {% for m in project.members %}
+                <option value="{{ m.id }}" {{ 'selected' if task.assignee_id == m.id }}>{{ m.username }}</option>
+              {% endfor %}
+            </select>
+            <button type="submit" class="ghost">Save</button>
+          </form>
+
+          <form method="post" action="{{ url_for('delete_task', project_id=project.id, task_id=task.id) }}" style="margin-top:.4rem;">
+            <button type="submit" class="danger">Delete</button>
+          </form>
+        </div>
+      {% else %}
+        <p class="meta" style="color:var(--muted);">No tasks.</p>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

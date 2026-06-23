@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Register · Scheduler{% endblock %}
+{% block content %}
+  <h1>Create an account</h1>
+  <div class="card" style="max-width:420px;">
+    <form method="post" action="{{ url_for('register') }}">
+      <label for="username">Username</label>
+      <input id="username" name="username" autofocus required>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required>
+      <label for="role">I am a…</label>
+      <select id="role" name="role" required>
+        <option value="provider">Provider (I publish slots)</option>
+        <option value="client">Client (I book slots)</option>
+      </select>
+      <p><button type="submit">Register</button></p>
+    </form>
+    <p class="muted">Already registered? <a href="{{ url_for('login') }}">Log in</a>.</p>
+  </div>
+{% endblock %}

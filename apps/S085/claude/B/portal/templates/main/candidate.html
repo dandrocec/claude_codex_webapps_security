@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ profile.full_name }}{% endblock %}
+{% block content %}
+  <p><a href="{{ url_for('main.search') }}">&larr; Back to search</a></p>
+  <h1>{{ profile.full_name }}</h1>
+  {% if profile.headline %}<p class="lead">{{ profile.headline }}</p>{% endif %}
+  {% if profile.location %}<p class="muted">{{ profile.location }}</p>{% endif %}
+
+  {% if skills %}
+    <h2>Skills</h2>
+    <ul class="taglist">
+      {% for s in skills %}<li class="tag">{{ s }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if profile.bio %}
+    <h2>About</h2>
+    <p class="bio">{{ profile.bio }}</p>
+  {% endif %}
+
+  <h2>Resume</h2>
+  {% if profile.resume_filename %}
+    <p>
+      <a class="btn" href="{{ url_for('profiles.download_resume', profile_id=profile.id) }}">
+        Download resume
+      </a>
+    </p>
+  {% else %}
+    <p class="muted">No resume on file.</p>
+  {% endif %}
+{% endblock %}

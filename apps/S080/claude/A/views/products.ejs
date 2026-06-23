@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+<div class="row-between">
+  <h1>Stock levels</h1>
+  <% if (currentUser.role === 'manager') { %>
+    <a class="button" href="/products/new">+ Add product</a>
+  <% } %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>SKU</th>
+      <th>Name</th>
+      <th class="num">In stock</th>
+      <% if (currentUser.role === 'manager') { %><th>Adjust stock</th><% } %>
+    </tr>
+  </thead>
+  <tbody>
+    <% products.forEach(function (p) { %>
+      <tr>
+        <td><code><%= p.sku %></code></td>
+        <td><%= p.name %></td>
+        <td class="num <%= p.quantity === 0 ? 'danger' : (p.quantity < 20 ? 'warn' : '') %>">
+          <%= p.quantity %>
+        </td>
+        <% if (currentUser.role === 'manager') { %>
+          <td>
+            <form action="/products/<%= p.id %>/adjust" method="post" class="inline-form">
+              <select name="mode">
+                <option value="add">Add</option>
+                <option value="remove">Remove</option>
+                <option value="set">Set to</option>
+              </select>
+              <input type="number" name="amount" min="0" value="0" required />
+              <button type="submit">Apply</button>
+            </form>
+          </td>
+        <% } %>
+      </tr>
+    <% }); %>
+    <% if (products.length === 0) { %>
+      <tr><td colspan="4" class="empty">No products yet.</td></tr>
+    <% } %>
+  </tbody>
+</table>
+
+<%- include('partials/footer') %>

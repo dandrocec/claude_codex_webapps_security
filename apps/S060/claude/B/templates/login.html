@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Log in — Quill{% endblock %}
+{% block content %}
+  <h1>Log in</h1>
+  <form method="post" class="card form" novalidate>
+    {{ form.csrf_token }}
+    <label>{{ form.username.label }}{{ form.username(autocomplete="username") }}</label>
+    {% for e in form.username.errors %}<small class="field-error">{{ e }}</small>{% endfor %}
+
+    <label>{{ form.password.label }}{{ form.password(autocomplete="current-password") }}</label>
+    {% for e in form.password.errors %}<small class="field-error">{{ e }}</small>{% endfor %}
+
+    <label class="checkbox">{{ form.remember() }} {{ form.remember.label.text }}</label>
+    {{ form.submit(class="btn") }}
+  </form>
+  <p class="muted">No account? <a href="{{ url_for('register') }}">Register</a>.</p>
+{% endblock %}

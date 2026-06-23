@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+
+<h1>My schedule</h1>
+<div class="card">
+  <% if (appointments.length === 0) { %>
+    <p class="muted">No appointments scheduled.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>When</th><th>Patient</th><th>Reason</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        <% appointments.forEach(function (a) { %>
+          <tr>
+            <td><%= a.slot.replace('T', ' ') %></td>
+            <td><a href="/doctor/patients/<%= a.patient_id %>"><%= a.patient_name %></a></td>
+            <td><%= a.reason %></td>
+            <td><span class="status status-<%= a.status %>"><%= a.status %></span></td>
+            <td>
+              <% if (a.status !== 'completed' && a.status !== 'cancelled') { %>
+                <form method="post" action="/doctor/appointments/<%= a.id %>/complete" class="inline">
+                  <button class="link" type="submit">Mark completed</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<h2>My patients</h2>
+<div class="card">
+  <% if (patients.length === 0) { %>
+    <p class="muted">No patients yet.</p>
+  <% } else { %>
+    <ul class="list">
+      <% patients.forEach(function (p) { %>
+        <li><a href="/doctor/patients/<%= p.id %>"><%= p.full_name %></a></li>
+      <% }); %>
+    </ul>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

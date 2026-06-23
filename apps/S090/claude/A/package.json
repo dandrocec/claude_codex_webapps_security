@@ -1,0 +1,24 @@
+{
+  "name": "express-github-oauth",
+  "version": "1.0.0",
+  "description": "Express app: sign in with GitHub OAuth, store profile + sessions in SQLite, show a personalised page with live account data from the GitHub API.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "connect-sqlite3": "^0.9.15",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12"
+  }
+}

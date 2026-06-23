@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Clients{% endblock %}
+{% block content %}
+<h1>Client applications</h1>
+
+{% if new_secret %}
+<div class="card success">
+  <p><strong>Client created.</strong> Copy the secret now — it will not be shown again.</p>
+  <p>client_id: <code>{{ new_secret_id }}</code></p>
+  <p>client_secret: <code>{{ new_secret }}</code></p>
+</div>
+{% endif %}
+
+{% for error in errors %}<p class="error">{{ error }}</p>{% endfor %}
+
+<h2>Register a new client</h2>
+<form method="post" action="/clients" class="card">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Name
+    <input type="text" name="name" value="{{ values.name | default('') }}"
+           required maxlength="128">
+  </label>
+  <label>Redirect URIs (one per line)
+    <textarea name="redirect_uris" rows="3"
+              placeholder="https://app.example.com/callback">{{ values.redirect_uris | default('') }}</textarea>
+  </label>
+  <button type="submit">Create client</button>
+</form>
+
+<h2>Your clients</h2>
+{% if clients %}
+<table class="clients">
+  <thead><tr><th>Name</th><th>client_id</th><th>Redirect URIs</th><th></th></tr></thead>
+  <tbody>
+  {% for c in clients %}
+    <tr>
+      <td>{{ c.name }}</td>
+      <td><code>{{ c.client_id }}</code></td>
+      <td>
+        {% for uri in c.redirect_uri_list() %}<div>{{ uri }}</div>{% endfor %}
+      </td>
+      <td>
+        <form method="post" action="/clients/{{ c.id }}/delete" class="inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <button type="submit" class="danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>You have no clients yet.</p>
+{% endif %}
+{% endblock %}

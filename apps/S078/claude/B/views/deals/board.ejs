@@ -1,0 +1,54 @@
+<%- include('../partials/header') %>
+  <div class="page-head">
+    <h1>Pipeline</h1>
+    <a class="btn" href="/deals/new">+ New deal</a>
+  </div>
+  <% if (currentUser.role === 'manager') { %>
+    <p class="muted">Showing the whole team's deals. You can move only deals you own.</p>
+  <% } %>
+
+  <div class="board">
+    <% columns.forEach(function(col){ %>
+      <section class="column">
+        <header class="column-head">
+          <span><%= col.label %></span>
+          <span class="count"><%= col.deals.length %></span>
+        </header>
+        <div class="column-body">
+          <% col.deals.forEach(function(d){ %>
+            <article class="deal-card">
+              <div class="deal-title"><%= d.title %></div>
+              <div class="deal-amount"><%= formatMoney(d.amount) %></div>
+              <div class="deal-meta">
+                <% if (d.contact_name) { %><span><%= d.contact_name %></span><br><% } %>
+                <% if (currentUser.role === 'manager') { %>
+                  <span class="muted">owner: <%= d.owner_name %></span>
+                <% } %>
+              </div>
+
+              <% if (d.owner_id === currentUser.id) { %>
+                <form method="post" action="/deals/<%= d.id %>/stage" class="stage-form">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <select name="stage" aria-label="Move stage">
+                    <% stages.forEach(function(s){ %>
+                      <option value="<%= s.key %>" <%= s.key === d.stage ? 'selected' : '' %>><%= s.label %></option>
+                    <% }) %>
+                  </select>
+                  <button type="submit" class="link-btn">Move</button>
+                </form>
+                <div class="deal-actions">
+                  <a href="/deals/<%= d.id %>/edit">Edit</a>
+                  <form method="post" action="/deals/<%= d.id %>/delete" class="inline"
+                        data-confirm="Delete this deal?">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="link-btn danger">Delete</button>
+                  </form>
+                </div>
+              <% } %>
+            </article>
+          <% }) %>
+        </div>
+      </section>
+    <% }) %>
+  </div>
+<%- include('../partials/footer') %>

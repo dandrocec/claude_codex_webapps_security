@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}My appointments · Scheduler{% endblock %}
+{% block content %}
+<h1>My appointments</h1>
+{% if appts %}
+<table class="data">
+  <thead>
+    <tr><th>Provider</th><th>Start</th><th>End</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for a in appts %}
+    <tr>
+      <td>{{ a['provider_email'] }}</td>
+      <td>{{ a['start_time'] }}</td>
+      <td>{{ a['end_time'] }}</td>
+      <td>
+        <form method="post" action="{{ url_for('cancel_booking', slot_id=a['id']) }}" class="inline">
+          {{ action_form.csrf_token }}
+          <button type="submit" class="danger">Cancel</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">You have no booked appointments yet.
+  <a href="{{ url_for('browse_slots') }}">Browse available slots</a>.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,127 @@
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --ink: #1d2733;
+  --muted: #6b7785;
+  --line: #e1e4e8;
+  --primary: #2f6fed;
+  --danger: #d6334c;
+  --todo: #8a94a6;
+  --doing: #e0a82e;
+  --done: #2faa5a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand { font-weight: 700; text-decoration: none; color: var(--ink); }
+
+.topbar nav { display: flex; align-items: center; gap: 1rem; }
+.topbar nav a { text-decoration: none; color: var(--primary); }
+.who { color: var(--muted); }
+
+.container { max-width: 1100px; margin: 1.5rem auto; padding: 0 1.25rem; }
+
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.page-head .actions { display: flex; gap: 0.5rem; }
+
+h1 { margin: 0 0 0.25rem; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.card.narrow { max-width: 480px; }
+.card.row { display: flex; align-items: center; gap: 0.75rem; }
+
+.muted { color: var(--muted); }
+.meta { color: var(--muted); font-size: 0.85rem; }
+
+.field { margin-bottom: 0.9rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.field label { font-weight: 600; font-size: 0.9rem; }
+input, textarea, select {
+  font: inherit;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  width: 100%;
+}
+
+.errors { color: var(--danger); margin: 0.2rem 0 0; padding-left: 1.1rem; font-size: 0.85rem; }
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+}
+.btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.btn.danger { background: var(--danger); border-color: var(--danger); color: #fff; }
+.btn.small { padding: 0.3rem 0.55rem; font-size: 0.85rem; }
+
+.link-btn {
+  background: none; border: none; color: var(--primary);
+  cursor: pointer; font: inherit; padding: 0; text-decoration: underline;
+}
+.link-btn.danger { color: var(--danger); }
+.inline { display: inline; }
+
+.flashes { margin-bottom: 1rem; }
+.flash { padding: 0.6rem 0.9rem; border-radius: 6px; margin-bottom: 0.5rem; }
+.flash-success { background: #e6f6ec; color: #1b6b39; }
+.flash-danger  { background: #fbe7ea; color: #97122a; }
+.flash-warning { background: #fdf4e3; color: #8a6100; }
+
+.project-list, .member-list { list-style: none; padding: 0; margin: 0; }
+.project-name { font-size: 1.1rem; font-weight: 600; text-decoration: none; color: var(--primary); }
+
+.badge {
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: 999px; padding: 0.1rem 0.6rem; font-size: 0.8rem; color: var(--muted);
+}
+
+.board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; align-items: start; }
+.column { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 0.75rem; }
+.column-title { margin: 0 0 0.75rem; font-size: 1rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--line); }
+.status-todo  { border-color: var(--todo); }
+.status-doing { border-color: var(--doing); }
+.status-done  { border-color: var(--done); }
+
+.task { border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem 0.7rem; margin-bottom: 0.6rem; background: #fff; }
+.task h3 { margin: 0 0 0.3rem; font-size: 0.98rem; }
+.status-move { display: flex; gap: 0.4rem; margin: 0.5rem 0; }
+.status-move select { width: auto; flex: 1; }
+.task-actions { display: flex; gap: 0.8rem; align-items: center; }
+.empty { text-align: center; padding: 0.5rem; }
+
+.danger-zone { margin-top: 1.5rem; }

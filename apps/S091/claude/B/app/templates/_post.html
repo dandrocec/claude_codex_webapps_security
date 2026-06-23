@@ -1,0 +1,30 @@
+{% macro render_post(post, current_user, csrf_token) %}
+<article class="post">
+  <div class="post-head">
+    <a class="author" href="/u/{{ post.author.username }}">@{{ post.author.username }}</a>
+    <time>{{ post.created_at.strftime('%Y-%m-%d %H:%M UTC') }}</time>
+  </div>
+  <p class="post-body">{{ post.content }}</p>
+
+  {% for preview in post.previews %}
+    <div class="preview">
+      {% if preview.status == 'ok' %}
+        <div class="preview-title">{{ preview.title or preview.url }}</div>
+        {% if preview.description %}<div class="preview-desc">{{ preview.description }}</div>{% endif %}
+        <a class="preview-url" href="{{ preview.url }}" rel="noopener noreferrer nofollow" target="_blank">{{ preview.url }}</a>
+      {% elif preview.status == 'pending' %}
+        <div class="preview-pending">Fetching preview for {{ preview.url }} …</div>
+      {% else %}
+        <div class="preview-blocked">Preview unavailable for {{ preview.url }}</div>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  {% if current_user and post.author.id == current_user.id %}
+    <form class="inline" method="post" action="/posts/{{ post.id }}/delete">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <button type="submit" class="link-btn danger">Delete</button>
+    </form>
+  {% endif %}
+</article>
+{% endmacro %}

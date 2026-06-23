@@ -1,0 +1,19 @@
+{
+  "name": "integration-hub",
+  "version": "1.0.0",
+  "description": "A small integration hub: register inbound webhooks, define outbound actions, view events and deliveries with retry.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0"
+  }
+}

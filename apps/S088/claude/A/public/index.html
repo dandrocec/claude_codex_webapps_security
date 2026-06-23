@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocVault — Document Management</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>📁 DocVault</h1>
+    <div id="user-bar"></div>
+  </header>
+
+  <!-- Auth view -->
+  <section id="auth-view" class="card hidden">
+    <h2>Sign in</h2>
+    <form id="login-form">
+      <input name="username" placeholder="Username" autocomplete="username" required />
+      <input name="password" type="password" placeholder="Password" autocomplete="current-password" required />
+      <div class="row">
+        <button type="submit">Log in</button>
+        <button type="button" id="register-btn" class="secondary">Register</button>
+      </div>
+    </form>
+    <p id="auth-msg" class="msg"></p>
+  </section>
+
+  <!-- Main app -->
+  <main id="app-view" class="hidden">
+    <div class="columns">
+      <aside class="card">
+        <h2>Folders</h2>
+        <ul id="folder-list" class="list"></ul>
+        <form id="folder-form" class="inline">
+          <input name="name" placeholder="New folder name" required />
+          <button type="submit">+ Add</button>
+        </form>
+
+        <h2 style="margin-top:1.5rem">Groups</h2>
+        <ul id="group-list" class="list"></ul>
+        <form id="group-form" class="inline">
+          <input name="name" placeholder="New group name" required />
+          <button type="submit">+ Add</button>
+        </form>
+      </aside>
+
+      <div class="card grow">
+        <h2 id="docs-title">All documents</h2>
+
+        <form id="upload-form" class="inline">
+          <input type="file" name="file" required />
+          <input name="name" placeholder="Display name (optional)" />
+          <button type="submit">Upload</button>
+        </form>
+
+        <table id="docs-table">
+          <thead>
+            <tr><th>Name</th><th>Owner</th><th>Access</th><th>Version</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="docs-body"></tbody>
+        </table>
+        <p id="docs-msg" class="msg"></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Generic modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content card">
+      <button id="modal-close" class="close">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

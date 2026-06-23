@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Open jobs{% endblock %}
+{% block content %}
+  <h1>Open jobs</h1>
+  {% if not jobs %}
+    <p class="muted">No jobs have been posted yet.</p>
+  {% endif %}
+  {% for job in jobs %}
+    <div class="card">
+      <h3><a href="{{ url_for('job_detail', job_id=job.id) }}">{{ job.title }}</a></h3>
+      <p class="muted">
+        {% if job.location %}{{ job.location }} &middot; {% endif %}
+        Posted by {{ job.employer.name }} &middot;
+        {{ job.created_at.strftime('%b %d, %Y') }}
+      </p>
+      <p>{{ (job.description[:160] ~ '…') if job.description|length > 160 else job.description }}</p>
+      <a class="btn secondary" href="{{ url_for('job_detail', job_id=job.id) }}">View</a>
+    </div>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{
+  "name": "devops-dashboard",
+  "version": "1.0.0",
+  "description": "A small DevOps dashboard: register services, run deployment shell steps, stream/store logs, manage per-service secrets. Built with security (OWASP Top 10) in mind.",
+  "type": "commonjs",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "init-db": "node src/db/migrate.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.9.0 || ^12.0.0",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.0.0"
+  },
+  "license": "MIT"
+}

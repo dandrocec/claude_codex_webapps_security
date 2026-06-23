@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+  <h1>Sign in</h1>
+  <form method="post" action="{{ url_for('auth.login') }}" class="form" novalidate>
+    {{ form.csrf_token }}
+    {{ render_field(form.email, autocomplete="email") }}
+    {{ render_field(form.password, autocomplete="current-password") }}
+    <button type="submit" class="btn">Sign in</button>
+  </form>
+  <p>No account yet? <a href="{{ url_for('auth.register') }}">Register</a>.</p>
+{% endblock %}

@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<h1>My orders</h1>
+
+<% if (orders.length === 0) { %>
+  <p>You have no orders yet. <a href="/menu">Order something</a>.</p>
+<% } else { %>
+  <table class="table">
+    <thead>
+      <tr><th>Order</th><th>Placed</th><th>Status</th><th>Total</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% orders.forEach(function (o) { %>
+        <tr>
+          <td>#<%= o.id %></td>
+          <td><%= o.created_at %></td>
+          <td><span class="badge status-<%= o.status %>"><%= o.status %></span></td>
+          <td><%= formatPrice(o.total_cents) %></td>
+          <td><a href="/orders/<%= o.id %>">View</a></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/footer') %>

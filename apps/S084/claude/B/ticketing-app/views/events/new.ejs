@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+<h1>Create event</h1>
+<%- include('../partials/errors') %>
+<form action="/events" method="post" class="card form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Name
+    <input type="text" name="name" value="<%= values.name || '' %>" required maxlength="200">
+  </label>
+  <label>Description
+    <textarea name="description" rows="4" maxlength="5000"><%= values.description || '' %></textarea>
+  </label>
+  <label>Date (optional)
+    <input type="date" name="event_date" value="<%= values.event_date || '' %>">
+  </label>
+  <label>Capacity (number of tickets)
+    <input type="number" name="capacity" value="<%= values.capacity || '' %>" required min="1" max="1000000">
+  </label>
+  <button type="submit">Create</button>
+</form>
+<%- include('../partials/footer') %>

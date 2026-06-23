@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Reader dashboard — Quill{% endblock %}
+{% block content %}
+  <h1>Welcome, {{ current_user.username }}</h1>
+  <p class="muted">You're signed in as a <strong>reader</strong>. Here are the latest published posts.</p>
+  <ul class="post-list">
+    {% for post in posts %}
+      <li class="post-card">
+        <h2><a href="{{ url_for('view_post', post_id=post['id']) }}">{{ post['title'] }}</a></h2>
+        <p class="meta">by {{ post['author'] }} · {{ post['created_at'] }}</p>
+      </li>
+    {% else %}
+      <li class="muted">Nothing published yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,29 @@
+<%- include('partials/header', { title: 'Start a campaign' }) %>
+
+<h1>Start a campaign</h1>
+
+<% if (errors && errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %>
+  </ul>
+<% } %>
+
+<form method="post" action="/campaigns" class="stacked">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <label for="title">Title</label>
+  <input id="title" name="title" type="text" maxlength="120" value="<%= values.title || '' %>" required>
+
+  <label for="description">Description</label>
+  <textarea id="description" name="description" rows="6" maxlength="5000" required><%= values.description || '' %></textarea>
+
+  <label for="goal">Funding goal (USD)</label>
+  <input id="goal" name="goal" type="text" inputmode="decimal" placeholder="5000" value="<%= values.goal || '' %>" required>
+
+  <label for="deadline">Deadline</label>
+  <input id="deadline" name="deadline" type="date" value="<%= values.deadline || '' %>" required>
+
+  <button type="submit">Launch campaign</button>
+</form>
+
+<%- include('partials/footer') %>

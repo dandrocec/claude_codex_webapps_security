@@ -126,6 +126,41 @@ def load_overrides(path: Path) -> dict:
     return {k: v for k, v in data.items() if not k.startswith("_")}
 
 
+# Conventional framework default per language, used only when file-based stack
+# detection overrides the catalog (so start_cmd matches what was generated).
+LANGUAGE_DEFAULT_FRAMEWORK = {
+    "python": "flask",
+    "node": "express",
+    "php": "",  # falls back to LANGUAGE_START['php'] (built-in server)
+}
+
+
+def detect_language(app_dir: Path, catalog_language: str) -> str:
+    """Detect the actual stack from the generated manifest files.
+
+    The generation prompt is deliberately language-neutral (it asks for "the
+    appropriate dependency manifest (requirements.txt / package.json /
+    composer.json)"), so the model may build a spec in a different language than
+    the catalog planned (e.g. S057 is catalogued as node/express but Claude
+    produced a Flask app). Trust the manifest that is actually present; fall back
+    to the catalog language only when the signal is absent or ambiguous.
+
+    Security-NEUTRAL: this only points the harness at the correct Dockerfile and
+    start command for what was generated; it changes no application code.
+    """
+    present = [
+        lang for lang, exists in (
+            ("node", (app_dir / "package.json").is_file()),
+            ("php", (app_dir / "composer.json").is_file()),
+            ("python", (app_dir / "requirements.txt").is_file()
+                       or (app_dir / "app.py").is_file()),
+        ) if exists
+    ]
+    if len(present) == 1:
+        return present[0]
+    return (catalog_language or "").lower()
+
+
 def resolve_start_cmd(app_dir: Path, framework: str, language: str) -> str | None:
     sidecar = app_dir / ".runcmd"
     if sidecar.is_file():
@@ -175,7 +210,16 @@ def build_services(args) -> tuple[list[str], int]:
                   file=sys.stderr)
             continue
 
-        language = str(spec.get("language", "")).lower()
+        catalog_language = str(spec.get("language", "")).lower()
+        framework = str(spec.get("framework", ""))
+        # The prompt is language-neutral, so trust the generated files over the
+        # catalog's planned language (neutral; see detect_language).
+        language = detect_language(app_dir, catalog_language)
+        if language != catalog_language:
+            print(f"note: {spec_id} {tool}/{variant} catalogued as "
+                  f"'{catalog_language}' but generated as '{language}'; using "
+                  f"detected stack", file=sys.stderr)
+            framework = LANGUAGE_DEFAULT_FRAMEWORK.get(language, "")
         template_name = LANGUAGE_TEMPLATE.get(language)
         if template_name is None:
             print(f"warning: unknown language '{language}' for {spec_id}; skipping",
@@ -209,7 +253,7 @@ def build_services(args) -> tuple[list[str], int]:
         context_rel = rel(context_dir.resolve(), output_dir)
         dockerfile_rel = rel(template_path.resolve(), context_dir.resolve())
         start_cmd = ov.get("start_cmd") or resolve_start_cmd(
-            app_dir, str(spec.get("framework", "")), language)
+            app_dir, framework, language)
 
         lines.append(f"  {service}:")
         lines.append("    build:")

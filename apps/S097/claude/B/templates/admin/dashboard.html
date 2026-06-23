@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+<h1>Admin dashboard</h1>
+<div class="grid">
+  <div class="card">
+    <h3>Products</h3>
+    <p class="price">{{ products | length }}</p>
+    <a class="btn" href="{{ url_for('admin.products') }}">Manage products</a>
+  </div>
+  <div class="card">
+    <h3>Orders</h3>
+    <p class="price">{{ orders | length }}</p>
+    <a class="btn" href="{{ url_for('admin.orders') }}">Manage orders</a>
+  </div>
+  <div class="card">
+    <h3>Low stock (&lt; 10)</h3>
+    <ul class="muted">
+      {% for p in products if p['stock'] < 10 %}
+        <li>{{ p['name'] }} — {{ p['stock'] }} left</li>
+      {% else %}
+        <li>All products well stocked.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

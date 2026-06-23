@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+<h1>Share Links</h1>
+<p class="muted">Each link grants read-only download access to a single file. Revoke a link to disable it immediately.</p>
+
+<% if (shares.length === 0) { %>
+  <p class="muted">You have no share links. Create one from <a href="/">My Files</a>.</p>
+<% } else { %>
+  <table class="list">
+    <thead>
+      <tr><th>File</th><th>Link</th><th>Status</th><th>Created</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <% shares.forEach(function (s) { %>
+        <tr>
+          <td><%= s.original_name %></td>
+          <td>
+            <% if (!s.revoked) { %>
+              <a href="/s/<%= s.token %>">/s/<%= s.token %></a>
+            <% } else { %>
+              <span class="muted">—</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (s.revoked) { %>
+              <span class="badge revoked">Revoked</span>
+            <% } else { %>
+              <span class="badge active">Active</span>
+            <% } %>
+          </td>
+          <td><%= s.created_at %></td>
+          <td class="actions">
+            <% if (!s.revoked) { %>
+              <form class="inline" method="post" action="/shares/<%= s.id %>/revoke">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="link-btn danger">Revoke</button>
+              </form>
+            <% } else { %>
+              <span class="muted">No actions</span>
+            <% } %>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } %>
+<%- include('partials/footer') %>

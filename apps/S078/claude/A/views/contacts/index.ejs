@@ -1,0 +1,42 @@
+<%- include('../partials/head', { pageTitle: 'Contacts' }) %>
+  <div class="page-head">
+    <h1>Contacts</h1>
+    <div class="page-actions">
+      <span class="scope"><%= currentUser.role === 'manager' ? 'Whole team' : 'Yours' %></span>
+      <a href="/contacts/new" class="btn btn-primary">+ New contact</a>
+    </div>
+  </div>
+
+  <% if (contacts.length === 0) { %>
+    <p class="empty">No contacts yet. <a href="/contacts/new">Add one</a>.</p>
+  <% } else { %>
+  <table class="data">
+    <thead>
+      <tr>
+        <th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Deals</th>
+        <% if (currentUser.role === 'manager') { %><th>Owner</th><% } %>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% contacts.forEach(function(c) { %>
+        <tr>
+          <td><%= c.name %></td>
+          <td><%= c.company || '—' %></td>
+          <td><%= c.email || '—' %></td>
+          <td><%= c.phone || '—' %></td>
+          <td><%= c.deal_count %></td>
+          <% if (currentUser.role === 'manager') { %><td><%= c.owner_name %></td><% } %>
+          <td class="row-actions">
+            <a class="btn btn-mini" href="/contacts/<%= c.id %>/edit">Edit</a>
+            <form method="POST" action="/contacts/<%= c.id %>?_method=DELETE" class="inline"
+                  onsubmit="return confirm('Delete this contact?');">
+              <button class="btn btn-mini btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <% } %>
+<%- include('../partials/foot') %>

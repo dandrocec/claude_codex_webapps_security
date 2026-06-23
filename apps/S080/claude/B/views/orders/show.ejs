@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+<div class="card" style="max-width:520px;">
+  <h1>Order #<%= order.id %></h1>
+  <table>
+    <tbody>
+      <tr><th>Product</th><td><%= order.product_name %> (<%= order.product_sku %>)</td></tr>
+      <tr><th>Quantity</th><td><%= order.quantity %></td></tr>
+      <tr><th>Status</th><td><span class="pill <%= order.status %>"><%= order.status %></span></td></tr>
+      <tr><th>Placed by</th><td><%= order.created_by_username %></td></tr>
+      <tr><th>When</th><td class="muted"><%= order.created_at %></td></tr>
+    </tbody>
+  </table>
+  <% if (order.status === 'fulfilled') { %>
+    <form method="POST" action="/orders/<%= order.id %>/cancel"
+          onsubmit="return confirm('Cancel this order and restore stock?');">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <button class="btn danger" type="submit">Cancel order (restore stock)</button>
+    </form>
+  <% } %>
+  <a class="btn secondary" href="/orders">Back to orders</a>
+</div>
+<%- include('../partials/footer') %>

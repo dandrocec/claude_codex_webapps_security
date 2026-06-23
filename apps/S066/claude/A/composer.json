@@ -1,0 +1,20 @@
+{
+    "name": "demo/real-estate",
+    "description": "A small real-estate listings site: agents post properties with photos, visitors search/filter and contact agents.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-fileinfo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php -S 127.0.0.1:5066 -t public"
+    }
+}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Checkout — Nimbus Store{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>Checkout</h1></div>
+
+  <div class="detail">
+    <form method="post" action="{{ url_for('checkout') }}" class="card form-card form-wide" style="margin:0">
+      <h2 style="margin-top:0">Shipping details</h2>
+      <div class="field">
+        <label>Full name</label>
+        <input type="text" name="shipping_name" value="{{ current_user.name }}" required>
+      </div>
+      <div class="field">
+        <label>Shipping address</label>
+        <textarea name="shipping_address" placeholder="Street, city, postal code, country" required></textarea>
+      </div>
+      <button class="btn btn-block" type="submit">Place order — {{ total_cents | money }}</button>
+      <p class="muted" style="text-align:center;margin-top:10px">This demo does not process real payments.</p>
+    </form>
+
+    <div class="card form-card" style="margin:0">
+      <h2 style="margin-top:0">Order summary</h2>
+      <table>
+        <tbody>
+          {% for item in items %}
+            <tr>
+              <td>{{ item.product.name }} × {{ item.quantity }}</td>
+              <td class="right">{{ item.line_total_cents | money }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr><th>Total</th><th class="right">{{ total_cents | money }}</th></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+{% endblock %}

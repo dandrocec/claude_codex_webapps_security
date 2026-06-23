@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Catalogue &middot; Simple Shop{% endblock %}
+
+{% block content %}
+  <h1>Catalogue</h1>
+
+  <div class="product-grid">
+    {% for product in products %}
+      <article class="card">
+        <h2>
+          <a href="{{ url_for('product', product_id=product['id']) }}">
+            {{ product['name'] }}
+          </a>
+        </h2>
+        <p class="price">${{ '%.2f'|format(product['price']) }}</p>
+        <p class="description">{{ product['description'] }}</p>
+        <form method="post"
+              action="{{ url_for('add_to_cart', product_id=product['id']) }}">
+          <button type="submit">Add to cart</button>
+        </form>
+      </article>
+    {% else %}
+      <p>No products available.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

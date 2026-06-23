@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+<div class="card" style="max-width:380px;margin:3rem auto;">
+  <h1>Sign in</h1>
+  <% if (error) { %>
+    <div class="errors"><%= error %></div>
+  <% } %>
+  <form method="POST" action="/login">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" autocomplete="username"
+           maxlength="64" value="<%= username %>" required autofocus />
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="current-password"
+           maxlength="256" required />
+    <button class="btn" type="submit">Sign in</button>
+  </form>
+</div>
+<%- include('partials/footer') %>

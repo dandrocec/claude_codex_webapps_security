@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}{{ election.title }}{% endblock %}
+{% block content %}
+  <div class="card">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <h1 style="margin:0;">{{ election.title }}</h1>
+      <span class="badge {{ status }}">{{ status }}</span>
+    </div>
+    {% if election.description %}<p>{{ election.description }}</p>{% endif %}
+    <p class="muted" style="font-size:.85rem;">
+      Opens {{ election.open_time | humanize }} &middot;
+      Closes {{ election.close_time | humanize }}
+    </p>
+  </div>
+
+  {# ---------- Closed: show results ---------- #}
+  {% if status == 'closed' %}
+    <div class="card">
+      <h2 style="margin-top:0;">Results</h2>
+      <p class="muted">{{ total_votes }} vote(s) cast.</p>
+      {% for r in results %}
+        <div style="margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between;">
+            <strong>{{ r.candidate.name }}</strong>
+            <span class="muted">{{ r.votes }} ({{ '%.0f' % r.pct }}%)</span>
+          </div>
+          <div class="bar"><span style="width: {{ r.pct }}%;"></span></div>
+        </div>
+      {% else %}
+        <p class="muted">No candidates.</p>
+      {% endfor %}
+    </div>
+
+  {# ---------- Upcoming: not open yet ---------- #}
+  {% elif status == 'upcoming' %}
+    <div class="card">
+      <h2 style="margin-top:0;">Candidates</h2>
+      <ul class="plain">
+        {% for c in candidates %}<li class="choice">{{ c.name }}</li>{% endfor %}
+      </ul>
+      <p class="muted">Voting opens {{ election.open_time | humanize }}.</p>
+    </div>
+
+  {# ---------- Open: voting ---------- #}
+  {% else %}
+    <div class="card">
+      <h2 style="margin-top:0;">Cast your vote</h2>
+
+      {% if not current_user %}
+        <p class="muted">
+          Please <a href="{{ url_for('login', next=request.path) }}">log in</a>
+          to vote.
+        </p>
+        <ul class="plain">
+          {% for c in candidates %}<li class="choice">{{ c.name }}</li>{% endfor %}
+        </ul>
+
+      {% elif user_vote %}
+        <p class="success" style="font-weight:600;">
+          You have already voted in this election.
+        </p>
+        <ul class="plain">
+          {% for c in candidates %}
+            <li class="choice">
+              {% if c.id == user_vote %}✅ <strong>{{ c.name }}</strong> (your choice)
+              {% else %}{{ c.name }}{% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+        <p class="muted">Results will be available once the election closes.</p>
+
+      {% else %}
+        <form method="post"
+              action="{{ url_for('cast_vote', election_id=election.id) }}">
+          {% for c in candidates %}
+            <label class="choice">
+              <input type="radio" name="candidate_id" value="{{ c.id }}" required>
+              <span>
+                <strong>{{ c.name }}</strong>
+                {% if c.description %}<br><span class="muted">{{ c.description }}</span>{% endif %}
+              </span>
+            </label>
+          {% endfor %}
+          <button class="btn" type="submit">Submit vote</button>
+        </form>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <a class="btn secondary" href="{{ url_for('index') }}">&larr; All elections</a>
+{% endblock %}

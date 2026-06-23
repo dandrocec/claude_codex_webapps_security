@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+<% var remaining = event.capacity - event.tickets_sold; %>
+<div class="card">
+  <h1><%= event.name %></h1>
+  <p class="meta">
+    <% if (event.event_date) { %><span><%= event.event_date %></span> · <% } %>
+    organised by <%= event.organiser_email %>
+  </p>
+  <% if (event.description) { %>
+    <p class="description"><%= event.description %></p>
+  <% } %>
+
+  <p>
+    <% if (remaining > 0) { %>
+      <span class="badge ok"><%= remaining %> of <%= event.capacity %> tickets left</span>
+    <% } else { %>
+      <span class="badge sold">Sold out</span>
+    <% } %>
+  </p>
+
+  <% if (owned > 0) { %>
+    <p class="hint">You hold <%= owned %> ticket<%= owned === 1 ? '' : 's' %> for this event.</p>
+  <% } %>
+
+  <% if (remaining > 0) { %>
+    <form action="/events/<%= event.id %>/buy" method="post" class="inline">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">Buy a ticket</button>
+    </form>
+  <% } %>
+  <p><a href="/events">← Back to all events</a></p>
+</div>
+<%- include('../partials/footer') %>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}My applications{% endblock %}
+{% block content %}
+  <h1>My applications</h1>
+  {% if applications %}
+    <table class="data-table">
+      <thead>
+        <tr><th>Job</th><th>Employer</th><th>Location</th><th>Status</th><th>Submitted</th><th>Resume</th></tr>
+      </thead>
+      <tbody>
+        {% for a in applications %}
+          <tr>
+            <td>{{ a.title }}</td>
+            <td>{{ a.employer }}</td>
+            <td>{{ a.location }}</td>
+            <td><span class="status status-{{ a.status }}">{{ a.status }}</span></td>
+            <td>{{ a.created_at }}</td>
+            <td><a href="{{ url_for('download_resume', app_id=a.id) }}">Download ({{ a.resume_ext }})</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You have not applied to any jobs yet. <a href="{{ url_for('index') }}">Browse openings</a>.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,49 @@
+The application is complete — 31 files. Here's what I built and its current verification status.
+
+## What's there
+
+A runnable Node.js/Express + SQLite DevOps dashboard:
+
+- **Auth & roles** — register/login, `viewer` (read-only) and `operator` (manage own services + deploy).
+- **Services** — operators register services with repo URL, description, and an ordered list of shell deployment steps.
+- **Deployments** — steps run sequentially via `child_process` (non-zero exit aborts), with per-service secrets injected as env vars and a 10-min per-step timeout.
+- **Logs** — streamed live to the browser over **SSE** and persisted line-by-line in the DB for later replay.
+- **Secrets** — encrypted at rest (AES-256-GCM), write-only from the UI (values never rendered back).
+
+## How the security requirements are met
+
+| Requirement | Implementation |
+|---|---|
+| SQL injection | better-sqlite3 **prepared statements + bound params** everywhere (`src/models/*`) |
+| Password hashing | **bcrypt** (`bcryptjs`, cost 12) + constant-time dummy-hash compare to avoid user enumeration |
+| Input validation | `express-validator` allow-lists (role/URL/secret-key regex), body size caps (`src/lib/validators.js`) |
+| XSS | EJS auto-escaping (`<%= %>`), client logs via `textContent` only, strict **CSP with no inline JS/CSS** |
+| CSRF | Synchronizer token in session, constant-time check on all mutating requests (`src/middleware/csrf.js`) |
+| Access control / IDOR | `requireOwnership` re-loads the resource and checks `owner_id === user.id`; missing → 404, not 403 (`src/routes/services.js`) |
+| Session cookies | `HttpOnly`, `SameSite=Lax`, `Secure` in prod; session regenerated on login/register (fixation) |
+| Security headers | Helmet (CSP, HSTS, no-referrer, frame-ancestors none, nosniff) |
+| Error leakage | Central handler logs server-side, returns generic messages only |
+| No hardcoded secrets | All from env; prod refuses to boot without `SESSION_SECRET`/`SECRETS_KEY`; `.env` git-ignored |
+
+Run instructions are in `README.md` (`npm install`, copy `.env.example`→`.env`, `npm start`, port 5100).
+
+## ⚠️ Verification status — please read
+
+**I was not able to run `npm install` or even `node --check` in this session — every command-execution attempt was declined by the approval prompt.** So while I've manually reviewed all the code (and fixed three issues during review: a flash/CSRF middleware-ordering crash, a validator `.optional()` ordering bug, and CSP-incompatible inline handlers), **the app has not been runtime-verified.** Please run `npm install && npm start` yourself to confirm.
+
+Two things to watch on first run, both in `README.md`:
+
+1. **`better-sqlite3` is a native module.** I set its range to `^11.9.0 || ^12.0.0` so npm picks a release with **prebuilt Node 24 binaries** (no compiler needed). If your platform somehow lacks a prebuild and the install tries to compile and fails, the drop-in alternative is Node 24's built-in `node:sqlite` (zero native deps) — tell me and I'll switch the data layer over.
+2. The two secrets must be generated into `.env` (commands are in the README); in development the app will otherwise boot with ephemeral keys and warn.
+
+Would you like me to keep trying to install and smoke-test it (I'll need command approvals granted), or switch the database layer to the built-in `node:sqlite` to eliminate the native-module install risk entirely?
+run_id S100_claude_B_20260623102853: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S100\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S100_claude_B_20260623102853.txt  (sha256 8e76423d0a90bd11...)
+  logged to logs/commands.log and logs/sessions.csv
+catalog: 100 specs | selected specs: 1 | tools: ['claude'] | variants: ['B']
+already done (skipped): 0 | blocked (tool missing): 0 | to run: 1
+
+>>> S100 claude B  (run_id S100_claude_B_20260623102853)
+
+batch complete: ran 1 this session. state totals: {'done': 200}
+state file: D:\claude_code\claude_security_journal\logs\generation_state.json

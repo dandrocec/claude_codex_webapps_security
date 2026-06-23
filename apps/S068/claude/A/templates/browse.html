@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Browse slots · Scheduler{% endblock %}
+{% block content %}
+  <h1>Available slots</h1>
+
+  <div class="card">
+    {% if slots %}
+      <table>
+        <thead>
+          <tr><th>Start</th><th>End</th><th>Provider</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for slot in slots %}
+            <tr>
+              <td>{{ slot['start_time'] | pretty_dt }}</td>
+              <td>{{ slot['end_time'] | pretty_dt }}</td>
+              <td>{{ slot['provider_name'] }}</td>
+              <td>
+                <form method="post" action="{{ url_for('book_slot', slot_id=slot['id']) }}">
+                  <button type="submit">Book</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="muted">There are no free slots right now. Check back later.</p>
+    {% endif %}
+  </div>
+{% endblock %}

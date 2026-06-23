@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Your projects</h1>
+
+<div class="card">
+  <h3>Create a project</h3>
+  <form method="post" action="{{ url_for('create_project') }}">
+    <div class="field">
+      <label>Name</label>
+      <input name="name" required>
+    </div>
+    <div class="field">
+      <label>Description</label>
+      <textarea name="description" rows="2"></textarea>
+    </div>
+    <button type="submit">Create project</button>
+  </form>
+</div>
+
+{% if projects %}
+  {% for project in projects %}
+    <div class="card">
+      <div class="row" style="justify-content:space-between;">
+        <div>
+          <strong><a href="{{ url_for('project_board', project_id=project.id) }}">{{ project.name }}</a></strong>
+          <div class="meta" style="color:var(--muted);font-size:.85rem;">
+            {{ project.members|length }} member(s) · {{ project.tasks|length }} task(s)
+          </div>
+        </div>
+        <a class="btn ghost" href="{{ url_for('project_board', project_id=project.id) }}">Open board</a>
+      </div>
+      {% if project.description %}<p>{{ project.description }}</p>{% endif %}
+    </div>
+  {% endfor %}
+{% else %}
+  <p>You have no projects yet. Create one above.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+<h1>Upload a photo</h1>
+<% if (errors && errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %>
+  </ul>
+<% } %>
+<form action="/photos" method="post" enctype="multipart/form-data" class="card form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Image (<%= allowed %>)
+    <input type="file" name="photo" accept="image/jpeg,image/png,image/gif,image/webp" required>
+  </label>
+  <label>Caption (optional)
+    <textarea name="caption" maxlength="1000" rows="3"></textarea>
+  </label>
+  <button type="submit">Upload</button>
+</form>
+<%- include('partials/footer') %>

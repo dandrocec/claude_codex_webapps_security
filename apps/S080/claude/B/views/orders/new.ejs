@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+<div class="card" style="max-width:480px;">
+  <h1>New order</h1>
+  <% if (errors.length) { %>
+    <div class="errors"><ul><% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %></ul></div>
+  <% } %>
+  <% if (products.length === 0) { %>
+    <p class="muted">There are no products to order yet.</p>
+  <% } else { %>
+    <form method="POST" action="/orders">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <label for="product_id">Product</label>
+      <select id="product_id" name="product_id" required>
+        <option value="">— choose a product —</option>
+        <% products.forEach(function (p) { %>
+          <option value="<%= p.id %>" <%= String(values.product_id) === String(p.id) ? 'selected' : '' %>>
+            <%= p.name %> (<%= p.sku %>) — <%= p.stock %> in stock
+          </option>
+        <% }); %>
+      </select>
+      <label for="quantity">Quantity</label>
+      <input id="quantity" name="quantity" type="number" min="1" max="1000000"
+             value="<%= values.quantity || 1 %>" required />
+      <button class="btn" type="submit">Place order</button>
+      <a class="btn secondary" href="/orders">Cancel</a>
+    </form>
+  <% } %>
+</div>
+<%- include('../partials/footer') %>

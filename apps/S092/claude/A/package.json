@@ -1,0 +1,20 @@
+{
+  "name": "clinic-portal",
+  "version": "1.0.0",
+  "description": "Role-based clinic portal (patients, doctors, receptionists) built with Express + SQLite.",
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "seed": "node src/seed.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1"
+  }
+}

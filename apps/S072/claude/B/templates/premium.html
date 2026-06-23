@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Premium{% endblock %}
+{% block content %}
+  <h1>Premium content <span class="badge badge-premium">premium</span></h1>
+  <p>This page is only reachable by premium members (and admins).</p>
+  <article class="card card-premium">
+    <h2>Members-only briefing</h2>
+    <p>Exclusive material lives here. Because access is enforced server-side by
+       the <code>premium_required</code> decorator, free users receive a 403
+       even if they navigate directly to <code>/premium</code>.</p>
+  </article>
+{% endblock %}

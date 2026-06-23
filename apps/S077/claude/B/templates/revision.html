@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Revision #{{ revision.id }}{% endblock %}
+{% block content %}
+  <article>
+    <h1>{{ revision.title }}</h1>
+    <p class="muted">
+      Revision #{{ revision.id }} &middot; by {{ revision.author }}
+      &middot; {{ revision.created_at }} UTC
+      {% if revision.comment %}&middot; {{ revision.comment }}{% endif %}
+    </p>
+    <div class="actions">
+      <a href="{{ url_for('history', slug=page.slug) }}">&larr; History</a>
+      <a href="{{ url_for('view_page', slug=page.slug) }}">Current version</a>
+      {% if current_user and current_user.role == 'editor' %}
+        <form class="inline" method="post"
+              action="{{ url_for('restore_revision', slug=page.slug, rev_id=revision.id) }}">
+          {{ confirm_form.csrf_token }}
+          <button type="submit" class="linkbtn strong">Restore this revision</button>
+        </form>
+      {% endif %}
+    </div>
+    <pre class="content">{{ revision.content }}</pre>
+  </article>
+{% endblock %}

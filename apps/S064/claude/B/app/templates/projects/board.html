@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <div>
+      <h1>{{ project.name }}</h1>
+      {% if project.description %}<p class="muted">{{ project.description }}</p>{% endif %}
+    </div>
+    <div class="actions">
+      <a class="btn" href="{{ url_for('projects.members', project_id=project.id) }}">Members</a>
+      <a class="btn primary" href="{{ url_for('projects.create_task', project_id=project.id) }}">Add task</a>
+      {% if is_owner %}
+        <a class="btn" href="{{ url_for('projects.edit_project', project_id=project.id) }}">Edit</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="board">
+    {% for status in statuses %}
+      <section class="column">
+        <h2 class="column-title status-{{ status }}">{{ status.capitalize() }} ({{ columns[status]|length }})</h2>
+        {% for task in columns[status] %}
+          <article class="task">
+            <h3>{{ task.title }}</h3>
+            {% if task.description %}<p class="muted">{{ task.description }}</p>{% endif %}
+            <p class="meta">
+              {% if task.assignee %}👤 {{ task.assignee.username }}{% else %}Unassigned{% endif %}
+            </p>
+
+            <form class="status-move" method="post"
+                  action="{{ url_for('projects.update_status', project_id=project.id, task_id=task.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <select name="status" aria-label="Change status">
+                {% for s in statuses %}
+                  <option value="{{ s }}" {{ "selected" if s == task.status }}>{{ s.capitalize() }}</option>
+                {% endfor %}
+              </select>
+              <button type="submit" class="btn small">Move</button>
+            </form>
+
+            <div class="task-actions">
+              <a class="link-btn" href="{{ url_for('projects.edit_task', project_id=project.id, task_id=task.id) }}">Edit</a>
+              <form class="inline" method="post"
+                    action="{{ url_for('projects.delete_task', project_id=project.id, task_id=task.id) }}"
+                    onsubmit="return confirm('Delete this task?');">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="link-btn danger">Delete</button>
+              </form>
+            </div>
+          </article>
+        {% else %}
+          <p class="muted empty">No tasks.</p>
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </div>
+
+  {% if is_owner %}
+    <form class="danger-zone" method="post"
+          action="{{ url_for('projects.delete_project', project_id=project.id) }}"
+          onsubmit="return confirm('Delete the entire project and all its tasks?');">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button type="submit" class="btn danger">Delete project</button>
+    </form>
+  {% endif %}
+{% endblock %}

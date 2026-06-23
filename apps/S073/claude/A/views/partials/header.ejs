@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photogram</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">📷 Photogram</a>
+    <nav>
+      <% if (currentUser) { %>
+        <a href="/">Feed</a>
+        <a href="/explore">Explore</a>
+        <a href="/upload">Upload</a>
+        <a href="/u/<%= currentUser.username %>">@<%= currentUser.username %></a>
+        <form action="/logout" method="post" class="inline">
+          <button type="submit" class="link">Logout</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert"><%= error %></div>
+    <% } %>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }}{% endblock %}
+{% block content %}
+  <h1>{{ job.title }}</h1>
+  <div class="job-meta">{{ job.location }} &middot; posted by {{ job.employer }} &middot; {{ job.created_at }}</div>
+
+  <h2>Description</h2>
+  <p class="job-description">{{ job.description }}</p>
+
+  {% if current_user.is_authenticated and current_user.is_applicant %}
+    {% if already_applied %}
+      <p class="note">You have already applied to this job.</p>
+    {% else %}
+      <a class="btn" href="{{ url_for('apply', job_id=job.id) }}">Apply now</a>
+    {% endif %}
+  {% elif current_user.is_authenticated and current_user.is_employer and job.employer_id == current_user.id %}
+    <a class="btn" href="{{ url_for('job_applications', job_id=job.id) }}">View applications</a>
+  {% elif not current_user.is_authenticated %}
+    <p><a href="{{ url_for('login') }}">Log in</a> as an applicant to apply.</p>
+  {% endif %}
+{% endblock %}

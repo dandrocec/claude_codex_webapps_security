@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ rev.title }}{% endblock %}
+{% block content %}
+  <div class="row">
+    <h1 style="margin-bottom:.25rem">{{ rev.title }}</h1>
+    {% if page.editor_only %}<span class="tag">editor-only</span>{% endif %}
+  </div>
+  <p class="muted">/{{ page.slug }} · last edited {{ rev.created_at }}</p>
+
+  <div class="content">{{ rev.content }}</div>
+
+  <p class="row" style="margin-top:1rem">
+    <a class="btn secondary" href="{{ url_for('history', slug=page.slug) }}">History</a>
+    {% if user and user.role == 'editor' %}
+      <a class="btn" href="{{ url_for('edit_page', slug=page.slug) }}">Edit</a>
+    {% endif %}
+  </p>
+{% endblock %}

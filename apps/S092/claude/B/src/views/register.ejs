@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+<section class="card narrow">
+  <h1>Create patient account</h1>
+  <%- include('partials/errors') %>
+  <form method="post" action="/register" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Full name
+      <input type="text" name="full_name" value="<%= values.full_name || '' %>" required maxlength="100">
+    </label>
+    <label>Username
+      <input type="text" name="username" value="<%= values.username || '' %>" required minlength="3" maxlength="32">
+    </label>
+    <label>Email
+      <input type="email" name="email" value="<%= values.email || '' %>" required>
+    </label>
+    <label>Password (min 10 chars)
+      <input type="password" name="password" required minlength="10">
+    </label>
+    <label>Assigned doctor
+      <select name="doctor_id" required>
+        <option value="">— choose —</option>
+        <% doctors.forEach(function (d) { %>
+          <option value="<%= d.id %>" <%= String(values.doctor_id) === String(d.id) ? 'selected' : '' %>><%= d.full_name %></option>
+        <% }); %>
+      </select>
+    </label>
+    <button type="submit">Create account</button>
+  </form>
+  <p>Already registered? <a href="/login">Sign in</a>.</p>
+</section>
+<%- include('partials/footer') %>

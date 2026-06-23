@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collaborative Editor</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>📝 Collab Editor</h1>
+    <div id="userbar" class="hidden">
+      <span id="who"></span>
+      <button id="logout">Log out</button>
+    </div>
+  </header>
+
+  <!-- Auth -->
+  <section id="auth" class="card hidden">
+    <h2>Sign in</h2>
+    <input id="username" placeholder="username" autocomplete="username" />
+    <input id="password" type="password" placeholder="password" autocomplete="current-password" />
+    <div class="row">
+      <button id="login">Log in</button>
+      <button id="register" class="secondary">Register</button>
+    </div>
+    <p id="auth-error" class="error"></p>
+  </section>
+
+  <!-- Main app -->
+  <main id="app" class="hidden">
+    <aside id="sidebar">
+      <div class="row spread">
+        <h3>Your documents</h3>
+        <button id="new-doc" class="small">+ New</button>
+      </div>
+      <ul id="doc-list"></ul>
+    </aside>
+
+    <section id="editor-pane" class="hidden">
+      <div class="row spread">
+        <h2 id="doc-title"></h2>
+        <span id="role-badge" class="badge"></span>
+      </div>
+
+      <textarea id="content" placeholder="Start typing…"></textarea>
+      <p id="status" class="status"></p>
+
+      <div class="card">
+        <h3>Who has access</h3>
+        <ul id="access-list"></ul>
+
+        <div id="invite-box" class="hidden">
+          <h4>Invite a collaborator</h4>
+          <div class="row">
+            <input id="invite-username" placeholder="username" />
+            <select id="invite-role">
+              <option value="view">Can view</option>
+              <option value="edit">Can edit</option>
+            </select>
+            <button id="invite">Invite</button>
+          </div>
+          <p id="invite-error" class="error"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="empty-pane">
+      <p>Select a document or create a new one to start editing.</p>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

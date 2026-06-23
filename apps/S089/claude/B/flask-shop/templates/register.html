@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Register &middot; Tiny Shop{% endblock %}
+{% block content %}
+  <h1>Create an account</h1>
+  <form method="post" action="{{ url_for('auth.register') }}" class="stack">
+    {{ form.csrf_token }}
+    <label>{{ form.email.label }} {{ form.email(autocomplete="email") }}</label>
+    {% for e in form.email.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.password.label }} {{ form.password(autocomplete="new-password") }}</label>
+    {% for e in form.password.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.confirm.label }} {{ form.confirm(autocomplete="new-password") }}</label>
+    {% for e in form.confirm.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <p class="hint">Use at least 12 characters.</p>
+    <button class="btn primary" type="submit">Register</button>
+  </form>
+{% endblock %}

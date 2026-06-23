@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Inventory — Admin{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>Inventory</h1></div>
+  <p class="muted">Set absolute stock levels. Low stock (&le;5) is highlighted.</p>
+
+  {% if products %}
+    <div class="card table-card">
+      <table>
+        <thead>
+          <tr><th>Product</th><th>Category</th><th class="right">Price</th><th>Current stock</th><th>Set new stock</th></tr>
+        </thead>
+        <tbody>
+          {% for p in products %}
+            <tr>
+              <td>{{ p.name }}</td>
+              <td>{{ p.category }}</td>
+              <td class="right">{{ p.price_cents | money }}</td>
+              <td>
+                {% if p.stock == 0 %}<span class="oos">Out of stock</span>
+                {% elif p.stock <= 5 %}<span class="pill pill-pending">{{ p.stock }} left</span>
+                {% else %}{{ p.stock }}{% endif %}
+              </td>
+              <td>
+                <form method="post" action="{{ url_for('admin_inventory') }}" class="inline">
+                  <input type="hidden" name="product_id" value="{{ p.id }}">
+                  <input class="qty-input" type="number" name="stock" value="{{ p.stock }}" min="0">
+                  <button class="btn-sm" type="submit">Update</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty"><p>No products to manage.</p></div>
+  {% endif %}
+{% endblock %}

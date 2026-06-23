@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Not found{% endblock %}
+{% block content %}
+  <h1>Page not found</h1>
+  <p class="muted">There is no page at <code>/{{ slug }}</code>.</p>
+  {% if user and user.role == 'editor' %}
+    <p><a class="btn" href="{{ url_for('create_page') }}">Create a page</a></p>
+  {% endif %}
+{% endblock %}

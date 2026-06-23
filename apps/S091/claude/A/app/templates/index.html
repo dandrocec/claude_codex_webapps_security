@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Microblog</title>
+  <style>
+    :root { --bg:#0f1115; --card:#1a1d24; --muted:#8b93a7; --accent:#4f8cff; --border:#2a2f3a; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+           background:var(--bg); color:#e7eaf0; }
+    header { padding:16px 24px; border-bottom:1px solid var(--border); display:flex;
+             align-items:center; gap:16px; flex-wrap:wrap; }
+    h1 { font-size:20px; margin:0; }
+    .wrap { max-width:720px; margin:0 auto; padding:24px; }
+    select, input, textarea, button { font:inherit; }
+    select, input, textarea {
+      background:var(--card); color:#e7eaf0; border:1px solid var(--border);
+      border-radius:8px; padding:8px 10px; }
+    textarea { width:100%; resize:vertical; min-height:70px; }
+    button { background:var(--accent); color:#fff; border:none; border-radius:8px;
+             padding:9px 16px; cursor:pointer; font-weight:600; }
+    button.secondary { background:transparent; border:1px solid var(--border); color:var(--muted); }
+    button:hover { filter:brightness(1.1); }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px;
+            padding:14px 16px; margin-bottom:14px; }
+    .muted { color:var(--muted); font-size:13px; }
+    .tabs { display:flex; gap:8px; margin:18px 0; }
+    .tabs button { background:transparent; border:1px solid var(--border); color:var(--muted); }
+    .tabs button.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .post-head { display:flex; justify-content:space-between; align-items:baseline; }
+    .author { font-weight:700; }
+    .content { margin:6px 0 0; white-space:pre-wrap; word-break:break-word; }
+    .content a { color:var(--accent); }
+    .preview { display:flex; gap:12px; margin-top:10px; border:1px solid var(--border);
+               border-radius:10px; overflow:hidden; background:#13161c; }
+    .preview img { width:96px; height:96px; object-fit:cover; flex:none; }
+    .preview .pv-body { padding:10px; min-width:0; }
+    .preview .pv-title { font-weight:600; font-size:14px; }
+    .preview .pv-desc { color:var(--muted); font-size:13px; margin-top:4px;
+                        display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+                        overflow:hidden; }
+    .preview .pv-pending { color:var(--muted); font-size:13px; padding:10px; }
+    .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .follow-list { display:flex; flex-wrap:wrap; gap:8px; }
+    .pill { display:flex; align-items:center; gap:6px; background:#13161c;
+            border:1px solid var(--border); border-radius:999px; padding:4px 6px 4px 12px; }
+    .pill button { padding:3px 9px; font-size:12px; border-radius:999px; }
+    .empty { color:var(--muted); padding:30px; text-align:center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📝 Microblog</h1>
+    <div class="row">
+      <label class="muted">Acting as</label>
+      <select id="userSelect"></select>
+      <input id="newUser" placeholder="new username" size="12" />
+      <button class="secondary" id="createUser">Create user</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <textarea id="postContent" placeholder="What's happening? Paste a URL to get a link preview…"></textarea>
+      <div class="row" style="margin-top:10px; justify-content:flex-end;">
+        <button id="postBtn">Post</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="muted" style="margin-bottom:8px;">People you can follow</div>
+      <div class="follow-list" id="peopleList"></div>
+    </div>
+
+    <div class="tabs">
+      <button data-tab="timeline" class="active">Timeline</button>
+      <button data-tab="mine">My posts</button>
+    </div>
+
+    <div id="feed"></div>
+  </div>
+
+<script>
+const api = (path, opts={}) => fetch(path, {
+  headers: {"Content-Type": "application/json"}, ...opts
+}).then(async r => {
+  if (!r.ok) throw new Error((await r.json().catch(()=>({detail:r.statusText}))).detail);
+  return r.status === 204 ? null : r.json();
+});
+
+let currentUser = null;
+let users = [];
+let activeTab = "timeline";
+let following = new Set();
+
+function esc(s){ return s.replace(/[&<>"']/g, c => (
+  {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+function linkify(text){
+  return esc(text).replace(/(https?:\/\/[^\s<>"']+)/g,
+    '<a href="$1" target="_blank" rel="noopener">$1</a>');
+}
+
+async function loadUsers(){
+  users = await api("/api/users");
+  const sel = document.getElementById("userSelect");
+  sel.innerHTML = users.map(u => `<option value="${u.id}">${esc(u.username)}</option>`).join("");
+  if (!currentUser && users.length) currentUser = users[0].id;
+  if (currentUser) sel.value = currentUser;
+  await loadFollowing();
+  renderPeople();
+}
+
+async function loadFollowing(){
+  if (!currentUser) return;
+  const list = await api(`/api/users/${currentUser}/following`);
+  following = new Set(list.map(u => u.id));
+}
+
+function renderPeople(){
+  const el = document.getElementById("peopleList");
+  const others = users.filter(u => u.id != currentUser);
+  if (!others.length){ el.innerHTML = '<span class="muted">No other users yet.</span>'; return; }
+  el.innerHTML = others.map(u => {
+    const isF = following.has(u.id);
+    return `<span class="pill">@${esc(u.username)}
+      <button class="${isF?'secondary':''}" onclick="toggleFollow(${u.id},${isF})">
+        ${isF ? 'Unfollow' : 'Follow'}</button></span>`;
+  }).join("");
+}
+
+async function toggleFollow(targetId, isFollowing){
+  if (isFollowing){
+    await api(`/api/users/${currentUser}/follow/${targetId}`, {method:"DELETE"});
+  } else {
+    await api(`/api/users/${currentUser}/follow`, {
+      method:"POST", body: JSON.stringify({target_id: targetId})});
+  }
+  await loadFollowing();
+  renderPeople();
+  loadFeed();
+}
+
+function previewHtml(p){
+  if (p.status === "pending")
+    return `<div class="preview"><div class="pv-pending">⏳ Fetching preview for ${esc(p.url)}…</div></div>`;
+  if (p.status === "error")
+    return `<div class="preview"><div class="pv-pending">⚠️ ${esc(p.url)}</div></div>`;
+  const img = p.image ? `<img src="${esc(p.image)}" onerror="this.remove()"/>` : "";
+  return `<a class="preview" href="${esc(p.url)}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+    ${img}<div class="pv-body">
+      <div class="pv-title">${esc(p.title || p.url)}</div>
+      ${p.description ? `<div class="pv-desc">${esc(p.description)}</div>` : ""}
+      <div class="muted" style="margin-top:4px;">${esc(p.url)}</div>
+    </div></a>`;
+}
+
+function postHtml(post){
+  const when = post.created_at ? new Date(post.created_at).toLocaleString() : "";
+  return `<div class="card">
+    <div class="post-head">
+      <span class="author">@${esc(post.author_username || ("user"+post.author_id))}</span>
+      <span class="muted">${esc(when)}</span>
+    </div>
+    <div class="content">${linkify(post.content)}</div>
+    ${(post.previews||[]).map(previewHtml).join("")}
+  </div>`;
+}
+
+async function loadFeed(){
+  if (!currentUser){ return; }
+  const path = activeTab === "timeline"
+    ? `/api/timeline/${currentUser}` : `/api/users/${currentUser}/posts`;
+  const posts = await api(path);
+  const feed = document.getElementById("feed");
+  if (!posts.length){
+    feed.innerHTML = `<div class="empty">${activeTab==="timeline"
+      ? "Your timeline is empty. Follow someone or post something!"
+      : "You haven't posted yet."}</div>`;
+    return;
+  }
+  feed.innerHTML = posts.map(postHtml).join("");
+}
+
+// --- events ---
+document.getElementById("userSelect").addEventListener("change", async e => {
+  currentUser = parseInt(e.target.value);
+  await loadFollowing(); renderPeople(); loadFeed();
+});
+
+document.getElementById("createUser").addEventListener("click", async () => {
+  const input = document.getElementById("newUser");
+  const username = input.value.trim();
+  if (!username) return;
+  try {
+    const u = await api("/api/users", {method:"POST", body: JSON.stringify({username})});
+    input.value = "";
+    currentUser = u.id;
+    await loadUsers();
+    document.getElementById("userSelect").value = currentUser;
+    loadFeed();
+  } catch(err){ alert(err.message); }
+});
+
+document.getElementById("postBtn").addEventListener("click", async () => {
+  const ta = document.getElementById("postContent");
+  const content = ta.value.trim();
+  if (!content || !currentUser) return;
+  try {
+    await api("/api/posts", {method:"POST",
+      body: JSON.stringify({author_id: currentUser, content})});
+    ta.value = "";
+    activeTab = "timeline"; setActiveTabButton();
+    loadFeed();
+    // Previews + fanout are async; refresh shortly to show results.
+    setTimeout(loadFeed, 1500);
+    setTimeout(loadFeed, 4000);
+  } catch(err){ alert(err.message); }
+});
+
+function setActiveTabButton(){
+  document.querySelectorAll(".tabs button").forEach(b =>
+    b.classList.toggle("active", b.dataset.tab === activeTab));
+}
+document.querySelectorAll(".tabs button").forEach(btn =>
+  btn.addEventListener("click", () => {
+    activeTab = btn.dataset.tab; setActiveTabButton(); loadFeed();
+  }));
+
+// auto-refresh timeline so async worker results appear
+setInterval(() => { if (document.visibilityState === "visible") loadFeed(); }, 6000);
+
+(async function init(){ await loadUsers(); loadFeed(); })();
+</script>
+</body>
+</html>

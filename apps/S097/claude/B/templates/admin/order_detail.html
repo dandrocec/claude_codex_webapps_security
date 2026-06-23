@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}Order #{{ order['id'] }}{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('admin.orders') }}">← Orders</a></p>
+<h1>Order #{{ order['id'] }}</h1>
+<p class="muted">Placed {{ order['created_at'] }}</p>
+
+<table>
+  <thead><tr><th>Product</th><th>Unit price</th><th>Qty</th><th>Line total</th></tr></thead>
+  <tbody>
+    {% for it in items %}
+    <tr>
+      <td>{{ it['product_name'] }}</td>
+      <td>{{ it['unit_price_cents'] | money }}</td>
+      <td>{{ it['quantity'] }}</td>
+      <td>{{ (it['unit_price_cents'] * it['quantity']) | money }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="totals"><strong>Total: {{ order['total_cents'] | money }}</strong></div>
+
+<div class="card narrow">
+  <h3>Shipping</h3>
+  <p>{{ order['shipping_name'] }}</p>
+  <p class="pre-line">{{ order['shipping_address'] }}</p>
+</div>
+
+<div class="card narrow">
+  <h3>Update status</h3>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ field(form.status) }}
+    <button class="btn" type="submit">Update</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+<%- include('partials/header', { pageTitle: 'List an item' }) %>
+
+<p><a class="back" href="/">← Back to all auctions</a></p>
+
+<h1>List an item for auction</h1>
+
+<% if (error) { %><p class="error"><%= error %></p><% } %>
+
+<form class="listing-form" method="POST" action="/items">
+  <label>
+    Title
+    <input type="text" name="title" required value="<%= values.title || '' %>" placeholder="Vintage typewriter">
+  </label>
+  <label>
+    Description
+    <textarea name="description" rows="4" placeholder="Condition, details, etc."><%= values.description || '' %></textarea>
+  </label>
+  <label>
+    Your name (seller)
+    <input type="text" name="seller" required value="<%= values.seller || '' %>" placeholder="e.g. Bob">
+  </label>
+  <label>
+    Starting price ($)
+    <input type="number" name="starting_price" step="0.01" min="0" required
+           value="<%= values.starting_price || '1.00' %>">
+  </label>
+  <label>
+    End time
+    <input type="datetime-local" name="end_time" required
+           value="<%= values.end_time || defaultEnd %>">
+  </label>
+  <button type="submit">Create listing</button>
+</form>
+
+<%- include('partials/footer') %>

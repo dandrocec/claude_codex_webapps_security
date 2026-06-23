@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+<section class="card narrow">
+  <h1>New appointment</h1>
+  <%- include('../partials/errors') %>
+  <form method="post" action="/schedule">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Patient
+      <select name="patient_id" required>
+        <option value="">— choose —</option>
+        <% patients.forEach(function (p) { %>
+          <option value="<%= p.id %>" <%= String(values.patient_id) === String(p.id) ? 'selected' : '' %>><%= p.full_name %></option>
+        <% }); %>
+      </select>
+    </label>
+    <label>Doctor
+      <select name="doctor_id" required>
+        <option value="">— choose —</option>
+        <% doctors.forEach(function (d) { %>
+          <option value="<%= d.id %>" <%= String(values.doctor_id) === String(d.id) ? 'selected' : '' %>><%= d.full_name %></option>
+        <% }); %>
+      </select>
+    </label>
+    <label>Date &amp; time
+      <input type="datetime-local" name="scheduled_at" value="<%= values.scheduled_at || '' %>" required>
+    </label>
+    <label>Reason
+      <textarea name="reason" rows="3" required maxlength="500"><%= values.reason || '' %></textarea>
+    </label>
+    <label>Status
+      <select name="status">
+        <% ['confirmed','requested','cancelled','completed'].forEach(function (s) { %>
+          <option value="<%= s %>" <%= values.status === s ? 'selected' : '' %>><%= s %></option>
+        <% }); %>
+      </select>
+    </label>
+    <button type="submit">Create appointment</button>
+  </form>
+</section>
+<%- include('../partials/footer') %>

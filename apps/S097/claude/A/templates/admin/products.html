@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Manage Products — Admin{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>Products</h1>
+    <a class="btn" href="{{ url_for('admin_product_new') }}">+ New product</a>
+  </div>
+
+  {% if products %}
+    <div class="card table-card">
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Category</th><th class="right">Price</th><th class="right">Stock</th><th>Status</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for p in products %}
+            <tr>
+              <td>{{ p.name }}</td>
+              <td>{{ p.category }}</td>
+              <td class="right">{{ p.price_cents | money }}</td>
+              <td class="right">{% if p.stock == 0 %}<span class="oos">0</span>{% else %}{{ p.stock }}{% endif %}</td>
+              <td>
+                {% if p.is_active %}<span class="pill pill-delivered">active</span>
+                {% else %}<span class="pill pill-cancelled">inactive</span>{% endif %}
+              </td>
+              <td class="right">
+                <a class="btn-sm btn-ghost" href="{{ url_for('admin_product_edit', product_id=p.id) }}">Edit</a>
+                <form method="post" action="{{ url_for('admin_product_delete', product_id=p.id) }}" class="inline"
+                      onsubmit="return confirm('Delete or deactivate this product?');">
+                  <button class="btn-sm btn-danger" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty">
+      <p>No products yet.</p>
+      <a class="btn" href="{{ url_for('admin_product_new') }}">Create your first product</a>
+    </div>
+  {% endif %}
+{% endblock %}

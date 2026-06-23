@@ -1,0 +1,14 @@
+<article class="post">
+  <div class="post-head">
+    <a class="post-author" href="/u/<%= encodeURIComponent(post.username) %>">@<%= post.username %></a>
+    <time class="post-time"><%= post.created_at %> UTC</time>
+  </div>
+  <%# Auto-escaped output; CSS preserves newlines safely (prevents XSS). %>
+  <p class="post-body"><%= post.content %></p>
+  <% if (currentUser && currentUser.id === post.user_id) { %>
+    <form class="inline" method="post" action="/posts/<%= post.id %>/delete">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit" class="link-btn danger">Delete</button>
+    </form>
+  <% } %>
+</article>

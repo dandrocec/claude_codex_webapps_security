@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<h1>Upload a photo</h1>
+<form action="/upload" method="post" enctype="multipart/form-data" class="form">
+  <label>Image
+    <input type="file" name="photo" accept="image/*" required>
+  </label>
+  <label>Caption
+    <textarea name="caption" rows="3" maxlength="500" placeholder="Say something..."></textarea>
+  </label>
+  <button type="submit">Share</button>
+</form>
+<%- include('partials/footer') %>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Your jobs{% endblock %}
+{% block content %}
+  <div class="row" style="justify-content:space-between;">
+    <h1>Your job postings</h1>
+    <a class="btn" href="{{ url_for('new_job') }}">Post a job</a>
+  </div>
+  {% if not jobs %}
+    <p class="muted">You haven't posted any jobs yet.</p>
+  {% endif %}
+  {% for job in jobs %}
+    <div class="card">
+      <h3>{{ job.title }}</h3>
+      <p class="muted">
+        {% if job.location %}{{ job.location }} &middot; {% endif %}
+        {{ job.created_at.strftime('%b %d, %Y') }} &middot;
+        {{ job.applications|length }} application(s)
+      </p>
+      <div class="row">
+        <a class="btn secondary" href="{{ url_for('job_detail', job_id=job.id) }}">View posting</a>
+        <a class="btn" href="{{ url_for('job_applications', job_id=job.id) }}">Review applications</a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

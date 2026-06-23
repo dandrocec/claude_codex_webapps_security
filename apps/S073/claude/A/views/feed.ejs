@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<h1>Your Feed</h1>
+<% if (photos.length === 0) { %>
+  <p class="empty">Your feed is quiet. <a href="/explore">Explore</a> to find people to follow, or <a href="/upload">upload a photo</a>.</p>
+<% } else { %>
+  <div class="grid">
+    <% photos.forEach(function (photo) { %>
+      <%- include('partials/card', { photo: photo }) %>
+    <% }) %>
+  </div>
+<% } %>
+<%- include('partials/footer') %>

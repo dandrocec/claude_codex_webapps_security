@@ -1,0 +1,34 @@
+<%- include('../partials/header') %>
+
+<div class="page-head">
+  <h1><%= patient.full_name %></h1>
+  <a class="btn ghost" href="/doctor">← Back</a>
+</div>
+
+<h2>Add a record</h2>
+<div class="card narrow">
+  <form method="post" action="/doctor/patients/<%= patient.id %>/records">
+    <label>Diagnosis <input name="diagnosis" required /></label>
+    <label>Treatment <input name="treatment" /></label>
+    <label>Notes <textarea name="notes" rows="3"></textarea></label>
+    <button class="btn" type="submit">Save record</button>
+  </form>
+</div>
+
+<h2>Medical history</h2>
+<div class="card">
+  <% if (records.length === 0) { %>
+    <p class="muted">No records yet.</p>
+  <% } else { %>
+    <% records.forEach(function (r) { %>
+      <div class="record">
+        <div class="record-meta"><%= r.created_at %> · by <%= r.doctor_name %></div>
+        <div><strong>Diagnosis:</strong> <%= r.diagnosis || '—' %></div>
+        <div><strong>Treatment:</strong> <%= r.treatment || '—' %></div>
+        <% if (r.notes) { %><div><strong>Notes:</strong> <%= r.notes %></div><% } %>
+      </div>
+    <% }); %>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

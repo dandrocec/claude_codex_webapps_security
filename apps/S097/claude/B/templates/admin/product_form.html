@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}{{ "Edit" if mode == "edit" else "New" }} product{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('admin.products') }}">← Products</a></p>
+<h1>{{ "Edit product" if mode == "edit" else "New product" }}</h1>
+<div class="card narrow">
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ field(form.name) }}
+    {{ field(form.description) }}
+    {{ field(form.price) }}
+    {{ field(form.stock) }}
+    <div class="form-row">
+      <label>{{ form.is_active() }} {{ form.is_active.label.text }}</label>
+    </div>
+    <button class="btn" type="submit">Save</button>
+  </form>
+</div>
+{% endblock %}

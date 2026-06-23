@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+<h1>Clinic schedule</h1>
+<p class="muted">Front desk view — manage appointments for all doctors. Clinical records are not visible to this role.</p>
+
+<div class="card">
+  <% if (appointments.length === 0) { %>
+    <p class="muted">No appointments booked.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>When</th><th>Patient</th><th>Doctor</th><th>Reason</th><th>Status</th><th>Reschedule</th></tr></thead>
+      <tbody>
+        <% appointments.forEach(function (a) { %>
+          <tr>
+            <td><%= a.slot.replace('T', ' ') %></td>
+            <td><%= a.patient_name %></td>
+            <td><%= a.doctor_name %></td>
+            <td><%= a.reason %></td>
+            <td>
+              <form method="post" action="/reception/appointments/<%= a.id %>/status" class="inline">
+                <select name="status" onchange="this.form.submit()">
+                  <% statuses.forEach(function (s) { %>
+                    <option value="<%= s %>" <%= s === a.status ? 'selected' : '' %>><%= s %></option>
+                  <% }); %>
+                </select>
+              </form>
+            </td>
+            <td>
+              <form method="post" action="/reception/appointments/<%= a.id %>/reschedule" class="inline">
+                <input name="slot" type="datetime-local" value="<%= a.slot %>" required />
+                <button class="link" type="submit">Save</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

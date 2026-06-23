@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} · Flask Blog{% endblock %}
+{% block content %}
+  <article class="card">
+    <div class="row">
+      <h1 style="margin:0">{{ post.title }}</h1>
+      <span class="status {{ post.status }}">{{ post.status }}</span>
+    </div>
+    <p class="muted">by {{ post.author.username }} ·
+       {{ post.updated_at.strftime('%b %d, %Y %H:%M') }}</p>
+    <div class="post-body">{{ post.body }}</div>
+    {% if post.status == 'rejected' and post.review_note %}
+      <p class="flash error" style="margin-top:1rem">
+        Editor note: {{ post.review_note }}</p>
+    {% endif %}
+  </article>
+  <a href="{{ url_for('index') }}">&larr; Back</a>
+{% endblock %}

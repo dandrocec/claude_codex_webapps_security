@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<div class="card">
+  <h1>Your feed</h1>
+  <form action="/posts" method="post" class="composer">
+    <textarea name="body" rows="3" maxlength="280" required
+              placeholder="What's happening, @<%= currentUser.username %>?"></textarea>
+    <button type="submit">Post</button>
+  </form>
+</div>
+
+<% if (posts.length === 0) { %>
+  <div class="card empty">
+    <p>Your feed is empty.</p>
+    <p class="muted">Post something above, or <a href="/people">find people to follow</a>.</p>
+  </div>
+<% } else { %>
+  <% posts.forEach(function (p) { %>
+    <article class="post">
+      <div class="post-head">
+        <a class="name" href="/profile/<%= p.username %>"><%= displayNameOf(p) %></a>
+        <span class="handle">@<%= p.username %></span>
+        <span class="muted dot">&middot;</span>
+        <span class="muted time"><%= p.created_at %> UTC</span>
+      </div>
+      <p class="body"><%= p.body %></p>
+    </article>
+  <% }) %>
+<% } %>
+
+<%- include('partials/footer') %>

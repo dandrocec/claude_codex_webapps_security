@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<section class="card narrow">
+  <h1>Sign in</h1>
+  <%- include('partials/errors') %>
+  <form method="post" action="/login" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Username
+      <input type="text" name="username" value="<%= values.username || '' %>" required>
+    </label>
+    <label>Password
+      <input type="password" name="password" required>
+    </label>
+    <button type="submit">Sign in</button>
+  </form>
+  <p>No account? <a href="/register">Register as a patient</a>.</p>
+</section>
+<%- include('partials/footer') %>

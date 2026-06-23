@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+<section class="grid">
+  <div class="card">
+    <h1>My Folders</h1>
+    <% if (folders.length === 0) { %>
+      <p class="muted">No folders yet. Create one to start uploading documents.</p>
+    <% } else { %>
+      <ul class="list">
+        <% folders.forEach(function (f) { %>
+          <li><a href="/folders/<%= f.id %>">📂 <%= f.name %></a></li>
+        <% }); %>
+      </ul>
+    <% } %>
+    <form method="post" action="/folders" class="row">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <input name="name" placeholder="New folder name" maxlength="120" required>
+      <button type="submit">Create folder</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h1>Shared with me</h1>
+    <% if (shared.length === 0) { %>
+      <p class="muted">Nothing has been shared with you yet.</p>
+    <% } else { %>
+      <ul class="list">
+        <% shared.forEach(function (d) { %>
+          <li>
+            <a href="/documents/<%= d.id %>">📄 <%= d.name %></a>
+            <span class="badge"><%= d.permission %></span>
+            <span class="muted">by <%= d.owner_name %></span>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+</section>
+<%- include('partials/footer') %>

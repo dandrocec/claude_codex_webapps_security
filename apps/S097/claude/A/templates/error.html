@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ code }} — Nimbus Store{% endblock %}
+{% block content %}
+  <div class="empty">
+    <h1 style="font-size:3rem; margin:0">{{ code }}</h1>
+    <p>{{ message }}</p>
+    <a class="btn" href="{{ url_for('index') }}">Back to shop</a>
+  </div>
+{% endblock %}

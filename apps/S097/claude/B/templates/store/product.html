@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}{{ product['name'] }}{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('store.index') }}">← Back to store</a></p>
+
+<div class="card">
+  <h1>{{ product['name'] }}</h1>
+  <p class="price">{{ product['price_cents'] | money }}</p>
+  <p>{{ product['description'] }}</p>
+
+  {% if product['stock'] > 0 %}
+    <p class="muted">{{ product['stock'] }} in stock</p>
+    {% if current_user.is_authenticated %}
+    <form class="row-between" method="post"
+          action="{{ url_for('store.add_to_cart', product_id=product['id']) }}">
+      {{ cart_form.hidden_tag() }}
+      {{ cart_form.quantity(class="qty-input", min="1", max=product['stock']) }}
+      <button class="btn" type="submit">Add to cart</button>
+    </form>
+    {% else %}
+      <p><a class="btn" href="{{ url_for('auth.login') }}">Sign in to buy</a></p>
+    {% endif %}
+  {% else %}
+    <p class="stock-out">Out of stock</p>
+  {% endif %}
+</div>
+
+<section>
+  <h2>Reviews</h2>
+  {% if reviews %}
+    {% for r in reviews %}
+    <div class="review">
+      <div class="stars">{{ "★" * r['rating'] }}{{ "☆" * (5 - r['rating']) }}</div>
+      <strong>{{ r['author'] }}</strong> <span class="muted">· {{ r['created_at'] }}</span>
+      {% if r['body'] %}<p>{{ r['body'] }}</p>{% endif %}
+    </div>
+    {% endfor %}
+  {% else %}
+    <p class="muted">No reviews yet.</p>
+  {% endif %}
+
+  {% if current_user.is_authenticated %}
+    {% if can_review %}
+      <div class="card narrow">
+        <h3>{{ "Update your review" if existing_review else "Write a review" }}</h3>
+        <form method="post"
+              action="{{ url_for('store.submit_review', product_id=product['id']) }}" novalidate>
+          {{ review_form.hidden_tag() }}
+          {{ field(review_form.rating) }}
+          {{ field(review_form.body) }}
+          <button class="btn" type="submit">Submit review</button>
+        </form>
+      </div>
+    {% else %}
+      <p class="muted">Only customers who have purchased this product can review it.</p>
+    {% endif %}
+  {% endif %}
+</section>
+{% endblock %}

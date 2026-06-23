@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block content %}
+  <article>
+    <h1>{{ page.title }}
+      {% if page.editor_only %}<span class="badge">editor-only</span>{% endif %}
+    </h1>
+    <div class="actions">
+      <a href="{{ url_for('history', slug=page.slug) }}">History</a>
+      {% if current_user and current_user.role == 'editor' %}
+        <a href="{{ url_for('edit_page', slug=page.slug) }}">Edit</a>
+      {% endif %}
+    </div>
+
+    {# Content is plain text; Jinja autoescaping prevents stored XSS.
+       <pre> preserves whitespace without rendering any markup. #}
+    {% if revision %}
+      <pre class="content">{{ revision.content }}</pre>
+    {% else %}
+      <p><em>This page has no content yet.</em></p>
+    {% endif %}
+  </article>
+{% endblock %}

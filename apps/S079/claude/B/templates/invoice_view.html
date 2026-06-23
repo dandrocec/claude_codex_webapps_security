@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Invoice {{ invoice.number }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>Invoice {{ invoice.number }}</h1>
+    <div class="actions">
+      <a class="btn" href="{{ url_for('invoice_print', invoice_id=invoice.id) }}">Print</a>
+      <a class="btn ghost" href="{{ url_for('invoice_edit', invoice_id=invoice.id) }}">Edit</a>
+      <form action="{{ url_for('invoice_delete', invoice_id=invoice.id) }}"
+            method="post" class="inline"
+            onsubmit="return confirm('Delete this invoice?');">
+        {{ delete_form.csrf_token }}
+        <button type="submit" class="btn danger">Delete</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <p><strong>Client:</strong> {{ client.name }}</p>
+    {% if client.email %}<p><strong>Email:</strong> {{ client.email }}</p>{% endif %}
+    {% if client.address %}<p><strong>Address:</strong> {{ client.address }}</p>{% endif %}
+    <p><strong>Issued:</strong> {{ invoice.issue_date }}
+       {% if invoice.due_date %}· <strong>Due:</strong> {{ invoice.due_date }}{% endif %}</p>
+    <p><strong>Status:</strong> <span class="badge badge-{{ invoice.status }}">{{ invoice.status }}</span></p>
+
+    <table class="table">
+      <thead>
+        <tr><th>Description</th><th class="num">Qty</th>
+            <th class="num">Unit price</th><th class="num">Amount</th></tr>
+      </thead>
+      <tbody>
+        {% for it in items %}
+          <tr>
+            <td>{{ it.description }}</td>
+            <td class="num">{{ it.quantity }}</td>
+            <td class="num">{{ "%.2f"|format(money(it.unit_price)) }}</td>
+            <td class="num">{{ "%.2f"|format(money(it.quantity|float * it.unit_price|float)) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr><td colspan="3" class="num">Subtotal</td><td class="num">{{ "%.2f"|format(subtotal) }}</td></tr>
+        <tr><td colspan="3" class="num">Tax ({{ invoice.tax_rate }}%)</td><td class="num">{{ "%.2f"|format(tax) }}</td></tr>
+        <tr class="grand"><td colspan="3" class="num">Total</td><td class="num">{{ "%.2f"|format(total) }}</td></tr>
+      </tfoot>
+    </table>
+
+    {% if invoice.notes %}<p><strong>Notes:</strong> {{ invoice.notes }}</p>{% endif %}
+  </div>
+{% endblock %}

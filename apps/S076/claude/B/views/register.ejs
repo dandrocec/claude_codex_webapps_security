@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<section class="card narrow">
+  <h1>Create an account</h1>
+  <% if (error) { %><p class="alert"><%= error %></p><% } %>
+  <form action="/register" method="post" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Username
+      <input type="text" name="username" value="<%= values.username || '' %>"
+             required minlength="3" maxlength="32" pattern="[a-zA-Z0-9_]+" autofocus>
+      <small class="muted">3-32 chars: letters, numbers, underscore.</small>
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" required minlength="8" maxlength="200">
+      <small class="muted">At least 8 characters.</small>
+    </label>
+    <button type="submit">Register</button>
+  </form>
+  <p class="muted">Already registered? <a href="/login">Log in</a>.</p>
+</section>
+
+<%- include('partials/footer') %>

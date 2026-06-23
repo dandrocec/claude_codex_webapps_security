@@ -1,0 +1,23 @@
+<%- include('partials/head') %>
+<div class="page-head">
+  <div>
+    <h1>Deployment #<%= deployment.id %></h1>
+    <p class="muted">
+      service: <a href="/services/<%= service.id %>"><%= service.name %></a> ·
+      status: <span class="status status-<%= deployment.status %>" id="status"><%= deployment.status %></span>
+    </p>
+  </div>
+  <a class="btn btn-link" href="/services/<%= service.id %>">← Back</a>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <h2>Logs</h2>
+    <% if (live) { %><span class="live-dot" id="live-indicator">● live</span><% } %>
+  </div>
+  <pre id="log" class="log-view" data-stream-url="/services/<%= service.id %>/deployments/<%= deployment.id %>/stream" data-live="<%= live %>"><% logs.forEach(function (l) { %><span class="log-line log-<%= l.stream %>"><%= l.line %></span>
+<% }); %></pre>
+</div>
+
+<script src="/static/deployment.js"></script>
+<%- include('partials/foot') %>

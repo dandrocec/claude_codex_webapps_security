@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Catalogue &mdash; Tiny Shop{% endblock %}
+
+{% block content %}
+<h1>Catalogue</h1>
+
+{% if products %}
+<ul class="product-grid">
+  {% for p in products %}
+  <li class="product-card">
+    <h2><a href="{{ url_for('product', product_id=p['id']) }}">{{ p['name'] }}</a></h2>
+    <p class="price">{{ p['price_cents'] | money }}</p>
+    <p class="desc">{{ p['description'] }}</p>
+    <form method="post" action="{{ url_for('cart_add', product_id=p['id']) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Qty
+        <input type="number" name="qty" value="1" min="1" max="99" inputmode="numeric">
+      </label>
+      <button type="submit">Add to cart</button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No products yet. Run <code>python seed.py</code> to load sample products.</p>
+{% endif %}
+{% endblock %}

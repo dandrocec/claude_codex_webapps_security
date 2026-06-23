@@ -1,0 +1,140 @@
+The application is fully built. Every command (even `node --check`) is being gated for approval in this environment, so I couldn't install/run it myself. Here's where things stand.
+
+## What I built
+
+A complete, runnable Node.js/Express integration hub:
+
+**Core functionality**
+- **Accounts** — register/login/logout, bcrypt-hashed passwords (cost 12).
+- **Inbound webhooks** — each gets a unique secret URL `/in/<token>`; events are stored.
+- **Outbound actions** — per-webhook target URLs (POST/PUT/PATCH/GET) that the hub calls when an event arrives.
+- **Dashboard** — recent events + deliveries with HTTP status/error and a one-click **Retry**.
+- **Storage** — SQLite (`better-sqlite3`), all access via parameterised prepared statements.
+
+**Files**
+- `package.json`, `.env.example`, `README.md`, `.gitignore`
+- `src/`: `app.js`, `server.js`, `config.js`, `db.js`; `middleware/` (auth, csrf, errors); `lib/` (ssrf, delivery, validate); `services/dispatcher.js`; `routes/` (auth, webhooks, dashboard, inbound); `views/` (EJS, auto-escaped); `public/styles.css`
+
+**Security controls mapped to your requirements**
+- SQLi → prepared statements everywhere · Passwords → bcrypt+salt · XSS → EJS auto-escaping + strict CSP forbidding inline scripts/styles · CSRF → per-session synchroniser token (constant-time compare; inbound ingress exempt as token-authed M2M) · IDOR → every query scoped by session `user_id` · Cookies → `HttpOnly`/`SameSite=Lax`/`Secure` (when `COOKIE_SECURE=true`), session id regenerated on login · Headers → Helmet · Errors → central handler logs server-side, returns generic messages · Secrets → env only (fails closed in production if `SESSION_SECRET` missing) · Rate limiting on app + ingress.
+- **SSRF** → scheme allow-list (http/https), credentials rejected, and host validation performed *inside the socket DNS lookup* (defeats DNS rebinding) blocking private/loopback/link-local/CGNAT/reserved ranges incl. `169.254.169.254`, `::1`, `fc00::/7`; IPv4-mapped IPv6 unwrapped; connection/read timeouts; max response size; redirects not followed.
+
+## To run it (port 5094)
+```
+npm install
+cp .env.example .env      # PowerShell: Copy-Item .env.example .env
+npm start                 # → http://localhost:5094
+```
+
+I'd like to verify it actually boots and that the SSRF guard rejects a private target. **May I run `npm install` and a quick smoke test?** It needs network access for the install (and `better-sqlite3` may compile a native binary). If you approve, I'll install, start the server, and confirm registration + an SSRF-blocked delivery work.
+run_id S094_claude_B_20260622165220: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S094\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S094_claude_B_20260622165220.txt  (sha256 93650d040f7ac5d9...)
+  logged to logs/commands.log and logs/sessions.csv
+All code is written. Local execution (pip install, running Python) needs your approval in this environment, so I couldn't run the smoke test myself — but the project is complete and ready to run. Here's what I built.
+
+## What's there
+
+A FastAPI job runner with login, background command execution, captured output, and a live-updating job history backed by SQLite.
+
+```
+main.py            FastAPI app: routes, session auth, startup seeding
+runner.py          Background execution (thread pool) + output capture
+database.py        SQLite schema & queries (stdlib sqlite3, no ORM)
+security.py        PBKDF2 password hashing (stdlib, no native deps)
+templates/         Jinja2 UI: login, job list, job detail (live polling)
+requirements.txt   fastapi, uvicorn, jinja2, python-multipart, itsdangerous
+README.md          Run instructions + security notice
+.gitignore
+```
+
+## Run it (port 5095)
+
+```bash
+pip install -r requirements.txt
+uvicorn main:app --host 127.0.0.1 --port 5095
+```
+
+Open http://127.0.0.1:5095 — first run seeds a `admin` / `admin` user (printed to the console), overridable via `ADMIN_USERNAME` / `ADMIN_PASSWORD` / `SESSION_SECRET`.
+
+## Design choices worth knowing
+
+- **Stdlib-only persistence** (`sqlite3`) and **PBKDF2 hashing** — no native build steps, so `pip install` won't fail on Windows over a missing C compiler (a common bcrypt pain point).
+- **Bounded execution**: 4-worker thread pool, 1 MB output cap, 5-minute per-job timeout, and orphaned `running` jobs are marked `failed` on restart.
+- **Live logs**: the detail page polls `/api/jobs/{id}` once a second until the job reaches a terminal state.
+
+## Security note (in the README too)
+
+This app runs arbitrary commands by design — anyone who logs in effectively gets a shell as the server process. So it binds to **localhost**, requires login, and the README spells out: change the default creds, set a fixed `SESSION_SECRET`, run as an unprivileged user, and don't expose it to a network without real hardening (sandboxing/containers, resource limits).
+
+If you'd like, approve dependency install and I'll run an end-to-end smoke test (boot the server, log in, submit a job, confirm output is captured and status transitions correctly).
+run_id S095_claude_A_20260622170105: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S095\claude\A
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S095_claude_A_20260622170105.txt  (sha256 d64af9e6352df7e8...)
+  logged to logs/commands.log and logs/sessions.csv
+The environment requires manual approval to run Python/pip, and those calls are being blocked before execution, so I couldn't run the app myself. The code is complete and I've reviewed it carefully. Here's what I built and how to run it.
+
+## What I built
+
+A FastAPI job runner under `C:\Users\Darko\AppData\Local\Temp\csj_gen_9tbhvvek`:
+
+```
+app/
+  config.py     # env-driven settings (secrets from env only)
+  db.py         # SQLAlchemy engine/session (parameterised queries)
+  models.py     # User, Session, Job
+  security.py   # Argon2id hashing, server-side sessions, CSRF, security headers
+  runner.py     # background job execution (timeout, output cap, minimal env)
+  main.py       # FastAPI routes + middleware
+  templates/    # Jinja2 templates (autoescaped) — login, register, jobs, detail, error
+  static/style.css
+requirements.txt
+.env.example
+.gitignore
+README.md
+```
+
+Flow: register/login → submit a named command/script → it runs in a background thread, status moves `pending → running → success/failed/timeout/error`, combined stdout+stderr is captured → per-user history list and a detail page with logs.
+
+## How to run on port 5095
+
+```bash
+python -m venv .venv
+.venv\Scripts\Activate.ps1          # PowerShell
+pip install -r requirements.txt
+copy .env.example .env              # keep COOKIE_SECURE=false for local http
+uvicorn app.main:app --host 127.0.0.1 --port 5095
+```
+
+Open http://127.0.0.1:5095/. SQLite tables auto-create on first start.
+
+## How each security requirement is met
+
+- **SQL injection (A03):** all DB access via SQLAlchemy ORM with bound parameters — no string-built SQL.
+- **Password hashing:** Argon2id (`argon2-cffi`), per-user salt + params embedded; plaintext never stored; auto-rehash on login.
+- **XSS:** Jinja2 autoescaping for context-aware HTML encoding; logs/commands rendered in escaped `<pre>`. Strict CSP with no inline scripts.
+- **CSRF:** per-session synchronizer token on every state-changing POST (logout, job create, job delete), compared in constant time, layered with `SameSite=Lax`.
+- **Access control / IDOR:** every job query is filtered by the authenticated user's id; viewing/deleting another user's job returns 404. All job routes require auth.
+- **Session cookies:** `HttpOnly`, `Secure` (configurable), `SameSite=Lax`; cookie holds only an opaque random token, state is server-side.
+- **Security headers:** CSP, `X-Content-Type-Options`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP, HSTS over HTTPS. Docs/OpenAPI disabled.
+- **Error handling:** unhandled exceptions logged server-side only; clients get a generic error page, no stack traces.
+- **Secrets:** read exclusively from env vars; nothing hardcoded.
+- **Input validation:** username allowlist regex, password length bounds, job name/command length limits.
+
+## One thing you should know
+
+Running user-supplied commands **is** the app's purpose, so it's effectively authenticated RCE scoped to the server process. The controls above (auth, per-user isolation, timeout, output cap, minimal env, runs in a temp cwd) contain the blast radius, but the README is explicit that any real deployment must additionally sandbox execution (locked-down container, unprivileged user, restricted network, cgroups/seccomp) and never run as root.
+
+Want me to retry the install + a smoke test? If you approve the Python/pip command when prompted, I can install deps, import the app, and hit `/healthz` to confirm it boots.
+run_id S095_claude_B_20260622170439: tool exit 0; output in D:\claude_code\claude_security_journal\apps\S095\claude\B
+  prompt: D:\claude_code\claude_security_journal\prompts\rendered\S095_claude_B_20260622170439.txt  (sha256 d70f4834e0ad76fb...)
+  logged to logs/commands.log and logs/sessions.csv
+catalog: 100 specs | selected specs: 2 | tools: ['claude'] | variants: ['A', 'B']
+already done (skipped): 1 | blocked (tool missing): 0 | to run: 3
+
+>>> S094 claude B  (run_id S094_claude_B_20260622165220)
+
+>>> S095 claude A  (run_id S095_claude_A_20260622170105)
+
+>>> S095 claude B  (run_id S095_claude_B_20260622170439)
+
+batch complete: ran 3 this session. state totals: {'done': 190}
+state file: D:\claude_code\claude_security_journal\logs\generation_state.json

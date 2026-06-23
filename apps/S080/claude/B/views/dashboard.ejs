@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<div class="card">
+  <h1>Welcome, <%= currentUser.username %></h1>
+  <p class="muted">You are signed in as a <strong><%= currentUser.role %></strong>.</p>
+  <div class="actions">
+    <a class="btn" href="/products">View stock</a>
+    <a class="btn" href="/orders/new">Create an order</a>
+    <a class="btn secondary" href="/orders">View orders</a>
+    <% if (currentUser.role === 'manager') { %>
+      <a class="btn secondary" href="/products/new">Add a product</a>
+    <% } %>
+  </div>
+</div>
+<div class="card">
+  <p class="muted" style="margin:0;">
+    Clerks can create and manage their own orders and view stock.
+    Managers can additionally add products and adjust stock levels, and can view all orders.
+  </p>
+</div>
+<%- include('partials/footer') %>

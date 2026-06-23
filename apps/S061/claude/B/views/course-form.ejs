@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<h1><%= course ? 'Edit course' : 'New course' %></h1>
+
+<% if (errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %>
+  </ul>
+<% } %>
+
+<form action="<%= action %>" method="post" class="card form">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+  <label>Title
+    <input type="text" name="title" maxlength="150" required value="<%= values.title || '' %>" />
+  </label>
+
+  <label>Description
+    <textarea name="description" rows="5" maxlength="2000"><%= values.description || '' %></textarea>
+  </label>
+
+  <button type="submit" class="btn"><%= course ? 'Save changes' : 'Create course' %></button>
+  <a class="btn btn-secondary" href="<%= course ? '/courses/' + course.id : '/dashboard' %>">Cancel</a>
+</form>
+
+<%- include('partials/footer') %>

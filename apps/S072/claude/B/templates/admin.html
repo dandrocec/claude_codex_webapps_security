@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+  <h1>Admin · users</h1>
+  <p>Change any member's tier. State-changing actions are CSRF-protected.</p>
+
+  <table class="table">
+    <thead>
+      <tr><th>Name</th><th>Email</th><th>Tier</th><th>Role</th><th>Change tier</th></tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+        <tr>
+          <td>{{ u['display_name'] }}</td>
+          <td>{{ u['email'] }}</td>
+          <td><span class="badge badge-{{ u['tier'] }}">{{ u['tier'] }}</span></td>
+          <td>{{ 'admin' if u['is_admin'] else 'member' }}</td>
+          <td>
+            {% if u['id'] == current_user['id'] %}
+              <em>—</em>
+            {% else %}
+              <form method="post" action="{{ url_for('main.change_tier') }}" class="inline">
+                {{ form.csrf_token }}
+                <input type="hidden" name="user_id" value="{{ u['id'] }}">
+                <select name="tier" aria-label="Tier for {{ u['display_name'] }}">
+                  <option value="free" {{ 'selected' if u['tier'] == 'free' }}>Free</option>
+                  <option value="premium" {{ 'selected' if u['tier'] == 'premium' }}>Premium</option>
+                </select>
+                <button type="submit" class="btn btn-sm">Apply</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

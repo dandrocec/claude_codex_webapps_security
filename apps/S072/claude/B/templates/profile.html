@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+  <h1>Your profile</h1>
+  <dl class="profile">
+    <dt>Email</dt><dd>{{ current_user['email'] }}</dd>
+    <dt>Tier</dt><dd><span class="badge badge-{{ current_user['tier'] }}">{{ current_user['tier'] }}</span></dd>
+    <dt>Member since</dt><dd>{{ current_user['created_at'][:10] }}</dd>
+  </dl>
+
+  <h2>Update display name</h2>
+  <form method="post" action="{{ url_for('main.profile') }}" class="form" novalidate>
+    {{ form.csrf_token }}
+    {{ render_field(form.display_name, autocomplete="nickname") }}
+    <button type="submit" class="btn">Save</button>
+  </form>
+
+  {% if current_user['tier'] != 'premium' and not current_user['is_admin'] %}
+    <p class="hint">Want premium access? An administrator can upgrade your tier.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }}{% endblock %}
+{% block content %}
+  <div class="card">
+    <h1 style="margin-top:0;">{{ job.title }}</h1>
+    <p class="muted">
+      {% if job.location %}{{ job.location }} &middot; {% endif %}
+      Posted by {{ job.employer.name }} &middot;
+      {{ job.created_at.strftime('%b %d, %Y') }}
+    </p>
+    <pre class="letter">{{ job.description or 'No description provided.' }}</pre>
+
+    <div style="margin-top:16px;">
+      {% if current_user and current_user.is_applicant %}
+        {% if already_applied %}
+          <span class="tag">You have applied</span>
+        {% else %}
+          <a class="btn" href="{{ url_for('apply', job_id=job.id) }}">Apply now</a>
+        {% endif %}
+      {% elif current_user and current_user.is_employer and job.employer_id == current_user.id %}
+        <a class="btn" href="{{ url_for('job_applications', job_id=job.id) }}">Review applications</a>
+      {% elif not current_user %}
+        <a class="btn" href="{{ url_for('login', next=url_for('apply', job_id=job.id)) }}">Log in to apply</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

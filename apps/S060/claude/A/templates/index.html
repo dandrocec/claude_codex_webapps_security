@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Latest posts · Flask Blog{% endblock %}
+{% block content %}
+  <h1>Latest posts</h1>
+  {% if not posts %}
+    <div class="card muted">No published posts yet. Check back soon.</div>
+  {% endif %}
+  {% for post in posts %}
+    <article class="card">
+      <h2 style="margin-top:0">
+        <a href="{{ url_for('view_post', post_id=post.id) }}">{{ post.title }}</a>
+      </h2>
+      <p class="muted">by {{ post.author.username }} ·
+         {{ post.updated_at.strftime('%b %d, %Y') }}</p>
+      <p class="post-body">{{ post.body[:240] }}{% if post.body|length > 240 %}…{% endif %}</p>
+    </article>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Client applications{% endblock %}
+{% block body %}
+<div class="wrap">
+  <div class="topbar">
+    <h1>Client applications</h1>
+    <span class="muted">{{ admin.username }} &middot; <a href="/admin/logout">log out</a></span>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:1.05rem; margin-top:0">Register a new client</h2>
+    <form method="post" action="/admin/clients">
+      <label for="name">Application name</label>
+      <input id="name" name="name" placeholder="My Web App" required>
+      <label for="redirect_uris">Redirect URIs (one per line or space-separated)</label>
+      <textarea id="redirect_uris" name="redirect_uris" rows="3"
+                placeholder="https://myapp.example.com/callback" required></textarea>
+      <button type="submit">Create client</button>
+    </form>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem">
+    <h2 style="font-size:1.05rem; margin-top:0">Registered clients ({{ clients|length }})</h2>
+    {% if not clients %}
+      <p class="muted">No clients yet.</p>
+    {% else %}
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Credentials</th><th>Redirect URIs</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for c in clients %}
+        <tr>
+          <td>{{ c.name }}<br><span class="muted">{{ "active" if c.is_active else "inactive" }}</span></td>
+          <td>
+            <div><span class="muted">id</span> <code>{{ c.client_id }}</code></div>
+            <div style="margin-top:.3rem"><span class="muted">secret</span> <code>{{ c.client_secret }}</code></div>
+          </td>
+          <td>
+            {% for uri in c.redirect_uri_list() %}<div><code>{{ uri }}</code></div>{% endfor %}
+          </td>
+          <td>
+            <form method="post" action="/admin/clients/{{ c.client_id }}/delete"
+                  onsubmit="return confirm('Delete {{ c.name }}?')">
+              <button class="danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+
+  <p class="muted" style="margin-top:1.5rem">
+    Discovery: <a href="/.well-known/openid-configuration">/.well-known/openid-configuration</a> &middot;
+    Keys: <a href="/.well-known/jwks.json">/.well-known/jwks.json</a>
+  </p>
+</div>
+{% endblock %}

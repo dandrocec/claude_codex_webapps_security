@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+  <h1>Register</h1>
+  <form method="post" class="stack">
+    {{ form.csrf_token }}
+    <label>{{ form.username.label }}{{ form.username(autocomplete="username") }}</label>
+    {% for e in form.username.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.password.label }}{{ form.password(autocomplete="new-password") }}</label>
+    {% for e in form.password.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.confirm.label }}{{ form.confirm(autocomplete="new-password") }}</label>
+    {% for e in form.confirm.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.role.label }}{{ form.role() }}</label>
+    {% for e in form.role.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <button type="submit">Create account</button>
+  </form>
+{% endblock %}

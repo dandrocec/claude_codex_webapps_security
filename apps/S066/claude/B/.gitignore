@@ -1,0 +1,6 @@
+/vendor/
+/.env
+/storage/app.sqlite
+/storage/app.sqlite-*
+/storage/uploads/*
+!/storage/uploads/.gitkeep

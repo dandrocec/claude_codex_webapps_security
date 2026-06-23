@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>My medical records</h1>
+  <% if (!records.length) { %>
+    <p>You have no records yet.</p>
+  <% } else { %>
+    <% records.forEach(function (r) { %>
+      <article class="record">
+        <h3><%= r.title %></h3>
+        <p class="meta">By <%= r.doctor_name %> · updated <%= r.updated_at %></p>
+        <p><%= r.notes %></p>
+      </article>
+    <% }); %>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

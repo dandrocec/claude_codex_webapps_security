@@ -1,0 +1,14 @@
+<%- include('partials/header', { title: 'Ask a Question' }) %>
+
+<h1>Ask a Question</h1>
+<form method="post" action="/questions" class="stacked">
+  <label>Title
+    <input type="text" name="title" placeholder="What's your question?" required />
+  </label>
+  <label>Body
+    <textarea name="body" rows="8" placeholder="Describe your question in detail..." required></textarea>
+  </label>
+  <button class="btn" type="submit">Post Question</button>
+</form>
+
+<%- include('partials/footer') %>

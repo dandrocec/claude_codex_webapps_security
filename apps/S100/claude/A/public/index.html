@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevOps Dashboard</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Login -->
+  <div id="login-view" class="view">
+    <div class="login-card">
+      <h1>DevOps Dashboard</h1>
+      <p class="muted">Sign in to manage services and deployments.</p>
+      <form id="login-form">
+        <label>Username <input id="login-username" autocomplete="username" required /></label>
+        <label>Password <input id="login-password" type="password" autocomplete="current-password" required /></label>
+        <button type="submit">Sign in</button>
+        <div id="login-error" class="error"></div>
+      </form>
+      <div class="hint">
+        Default accounts: <code>operator / operator123</code> &middot; <code>viewer / viewer123</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div id="app-view" class="view hidden">
+    <header class="topbar">
+      <div class="brand">DevOps Dashboard</div>
+      <div class="topbar-right">
+        <span id="user-badge" class="badge"></span>
+        <button id="logout-btn" class="secondary">Log out</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <h2>Services</h2>
+          <button id="new-service-btn" class="operator-only small">+ New</button>
+        </div>
+        <ul id="service-list" class="service-list"></ul>
+      </aside>
+
+      <section class="content">
+        <div id="empty-state" class="placeholder">Select a service to view details.</div>
+
+        <div id="service-detail" class="hidden">
+          <div class="detail-head">
+            <div>
+              <h2 id="sd-name"></h2>
+              <div id="sd-desc" class="muted"></div>
+              <div id="sd-repo" class="muted small"></div>
+            </div>
+            <div class="detail-actions">
+              <button id="deploy-btn" class="operator-only primary">Deploy now</button>
+              <button id="edit-service-btn" class="operator-only secondary">Edit</button>
+              <button id="delete-service-btn" class="operator-only danger">Delete</button>
+            </div>
+          </div>
+
+          <div class="cards">
+            <div class="card">
+              <h3>Steps</h3>
+              <ol id="sd-steps" class="steps"></ol>
+            </div>
+
+            <div class="card">
+              <h3>Secrets <span class="operator-only"><button id="add-secret-btn" class="small">+ Add</button></span></h3>
+              <table class="secrets-table">
+                <thead><tr><th>Key</th><th>Updated</th><th class="operator-only"></th></tr></thead>
+                <tbody id="sd-secrets"></tbody>
+              </table>
+              <p class="muted small">Secret values are encrypted at rest and never displayed.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Deployments</h3>
+            <table class="deploy-table">
+              <thead><tr><th>#</th><th>Status</th><th>By</th><th>Started</th><th>Finished</th><th></th></tr></thead>
+              <tbody id="sd-deployments"></tbody>
+            </table>
+          </div>
+
+          <div id="log-panel" class="card hidden">
+            <div class="log-head">
+              <h3>Logs — deployment <span id="log-dep-id"></span> <span id="log-status" class="badge"></span></h3>
+              <button id="close-log-btn" class="small secondary">Close</button>
+            </div>
+            <pre id="log-output" class="log-output"></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Service modal -->
+  <div id="service-modal" class="modal hidden">
+    <div class="modal-card">
+      <h2 id="service-modal-title">New service</h2>
+      <form id="service-form">
+        <label>Name <input id="svc-name" required /></label>
+        <label>Description <input id="svc-desc" /></label>
+        <label>Repository URL <input id="svc-repo" placeholder="https://..." /></label>
+        <label>Steps (one shell command per line)
+          <textarea id="svc-steps" rows="6" placeholder="npm ci&#10;npm test&#10;npm run deploy"></textarea>
+        </label>
+        <div class="modal-actions">
+          <button type="button" id="service-cancel" class="secondary">Cancel</button>
+          <button type="submit" class="primary">Save</button>
+        </div>
+        <div id="service-modal-error" class="error"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Secret modal -->
+  <div id="secret-modal" class="modal hidden">
+    <div class="modal-card">
+      <h2>Add / update secret</h2>
+      <form id="secret-form">
+        <label>Key <input id="secret-key" placeholder="DATABASE_URL" required /></label>
+        <label>Value <input id="secret-value" type="password" required /></label>
+        <div class="modal-actions">
+          <button type="button" id="secret-cancel" class="secondary">Cancel</button>
+          <button type="submit" class="primary">Save</button>
+        </div>
+        <div id="secret-modal-error" class="error"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

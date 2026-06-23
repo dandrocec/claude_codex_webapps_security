@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Invoice {{ invoice.number }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Invoice {{ invoice.number }}</h1>
+  <div class="header-actions">
+    <a class="btn" href="{{ url_for('print_invoice', invoice_id=invoice.id) }}" target="_blank">Print</a>
+    <a class="btn" href="{{ url_for('edit_invoice', invoice_id=invoice.id) }}">Edit</a>
+    <form method="post" action="{{ url_for('delete_invoice', invoice_id=invoice.id) }}"
+          onsubmit="return confirm('Delete this invoice?');">
+      <button type="submit" class="btn danger">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="grid-2 meta">
+    <div>
+      <h3>Billed to</h3>
+      <p><strong>{{ invoice.client.name }}</strong><br>
+      {{ invoice.client.email or "" }}<br>
+      {{ invoice.client.address or "" }}</p>
+    </div>
+    <div>
+      <p><strong>Issued:</strong> {{ invoice.issue_date.isoformat() if invoice.issue_date else "—" }}</p>
+      <p><strong>Due:</strong> {{ invoice.due_date.isoformat() if invoice.due_date else "—" }}</p>
+      <p><strong>Status:</strong>
+        <form method="post" action="{{ url_for('update_status', invoice_id=invoice.id) }}" class="inline">
+          <select name="status" onchange="this.form.submit()">
+            {% for s in ["draft", "sent", "paid"] %}
+            <option value="{{ s }}" {{ "selected" if invoice.status == s }}>{{ s }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </p>
+    </div>
+  </div>
+
+  <table class="data">
+    <thead>
+      <tr><th>Description</th><th class="right">Qty</th><th class="right">Unit price</th><th class="right">Amount</th></tr>
+    </thead>
+    <tbody>
+      {% for item in invoice.items %}
+      <tr>
+        <td>{{ item.description }}</td>
+        <td class="right">{{ "%g"|format(item.quantity) }}</td>
+        <td class="right">{{ item.unit_price | money }}</td>
+        <td class="right">{{ item.amount | money }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr><td colspan="3" class="right">Subtotal</td><td class="right">{{ invoice.subtotal | money }}</td></tr>
+      <tr><td colspan="3" class="right">Tax ({{ "%g"|format(invoice.tax_rate) }}%)</td><td class="right">{{ invoice.tax_amount | money }}</td></tr>
+      <tr class="grand"><td colspan="3" class="right">Total</td><td class="right">{{ invoice.total | money }}</td></tr>
+    </tfoot>
+  </table>
+
+  {% if invoice.notes %}
+  <div class="notes"><h3>Notes</h3><p>{{ invoice.notes }}</p></div>
+  {% endif %}
+</div>
+{% endblock %}

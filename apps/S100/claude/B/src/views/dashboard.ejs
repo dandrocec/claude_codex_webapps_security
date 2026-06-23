@@ -1,0 +1,26 @@
+<%- include('partials/head') %>
+<div class="page-head">
+  <h1>Services</h1>
+  <% if (currentUser.role === 'operator') { %>
+    <a class="btn btn-primary" href="/services/new">+ Register service</a>
+  <% } %>
+</div>
+
+<% if (services.length === 0) { %>
+  <p class="muted">No services registered yet.</p>
+<% } else { %>
+  <div class="grid">
+    <% services.forEach(function (s) { %>
+      <a class="card service-card" href="/services/<%= s.id %>">
+        <h3><%= s.name %></h3>
+        <% if (s.description) { %><p class="muted"><%= s.description %></p><% } %>
+        <div class="meta">
+          <span><%= s.steps.length %> step<%= s.steps.length === 1 ? '' : 's' %></span>
+          <span>owner: <%= s.owner_username %></span>
+          <% if (s.owner_id === currentUser.id) { %><span class="badge badge-operator">yours</span><% } %>
+        </div>
+      </a>
+    <% }); %>
+  </div>
+<% } %>
+<%- include('partials/foot') %>

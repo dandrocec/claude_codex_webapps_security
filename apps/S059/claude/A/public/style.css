@@ -1,0 +1,148 @@
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --ink: #1f2933;
+  --muted: #6b7280;
+  --line: #e2e8f0;
+  --brand: #2563eb;
+  --free: #e8f5ec;
+  --free-ink: #166534;
+  --taken: #f1f3f5;
+  --taken-ink: #98a2b3;
+  --mine: #dbeafe;
+  --mine-ink: #1e40af;
+  --danger: #dc2626;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.brand { font-weight: 700; text-decoration: none; color: var(--ink); }
+.topbar nav { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.topbar nav a { text-decoration: none; color: var(--brand); }
+.topbar .who { color: var(--muted); font-size: 0.9rem; }
+
+.container { max-width: 1000px; margin: 1.5rem auto; padding: 0 1.25rem; }
+
+h1 { margin-top: 0; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.card.narrow { max-width: 380px; margin: 2rem auto; }
+
+label { display: block; margin-bottom: 1rem; font-size: 0.9rem; color: var(--muted); }
+input[type="text"], input[type="password"], input[type="date"] {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-size: 1rem;
+}
+
+button { cursor: pointer; font: inherit; }
+.primary {
+  width: 100%;
+  padding: 0.6rem;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-weight: 600;
+}
+.danger {
+  padding: 0.35rem 0.7rem;
+  background: #fff;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 6px;
+}
+.link-btn { background: none; border: none; color: var(--brand); padding: 0; }
+.inline { display: inline; margin: 0; }
+
+.muted { color: var(--muted); }
+.muted a { color: var(--brand); }
+
+.flash { padding: 0.65rem 0.85rem; border-radius: 7px; margin: 0 0 1rem; }
+.flash.success { background: var(--free); color: var(--free-ink); }
+.flash.error { background: #fde8e8; color: var(--danger); }
+
+.date-picker { margin-bottom: 1rem; }
+.date-picker label { display: inline-block; }
+
+.grid-scroll { overflow-x: auto; }
+table.grid {
+  border-collapse: collapse;
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+table.grid th, table.grid td {
+  border: 1px solid var(--line);
+  padding: 0.4rem;
+  text-align: center;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+table.grid thead th { background: #f8fafc; }
+.room-col { text-align: left; font-weight: 600; }
+.cap { color: var(--muted); font-weight: 400; font-size: 0.75rem; }
+
+td.free { background: var(--free); }
+td.taken { background: var(--taken); color: var(--taken-ink); }
+td.mine { background: var(--mine); color: var(--mine-ink); }
+.cell-btn.book {
+  background: transparent;
+  border: 1px solid var(--free-ink);
+  color: var(--free-ink);
+  border-radius: 5px;
+  padding: 0.25rem 0.6rem;
+}
+.cell-label { font-weight: 600; }
+
+.legend { margin-top: 1rem; color: var(--muted); font-size: 0.85rem; }
+.swatch {
+  display: inline-block; width: 12px; height: 12px;
+  border-radius: 3px; vertical-align: middle; margin: 0 0.25rem 0 0.9rem;
+}
+.swatch.free { background: var(--free); border: 1px solid var(--free-ink); }
+.swatch.mine { background: var(--mine); border: 1px solid var(--mine-ink); }
+.swatch.taken { background: var(--taken); border: 1px solid var(--taken-ink); }
+
+table.list {
+  border-collapse: collapse;
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+table.list th, table.list td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+}
+table.list .right { text-align: right; }
+table.list thead th { background: #f8fafc; }

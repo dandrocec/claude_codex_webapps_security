@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+<section class="card narrow">
+  <h1>Book an appointment</h1>
+  <%- include('../partials/errors') %>
+  <% if (doctor) { %>
+    <p>Your appointment will be requested with <strong><%= doctor.full_name %></strong>.</p>
+    <form method="post" action="/appointments">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Date &amp; time
+        <input type="datetime-local" name="scheduled_at" value="<%= values.scheduled_at || '' %>" required>
+      </label>
+      <label>Reason
+        <textarea name="reason" rows="4" required maxlength="500"><%= values.reason || '' %></textarea>
+      </label>
+      <button type="submit">Request appointment</button>
+    </form>
+  <% } else { %>
+    <p>You have no assigned doctor. Please contact reception.</p>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

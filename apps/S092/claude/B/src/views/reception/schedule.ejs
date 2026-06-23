@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>Clinic schedule</h1>
+  <p><a class="btn" href="/schedule/new">New appointment</a></p>
+  <% if (!appointments.length) { %>
+    <p>No appointments scheduled.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>When</th><th>Patient</th><th>Doctor</th><th>Reason</th><th>Status</th><th>Update</th></tr></thead>
+      <tbody>
+        <% appointments.forEach(function (a) { %>
+          <tr>
+            <td><%= a.scheduled_at %></td>
+            <td><%= a.patient_name %></td>
+            <td><%= a.doctor_name %></td>
+            <td><%= a.reason %></td>
+            <td><span class="status status-<%= a.status %>"><%= a.status %></span></td>
+            <td>
+              <form method="post" action="/schedule/<%= a.id %>/status" class="inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <select name="status">
+                  <% ['requested','confirmed','cancelled','completed'].forEach(function (s) { %>
+                    <option value="<%= s %>" <%= a.status === s ? 'selected' : '' %>><%= s %></option>
+                  <% }); %>
+                </select>
+                <button type="submit">Set</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

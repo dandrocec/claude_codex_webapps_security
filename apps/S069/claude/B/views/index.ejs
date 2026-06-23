@@ -1,0 +1,23 @@
+<%- include('partials/header', { title: 'Crowdfund — Discover campaigns' }) %>
+
+<h1>Discover campaigns</h1>
+
+<% if (campaigns.length === 0) { %>
+  <p class="empty">No campaigns yet. <% if (currentUser) { %><a href="/campaigns/new">Be the first to start one.</a><% } else { %><a href="/register">Sign up</a> to start one.<% } %></p>
+<% } %>
+
+<ul class="card-grid">
+  <% campaigns.forEach(function (c) { %>
+    <li class="card">
+      <h2><a href="/campaigns/<%= c.id %>"><%= c.title %></a></h2>
+      <p class="meta">by <%= c.creator_name %><% if (c.expired) { %> &middot; <span class="ended">ended</span><% } %></p>
+      <div class="progress" aria-label="<%= c.percent %>% funded">
+        <div class="progress-bar" style="width: <%= c.percent %>%"></div>
+      </div>
+      <p class="figures"><strong><%= c.raised_display %></strong> of <%= c.goal_display %> &middot; <%= c.percent %>%</p>
+      <p class="meta">Deadline: <%= c.deadline %></p>
+    </li>
+  <% }); %>
+</ul>
+
+<%- include('partials/footer') %>

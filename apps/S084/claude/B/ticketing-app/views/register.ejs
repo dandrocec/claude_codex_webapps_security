@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+<h1>Create an account</h1>
+<%- include('partials/errors') %>
+<form action="/register" method="post" class="card form" autocomplete="on">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>Email
+    <input type="email" name="email" value="<%= values.email || '' %>" required maxlength="254" autocomplete="email">
+  </label>
+  <label>Password
+    <input type="password" name="password" required minlength="10" maxlength="200" autocomplete="new-password">
+  </label>
+  <p class="hint">At least 10 characters.</p>
+  <button type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="/login">Log in</a>.</p>
+<%- include('partials/footer') %>

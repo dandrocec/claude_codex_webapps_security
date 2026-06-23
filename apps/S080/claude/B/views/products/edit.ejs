@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+<div class="card" style="max-width:480px;">
+  <h1>Adjust stock</h1>
+  <p class="muted"><%= product.sku %> — <%= product.name %></p>
+  <% if (errors.length) { %>
+    <div class="errors"><ul><% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %></ul></div>
+  <% } %>
+  <form method="POST" action="/products/<%= product.id %>/stock">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label for="stock">New stock level</label>
+    <input id="stock" name="stock" type="number" min="0" max="1000000"
+           value="<%= product.stock %>" required autofocus />
+    <button class="btn" type="submit">Save</button>
+    <a class="btn secondary" href="/products">Cancel</a>
+  </form>
+</div>
+<%- include('../partials/footer') %>

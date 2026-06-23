@@ -1,0 +1,30 @@
+<%- include('../partials/head', { pageTitle: title }) %>
+  <div class="page-head"><h1><%= title %></h1></div>
+  <form method="<%= method %>" action="<%= action %>" class="stack-form">
+    <label>Title *
+      <input type="text" name="title" required value="<%= deal.title || '' %>" />
+    </label>
+    <label>Value (USD)
+      <input type="number" name="value" min="0" step="100" value="<%= deal.value != null ? deal.value : 0 %>" />
+    </label>
+    <label>Stage
+      <select name="stage">
+        <% STAGES.forEach(function(s) { %>
+          <option value="<%= s %>" <%= deal.stage === s ? 'selected' : '' %>><%= stageLabel(s) %></option>
+        <% }); %>
+      </select>
+    </label>
+    <label>Contact
+      <select name="contact_id">
+        <option value="">— none —</option>
+        <% contacts.forEach(function(c) { %>
+          <option value="<%= c.id %>" <%= String(deal.contact_id) === String(c.id) ? 'selected' : '' %>><%= c.name %></option>
+        <% }); %>
+      </select>
+    </label>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a href="/board" class="btn">Cancel</a>
+    </div>
+  </form>
+<%- include('../partials/foot') %>

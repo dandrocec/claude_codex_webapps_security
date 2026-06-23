@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Editor dashboard · Flask Blog{% endblock %}
+{% block content %}
+  <h1>Editor dashboard</h1>
+
+  <h2>Awaiting review ({{ pending|length }})</h2>
+  {% if not pending %}
+    <div class="card muted">The review queue is empty. 🎉</div>
+  {% endif %}
+  {% for post in pending %}
+    <article class="card">
+      <div class="row">
+        <strong>{{ post.title }}</strong>
+        <span class="status {{ post.status }}">{{ post.status }}</span>
+        <span class="muted" style="margin-left:auto">by {{ post.author.username }}</span>
+      </div>
+      <p class="post-body muted">{{ post.body[:300] }}{% if post.body|length > 300 %}…{% endif %}</p>
+      <p><a href="{{ url_for('view_post', post_id=post.id) }}">Read full post</a></p>
+      <form method="post" action="{{ url_for('review_post', post_id=post.id) }}">
+        <label for="note-{{ post.id }}">Review note (optional for approve, shown to author)</label>
+        <input id="note-{{ post.id }}" name="note" placeholder="Add a note…">
+        <div class="row" style="margin-top:.8rem">
+          <button class="btn ok" type="submit" name="decision" value="approve">Approve</button>
+          <button class="btn danger" type="submit" name="decision" value="reject">Reject</button>
+        </div>
+      </form>
+    </article>
+  {% endfor %}
+
+  <h2>Recently reviewed</h2>
+  {% if not reviewed %}
+    <div class="card muted">Nothing reviewed yet.</div>
+  {% else %}
+    <div class="card">
+      <table>
+        <thead><tr><th>Title</th><th>Author</th><th>Status</th><th>Updated</th></tr></thead>
+        <tbody>
+          {% for post in reviewed %}
+            <tr>
+              <td><a href="{{ url_for('view_post', post_id=post.id) }}">{{ post.title }}</a></td>
+              <td>{{ post.author.username }}</td>
+              <td><span class="status {{ post.status }}">{{ post.status }}</span></td>
+              <td class="muted">{{ post.updated_at.strftime('%b %d, %Y %H:%M') }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+{% endblock %}

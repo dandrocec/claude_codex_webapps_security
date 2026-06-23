@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Applications: {{ job.title }}{% endblock %}
+{% block content %}
+  <h1>Applications for {{ job.title }}</h1>
+  <p class="muted">{{ applications|length }} application(s)</p>
+  {% if not applications %}
+    <p class="muted">No one has applied to this job yet.</p>
+  {% endif %}
+  {% for app in applications %}
+    <div class="card">
+      <h3>{{ app.applicant.name }}</h3>
+      <p class="muted">
+        {{ app.applicant.email }} &middot;
+        Applied {{ app.created_at.strftime('%b %d, %Y') }}
+      </p>
+      {% if app.cover_letter %}
+        <pre class="letter">{{ app.cover_letter }}</pre>
+      {% else %}
+        <p class="muted">No cover letter.</p>
+      {% endif %}
+      <p style="margin-top:10px;">
+        <a class="btn secondary" href="{{ url_for('download_resume', application_id=app.id) }}">
+          Download resume ({{ app.resume_original_name }})
+        </a>
+      </p>
+    </div>
+  {% endfor %}
+  <a class="btn secondary" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+{% endblock %}

@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<div class="page-head">
+  <h1>Your courses</h1>
+  <a class="btn" href="/courses/new">+ New course</a>
+</div>
+
+<% if (courses.length === 0) { %>
+  <p class="muted">You haven't created any courses yet.</p>
+<% } else { %>
+  <ul class="card-list">
+    <% courses.forEach((c) => { %>
+      <li class="card">
+        <h3><a href="/courses/<%= c.id %>"><%= c.title %></a></h3>
+        <p class="muted"><%= c.description || 'No description.' %></p>
+        <p class="meta"><%= c.lesson_count %> lesson(s) · <%= c.student_count %> student(s)</p>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+<%- include('partials/footer') %>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Membership{% endblock %} · MemberHub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('main.index') }}">MemberHub</a>
+    <nav class="nav">
+      <a href="{{ url_for('main.index') }}">Home</a>
+
+      {% if current_user %}
+        {# --- Navigation differs per tier --- #}
+        {% if current_user['tier'] == 'premium' or current_user['is_admin'] %}
+          <a href="{{ url_for('main.premium') }}">Premium</a>
+        {% else %}
+          <a class="upgrade" href="{{ url_for('main.profile') }}">Upgrade</a>
+        {% endif %}
+
+        {% if current_user['is_admin'] %}
+          <a href="{{ url_for('main.admin') }}">Admin</a>
+        {% endif %}
+
+        <a href="{{ url_for('main.profile') }}">Profile</a>
+
+        <span class="badge badge-{{ current_user['tier'] }}">
+          {{ current_user['tier'] }}
+        </span>
+
+        <form class="inline" method="post" action="{{ url_for('auth.logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="linkbtn">Sign out</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('auth.login') }}">Sign in</a>
+        <a href="{{ url_for('auth.register') }}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flash">
+          {% for category, message in messages %}
+            <li class="flash-{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <small>MemberHub — demo membership site.</small>
+  </footer>
+</body>
+</html>

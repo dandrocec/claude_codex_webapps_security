@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Sign in · Helpdesk{% endblock %}
+{% block content %}
+<div class="card narrow">
+  <h1>Sign in</h1>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <label>{{ form.email.label }}{{ form.email(autocomplete="email") }}</label>
+    {% for e in form.email.errors %}<small class="err">{{ e }}</small>{% endfor %}
+
+    <label>{{ form.password.label }}{{ form.password(autocomplete="current-password") }}</label>
+    {% for e in form.password.errors %}<small class="err">{{ e }}</small>{% endfor %}
+
+    {{ form.submit(class="btn") }}
+  </form>
+  <p class="muted">No account? <a href="{{ url_for('auth.register') }}">Register</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import field %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+  <h1>Log in</h1>
+  <form method="post" action="{{ url_for('auth.login') }}" class="card">
+    {{ form.hidden_tag() }}
+    {{ field(form.email) }}
+    {{ field(form.password) }}
+    <label class="check">{{ form.remember() }} {{ form.remember.label.text }}</label>
+    {{ form.submit(class="btn") }}
+  </form>
+  <p>No account? <a href="{{ url_for('auth.register') }}">Register</a>.</p>
+{% endblock %}

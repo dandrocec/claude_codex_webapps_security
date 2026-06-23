@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Checkout · Acme Shop{% endblock %}
+{% block content %}
+{% if success %}
+  <h1>Thanks for your order!</h1>
+  {% if order.status == 'paid' %}
+    <p class="badge paid">Payment confirmed</p>
+  {% else %}
+    <p class="badge pending">Payment is being confirmed…</p>
+    <p class="muted">The provider webhook usually arrives within a moment.
+      Refresh your <a href="{{ url_for('order_detail', order_id=order.id) }}">order page</a>.</p>
+  {% endif %}
+{% else %}
+  <h1>Checkout cancelled</h1>
+  <p>Your order was not completed.</p>
+{% endif %}
+
+{% if order %}
+<p>Order <strong>#{{ order.id }}</strong> · {{ order.total_display }}</p>
+<p>
+  <a href="{{ url_for('order_detail', order_id=order.id) }}">View order</a> ·
+  <a href="{{ url_for('index') }}">Continue shopping</a>
+</p>
+{% endif %}
+{% endblock %}

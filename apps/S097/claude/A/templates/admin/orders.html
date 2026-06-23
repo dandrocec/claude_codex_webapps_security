@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Orders — Admin{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>Orders</h1></div>
+
+  <div class="chips">
+    <a class="chip {{ 'active' if not active_status }}" href="{{ url_for('admin_orders') }}">All</a>
+    {% for s in statuses %}
+      <a class="chip {{ 'active' if active_status == s }}" href="{{ url_for('admin_orders', status=s) }}">{{ s | capitalize }}</a>
+    {% endfor %}
+  </div>
+
+  {% if orders %}
+    <div class="card table-card">
+      <table>
+        <thead>
+          <tr><th>Order</th><th>Customer</th><th>Date</th><th>Items</th><th>Status</th><th class="right">Total</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for o in orders %}
+            <tr>
+              <td>#{{ o.id }}</td>
+              <td>{{ o.user.name }}<br><span class="muted">{{ o.user.email }}</span></td>
+              <td>{{ o.created_at.strftime('%b %d, %Y') }}</td>
+              <td>{{ o.items | length }}</td>
+              <td><span class="pill pill-{{ o.status }}">{{ o.status }}</span></td>
+              <td class="right">{{ o.total_cents | money }}</td>
+              <td class="right"><a class="btn-sm btn-ghost" href="{{ url_for('admin_order_detail', order_id=o.id) }}">Manage</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty"><p>No orders found.</p></div>
+  {% endif %}
+{% endblock %}

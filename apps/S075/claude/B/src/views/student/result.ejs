@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>Your Result</h1>
+  <p class="score-line">
+    <%= quiz.title %>:
+    <strong><%= score %> / <%= total %></strong>
+    (<%= total > 0 ? Math.round((score / total) * 100) : 0 %>%)
+  </p>
+
+  <% graded.forEach(function (g, i) { %>
+    <div class="question-view">
+      <p><strong><%= i + 1 %>.</strong> <%= g.question.text %>
+        <% if (g.isCorrect) { %>
+          <span class="tag ok">correct</span>
+        <% } else { %>
+          <span class="tag bad">incorrect</span>
+        <% } %>
+      </p>
+      <ul>
+        <% g.options.forEach(function (o) { %>
+          <li class="<%= o.id === g.correctId ? 'correct' : '' %> <%= o.id === g.selectedId ? 'chosen' : '' %>">
+            <%= o.text %>
+            <% if (o.id === g.correctId) { %> <span class="tag">correct answer</span><% } %>
+            <% if (o.id === g.selectedId && o.id !== g.correctId) { %> <span class="tag bad">your answer</span><% } %>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+  <% }); %>
+
+  <p><a class="btn" href="/">← Back to quizzes</a></p>
+</section>
+<%- include('../partials/footer') %>

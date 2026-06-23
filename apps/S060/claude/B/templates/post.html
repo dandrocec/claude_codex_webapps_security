@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ post['title'] }} — Quill{% endblock %}
+{% block content %}
+  <article class="article">
+    <h1>{{ post['title'] }}</h1>
+    <p class="meta">by {{ post['author'] }} · {{ post['created_at'] }}</p>
+    {# white-space:pre-wrap preserves line breaks; autoescaping prevents XSS #}
+    <div class="body">{{ post['body'] }}</div>
+  </article>
+  <p><a href="{{ url_for('index') }}">← Back to posts</a></p>
+{% endblock %}

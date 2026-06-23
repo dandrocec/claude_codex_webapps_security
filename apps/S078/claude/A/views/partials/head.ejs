@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= typeof pageTitle !== 'undefined' ? pageTitle + ' · ' : '' %>Mini CRM</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <% if (currentUser) { %>
+  <nav class="topbar">
+    <a class="brand" href="/board">📊 Mini CRM</a>
+    <div class="navlinks">
+      <a href="/board">Board</a>
+      <a href="/deals">Deals</a>
+      <a href="/contacts">Contacts</a>
+    </div>
+    <div class="user">
+      <span class="who">
+        <%= currentUser.name %>
+        <span class="role role-<%= currentUser.role %>"><%= currentUser.role %></span>
+      </span>
+      <form method="POST" action="/logout" class="inline">
+        <button type="submit" class="btn btn-link">Log out</button>
+      </form>
+    </div>
+  </nav>
+  <% } %>
+  <main class="container">

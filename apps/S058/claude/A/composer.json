@@ -1,0 +1,19 @@
+{
+    "name": "example/php-forum",
+    "description": "A small PHP discussion forum (boards, threads, replies) with users and moderators.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:5058 -t public public/router.php"
+    }
+}

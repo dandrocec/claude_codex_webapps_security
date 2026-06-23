@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}New page{% endblock %}
+{% block content %}
+  <h1>Create a page</h1>
+  <form method="post" class="stack">
+    {{ form.csrf_token }}
+    <label>{{ form.title.label }}{{ form.title() }}</label>
+    {% for e in form.title.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.slug.label }}{{ form.slug(placeholder="my-new-page") }}</label>
+    {% for e in form.slug.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.content.label }}{{ form.content(rows=14) }}</label>
+    {% for e in form.content.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    <label>{{ form.comment.label }}{{ form.comment(placeholder="Created page") }}</label>
+    <label class="check">{{ form.editor_only() }} {{ form.editor_only.label.text }}</label>
+    <button type="submit">Create page</button>
+  </form>
+{% endblock %}

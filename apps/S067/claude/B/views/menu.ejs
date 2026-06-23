@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<h1>Menu</h1>
+
+<% if (items.length === 0) { %>
+  <p>No items are available right now.</p>
+<% } %>
+
+<div class="grid">
+  <% items.forEach(function (item) { %>
+    <article class="card">
+      <h2><%= item.name %></h2>
+      <p class="desc"><%= item.description %></p>
+      <p class="price"><%= formatPrice(item.price_cents) %></p>
+      <% if (currentUser && currentUser.role === 'customer') { %>
+        <form method="post" action="/cart/add" class="add-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <input type="hidden" name="menuItemId" value="<%= item.id %>">
+          <label>Qty
+            <input type="number" name="quantity" value="1" min="1" max="50">
+          </label>
+          <button type="submit">Add to cart</button>
+        </form>
+      <% } else if (!currentUser) { %>
+        <a class="btn" href="/login">Log in to order</a>
+      <% } %>
+    </article>
+  <% }); %>
+</div>
+
+<%- include('partials/footer') %>

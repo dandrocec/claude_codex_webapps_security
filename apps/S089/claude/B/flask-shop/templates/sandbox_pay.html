@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Sandbox payment &middot; Tiny Shop{% endblock %}
+{% block content %}
+  <div class="paybox">
+    <h1>Sandbox checkout</h1>
+    <p class="hint">This page simulates an external payment provider. No real
+    card is charged. Confirming sends a signed webhook that marks the order paid.</p>
+    <h2>Order #{{ order['id'] }}</h2>
+    <table class="table">
+      <tbody>
+        {% for it in items %}
+          <tr><td>{{ it['product_name'] }} &times; {{ it['quantity'] }}</td>
+              <td>{{ (it['unit_cents'] * it['quantity']) | money }}</td></tr>
+        {% endfor %}
+      </tbody>
+      <tfoot><tr><th>Total</th><td>{{ order['total_cents'] | money }}</td></tr></tfoot>
+    </table>
+    <form method="post" action="{{ url_for('sandbox.confirm', payment_ref=order['payment_ref']) }}">
+      {{ form.csrf_token }}
+      <button class="btn primary" type="submit">Pay {{ order['total_cents'] | money }}</button>
+    </form>
+    <form method="get" action="{{ url_for('main.checkout_cancel') }}">
+      <button class="link-btn" type="submit">Cancel</button>
+    </form>
+  </div>
+{% endblock %}

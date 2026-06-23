@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ "New user" if mode == "create" else "Edit user" }} · Admin{% endblock %}
+{% block content %}
+<div class="card" style="max-width:520px;margin:0 auto;">
+  <h2 style="margin-top:0;">
+    {{ "Create user" if mode == "create" else "Edit user" }}
+  </h2>
+
+  <form method="post" novalidate
+        action="{{ url_for('user_new') if mode == 'create' else url_for('user_edit', user_id=target['id']) }}">
+    {{ form.csrf_token }}
+
+    <label for="username">Username</label>
+    {{ form.username(id="username") }}
+    {% for e in form.username.errors %}<div class="err">{{ e }}</div>{% endfor %}
+
+    <label for="email">Email</label>
+    {{ form.email(id="email") }}
+    {% for e in form.email.errors %}<div class="err">{{ e }}</div>{% endfor %}
+
+    <label for="password">{{ form.password.label.text }}</label>
+    {{ form.password(id="password", autocomplete="new-password") }}
+    {% for e in form.password.errors %}<div class="err">{{ e }}</div>{% endfor %}
+
+    <label for="confirm">{{ form.confirm.label.text }}</label>
+    {{ form.confirm(id="confirm", autocomplete="new-password") }}
+    {% for e in form.confirm.errors %}<div class="err">{{ e }}</div>{% endfor %}
+
+    <div class="check">{{ form.is_admin(id="is_admin") }}<label for="is_admin" style="margin:0;">Administrator</label></div>
+    <div class="check">{{ form.is_active(id="is_active") }}<label for="is_active" style="margin:0;">Active</label></div>
+
+    <div style="margin-top:1.25rem;display:flex;gap:.5rem;">
+      {{ form.submit(class="btn primary") }}
+      <a class="btn" href="{{ url_for('dashboard') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

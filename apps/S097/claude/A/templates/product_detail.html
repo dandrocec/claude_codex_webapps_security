@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} — Nimbus Store{% endblock %}
+{% block content %}
+  <p><a href="{{ url_for('index') }}">← Back to shop</a></p>
+
+  <div class="detail">
+    <img src="{{ product.image_url or 'https://via.placeholder.com/600x400?text=No+Image' }}" alt="{{ product.name }}">
+    <div>
+      <span class="cat-tag">{{ product.category }}</span>
+      <h1>{{ product.name }}</h1>
+      {% if product.avg_rating %}
+        <div class="stars">
+          {{ '★' * (product.avg_rating | round(0, 'floor') | int) }}{{ '☆' * (5 - (product.avg_rating | round(0, 'floor') | int)) }}
+          <span class="muted">{{ product.avg_rating }} / 5 · {{ product.reviews | length }} review(s)</span>
+        </div>
+      {% else %}
+        <p class="muted">No reviews yet.</p>
+      {% endif %}
+      <p class="price" style="font-size:1.6rem">{{ product.price_cents | money }}</p>
+      <p>{{ product.description or "No description provided." }}</p>
+
+      {% if product.in_stock %}
+        <p class="muted">{{ product.stock }} in stock</p>
+        {% if current_user and not current_user.is_admin %}
+          <form method="post" action="{{ url_for('cart_add', product_id=product.id) }}" class="filters">
+            <input class="qty-input" type="number" name="quantity" value="1" min="1" max="{{ product.stock }}">
+            <button class="btn" type="submit">Add to cart</button>
+          </form>
+        {% elif not current_user %}
+          <a class="btn" href="{{ url_for('login', next=url_for('product_detail', product_id=product.id)) }}">Log in to buy</a>
+        {% endif %}
+      {% else %}
+        <p class="oos">Out of stock</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Customer reviews</h2>
+
+    {% if can_review %}
+      <form method="post" action="{{ url_for('add_review', product_id=product.id) }}" class="card form-card" style="margin:0 0 24px; max-width:520px">
+        <div class="field">
+          <label>Your rating</label>
+          <select name="rating" required>
+            <option value="5">★★★★★ — Excellent</option>
+            <option value="4">★★★★ — Good</option>
+            <option value="3">★★★ — Average</option>
+            <option value="2">★★ — Poor</option>
+            <option value="1">★ — Terrible</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Your review</label>
+          <textarea name="comment" placeholder="Share your thoughts…"></textarea>
+        </div>
+        <button class="btn" type="submit">Submit review</button>
+      </form>
+    {% elif already_reviewed %}
+      <p class="muted">You have already reviewed this product.</p>
+    {% elif current_user and not current_user.is_admin %}
+      <p class="muted">You can review this product after purchasing it.</p>
+    {% endif %}
+
+    {% if reviews %}
+      {% for r in reviews %}
+        <div class="review">
+          <div class="stars">{{ '★' * r.rating }}{{ '☆' * (5 - r.rating) }}</div>
+          <div class="meta">{{ r.user.name }} · {{ r.created_at.strftime('%b %d, %Y') }}</div>
+          {% if r.comment %}<p>{{ r.comment }}</p>{% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="muted">Be the first to review this product.</p>
+    {% endif %}
+  </div>
+{% endblock %}

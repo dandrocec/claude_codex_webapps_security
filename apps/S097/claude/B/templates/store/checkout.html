@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<h1>Checkout</h1>
+
+<table>
+  <thead><tr><th>Product</th><th>Qty</th><th>Line total</th></tr></thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r['name'] }}</td>
+      <td>{{ r['quantity'] }}</td>
+      <td>{{ (r['price_cents'] * r['quantity']) | money }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="totals"><strong>Total: {{ subtotal | money }}</strong></div>
+
+<div class="card narrow">
+  <h2>Shipping details</h2>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ field(form.shipping_name, autocomplete="name") }}
+    {{ field(form.shipping_address, autocomplete="street-address") }}
+    <button class="btn" type="submit">Place order</button>
+  </form>
+</div>
+{% endblock %}

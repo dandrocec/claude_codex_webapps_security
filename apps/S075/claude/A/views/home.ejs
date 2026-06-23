@@ -1,0 +1,21 @@
+<%- include('partials/head', { title: 'Quizzes' }) %>
+
+<h1>Available quizzes</h1>
+
+<% if (quizzes.length === 0) { %>
+  <p class="muted">No quizzes yet. <a href="/teacher/new">Create the first one →</a></p>
+<% } else { %>
+  <ul class="quiz-list">
+    <% quizzes.forEach(function (q) { %>
+      <li class="card">
+        <div>
+          <a class="quiz-title" href="/quiz/<%= q.id %>"><%= q.title %></a>
+          <p class="muted"><%= q.question_count %> question<%= q.question_count === 1 ? '' : 's' %></p>
+        </div>
+        <a class="btn" href="/quiz/<%= q.id %>">Take quiz →</a>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include('partials/foot') %>

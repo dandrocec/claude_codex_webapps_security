@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<div class="card narrow">
+  <h1>Sign in</h1>
+  <% if (error) { %><p class="alert"><%= error %></p><% } %>
+  <form method="post" action="/login">
+    <label>Username
+      <input name="username" autocomplete="username" autofocus required />
+    </label>
+    <label>Password
+      <input name="password" type="password" autocomplete="current-password" required />
+    </label>
+    <button type="submit" class="btn">Sign in</button>
+  </form>
+
+  <details class="demo">
+    <summary>Demo accounts (password: <code>password</code>)</summary>
+    <ul>
+      <li><strong>Doctor:</strong> drsmith, drjones</li>
+      <li><strong>Receptionist:</strong> reception</li>
+      <li><strong>Patient:</strong> alice, bob</li>
+    </ul>
+  </details>
+</div>
+
+<%- include('partials/footer') %>

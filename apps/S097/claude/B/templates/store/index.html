@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Store{% endblock %}
+{% block content %}
+<h1>Products</h1>
+{% if products %}
+<div class="grid">
+  {% for p in products %}
+  <div class="card">
+    <h3><a href="{{ url_for('store.product_detail', product_id=p['id']) }}">{{ p['name'] }}</a></h3>
+    <p class="muted">{{ p['description'][:90] }}{% if p['description']|length > 90 %}…{% endif %}</p>
+    <p class="price">{{ p['price_cents'] | money }}</p>
+    {% if p['stock'] > 0 %}
+      <p class="muted">{{ p['stock'] }} in stock</p>
+    {% else %}
+      <p class="stock-out">Out of stock</p>
+    {% endif %}
+    <a class="btn" href="{{ url_for('store.product_detail', product_id=p['id']) }}">View</a>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="muted">No products available yet.</p>
+{% endif %}
+{% endblock %}

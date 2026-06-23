@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — MemberHub{% endblock %}
+{% block content %}
+  <div class="card">
+    <h1>Your dashboard</h1>
+    <p>Signed in as <strong>{{ g.user['username'] }}</strong>.</p>
+    <p>
+      Membership:
+      {% if g.user['is_admin'] %}
+        <span class="badge admin">admin</span>
+      {% else %}
+        <span class="badge {{ g.user['tier'] }}">{{ g.user['tier'] }}</span>
+      {% endif %}
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Quick links</h2>
+    <p><a class="btn secondary" href="{{ url_for('free_content') }}">Free content</a></p>
+    {% if g.user['tier'] == 'premium' or g.user['is_admin'] %}
+      <p><a class="btn premium" href="{{ url_for('premium_content') }}">Premium content</a></p>
+    {% else %}
+      <p><a class="btn premium" href="{{ url_for('upgrade') }}">Unlock premium</a></p>
+    {% endif %}
+    {% if g.user['is_admin'] %}
+      <p><a class="btn" href="{{ url_for('admin') }}">Admin panel</a></p>
+    {% endif %}
+  </div>
+{% endblock %}

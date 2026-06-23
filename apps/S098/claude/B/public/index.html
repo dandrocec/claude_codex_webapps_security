@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Collaborative Editor</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="brand">Collaborative Editor</h1>
+    <div id="userbar" class="userbar hidden">
+      <span id="currentUser" class="muted"></span>
+      <button id="logoutBtn" type="button">Log out</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- Auth view -->
+    <section id="authView" class="view auth-view">
+      <div class="card">
+        <div class="tabs">
+          <button id="tabLogin" type="button" class="tab active">Log in</button>
+          <button id="tabRegister" type="button" class="tab">Register</button>
+        </div>
+
+        <form id="loginForm" class="form">
+          <label>Username
+            <input id="loginUsername" type="text" autocomplete="username" required />
+          </label>
+          <label>Password
+            <input id="loginPassword" type="password" autocomplete="current-password" required />
+          </label>
+          <button type="submit">Log in</button>
+        </form>
+
+        <form id="registerForm" class="form hidden">
+          <label>Username
+            <input id="registerUsername" type="text" autocomplete="username" required />
+          </label>
+          <label>Password (min 8 chars)
+            <input id="registerPassword" type="password" autocomplete="new-password" required />
+          </label>
+          <button type="submit">Create account</button>
+        </form>
+
+        <p id="authError" class="error" role="alert"></p>
+      </div>
+    </section>
+
+    <!-- Workspace view -->
+    <section id="workspaceView" class="view workspace hidden">
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <h2>My documents</h2>
+        </div>
+        <form id="newDocForm" class="new-doc">
+          <input id="newDocTitle" type="text" placeholder="New document title" maxlength="200" required />
+          <button type="submit">Create</button>
+        </form>
+        <ul id="docList" class="doc-list"></ul>
+      </aside>
+
+      <section class="editor-pane">
+        <div id="emptyState" class="empty-state">
+          <p>Select a document on the left, or create a new one to get started.</p>
+        </div>
+
+        <div id="editorState" class="editor-state hidden">
+          <div class="editor-head">
+            <h2 id="docTitle" class="doc-title"></h2>
+            <span id="permBadge" class="badge"></span>
+            <button id="deleteDocBtn" type="button" class="danger hidden">Delete</button>
+          </div>
+          <p id="saveStatus" class="muted save-status"></p>
+          <textarea id="docContent" class="doc-content" spellcheck="true"
+            placeholder="Start typing…"></textarea>
+
+          <div class="collab-panel">
+            <h3>People with access</h3>
+            <ul id="collabList" class="collab-list"></ul>
+
+            <form id="inviteForm" class="invite-form hidden">
+              <input id="inviteUsername" type="text" placeholder="Username to invite" maxlength="32" required />
+              <select id="invitePermission">
+                <option value="view">Can view</option>
+                <option value="edit">Can edit</option>
+              </select>
+              <button type="submit">Invite</button>
+            </form>
+            <p id="collabError" class="error" role="alert"></p>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

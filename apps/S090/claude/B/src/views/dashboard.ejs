@@ -1,0 +1,49 @@
+<%- include('partials/head', { title: 'Your dashboard' }) %>
+
+  <section class="profile">
+    <div class="profile-head">
+      <% if (profile.avatar_url) { %>
+        <img class="avatar" src="<%= profile.avatar_url %>" alt="Your avatar" width="72" height="72" />
+      <% } %>
+      <div>
+        <h1>Hello, <%= profile.display_name || profile.username %></h1>
+        <p class="muted">
+          <%= profile.username %><% if (profile.email) { %> &middot; <%= profile.email %><% } %>
+        </p>
+        <% if (profile.profile_url) { %>
+          <p><a href="<%= profile.profile_url %>" rel="noopener noreferrer">View GitHub profile</a></p>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <section class="repos">
+    <h2>Your recent repositories</h2>
+
+    <% if (apiError) { %>
+      <p class="alert"><%= apiError %></p>
+    <% } else if (!repos || repos.length === 0) { %>
+      <p class="muted">No repositories to show.</p>
+    <% } else { %>
+      <ul class="repo-list">
+        <% repos.forEach(function (repo) { %>
+          <li class="repo">
+            <a href="<%= repo.htmlUrl %>" rel="noopener noreferrer"><%= repo.fullName || repo.name %></a>
+            <span class="badge"><%= repo.private ? 'private' : 'public' %></span>
+            <span class="stars">&#9733; <%= repo.stars %></span>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </section>
+
+  <section class="api-demo">
+    <h2>Your stored profile (JSON)</h2>
+    <p class="muted">
+      This endpoint only ever returns <em>your own</em> record — access control
+      blocks requests for other users' ids.
+    </p>
+    <p><a href="/users/<%= profile.id %>/profile">/users/<%= profile.id %>/profile</a></p>
+  </section>
+
+<%- include('partials/foot') %>

@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+
+<h1>Course catalog</h1>
+
+<% if (!courses.length) { %>
+  <p class="muted">No courses available yet.</p>
+<% } else { %>
+  <ul class="course-list">
+    <% courses.forEach(function (c) { %>
+      <li class="card">
+        <h3><a href="/courses/<%= c.id %>"><%= c.title %></a></h3>
+        <p class="muted">by <%= c.instructor_name %> · <%= c.student_count %> enrolled</p>
+        <% if (c.description) { %><p><%= c.description %></p><% } %>
+        <% if (currentUser.role === 'student') { %>
+          <% if (enrolledIds.has(c.id)) { %>
+            <span class="badge">Enrolled</span>
+          <% } else { %>
+            <form action="/courses/<%= c.id %>/enrol" method="post" class="inline">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="btn btn-small">Enrol</button>
+            </form>
+          <% } %>
+        <% } %>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<h1>Explore</h1>
+<% if (photos.length === 0) { %>
+  <p class="empty">No photos yet. Be the first to <a href="/upload">upload</a>!</p>
+<% } else { %>
+  <div class="grid">
+    <% photos.forEach(function (photo) { %>
+      <%- include('partials/card', { photo: photo }) %>
+    <% }) %>
+  </div>
+<% } %>
+<%- include('partials/footer') %>

@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+<h1>Your feed</h1>
+<% if (!photos.length) { %>
+  <p class="muted">No photos yet. <a href="/users">Follow some people</a> or <a href="/photos/new">upload your own</a>.</p>
+<% } %>
+<div class="grid">
+  <% photos.forEach(function (p) { %>
+    <article class="card photo-card">
+      <a href="/users/<%= p.username %>" class="author"><%= p.username %></a>
+      <a href="/photos/<%= p.id %>">
+        <img src="/uploads/<%= p.filename %>" alt="<%= p.caption || 'Photo by ' + p.username %>" loading="lazy">
+      </a>
+      <% if (p.caption) { %><p class="caption"><%= p.caption %></p><% } %>
+      <div class="meta">
+        <form class="inline" action="/photos/<%= p.id %>/like" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="linkbtn"><%= p.liked_by_me ? '♥' : '♡' %> <%= p.like_count %></button>
+        </form>
+        <a href="/photos/<%= p.id %>">💬 <%= p.comment_count %></a>
+      </div>
+    </article>
+  <% }); %>
+</div>
+<%- include('partials/footer') %>

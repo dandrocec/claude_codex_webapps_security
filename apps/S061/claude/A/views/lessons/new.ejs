@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+<h1>New lesson</h1>
+<p class="muted">for <strong><%= course.title %></strong></p>
+<% if (error) { %><p class="error"><%= error %></p><% } %>
+<form action="/courses/<%= course.id %>/lessons" method="post" class="card form">
+  <label>Lesson title
+    <input type="text" name="title" value="<%= form.title || '' %>" required />
+  </label>
+  <label>Content
+    <textarea name="content" rows="8"><%= form.content || '' %></textarea>
+  </label>
+  <button type="submit" class="btn">Add lesson</button>
+</form>
+<p><a href="/courses/<%= course.id %>">← Back to course</a></p>
+<%- include('../partials/footer') %>

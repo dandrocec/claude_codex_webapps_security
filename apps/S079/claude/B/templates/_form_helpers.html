@@ -1,0 +1,15 @@
+{% macro render_field(field, type=None) %}
+  <div class="field">
+    {{ field.label }}
+    {% if type %}
+      {{ field(type=type, class="input") }}
+    {% else %}
+      {{ field(class="input") }}
+    {% endif %}
+    {% if field.errors %}
+      <ul class="errors">
+        {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endmacro %}

@@ -1,0 +1,26 @@
+{
+  "name": "docman",
+  "version": "1.0.0",
+  "description": "Secure document-management system (folders, sharing, version history) built with Node.js/Express.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "helmet": "^8.0.0",
+    "memorystore": "^1.6.7",
+    "multer": "^1.4.5-lts.1"
+  }
+}

@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<section class="card">
+  <p class="breadcrumb"><a href="/rooms">&larr; All rooms</a></p>
+  <h1><%= room.name %></h1>
+  <% if (error) { %><p class="alert"><%= error %></p><% } %>
+
+  <div class="messages">
+    <% if (messages.length === 0) { %>
+      <p class="muted">No messages yet. Say hello!</p>
+    <% } else { %>
+      <% messages.forEach(function (m) { %>
+        <article class="message">
+          <div class="message-head">
+            <strong><%= m.author %></strong>
+            <time><%= m.created_at %></time>
+          </div>
+          <%# <%= %> performs context-aware HTML escaping, preventing stored XSS %>
+          <p class="message-body"><%= m.body %></p>
+          <% if (currentUser && m.user_id === currentUser.id) { %>
+            <form action="/rooms/<%= room.id %>/messages/<%= m.id %>/delete"
+                  method="post" class="inline">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit" class="link-btn danger">delete</button>
+            </form>
+          <% } %>
+        </article>
+      <% }); %>
+    <% } %>
+  </div>
+
+  <form action="/rooms/<%= room.id %>/messages" method="post" class="row compose">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="text" name="body" placeholder="Type a message…"
+           required minlength="1" maxlength="2000" autofocus autocomplete="off">
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

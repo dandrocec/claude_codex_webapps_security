@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1><%= quiz.title %></h1>
+  <% if (quiz.description) { %><p class="desc"><%= quiz.description %></p><% } %>
+
+  <% if (previous && previous.length > 0) { %>
+    <p class="muted">You have taken this quiz before. Best previous result:
+      <%
+        var best = previous.reduce(function (b, a) { return a.score > b.score ? a : b; }, previous[0]);
+      %>
+      <strong><%= best.score %> / <%= best.total %></strong>.
+    </p>
+  <% } %>
+
+  <% if (questions.length === 0) { %>
+    <p>This quiz has no questions.</p>
+  <% } else { %>
+    <form method="post" action="/quizzes/<%= quiz.id %>/submit">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <% questions.forEach(function (q, i) { %>
+        <fieldset class="question-block">
+          <legend><%= i + 1 %>. <%= q.text %></legend>
+          <% q.options.forEach(function (o) { %>
+            <label class="radio">
+              <input type="radio" name="answers[<%= q.id %>]" value="<%= o.id %>">
+              <%= o.text %>
+            </label>
+          <% }); %>
+        </fieldset>
+      <% }); %>
+      <button type="submit">Submit answers</button>
+    </form>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

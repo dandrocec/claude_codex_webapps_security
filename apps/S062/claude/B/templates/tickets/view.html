@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Ticket #{{ ticket['id'] }} · Helpdesk{% endblock %}
+{% block content %}
+<div class="card">
+  <a class="muted" href="{{ url_for('tickets.index') }}">← Back to tickets</a>
+  <div class="row-between">
+    <h1>#{{ ticket['id'] }} · {{ ticket['subject'] }}</h1>
+    <span class="status status-{{ ticket['status'] }}">{{ ticket['status'] }}</span>
+  </div>
+  <p class="muted">
+    Opened by {{ ticket['customer_name'] }}
+    · Assigned to {{ ticket['agent_name'] or 'nobody yet' }}
+    · {{ ticket['created_at'] }}
+  </p>
+
+  {% if current_user['role'] == 'agent' %}
+  <div class="agent-tools">
+    <form method="post" action="{{ url_for('tickets.change_status', ticket_id=ticket['id']) }}" class="inline">
+      {{ status_form.hidden_tag() }}
+      {{ status_form.status() }} {{ status_form.submit(class="btn small") }}
+    </form>
+    <form method="post" action="{{ url_for('tickets.assign', ticket_id=ticket['id']) }}" class="inline">
+      {{ assign_form.hidden_tag() }}
+      {{ assign_form.agent_id() }} {{ assign_form.submit(class="btn small") }}
+    </form>
+  </div>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h2>Conversation</h2>
+  {% for r in replies %}
+  <div class="reply reply-{{ r['author_role'] }}">
+    <div class="reply-head">
+      <strong>{{ r['author_name'] }}</strong>
+      <span class="badge badge-{{ r['author_role'] }}">{{ r['author_role'] }}</span>
+      <span class="muted">{{ r['created_at'] }}</span>
+    </div>
+    <p class="reply-body">{{ r['body'] }}</p>
+  </div>
+  {% endfor %}
+
+  {% if ticket['status'] == 'closed' %}
+    <p class="muted">This ticket is closed. No further replies can be added.</p>
+  {% else %}
+  <form method="post" action="{{ url_for('tickets.reply', ticket_id=ticket['id']) }}" novalidate>
+    {{ reply_form.hidden_tag() }}
+    <label>{{ reply_form.body.label }}{{ reply_form.body(rows=5) }}</label>
+    {% for e in reply_form.body.errors %}<small class="err">{{ e }}</small>{% endfor %}
+    {{ reply_form.submit(class="btn") }}
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

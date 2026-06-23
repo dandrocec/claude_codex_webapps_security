@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> · Warehouse</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">📦 Warehouse</a>
+    <% if (currentUser) { %>
+      <nav>
+        <a href="/products">Stock</a>
+        <a href="/orders">Orders</a>
+        <a href="/orders/new">Process order</a>
+        <% if (currentUser.role === 'manager') { %>
+          <a href="/products/new">Add product</a>
+        <% } %>
+      </nav>
+      <div class="user">
+        <span><%= currentUser.username %> <em>(<%= currentUser.role %>)</em></span>
+        <form action="/logout" method="post" class="inline">
+          <button type="submit" class="link">Log out</button>
+        </form>
+      </div>
+    <% } %>
+  </header>
+  <main class="container">
+    <% (success || []).forEach(function (msg) { %>
+      <div class="flash flash-success"><%= msg %></div>
+    <% }); %>
+    <% (error || []).forEach(function (msg) { %>
+      <div class="flash flash-error"><%= msg %></div>
+    <% }); %>

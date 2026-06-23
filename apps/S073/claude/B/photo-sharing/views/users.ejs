@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+<h1>People</h1>
+<% if (!users.length) { %><p class="muted">No users yet.</p><% } %>
+<ul class="userlist">
+  <% users.forEach(function (u) { %>
+    <li><a href="/users/<%= u.username %>"><%= u.username %></a></li>
+  <% }); %>
+</ul>
+<%- include('partials/footer') %>

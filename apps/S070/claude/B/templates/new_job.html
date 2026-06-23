@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Post a job{% endblock %}
+{% block content %}
+  <h1>Post a job</h1>
+  <form method="post" class="stacked">
+    {{ form.csrf_token }}
+    <label>{{ form.title.label }} {{ form.title(maxlength=140) }}</label>
+    {% for e in form.title.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.location.label }} {{ form.location(maxlength=140) }}</label>
+    {% for e in form.location.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+    <label>{{ form.description.label }} {{ form.description(rows=10) }}</label>
+    {% for e in form.description.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+    {{ form.submit(class="btn") }}
+  </form>
+{% endblock %}

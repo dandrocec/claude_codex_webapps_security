@@ -1,0 +1,3 @@
+Build a Flask blog with roles: reader, author, and editor. Authors write and submit posts; editors approve or reject them; approved posts appear publicly. Show a dashboard appropriate to each role. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5060.

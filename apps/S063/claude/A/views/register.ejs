@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<div class="card narrow">
+  <h1>Create your account</h1>
+  <% if (error) { %><p class="error"><%= error %></p><% } %>
+  <form action="/register" method="post">
+    <label>
+      Username
+      <input type="text" name="username" value="<%= values.username || '' %>"
+             placeholder="lowercase, 3-20 chars" autofocus required />
+    </label>
+    <label>
+      Display name <span class="muted">(optional)</span>
+      <input type="text" name="display_name" value="<%= values.display_name || '' %>"
+             placeholder="How your name appears" />
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" placeholder="at least 6 characters" required />
+    </label>
+    <button type="submit">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Log in</a>.</p>
+</div>
+
+<%- include('partials/footer') %>

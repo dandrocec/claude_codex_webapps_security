@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · Room Reservations</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Room Reservations</a>
+    <nav>
+      <% if (currentUser) { %>
+        <a href="/">Availability</a>
+        <a href="/bookings">My bookings</a>
+        <span class="user">Signed in as <strong><%= currentUser.username %></strong></span>
+        <form action="/logout" method="post" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link-btn">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+
+  <main class="container">
+    <% messages.success.forEach(function (m) { %>
+      <div class="flash flash-success"><%= m %></div>
+    <% }); %>
+    <% messages.error.forEach(function (m) { %>
+      <div class="flash flash-error"><%= m %></div>
+    <% }); %>

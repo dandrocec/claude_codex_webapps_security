@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Job Runner{% endblock %}</title>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+           margin: 0; background: #0f1117; color: #e6e6e6; }
+    header { display: flex; justify-content: space-between; align-items: center;
+             padding: 12px 24px; background: #171a21; border-bottom: 1px solid #262b36; }
+    header a { color: #6ea8fe; text-decoration: none; font-weight: 600; }
+    main { max-width: 960px; margin: 0 auto; padding: 24px; }
+    h1, h2 { font-weight: 650; }
+    form.inline { display: inline; }
+    button { background: #2563eb; color: #fff; border: 0; border-radius: 6px;
+             padding: 8px 14px; font-size: 14px; cursor: pointer; }
+    button.secondary { background: #374151; }
+    button:hover { filter: brightness(1.1); }
+    textarea, input { width: 100%; padding: 10px; border-radius: 6px;
+             border: 1px solid #374151; background: #0b0d12; color: #e6e6e6;
+             font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    textarea { min-height: 90px; resize: vertical; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #262b36;
+             font-size: 14px; }
+    th { color: #9aa4b2; font-weight: 600; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    pre.logs { background: #0b0d12; border: 1px solid #262b36; border-radius: 8px;
+               padding: 14px; overflow-x: auto; white-space: pre-wrap;
+               word-break: break-word; min-height: 80px; }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 999px;
+             font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    .pending { background: #44403c; color: #fde68a; }
+    .running { background: #1e3a8a; color: #bfdbfe; }
+    .success { background: #14532d; color: #bbf7d0; }
+    .failed  { background: #7f1d1d; color: #fecaca; }
+    .muted { color: #9aa4b2; font-size: 13px; }
+    .error { background: #7f1d1d; color: #fecaca; padding: 10px; border-radius: 6px; }
+    .card { background: #171a21; border: 1px solid #262b36; border-radius: 10px;
+            padding: 20px; margin-bottom: 24px; }
+    a.joblink { color: #6ea8fe; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/">⚙ Job Runner</a>
+    <div>
+      {% if user %}
+        <span class="muted">{{ user.username }}</span>
+        <form class="inline" action="/logout" method="post">
+          <button class="secondary" type="submit">Log out</button>
+        </form>
+      {% endif %}
+    </div>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

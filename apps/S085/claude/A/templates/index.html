@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Find talent. Get found.</h1>
+  <p>A simple recruitment portal where candidates build profiles and recruiters
+     search by skill.</p>
+  <div class="cta">
+    <a class="btn" href="{{ url_for('register') }}">Create an account</a>
+    <a class="btn btn-ghost" href="{{ url_for('login') }}">Log in</a>
+  </div>
+</section>
+
+<section class="cards">
+  <div class="card">
+    <h3>For candidates</h3>
+    <p>Create a profile, list your skills, and upload your resume so recruiters
+       can discover you.</p>
+  </div>
+  <div class="card">
+    <h3>For recruiters</h3>
+    <p>Search the candidate pool by skill, browse profiles, and download
+       resumes.</p>
+  </div>
+</section>
+{% endblock %}

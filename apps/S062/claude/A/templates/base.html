@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Helpdesk{% endblock %}</title>
+  <style>
+    :root { --line: #d9dde3; --muted: #6b7280; --bg: #f6f7f9; --accent: #2563eb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+           color: #1f2330; background: var(--bg); }
+    header { background: #fff; border-bottom: 1px solid var(--line); }
+    .bar { max-width: 880px; margin: 0 auto; padding: 14px 20px;
+           display: flex; align-items: center; gap: 16px; }
+    .bar a.brand { font-weight: 700; color: #1f2330; text-decoration: none; font-size: 18px; }
+    .bar .spacer { flex: 1; }
+    .bar a, .bar span { color: var(--muted); text-decoration: none; font-size: 14px; }
+    .bar a:hover { color: var(--accent); }
+    main { max-width: 880px; margin: 24px auto; padding: 0 20px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 10px;
+            padding: 18px 20px; margin-bottom: 16px; }
+    h1 { font-size: 22px; margin: 0 0 16px; }
+    h2 { font-size: 16px; margin: 0 0 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); font-size: 14px; }
+    th { color: var(--muted); font-weight: 600; }
+    a { color: var(--accent); }
+    input, textarea, select, button {
+      font: inherit; padding: 9px 11px; border: 1px solid var(--line);
+      border-radius: 7px; background: #fff; }
+    textarea { width: 100%; min-height: 90px; resize: vertical; }
+    label { display: block; font-size: 13px; color: var(--muted); margin: 10px 0 4px; }
+    .btn { background: var(--accent); color: #fff; border-color: var(--accent);
+           cursor: pointer; }
+    .btn:hover { filter: brightness(1.05); }
+    .btn.secondary { background: #fff; color: #1f2330; }
+    .flash { background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412;
+             padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 12px;
+             font-weight: 600; text-transform: capitalize; }
+    .s-open { background: #dbeafe; color: #1e40af; }
+    .s-pending { background: #fef3c7; color: #92400e; }
+    .s-resolved { background: #dcfce7; color: #166534; }
+    .s-closed { background: #e5e7eb; color: #374151; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .reply { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; }
+    .reply.agent { background: #f0f7ff; border-color: #cfe0fb; }
+    .reply .who { font-weight: 600; font-size: 14px; }
+    .reply .body { white-space: pre-wrap; margin-top: 6px; font-size: 14px; }
+    .inline { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .row > div { flex: 1; min-width: 220px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <a class="brand" href="{{ url_for('index') }}">🎧 Helpdesk</a>
+      <div class="spacer"></div>
+      {% if g.user %}
+        <span>{{ g.user['username'] }} ({{ g.user['role'] }})</span>
+        <a href="{{ url_for('logout') }}">Log out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </div>
+  </header>
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

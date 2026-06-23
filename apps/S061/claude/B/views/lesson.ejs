@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<p class="muted"><a href="/courses/<%= course.id %>"><%= course.title %></a></p>
+<h1><%= lesson.title %></h1>
+
+<article class="lesson-content"><%= lesson.content %></article>
+
+<% if (isEnrolled) { %>
+  <div class="actions">
+    <% if (completed) { %>
+      <span class="badge badge-done">✓ Completed</span>
+      <form action="/lessons/<%= lesson.id %>/incomplete" method="post" class="inline">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="btn btn-secondary btn-small">Mark incomplete</button>
+      </form>
+    <% } else { %>
+      <form action="/lessons/<%= lesson.id %>/complete" method="post" class="inline">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="btn">Mark complete</button>
+      </form>
+    <% } %>
+  </div>
+<% } %>
+
+<p><a href="/courses/<%= course.id %>">← Back to course</a></p>
+
+<%- include('partials/footer') %>

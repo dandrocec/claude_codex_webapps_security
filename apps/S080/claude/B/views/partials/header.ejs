@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= typeof title !== 'undefined' ? title : 'Warehouse' %> · Warehouse</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">📦 Warehouse</a>
+    <% if (currentUser) { %>
+      <a href="/products">Stock</a>
+      <a href="/orders">Orders</a>
+      <a href="/orders/new">New order</a>
+      <% if (currentUser.role === 'manager') { %>
+        <a href="/products/new">Add product</a>
+      <% } %>
+      <span class="spacer"></span>
+      <span class="role"><%= currentUser.username %> (<%= currentUser.role %>)</span>
+      <form method="POST" action="/logout" style="margin:0;">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button class="btn secondary" style="margin:0;padding:0.35rem 0.75rem;" type="submit">Log out</button>
+      </form>
+    <% } %>
+  </header>
+  <main>

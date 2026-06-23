@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Search candidates · Recruitment Portal{% endblock %}
+{% block content %}
+<h1>Search candidates</h1>
+
+<form method="get" class="search">
+  <input type="text" name="skill" value="{{ skill_query }}"
+         placeholder="Search by skill, e.g. python">
+  <button class="btn" type="submit">Search</button>
+  {% if skill_query %}<a class="btn btn-ghost" href="{{ url_for('candidates') }}">Clear</a>{% endif %}
+</form>
+
+{% if skill_query %}
+  <p class="muted">{{ candidates|length }} result(s) for skill “{{ skill_query }}”.</p>
+{% else %}
+  <p class="muted">Showing all candidates ({{ candidates|length }}).</p>
+{% endif %}
+
+{% if candidates %}
+  <div class="cards">
+    {% for c in candidates %}
+      <div class="card">
+        <h3><a href="{{ url_for('view_profile', user_id=c.user_id) }}">{{ c.full_name }}</a></h3>
+        {% if c.headline %}<p class="muted">{{ c.headline }}</p>{% endif %}
+        {% if c.location %}<p>📍 {{ c.location }}</p>{% endif %}
+        {% if c.skills %}
+          <ul class="skill-tags">
+            {% for s in c.skills %}<li>{{ s }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+        <p>
+          {% if c.has_resume %}
+            <a href="{{ url_for('download_resume', user_id=c.user_id) }}">Download resume</a>
+          {% else %}
+            <span class="muted">no resume</span>
+          {% endif %}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No candidates found.</p>
+{% endif %}
+{% endblock %}

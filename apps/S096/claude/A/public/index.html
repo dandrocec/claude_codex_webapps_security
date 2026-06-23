@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Gateway · Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f1419; --panel: #1a212b; --panel2: #232c38; --line: #2e3a48;
+      --text: #e6edf3; --muted: #8b98a5; --accent: #4f9cf9; --good: #3fb950;
+      --warn: #d29922; --bad: #f85149;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+           background: var(--bg); color: var(--text); }
+    header { padding: 20px 28px; border-bottom: 1px solid var(--line); display: flex;
+             align-items: baseline; gap: 14px; }
+    header h1 { font-size: 18px; margin: 0; }
+    header .sub { color: var(--muted); font-size: 13px; }
+    main { padding: 24px 28px; max-width: 1100px; margin: 0 auto; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+            padding: 18px 20px; margin-bottom: 22px; }
+    .card h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .05em;
+               color: var(--muted); margin: 0 0 14px; }
+    label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    input, button { font: inherit; }
+    input { background: var(--panel2); border: 1px solid var(--line); color: var(--text);
+            border-radius: 6px; padding: 8px 10px; width: 100%; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+    .row > div { flex: 1; min-width: 140px; }
+    button { background: var(--accent); color: #08121f; border: none; border-radius: 6px;
+             padding: 9px 16px; font-weight: 600; cursor: pointer; }
+    button.secondary { background: var(--panel2); color: var(--text); border: 1px solid var(--line); }
+    button.danger { background: transparent; color: var(--bad); border: 1px solid var(--bad);
+                    padding: 4px 10px; font-weight: 500; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; }
+    code { background: var(--panel2); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+    .pill { display: inline-block; padding: 1px 8px; border-radius: 20px; font-size: 12px; }
+    .pill.ok { background: rgba(63,185,80,.15); color: var(--good); }
+    .pill.warn { background: rgba(210,153,34,.15); color: var(--warn); }
+    .pill.bad { background: rgba(248,81,73,.15); color: var(--bad); }
+    .muted { color: var(--muted); }
+    .toast { background: rgba(79,156,249,.12); border: 1px solid var(--accent);
+             border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; word-break: break-all; }
+    .stat { display: flex; gap: 26px; flex-wrap: wrap; }
+    .stat .n { font-size: 22px; font-weight: 700; }
+    .stat .l { font-size: 12px; color: var(--muted); }
+    .hidden { display: none; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>API Gateway</h1>
+    <span class="sub">developer console &amp; usage dashboard</span>
+  </header>
+
+  <main>
+    <div id="notice"></div>
+
+    <div class="card">
+      <h2>1 · Register a developer</h2>
+      <div class="row">
+        <div><label>Name</label><input id="reg-name" placeholder="Ada Lovelace" /></div>
+        <div><label>Email</label><input id="reg-email" placeholder="ada@example.com" /></div>
+        <div style="flex:0"><button onclick="register()">Register</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2 · Load an existing developer</h2>
+      <div class="row">
+        <div><label>Developer ID</label><input id="dev-id" placeholder="1" /></div>
+        <div style="flex:0"><button class="secondary" onclick="loadDeveloper()">Load</button></div>
+      </div>
+    </div>
+
+    <div id="panel" class="hidden">
+      <div class="card">
+        <h2>Developer</h2>
+        <div id="dev-info"></div>
+        <div class="row" style="margin-top:14px">
+          <div><label>New key label</label><input id="key-label" placeholder="production" /></div>
+          <div><label>Rate limit (req/min)</label><input id="key-limit" placeholder="60" /></div>
+          <div style="flex:0"><button onclick="createKey()">Generate key</button></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>API keys &amp; usage</h2>
+        <table id="keys-table">
+          <thead>
+            <tr><th>ID</th><th>Label</th><th>Key</th><th>Limit</th><th>This min</th>
+                <th>Total</th><th>Success</th><th>Throttled</th><th>Avg ms</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Recent requests <span class="muted" style="text-transform:none">(auto-refreshes every 4s)</span></h2>
+        <table id="logs-table">
+          <thead>
+            <tr><th>Time</th><th>Key</th><th>Method</th><th>Path</th><th>Status</th><th>ms</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let currentDev = null;
+    let timer = null;
+
+    function notify(html, persist) {
+      document.getElementById('notice').innerHTML = `<div class="toast">${html}</div>`;
+      if (!persist) setTimeout(() => (document.getElementById('notice').innerHTML = ''), 6000);
+    }
+
+    async function api(url, opts) {
+      const res = await fetch(url, opts);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || res.statusText);
+      return data;
+    }
+
+    async function register() {
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      try {
+        const dev = await api('/register', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ name, email }),
+        });
+        notify(`Registered <b>${dev.name}</b> with developer ID <b>${dev.id}</b>.`);
+        document.getElementById('dev-id').value = dev.id;
+        loadDeveloper();
+      } catch (e) { notify('Error: ' + e.message); }
+    }
+
+    async function loadDeveloper() {
+      const id = document.getElementById('dev-id').value.trim();
+      if (!id) return;
+      try {
+        currentDev = id;
+        await refresh();
+        document.getElementById('panel').classList.remove('hidden');
+        if (timer) clearInterval(timer);
+        timer = setInterval(refresh, 4000);
+      } catch (e) { notify('Error: ' + e.message); }
+    }
+
+    async function createKey() {
+      const label = document.getElementById('key-label').value.trim() || 'default';
+      const rate_limit = Number(document.getElementById('key-limit').value) || undefined;
+      try {
+        const r = await api(`/developers/${currentDev}/keys`, {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ label, rate_limit }),
+        });
+        notify(`New API key (copy it now — shown once):<br><code>${r.api_key}</code>`, true);
+        refresh();
+      } catch (e) { notify('Error: ' + e.message); }
+    }
+
+    async function revokeKey(keyId) {
+      if (!confirm('Revoke this key? Requests using it will be rejected.')) return;
+      try {
+        await api(`/developers/${currentDev}/keys/${keyId}`, { method: 'DELETE' });
+        refresh();
+      } catch (e) { notify('Error: ' + e.message); }
+    }
+
+    function statusPill(code, throttled) {
+      if (throttled) return '<span class="pill warn">429 throttled</span>';
+      const cls = code >= 200 && code < 400 ? 'ok' : 'bad';
+      return `<span class="pill ${cls}">${code}</span>`;
+    }
+
+    async function refresh() {
+      const d = await api(`/developers/${currentDev}/usage`);
+      document.getElementById('dev-info').innerHTML =
+        `<div class="stat">
+           <div><div class="n">#${d.developer.id}</div><div class="l">${d.developer.name}</div></div>
+           <div><div class="n" style="font-size:15px">${d.developer.email}</div><div class="l">registered ${d.developer.created_at}</div></div>
+         </div>`;
+
+      const kbody = document.querySelector('#keys-table tbody');
+      kbody.innerHTML = d.keys.map((k) => `
+        <tr style="opacity:${k.revoked ? .5 : 1}">
+          <td>${k.id}</td>
+          <td>${k.label}</td>
+          <td><code>${k.key_prefix}…</code></td>
+          <td>${k.rate_limit}/min</td>
+          <td>${k.current_minute} <span class="muted">(${k.remaining_this_minute} left)</span></td>
+          <td>${k.total_requests}</td>
+          <td>${k.success}</td>
+          <td>${k.throttled}</td>
+          <td>${k.avg_ms}</td>
+          <td>${k.revoked ? '<span class="pill bad">revoked</span>' : '<span class="pill ok">active</span>'}</td>
+          <td>${k.revoked ? '' : `<button class="danger" onclick="revokeKey(${k.id})">Revoke</button>`}</td>
+        </tr>`).join('') || '<tr><td colspan="11" class="muted">No keys yet — generate one above.</td></tr>';
+
+      const lbody = document.querySelector('#logs-table tbody');
+      lbody.innerHTML = d.recent_requests.map((l) => `
+        <tr>
+          <td class="muted">${l.ts}</td>
+          <td><code>${l.key_prefix}…</code></td>
+          <td>${l.method}</td>
+          <td>${l.path}</td>
+          <td>${statusPill(l.status_code, l.rate_limited)}</td>
+          <td>${l.duration_ms}</td>
+        </tr>`).join('') || '<tr><td colspan="6" class="muted">No requests yet. Send one through /gateway/*.</td></tr>';
+    }
+  </script>
+</body>
+</html>

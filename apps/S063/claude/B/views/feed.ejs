@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+<section class="card">
+  <h1>What's happening?</h1>
+  <form method="post" action="/posts" class="composer">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <textarea name="content" rows="3" maxlength="280" required
+              placeholder="Share an update (max 280 chars)"></textarea>
+    <button type="submit" class="btn">Post</button>
+  </form>
+</section>
+
+<section class="feed">
+  <h2>Your feed</h2>
+  <% if (!posts.length) { %>
+    <p class="muted">Your feed is empty. Post something, or
+       <a href="/">find people to follow</a> by visiting their profile.</p>
+  <% } else { %>
+    <% posts.forEach(function(post){ %>
+      <%- include('partials/post', { post: post }) %>
+    <% }) %>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

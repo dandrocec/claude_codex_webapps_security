@@ -1,0 +1,57 @@
+<%- include('partials/header') %>
+<section class="card">
+  <h1>Dashboard</h1>
+  <p class="muted">The 50 most recent events and deliveries for your account.</p>
+</section>
+
+<section class="card">
+  <h2>Recent deliveries</h2>
+  <% if (deliveries.length === 0) { %>
+    <p class="muted">No deliveries yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Action</th><th>Target</th><th>Status</th><th>HTTP</th><th>Attempts</th><th>Detail</th><th>Updated</th><th></th></tr></thead>
+      <tbody>
+        <% deliveries.forEach(function (d) { %>
+          <tr>
+            <td><%= d.action_name %></td>
+            <td class="break"><%= d.request_url %></td>
+            <td><span class="badge badge-<%= d.status %>"><%= d.status %></span></td>
+            <td><%= d.response_status === null ? '—' : d.response_status %></td>
+            <td><%= d.attempts %></td>
+            <td class="muted break"><%= d.error ? d.error : '' %></td>
+            <td class="muted nowrap"><%= d.updated_at %></td>
+            <td class="right">
+              <form method="post" action="/deliveries/<%= d.id %>/retry" class="inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit">Retry</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<section class="card">
+  <h2>Recent events</h2>
+  <% if (events.length === 0) { %>
+    <p class="muted">No events received yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>ID</th><th>Webhook</th><th>Source IP</th><th>Received</th></tr></thead>
+      <tbody>
+        <% events.forEach(function (e) { %>
+          <tr>
+            <td><%= e.id %></td>
+            <td><%= e.webhook_name %></td>
+            <td class="muted"><%= e.source_ip %></td>
+            <td class="muted nowrap"><%= e.created_at %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

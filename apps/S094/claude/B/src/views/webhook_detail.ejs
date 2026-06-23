@@ -1,0 +1,64 @@
+<%- include('partials/header') %>
+<section class="card">
+  <p><a href="/webhooks">&larr; All webhooks</a></p>
+  <h1><%= webhook.name %></h1>
+  <p class="muted">Send events here (POST):</p>
+  <pre class="code"><%= inboundUrl %></pre>
+  <p class="hint">Keep this URL secret — anyone who knows it can submit events.</p>
+</section>
+
+<section class="card">
+  <h2>Outbound actions</h2>
+  <p class="muted">When an event arrives, the hub forwards the payload to each enabled target URL.</p>
+  <% if (error) { %><p class="alert error"><%= error %></p><% } %>
+  <form method="post" action="/webhooks/<%= webhook.id %>/actions" class="stack">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>Action name
+      <input type="text" name="name" maxlength="80" required />
+    </label>
+    <label>Target URL
+      <input type="url" name="target_url" placeholder="https://example.com/endpoint" required />
+      <small class="hint">http/https only. Internal/private addresses are blocked.</small>
+    </label>
+    <label>Method
+      <select name="method">
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="PATCH">PATCH</option>
+        <option value="GET">GET</option>
+      </select>
+    </label>
+    <button type="submit">Add action</button>
+  </form>
+</section>
+
+<section class="card">
+  <% if (actions.length === 0) { %>
+    <p class="muted">No actions yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Name</th><th>Method</th><th>Target</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        <% actions.forEach(function (a) { %>
+          <tr>
+            <td><%= a.name %></td>
+            <td><%= a.method %></td>
+            <td class="break"><%= a.target_url %></td>
+            <td><%= a.enabled ? 'enabled' : 'disabled' %></td>
+            <td class="right nowrap">
+              <form method="post" action="/actions/<%= a.id %>/toggle" class="inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit"><%= a.enabled ? 'Disable' : 'Enable' %></button>
+              </form>
+              <form method="post" action="/actions/<%= a.id %>/delete" class="inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+  <div class="page-head">
+    <h1>Dashboard</h1>
+    <p class="muted">
+      <% if (currentUser.role === 'manager') { %>
+        Viewing the whole team's pipeline.
+      <% } else { %>
+        Viewing your contacts and deals.
+      <% } %>
+    </p>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <span class="stat-label">Open deals</span>
+      <span class="stat-value"><%= counts.open %></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Open pipeline value</span>
+      <span class="stat-value"><%= formatMoney(pipelineValue) %></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Won deals</span>
+      <span class="stat-value"><%= counts.won %></span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Won value</span>
+      <span class="stat-value"><%= formatMoney(wonValue) %></span>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <a class="btn" href="/contacts/new">+ New contact</a>
+    <a class="btn" href="/deals/new">+ New deal</a>
+    <a class="btn ghost" href="/deals">Open pipeline board</a>
+  </div>
+<%- include('partials/footer') %>

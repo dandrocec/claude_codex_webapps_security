@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Open positions{% endblock %}
+{% block content %}
+  <h1>Open positions</h1>
+  {% if jobs %}
+    <ul class="job-list">
+      {% for job in jobs %}
+        <li class="job-card">
+          <a class="job-title" href="{{ url_for('job_detail', job_id=job.id) }}">{{ job.title }}</a>
+          <div class="job-meta">{{ job.location }} &middot; posted by {{ job.employer }} &middot; {{ job.created_at }}</div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No jobs have been posted yet.</p>
+  {% endif %}
+{% endblock %}

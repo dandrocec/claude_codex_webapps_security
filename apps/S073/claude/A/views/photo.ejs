@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+<div class="single">
+  <article class="card">
+    <div class="card-head">
+      <a class="author" href="/u/<%= photo.username %>">@<%= photo.username %></a>
+      <span class="time"><%= photo.created_at %></span>
+    </div>
+    <img class="photo" src="/uploads/<%= photo.filename %>" alt="<%= photo.caption || 'photo' %>">
+    <div class="card-body">
+      <% if (photo.caption) { %><p class="caption"><%= photo.caption %></p><% } %>
+      <div class="actions">
+        <form action="/photos/<%= photo.id %>/like" method="post" class="inline">
+          <button type="submit" class="like <%= photo.likedByMe ? 'on' : '' %>">
+            <%= photo.likedByMe ? '♥' : '♡' %> <%= photo.likes %>
+          </button>
+        </form>
+        <span class="comment-link">💬 <%= photo.comments %></span>
+        <% if (currentUser && currentUser.id === photo.user_id) { %>
+          <form action="/photos/<%= photo.id %>/delete" method="post" class="inline"
+                onsubmit="return confirm('Delete this photo?')">
+            <button type="submit" class="link danger">Delete</button>
+          </form>
+        <% } %>
+      </div>
+    </div>
+  </article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <form action="/photos/<%= photo.id %>/comments" method="post" class="comment-form">
+      <input type="text" name="body" maxlength="1000" placeholder="Add a comment..." required>
+      <button type="submit">Post</button>
+    </form>
+    <% if (comments.length === 0) { %>
+      <p class="empty">No comments yet.</p>
+    <% } else { %>
+      <ul class="comment-list">
+        <% comments.forEach(function (c) { %>
+          <li>
+            <a class="author" href="/u/<%= c.username %>">@<%= c.username %></a>
+            <span class="body"><%= c.body %></span>
+            <span class="time"><%= c.created_at %></span>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </section>
+</div>
+<%- include('partials/footer') %>

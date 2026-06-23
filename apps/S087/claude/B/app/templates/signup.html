@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<h1>Create your organisation</h1>
+<p class="muted">You'll become the organisation admin. A login slug is derived from the name.</p>
+<form method="post" action="/signup" class="card">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Organisation name
+    <input type="text" name="org_name" value="{{ org_name|default('') }}" required
+           minlength="2" maxlength="120" autocomplete="organization">
+  </label>
+  <label>Your email
+    <input type="email" name="email" value="{{ email|default('') }}" required
+           maxlength="255" autocomplete="email">
+  </label>
+  <label>Password
+    <input type="password" name="password" required minlength="10" maxlength="64"
+           autocomplete="new-password">
+  </label>
+  <button type="submit">Create organisation</button>
+</form>
+<p>Already have an account? <a href="/login">Log in</a>.</p>
+{% endblock %}

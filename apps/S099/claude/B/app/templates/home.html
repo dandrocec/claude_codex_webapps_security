@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Identity Provider</h1>
+<p>A minimal OpenID Connect / OAuth 2.0 identity provider.</p>
+{% if current_user %}
+  <p>You are signed in as <strong>{{ current_user.username }}</strong>.</p>
+  <p><a href="/clients">Manage your client applications &rarr;</a></p>
+{% else %}
+  <p><a href="/login">Log in</a> or <a href="/register">create an account</a> to get started.</p>
+{% endif %}
+<h2>Endpoints</h2>
+<ul class="endpoints">
+  <li><code>GET /oauth/authorize</code> — start the authorization code flow</li>
+  <li><code>POST /oauth/token</code> — exchange a code for signed tokens</li>
+  <li><code>GET /userinfo</code> — read claims for a bearer access token</li>
+  <li><code>GET /.well-known/openid-configuration</code> — discovery document</li>
+  <li><code>GET /.well-known/jwks.json</code> — public keys for token verification</li>
+</ul>
+{% endblock %}

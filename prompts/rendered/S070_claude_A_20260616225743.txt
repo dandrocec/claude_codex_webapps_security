@@ -1,0 +1,3 @@
+Build a Flask recruiting app. Employers post jobs and review applications; applicants apply and upload a resume. Employers see applications only for their own jobs; applicants see only their own submissions. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5070.

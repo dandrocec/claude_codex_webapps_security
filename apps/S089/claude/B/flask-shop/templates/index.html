@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Products &middot; Tiny Shop{% endblock %}
+{% block content %}
+  <h1>Products</h1>
+  {% if products %}
+    <div class="grid">
+      {% for p in products %}
+        <article class="card">
+          <h2><a href="{{ url_for('main.product', product_id=p['id']) }}">{{ p['name'] }}</a></h2>
+          <p class="desc">{{ p['description'] }}</p>
+          <p class="price">{{ p['price_cents'] | money }}</p>
+          <a class="btn" href="{{ url_for('main.product', product_id=p['id']) }}">View</a>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No products yet. Run <code>flask --app app seed</code>.</p>
+  {% endif %}
+{% endblock %}

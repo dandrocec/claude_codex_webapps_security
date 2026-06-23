@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Reader dashboard · Flask Blog{% endblock %}
+{% block content %}
+  <h1>Reader dashboard</h1>
+  <p class="muted">Welcome, {{ current_user.username }}. Here are the latest published posts.</p>
+  {% if not posts %}
+    <div class="card muted">Nothing published yet.</div>
+  {% endif %}
+  {% for post in posts %}
+    <article class="card">
+      <h2 style="margin-top:0">
+        <a href="{{ url_for('view_post', post_id=post.id) }}">{{ post.title }}</a>
+      </h2>
+      <p class="muted">by {{ post.author.username }} ·
+         {{ post.updated_at.strftime('%b %d, %Y') }}</p>
+    </article>
+  {% endfor %}
+{% endblock %}

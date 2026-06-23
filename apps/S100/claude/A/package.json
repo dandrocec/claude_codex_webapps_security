@@ -1,0 +1,21 @@
+{
+  "name": "devops-dashboard",
+  "version": "1.0.0",
+  "description": "A DevOps dashboard: register services, run deployments, stream/store logs, manage per-service secrets.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node scripts/seed.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "connect-sqlite3": "^0.9.13",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  }
+}

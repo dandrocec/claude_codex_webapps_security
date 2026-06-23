@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard — Nimbus Store{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>Dashboard</h1>
+    <a class="btn" href="{{ url_for('admin_product_new') }}">+ New product</a>
+  </div>
+
+  <div class="stat-grid">
+    <div class="card stat"><div class="n">{{ stats.revenue_cents | money }}</div><div class="l">Revenue (excl. cancelled)</div></div>
+    <div class="card stat"><div class="n">{{ stats.orders }}</div><div class="l">Orders</div></div>
+    <div class="card stat"><div class="n">{{ stats.customers }}</div><div class="l">Customers</div></div>
+    <div class="card stat"><div class="n">{{ stats.active_products }}/{{ stats.products }}</div><div class="l">Active products</div></div>
+    <div class="card stat"><div class="n">{{ stats.low_stock }}</div><div class="l">Low stock (&le;5)</div></div>
+  </div>
+
+  <div class="section" style="margin-top:0">
+    <h2>Recent orders</h2>
+    {% if recent_orders %}
+      <div class="card table-card">
+        <table>
+          <thead><tr><th>Order</th><th>Customer</th><th>Date</th><th>Status</th><th class="right">Total</th><th></th></tr></thead>
+          <tbody>
+            {% for o in recent_orders %}
+              <tr>
+                <td>#{{ o.id }}</td>
+                <td>{{ o.user.name }}</td>
+                <td>{{ o.created_at.strftime('%b %d, %Y') }}</td>
+                <td><span class="pill pill-{{ o.status }}">{{ o.status }}</span></td>
+                <td class="right">{{ o.total_cents | money }}</td>
+                <td class="right"><a class="btn-sm btn-ghost" href="{{ url_for('admin_order_detail', order_id=o.id) }}">View</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="muted">No orders yet.</p>
+    {% endif %}
+  </div>
+
+  <div class="section">
+    <h2>Low stock alerts</h2>
+    {% if low_stock %}
+      <div class="card table-card">
+        <table>
+          <thead><tr><th>Product</th><th>Category</th><th class="right">Stock</th><th></th></tr></thead>
+          <tbody>
+            {% for p in low_stock %}
+              <tr>
+                <td>{{ p.name }}</td>
+                <td>{{ p.category }}</td>
+                <td class="right">{% if p.stock == 0 %}<span class="oos">0</span>{% else %}{{ p.stock }}{% endif %}</td>
+                <td class="right"><a class="btn-sm btn-ghost" href="{{ url_for('admin_inventory') }}">Restock</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="muted">All products are well stocked.</p>
+    {% endif %}
+  </div>
+{% endblock %}

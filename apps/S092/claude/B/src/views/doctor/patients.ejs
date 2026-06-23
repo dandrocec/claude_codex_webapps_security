@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>My patients</h1>
+  <% if (!patients.length) { %>
+    <p>No patients are assigned to you.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Name</th><th>Email</th><th></th></tr></thead>
+      <tbody>
+        <% patients.forEach(function (p) { %>
+          <tr>
+            <td><%= p.full_name %></td>
+            <td><%= p.email %></td>
+            <td><a href="/doctor/patients/<%= p.id %>/records">View records</a></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

@@ -1,0 +1,77 @@
+<%- include('partials/header') %>
+
+<div class="page-head">
+  <div>
+    <h1><%= course.title %></h1>
+    <p class="muted">by <%= course.instructor_name %></p>
+  </div>
+  <% if (isOwner) { %>
+    <div class="actions">
+      <a class="btn btn-secondary btn-small" href="/courses/<%= course.id %>/edit">Edit</a>
+      <form action="/courses/<%= course.id %>/delete" method="post" class="inline"
+            data-confirm="Delete this course and all its lessons?">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="btn btn-danger btn-small">Delete</button>
+      </form>
+    </div>
+  <% } %>
+</div>
+
+<% if (course.description) { %>
+  <p class="course-desc"><%= course.description %></p>
+<% } %>
+
+<% if (!canViewContent) { %>
+  <div class="card locked">
+    <p>🔒 This course's lessons are visible to enrolled students only.</p>
+    <% if (currentUser.role === 'student') { %>
+      <form action="/courses/<%= course.id %>/enrol" method="post" class="inline">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="btn">Enrol to access</button>
+      </form>
+    <% } %>
+  </div>
+<% } else { %>
+  <h2>Lessons</h2>
+  <% if (!lessons.length) { %>
+    <p class="muted">No lessons yet.</p>
+  <% } else { %>
+    <ol class="lesson-list">
+      <% lessons.forEach(function (l) { %>
+        <li class="card lesson-row">
+          <a href="/courses/<%= course.id %>/lessons/<%= l.id %>"><%= l.title %></a>
+          <span class="lesson-meta">
+            <% if (isEnrolled && completedIds.has(l.id)) { %>
+              <span class="badge badge-done">✓ Completed</span>
+            <% } %>
+            <% if (isOwner) { %>
+              <form action="/lessons/<%= l.id %>/delete" method="post" class="inline"
+                    data-confirm="Delete this lesson?">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="link-btn danger">Delete</button>
+              </form>
+            <% } %>
+          </span>
+        </li>
+      <% }); %>
+    </ol>
+  <% } %>
+
+  <% if (isOwner) { %>
+    <h2>Add a lesson</h2>
+    <form action="/courses/<%= course.id %>/lessons" method="post" class="card form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <label>Title
+        <input type="text" name="title" maxlength="150" required />
+      </label>
+      <label>Content
+        <textarea name="content" rows="6" maxlength="20000"></textarea>
+      </label>
+      <button type="submit" class="btn">Add lesson</button>
+    </form>
+  <% } %>
+<% } %>
+
+<p><a href="/dashboard">← Back to dashboard</a></p>
+
+<%- include('partials/footer') %>

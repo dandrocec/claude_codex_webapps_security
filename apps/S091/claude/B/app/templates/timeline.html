@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% from "_post.html" import render_post %}
+{% block title %}Your timeline · Microblog{% endblock %}
+{% block content %}
+<section class="compose">
+  <h1>Hello, @{{ current_user.username }}</h1>
+  <form method="post" action="/compose">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <textarea name="content" maxlength="280" rows="3" required
+              placeholder="What's happening? Links get previews."></textarea>
+    <div class="compose-actions">
+      <span class="hint">Max 280 characters</span>
+      <button type="submit">Post</button>
+    </div>
+  </form>
+</section>
+
+<section class="feed">
+  <h2>Timeline</h2>
+  {% if posts %}
+    {% for post in posts %}
+      {{ render_post(post, current_user, csrf_token) }}
+    {% endfor %}
+  {% else %}
+    <p class="empty">Your timeline is empty. Post something or follow people from their profile.</p>
+  {% endif %}
+</section>
+{% endblock %}

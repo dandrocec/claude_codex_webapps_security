@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %> · DevOps Dashboard</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">⚙ DevOps Dashboard</a>
+    <nav>
+      <% if (currentUser) { %>
+        <span class="user">
+          <%= currentUser.username %>
+          <span class="badge badge-<%= currentUser.role %>"><%= currentUser.role %></span>
+        </span>
+        <form method="POST" action="/logout" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="btn btn-link">Sign out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Sign in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">
+    <% (flash.success || []).forEach(function (m) { %>
+      <div class="alert alert-success"><%= m %></div>
+    <% }); %>
+    <% (flash.error || []).forEach(function (m) { %>
+      <div class="alert alert-error"><%= m %></div>
+    <% }); %>
+    <% if (typeof errors !== 'undefined' && errors && errors.length) { %>
+      <div class="alert alert-error">
+        <ul>
+          <% errors.forEach(function (e) { %><li><%= e %></li><% }); %>
+        </ul>
+      </div>
+    <% } %>

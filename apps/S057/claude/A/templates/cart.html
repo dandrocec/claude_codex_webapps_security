@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Cart &middot; Simple Shop{% endblock %}
+
+{% block content %}
+  <h1>Your Cart</h1>
+
+  {% if items %}
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Line total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+          <tr>
+            <td>
+              <a href="{{ url_for('product', product_id=item['id']) }}">
+                {{ item['name'] }}
+              </a>
+            </td>
+            <td>${{ '%.2f'|format(item['price']) }}</td>
+            <td>{{ item['quantity'] }}</td>
+            <td>${{ '%.2f'|format(item['line_total']) }}</td>
+            <td>
+              <form method="post"
+                    action="{{ url_for('remove_from_cart', product_id=item['id']) }}">
+                <button type="submit" class="link-button">Remove</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="total-label">Total</td>
+          <td class="total-value">${{ '%.2f'|format(total) }}</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  {% else %}
+    <p>Your cart is empty. <a href="{{ url_for('catalogue') }}">Browse the catalogue</a>.</p>
+  {% endif %}
+{% endblock %}

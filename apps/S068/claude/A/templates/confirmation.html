@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Booking confirmed · Scheduler{% endblock %}
+{% block content %}
+  <h1>✅ Booking confirmed</h1>
+  <div class="card" style="max-width:520px;">
+    <p>Your appointment has been booked. Here are the details:</p>
+    <table>
+      <tr><th>Provider</th><td>{{ slot['provider_name'] }}</td></tr>
+      <tr><th>Start</th><td>{{ slot['start_time'] | pretty_dt }}</td></tr>
+      <tr><th>End</th><td>{{ slot['end_time'] | pretty_dt }}</td></tr>
+      <tr><th>Confirmation #</th><td>APPT-{{ '%05d' | format(slot['id']) }}</td></tr>
+    </table>
+    <p style="margin-top:1rem;">
+      <a class="btn" href="{{ url_for('dashboard') }}">View my appointments</a>
+    </p>
+  </div>
+{% endblock %}

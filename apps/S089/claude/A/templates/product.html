@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} · Acme Shop{% endblock %}
+{% block content %}
+<a class="back" href="{{ url_for('index') }}">&larr; Back to products</a>
+<div class="detail">
+  <img src="{{ product.image_url }}" alt="{{ product.name }}">
+  <div class="detail-body">
+    <h1>{{ product.name }}</h1>
+    <p class="price big">{{ product.price_display }}</p>
+    <p class="stock {{ 'out' if product.stock == 0 }}">{{ product.stock }} in stock</p>
+    <p>{{ product.description }}</p>
+    <form method="post" action="{{ url_for('cart_add', product_id=product.id) }}" class="add-form">
+      <label>Qty
+        <input type="number" name="quantity" value="1" min="1" max="{{ product.stock or 1 }}">
+      </label>
+      <button type="submit" {{ 'disabled' if product.stock == 0 }}>Add to cart</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

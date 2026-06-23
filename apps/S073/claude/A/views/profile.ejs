@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<section class="profile-head">
+  <h1>@<%= profile.username %></h1>
+  <% if (profile.bio) { %><p class="bio"><%= profile.bio %></p><% } %>
+  <div class="stats">
+    <span><strong><%= stats.photos %></strong> photos</span>
+    <span><strong><%= stats.followers %></strong> followers</span>
+    <span><strong><%= stats.following %></strong> following</span>
+  </div>
+  <% if (!isMe) { %>
+    <% if (isFollowing) { %>
+      <form action="/u/<%= profile.username %>/unfollow" method="post" class="inline">
+        <button type="submit" class="secondary">Unfollow</button>
+      </form>
+    <% } else { %>
+      <form action="/u/<%= profile.username %>/follow" method="post" class="inline">
+        <button type="submit">Follow</button>
+      </form>
+    <% } %>
+  <% } %>
+</section>
+
+<% if (photos.length === 0) { %>
+  <p class="empty">No photos yet.</p>
+<% } else { %>
+  <div class="grid">
+    <% photos.forEach(function (photo) { %>
+      <%- include('partials/card', { photo: photo }) %>
+    <% }) %>
+  </div>
+<% } %>
+<%- include('partials/footer') %>

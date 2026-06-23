@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_formfield.html" import field %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+<div class="card narrow">
+  <h2>Sign in</h2>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ field(form.email, autocomplete="email") }}
+    {{ field(form.password, autocomplete="current-password") }}
+    <button class="btn" type="submit">Sign in</button>
+  </form>
+  <p class="muted">No account yet? <a href="{{ url_for('auth.register') }}">Register</a>.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{
+  "name": "integration-hub",
+  "version": "1.0.0",
+  "description": "A Node.js/Express integration hub: inbound webhooks, outbound actions, deliveries with retry.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "helmet": "^8.0.0",
+    "ipaddr.js": "^2.2.0"
+  }
+}

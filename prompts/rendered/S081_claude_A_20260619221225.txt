@@ -1,0 +1,3 @@
+Build a Flask voting platform. An admin creates elections with candidates and an open/close time; registered users cast exactly one vote per election; results are shown after the election closes. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5081.

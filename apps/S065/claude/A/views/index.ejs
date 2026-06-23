@@ -1,0 +1,31 @@
+<%- include('partials/header', { title: 'All Questions' }) %>
+
+<div class="page-head">
+  <h1>All Questions</h1>
+  <% if (currentUser) { %>
+    <a class="btn" href="/questions/new">Ask Question</a>
+  <% } %>
+</div>
+
+<% if (questions.length === 0) { %>
+  <p class="muted">No questions yet. Be the first to ask one!</p>
+<% } %>
+
+<ul class="question-list">
+  <% questions.forEach(function (qn) { %>
+    <li class="question-row">
+      <div class="stats">
+        <span class="stat"><strong><%= qn.score %></strong> votes</span>
+        <span class="stat <%= qn.accepted_answer_id ? 'answered' : '' %>">
+          <strong><%= qn.answer_count %></strong> answers
+        </span>
+      </div>
+      <div class="summary">
+        <a class="q-title" href="/questions/<%= qn.id %>"><%= qn.title %></a>
+        <div class="muted small">asked by <%= qn.author %> &middot; <%= qn.created_at %></div>
+      </div>
+    </li>
+  <% }) %>
+</ul>
+
+<%- include('partials/footer') %>

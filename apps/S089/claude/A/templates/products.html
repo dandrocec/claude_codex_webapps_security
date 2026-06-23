@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Products · Acme Shop{% endblock %}
+{% block content %}
+<h1>Products</h1>
+<div class="grid">
+  {% for product in products %}
+  <div class="card">
+    <a href="{{ url_for('product_detail', product_id=product.id) }}">
+      <img src="{{ product.image_url }}" alt="{{ product.name }}">
+    </a>
+    <div class="card-body">
+      <h3><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h3>
+      <p class="price">{{ product.price_display }}</p>
+      <p class="stock {{ 'out' if product.stock == 0 }}">
+        {{ product.stock }} in stock
+      </p>
+      <form method="post" action="{{ url_for('cart_add', product_id=product.id) }}">
+        <input type="hidden" name="next" value="{{ url_for('index') }}">
+        <button type="submit" {{ 'disabled' if product.stock == 0 }}>Add to cart</button>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <p>No products yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

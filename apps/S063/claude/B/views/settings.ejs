@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<section class="card narrow">
+  <h1>Profile settings</h1>
+  <% if (errors && errors.length) { %>
+    <ul class="errors">
+      <% errors.forEach(function(e){ %><li><%= e.msg %></li><% }) %>
+    </ul>
+  <% } %>
+  <form method="post" action="/settings">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Bio
+      <textarea name="bio" rows="4" maxlength="300" placeholder="Tell people about yourself"><%= values.bio || '' %></textarea>
+    </label>
+    <button type="submit" class="btn">Save</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

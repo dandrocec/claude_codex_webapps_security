@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Elections{% endblock %}
+{% block content %}
+  <h1>Elections</h1>
+
+  {% if not elections %}
+    <div class="card muted">
+      No elections yet.
+      {% if current_user and current_user.is_admin %}
+        <a href="{{ url_for('new_election') }}">Create the first one.</a>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% for e in elections %}
+    <div class="card">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <a href="{{ url_for('election_detail', election_id=e.id) }}"
+           style="font-size:1.15rem; font-weight:700; text-decoration:none; color:var(--ink);">
+          {{ e.title }}
+        </a>
+        <span class="badge {{ e.status }}">{{ e.status }}</span>
+      </div>
+      {% if e.description %}<p class="muted">{{ e.description }}</p>{% endif %}
+      <p class="muted" style="font-size:.85rem;">
+        Opens {{ e.open_time | humanize }} &middot; Closes {{ e.close_time | humanize }}
+      </p>
+      <a class="btn" href="{{ url_for('election_detail', election_id=e.id) }}">
+        {% if e.status == 'open' %}Vote{% elif e.status == 'closed' %}View results{% else %}View{% endif %}
+      </a>
+    </div>
+  {% endfor %}
+{% endblock %}

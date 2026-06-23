@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+
+<div class="card narrow">
+  <h1>Book an appointment</h1>
+  <% if (error) { %><p class="alert"><%= error %></p><% } %>
+  <form method="post" action="/patient/book">
+    <label>Doctor
+      <select name="doctor_id" required>
+        <option value="">— choose —</option>
+        <% doctors.forEach(function (d) { %>
+          <option value="<%= d.id %>"><%= d.full_name %><% if (d.specialty) { %> (<%= d.specialty %>)<% } %></option>
+        <% }); %>
+      </select>
+    </label>
+    <label>Date &amp; time
+      <input name="slot" type="datetime-local" required />
+    </label>
+    <label>Reason
+      <input name="reason" placeholder="e.g. check-up" />
+    </label>
+    <button class="btn" type="submit">Request appointment</button>
+    <a class="btn ghost" href="/patient">Cancel</a>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

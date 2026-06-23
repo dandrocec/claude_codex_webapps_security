@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+<section class="card">
+  <h1>@<%= profile.username %></h1>
+  <% if (profile.bio) { %>
+    <p class="bio"><%= profile.bio %></p>
+  <% } %>
+  <p class="muted">
+    <%= followers %> follower<%= followers === 1 ? '' : 's' %> &middot;
+    <%= following %> following &middot;
+    joined <%= profile.created_at %> UTC
+  </p>
+
+  <% if (currentUser && !isSelf) { %>
+    <% if (isFollowing) { %>
+      <form class="inline" method="post" action="/u/<%= encodeURIComponent(profile.username) %>/unfollow">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="btn btn-secondary">Unfollow</button>
+      </form>
+    <% } else { %>
+      <form class="inline" method="post" action="/u/<%= encodeURIComponent(profile.username) %>/follow">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="btn">Follow</button>
+      </form>
+    <% } %>
+  <% } else if (isSelf) { %>
+    <a class="btn btn-secondary" href="/settings">Edit profile</a>
+  <% } %>
+</section>
+
+<section class="feed">
+  <h2>Posts</h2>
+  <% if (!posts.length) { %>
+    <p class="muted">No posts yet.</p>
+  <% } else { %>
+    <% posts.forEach(function(post){ %>
+      <%- include('partials/post', { post: post }) %>
+    <% }) %>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

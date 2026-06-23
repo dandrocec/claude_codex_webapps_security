@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<h1>My Tickets</h1>
+
+<% if (tickets.length === 0) { %>
+  <p class="muted">You haven't bought any tickets yet. <a href="/">Browse events</a>.</p>
+<% } else { %>
+  <div class="cards">
+    <% tickets.forEach(function (t) { %>
+      <article class="card ticket">
+        <h2><%= t.event_name %></h2>
+        <% if (t.event_date) { %><p class="date">📅 <%= t.event_date %></p><% } %>
+        <% if (t.description) { %><p><%= t.description %></p><% } %>
+        <p class="muted">Ticket #<%= t.id %> &middot; purchased <%= t.purchased_at %></p>
+      </article>
+    <% }); %>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

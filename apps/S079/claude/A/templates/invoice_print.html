@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoice {{ invoice.number }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body { background: #fff; }
+    .invoice-sheet {
+      max-width: 800px; margin: 24px auto; padding: 48px;
+      background: #fff; color: #1a1a1a;
+    }
+    .print-bar { max-width: 800px; margin: 12px auto; text-align: right; }
+    @media print { .print-bar { display: none; } .invoice-sheet { margin: 0; } }
+  </style>
+</head>
+<body onload="window.focus()">
+  <div class="print-bar">
+    <button class="btn primary" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <div class="invoice-sheet">
+    <div class="invoice-top">
+      <div>
+        <h1 class="invoice-title">INVOICE</h1>
+        <p class="muted">{{ invoice.number }}</p>
+      </div>
+      <div class="right">
+        <p><strong>From</strong><br>{{ invoice.owner.email }}</p>
+      </div>
+    </div>
+
+    <div class="invoice-parties">
+      <div>
+        <h3>Billed to</h3>
+        <p><strong>{{ invoice.client.name }}</strong><br>
+        {{ invoice.client.email or "" }}<br>
+        {{ (invoice.client.address or "")|replace("\n", "<br>")|safe }}</p>
+      </div>
+      <div class="right">
+        <p><strong>Issue date:</strong> {{ invoice.issue_date.isoformat() if invoice.issue_date else "—" }}</p>
+        <p><strong>Due date:</strong> {{ invoice.due_date.isoformat() if invoice.due_date else "—" }}</p>
+        <p><strong>Status:</strong> {{ invoice.status }}</p>
+      </div>
+    </div>
+
+    <table class="data print-table">
+      <thead>
+        <tr><th>Description</th><th class="right">Qty</th><th class="right">Unit price</th><th class="right">Amount</th></tr>
+      </thead>
+      <tbody>
+        {% for item in invoice.items %}
+        <tr>
+          <td>{{ item.description }}</td>
+          <td class="right">{{ "%g"|format(item.quantity) }}</td>
+          <td class="right">{{ item.unit_price | money }}</td>
+          <td class="right">{{ item.amount | money }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr><td colspan="3" class="right">Subtotal</td><td class="right">{{ invoice.subtotal | money }}</td></tr>
+        <tr><td colspan="3" class="right">Tax ({{ "%g"|format(invoice.tax_rate) }}%)</td><td class="right">{{ invoice.tax_amount | money }}</td></tr>
+        <tr class="grand"><td colspan="3" class="right">Total</td><td class="right">{{ invoice.total | money }}</td></tr>
+      </tfoot>
+    </table>
+
+    {% if invoice.notes %}
+    <div class="notes"><h3>Notes</h3><p>{{ invoice.notes }}</p></div>
+    {% endif %}
+  </div>
+</body>
+</html>

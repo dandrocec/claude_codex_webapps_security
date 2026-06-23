@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Edit profile · Recruitment Portal{% endblock %}
+{% block content %}
+<h1>Edit profile</h1>
+<form method="post" enctype="multipart/form-data" class="form">
+  <label>Full name
+    <input type="text" name="full_name" value="{{ profile['full_name'] }}">
+  </label>
+  <label>Headline <small>(e.g. "Senior Backend Engineer")</small>
+    <input type="text" name="headline" value="{{ profile['headline'] }}">
+  </label>
+  <label>Location
+    <input type="text" name="location" value="{{ profile['location'] }}">
+  </label>
+  <label>About you
+    <textarea name="bio" rows="5">{{ profile['bio'] }}</textarea>
+  </label>
+  <label>Skills <small>(comma separated, e.g. "python, flask, sql")</small>
+    <input type="text" name="skills" value="{{ skills }}">
+  </label>
+  <label>Resume
+    {% if profile['resume_filename'] %}
+      <small>Current: {{ profile['resume_filename'] }} — upload a new file to replace it.</small>
+    {% endif %}
+    <input type="file" name="resume">
+  </label>
+  <button class="btn" type="submit">Save profile</button>
+</form>
+{% endblock %}

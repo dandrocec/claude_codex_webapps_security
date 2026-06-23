@@ -1,0 +1,73 @@
+<%- include('partials/header', { title: question.title }) %>
+
+<article class="question card">
+  <div class="vote-col">
+    <% if (currentUser && !isOwner) { %>
+      <form method="post" action="/questions/<%= question.id %>/vote" class="inline">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button name="value" value="up" class="vote <%= questionVote === 1 ? 'on' : '' %>" aria-label="Vote up">&#9650;</button>
+      </form>
+      <div class="score"><%= question.score %></div>
+      <form method="post" action="/questions/<%= question.id %>/vote" class="inline">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button name="value" value="down" class="vote <%= questionVote === -1 ? 'on' : '' %>" aria-label="Vote down">&#9660;</button>
+      </form>
+    <% } else { %>
+      <div class="score"><%= question.score %></div>
+    <% } %>
+  </div>
+  <div class="content">
+    <h1><%= question.title %></h1>
+    <div class="body"><%= question.body %></div>
+    <div class="meta">asked by <%= question.author %> on <%= question.created_at %></div>
+  </div>
+</article>
+
+<h2 id="answers"><%= answers.length %> Answer<%= answers.length === 1 ? '' : 's' %></h2>
+
+<% answers.forEach(function (a) { %>
+  <article class="answer card <%= a.is_accepted ? 'accepted' : '' %>">
+    <div class="vote-col">
+      <% if (currentUser && a.user_id !== currentUser.id) { %>
+        <form method="post" action="/answers/<%= a.id %>/vote" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button name="value" value="up" class="vote <%= answerVotes[a.id] === 1 ? 'on' : '' %>" aria-label="Vote up">&#9650;</button>
+        </form>
+        <div class="score"><%= a.score %></div>
+        <form method="post" action="/answers/<%= a.id %>/vote" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button name="value" value="down" class="vote <%= answerVotes[a.id] === -1 ? 'on' : '' %>" aria-label="Vote down">&#9660;</button>
+        </form>
+      <% } else { %>
+        <div class="score"><%= a.score %></div>
+      <% } %>
+      <% if (a.is_accepted) { %><div class="check" title="Accepted answer">&#10003;</div><% } %>
+    </div>
+    <div class="content">
+      <div class="body"><%= a.body %></div>
+      <div class="meta">answered by <%= a.author %> on <%= a.created_at %></div>
+      <% if (isOwner && !a.is_accepted) { %>
+        <form method="post" action="/questions/<%= question.id %>/accept" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <input type="hidden" name="answer_id" value="<%= a.id %>">
+          <button type="submit" class="accept-btn">Accept this answer</button>
+        </form>
+      <% } %>
+    </div>
+  </article>
+<% }); %>
+
+<% if (currentUser) { %>
+  <h2>Your Answer</h2>
+  <%- include('partials/errors') %>
+  <form method="post" action="/questions/<%= question.id %>/answers" class="card">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <textarea name="body" rows="8" required minlength="20" maxlength="10000"
+              placeholder="Write your answer"><%= values.body || '' %></textarea>
+    <button type="submit">Post your answer</button>
+  </form>
+<% } else { %>
+  <p><a href="/login">Log in</a> to post an answer or vote.</p>
+<% } %>
+
+<%- include('partials/footer') %>

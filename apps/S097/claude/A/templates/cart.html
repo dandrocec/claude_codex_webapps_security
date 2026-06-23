@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Your Cart — Nimbus Store{% endblock %}
+{% block content %}
+  <div class="page-head"><h1>Your cart</h1></div>
+
+  {% if items %}
+    <div class="card table-card">
+      <table>
+        <thead>
+          <tr><th>Product</th><th>Price</th><th>Quantity</th><th class="right">Subtotal</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+            <tr>
+              <td><a href="{{ url_for('product_detail', product_id=item.product.id) }}">{{ item.product.name }}</a></td>
+              <td>{{ item.product.price_cents | money }}</td>
+              <td>
+                <form method="post" action="{{ url_for('cart_update', item_id=item.id) }}" class="inline">
+                  <input class="qty-input" type="number" name="quantity" value="{{ item.quantity }}" min="0" max="{{ item.product.stock }}">
+                  <button class="btn-sm btn-ghost" type="submit">Update</button>
+                </form>
+              </td>
+              <td class="right">{{ item.line_total_cents | money }}</td>
+              <td class="right">
+                <form method="post" action="{{ url_for('cart_remove', item_id=item.id) }}" class="inline">
+                  <button class="btn-sm btn-danger" type="submit">Remove</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="totals">
+      Total: <strong>{{ total_cents | money }}</strong>
+    </div>
+    <div class="page-head" style="margin-top:16px">
+      <a href="{{ url_for('index') }}">← Continue shopping</a>
+      <a class="btn" href="{{ url_for('checkout') }}">Proceed to checkout</a>
+    </div>
+  {% else %}
+    <div class="empty">
+      <p>Your cart is empty.</p>
+      <a class="btn" href="{{ url_for('index') }}">Start shopping</a>
+    </div>
+  {% endif %}
+{% endblock %}

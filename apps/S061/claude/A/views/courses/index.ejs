@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+<div class="page-head">
+  <h1>Course catalogue</h1>
+  <% if (currentUser.role === 'instructor') { %>
+    <a class="btn" href="/courses/new">+ New course</a>
+  <% } %>
+</div>
+
+<% if (courses.length === 0) { %>
+  <p class="muted">No courses available yet.</p>
+<% } else { %>
+  <ul class="card-list">
+    <% courses.forEach((c) => { %>
+      <li class="card">
+        <h3><a href="/courses/<%= c.id %>"><%= c.title %></a></h3>
+        <p class="muted">by <%= c.instructor_name %> · <%= c.lesson_count %> lesson(s)</p>
+        <p><%= c.description || '' %></p>
+        <% if (currentUser.role === 'student') { %>
+          <% if (enrolledIds.has(c.id)) { %>
+            <span class="badge badge-ok">Enrolled</span>
+          <% } else { %>
+            <form action="/courses/<%= c.id %>/enrol" method="post" class="inline">
+              <button type="submit" class="btn btn-small">Enrol</button>
+            </form>
+          <% } %>
+        <% } %>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+<%- include('../partials/footer') %>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Invoices{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Invoices</h1>
+  <a class="btn primary" href="{{ url_for('new_invoice') }}">+ New invoice</a>
+</div>
+
+{% if invoices %}
+<table class="data">
+  <thead>
+    <tr><th>Number</th><th>Client</th><th>Issued</th><th>Status</th><th class="right">Total</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for inv in invoices %}
+    <tr>
+      <td><a href="{{ url_for('view_invoice', invoice_id=inv.id) }}">{{ inv.number }}</a></td>
+      <td>{{ inv.client.name }}</td>
+      <td>{{ inv.issue_date.isoformat() if inv.issue_date else "—" }}</td>
+      <td><span class="badge badge-{{ inv.status }}">{{ inv.status }}</span></td>
+      <td class="right">{{ inv.total | money }}</td>
+      <td class="actions">
+        <a href="{{ url_for('view_invoice', invoice_id=inv.id) }}">View</a>
+        <a href="{{ url_for('print_invoice', invoice_id=inv.id) }}" target="_blank">Print</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">No invoices yet. <a href="{{ url_for('new_invoice') }}">Create one</a>.</p>
+{% endif %}
+{% endblock %}

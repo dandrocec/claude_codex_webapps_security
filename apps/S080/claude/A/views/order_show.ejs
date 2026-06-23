@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<p><a href="/orders">← Back to orders</a></p>
+<h1>Order #<%= order.id %></h1>
+<p>
+  <strong>Customer:</strong> <%= order.customer %><br />
+  <strong>Status:</strong> <span class="badge ok"><%= order.status %></span><br />
+  <strong>Processed by:</strong> <%= order.created_by %><br />
+  <strong>Date:</strong> <%= order.created_at %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>SKU</th>
+      <th>Product</th>
+      <th class="num">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.forEach(function (it) { %>
+      <tr>
+        <td><code><%= it.sku %></code></td>
+        <td><%= it.unit_name %></td>
+        <td class="num"><%= it.quantity %></td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+<%- include('partials/footer') %>

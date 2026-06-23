@@ -1,0 +1,54 @@
+<%- include('partials/header', { title: question.title }) %>
+
+<article class="post">
+  <%- include('partials/votes', {
+        postType: 'question', postId: question.id,
+        score: question.score, myVote: myQVote }) %>
+  <div class="post-body">
+    <h1><%= question.title %></h1>
+    <p class="body-text"><%= question.body %></p>
+    <div class="muted small">asked by <%= question.author %> &middot; <%= question.created_at %></div>
+  </div>
+</article>
+
+<section id="answers">
+  <h2><%= answers.length %> Answer<%= answers.length === 1 ? '' : 's' %></h2>
+
+  <% answers.forEach(function (a) { %>
+    <article class="post answer <%= question.accepted_answer_id === a.id ? 'accepted' : '' %>">
+      <%- include('partials/votes', {
+            postType: 'answer', postId: a.id,
+            score: a.score, myVote: myAVotes[a.id] || 0 }) %>
+      <div class="post-body">
+        <% if (question.accepted_answer_id === a.id) { %>
+          <span class="badge accepted-badge">&#10004; Accepted</span>
+        <% } %>
+        <p class="body-text"><%= a.body %></p>
+        <div class="meta-row">
+          <span class="muted small">answered by <%= a.author %> &middot; <%= a.created_at %></span>
+          <% if (currentUser && currentUser.id === question.user_id) { %>
+            <form method="post" action="/answers/<%= a.id %>/accept" class="inline">
+              <button type="submit" class="link">
+                <%= question.accepted_answer_id === a.id ? 'Unaccept' : 'Accept' %>
+              </button>
+            </form>
+          <% } %>
+        </div>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<section class="answer-form">
+  <h2>Your Answer</h2>
+  <% if (currentUser) { %>
+    <form method="post" action="/questions/<%= question.id %>/answers">
+      <textarea name="body" rows="5" placeholder="Write your answer..." required></textarea>
+      <button class="btn" type="submit">Post Answer</button>
+    </form>
+  <% } else { %>
+    <p class="muted">Please <a href="/login">log in</a> to post an answer.</p>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

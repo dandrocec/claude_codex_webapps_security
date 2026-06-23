@@ -1,0 +1,13 @@
+{% macro field(f, type=None) %}
+  <div class="field">
+    {{ f.label }}
+    {% if type == 'textarea' %}
+      {{ f(rows=6) }}
+    {% else %}
+      {{ f() }}
+    {% endif %}
+    {% for error in f.errors %}
+      <span class="error-text">{{ error }}</span>
+    {% endfor %}
+  </div>
+{% endmacro %}

@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+<section class="card">
+  <h1>Webhooks</h1>
+  <p class="muted">An inbound webhook gives you a unique URL. POST events to it and your outbound actions will fire.</p>
+  <% if (error) { %><p class="alert error"><%= error %></p><% } %>
+  <form method="post" action="/webhooks" class="row">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <input type="text" name="name" placeholder="e.g. GitHub push" maxlength="80" required />
+    <button type="submit">Create webhook</button>
+  </form>
+</section>
+
+<section class="card">
+  <% if (webhooks.length === 0) { %>
+    <p class="muted">No webhooks yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Name</th><th>Created</th><th></th></tr></thead>
+      <tbody>
+        <% webhooks.forEach(function (w) { %>
+          <tr>
+            <td><a href="/webhooks/<%= w.id %>"><%= w.name %></a></td>
+            <td class="muted"><%= w.created_at %></td>
+            <td class="right">
+              <form method="post" action="/webhooks/<%= w.id %>/delete" class="inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

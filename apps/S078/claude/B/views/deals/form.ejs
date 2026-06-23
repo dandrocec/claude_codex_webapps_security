@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+  <div class="page-head"><h1><%= title %></h1></div>
+
+  <% if (errors && errors.length) { %>
+    <ul class="errors">
+      <% errors.forEach(function(e){ %><li><%= e.msg %></li><% }) %>
+    </ul>
+  <% } %>
+
+  <form method="post" action="<%= action %>" class="card">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Title
+      <input type="text" name="title" value="<%= deal.title || '' %>" required maxlength="150">
+    </label>
+    <label>Amount (USD)
+      <input type="number" name="amount" step="0.01" min="0" value="<%= amountValue %>">
+    </label>
+    <label>Stage
+      <select name="stage">
+        <% stages.forEach(function(s){ %>
+          <option value="<%= s.key %>" <%= s.key === deal.stage ? 'selected' : '' %>><%= s.label %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Contact
+      <select name="contact_id">
+        <option value="">— none —</option>
+        <% contacts.forEach(function(c){ %>
+          <option value="<%= c.id %>" <%= String(deal.contact_id) === String(c.id) ? 'selected' : '' %>><%= c.name %></option>
+        <% }) %>
+      </select>
+    </label>
+    <div class="actions">
+      <button type="submit" class="btn">Save</button>
+      <a class="btn ghost" href="/deals">Cancel</a>
+    </div>
+  </form>
+<%- include('../partials/footer') %>

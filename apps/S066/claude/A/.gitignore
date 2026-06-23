@@ -1,0 +1,5 @@
+/vendor/
+/data/
+/public/uploads/*
+!/public/uploads/.gitkeep
+.DS_Store

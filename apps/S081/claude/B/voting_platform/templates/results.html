@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Results — {{ election['title'] }}{% endblock %}
+{% block content %}
+  <h1>Results: {{ election['title'] }}</h1>
+  <table class="results">
+    <thead><tr><th>Candidate</th><th>Votes</th><th>Share</th></tr></thead>
+    <tbody>
+    {% for r in results.rows %}
+      <tr>
+        <td>{{ r['name'] }}</td>
+        <td>{{ r['votes'] }}</td>
+        <td>
+          {% if results.total %}
+            {{ '%.1f'|format(100 * r['votes'] / results.total) }}%
+          {% else %}—{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p class="muted">Total votes: {{ results.total }}</p>
+  <p><a href="{{ url_for('index') }}">← Back to elections</a></p>
+{% endblock %}

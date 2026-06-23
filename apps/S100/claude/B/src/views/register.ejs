@@ -1,0 +1,25 @@
+<%- include('partials/head') %>
+<div class="card narrow">
+  <h1>Create account</h1>
+  <form method="POST" action="/register" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>Username
+      <input type="text" name="username" value="<%= values.username || '' %>"
+             required minlength="3" maxlength="32" pattern="[A-Za-z0-9_.\-]+" />
+      <small class="muted">3–32 chars: letters, numbers, _ . -</small>
+    </label>
+    <label>Password
+      <input type="password" name="password" required minlength="10" />
+      <small class="muted">At least 10 characters.</small>
+    </label>
+    <label>Role
+      <select name="role" required>
+        <option value="viewer" <%= values.role === 'viewer' ? 'selected' : '' %>>viewer — read-only</option>
+        <option value="operator" <%= values.role === 'operator' ? 'selected' : '' %>>operator — manage services &amp; deploy</option>
+      </select>
+    </label>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Sign in</a>.</p>
+</div>
+<%- include('partials/foot') %>

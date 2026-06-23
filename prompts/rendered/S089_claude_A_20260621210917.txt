@@ -1,0 +1,3 @@
+Build a Flask online shop with checkout. Users browse products, add to a cart, and check out through a payment provider's sandbox; a webhook endpoint marks orders as paid. Show order history per user and an admin order list. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5089.

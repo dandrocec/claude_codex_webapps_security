@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}History: {{ page.title }}{% endblock %}
+{% block content %}
+  <h1>History: {{ page.title }}</h1>
+  <p><a href="{{ url_for('view_page', slug=page.slug) }}">&larr; Back to page</a></p>
+  <table class="history">
+    <thead>
+      <tr><th>#</th><th>Date (UTC)</th><th>Author</th><th>Summary</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for r in revisions %}
+        <tr>
+          <td>{{ r.id }}</td>
+          <td>{{ r.created_at }}</td>
+          <td>{{ r.author }}</td>
+          <td>{{ r.comment }}</td>
+          <td class="rowactions">
+            <a href="{{ url_for('view_revision', slug=page.slug, rev_id=r.id) }}">View</a>
+            {% if current_user and current_user.role == 'editor' %}
+              <form class="inline" method="post"
+                    action="{{ url_for('restore_revision', slug=page.slug, rev_id=r.id) }}">
+                {{ confirm_form.csrf_token }}
+                <button type="submit" class="linkbtn">Restore</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

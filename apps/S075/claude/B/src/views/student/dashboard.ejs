@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>Available Quizzes</h1>
+  <% if (quizzes.length === 0) { %>
+    <p>No quizzes are available yet. Check back later.</p>
+  <% } else { %>
+    <ul class="list">
+      <% quizzes.forEach(function (q) { %>
+        <li>
+          <div>
+            <a href="/quizzes/<%= q.id %>/take"><strong><%= q.title %></strong></a>
+            <span class="muted">by <%= q.teacher_name %></span>
+          </div>
+          <% if (q.description) { %><p class="desc"><%= q.description %></p><% } %>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

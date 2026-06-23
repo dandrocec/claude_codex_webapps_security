@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% block content %}
+<h1>Users in {{ current_user.organisation.name }}</h1>
+
+<table class="table">
+  <thead><tr><th>Email</th><th>Role</th><th>Created</th><th></th></tr></thead>
+  <tbody>
+  {% for u in users %}
+    <tr>
+      <td>{{ u.email }}</td>
+      <td>{{ u.role }}</td>
+      <td>{{ u.created_at.strftime('%Y-%m-%d') }}</td>
+      <td>
+        {% if u.id != current_user.id %}
+        <form method="post" action="/admin/users/{{ u.id }}/delete" class="inline"
+              onsubmit="return confirm('Delete this user?');">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <button type="submit" class="btn-danger">Delete</button>
+        </form>
+        {% else %}<span class="muted">you</span>{% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h2>Add a user</h2>
+<form method="post" action="/admin/users" class="card">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Email
+    <input type="email" name="email" required maxlength="255" autocomplete="off">
+  </label>
+  <label>Temporary password
+    <input type="password" name="password" required minlength="10" maxlength="64"
+           autocomplete="new-password">
+  </label>
+  <label>Role
+    <select name="role">
+      <option value="member">member</option>
+      <option value="admin">admin</option>
+    </select>
+  </label>
+  <button type="submit">Add user</button>
+</form>
+{% endblock %}

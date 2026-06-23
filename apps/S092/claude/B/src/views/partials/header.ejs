@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · Clinic Portal</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">🏥 Clinic Portal</a>
+    <nav>
+      <% if (currentUser) { %>
+        <% if (currentUser.role === 'patient') { %>
+          <a href="/appointments">My appointments</a>
+          <a href="/appointments/new">Book</a>
+          <a href="/records">My records</a>
+        <% } else if (currentUser.role === 'doctor') { %>
+          <a href="/doctor/patients">My patients</a>
+          <a href="/doctor/appointments">Appointments</a>
+        <% } else if (currentUser.role === 'receptionist') { %>
+          <a href="/schedule">Schedule</a>
+          <a href="/schedule/new">New appointment</a>
+        <% } %>
+        <span class="who"><%= currentUser.full_name %> (<%= currentUser.role %>)</span>
+        <form method="post" action="/logout" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link">Sign out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Sign in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">

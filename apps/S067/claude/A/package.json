@@ -1,0 +1,19 @@
+{
+  "name": "food-ordering-app",
+  "version": "1.0.0",
+  "description": "A simple food-ordering app: customers browse a menu, build a cart, and place orders; staff manage incoming orders.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node db.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  }
+}

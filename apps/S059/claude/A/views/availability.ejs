@@ -1,0 +1,57 @@
+<%- include('partials/head') %>
+
+<h1>Availability</h1>
+
+<% if (flash) { %><p class="flash <%= flash.type %>"><%= flash.msg %></p><% } %>
+
+<form action="/availability" method="get" class="date-picker">
+  <label>Date
+    <input type="date" name="date" value="<%= date %>" onchange="this.form.submit()" />
+  </label>
+  <noscript><button type="submit" class="primary">Show</button></noscript>
+</form>
+
+<div class="grid-scroll">
+  <table class="grid">
+    <thead>
+      <tr>
+        <th class="room-col">Room</th>
+        <% slots.forEach(function (s) { %><th><%= s %></th><% }); %>
+      </tr>
+    </thead>
+    <tbody>
+      <% grid.forEach(function (row) { %>
+        <tr>
+          <th class="room-col">
+            <%= row.room.name %>
+            <span class="cap">· up to <%= row.room.capacity %></span>
+          </th>
+          <% row.slots.forEach(function (cell) { %>
+            <td class="<%= cell.taken ? (cell.mine ? 'mine' : 'taken') : 'free' %>">
+              <% if (!cell.taken) { %>
+                <form action="/book" method="post">
+                  <input type="hidden" name="room_id" value="<%= row.room.id %>" />
+                  <input type="hidden" name="slot" value="<%= cell.slot %>" />
+                  <input type="hidden" name="date" value="<%= date %>" />
+                  <button type="submit" class="cell-btn book">Book</button>
+                </form>
+              <% } else if (cell.mine) { %>
+                <span class="cell-label">Yours</span>
+              <% } else { %>
+                <span class="cell-label">Taken</span>
+              <% } %>
+            </td>
+          <% }); %>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+
+<p class="legend">
+  <span class="swatch free"></span> Free
+  <span class="swatch mine"></span> Your booking
+  <span class="swatch taken"></span> Taken
+</p>
+
+<%- include('partials/foot') %>

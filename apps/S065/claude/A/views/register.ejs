@@ -1,0 +1,15 @@
+<%- include('partials/header', { title: 'Register' }) %>
+
+<h1>Register</h1>
+<form method="post" action="/register" class="stacked narrow">
+  <label>Username
+    <input type="text" name="username" minlength="3" required autofocus />
+  </label>
+  <label>Password
+    <input type="password" name="password" minlength="4" required />
+  </label>
+  <button class="btn" type="submit">Create account</button>
+</form>
+<p class="muted">Already have an account? <a href="/login">Log in.</a></p>
+
+<%- include('partials/footer') %>

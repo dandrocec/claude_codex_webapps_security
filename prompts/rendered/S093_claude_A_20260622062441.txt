@@ -1,0 +1,3 @@
+Build a Flask ledger app. Each user has an account balance; users transfer funds to other users; every transfer is recorded as an immutable transaction and balances update atomically so a balance can never go negative. Users see their own transaction history. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5093.

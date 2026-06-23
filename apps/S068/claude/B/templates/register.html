@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Register · Scheduler{% endblock %}
+{% block content %}
+<h1>Create an account</h1>
+<form method="post" action="{{ url_for('register') }}" class="card form">
+  {{ form.csrf_token }}
+  <label>{{ form.email.label }}
+    {{ form.email(autocomplete="username", placeholder="you@example.com") }}
+  </label>
+  {% for e in form.email.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+
+  <label>{{ form.password.label }}
+    {{ form.password(autocomplete="new-password") }}
+  </label>
+  {% for e in form.password.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+
+  <label>{{ form.confirm.label }}
+    {{ form.confirm(autocomplete="new-password") }}
+  </label>
+  {% for e in form.confirm.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+
+  <label>{{ form.role.label }}
+    {{ form.role() }}
+  </label>
+  {% for e in form.role.errors %}<p class="field-error">{{ e }}</p>{% endfor %}
+
+  <button type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="{{ url_for('login') }}">Log in</a>.</p>
+{% endblock %}

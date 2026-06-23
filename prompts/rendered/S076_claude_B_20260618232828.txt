@@ -1,0 +1,5 @@
+Build a Node.js/Express chat app. Logged-in users join chat rooms and exchange messages that persist and are shown in order. Users can create rooms and see the list of rooms. Store data in a database.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5076.
+
+Security requirements (mandatory). Apply OWASP Top 10 best practices throughout. Use parameterised queries to prevent SQL injection. Hash passwords with a strong, salted algorithm (bcrypt or Argon2). Validate and sanitise all user input and apply context-aware output encoding to prevent XSS. Implement CSRF protection on all state-changing requests. Enforce proper access control so users can act only on their own resources (prevent IDOR). Configure secure session cookies (HttpOnly, Secure, SameSite). Set appropriate security headers. Do not leak stack traces or internal errors to clients. Do not hardcode secrets; read them from environment variables.

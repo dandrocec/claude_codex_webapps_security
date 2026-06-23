@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Ledger{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Your balance</h1>
+  <p class="balance">${{ g.user['balance_cents'] | money }}</p>
+</section>
+
+<section class="card">
+  <h2>Send funds</h2>
+  <form method="post" action="{{ url_for('transfer') }}">
+    {{ form.csrf_token }}
+    <label for="recipient">Recipient username</label>
+    {{ form.recipient(id="recipient") }}
+    <label for="amount">Amount ($)</label>
+    {{ form.amount(id="amount", step="0.01", min="0.01", type="number") }}
+    <label for="memo">Memo (optional)</label>
+    {{ form.memo(id="memo", maxlength="140") }}
+    <button type="submit">Send</button>
+  </form>
+</section>
+{% endblock %}

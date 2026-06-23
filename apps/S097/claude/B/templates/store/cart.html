@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+<h1>Your cart</h1>
+{% if rows %}
+<table>
+  <thead>
+    <tr><th>Product</th><th>Price</th><th>Qty</th><th>Line total</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td><a href="{{ url_for('store.product_detail', product_id=r['product_id']) }}">{{ r['name'] }}</a></td>
+      <td>{{ r['price_cents'] | money }}</td>
+      <td>
+        <form class="inline" method="post"
+              action="{{ url_for('store.update_cart', cart_id=r['cart_id']) }}">
+          {{ update_form.hidden_tag() }}
+          <input class="qty-input" type="number" name="quantity"
+                 value="{{ r['quantity'] }}" min="0" max="99">
+          <button class="link-btn" type="submit">Update</button>
+        </form>
+      </td>
+      <td>{{ (r['price_cents'] * r['quantity']) | money }}</td>
+      <td>
+        <form class="inline" method="post"
+              action="{{ url_for('store.remove_from_cart', cart_id=r['cart_id']) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="link-btn" type="submit">Remove</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="totals"><strong>Subtotal: {{ subtotal | money }}</strong></div>
+<p class="row-between">
+  <a href="{{ url_for('store.index') }}">← Continue shopping</a>
+  <a class="btn" href="{{ url_for('store.checkout') }}">Checkout</a>
+</p>
+{% else %}
+<p class="muted">Your cart is empty. <a href="{{ url_for('store.index') }}">Browse products</a>.</p>
+{% endif %}
+{% endblock %}

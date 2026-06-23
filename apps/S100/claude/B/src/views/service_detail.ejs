@@ -1,0 +1,114 @@
+<%- include('partials/head') %>
+<div class="page-head">
+  <div>
+    <h1><%= service.name %></h1>
+    <p class="muted">
+      owner: <%= service.owner_username || (isOwner ? currentUser.username : '—') %>
+      <% if (isOwner) { %><span class="badge badge-operator">yours</span><% } %>
+    </p>
+  </div>
+  <a class="btn btn-link" href="/">← Back</a>
+</div>
+
+<% if (service.repo_url) { %>
+  <p><strong>Repo:</strong> <%= service.repo_url %></p>
+<% } %>
+<% if (service.description) { %>
+  <p><%= service.description %></p>
+<% } %>
+
+<div class="card">
+  <div class="card-head">
+    <h2>Deployment steps</h2>
+    <% if (isOwner) { %>
+      <div class="actions">
+        <a class="btn btn-secondary" href="/services/<%= service.id %>/edit">Edit</a>
+        <form method="POST" action="/services/<%= service.id %>/deploy" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="btn btn-primary"
+                  <%= service.steps.length === 0 ? 'disabled' : '' %>>▶ Deploy now</button>
+        </form>
+        <form method="POST" action="/services/<%= service.id %>/delete" class="inline"
+              data-confirm="Delete this service and all its deployments and secrets?">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="btn btn-link danger">Delete</button>
+        </form>
+      </div>
+    <% } %>
+  </div>
+  <% if (service.steps.length === 0) { %>
+    <p class="muted">No steps configured.</p>
+  <% } else { %>
+    <ol class="steps-readonly">
+      <% service.steps.forEach(function (step) { %>
+        <li>
+          <strong><%= step.name %></strong>
+          <code><%= step.command %></code>
+        </li>
+      <% }); %>
+    </ol>
+  <% } %>
+</div>
+
+<% if (isOwner) { %>
+<div class="card">
+  <div class="card-head"><h2>Environment secrets</h2></div>
+  <p class="muted">Stored encrypted (AES-256-GCM). Values are never displayed back; re-enter to change.</p>
+  <% if (secrets.length) { %>
+    <table class="table">
+      <thead><tr><th>Key</th><th>Value</th><th>Added</th><th></th></tr></thead>
+      <tbody>
+        <% secrets.forEach(function (sec) { %>
+          <tr>
+            <td><code><%= sec.key %></code></td>
+            <td class="muted">••••••••</td>
+            <td class="muted"><%= sec.created_at %></td>
+            <td>
+              <form method="POST" action="/services/<%= service.id %>/secrets/<%= sec.id %>/delete" class="inline"
+                    data-confirm="Delete secret <%= sec.key %>?">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="btn btn-link danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p class="muted">No secrets yet.</p>
+  <% } %>
+
+  <form method="POST" action="/services/<%= service.id %>/secrets" class="secret-form" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <input type="text" name="key" placeholder="MY_API_KEY" required maxlength="128"
+           pattern="[A-Za-z_][A-Za-z0-9_]*" />
+    <input type="password" name="value" placeholder="value" required maxlength="8192" />
+    <button type="submit" class="btn btn-secondary">Save secret</button>
+  </form>
+</div>
+<% } %>
+
+<div class="card">
+  <div class="card-head"><h2>Recent deployments</h2></div>
+  <% if (deployments.length === 0) { %>
+    <p class="muted">No deployments yet.</p>
+  <% } else { %>
+    <table class="table">
+      <thead><tr><th>#</th><th>Status</th><th>By</th><th>Started</th><th>Finished</th><th></th></tr></thead>
+      <tbody>
+        <% deployments.forEach(function (d) { %>
+          <tr>
+            <td>#<%= d.id %></td>
+            <td><span class="status status-<%= d.status %>"><%= d.status %></span></td>
+            <td><%= d.triggered_by_username || '—' %></td>
+            <td class="muted"><%= d.started_at %></td>
+            <td class="muted"><%= d.finished_at || '—' %></td>
+            <td><a href="/services/<%= service.id %>/deployments/<%= d.id %>">View logs</a></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+<script src="/static/confirm.js"></script>
+<%- include('partials/foot') %>

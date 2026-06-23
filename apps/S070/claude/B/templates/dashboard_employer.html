@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Employer dashboard{% endblock %}
+{% block content %}
+  <h1>Your job postings</h1>
+  <p><a class="btn" href="{{ url_for('new_job') }}">Post a new job</a></p>
+  {% if jobs %}
+    <ul class="job-list">
+      {% for job in jobs %}
+        <li class="job-card">
+          <a class="job-title" href="{{ url_for('job_detail', job_id=job.id) }}">{{ job.title }}</a>
+          <div class="job-meta">{{ job.location }} &middot; {{ job.created_at }}</div>
+          <a href="{{ url_for('job_applications', job_id=job.id) }}">
+            View applications ({{ job.app_count }})
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have not posted any jobs yet.</p>
+  {% endif %}
+{% endblock %}

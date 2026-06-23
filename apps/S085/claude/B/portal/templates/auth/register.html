@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import field %}
+{% block title %}Register{% endblock %}
+{% block content %}
+  <h1>Create an account</h1>
+  <form method="post" action="{{ url_for('auth.register') }}" class="card">
+    {{ form.hidden_tag() }}
+    {{ field(form.email) }}
+    {{ field(form.full_name) }}
+    {{ field(form.role) }}
+    {{ field(form.password) }}
+    {{ field(form.confirm) }}
+    {{ form.submit(class="btn") }}
+  </form>
+  <p>Already registered? <a href="{{ url_for('auth.login') }}">Log in</a>.</p>
+{% endblock %}

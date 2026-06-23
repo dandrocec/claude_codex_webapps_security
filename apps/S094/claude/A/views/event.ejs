@@ -1,0 +1,35 @@
+<%- include('_head') %>
+
+<p><a href="/">&larr; Dashboard</a></p>
+<div class="card" style="margin-bottom:20px;">
+  <h2>Event #<%= event.id %> · <%= event.webhook_name %></h2>
+  <p class="muted">Received <%= event.received_at %> from <%= event.source_ip || 'unknown' %></p>
+  <h2 style="margin-top:18px;">Payload</h2>
+  <pre><%= event.payload %></pre>
+</div>
+
+<div class="card">
+  <h2>Deliveries</h2>
+  <% if (deliveries.length === 0) { %>
+    <p class="muted">No outbound actions matched this webhook when the event arrived.</p>
+  <% } else { %>
+  <table>
+    <thead><tr><th>Action</th><th>Target</th><th>Status</th><th>Attempts</th><th>Code</th><th>Last error</th><th></th></tr></thead>
+    <tbody>
+    <% deliveries.forEach(d => { %>
+      <tr>
+        <td><%= d.action_name %></td>
+        <td class="mono url"><%= d.target_url %></td>
+        <td><span class="pill <%= d.status %>"><%= d.status %></span></td>
+        <td><%= d.attempts %>/<%= d.max_attempts %></td>
+        <td class="mono"><%= d.last_status || '—' %></td>
+        <td class="mono muted"><%= d.last_error || '—' %></td>
+        <td><form class="inline" method="post" action="/deliveries/<%= d.id %>/retry"><button class="ghost" type="submit">Retry</button></form></td>
+      </tr>
+    <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+</div>
+
+<%- include('_foot') %>

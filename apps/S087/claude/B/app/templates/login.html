@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<h1>Log in</h1>
+<form method="post" action="/login" class="card">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Organisation slug
+    <input type="text" name="org_slug" value="{{ org_slug|default('') }}" required
+           maxlength="80" placeholder="acme" autocomplete="organization">
+  </label>
+  <label>Email
+    <input type="email" name="email" value="{{ email|default('') }}" required
+           maxlength="255" autocomplete="email">
+  </label>
+  <label>Password
+    <input type="password" name="password" required maxlength="64"
+           autocomplete="current-password">
+  </label>
+  <button type="submit">Log in</button>
+</form>
+<p>No organisation yet? <a href="/signup">Sign up</a>.</p>
+{% endblock %}

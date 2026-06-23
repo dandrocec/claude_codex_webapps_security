@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}My projects{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <h1>My projects</h1>
+    <a class="btn primary" href="{{ url_for('projects.create_project') }}">New project</a>
+  </div>
+
+  {% if projects %}
+    <ul class="project-list">
+      {% for project in projects %}
+        <li class="card">
+          <a class="project-name" href="{{ url_for('projects.view_project', project_id=project.id) }}">
+            {{ project.name }}
+          </a>
+          {% if project.description %}
+            <p class="muted">{{ project.description }}</p>
+          {% endif %}
+          <p class="meta">
+            Owner: {{ project.owner.username }} ·
+            {{ project.memberships|length }} member(s) ·
+            {{ project.tasks|length }} task(s)
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="muted">You have no projects yet. Create one to get started.</p>
+  {% endif %}
+{% endblock %}
