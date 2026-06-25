@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% set is_edit = page is not none %}
+{% block title %}{{ 'Edit' if is_edit else 'New' }} Page - Flask Wiki{% endblock %}
+
+{% block content %}
+  <section class="form-panel">
+    <h1>{{ 'Edit Page' if is_edit else 'New Page' }}</h1>
+    <form method="post">
+      <label for="title">Title</label>
+      <input id="title" name="title" required value="{{ request.form.title or (page.title if is_edit else '') }}">
+
+      <label for="body">Markdown body</label>
+      <textarea id="body" name="body" rows="18" required>{{ request.form.body or (page.body if is_edit else '') }}</textarea>
+
+      <div class="form-actions">
+        <button type="submit">{{ 'Save changes' if is_edit else 'Create page' }}</button>
+        <a href="{{ url_for('view_page', slug=page.slug) if is_edit else url_for('index') }}">Cancel</a>
+      </div>
+    </form>
+  </section>
+{% endblock %}

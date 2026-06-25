@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% set title = "Preview" %}
+{% block content %}
+<div class="page-heading">
+  <h1>Newsletter Preview</h1>
+  <a class="button secondary" href="{{ url_for('edit_draft', draft_id=draft.id) }}">Edit</a>
+</div>
+
+<section class="preview-meta">
+  <p><strong>Subject:</strong> {{ draft.subject }}</p>
+  <p><strong>Active recipients:</strong> {{ active_count }}</p>
+</section>
+
+<article class="newsletter-preview">
+  <header>
+    <p class="kicker">Newsletter</p>
+    <h2>{{ draft.subject }}</h2>
+  </header>
+  <div class="newsletter-body">
+    {{ body_html }}
+  </div>
+</article>
+{% endblock %}

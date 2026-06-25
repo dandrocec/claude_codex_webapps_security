@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdown Preview</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1>Markdown Preview</h1>
+          <p>Signed in as <strong><%= user.username %></strong></p>
+        </div>
+        <form method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="secondary" type="submit">Sign out</button>
+        </form>
+      </header>
+
+      <% if (error) { %>
+        <p class="notice" role="alert"><%= error %></p>
+      <% } %>
+
+      <form class="preview-form" method="post" action="/preview">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label for="markdown">Markdown</label>
+        <textarea id="markdown" name="markdown" rows="14" maxlength="20000" spellcheck="true"><%= markdown %></textarea>
+        <button type="submit">Render Markdown</button>
+      </form>
+
+      <section class="output" aria-label="Rendered HTML output">
+        <h2>Rendered Output</h2>
+        <% if (renderedHtml) { %>
+          <div class="rendered"><%- renderedHtml %></div>
+        <% } else { %>
+          <p class="empty">Rendered HTML will appear here.</p>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>

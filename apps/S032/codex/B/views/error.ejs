@@ -1,0 +1,7 @@
+<%- include("partials/header", { title: "Error", user, csrfToken: "" }) %>
+  <section class="panel">
+    <h1>Request failed</h1>
+    <p><%= message %></p>
+    <a href="/expenses">Back to expenses</a>
+  </section>
+<%- include("partials/footer") %>

@@ -1,0 +1,49 @@
+<%- include("partials/header") %>
+
+<section class="panel form-panel">
+  <div class="section-head">
+    <h1>Submit feedback</h1>
+    <p>Share what happened so the review team can track patterns and follow up internally.</p>
+  </div>
+
+  <% if (submitted) { %>
+    <div class="notice success">Thanks. Your feedback was recorded.</div>
+  <% } %>
+
+  <% if (errors.length) { %>
+    <div class="notice error">
+      <% errors.forEach((error) => { %>
+        <p><%= error %></p>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <form class="stack" method="post" action="/feedback">
+    <label>
+      <span>Category</span>
+      <select name="category" required>
+        <% categories.forEach((category) => { %>
+          <option value="<%= category %>" <%= values.category === category ? "selected" : "" %>><%= category %></option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label>
+      <span>Rating</span>
+      <select name="rating" required>
+        <% [5, 4, 3, 2, 1].forEach((rating) => { %>
+          <option value="<%= rating %>" <%= Number(values.rating) === rating ? "selected" : "" %>><%= rating %> / 5</option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label>
+      <span>Comment</span>
+      <textarea name="comment" rows="7" maxlength="1000" required><%= values.comment %></textarea>
+    </label>
+
+    <button type="submit">Send feedback</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

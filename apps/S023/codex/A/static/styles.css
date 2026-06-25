@@ -1,0 +1,137 @@
+:root {
+  color-scheme: light;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #1f2933;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.shell {
+  width: min(960px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.brand {
+  color: #111827;
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.new-link,
+.button-link {
+  color: #0f766e;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #d8dee6;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 12px 28px rgba(31, 41, 51, 0.08);
+}
+
+h1 {
+  margin: 0 0 18px;
+  font-size: 28px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 360px;
+  resize: vertical;
+  border: 1px solid #b8c2cc;
+  border-radius: 6px;
+  padding: 14px;
+  font: 15px/1.5 Consolas, "Courier New", monospace;
+}
+
+textarea:focus {
+  border-color: #0f766e;
+  outline: 3px solid rgba(15, 118, 110, 0.18);
+}
+
+button {
+  margin-top: 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #0f766e;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 18px;
+}
+
+button:hover {
+  background: #115e59;
+}
+
+.error {
+  color: #b42318;
+  font-weight: 700;
+}
+
+.paste-heading {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.meta {
+  margin: 0;
+  color: #64748b;
+}
+
+.paste-content {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  border: 1px solid #d8dee6;
+  border-radius: 6px;
+  background: #f8fafc;
+  padding: 16px;
+  font: 15px/1.5 Consolas, "Courier New", monospace;
+}
+
+@media (max-width: 640px) {
+  .panel {
+    padding: 18px;
+  }
+
+  .paste-heading {
+    display: block;
+  }
+
+  .button-link {
+    display: inline-block;
+    margin-top: 12px;
+  }
+}

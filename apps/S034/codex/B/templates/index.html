@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Reading List{% endblock %}
+{% block content %}
+<section class="panel">
+    <h1>Track your books</h1>
+    <p>Log in to manage your private reading list and update your progress.</p>
+    <div class="actions">
+        <a class="button" href="{{ url_for('login') }}">Log in</a>
+        <a class="button secondary" href="{{ url_for('register') }}">Register</a>
+    </div>
+</section>
+{% endblock %}

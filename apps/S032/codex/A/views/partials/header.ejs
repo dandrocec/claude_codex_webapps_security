@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/expenses">Expense Tracker</a>
+      <% if (currentUser) { %>
+        <nav class="nav">
+          <span><%= currentUser.username %></span>
+          <form method="post" action="/logout">
+            <button class="link-button" type="submit">Log out</button>
+          </form>
+        </nav>
+      <% } %>
+    </header>
+    <main class="container">
+      <% if (flash) { %>
+        <div class="alert <%= flash.type %>"><%= flash.message %></div>
+      <% } %>

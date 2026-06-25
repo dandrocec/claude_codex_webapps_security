@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Favorites | Daily Spark{% endblock %}
+{% block content %}
+  <section class="list-panel" aria-labelledby="favorites-heading">
+    <h1 id="favorites-heading">Favorites</h1>
+    {% if favorites %}
+      <ul class="favorites">
+        {% for favorite in favorites %}
+          <li>
+            <blockquote>
+              <p>{{ favorite.quote }}</p>
+              <footer>{{ favorite.author }}</footer>
+            </blockquote>
+            <form method="post" action="{{ url_for('delete_favorite', favorite_id=favorite.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="button danger" type="submit">Remove</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">No favorites saved yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

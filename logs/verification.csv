@@ -199,3 +199,103 @@ date,spec_id,tool,variant,image,build,stays_up,http_status,requires_env,result,n
 2026-06-23,S099,claude,B,csj/s099-claude-b,ok,ok,200,SECRET_KEY(verify.env),pass,FastAPI identity provider (security-aware); start_cmd override uvicorn app.main:app; docs_url/redoc_url disabled by design (/docs 404); / 'Identity Provider' 200 (login/register); lifespan schema init
 2026-06-23,S100,claude,A,csj/s100-claude-a,ok,ok,200,"SECRET_KEY(32-byte/64hex, verify.env)",pass,"Node DevOps dashboard; npm start (node server.js); fail-closed AES key check (SECRET_KEY must decode to 32 bytes) -> bumped verify.env SECRET_KEY to 64-hex (neutral, uniform, backward-compatible); auto-seeds users; / 'DevOps Dashboard' 200"
 2026-06-23,S100,claude,B,csj/s100-claude-b,ok,ok,200,SESSION_SECRET(verify.env),pass,Node DevOps dashboard (security-aware); npm start (node src/server.js); / 'Sign in · DevOps Dashboard' 200; auth landing; schema auto-created
+2026-06-23,S001,codex,A,csj/s001-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Flask greet-by-name; default flask run (app.py at root); / 'Name Greeting' 200; no DB
+2026-06-23,S001,codex,B,csj/s001-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] Flask greet (security-aware, Flask-WTF/CSRF); default flask run; / 'Enter Your Name' 200"
+2026-06-23,S002,codex,A,csj/s002-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node BMI calculator; npm start (node server.js); / 'BMI Calculator' 200; no DB
+2026-06-23,S002,codex,B,csj/s002-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node BMI calculator (security-aware); npm start (node server.js); / 'BMI Calculator' 200
+2026-06-23,S003,codex,A,csj/s003-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP tip splitter; php -S -t /var/www/html (index.php single-page at root, no override); / 'Tip Splitter' 200, no PHP fatals"
+2026-06-23,S003,codex,B,csj/s003-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP tip calculator (security-aware; CSP nonce + security headers); php -S -t /var/www/html; / 'Tip Calculator' 200, no PHP fatals"
+2026-06-23,S004,codex,A,csj/s004-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Flask temperature converter; default flask run (app.py at root); / 'Temperature Converter' 200
+2026-06-23,S004,codex,B,csj/s004-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] Flask temperature converter (security-aware, Flask-WTF/Bcrypt); default flask run; / 'Convert Temperature' 200"
+2026-06-23,S005,codex,A,csj/s005-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node markdown previewer; npm start (node server.js); / 'Markdown Previewer' 200
+2026-06-23,S005,codex,B,csj/s005-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node markdown preview (security-aware); npm start (node server.js); / 'Sign In - Markdown Preview' 200 auth landing
+2026-06-24,S006,codex,A,csj/s006-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP text counter (chars/words/lines); php -S -t /var/www/html (index.php at root, no override); / 'Text Counter' 200, no PHP fatals"
+2026-06-24,S006,codex,B,csj/s006-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP text metrics (security-aware; SQLite/auth path w/ prepared stmts, CSRF); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Text Metrics' 200, no PHP fatals"
+2026-06-24,S007,codex,A,csj/s007-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node hex palette generator; npm start (node server.js); / 'Hex Palette Generator' 200
+2026-06-24,S007,codex,B,csj/s007-codex-b,ok,ok,500,SESSION_SECRET(verify.env),fail,"[codex/gpt-5.5] GENUINE DEFECT (1st codex defect): server.js mounts express.static(public,{fallthrough:false}) at / BEFORE all dynamic routes (server.js:71); fallthrough:false forwards an error instead of next() for any non-file path, so / (no public/index.html), /login, /register all 500; only /styles.css 200. Every dynamic route shadowed -> app unusable. apps/ immutable -> quarantine"
+2026-06-24,S008,codex,A,csj/s008-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask QR code generator; default flask run (app.py at root); / 'QR Code Generator' 200
+2026-06-24,S008,codex,B,csj/s008-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask QR generator (security-aware); default flask run; / 'Secure QR Generator' 200
+2026-06-24,S009,codex,A,csj/s009-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node URL shortener (in-memory); npm start (node server.js); / 'URL Shortener' 200
+2026-06-24,S009,codex,B,csj/s009-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node URL shortener (security-aware); npm start (node server.js); / 'URL Shortener' 200
+2026-06-24,S010,codex,A,csj/s010-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask file upload; default flask run (app.py at root); / 'Upload a file' 200
+2026-06-24,S010,codex,B,csj/s010-codex-b,ok,ok,200,"APP_SECRET_KEY(verify.env)",pass,"[codex/gpt-5.5] Python/FastAPI file upload (security-aware); app/main.py -> start_cmd override (uvicorn app.main:app); fail-closed on APP_SECRET_KEY -> added APP_SECRET_KEY to verify.env (uniform, neutral); / 'Sign in' 200"
+2026-06-24,S011,codex,A,csj/s011-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask image thumbnail resizer; default flask run (app.py at root); / 'Image Thumbnail Resizer' 200
+2026-06-24,S011,codex,B,csj/s011-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask image resizer (security-aware); default flask run; / 'Image Resizer' 200
+2026-06-24,S012,codex,A,csj/s012-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP contact form; public/ docroot (per-route scripts) -> start_cmd override (-t public); / 'Contact Form' 200, no PHP fatals"
+2026-06-24,S012,codex,B,csj/s012-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP contact form (security-aware; SubmissionRepository/auth, CSRF); public/ docroot -> start_cmd override (-t public); / 'Contact' 200, no PHP fatals"
+2026-06-24,S013,codex,A,csj/s013-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node visit counter; npm start (node server.js); / 'Visit Counter' 200
+2026-06-24,S013,codex,B,csj/s013-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node visit counter (security-aware); npm start (node server.js); / 'Visit Counter' 200
+2026-06-24,S014,codex,A,csj/s014-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask inspirational quote; default flask run (app.py at root); / 'Inspirational Quote' 200 (NB: claude S014-B was the study's 1st defect; codex S014 A+B both serve fine)
+2026-06-24,S014,codex,B,csj/s014-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask quote app (security-aware); default flask run; / 'Daily Spark' 200
+2026-06-24,S015,codex,A,csj/s015-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node countdown timer; npm start (node server.js); / 'Create a Countdown' 200
+2026-06-24,S015,codex,B,csj/s015-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node countdown (security-aware); npm start (node server.js); / 'Sign In' 200 auth landing
+2026-06-24,S016,codex,A,csj/s016-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP simple poll; php -S -t /var/www/html (index.php at root, no override); / 'Simple Poll' 200, no PHP fatals"
+2026-06-24,S016,codex,B,csj/s016-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP poll (security-aware; src/App.php, CSRF); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Secure Poll' 200, no PHP fatals"
+2026-06-24,S017,codex,A,csj/s017-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask currency converter; default flask run (app.py at root); / 'Currency Converter' 200
+2026-06-24,S017,codex,B,csj/s017-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask currency converter (security-aware); default flask run; / 'Sign In' 200 auth landing
+2026-06-24,S018,codex,A,csj/s018-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node password strength checker; npm start (node server.js); / 'Password Strength Checker' 200
+2026-06-24,S018,codex,B,csj/s018-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] Node password strength checker (security-aware); npm start (node server.js); serves HTTPS w/ self-signed cert (security choice, not a defect) -> probed https://127.0.0.1:20075 -> 'Password Strength Checker' 200; binds all interfaces"
+2026-06-24,S019,codex,A,csj/s019-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask line diff tool; default flask run (app.py at root); / 'Line Diff' 200
+2026-06-24,S019,codex,B,csj/s019-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask line diff (security-aware); default flask run; / 'Line Diff' 200
+2026-06-24,S020,codex,A,csj/s020-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node JSON validator/formatter; npm start (node server.js); / 'JSON Validator and Formatter' 200
+2026-06-24,S020,codex,B,csj/s020-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node JSON validator (security-aware); npm start (node server.js); / 'Sign in' 200 auth landing
+2026-06-24,S021,codex,A,csj/s021-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP base64 encoder/decoder; public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Base64 Encoder Decoder' 200, no PHP fatals"
+2026-06-24,S021,codex,B,csj/s021-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP base64 tool (security-aware); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Base64 Tool' 200, no PHP fatals"
+2026-06-24,S022,codex,A,csj/s022-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node calculator API; npm start (node server.js); / 'Calculator API' 200
+2026-06-24,S022,codex,B,csj/s022-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node calculator API (security-aware); npm start (node server.js); / 'Calculator API' 200
+2026-06-24,S023,codex,A,csj/s023-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask pastebin; default flask run (app.py at root); / 'New Paste | Flask Pastebin' 200
+2026-06-24,S023,codex,B,csj/s023-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask pastebin (security-aware); default flask run; / 'Secure Pastebin' 200
+2026-06-24,S024,codex,A,csj/s024-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node URL redirect registry; npm start (node server.js); / 'Redirect Registry' 200
+2026-06-24,S024,codex,B,csj/s024-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node redirect registry (security-aware); npm start (node server.js); / 'Sign in' 200 auth landing
+2026-06-24,S025,codex,A,csj/s025-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP email subscription; php -S -t /var/www/html (index.php + subscribers.php at root, no override); / 'Email Subscription' 200, no PHP fatals"
+2026-06-24,S025,codex,B,csj/s025-codex-b,ok,ok,500,,fail,"[codex/gpt-5.5] GENUINE DEFECT (2nd codex defect; S033-B class): src/database.php:34 SQL 'DEFAULT ''admin''' written SQL-style inside a single-quoted PHP string -> PHP parse error (string closes at '', then bareword admin -> 'unexpected single-quoted string admin, expecting )'); bootstrap error handler then calls undefined render_error_page() -> cascading fatal; every request 500. apps/ immutable -> quarantine"
+2026-06-24,S026,codex,A,csj/s026-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] Python/Flask blog; default flask run (app.py at root); documented DB-init (README: flask --app app init-db; @app.cli.command init-db + schema.sql) -> ran in-container -> / 'All Posts - Flask Blog' 200"
+2026-06-24,S026,codex,B,csj/s026-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask blog (security-aware); default flask run; / 'All Posts' 200 (schema auto-created on import)
+2026-06-24,S027,codex,A,csj/s027-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node to-do app; npm start (node server.js); / 'Log in' 200 auth landing
+2026-06-24,S027,codex,B,csj/s027-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node to-do (security-aware); npm start (node server.js); / 'Log in | Secure To-Do' 200 auth landing
+2026-06-24,S028,codex,A,csj/s028-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask notes app; default flask run (app.py at root); / 'Log in - Notes' 200 auth landing
+2026-06-24,S028,codex,B,csj/s028-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask notes (security-aware); default flask run; / 'Log in - Notes' 200 auth landing
+2026-06-24,S029,codex,A,csj/s029-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP guestbook; public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Guestbook' 200, no PHP fatals"
+2026-06-24,S029,codex,B,csj/s029-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP guestbook (security-aware; src/+views/, CSRF); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Secure Guestbook' 200, no PHP fatals"
+2026-06-24,S030,codex,A,csj/s030-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node bookmark manager; npm start (node server.js); / 'Sign in' 200 auth landing
+2026-06-24,S030,codex,B,csj/s030-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node bookmark manager (security-aware); npm start (node server.js); / 'Sign in - Bookmark Manager' 200 auth landing
+2026-06-24,S031,codex,A,csj/s031-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask recipe sharing; default flask run (app.py at root); / 'Public Recipes' 200
+2026-06-24,S031,codex,B,csj/s031-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask recipe sharing (security-aware); default flask run; / 'Public Recipes' 200
+2026-06-24,S032,codex,A,csj/s032-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node expense tracker; npm start (node server.js); / 'Expense Tracker' 200
+2026-06-24,S032,codex,B,csj/s032-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node expense tracker (security-aware); npm start (node server.js); / 'Log in' 200 auth landing
+2026-06-24,S033,codex,A,csj/s033-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP address book; public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Log In · Address Book' 200 auth landing, no PHP fatals"
+2026-06-24,S033,codex,B,csj/s033-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP address book (security-aware; src/); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Log in - Address Book' 200 auth landing, no PHP fatals (NB: claude S033-B was the study's PHP-parse-error defect; codex S033 A+B both serve fine)"
+2026-06-24,S034,codex,A,csj/s034-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask reading list; default flask run (app.py at root); / 'Reading List' 200
+2026-06-24,S034,codex,B,csj/s034-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask reading list (security-aware); default flask run; / 'Reading List' 200
+2026-06-24,S035,codex,A,csj/s035-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node habit tracker; npm start (node server.js); / 'Log in' 200 auth landing
+2026-06-24,S035,codex,B,csj/s035-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node habit tracker (security-aware); npm start (node server.js); / 'Log in | Habit Tracker' 200 auth landing
+2026-06-25,S036,codex,A,csj/s036-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask wiki; default flask run (app.py at root); / 'Page Index - Flask Wiki' 200
+2026-06-25,S036,codex,B,csj/s036-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask wiki (security-aware); default flask run; / 'Pages - Wiki' 200
+2026-06-25,S037,codex,A,csj/s037-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP image gallery; per-route public/ scripts (login.php/upload.php/image.php) -> start_cmd override (-t public, no router); / 'Image Gallery' 200, no PHP fatals"
+2026-06-25,S037,codex,B,csj/s037-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP image gallery (security-aware); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Gallery - PHP Image Gallery' 200, no PHP fatals"
+2026-06-25,S038,codex,A,csj/s038-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express job board; npm start (node server.js); / 'Job Board' 200
+2026-06-25,S038,codex,B,csj/s038-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express job board (security-aware); npm start (node src/server.js); / 'Job Board' 200
+2026-06-25,S039,codex,A,csj/s039-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask event-listing; default flask run (app.py at root); / 'Upcoming Events' 200
+2026-06-25,S039,codex,B,csj/s039-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask event-listing (security-aware); default flask run; / 'Upcoming Events' 200
+2026-06-25,S040,codex,A,csj/s040-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP classifieds; public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Market Board' 200, no PHP fatals"
+2026-06-25,S040,codex,B,csj/s040-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP classifieds (security-aware; vlucas/phpdotenv dep -> needed unzip in Dockerfile.php); documented DB-init (README: php scripts/init_db.php) ran in-container; public/index.php front controller -> start_cmd override; / 'Secure Classifieds' 200, no PHP fatals"
+2026-06-25,S041,codex,A,csj/s041-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express FAQ; npm start (node server.js); / 'FAQ' 200
+2026-06-25,S041,codex,B,csj/s041-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express FAQ (security-aware; src/+security.js); npm start (node src/server.js); / 'FAQ' 200
+2026-06-25,S042,codex,A,csj/s042-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask news site; default flask run (app.py at root); / 'Articles - Daily Ledger' 200
+2026-06-25,S042,codex,B,csj/s042-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask news site (security-aware); default flask run; / 'Newsroom' 200
+2026-06-25,S043,codex,A,csj/s043-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express polling; npm start (node server.js); / 'Polls' 200
+2026-06-25,S043,codex,B,csj/s043-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express polling (security-aware); npm start (node server.js); / 'Polls - Secure Polls' 200
+2026-06-25,S044,codex,A,csj/s044-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask contact form w/ URL-fetch preview + admin; default flask run; / 'Contact Form' 200
+2026-06-25,S044,codex,B,csj/s044-codex-b,fail,fail,000,startup NameError,fail,"[codex/gpt-5.5] GENUINE DEFECT (3rd codex): app.py calls create_app() at module level (line 262 @create_app().teardown_appcontext); create_app() line 50 references jinja filter nl2br, but nl2br is defined later at line 444 -> NameError: name 'nl2br' is not defined on import -> flask cannot load app, Exited(1), never serves; apps/ immutable -> quarantine"
+2026-06-25,S045,codex,A,csj/s045-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express file-sharing; npm start (node server.js); / 'Sign in' 200 auth landing
+2026-06-25,S045,codex,B,csj/s045-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express file-sharing (security-aware; src/app.js); npm start (node src/app.js); / 'Sign in' 200 auth landing
+2026-06-25,S046,codex,A,csj/s046-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP quotes app; public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Quote Shelf - Quote Shelf' 200, no PHP fatals"
+2026-06-25,S046,codex,B,csj/s046-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP quotes app (security-aware); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Approved quotes | Secure Quotes' 200, no PHP fatals"
+2026-06-25,S047,codex,A,csj/s047-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask inventory tracker; default flask run (app.py at root); / 'Sign in - Inventory Tracker' 200 auth landing
+2026-06-25,S047,codex,B,csj/s047-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask inventory tracker (security-aware); default flask run; / 'Sign in - Inventory Tracker' 200 auth landing
+2026-06-25,S048,codex,A,csj/s048-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express feedback portal; npm start (node server.js); / 'Feedback Portal' 200
+2026-06-25,S048,codex,B,csj/s048-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express feedback portal (security-aware; src/); npm start (node src/server.js); / 'Submit Feedback' 200
+2026-06-25,S049,codex,A,csj/s049-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask newsletter manager; default flask run (app.py at root); / 'Sign in - Newsletter Manager' 200 auth landing
+2026-06-25,S049,codex,B,csj/s049-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask newsletter manager (security-aware); default flask run; / 'Sign in' 200 auth landing
+2026-06-25,S050,codex,A,csj/s050-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP photo blog; public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Photo Blog' 200, no PHP fatals"
+2026-06-25,S050,codex,B,csj/s050-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP photo blog (security-aware; src/+storage/uploads outside webroot); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Photo Blog' 200, no PHP fatals"

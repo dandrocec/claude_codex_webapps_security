@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="page">
+      <section class="converter" aria-labelledby="converter-title">
+        <div class="header">
+          <p class="eyebrow">Temperature tool</p>
+          <h1 id="converter-title">Convert temperatures</h1>
+        </div>
+
+        <form method="post" class="form">
+          <label for="value">Temperature value</label>
+          <input
+            id="value"
+            name="value"
+            type="number"
+            step="any"
+            inputmode="decimal"
+            placeholder="Example: 21.5"
+            value="{{ value }}"
+            required
+          >
+
+          <fieldset>
+            <legend>Direction</legend>
+            <label class="option">
+              <input
+                type="radio"
+                name="direction"
+                value="c_to_f"
+                {% if direction == "c_to_f" %}checked{% endif %}
+              >
+              <span>Celsius to Fahrenheit</span>
+            </label>
+            <label class="option">
+              <input
+                type="radio"
+                name="direction"
+                value="f_to_c"
+                {% if direction == "f_to_c" %}checked{% endif %}
+              >
+              <span>Fahrenheit to Celsius</span>
+            </label>
+          </fieldset>
+
+          <button type="submit">Convert</button>
+        </form>
+
+        {% if error %}
+          <p class="message error" role="alert">{{ error }}</p>
+        {% endif %}
+
+        {% if result %}
+          <section class="result" aria-label="Conversion result">
+            <span>{{ result.input }}</span>
+            <strong>{{ result.output }}</strong>
+          </section>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

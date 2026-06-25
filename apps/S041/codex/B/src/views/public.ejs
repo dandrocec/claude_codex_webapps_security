@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+  <section class="intro">
+    <h1>Frequently Asked Questions</h1>
+    <form class="search" method="get" action="/">
+      <label for="q">Keyword filter</label>
+      <div class="search-row">
+        <input id="q" name="q" type="search" value="<%= keyword %>" maxlength="100" autocomplete="off">
+        <button type="submit">Filter</button>
+      </div>
+    </form>
+  </section>
+
+  <% if (groups.length === 0) { %>
+    <p class="empty">No FAQ entries match your search.</p>
+  <% } %>
+
+  <% groups.forEach((group) => { %>
+    <section class="category">
+      <h2><%= group.category %></h2>
+      <% group.faqs.forEach((faq) => { %>
+        <article class="faq-item">
+          <h3><%= faq.question %></h3>
+          <p><%= faq.answer %></p>
+        </article>
+      <% }) %>
+    </section>
+  <% }) %>
+<%- include('partials/footer') %>

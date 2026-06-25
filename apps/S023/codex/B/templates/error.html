@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Error{% endblock %}
+{% block content %}
+  <section class="panel narrow">
+    <h1>{{ message }}</h1>
+    <p>The request could not be completed.</p>
+    <a class="button secondary" href="{{ url_for('index') }}">Go home</a>
+  </section>
+{% endblock %}

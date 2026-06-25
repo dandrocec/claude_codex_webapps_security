@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<section class="form-panel narrow">
+  <h1>Create Account</h1>
+
+  <% if (errors.length) { %>
+    <div class="flash error">
+      <% errors.forEach((error) => { %>
+        <div><%= error %></div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <form method="post" action="/register" class="stacked-form">
+    <label>
+      Username
+      <input name="username" value="<%= username %>" minlength="3" required>
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" minlength="6" required>
+    </label>
+    <button type="submit">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Log in</a>.</p>
+</section>
+
+<%- include('../partials/footer') %>

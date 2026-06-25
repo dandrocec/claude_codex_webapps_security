@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% set title = "Edit Draft" if draft else "New Draft" %}
+{% block content %}
+<div class="page-heading">
+  <h1>{{ "Edit Draft" if draft else "New Draft" }}</h1>
+  <a class="button secondary" href="{{ url_for('dashboard') }}">Dashboard</a>
+</div>
+
+<form class="editor" method="post" action="{{ url_for('edit_draft', draft_id=draft.id) if draft else url_for('new_draft') }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label>Subject
+    <input name="subject" maxlength="140" value="{{ subject }}" required>
+  </label>
+  <label>Body
+    <textarea name="body" maxlength="10000" rows="16" required>{{ body }}</textarea>
+  </label>
+  <div class="actions">
+    <button type="submit">Save draft</button>
+    {% if draft %}
+      <a class="button secondary" href="{{ url_for('preview_draft', draft_id=draft.id) }}">Preview</a>
+    {% endif %}
+  </div>
+</form>
+{% endblock %}

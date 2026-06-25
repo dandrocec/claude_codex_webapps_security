@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} - Daily Ledger{% endblock %}
+
+{% block content %}
+  <article class="article-detail">
+    <p class="meta">By {{ article.author_name }} · {{ article.created_at }}</p>
+    <h1>{{ article.title }}</h1>
+    <div class="article-body">
+      {% for paragraph in article.body.splitlines() %}
+        {% if paragraph.strip() %}
+          <p>{{ paragraph }}</p>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+
+    <form class="comment-form" method="post">
+      <label for="commenter_name">Name</label>
+      <input id="commenter_name" name="commenter_name" maxlength="80" required>
+
+      <label for="body">Comment</label>
+      <textarea id="body" name="body" rows="4" required></textarea>
+
+      <button type="submit">Post comment</button>
+    </form>
+
+    {% if comments %}
+      <div class="comment-list">
+        {% for comment in comments %}
+          <article class="comment">
+            <p class="meta">{{ comment.commenter_name }} · {{ comment.created_at }}</p>
+            <p>{{ comment.body }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="muted">No comments yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Conversion History{% endblock %}
+
+{% block content %}
+  <section class="panel wide">
+    <h1>Conversion history</h1>
+    {% if rows %}
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Amount</th>
+              <th>From</th>
+              <th>Converted</th>
+              <th>To</th>
+              <th>Date</th>
+              <th class="action-cell">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in rows %}
+              <tr>
+                <td>{{ row.amount }}</td>
+                <td>{{ row.source_currency }}</td>
+                <td>{{ row.converted_amount }}</td>
+                <td>{{ row.target_currency }}</td>
+                <td>{{ row.created_at }}</td>
+                <td class="action-cell">
+                  <form action="{{ url_for('delete_conversion', conversion_id=row.id) }}" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button class="link-button" type="submit">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="muted">No conversions yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

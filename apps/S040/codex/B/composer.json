@@ -1,0 +1,17 @@
+{
+  "name": "local/secure-classifieds",
+  "description": "A secure PHP classifieds site with user accounts, listings, categories, search, and image uploads.",
+  "type": "project",
+  "require": {
+    "php": "^8.2",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:5040 -t public"
+  }
+}

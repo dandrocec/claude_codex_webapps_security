@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Register - Notes{% endblock %}
+{% block content %}
+<section class="panel auth-panel">
+  <h1>Register</h1>
+  <form method="post" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="username">Username</label>
+    <input id="username" name="username" autocomplete="username" minlength="3" maxlength="32" pattern="[A-Za-z0-9_.-]{3,32}" required>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="new-password" minlength="12" maxlength="256" required>
+
+    <button type="submit">Create account</button>
+  </form>
+  <p class="muted">Already registered? <a href="{{ url_for('login') }}">Log in</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{
+  "name": "local/base64-tool",
+  "description": "A small secure PHP Base64 encode/decode form.",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.1"
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:5021 -t public"
+  }
+}

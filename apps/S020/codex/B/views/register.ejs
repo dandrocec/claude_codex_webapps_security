@@ -1,0 +1,16 @@
+<%- include('layout', {
+  title: 'Register',
+  body: `
+    <form method="post" action="/register" class="auth-card">
+      <input type="hidden" name="_csrf" value="${csrfToken}">
+      <h1>Register</h1>
+      ${typeof error !== 'undefined' && error ? `<p class="error">${escapeHtml(error)}</p>` : ''}
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_-]+">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="new-password" required minlength="12" maxlength="128">
+      <button type="submit">Create account</button>
+      <p class="muted">Already registered? <a href="/login">Sign in</a>.</p>
+    </form>
+  `
+}) %>

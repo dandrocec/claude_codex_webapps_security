@@ -1,0 +1,45 @@
+<%- include('partials/head', { title: poll.question }) %>
+<section class="poll-detail">
+  <div class="poll-title">
+    <h1><%= poll.question %></h1>
+    <p>Created by <%= poll.username %></p>
+  </div>
+
+  <% if (!alreadyVoted) { %>
+    <form action="/polls/<%= poll.id %>/vote" method="post" class="vote-box">
+      <h2>Cast your vote</h2>
+      <% results.options.forEach((option) => { %>
+        <label class="choice">
+          <input type="radio" name="optionId" value="<%= option.id %>" required>
+          <span><%= option.label %></span>
+        </label>
+      <% }) %>
+      <button class="primary" type="submit">Vote</button>
+    </form>
+  <% } else { %>
+    <div class="voted-note">You have voted in this poll.</div>
+  <% } %>
+
+  <section class="results" data-poll-id="<%= poll.id %>">
+    <div class="results-heading">
+      <h2>Live Results</h2>
+      <span id="totalVotes"><%= results.totalVotes %> vote<%= results.totalVotes === 1 ? '' : 's' %></span>
+    </div>
+    <div id="chart" class="chart">
+      <% results.options.forEach((option) => { %>
+        <div class="bar-row" data-option-id="<%= option.id %>">
+          <div class="bar-label">
+            <span><%= option.label %></span>
+            <strong class="bar-count"><%= option.votes %></strong>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: <%= option.percent %>%"></div>
+          </div>
+          <span class="bar-percent"><%= option.percent %>%</span>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+</section>
+<script src="/results.js"></script>
+<%- include('partials/foot') %>

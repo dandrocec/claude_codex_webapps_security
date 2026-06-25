@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ "Register" if mode == "register" else "Log in" }} - Notes{% endblock %}
+
+{% block content %}
+<section class="auth-panel">
+    <h1>{{ "Create account" if mode == "register" else "Log in" }}</h1>
+    <form method="post" class="stacked-form">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="{{ 'new-password' if mode == 'register' else 'current-password' }}" required>
+
+        <button type="submit">{{ "Register" if mode == "register" else "Log in" }}</button>
+    </form>
+
+    {% if mode == "register" %}
+        <p class="muted">Already have an account? <a href="{{ url_for('login') }}">Log in</a>.</p>
+    {% else %}
+        <p class="muted">Need an account? <a href="{{ url_for('register') }}">Register</a>.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<section class="panel wide">
+  <h1><%= mode === 'edit' ? 'Edit job' : 'Post job' %></h1>
+  <% if (errors && errors.length) { %>
+    <div class="alert"><% errors.forEach((error) => { %><p><%= error %></p><% }) %></div>
+  <% } %>
+  <form method="post" action="<%= action %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Title
+      <input name="title" minlength="3" maxlength="120" required value="<%= values.title || '' %>">
+    </label>
+    <label>Company
+      <input name="company" minlength="2" maxlength="120" required value="<%= values.company || '' %>">
+    </label>
+    <label>Location
+      <input name="location" minlength="2" maxlength="120" required value="<%= values.location || '' %>">
+    </label>
+    <label>Description
+      <textarea name="description" minlength="20" maxlength="4000" required><%= values.description || '' %></textarea>
+    </label>
+    <button type="submit"><%= mode === 'edit' ? 'Save changes' : 'Post job' %></button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

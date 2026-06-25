@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FAQ Editor</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header compact">
+      <div>
+        <p class="eyebrow">Signed in as <%= username %></p>
+        <h1>FAQ Editor</h1>
+      </div>
+      <nav class="header-actions">
+        <a class="button secondary" href="/">Public FAQ</a>
+        <form method="post" action="/logout">
+          <button class="button secondary" type="submit">Log out</button>
+        </form>
+      </nav>
+    </header>
+
+    <main class="page editor-grid">
+      <% if (error) { %>
+        <p class="error wide"><%= error %></p>
+      <% } %>
+
+      <section class="panel">
+        <h2><%= editingFaq ? "Edit FAQ" : "Add FAQ" %></h2>
+        <form method="post" action="<%= editingFaq ? `/editor/faqs/${editingFaq.id}` : "/editor/faqs" %>" class="stack-form">
+          <label for="category_id">Category</label>
+          <select id="category_id" name="category_id" required>
+            <option value="">Choose a category</option>
+            <% categories.forEach((category) => { %>
+              <option value="<%= category.id %>" <%= editingFaq && editingFaq.category_id === category.id ? "selected" : "" %>><%= category.name %></option>
+            <% }) %>
+          </select>
+
+          <label for="question">Question</label>
+          <input id="question" name="question" value="<%= editingFaq ? editingFaq.question : "" %>" required>
+
+          <label for="answer">Answer</label>
+          <textarea id="answer" name="answer" rows="6" required><%= editingFaq ? editingFaq.answer : "" %></textarea>
+
+          <label for="sort_order">Order</label>
+          <input id="sort_order" name="sort_order" type="number" value="<%= editingFaq ? editingFaq.sort_order : 0 %>">
+
+          <div class="form-actions">
+            <button class="button" type="submit"><%= editingFaq ? "Save FAQ" : "Add FAQ" %></button>
+            <% if (editingFaq) { %>
+              <a class="button secondary" href="/editor">Cancel</a>
+            <% } %>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2><%= editingCategory ? "Edit Category" : "Add Category" %></h2>
+        <form method="post" action="<%= editingCategory ? `/editor/categories/${editingCategory.id}` : "/editor/categories" %>" class="stack-form">
+          <label for="name">Category name</label>
+          <input id="name" name="name" value="<%= editingCategory ? editingCategory.name : "" %>" required>
+
+          <label for="category_order">Order</label>
+          <input id="category_order" name="sort_order" type="number" value="<%= editingCategory ? editingCategory.sort_order : 0 %>">
+
+          <div class="form-actions">
+            <button class="button" type="submit"><%= editingCategory ? "Save Category" : "Add Category" %></button>
+            <% if (editingCategory) { %>
+              <a class="button secondary" href="/editor">Cancel</a>
+            <% } %>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel wide">
+        <h2>Questions and Answers</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Order</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% faqs.forEach((faq) => { %>
+                <tr>
+                  <td><%= faq.category_name %></td>
+                  <td><%= faq.sort_order %></td>
+                  <td><%= faq.question %></td>
+                  <td><%= faq.answer %></td>
+                  <td class="actions">
+                    <a href="/editor/faqs/<%= faq.id %>/edit">Edit</a>
+                    <form method="post" action="/editor/faqs/<%= faq.id %>/delete">
+                      <button type="submit">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel wide">
+        <h2>Categories</h2>
+        <div class="category-list">
+          <% categories.forEach((category) => { %>
+            <div class="category-row">
+              <span><strong><%= category.name %></strong> <small>Order <%= category.sort_order %></small></span>
+              <span class="actions">
+                <a href="/editor/categories/<%= category.id %>/edit">Edit</a>
+                <form method="post" action="/editor/categories/<%= category.id %>/delete">
+                  <button type="submit">Delete</button>
+                </form>
+              </span>
+            </div>
+          <% }) %>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

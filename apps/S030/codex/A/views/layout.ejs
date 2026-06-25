@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title || 'Bookmark Manager' %></title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/bookmarks">Bookmark Manager</a>
+      <% if (currentUser) { %>
+        <nav class="nav">
+          <span><%= currentUser.username %></span>
+          <form method="post" action="/logout">
+            <button type="submit" class="link-button">Log out</button>
+          </form>
+        </nav>
+      <% } %>
+    </header>
+    <main class="container">
+      <%- body %>
+    </main>
+  </body>
+</html>

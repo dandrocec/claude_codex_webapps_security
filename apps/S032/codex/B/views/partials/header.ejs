@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title || "Expense Tracker" %></title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/expenses">Expense Tracker</a>
+      <% if (user) { %>
+        <form method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link-button">Log out</button>
+        </form>
+      <% } %>
+    </header>
+    <main class="container">

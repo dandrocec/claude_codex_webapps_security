@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Page Index - Flask Wiki{% endblock %}
+
+{% block content %}
+  <section class="page-heading">
+    <div>
+      <h1>Page Index</h1>
+      <p>{{ pages|length }} page{{ '' if pages|length == 1 else 's' }}</p>
+    </div>
+    {% if g.user %}
+      <a class="button" href="{{ url_for('new_page') }}">Create page</a>
+    {% endif %}
+  </section>
+
+  {% if pages %}
+    <ul class="page-list">
+      {% for page in pages %}
+        <li>
+          <a href="{{ url_for('view_page', slug=page.slug) }}">{{ page.title }}</a>
+          <time datetime="{{ page.updated_at }}">Updated {{ page.updated_at }}</time>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="empty">
+      <h2>No pages yet</h2>
+      <p>{% if g.user %}Create the first wiki page to get started.{% else %}Log in to create the first wiki page.{% endif %}</p>
+    </div>
+  {% endif %}
+{% endblock %}

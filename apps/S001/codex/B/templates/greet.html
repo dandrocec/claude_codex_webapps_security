@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Greeting{% endblock %}
+
+{% block content %}
+  <h1>Hello, {{ name }}!</h1>
+  <a class="button" href="{{ url_for('index') }}">Back</a>
+{% endblock %}

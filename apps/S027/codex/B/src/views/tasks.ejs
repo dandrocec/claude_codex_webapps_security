@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+<section class="tasks-header">
+  <div>
+    <h1>My tasks</h1>
+    <p class="muted">Only tasks owned by your account are shown here.</p>
+  </div>
+</section>
+
+<section class="panel">
+  <%- include('partials/errors', { errors }) %>
+  <form method="post" action="/tasks" class="task-create" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label class="sr-only" for="title">New task</label>
+    <input id="title" name="title" value="<%= draftTitle %>" maxlength="200" placeholder="Add a task" required>
+    <button type="submit">Add</button>
+  </form>
+</section>
+
+<section class="task-list" aria-label="Tasks">
+  <% if (!tasks.length) { %>
+    <div class="empty">No tasks yet.</div>
+  <% } %>
+
+  <% tasks.forEach((task) => { %>
+    <article class="task <%= task.completed ? 'is-complete' : '' %>">
+      <form method="post" action="/tasks/<%= task.id %>/toggle">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="toggle" aria-label="<%= task.completed ? 'Mark incomplete' : 'Mark complete' %>">
+          <%= task.completed ? 'Done' : 'Open' %>
+        </button>
+      </form>
+
+      <form method="post" action="/tasks/<%= task.id %>" class="task-edit" novalidate>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label class="sr-only" for="task-<%= task.id %>">Task title</label>
+        <input id="task-<%= task.id %>" name="title" value="<%= task.title %>" maxlength="200" required>
+        <button type="submit">Save</button>
+      </form>
+
+      <form method="post" action="/tasks/<%= task.id %>/delete">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="danger">Delete</button>
+      </form>
+    </article>
+  <% }) %>
+</section>
+
+<%- include('partials/footer') %>

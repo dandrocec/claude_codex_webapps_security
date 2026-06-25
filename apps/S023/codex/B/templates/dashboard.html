@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}New paste{% endblock %}
+{% block content %}
+  <section class="panel">
+    <h1>New paste</h1>
+    <form method="post" action="{{ url_for('create_paste') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="body">Text</label>
+      <textarea id="body" name="body" maxlength="20000" required rows="14"></textarea>
+      <button type="submit">Create unique URL</button>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Your recent pastes</h2>
+    {% if pastes %}
+      <ul class="paste-list">
+        {% for paste in pastes %}
+          <li>
+            <a href="{{ url_for('view_paste', token=paste['token']) }}">{{ paste["preview"] or "Untitled paste" }}</a>
+            <time>{{ paste["created_at"] }}</time>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No pastes yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

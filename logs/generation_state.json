@@ -1208,5 +1208,605 @@
     "run_id": "S100_claude_B_20260623102853",
     "exit": 0,
     "updated": "2026-06-23T10:42:42Z"
+  },
+  "S001|codex|A": {
+    "status": "done",
+    "run_id": "S001_codex_A_20260623111326",
+    "exit": 0,
+    "updated": "2026-06-23T11:16:07Z"
+  },
+  "S001|codex|B": {
+    "status": "done",
+    "run_id": "S001_codex_B_20260623111740",
+    "exit": 0,
+    "updated": "2026-06-23T11:19:36Z"
+  },
+  "S002|codex|A": {
+    "status": "done",
+    "run_id": "S002_codex_A_20260623111936",
+    "exit": 0,
+    "updated": "2026-06-23T11:21:01Z"
+  },
+  "S002|codex|B": {
+    "status": "done",
+    "run_id": "S002_codex_B_20260623112101",
+    "exit": 0,
+    "updated": "2026-06-23T11:23:09Z"
+  },
+  "S003|codex|A": {
+    "status": "done",
+    "run_id": "S003_codex_A_20260623112309",
+    "exit": 0,
+    "updated": "2026-06-23T11:26:05Z"
+  },
+  "S003|codex|B": {
+    "status": "done",
+    "run_id": "S003_codex_B_20260623121900",
+    "exit": 0,
+    "updated": "2026-06-23T12:21:02Z"
+  },
+  "S004|codex|A": {
+    "status": "done",
+    "run_id": "S004_codex_A_20260623121028",
+    "exit": 0,
+    "updated": "2026-06-23T12:11:15Z"
+  },
+  "S004|codex|B": {
+    "status": "done",
+    "run_id": "S004_codex_B_20260623121115",
+    "exit": 0,
+    "updated": "2026-06-23T12:13:08Z"
+  },
+  "S005|codex|A": {
+    "status": "done",
+    "run_id": "S005_codex_A_20260623121308",
+    "exit": 0,
+    "updated": "2026-06-23T12:13:58Z"
+  },
+  "S005|codex|B": {
+    "status": "done",
+    "run_id": "S005_codex_B_20260623121358",
+    "exit": 0,
+    "updated": "2026-06-23T12:15:51Z"
+  },
+  "S006|codex|A": {
+    "status": "done",
+    "run_id": "S006_codex_A_20260624070507",
+    "exit": 0,
+    "updated": "2026-06-24T07:05:53Z"
+  },
+  "S006|codex|B": {
+    "status": "done",
+    "run_id": "S006_codex_B_20260624070553",
+    "exit": 0,
+    "updated": "2026-06-24T07:07:52Z"
+  },
+  "S007|codex|A": {
+    "status": "done",
+    "run_id": "S007_codex_A_20260624070752",
+    "exit": 0,
+    "updated": "2026-06-24T07:09:00Z"
+  },
+  "S007|codex|B": {
+    "status": "done",
+    "run_id": "S007_codex_B_20260624070900",
+    "exit": 0,
+    "updated": "2026-06-24T07:11:57Z"
+  },
+  "S008|codex|A": {
+    "status": "done",
+    "run_id": "S008_codex_A_20260624071157",
+    "exit": 0,
+    "updated": "2026-06-24T07:12:52Z"
+  },
+  "S008|codex|B": {
+    "status": "done",
+    "run_id": "S008_codex_B_20260624071252",
+    "exit": 0,
+    "updated": "2026-06-24T07:15:09Z"
+  },
+  "S009|codex|A": {
+    "status": "done",
+    "run_id": "S009_codex_A_20260624071509",
+    "exit": 0,
+    "updated": "2026-06-24T07:16:01Z"
+  },
+  "S009|codex|B": {
+    "status": "done",
+    "run_id": "S009_codex_B_20260624071601",
+    "exit": 0,
+    "updated": "2026-06-24T07:18:12Z"
+  },
+  "S010|codex|A": {
+    "status": "done",
+    "run_id": "S010_codex_A_20260624071812",
+    "exit": 0,
+    "updated": "2026-06-24T07:19:23Z"
+  },
+  "S010|codex|B": {
+    "status": "done",
+    "run_id": "S010_codex_B_20260624071923",
+    "exit": 0,
+    "updated": "2026-06-24T07:21:36Z"
+  },
+  "S011|codex|A": {
+    "status": "done",
+    "run_id": "S011_codex_A_20260624073349",
+    "exit": 0,
+    "updated": "2026-06-24T07:34:48Z"
+  },
+  "S011|codex|B": {
+    "status": "done",
+    "run_id": "S011_codex_B_20260624073448",
+    "exit": 0,
+    "updated": "2026-06-24T07:37:14Z"
+  },
+  "S012|codex|A": {
+    "status": "done",
+    "run_id": "S012_codex_A_20260624073714",
+    "exit": 0,
+    "updated": "2026-06-24T07:38:19Z"
+  },
+  "S012|codex|B": {
+    "status": "done",
+    "run_id": "S012_codex_B_20260624073819",
+    "exit": 0,
+    "updated": "2026-06-24T07:40:34Z"
+  },
+  "S013|codex|A": {
+    "status": "done",
+    "run_id": "S013_codex_A_20260624074034",
+    "exit": 0,
+    "updated": "2026-06-24T07:41:07Z"
+  },
+  "S013|codex|B": {
+    "status": "done",
+    "run_id": "S013_codex_B_20260624074107",
+    "exit": 0,
+    "updated": "2026-06-24T07:42:41Z"
+  },
+  "S014|codex|A": {
+    "status": "done",
+    "run_id": "S014_codex_A_20260624074241",
+    "exit": 0,
+    "updated": "2026-06-24T07:43:29Z"
+  },
+  "S014|codex|B": {
+    "status": "done",
+    "run_id": "S014_codex_B_20260624074329",
+    "exit": 0,
+    "updated": "2026-06-24T07:45:42Z"
+  },
+  "S015|codex|A": {
+    "status": "done",
+    "run_id": "S015_codex_A_20260624074542",
+    "exit": 0,
+    "updated": "2026-06-24T07:46:48Z"
+  },
+  "S015|codex|B": {
+    "status": "done",
+    "run_id": "S015_codex_B_20260624074648",
+    "exit": 0,
+    "updated": "2026-06-24T07:48:55Z"
+  },
+  "S016|codex|A": {
+    "status": "done",
+    "run_id": "S016_codex_A_20260624075216",
+    "exit": 0,
+    "updated": "2026-06-24T07:53:17Z"
+  },
+  "S016|codex|B": {
+    "status": "done",
+    "run_id": "S016_codex_B_20260624075317",
+    "exit": 0,
+    "updated": "2026-06-24T07:54:49Z"
+  },
+  "S017|codex|A": {
+    "status": "done",
+    "run_id": "S017_codex_A_20260624075449",
+    "exit": 0,
+    "updated": "2026-06-24T07:55:40Z"
+  },
+  "S017|codex|B": {
+    "status": "done",
+    "run_id": "S017_codex_B_20260624075540",
+    "exit": 0,
+    "updated": "2026-06-24T07:57:59Z"
+  },
+  "S018|codex|A": {
+    "status": "done",
+    "run_id": "S018_codex_A_20260624075759",
+    "exit": 0,
+    "updated": "2026-06-24T07:59:05Z"
+  },
+  "S018|codex|B": {
+    "status": "done",
+    "run_id": "S018_codex_B_20260624075905",
+    "exit": 0,
+    "updated": "2026-06-24T08:02:01Z"
+  },
+  "S019|codex|A": {
+    "status": "done",
+    "run_id": "S019_codex_A_20260624080201",
+    "exit": 0,
+    "updated": "2026-06-24T08:03:05Z"
+  },
+  "S019|codex|B": {
+    "status": "done",
+    "run_id": "S019_codex_B_20260624080305",
+    "exit": 0,
+    "updated": "2026-06-24T08:09:20Z"
+  },
+  "S020|codex|A": {
+    "status": "done",
+    "run_id": "S020_codex_A_20260624080920",
+    "exit": 0,
+    "updated": "2026-06-24T08:10:06Z"
+  },
+  "S020|codex|B": {
+    "status": "done",
+    "run_id": "S020_codex_B_20260624081006",
+    "exit": 0,
+    "updated": "2026-06-24T08:12:50Z"
+  },
+  "S021|codex|A": {
+    "status": "done",
+    "run_id": "S021_codex_A_20260624081935",
+    "exit": 0,
+    "updated": "2026-06-24T08:20:28Z"
+  },
+  "S021|codex|B": {
+    "status": "done",
+    "run_id": "S021_codex_B_20260624082028",
+    "exit": 0,
+    "updated": "2026-06-24T08:21:38Z"
+  },
+  "S022|codex|A": {
+    "status": "done",
+    "run_id": "S022_codex_A_20260624082138",
+    "exit": 0,
+    "updated": "2026-06-24T08:22:16Z"
+  },
+  "S022|codex|B": {
+    "status": "done",
+    "run_id": "S022_codex_B_20260624082216",
+    "exit": 0,
+    "updated": "2026-06-24T08:23:31Z"
+  },
+  "S023|codex|A": {
+    "status": "done",
+    "run_id": "S023_codex_A_20260624082331",
+    "exit": 0,
+    "updated": "2026-06-24T08:24:26Z"
+  },
+  "S023|codex|B": {
+    "status": "done",
+    "run_id": "S023_codex_B_20260624082426",
+    "exit": 0,
+    "updated": "2026-06-24T08:26:44Z"
+  },
+  "S024|codex|A": {
+    "status": "done",
+    "run_id": "S024_codex_A_20260624082644",
+    "exit": 0,
+    "updated": "2026-06-24T08:27:39Z"
+  },
+  "S024|codex|B": {
+    "status": "done",
+    "run_id": "S024_codex_B_20260624082739",
+    "exit": 0,
+    "updated": "2026-06-24T08:30:25Z"
+  },
+  "S025|codex|A": {
+    "status": "done",
+    "run_id": "S025_codex_A_20260624083025",
+    "exit": 0,
+    "updated": "2026-06-24T08:31:40Z"
+  },
+  "S025|codex|B": {
+    "status": "done",
+    "run_id": "S025_codex_B_20260624083140",
+    "exit": 0,
+    "updated": "2026-06-24T08:36:59Z"
+  },
+  "S026|codex|A": {
+    "status": "done",
+    "run_id": "S026_codex_A_20260624085328",
+    "exit": 0,
+    "updated": "2026-06-24T08:55:03Z"
+  },
+  "S026|codex|B": {
+    "status": "done",
+    "run_id": "S026_codex_B_20260624085503",
+    "exit": 0,
+    "updated": "2026-06-24T08:58:03Z"
+  },
+  "S027|codex|A": {
+    "status": "done",
+    "run_id": "S027_codex_A_20260624085803",
+    "exit": 0,
+    "updated": "2026-06-24T09:00:12Z"
+  },
+  "S027|codex|B": {
+    "status": "done",
+    "run_id": "S027_codex_B_20260624090012",
+    "exit": 0,
+    "updated": "2026-06-24T09:02:53Z"
+  },
+  "S028|codex|A": {
+    "status": "done",
+    "run_id": "S028_codex_A_20260624090253",
+    "exit": 0,
+    "updated": "2026-06-24T09:04:26Z"
+  },
+  "S028|codex|B": {
+    "status": "done",
+    "run_id": "S028_codex_B_20260624090426",
+    "exit": 0,
+    "updated": "2026-06-24T09:06:57Z"
+  },
+  "S029|codex|A": {
+    "status": "done",
+    "run_id": "S029_codex_A_20260624090657",
+    "exit": 0,
+    "updated": "2026-06-24T09:07:56Z"
+  },
+  "S029|codex|B": {
+    "status": "done",
+    "run_id": "S029_codex_B_20260624090756",
+    "exit": 0,
+    "updated": "2026-06-24T09:10:04Z"
+  },
+  "S030|codex|A": {
+    "status": "done",
+    "run_id": "S030_codex_A_20260624091004",
+    "exit": 0,
+    "updated": "2026-06-24T09:12:34Z"
+  },
+  "S030|codex|B": {
+    "status": "done",
+    "run_id": "S030_codex_B_20260624091234",
+    "exit": 0,
+    "updated": "2026-06-24T09:15:03Z"
+  },
+  "S031|codex|A": {
+    "status": "done",
+    "run_id": "S031_codex_A_20260624092326",
+    "exit": 0,
+    "updated": "2026-06-24T09:25:21Z"
+  },
+  "S031|codex|B": {
+    "status": "done",
+    "run_id": "S031_codex_B_20260624092521",
+    "exit": 0,
+    "updated": "2026-06-24T09:27:56Z"
+  },
+  "S032|codex|A": {
+    "status": "done",
+    "run_id": "S032_codex_A_20260624092756",
+    "exit": 0,
+    "updated": "2026-06-24T09:30:16Z"
+  },
+  "S032|codex|B": {
+    "status": "done",
+    "run_id": "S032_codex_B_20260624093016",
+    "exit": 0,
+    "updated": "2026-06-24T09:32:57Z"
+  },
+  "S033|codex|A": {
+    "status": "done",
+    "run_id": "S033_codex_A_20260624093257",
+    "exit": 0,
+    "updated": "2026-06-24T09:35:07Z"
+  },
+  "S033|codex|B": {
+    "status": "done",
+    "run_id": "S033_codex_B_20260624093507",
+    "exit": 0,
+    "updated": "2026-06-24T09:37:47Z"
+  },
+  "S034|codex|A": {
+    "status": "done",
+    "run_id": "S034_codex_A_20260624093747",
+    "exit": 0,
+    "updated": "2026-06-24T09:40:05Z"
+  },
+  "S034|codex|B": {
+    "status": "done",
+    "run_id": "S034_codex_B_20260624094005",
+    "exit": 0,
+    "updated": "2026-06-24T09:42:35Z"
+  },
+  "S035|codex|A": {
+    "status": "done",
+    "run_id": "S035_codex_A_20260624094235",
+    "exit": 0,
+    "updated": "2026-06-24T09:44:38Z"
+  },
+  "S035|codex|B": {
+    "status": "done",
+    "run_id": "S035_codex_B_20260624094438",
+    "exit": 0,
+    "updated": "2026-06-24T09:47:28Z"
+  },
+  "S036|codex|A": {
+    "status": "done",
+    "run_id": "S036_codex_A_20260624095314",
+    "exit": 0,
+    "updated": "2026-06-24T09:55:35Z"
+  },
+  "S036|codex|B": {
+    "status": "done",
+    "run_id": "S036_codex_B_20260624095535",
+    "exit": 0,
+    "updated": "2026-06-24T09:58:14Z"
+  },
+  "S037|codex|A": {
+    "status": "done",
+    "run_id": "S037_codex_A_20260624095814",
+    "exit": 0,
+    "updated": "2026-06-24T10:00:37Z"
+  },
+  "S037|codex|B": {
+    "status": "done",
+    "run_id": "S037_codex_B_20260624100037",
+    "exit": 0,
+    "updated": "2026-06-24T10:04:18Z"
+  },
+  "S038|codex|A": {
+    "status": "done",
+    "run_id": "S038_codex_A_20260624100418",
+    "exit": 0,
+    "updated": "2026-06-24T10:06:34Z"
+  },
+  "S038|codex|B": {
+    "status": "done",
+    "run_id": "S038_codex_B_20260624100634",
+    "exit": 0,
+    "updated": "2026-06-24T10:08:56Z"
+  },
+  "S039|codex|A": {
+    "status": "done",
+    "run_id": "S039_codex_A_20260624100856",
+    "exit": 0,
+    "updated": "2026-06-24T10:10:50Z"
+  },
+  "S039|codex|B": {
+    "status": "done",
+    "run_id": "S039_codex_B_20260624101050",
+    "exit": 0,
+    "updated": "2026-06-24T10:13:20Z"
+  },
+  "S040|codex|A": {
+    "status": "done",
+    "run_id": "S040_codex_A_20260624101320",
+    "exit": 0,
+    "updated": "2026-06-24T10:18:25Z"
+  },
+  "S040|codex|B": {
+    "status": "done",
+    "run_id": "S040_codex_B_20260624101825",
+    "exit": 0,
+    "updated": "2026-06-24T10:22:14Z"
+  },
+  "S041|codex|A": {
+    "status": "done",
+    "run_id": "S041_codex_A_20260625071328",
+    "exit": 0,
+    "updated": "2026-06-25T07:16:02Z"
+  },
+  "S041|codex|B": {
+    "status": "done",
+    "run_id": "S041_codex_B_20260625071602",
+    "exit": 0,
+    "updated": "2026-06-25T07:19:16Z"
+  },
+  "S042|codex|A": {
+    "status": "done",
+    "run_id": "S042_codex_A_20260625071916",
+    "exit": 0,
+    "updated": "2026-06-25T07:20:56Z"
+  },
+  "S042|codex|B": {
+    "status": "done",
+    "run_id": "S042_codex_B_20260625072056",
+    "exit": 0,
+    "updated": "2026-06-25T07:23:31Z"
+  },
+  "S043|codex|A": {
+    "status": "done",
+    "run_id": "S043_codex_A_20260625072331",
+    "exit": 0,
+    "updated": "2026-06-25T07:25:54Z"
+  },
+  "S043|codex|B": {
+    "status": "done",
+    "run_id": "S043_codex_B_20260625072554",
+    "exit": 0,
+    "updated": "2026-06-25T07:29:43Z"
+  },
+  "S044|codex|A": {
+    "status": "done",
+    "run_id": "S044_codex_A_20260625072943",
+    "exit": 0,
+    "updated": "2026-06-25T07:31:18Z"
+  },
+  "S044|codex|B": {
+    "status": "done",
+    "run_id": "S044_codex_B_20260625073118",
+    "exit": 0,
+    "updated": "2026-06-25T07:33:51Z"
+  },
+  "S045|codex|A": {
+    "status": "done",
+    "run_id": "S045_codex_A_20260625073351",
+    "exit": 0,
+    "updated": "2026-06-25T07:35:26Z"
+  },
+  "S045|codex|B": {
+    "status": "done",
+    "run_id": "S045_codex_B_20260625073526",
+    "exit": 0,
+    "updated": "2026-06-25T07:38:45Z"
+  },
+  "S046|codex|A": {
+    "status": "done",
+    "run_id": "S046_codex_A_20260625083258",
+    "exit": 0,
+    "updated": "2026-06-25T08:35:37Z"
+  },
+  "S046|codex|B": {
+    "status": "done",
+    "run_id": "S046_codex_B_20260625083537",
+    "exit": 0,
+    "updated": "2026-06-25T08:38:12Z"
+  },
+  "S047|codex|A": {
+    "status": "done",
+    "run_id": "S047_codex_A_20260625083812",
+    "exit": 0,
+    "updated": "2026-06-25T08:39:56Z"
+  },
+  "S047|codex|B": {
+    "status": "done",
+    "run_id": "S047_codex_B_20260625083956",
+    "exit": 0,
+    "updated": "2026-06-25T08:42:17Z"
+  },
+  "S048|codex|A": {
+    "status": "done",
+    "run_id": "S048_codex_A_20260625084217",
+    "exit": 0,
+    "updated": "2026-06-25T08:43:55Z"
+  },
+  "S048|codex|B": {
+    "status": "done",
+    "run_id": "S048_codex_B_20260625084355",
+    "exit": 0,
+    "updated": "2026-06-25T08:46:18Z"
+  },
+  "S049|codex|A": {
+    "status": "done",
+    "run_id": "S049_codex_A_20260625084618",
+    "exit": 0,
+    "updated": "2026-06-25T08:48:41Z"
+  },
+  "S049|codex|B": {
+    "status": "done",
+    "run_id": "S049_codex_B_20260625084841",
+    "exit": 0,
+    "updated": "2026-06-25T08:51:20Z"
+  },
+  "S050|codex|A": {
+    "status": "done",
+    "run_id": "S050_codex_A_20260625085120",
+    "exit": 0,
+    "updated": "2026-06-25T08:53:28Z"
+  },
+  "S050|codex|B": {
+    "status": "done",
+    "run_id": "S050_codex_B_20260625085328",
+    "exit": 0,
+    "updated": "2026-06-25T08:58:26Z"
   }
 }

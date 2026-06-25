@@ -1,0 +1,30 @@
+<%- include('partials/head', { title: 'Create Poll' }) %>
+<section class="form-panel">
+  <h1>Create Poll</h1>
+  <form action="/polls" method="post" class="stack" id="pollForm">
+    <label>
+      Question
+      <input name="question" minlength="5" required placeholder="What should we choose?">
+    </label>
+    <div class="option-fields">
+      <label>
+        Option 1
+        <input name="options" required>
+      </label>
+      <label>
+        Option 2
+        <input name="options" required>
+      </label>
+      <label>
+        Option 3
+        <input name="options">
+      </label>
+      <label>
+        Option 4
+        <input name="options">
+      </label>
+    </div>
+    <button class="primary" type="submit">Create Poll</button>
+  </form>
+</section>
+<%- include('partials/foot') %>

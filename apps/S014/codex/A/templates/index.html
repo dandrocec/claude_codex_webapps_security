@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inspirational Quote</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="quote-shell" aria-live="polite">
+      <section class="quote-panel">
+        <p class="eyebrow">Daily spark</p>
+        <blockquote>
+          <p id="quote-text">{{ quote.text }}</p>
+          <footer id="quote-author">- {{ quote.author }}</footer>
+        </blockquote>
+        <button id="new-quote" type="button">Show another quote</button>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+Build a Flask web app that turns text or a URL entered in a form into a QR code image and displays the generated QR code on the result page, with an option to download it as a PNG.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5008.

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">JSON Formatter</a>
+    <nav>
+      <% if (user) { %>
+        <span class="user"><%= user.username %></span>
+        <form method="post" action="/logout" class="inline-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link-button">Sign out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Sign in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">
+    <%- body %>
+  </main>
+</body>
+</html>

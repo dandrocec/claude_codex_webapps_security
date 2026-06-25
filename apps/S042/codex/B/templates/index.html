@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Newsroom{% endblock %}
+{% block content %}
+<section class="page-title">
+    <h1>Latest Articles</h1>
+</section>
+
+{% if articles %}
+    <div class="article-list">
+        {% for article in articles %}
+            <article class="article-card">
+                <h2><a href="{{ url_for('article_detail', article_id=article.id) }}">{{ article.title }}</a></h2>
+                <p class="meta">By {{ article.author_name }} on {{ article.created_at[:10] }} · {{ article.comment_count }} comments</p>
+                <p>{{ article.body[:220] }}{% if article.body|length > 220 %}...{% endif %}</p>
+            </article>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="empty">No articles have been published yet.</p>
+{% endif %}
+{% endblock %}

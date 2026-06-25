@@ -1,0 +1,15 @@
+{
+  "name": "password-strength-checker",
+  "version": "1.0.0",
+  "description": "A Node.js/Express app that rates password strength and gives improvement feedback.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

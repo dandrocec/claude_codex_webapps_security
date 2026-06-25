@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% set title = "Contact Form" %}
+
+{% block content %}
+<section class="panel">
+  <div class="intro">
+    <p class="eyebrow">Contact</p>
+    <h1>Send a message</h1>
+  </div>
+
+  {% if errors %}
+    <div class="notice error">
+      {% for error in errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form method="post" class="contact-form">
+    <label>
+      <span>Name</span>
+      <input name="name" value="{{ form.name }}" required maxlength="120" autocomplete="name">
+    </label>
+
+    <label>
+      <span>Email</span>
+      <input name="email" type="email" value="{{ form.email }}" required maxlength="180" autocomplete="email">
+    </label>
+
+    <label>
+      <span>Website URL <small>optional</small></span>
+      <input name="website_url" type="url" value="{{ form.website_url }}" maxlength="500" placeholder="https://example.com">
+    </label>
+
+    <label>
+      <span>Message</span>
+      <textarea name="message" required rows="7" maxlength="3000">{{ form.message }}</textarea>
+    </label>
+
+    {% if preview %}
+      <aside class="preview">
+        <p class="eyebrow">Website preview</p>
+        <h2>{{ preview.title }}</h2>
+        <pre>{{ preview.text }}</pre>
+      </aside>
+    {% elif fetch_error %}
+      <div class="notice warning">
+        <p>{{ fetch_error }}</p>
+      </div>
+    {% endif %}
+
+    <button type="submit">Submit message</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+<%- include("partials/header", { title: "Register" }) %>
+<section class="panel auth">
+  <h1>Register</h1>
+  <%- include("partials/errors", { errors }) %>
+  <form method="post" action="/register" autocomplete="on">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" minlength="3" maxlength="32" required value="<%= form.username || "" %>">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" minlength="12" maxlength="128" required>
+    <p><button type="submit">Create account</button></p>
+  </form>
+  <p class="muted">Already registered? <a href="/login">Log in</a></p>
+</section>
+<%- include("partials/footer") %>

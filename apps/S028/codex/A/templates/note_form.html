@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ "Edit note" if note else "New note" }} - Notes{% endblock %}
+
+{% block content %}
+<section class="form-panel">
+    <h1>{{ "Edit note" if note else "New note" }}</h1>
+    <form method="post" class="stacked-form">
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" value="{{ note['title'] if note else '' }}" required autofocus>
+
+        <label for="body">Body</label>
+        <textarea id="body" name="body" rows="10">{{ note["body"] if note else "" }}</textarea>
+
+        <div class="form-actions">
+            <button type="submit">{{ "Save changes" if note else "Create note" }}</button>
+            <a href="{{ url_for('index') }}">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

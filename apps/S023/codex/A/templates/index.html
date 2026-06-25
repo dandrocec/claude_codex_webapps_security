@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}New Paste | Flask Pastebin{% endblock %}
+
+{% block content %}
+  <section class="panel">
+    <h1>Create a paste</h1>
+    <form method="post" action="{{ url_for('index') }}">
+      <label for="content">Text</label>
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+      <textarea id="content" name="content" rows="16" autofocus>{{ content or "" }}</textarea>
+      <button type="submit">Create paste</button>
+    </form>
+  </section>
+{% endblock %}

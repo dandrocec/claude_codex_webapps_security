@@ -1,0 +1,19 @@
+{
+  "name": "express-bookmark-manager",
+  "version": "1.0.0",
+  "description": "A Node.js/Express bookmark manager with user accounts, tags, and SQLite storage.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "sqlite3": "^5.1.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

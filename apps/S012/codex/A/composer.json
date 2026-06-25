@@ -1,0 +1,11 @@
+{
+  "name": "local/contact-form",
+  "description": "A small PHP contact form application that stores submissions in a local file.",
+  "type": "project",
+  "require": {
+    "php": ">=8.0"
+  },
+  "scripts": {
+    "start": "php -S 127.0.0.1:5012 -t public"
+  }
+}

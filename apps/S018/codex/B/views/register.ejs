@@ -1,0 +1,19 @@
+<%- include('layout/header') %>
+
+<section class="panel auth-panel">
+  <h1>Create account</h1>
+  <% if (error) { %><p class="alert"><%= error %></p><% } %>
+  <form method="post" action="/register" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="username">Username</label>
+    <input id="username" name="username" maxlength="40" autocomplete="username" required>
+
+    <label for="password">Account password</label>
+    <input id="password" name="password" type="password" maxlength="128" autocomplete="new-password" required>
+
+    <button type="submit">Create account</button>
+  </form>
+  <p class="muted">Already registered? <a href="/login">Sign in</a>.</p>
+</section>
+
+<%- include('layout/footer') %>

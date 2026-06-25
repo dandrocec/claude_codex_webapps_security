@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ "Register" if mode == "register" else "Sign in" }} - Inventory Tracker{% endblock %}
+{% block content %}
+  <section class="panel narrow">
+    <h1>{{ "Create account" if mode == "register" else "Sign in" }}</h1>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username" required minlength="3" maxlength="40" pattern="[A-Za-z0-9_.-]{3,40}">
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="{{ 'new-password' if mode == 'register' else 'current-password' }}" required minlength="12" maxlength="256">
+
+      <button type="submit">{{ "Register" if mode == "register" else "Sign in" }}</button>
+    </form>
+    {% if mode == "register" %}
+      <p class="muted">Already have an account? <a href="{{ url_for('login') }}">Sign in</a>.</p>
+    {% else %}
+      <p class="muted">Need an account? <a href="{{ url_for('register') }}">Register</a>.</p>
+    {% endif %}
+  </section>
+{% endblock %}

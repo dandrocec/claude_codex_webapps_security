@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Daily Ledger{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('index') }}">Daily Ledger</a>
+    <nav class="nav">
+      <a href="{{ url_for('index') }}">Articles</a>
+      {% if g.user %}
+        <a href="{{ url_for('publish') }}">Publish</a>
+        <span class="user">Signed in as {{ g.user.username }}</span>
+        <form action="{{ url_for('logout') }}" method="post">
+          <button type="submit" class="link-button">Log out</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="page">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-list">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

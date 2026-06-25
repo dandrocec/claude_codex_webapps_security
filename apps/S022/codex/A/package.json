@@ -1,0 +1,16 @@
+{
+  "name": "express-calc-api",
+  "version": "1.0.0",
+  "description": "A small Node.js/Express JSON API for evaluating math expressions.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mathjs": "^12.4.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

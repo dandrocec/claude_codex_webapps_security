@@ -1,0 +1,38 @@
+<%- include("partials/header") %>
+
+<section class="panel wide">
+  <div class="heading-row">
+    <h1>All feedback</h1>
+    <p><%= feedback.length %> entries</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th><a href="/reviewer/feedback?sort=created&direction=<%= sort === "created" && direction === "desc" ? "asc" : "desc" %>">Submitted</a></th>
+          <th><a href="/reviewer/feedback?sort=category&direction=<%= sort === "category" && direction === "asc" ? "desc" : "asc" %>">Category</a></th>
+          <th><a href="/reviewer/feedback?sort=rating&direction=<%= sort === "rating" && direction === "desc" ? "asc" : "desc" %>">Rating</a></th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% feedback.forEach((item) => { %>
+          <tr>
+            <td><time datetime="<%= item.created_at %>"><%= item.created_at %></time></td>
+            <td><%= item.category %></td>
+            <td><%= item.rating %></td>
+            <td class="comment"><%= item.comment %></td>
+          </tr>
+        <% }) %>
+        <% if (!feedback.length) { %>
+          <tr>
+            <td colspan="4" class="empty">No feedback has been submitted yet.</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,18 @@
+<%- include('layout', {
+  title: snippet.title,
+  body: `
+    <section class="panel snippet-view">
+      <div class="snippet-header">
+        <div>
+          <h1>${escapeHtml(snippet.title)}</h1>
+          <p class="muted">${escapeHtml(snippet.created_at)}</p>
+        </div>
+        <form method="post" action="/snippets/${snippet.id}/delete">
+          <input type="hidden" name="_csrf" value="${csrfToken}">
+          <button type="submit" class="danger">Delete</button>
+        </form>
+      </div>
+      <pre>${escapeHtml(snippet.formatted_json)}</pre>
+    </section>
+  `
+}) %>

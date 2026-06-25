@@ -1,0 +1,25 @@
+<%- include('partials/start', { title: 'Register' }) %>
+<section class="panel auth">
+  <h1>Create account</h1>
+  <% if (errors.length) { %>
+    <div class="errors">
+      <% for (const error of errors) { %>
+        <p><%= error.msg %></p>
+      <% } %>
+    </div>
+  <% } %>
+  <form method="post" action="/register" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Username
+      <input name="username" value="<%= form.username || '' %>" autocomplete="username" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_-]+">
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" autocomplete="new-password" required minlength="12" maxlength="128">
+    </label>
+    <button type="submit">Create account</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Sign in</a>.</p>
+</section>
+<%- include('partials/end') %>

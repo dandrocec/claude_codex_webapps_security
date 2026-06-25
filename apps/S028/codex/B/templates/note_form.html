@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} note - Notes{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>{{ action }} note</h1>
+  <form method="post" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="title">Title</label>
+    <input id="title" name="title" maxlength="150" value="{{ note['title'] if note else '' }}" required>
+
+    <label for="body">Body</label>
+    <textarea id="body" name="body" maxlength="10000" rows="12" required>{{ note['body'] if note else '' }}</textarea>
+
+    <div class="form-actions">
+      <button type="submit">{{ action }} note</button>
+      <a class="button secondary" href="{{ url_for('index') }}">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

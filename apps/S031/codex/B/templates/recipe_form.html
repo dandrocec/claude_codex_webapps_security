@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} Recipe{% endblock %}
+{% block content %}
+<section class="form-panel">
+  <h1>{{ action }} recipe</h1>
+  <form method="post" enctype="multipart/form-data" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>
+      Title
+      <input name="title" value="{{ recipe.title or '' }}" maxlength="120" required>
+    </label>
+    <label>
+      Ingredients
+      <textarea name="ingredients" rows="8" maxlength="5000" required>{{ recipe.ingredients or '' }}</textarea>
+    </label>
+    <label>
+      Steps
+      <textarea name="steps" rows="10" maxlength="5000" required>{{ recipe.steps or '' }}</textarea>
+    </label>
+    <label>
+      Photo
+      <input name="photo" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+    </label>
+    {% if recipe.photo_filename %}
+      <img class="preview" src="{{ url_for('uploaded_file', filename=recipe.photo_filename) }}" alt="">
+    {% endif %}
+    <button type="submit">{{ action }} recipe</button>
+  </form>
+</section>
+{% endblock %}

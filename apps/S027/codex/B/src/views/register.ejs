@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+
+<section class="panel auth-panel">
+  <h1>Create account</h1>
+  <%- include('partials/errors', { errors }) %>
+  <form method="post" action="/register" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="username">Username</label>
+    <input id="username" name="username" value="<%= username %>" minlength="3" maxlength="40" pattern="[A-Za-z0-9_.-]+" autocomplete="username" required>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" minlength="12" maxlength="128" autocomplete="new-password" required>
+
+    <label for="confirmPassword">Confirm password</label>
+    <input id="confirmPassword" name="confirmPassword" type="password" minlength="12" maxlength="128" autocomplete="new-password" required>
+
+    <button type="submit">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Log in</a>.</p>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Events{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="{{ url_for('index') }}">Events</a>
+      <nav aria-label="Primary navigation">
+        <a href="{{ url_for('index') }}">Upcoming</a>
+        {% if g.user %}
+          <a href="{{ url_for('dashboard') }}">My events</a>
+          <form class="inline" method="post" action="{{ url_for('logout') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit">Log out</button>
+          </form>
+        {% else %}
+          <a href="{{ url_for('login') }}">Log in</a>
+          <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <main class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="messages" aria-live="polite">
+            {% for category, message in messages %}
+              <p class="message {{ category }}">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

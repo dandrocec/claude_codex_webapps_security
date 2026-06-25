@@ -1,0 +1,38 @@
+<%- include("partials/header") %>
+
+<section class="panel narrow">
+  <h1>Submit feedback</h1>
+
+  <% if (validationErrors.length) { %>
+    <div class="error" role="alert">
+      <% validationErrors.forEach((item) => { %>
+        <p><%= item %></p>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <form method="post" action="/feedback" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <label for="category">Category</label>
+    <select id="category" name="category" required>
+      <% ["Bug", "Feature Request", "Praise", "Complaint", "Other"].forEach((category) => { %>
+        <option value="<%= category %>" <%= form.category === category ? "selected" : "" %>><%= category %></option>
+      <% }) %>
+    </select>
+
+    <label for="rating">Rating</label>
+    <select id="rating" name="rating" required>
+      <% [5, 4, 3, 2, 1].forEach((rating) => { %>
+        <option value="<%= rating %>" <%= String(form.rating) === String(rating) ? "selected" : "" %>><%= rating %></option>
+      <% }) %>
+    </select>
+
+    <label for="comment">Comment</label>
+    <textarea id="comment" name="comment" minlength="5" maxlength="2000" required><%= form.comment %></textarea>
+
+    <button type="submit">Send feedback</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

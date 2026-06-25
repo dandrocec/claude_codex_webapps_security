@@ -1,0 +1,46 @@
+<%- include("partials/page_start", { title: "Tasks" }) %>
+
+<section class="task-shell">
+  <div class="task-heading">
+    <h1>Your tasks</h1>
+    <span><%= tasks.length %> total</span>
+  </div>
+
+  <form action="/tasks" method="post" class="add-form">
+    <input name="title" maxlength="200" placeholder="Add a task" required autofocus>
+    <button type="submit">Add</button>
+  </form>
+
+  <% if (tasks.length === 0) { %>
+    <p class="empty">No tasks yet.</p>
+  <% } %>
+
+  <ul class="task-list">
+    <% tasks.forEach((task) => { %>
+      <li class="task-item <%= task.completed ? "is-complete" : "" %>">
+        <% if (editingTask && editingTask.id === task.id) { %>
+          <form action="/tasks/<%= task.id %>/edit" method="post" class="edit-form">
+            <input name="title" value="<%= task.title %>" maxlength="200" required>
+            <button type="submit">Save</button>
+            <a class="button secondary" href="/tasks">Cancel</a>
+          </form>
+        <% } else { %>
+          <form action="/tasks/<%= task.id %>/toggle" method="post">
+            <button class="check" type="submit" aria-label="<%= task.completed ? "Mark incomplete" : "Mark complete" %>">
+              <%= task.completed ? "✓" : "" %>
+            </button>
+          </form>
+          <span class="task-title"><%= task.title %></span>
+          <div class="task-actions">
+            <a class="button secondary" href="/tasks/<%= task.id %>/edit">Edit</a>
+            <form action="/tasks/<%= task.id %>/delete" method="post">
+              <button type="submit" class="danger">Delete</button>
+            </form>
+          </div>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+</section>
+
+<%- include("partials/page_end") %>

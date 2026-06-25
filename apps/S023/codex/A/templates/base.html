@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Flask Pastebin{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="{{ url_for('index') }}">Pastebin</a>
+        <a class="new-link" href="{{ url_for('index') }}">New paste</a>
+      </header>
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

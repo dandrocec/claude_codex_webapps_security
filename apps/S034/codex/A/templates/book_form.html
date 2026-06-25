@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} Book - Reading List{% endblock %}
+
+{% block content %}
+<section class="auth-panel wide">
+    <h1>{{ action }} book</h1>
+    <form method="post" class="form">
+        <label>
+            Title
+            <input name="title" value="{{ book['title'] }}" required>
+        </label>
+        <label>
+            Author
+            <input name="author" value="{{ book['author'] }}" required>
+        </label>
+        <div class="form-row">
+            <label>
+                Status
+                <select name="status">
+                    {% for status in statuses %}
+                        <option value="{{ status }}" {{ "selected" if book["status"] == status else "" }}>{{ status|replace("-", " ")|title }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>
+                Rating
+                <input name="rating" type="number" min="1" max="5" value="{{ book['rating'] or '' }}" placeholder="1-5">
+            </label>
+        </div>
+        <label>
+            Notes
+            <textarea name="notes" rows="5">{{ book['notes'] }}</textarea>
+        </label>
+        <div class="actions">
+            <button class="button" type="submit">{{ action }} book</button>
+            <a class="button secondary" href="{{ url_for('books') }}">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

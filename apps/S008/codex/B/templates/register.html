@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Create Account{% endblock %}
+{% block content %}
+  <section class="panel narrow">
+    <h1>Create account</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <label>
+        Username
+        {{ form.username(autocomplete="username") }}
+      </label>
+      {% for error in form.username.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+      <label>
+        Password
+        {{ form.password(autocomplete="new-password") }}
+      </label>
+      {% for error in form.password.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+      <label>
+        Confirm password
+        {{ form.confirm_password(autocomplete="new-password") }}
+      </label>
+      {% for error in form.confirm_password.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+      <button type="submit">Create account</button>
+    </form>
+  </section>
+{% endblock %}

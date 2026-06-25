@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{% if draft %}Edit draft{% else %}New draft{% endif %} - Newsletter Manager{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <div>
+      <p class="eyebrow">Compose</p>
+      <h1>{% if draft %}Edit draft{% else %}New draft{% endif %}</h1>
+    </div>
+  </section>
+
+  <section class="content-panel">
+    <form method="post" class="stacked-form compose-form">
+      <label>
+        Subject
+        <input name="subject" value="{{ draft.subject if draft else '' }}" required>
+      </label>
+      <label>
+        Body
+        <textarea name="body" rows="14" required>{{ draft.body if draft else '' }}</textarea>
+      </label>
+      <div class="button-row">
+        <button class="primary" type="submit">Save draft</button>
+        <a class="button" href="{{ url_for('drafts') }}">Cancel</a>
+      </div>
+    </form>
+  </section>
+{% endblock %}

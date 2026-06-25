@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }}{% endblock %}
+{% block content %}
+  <section class="form-panel narrow">
+    <h1>Error {{ code }}</h1>
+    <p>The request could not be completed.</p>
+    <a href="{{ url_for('index') }}">Return home</a>
+  </section>
+{% endblock %}

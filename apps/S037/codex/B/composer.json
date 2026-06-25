@@ -1,0 +1,21 @@
+{
+  "name": "local/php-image-gallery",
+  "description": "Secure PHP image gallery with user uploads and SQLite metadata storage.",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.1",
+    "ext-pdo": "*",
+    "ext-fileinfo": "*",
+    "ext-gd": "*",
+    "ext-mbstring": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Gallery\\": "src/"
+    }
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:5037 -t public"
+  }
+}

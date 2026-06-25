@@ -1,0 +1,3 @@
+Build a Flask wiki. Logged-in users create and edit wiki pages with a title and Markdown body; anyone can read pages. Provide a page index and search by title. Store pages in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5036.

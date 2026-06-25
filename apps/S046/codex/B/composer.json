@@ -1,0 +1,13 @@
+{
+  "name": "local/secure-quotes",
+  "description": "A secure PHP quotes app with user submissions and approval workflow.",
+  "type": "project",
+  "require": {
+    "php": ">=8.2",
+    "ext-pdo": "*",
+    "ext-pdo_sqlite": "*"
+  },
+  "scripts": {
+    "start": "php -S 127.0.0.1:5046 -t public public/index.php"
+  }
+}

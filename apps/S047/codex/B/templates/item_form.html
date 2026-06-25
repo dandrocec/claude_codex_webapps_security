@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit item" if item else "Add item" }} - Inventory Tracker{% endblock %}
+{% block content %}
+  <section class="panel narrow">
+    <h1>{{ "Edit item" if item else "Add item" }}</h1>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+      <label for="name">Name</label>
+      <input id="name" name="name" required maxlength="120" value="{{ item.name if item else '' }}">
+
+      <label for="sku">SKU</label>
+      <input id="sku" name="sku" required maxlength="64" pattern="[A-Za-z0-9_.-]{1,64}" value="{{ item.sku if item else '' }}">
+
+      <label for="quantity">Quantity</label>
+      <input id="quantity" name="quantity" type="number" min="0" max="1000000" required value="{{ item.quantity if item else 0 }}">
+
+      <label for="location">Location</label>
+      <input id="location" name="location" maxlength="80" pattern="[A-Za-z0-9 ,_.#/-]{0,80}" value="{{ item.location if item else '' }}">
+
+      <div class="form-actions">
+        <button type="submit">{{ "Save changes" if item else "Add item" }}</button>
+        <a href="{{ url_for('index') }}">Cancel</a>
+      </div>
+    </form>
+  </section>
+{% endblock %}

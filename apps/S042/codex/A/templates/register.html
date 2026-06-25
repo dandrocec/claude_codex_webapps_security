@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Daily Ledger{% endblock %}
+
+{% block content %}
+  <section class="form-panel">
+    <h1>Register as an author</h1>
+    <form method="post">
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username" required>
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="new-password" required>
+
+      <button type="submit">Create account</button>
+    </form>
+  </section>
+{% endblock %}

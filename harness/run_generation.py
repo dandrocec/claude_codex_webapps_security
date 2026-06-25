@@ -53,6 +53,12 @@ SESSIONS_CSV = LOGS / "sessions.csv"
 COMMANDS_LOG = LOGS / "commands.log"
 RENDERED_DIR = PROMPTS / "rendered"
 
+# Codex-only, security-neutral "generation-only" working agreement, dropped into the
+# build dir as AGENTS.md and removed before the move (see harness/invocation.md). It
+# discourages Codex's agentic self-run/self-test (Claude's -p mode doesn't do that),
+# bringing the two tools' calling conventions closer. NOT part of $PROMPT.
+CODEX_AGENTS_FILE = Path(__file__).resolve().parent / "codex_no_run_AGENTS.md"
+
 VALID_TOOLS = ("claude", "codex")
 VALID_VARIANTS = ("A", "B")
 
@@ -142,8 +148,17 @@ def build_command(tool: str, prompt: str, model: str, workdir: Path,
                 "--permission-mode", "acceptEdits", *extra]
         return argv, workdir
     if tool == "codex":
-        # PENDING: verify against the installed Codex version before a real study.
-        argv = ["codex", "exec", prompt, "--cd", str(workdir), *extra]
+        # Verified for Codex CLI v0.140.0 (see harness/invocation.md):
+        #   exec        = non-interactive mode (Codex equivalent of `claude -p`).
+        #   -m MODEL    = pin the model explicitly (do not rely on config default).
+        #   --cd DIR    = working root (the isolated build dir).
+        #   -s workspace-write = let it write the project unattended (the Codex
+        #                 equivalent of Claude's --permission-mode acceptEdits;
+        #                 security-NEUTRAL — adds no hardening to generated apps).
+        #   --skip-git-repo-check = the isolated build dir is outside any git repo,
+        #                 which `codex exec` otherwise refuses to run in.
+        argv = ["codex", "exec", prompt, "-m", model, "--cd", str(workdir),
+                "-s", "workspace-write", "--skip-git-repo-check", *extra]
         return argv, None
     sys.exit(f"error: unknown tool {tool!r}")
 
@@ -156,7 +171,8 @@ def loggable_command(tool: str, model: str, workdir: Path, rendered_file: Path,
     if tool == "claude":
         return (f"claude -p {promptref} --model {model} "
                 f"--permission-mode acceptEdits{extra_s}  (cwd={workdir})")
-    return f"codex exec {promptref} --cd {workdir}{extra_s}"
+    return (f"codex exec {promptref} -m {model} --cd {workdir} "
+            f"-s workspace-write --skip-git-repo-check{extra_s}")
 
 
 def tool_version(tool: str) -> str:
@@ -255,9 +271,21 @@ def main(argv: list[str]) -> int:
     build_dir = target if args.no_isolate else Path(tempfile.mkdtemp(prefix="csj_gen_"))
     argv_cmd, cwd = build_command(args.tool, prompt, args.model, build_dir, args.extra_arg)
 
+    # Codex-only: drop the generation-only working agreement as AGENTS.md so Codex
+    # writes files without spending turns running/testing the app. Removed below so
+    # it never lands in the generated project (and is never part of $PROMPT).
+    codex_agents = Path(build_dir) / "AGENTS.md"
+    if args.tool == "codex" and CODEX_AGENTS_FILE.exists():
+        shutil.copyfile(CODEX_AGENTS_FILE, codex_agents)
+
     started = _dt.datetime.now(_dt.timezone.utc)
     proc = subprocess.run(argv_cmd, cwd=str(cwd) if cwd else None)
     ok = proc.returncode == 0
+
+    # remove the injected AGENTS.md before anything is moved/kept (whether Codex
+    # touched it or not — it is harness scaffolding, not generated output)
+    if args.tool == "codex":
+        codex_agents.unlink(missing_ok=True)
 
     # move generated project into the immutable target dir
     if not args.no_isolate and ok:

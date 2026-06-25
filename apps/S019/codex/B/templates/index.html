@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="workspace">
+    <form method="post" class="diff-form" novalidate>
+      {{ form.hidden_tag() }}
+      <div class="editor-grid">
+        <label>
+          <span>Original</span>
+          {{ form.left_text(rows=16, maxlength=20000, spellcheck="false") }}
+        </label>
+        <label>
+          <span>Modified</span>
+          {{ form.right_text(rows=16, maxlength=20000, spellcheck="false") }}
+        </label>
+      </div>
+      <div class="actions">
+        {{ form.submit(class_="primary") }}
+      </div>
+    </form>
+
+    {% if diff_rows %}
+      <div class="diff-output" aria-label="Line by line differences">
+        {% for row in diff_rows %}
+          <div class="diff-row {{ row.kind }}">
+            <span class="prefix">{{ row.prefix }}</span>
+            <code>{{ row.text }}</code>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </section>
+
+  {% if recent %}
+    <aside class="recent">
+      <h2>Recent saved comparisons</h2>
+      <ul>
+        {% for item in recent %}
+          <li><a href="{{ url_for('comparison', comparison_id=item.id) }}">{{ item.created_at }}</a></li>
+        {% endfor %}
+      </ul>
+    </aside>
+  {% endif %}
+{% endblock %}

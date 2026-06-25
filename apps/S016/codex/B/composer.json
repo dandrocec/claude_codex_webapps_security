@@ -1,0 +1,16 @@
+{
+  "name": "codex/secure-file-poll",
+  "description": "A small secure PHP poll app backed by a JSON file.",
+  "type": "project",
+  "require": {
+    "php": ">=8.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "SecurePoll\\": "src/"
+    }
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:5016 -t public"
+  }
+}

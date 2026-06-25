@@ -1,0 +1,12 @@
+{
+  "name": "local/text-counter",
+  "description": "A small PHP web app that counts characters, words, and lines in submitted text.",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.1"
+  },
+  "scripts": {
+    "serve": "php -S 0.0.0.0:5006 index.php"
+  }
+}

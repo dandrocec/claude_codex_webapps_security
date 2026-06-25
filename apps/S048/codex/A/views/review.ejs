@@ -1,0 +1,39 @@
+<%- include("partials/header") %>
+
+<section class="review-layout">
+  <div class="section-head">
+    <h1>All feedback</h1>
+    <p><%= feedback.length %> total submission<%= feedback.length === 1 ? "" : "s" %></p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th><a href="/review?sort=created_at&order=<%= sort === "created_at" ? nextOrder : "desc" %>">Submitted</a></th>
+          <th><a href="/review?sort=category&order=<%= sort === "category" ? nextOrder : "asc" %>">Category</a></th>
+          <th><a href="/review?sort=rating&order=<%= sort === "rating" ? nextOrder : "desc" %>">Rating</a></th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (!feedback.length) { %>
+          <tr>
+            <td colspan="4" class="empty">No feedback has been submitted yet.</td>
+          </tr>
+        <% } %>
+
+        <% feedback.forEach((item) => { %>
+          <tr>
+            <td class="nowrap"><%= item.created_at %></td>
+            <td><span class="pill"><%= item.category %></span></td>
+            <td class="rating"><%= item.rating %> / 5</td>
+            <td class="comment"><%= item.comment %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<%- include("partials/footer") %>

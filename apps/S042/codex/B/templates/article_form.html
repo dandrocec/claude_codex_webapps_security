@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{% if article %}Edit Article{% else %}New Article{% endif %} · Newsroom{% endblock %}
+{% block content %}
+<section class="form-panel">
+    <h1>{% if article %}Edit Article{% else %}New Article{% endif %}</h1>
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label for="title">Title</label>
+        <input id="title" name="title" required minlength="5" maxlength="160" value="{{ article.title if article else '' }}">
+        <label for="body">Body</label>
+        <textarea id="body" name="body" required minlength="20" maxlength="20000">{{ article.body if article else '' }}</textarea>
+        <button type="submit">{% if article %}Save changes{% else %}Publish article{% endif %}</button>
+    </form>
+</section>
+{% endblock %}

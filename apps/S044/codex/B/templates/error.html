@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% set title = "Error" %}
+{% block content %}
+  <section class="panel narrow">
+    <h1>Request error</h1>
+    <p>The request could not be completed. Status: {{ status }}.</p>
+  </section>
+{% endblock %}

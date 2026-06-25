@@ -1,0 +1,304 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --text: #1f2937;
+  --muted: #667085;
+  --border: #d8dee9;
+  --primary: #1769aa;
+  --primary-dark: #125684;
+  --danger: #b42318;
+  --success-bg: #e8f6ef;
+  --success-text: #146c43;
+  --error-bg: #fdecec;
+  --error-text: #9f1c14;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--primary);
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 0 16px;
+}
+
+button:hover,
+.button:hover {
+  background: var(--primary-dark);
+  text-decoration: none;
+}
+
+.small {
+  min-height: 34px;
+  padding: 0 12px;
+}
+
+.site-header {
+  align-items: center;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 16px max(24px, calc((100vw - 1040px) / 2));
+}
+
+.brand {
+  color: var(--text);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.nav {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1040px;
+  padding: 32px 24px 56px;
+}
+
+.toolbar {
+  align-items: flex-start;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.search input {
+  flex: 1;
+}
+
+input,
+textarea {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.clear-link {
+  align-self: center;
+}
+
+.job-list {
+  display: grid;
+  gap: 16px;
+}
+
+.job-card,
+.form-panel,
+.empty {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px;
+}
+
+.job-card-header {
+  align-items: flex-start;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.company {
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.location {
+  background: #eef6fb;
+  border: 1px solid #cde3f2;
+  border-radius: 999px;
+  color: #125684;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 5px 10px;
+}
+
+.description {
+  margin: 18px 0;
+  white-space: pre-wrap;
+}
+
+.job-meta,
+.job-actions,
+.form-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.job-meta {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.92rem;
+  justify-content: space-between;
+  padding-top: 14px;
+}
+
+.job-actions {
+  margin-top: 16px;
+}
+
+.inline-form,
+.job-actions form {
+  display: inline;
+  margin: 0;
+}
+
+.link-button {
+  background: transparent;
+  color: var(--primary);
+  font-weight: 400;
+  min-height: auto;
+  padding: 0;
+}
+
+.link-button:hover {
+  background: transparent;
+  text-decoration: underline;
+}
+
+.danger {
+  background: transparent;
+  color: var(--danger);
+  min-height: auto;
+  padding: 0;
+}
+
+.danger:hover {
+  background: transparent;
+  text-decoration: underline;
+}
+
+.form-panel {
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.form-panel.narrow {
+  max-width: 440px;
+}
+
+.stacked-form {
+  display: grid;
+  gap: 16px;
+}
+
+.stacked-form label {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.flash {
+  border-radius: 6px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+}
+
+.flash.success {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.flash.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.empty {
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .site-header,
+  .toolbar,
+  .job-card-header,
+  .search {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .nav {
+    justify-content: flex-start;
+  }
+
+  .location {
+    align-self: flex-start;
+  }
+}

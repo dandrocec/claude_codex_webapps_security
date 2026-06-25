@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Enter Your Name{% endblock %}
+
+{% block content %}
+  <h1>Enter your name</h1>
+  <form method="post" action="{{ url_for('index') }}" novalidate>
+    {{ form.csrf_token }}
+    {{ form.name.label }}
+    {{ form.name(autocomplete="name", autofocus=true) }}
+    {% if form.name.errors %}
+      <ul class="errors">
+        {% for error in form.name.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {{ form.submit }}
+  </form>
+{% endblock %}

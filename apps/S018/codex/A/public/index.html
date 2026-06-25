@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Password Strength Checker</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel" aria-labelledby="page-title">
+        <div class="intro">
+          <p class="eyebrow">Security helper</p>
+          <h1 id="page-title">Password Strength Checker</h1>
+          <p>Type a candidate password to see a quick server-side rating and practical improvement tips.</p>
+        </div>
+
+        <form id="password-form" class="checker-form">
+          <label for="password">Candidate password</label>
+          <div class="input-row">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              placeholder="Enter a password"
+              required
+            >
+            <button type="button" id="toggle-password" aria-label="Show password">Show</button>
+          </div>
+          <button type="submit" class="primary-button">Check strength</button>
+        </form>
+
+        <section id="result" class="result hidden" aria-live="polite">
+          <div class="rating-row">
+            <span>Rating</span>
+            <strong id="rating">Weak</strong>
+          </div>
+          <div class="meter" aria-hidden="true">
+            <span id="meter-bar"></span>
+          </div>
+          <ul id="feedback"></ul>
+        </section>
+      </section>
+    </main>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

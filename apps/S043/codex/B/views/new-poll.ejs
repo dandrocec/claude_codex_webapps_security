@@ -1,0 +1,25 @@
+<%- include("partials/header", { title }) %>
+<section class="form-page">
+  <h1>New poll</h1>
+  <%- include("partials/errors", { errors }) %>
+  <form method="post" action="/polls" class="stack">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Title
+      <input name="title" minlength="3" maxlength="120" value="<%= values.title || '' %>" required>
+    </label>
+    <label>
+      Description
+      <textarea name="description" maxlength="500" rows="3"><%= values.description || '' %></textarea>
+    </label>
+    <fieldset>
+      <legend>Options</legend>
+      <% const opts = values.options && values.options.length ? values.options : ["", "", ""]; %>
+      <% for (let i = 0; i < 8; i += 1) { %>
+        <input name="options" maxlength="120" value="<%= opts[i] || '' %>" placeholder="Option <%= i + 1 %>" <%= i < 2 ? "required" : "" %>>
+      <% } %>
+    </fieldset>
+    <button type="submit">Create poll</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

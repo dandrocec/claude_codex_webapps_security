@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% set title = "Messages" %}
+{% block content %}
+  <section class="admin-head">
+    <h1>Submitted messages</h1>
+  </section>
+  <section class="message-list">
+    {% for item in messages %}
+      <article class="message-card">
+        <header>
+          <div>
+            <h2>{{ item.name }}</h2>
+            <a href="mailto:{{ item.email }}">{{ item.email }}</a>
+          </div>
+          <time datetime="{{ item.created_at }}">{{ item.created_at }}</time>
+        </header>
+        <p>{{ item.message | nl2br }}</p>
+        {% if item.website %}
+          <div class="preview">
+            <p class="preview-url">{{ item.website }}</p>
+            {% if item.preview_title %}
+              <strong>{{ item.preview_title }}</strong>
+              <p>{{ item.preview_excerpt | nl2br }}</p>
+            {% else %}
+              <p>No preview available.</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </article>
+    {% else %}
+      <p class="empty">No messages yet.</p>
+    {% endfor %}
+  </section>
+{% endblock %}

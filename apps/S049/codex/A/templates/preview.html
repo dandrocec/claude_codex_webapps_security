@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Preview - Newsletter Manager{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <div>
+      <p class="eyebrow">Preview</p>
+      <h1>{{ draft.subject }}</h1>
+    </div>
+    <div class="button-row">
+      <a class="button" href="{{ url_for('edit_draft', draft_id=draft.id) }}">Edit</a>
+      <a class="button" href="{{ url_for('drafts') }}">All drafts</a>
+    </div>
+  </section>
+
+  <section class="preview-shell">
+    <article class="email-preview">
+      <header>
+        <span>Newsletter Manager</span>
+        <h2>{{ draft.subject }}</h2>
+      </header>
+      <div class="email-body">
+        {% if sample_subscriber %}
+          <p>Hello {{ sample_subscriber.name or sample_subscriber.email }},</p>
+        {% else %}
+          <p>Hello subscriber,</p>
+        {% endif %}
+        {% for paragraph in draft.body.splitlines() %}
+          {% if paragraph.strip() %}
+            <p>{{ paragraph }}</p>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <footer>
+        <p>You are receiving this because you subscribed to this newsletter.</p>
+      </footer>
+    </article>
+  </section>
+{% endblock %}

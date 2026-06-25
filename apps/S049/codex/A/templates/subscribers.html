@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Subscribers - Newsletter Manager{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <div>
+      <p class="eyebrow">Audience</p>
+      <h1>Subscribers</h1>
+    </div>
+  </section>
+
+  <section class="content-panel">
+    <h2>Add subscriber</h2>
+    <form method="post" class="inline-form">
+      <label>
+        Name
+        <input name="name" placeholder="Ada Lovelace">
+      </label>
+      <label>
+        Email
+        <input name="email" type="email" placeholder="ada@example.com" required>
+      </label>
+      <button class="primary" type="submit">Add</button>
+    </form>
+  </section>
+
+  <section class="content-panel">
+    <div class="panel-title">
+      <h2>Subscriber list</h2>
+      <span>{{ subscribers|length }} total</span>
+    </div>
+    {% if subscribers %}
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Added</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for subscriber in subscribers %}
+            <tr>
+              <td>{{ subscriber.name or "Unnamed" }}</td>
+              <td>{{ subscriber.email }}</td>
+              <td>{{ subscriber.created_at }}</td>
+              <td class="actions">
+                <form method="post" action="{{ url_for('delete_subscriber', subscriber_id=subscriber.id) }}">
+                  <button class="danger" type="submit">Remove</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="empty">No subscribers yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

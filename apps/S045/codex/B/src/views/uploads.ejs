@@ -1,0 +1,59 @@
+<%- include('partials/start', { title: 'Your uploads' }) %>
+<section class="panel">
+  <h1>Your uploads</h1>
+  <% if (errors.length) { %>
+    <div class="errors">
+      <% for (const error of errors) { %>
+        <p><%= error.msg %></p>
+      <% } %>
+    </div>
+  <% } %>
+  <form method="post" action="/uploads" enctype="multipart/form-data" class="upload-form">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      File
+      <input name="file" type="file" required accept=".png,.jpg,.jpeg,.pdf,.txt,image/png,image/jpeg,application/pdf,text/plain">
+    </label>
+    <p class="muted">Allowed: PNG, JPEG, PDF, TXT. Maximum size: <%= maxUploadMb %> MB.</p>
+    <button type="submit">Upload</button>
+  </form>
+</section>
+
+<section class="panel">
+  <h2>Files</h2>
+  <% if (!uploads.length) { %>
+    <p class="muted">No uploads yet.</p>
+  <% } else { %>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Uploaded</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const file of uploads) { %>
+            <tr>
+              <td><%= file.original_name %></td>
+              <td><%= file.mime_type %></td>
+              <td><%= Math.ceil(file.byte_size / 1024) %> KB</td>
+              <td><%= file.created_at %></td>
+              <td class="actions">
+                <a href="/uploads/<%= file.id %>/download">Download</a>
+                <form method="post" action="/uploads/<%= file.id %>/delete" class="inline">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <button type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>
+<%- include('partials/end') %>

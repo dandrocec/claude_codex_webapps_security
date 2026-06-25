@@ -1,0 +1,22 @@
+<%- include("partials/header", { title }) %>
+<section class="page-head">
+  <h1>Polls</h1>
+  <% if (currentUser) { %>
+    <a class="button" href="/polls/new">Create poll</a>
+  <% } %>
+</section>
+
+<% if (!polls.length) { %>
+  <p class="empty">No polls have been created yet.</p>
+<% } %>
+
+<div class="poll-list">
+  <% polls.forEach((poll) => { %>
+    <article class="poll-card">
+      <h2><a href="/polls/<%= poll.id %>"><%= poll.title %></a></h2>
+      <% if (poll.description) { %><p><%= poll.description %></p><% } %>
+      <div class="meta">By <%= poll.owner_name %> · <%= poll.vote_count %> votes</div>
+    </article>
+  <% }) %>
+</div>
+<%- include("partials/footer") %>

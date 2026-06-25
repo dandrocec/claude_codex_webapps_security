@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% set title = "Admin" %}
+
+{% block content %}
+<section class="wide-panel">
+  <div class="intro">
+    <p class="eyebrow">Admin</p>
+    <h1>Submitted messages</h1>
+  </div>
+
+  {% if submissions %}
+    <div class="submission-list">
+      {% for item in submissions %}
+        <article class="submission">
+          <header>
+            <div>
+              <h2>{{ item.name }}</h2>
+              <a href="mailto:{{ item.email }}">{{ item.email }}</a>
+            </div>
+            <time>{{ item.created_at }}</time>
+          </header>
+          <p class="message">{{ item.message }}</p>
+          {% if item.website_url %}
+            <div class="preview compact">
+              <a href="{{ item.website_url }}" rel="noreferrer" target="_blank">{{ item.website_url }}</a>
+              {% if item.preview_title %}
+                <h3>{{ item.preview_title }}</h3>
+                <pre>{{ item.preview_text }}</pre>
+              {% elif item.fetch_error %}
+                <p class="muted">{{ item.fetch_error }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty">No messages have been submitted yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

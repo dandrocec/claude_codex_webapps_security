@@ -1,0 +1,11 @@
+<%- include('partials/page-start', { title: 'Error' }) %>
+<section class="panel">
+  <h1>Unable to complete request</h1>
+  <p><%= message %></p>
+  <% if (currentUser) { %>
+    <a class="button" href="/redirects">Back to redirects</a>
+  <% } else { %>
+    <a class="button" href="/login">Back to sign in</a>
+  <% } %>
+</section>
+<%- include('partials/page-end') %>

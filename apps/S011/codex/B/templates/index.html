@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="panel">
+    <h1>Resize an image</h1>
+    <form method="post" action="{{ url_for('resize') }}" enctype="multipart/form-data" novalidate>
+      {{ form.hidden_tag() }}
+      <label>
+        <span>Image file</span>
+        {{ form.image(accept=".jpg,.jpeg,.png,.webp") }}
+      </label>
+      <label>
+        <span>Target width</span>
+        {{ form.width(min="16", max="2000", inputmode="numeric", placeholder="320") }}
+      </label>
+      <button type="submit">Generate thumbnail</button>
+    </form>
+    <p class="muted">JPEG, PNG, and WebP images up to 5 MB are accepted.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Your thumbnails</h2>
+    {% if images %}
+      <ul class="image-list">
+        {% for image in images %}
+          <li>
+            <a href="{{ url_for('image_detail', image_id=image.id) }}">
+              Thumbnail {{ image.id }} - {{ image.target_width }} px wide
+            </a>
+            <span>{{ image.created_at }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">No thumbnails yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

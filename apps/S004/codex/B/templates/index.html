@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Convert Temperature{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Convert Temperature</h1>
+  <form method="post" novalidate>
+    {{ form.csrf_token }}
+    {{ form.value.label }}
+    {{ form.value(inputmode="decimal", autocomplete="off") }}
+    {% for error in form.value.errors %}
+      <p class="errors">{{ error }}</p>
+    {% endfor %}
+
+    <label>{{ form.direction.label.text }}</label>
+    <div class="radio-list">
+      {% for option in form.direction %}
+        <label>{{ option }} {{ option.label.text }}</label>
+      {% endfor %}
+    </div>
+    {% for error in form.direction.errors %}
+      <p class="errors">{{ error }}</p>
+    {% endfor %}
+
+    {{ form.submit() }}
+  </form>
+
+  {% if result %}
+    <div class="result">Converted value: {{ result }}</div>
+  {% endif %}
+</section>
+{% endblock %}

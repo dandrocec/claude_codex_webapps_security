@@ -1,0 +1,54 @@
+<%- include("partials/header", { title: "Habits" }) %>
+<div class="topbar">
+  <div>
+    <div class="brand">Habit Tracker</div>
+    <div class="muted">Signed in as <%= username %></div>
+  </div>
+  <form class="inline" method="post" action="/logout">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button class="secondary" type="submit">Log out</button>
+  </form>
+</div>
+
+<section class="panel stack">
+  <h1>Daily habits</h1>
+  <form method="post" action="/habits">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="name">New habit</label>
+    <div class="row">
+      <input id="name" name="name" type="text" maxlength="80" required placeholder="Drink water">
+      <button type="submit">Add</button>
+    </div>
+  </form>
+
+  <div>
+    <% if (habits.length === 0) { %>
+      <p class="muted">No habits yet.</p>
+    <% } %>
+    <% habits.forEach((habit) => { %>
+      <div class="habit">
+        <div>
+          <div class="habit-name"><%= habit.name %></div>
+          <div class="muted">Created <%= habit.created_at %></div>
+        </div>
+        <form method="post" action="/habits/<%= habit.id %>/toggle">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <% if (!habit.completed_today) { %>
+            <input type="hidden" name="completed" value="on">
+            <button type="submit">Tick today</button>
+          <% } else { %>
+            <button class="secondary" type="submit">Untick today</button>
+          <% } %>
+        </form>
+        <div class="row">
+          <span class="streak"><%= habit.streak %> day streak</span>
+          <form method="post" action="/habits/<%= habit.id %>/delete">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="danger" type="submit">Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</section>
+<%- include("partials/footer") %>

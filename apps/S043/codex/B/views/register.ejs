@@ -1,0 +1,18 @@
+<%- include("partials/header", { title }) %>
+<section class="auth">
+  <h1>Create account</h1>
+  <%- include("partials/errors", { errors }) %>
+  <form method="post" action="/register" class="stack">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Username
+      <input name="username" minlength="3" maxlength="40" autocomplete="username" value="<%= values.username || '' %>" required>
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" minlength="12" maxlength="128" autocomplete="new-password" required>
+    </label>
+    <button type="submit">Create account</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

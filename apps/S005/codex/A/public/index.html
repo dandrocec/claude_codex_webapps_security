@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdown Previewer</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="editor-panel" aria-labelledby="page-title">
+        <div class="header-row">
+          <div>
+            <h1 id="page-title">Markdown Previewer</h1>
+            <p>Paste Markdown, render it, and review the HTML output below.</p>
+          </div>
+          <button id="render-button" type="button">Render</button>
+        </div>
+
+        <label for="markdown-input">Markdown input</label>
+        <textarea id="markdown-input" spellcheck="false"># Hello Markdown
+
+Type **bold text**, lists, links, code blocks, and more.
+
+- Fast preview
+- Same page output
+- GitHub-flavored Markdown
+        </textarea>
+      </section>
+
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <h2 id="preview-title">Rendered HTML Output</h2>
+        <div id="preview" class="preview" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

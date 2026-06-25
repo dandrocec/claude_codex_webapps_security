@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Log In{% endblock %}
+{% block content %}
+  <div class="auth-panel">
+    <h1>Log in</h1>
+    <form method="post" class="form">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" required autofocus>
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required>
+
+      <button type="submit" class="primary-button">Log in</button>
+    </form>
+    <p class="helper">Need an account? <a href="{{ url_for('register') }}">Register</a>.</p>
+  </div>
+{% endblock %}

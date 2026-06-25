@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<section class="form-panel">
+  <h1><%= mode === 'new' ? 'Post a Job' : 'Edit Job' %></h1>
+
+  <% if (errors.length) { %>
+    <div class="flash error">
+      <% errors.forEach((error) => { %>
+        <div><%= error %></div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <form method="post" action="<%= action %>" class="stacked-form">
+    <label>
+      Title
+      <input name="title" value="<%= job.title %>" required>
+    </label>
+    <label>
+      Company
+      <input name="company" value="<%= job.company %>" required>
+    </label>
+    <label>
+      Location
+      <input name="location" value="<%= job.location %>" required>
+    </label>
+    <label>
+      Description
+      <textarea name="description" rows="8" required><%= job.description %></textarea>
+    </label>
+    <div class="form-actions">
+      <button type="submit"><%= mode === 'new' ? 'Post Listing' : 'Save Changes' %></button>
+      <a href="/">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include('../partials/footer') %>

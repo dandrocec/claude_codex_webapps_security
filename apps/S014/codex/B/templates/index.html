@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Daily Spark{% endblock %}
+{% block content %}
+  <section class="quote-panel" aria-labelledby="quote-heading">
+    <p class="eyebrow">Random inspiration</p>
+    <h1 id="quote-heading">Daily Spark</h1>
+    <blockquote>
+      <p>{{ quote[0] }}</p>
+      <footer>{{ quote[1] }}</footer>
+    </blockquote>
+    <div class="actions">
+      <a class="button primary" href="{{ url_for('index') }}">Show another quote</a>
+      {% if g.user %}
+        <form method="post" action="{{ url_for('save_favorite') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="quote" value="{{ quote[0] }}">
+          <input type="hidden" name="author" value="{{ quote[1] }}">
+          <button class="button" type="submit">Save favorite</button>
+        </form>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

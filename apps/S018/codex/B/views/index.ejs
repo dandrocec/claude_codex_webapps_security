@@ -1,0 +1,37 @@
+<%- include('layout/header') %>
+
+<section class="panel">
+  <h1>Check password strength</h1>
+  <% if (error) { %><p class="alert"><%= error %></p><% } %>
+  <form method="post" action="/check" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="candidate">Candidate password</label>
+    <input id="candidate" name="candidate" type="password" maxlength="128" autocomplete="off" required>
+    <button type="submit">Rate password</button>
+  </form>
+
+  <% if (result) { %>
+    <div class="result result-<%= result.rating %>">
+      <strong><%= result.rating %></strong>
+      <p><%= result.feedback %></p>
+    </div>
+  <% } %>
+</section>
+
+<section class="panel">
+  <h2>Recent checks</h2>
+  <% if (checks.length === 0) { %>
+    <p class="muted">No checks yet.</p>
+  <% } else { %>
+    <ul class="checks">
+      <% checks.forEach((check) => { %>
+        <li>
+          <a href="/checks/<%= check.id %>"><%= check.rating %></a>
+          <span><%= check.created_at %></span>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</section>
+
+<%- include('layout/footer') %>

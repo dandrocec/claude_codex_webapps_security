@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Line Diff</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="page">
+      <section class="workspace" aria-labelledby="title">
+        <header class="header">
+          <div>
+            <h1 id="title">Line Diff</h1>
+            <p>Compare two blocks of text and review additions and removals line by line.</p>
+          </div>
+        </header>
+
+        <form method="post" class="compare-form">
+          <div class="editors">
+            <label class="editor">
+              <span>Original text</span>
+              <textarea name="left_text" spellcheck="false" placeholder="Paste the original text here">{{ left_text }}</textarea>
+            </label>
+
+            <label class="editor">
+              <span>Updated text</span>
+              <textarea name="right_text" spellcheck="false" placeholder="Paste the updated text here">{{ right_text }}</textarea>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Compare texts</button>
+          </div>
+        </form>
+
+        {% if compared %}
+          <section class="results" aria-labelledby="results-title">
+            <div class="results-heading">
+              <h2 id="results-title">Differences</h2>
+              <div class="legend" aria-label="Diff legend">
+                <span><i class="swatch removed"></i>Removed</span>
+                <span><i class="swatch added"></i>Added</span>
+                <span><i class="swatch unchanged"></i>Unchanged</span>
+              </div>
+            </div>
+
+            {% if diff_rows %}
+              <ol class="diff-list">
+                {% for row in diff_rows %}
+                  <li class="diff-row {{ row.kind }}">
+                    <span class="marker" aria-hidden="true">{{ row.label }}</span>
+                    <code>{{ row.text if row.text else " " }}</code>
+                  </li>
+                {% endfor %}
+              </ol>
+            {% else %}
+              <p class="empty">Both text areas are empty.</p>
+            {% endif %}
+          </section>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

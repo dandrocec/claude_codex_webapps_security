@@ -1,0 +1,61 @@
+<%- include('partials/header') %>
+  <section class="editor-head">
+    <h1>FAQ editor</h1>
+    <p>Signed in as <%= user.email %></p>
+  </section>
+
+  <section class="panel">
+    <h2><%= editing ? 'Edit question' : 'Add question' %></h2>
+    <% if (errors.length) { %>
+      <div class="errors">
+        <% errors.forEach((error) => { %><p><%= error.msg %></p><% }) %>
+      </div>
+    <% } %>
+    <form method="post" action="<%= editing ? '/editor/faqs/' + editing.id : '/editor/faqs' %>" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <div class="grid">
+        <div>
+          <label for="category">Category</label>
+          <input id="category" name="category" value="<%= values.category || '' %>" maxlength="80" required>
+        </div>
+        <div>
+          <label for="position">Order</label>
+          <input id="position" name="position" type="number" min="0" max="100000" value="<%= values.position ?? '' %>">
+        </div>
+      </div>
+      <label for="question">Question</label>
+      <input id="question" name="question" value="<%= values.question || '' %>" maxlength="240" required>
+      <label for="answer">Answer</label>
+      <textarea id="answer" name="answer" rows="7" maxlength="4000" required><%= values.answer || '' %></textarea>
+      <div class="actions">
+        <button type="submit"><%= editing ? 'Save changes' : 'Add FAQ' %></button>
+        <% if (editing) { %><a class="button secondary" href="/editor">Cancel</a><% } %>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Your FAQ entries</h2>
+    <% if (faqs.length === 0) { %>
+      <p class="empty">No entries yet.</p>
+    <% } %>
+    <div class="admin-list">
+      <% faqs.forEach((faq) => { %>
+        <article class="admin-item">
+          <div>
+            <span class="meta"><%= faq.position %> · <%= faq.category %></span>
+            <h3><%= faq.question %></h3>
+            <p><%= faq.answer %></p>
+          </div>
+          <div class="row-actions">
+            <a class="button secondary" href="/editor/faqs/<%= faq.id %>/edit">Edit</a>
+            <form method="post" action="/editor/faqs/<%= faq.id %>/delete">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button class="danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </section>
+<%- include('partials/footer') %>

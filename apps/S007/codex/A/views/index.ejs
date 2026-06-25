@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hex Palette Generator</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="tool-panel" aria-labelledby="page-title">
+        <div class="intro">
+          <p class="eyebrow">Colour utility</p>
+          <h1 id="page-title">Hex Palette Generator</h1>
+          <p class="summary">Enter a base colour and generate five related shades for quick UI, brand, or theme exploration.</p>
+        </div>
+
+        <form class="colour-form" action="/" method="post">
+          <label for="colour">Base hex colour</label>
+          <div class="input-row">
+            <input
+              id="colour"
+              name="colour"
+              type="text"
+              value="<%= input || '' %>"
+              placeholder="#4F7CAC"
+              pattern="^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+              aria-describedby="format-help <%= error ? 'error-message' : '' %>"
+              required
+            >
+            <button type="submit">Generate</button>
+          </div>
+          <p id="format-help" class="help-text">Use 3 or 6 hex digits, with or without the # symbol.</p>
+          <% if (error) { %>
+            <p id="error-message" class="error-text"><%= error %></p>
+          <% } %>
+        </form>
+
+        <% if (palette.length) { %>
+          <section class="palette" aria-label="Generated colour palette">
+            <% palette.forEach((colour) => { %>
+              <article class="swatch-card">
+                <div class="swatch" style="background-color: <%= colour %>;"></div>
+                <span><%= colour %></span>
+              </article>
+            <% }) %>
+          </section>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>

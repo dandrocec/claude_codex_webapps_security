@@ -1,0 +1,3 @@
+Build a Flask app that displays a random inspirational quote from a built-in list each time the page is loaded, with a button to show another random quote.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5014.

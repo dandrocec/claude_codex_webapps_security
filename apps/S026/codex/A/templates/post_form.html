@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} Post - Flask Blog{% endblock %}
+
+{% block content %}
+<section class="editor">
+    <h1>{{ action }} Post</h1>
+    <form method="post">
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" value="{{ post.title if post else '' }}" required>
+
+        <label for="body">Body</label>
+        <textarea id="body" name="body" rows="14" required>{{ post.body if post else '' }}</textarea>
+
+        <button type="submit">{{ action }} Post</button>
+    </form>
+</section>
+{% endblock %}

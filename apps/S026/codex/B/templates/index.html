@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}All Posts{% endblock %}
+{% block content %}
+  <section class="page-head">
+    <h1>All posts</h1>
+  </section>
+
+  {% if posts %}
+    <div class="post-list">
+      {% for post in posts %}
+        <article class="post-card">
+          <h2><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></h2>
+          <p class="meta">By {{ post.username }} on {{ post.created_at[:10] }}</p>
+          <p>{{ post.body[:240] }}{% if post.body|length > 240 %}...{% endif %}</p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty">No posts have been published yet.</p>
+  {% endif %}
+{% endblock %}

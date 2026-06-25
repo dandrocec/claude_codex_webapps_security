@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% set title = "Contact" %}
+{% block content %}
+  <section class="panel">
+    <h1>Contact us</h1>
+    <form method="post" action="{{ url_for('submit_contact') }}" novalidate>
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <label>
+        Name
+        <input name="name" maxlength="120" required value="{{ (form.name if form else '') }}">
+      </label>
+      <label>
+        Email
+        <input name="email" type="email" maxlength="254" required value="{{ (form.email if form else '') }}">
+      </label>
+      <label>
+        Website URL <span>optional</span>
+        <input name="website" type="url" maxlength="2048" placeholder="https://example.com" value="{{ (form.website if form else '') }}">
+      </label>
+      <label>
+        Message
+        <textarea name="message" maxlength="4000" rows="8" required>{{ (form.message if form else '') }}</textarea>
+      </label>
+      <button type="submit">Send message</button>
+    </form>
+  </section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Pages - Wiki{% endblock %}
+
+{% block content %}
+  <section class="page-head">
+    <div>
+      <h1>Pages</h1>
+      <p>Browse readable wiki pages or search by title.</p>
+    </div>
+    {% if g.user %}
+      <a class="button" href="{{ url_for('create_page') }}">Create page</a>
+    {% endif %}
+  </section>
+
+  <form class="search" method="get" action="{{ url_for('index') }}">
+    <label for="q">Search titles</label>
+    <div class="search-row">
+      <input id="q" name="q" type="search" maxlength="120" value="{{ q }}">
+      <button type="submit">Search</button>
+    </div>
+  </form>
+
+  <section class="list">
+    {% for page in pages %}
+      <article class="list-item">
+        <h2><a href="{{ url_for('show_page', page_id=page.id) }}">{{ page.title }}</a></h2>
+        <p>Updated {{ page.updated_at }} by {{ page.owner }}</p>
+      </article>
+    {% else %}
+      <p class="empty">No pages found.</p>
+    {% endfor %}
+  </section>
+{% endblock %}

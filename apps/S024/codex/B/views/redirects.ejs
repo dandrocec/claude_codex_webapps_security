@@ -1,0 +1,41 @@
+<%- include('partials/page-start', { title: 'Redirects' }) %>
+<section class="panel">
+  <h1>Register redirect</h1>
+  <form method="post" action="/redirects">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="redirectKey">Key</label>
+    <input id="redirectKey" name="redirectKey" value="<%= fields.redirectKey || '' %>" required minlength="1" maxlength="64" pattern="[A-Za-z0-9][A-Za-z0-9_-]*">
+
+    <label for="destinationUrl">Destination URL</label>
+    <input id="destinationUrl" name="destinationUrl" value="<%= fields.destinationUrl || '' %>" required maxlength="2048" placeholder="https://example.com/path">
+
+    <button type="submit">Save redirect</button>
+  </form>
+</section>
+
+<section class="panel">
+  <h2>Registered redirects</h2>
+  <% if (redirects.length === 0) { %>
+    <p>No redirects registered yet.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Destination</th>
+          <th>Visit URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% redirects.forEach((redirect) => { %>
+          <tr>
+            <td><code><%= redirect.redirect_key %></code></td>
+            <td><a href="<%= redirect.destination_url %>" rel="noopener noreferrer"><%= redirect.destination_url %></a></td>
+            <td><a href="/go?to=<%= encodeURIComponent(redirect.redirect_key) %>">/go?to=<%= redirect.redirect_key %></a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<%- include('partials/page-end') %>

@@ -1,0 +1,11 @@
+{
+  "name": "local/simple-poll",
+  "description": "A small PHP file-backed poll application.",
+  "type": "project",
+  "require": {
+    "php": ">=8.1"
+  },
+  "scripts": {
+    "start": "php -S localhost:5016 index.php"
+  }
+}

@@ -1,0 +1,47 @@
+<%- include("partials/header", { title }) %>
+<section class="poll-detail">
+  <div class="page-head">
+    <div>
+      <h1><%= poll.title %></h1>
+      <% if (poll.description) { %><p><%= poll.description %></p><% } %>
+      <div class="meta">Created by <%= poll.owner_name %></div>
+    </div>
+    <% if (isOwner) { %>
+      <form method="post" action="/polls/<%= poll.id %>/delete">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="danger" type="submit">Delete</button>
+      </form>
+    <% } %>
+  </div>
+
+  <% if (existingVote) { %>
+    <p class="notice">You have voted in this poll.</p>
+  <% } else { %>
+    <form method="post" action="/polls/<%= poll.id %>/vote" class="vote-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <% poll.options.forEach((option) => { %>
+        <label class="option-row">
+          <input type="radio" name="option_id" value="<%= option.id %>" required>
+          <span><%= option.label %></span>
+        </label>
+      <% }) %>
+      <button type="submit">Vote</button>
+    </form>
+  <% } %>
+
+  <section class="results" data-poll-id="<%= poll.id %>">
+    <h2>Live results</h2>
+    <div class="total"><span data-total><%= totalVotes %></span> total votes</div>
+    <div class="chart" data-chart>
+      <% results.forEach((row) => { %>
+        <% const percent = totalVotes ? Math.round((row.votes / totalVotes) * 100) : 0; %>
+        <div class="bar-row" data-option-id="<%= row.id %>">
+          <div class="bar-label"><span><%= row.label %></span><strong data-votes><%= row.votes %></strong></div>
+          <div class="bar-track"><div class="bar-fill" data-fill data-percent="<%= percent %>"></div></div>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+</section>
+<script src="/poll-results.js" defer></script>
+<%- include("partials/footer") %>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Upcoming Events{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Upcoming Events</h1>
+    {% if g.user %}
+      <a class="button" href="{{ url_for('new_event') }}">Create event</a>
+    {% endif %}
+  </section>
+
+  {% if events %}
+    <div class="event-list">
+      {% for event in events %}
+        <article class="event-card">
+          <div>
+            <h2>{{ event.title }}</h2>
+            <p class="meta">{{ event.event_date }} · {{ event.location }} · by {{ event.username }}</p>
+          </div>
+          <p>{{ event.description }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty">No upcoming events have been posted yet.</p>
+  {% endif %}
+{% endblock %}

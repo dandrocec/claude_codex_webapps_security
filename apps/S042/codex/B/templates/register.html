@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Register · Newsroom{% endblock %}
+{% block content %}
+<section class="form-panel">
+    <h1>Register</h1>
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label for="username">Username</label>
+        <input id="username" name="username" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_.-]{3,32}" autocomplete="username">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required minlength="12" maxlength="256" autocomplete="new-password">
+        <button type="submit">Create account</button>
+    </form>
+</section>
+{% endblock %}

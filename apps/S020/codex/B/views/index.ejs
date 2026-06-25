@@ -1,0 +1,45 @@
+<%- include('layout', {
+  title: 'JSON Formatter',
+  body: `
+    <section class="workspace">
+      <form method="post" action="/format" class="panel">
+        <input type="hidden" name="_csrf" value="${csrfToken}">
+        <label for="jsonInput">Paste JSON</label>
+        <textarea id="jsonInput" name="jsonInput" spellcheck="false" autocomplete="off">${escapeHtml(input)}</textarea>
+        <button type="submit">Validate and format</button>
+      </form>
+
+      <section class="panel result-panel" aria-live="polite">
+        <h1>Result</h1>
+        ${notice ? `<p class="notice">${escapeHtml(notice)}</p>` : ''}
+        ${parseError ? `<p class="error">${escapeHtml(parseError)}</p>` : ''}
+        ${formatted ? `
+          <pre>${escapeHtml(formatted)}</pre>
+          <form method="post" action="/snippets" class="save-form">
+            <input type="hidden" name="_csrf" value="${csrfToken}">
+            <input type="hidden" name="formattedJson" value="${escapeAttr(formatted)}">
+            <label for="title">Save title</label>
+            <div class="save-row">
+              <input id="title" name="title" maxlength="80" placeholder="Untitled JSON">
+              <button type="submit">Save</button>
+            </div>
+          </form>
+        ` : '<p class="muted">Formatted JSON or a validation error will appear here.</p>'}
+      </section>
+    </section>
+
+    <section class="history">
+      <h2>Saved JSON</h2>
+      ${snippets.length ? `
+        <ul>
+          ${snippets.map((snippet) => `
+            <li>
+              <a href="/snippets/${snippet.id}">${escapeHtml(snippet.title)}</a>
+              <span>${escapeHtml(snippet.created_at)}</span>
+            </li>
+          `).join('')}
+        </ul>
+      ` : '<p class="muted">No saved JSON yet.</p>'}
+    </section>
+  `
+}) %>

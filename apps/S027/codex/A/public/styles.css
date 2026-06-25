@@ -1,0 +1,294 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --text: #171a1f;
+  --muted: #6b7280;
+  --line: #d8dde5;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --danger: #c2410c;
+  --danger-dark: #9a3412;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px clamp(16px, 4vw, 48px);
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.user {
+  color: var(--muted);
+}
+
+.container {
+  width: min(760px, calc(100% - 32px));
+  margin: 40px auto;
+}
+
+.auth-panel,
+.task-shell {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
+}
+
+.auth-panel {
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 1.8rem;
+}
+
+.stack {
+  display: grid;
+  gap: 16px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  padding: 12px;
+}
+
+input:focus {
+  border-color: var(--primary);
+  outline: 3px solid rgba(37, 99, 235, 0.16);
+}
+
+button,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 0 16px;
+  text-decoration: none;
+}
+
+button:hover,
+.button:hover {
+  background: var(--primary-dark);
+  text-decoration: none;
+}
+
+.secondary {
+  background: #e5e7eb;
+  color: var(--text);
+}
+
+.secondary:hover {
+  background: #d1d5db;
+}
+
+.danger {
+  background: var(--danger);
+}
+
+.danger:hover {
+  background: var(--danger-dark);
+}
+
+.link-button {
+  min-height: 0;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 400;
+  padding: 0;
+}
+
+.link-button:hover {
+  background: transparent;
+  text-decoration: underline;
+}
+
+.inline {
+  display: inline;
+}
+
+.notice {
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #991b1b;
+  padding: 12px;
+}
+
+.muted,
+.empty {
+  color: var(--muted);
+}
+
+.task-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.task-heading h1 {
+  margin: 0;
+}
+
+.task-heading span {
+  color: var(--muted);
+}
+
+.add-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.task-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.task-title {
+  overflow-wrap: anywhere;
+}
+
+.is-complete .task-title {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.check {
+  width: 34px;
+  min-height: 34px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--primary);
+  padding: 0;
+}
+
+.check:hover {
+  background: #eff6ff;
+}
+
+.task-actions,
+.edit-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-form {
+  grid-column: 1 / -1;
+}
+
+.edit-form input {
+  flex: 1;
+}
+
+@media (max-width: 620px) {
+  .topbar,
+  .task-heading,
+  .task-item,
+  .task-actions,
+  .edit-form {
+    align-items: stretch;
+  }
+
+  .topbar,
+  .task-heading,
+  .task-actions,
+  .edit-form {
+    flex-direction: column;
+  }
+
+  .task-item {
+    grid-template-columns: auto 1fr;
+  }
+
+  .task-actions {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .task-actions form,
+  .task-actions button,
+  .task-actions .button {
+    width: 100%;
+  }
+
+  .add-form {
+    grid-template-columns: 1fr;
+  }
+}

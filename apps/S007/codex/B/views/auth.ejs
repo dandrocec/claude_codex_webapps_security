@@ -1,0 +1,25 @@
+<%- include("partials/header", { title }) %>
+
+<main class="auth-shell">
+  <section class="panel auth-panel">
+    <p class="eyebrow"><%= mode === "register" ? "Create account" : "Welcome back" %></p>
+    <h1><%= mode === "register" ? "Create your palette account." : "Sign in to your palettes." %></h1>
+
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+
+    <form method="post" action="/<%= mode %>" class="stack-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" autocomplete="username" minlength="3" maxlength="32" pattern="[A-Za-z0-9_-]{3,32}" required>
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="<%= mode === "register" ? "new-password" : "current-password" %>" minlength="<%= mode === "register" ? 12 : 1 %>" maxlength="128" required>
+
+      <button type="submit"><%= mode === "register" ? "Create account" : "Sign in" %></button>
+    </form>
+  </section>
+</main>
+
+<%- include("partials/footer") %>

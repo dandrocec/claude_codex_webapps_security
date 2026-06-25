@@ -1,0 +1,25 @@
+{
+  "name": "secure-express-job-board",
+  "version": "1.0.0",
+  "description": "A secure Node.js/Express job board with SQLite persistence.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^11.9.1",
+    "connect-sqlite3": "^0.9.16",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.0.0",
+    "sanitize-html": "^2.14.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

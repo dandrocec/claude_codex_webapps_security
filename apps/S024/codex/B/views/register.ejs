@@ -1,0 +1,16 @@
+<%- include('partials/page-start', { title: 'Register' }) %>
+<section class="panel">
+  <h1>Create account</h1>
+  <form method="post" action="/register" autocomplete="on">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="username">Username</label>
+    <input id="username" name="username" value="<%= fields.username || '' %>" required minlength="3" maxlength="32" autocomplete="username">
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required minlength="12" maxlength="256" autocomplete="new-password">
+
+    <button type="submit">Create account</button>
+  </form>
+  <p>Already registered? <a href="/login">Sign in</a>.</p>
+</section>
+<%- include('partials/page-end') %>

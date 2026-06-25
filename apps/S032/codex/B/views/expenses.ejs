@@ -1,0 +1,78 @@
+<%- include("partials/header", { title: "Expenses", user, csrfToken }) %>
+  <section class="summary">
+    <div>
+      <p class="eyebrow">Monthly total</p>
+      <h1>$<%= total %></h1>
+    </div>
+    <form method="get" action="/expenses" class="month-form">
+      <label>
+        Month
+        <input type="month" name="month" value="<%= month %>">
+      </label>
+      <button type="submit">View</button>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Add expense</h2>
+    <%- include("partials/errors", { errors }) %>
+    <form method="post" action="/expenses" class="expense-form" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>
+        Amount
+        <input name="amount" inputmode="decimal" placeholder="25.00" maxlength="12" required value="<%= values.amount || "" %>">
+      </label>
+      <label>
+        Category
+        <input name="category" maxlength="60" required value="<%= values.category || "" %>">
+      </label>
+      <label>
+        Date
+        <input name="date" type="date" required value="<%= values.date || "" %>">
+      </label>
+      <label class="wide">
+        Note
+        <input name="note" maxlength="500" value="<%= values.note || "" %>">
+      </label>
+      <button type="submit">Add</button>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Entries</h2>
+    <% if (expenses.length === 0) { %>
+      <p class="muted">No expenses recorded for this month.</p>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Note</th>
+              <th class="amount">Amount</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% expenses.forEach((expense) => { %>
+              <tr>
+                <td><%= expense.expense_date %></td>
+                <td><%= expense.category %></td>
+                <td><%= expense.note || "" %></td>
+                <td class="amount">$<%= expense.amount %></td>
+                <td class="actions">
+                  <a href="/expenses/<%= expense.id %>/edit">Edit</a>
+                  <form method="post" action="/expenses/<%= expense.id %>/delete">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </section>
+<%- include("partials/footer") %>

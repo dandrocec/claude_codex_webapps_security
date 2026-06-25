@@ -1,0 +1,24 @@
+<%- include('partials/head', { title: 'Polls' }) %>
+<section class="page-heading">
+  <h1>Current Polls</h1>
+  <% if (currentUser) { %>
+    <a class="primary" href="/polls/new">Create a poll</a>
+  <% } %>
+</section>
+
+<% if (polls.length === 0) { %>
+  <section class="empty">
+    <h2>No polls yet</h2>
+    <p>Log in and create the first poll.</p>
+  </section>
+<% } else { %>
+  <section class="poll-list">
+    <% polls.forEach((poll) => { %>
+      <article class="poll-card">
+        <a href="/polls/<%= poll.id %>"><%= poll.question %></a>
+        <p>By <%= poll.username %> · <%= poll.votes %> vote<%= poll.votes === 1 ? '' : 's' %></p>
+      </article>
+    <% }) %>
+  </section>
+<% } %>
+<%- include('partials/foot') %>

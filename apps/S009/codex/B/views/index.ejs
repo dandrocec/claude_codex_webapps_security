@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="page">
+      <section class="panel">
+        <h1>URL Shortener</h1>
+
+        <form action="/shorten" method="post" novalidate>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label for="longUrl">Long URL</label>
+          <div class="form-row">
+            <input
+              id="longUrl"
+              name="longUrl"
+              type="url"
+              inputmode="url"
+              placeholder="https://example.com/very/long/path"
+              maxlength="2048"
+              required
+            >
+            <button type="submit">Shorten</button>
+          </div>
+        </form>
+
+        <% if (error) { %>
+          <p class="message error"><%= error %></p>
+        <% } %>
+
+        <% if (created) { %>
+          <div class="message success">
+            <span>Created:</span>
+            <a href="/<%= created.code %>"><%= created.shortUrl %></a>
+          </div>
+        <% } %>
+      </section>
+
+      <section class="panel">
+        <h2>Codes created in this session</h2>
+        <% if (links.length === 0) { %>
+          <p class="empty">No codes created yet.</p>
+        <% } else { %>
+          <ul class="links">
+            <% links.forEach((link) => { %>
+              <li>
+                <a class="code" href="/<%= link.code %>"><%= link.code %></a>
+                <span class="target"><%= link.url %></span>
+              </li>
+            <% }) %>
+          </ul>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>

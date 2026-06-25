@@ -1,0 +1,22 @@
+<%- include("partials/page_start", { title: "Log in" }) %>
+
+<section class="auth-panel">
+  <h1>Log in</h1>
+  <% if (typeof error !== "undefined" && error) { %>
+    <p class="notice"><%= error %></p>
+  <% } %>
+  <form action="/login" method="post" class="stack">
+    <label>
+      Username
+      <input name="username" autocomplete="username" required>
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" autocomplete="current-password" required>
+    </label>
+    <button type="submit">Log in</button>
+  </form>
+  <p class="muted">Need an account? <a href="/register">Register</a></p>
+</section>
+
+<%- include("partials/page_end") %>

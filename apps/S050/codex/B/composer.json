@@ -1,0 +1,20 @@
+{
+  "name": "codex/photo-blog",
+  "description": "A secure PHP photo blog with SQLite storage.",
+  "type": "project",
+  "require": {
+    "php": ">=8.2",
+    "ext-pdo": "*",
+    "ext-pdo_sqlite": "*",
+    "ext-fileinfo": "*",
+    "ext-mbstring": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "PhotoBlog\\": "src/"
+    }
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:5050 -t public"
+  }
+}

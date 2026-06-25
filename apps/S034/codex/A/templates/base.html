@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Reading List{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('index') }}">Reading List</a>
+        <nav class="nav">
+            {% if g.user %}
+                <span class="user">{{ g.user["username"] }}</span>
+                <a href="{{ url_for('books') }}">My books</a>
+                <a href="{{ url_for('new_book') }}">Add book</a>
+                <form method="post" action="{{ url_for('logout') }}">
+                    <button class="link-button" type="submit">Log out</button>
+                </form>
+            {% else %}
+                <a href="{{ url_for('login') }}">Log in</a>
+                <a class="button small" href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="page">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-stack">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

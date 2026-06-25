@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}All Posts - Flask Blog{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <h1>Latest Posts</h1>
+    {% if g.user %}
+        <a class="button" href="{{ url_for('create_post') }}">Create Post</a>
+    {% endif %}
+</div>
+
+{% if posts %}
+    <div class="post-list">
+        {% for post in posts %}
+            <article class="post-card">
+                <h2><a href="{{ url_for('detail', post_id=post.id) }}">{{ post.title }}</a></h2>
+                <p class="meta">By {{ post.author }} on {{ post.created_at }}</p>
+                <p>{{ post.body[:220] }}{% if post.body|length > 220 %}...{% endif %}</p>
+            </article>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="empty">No posts have been published yet.</p>
+{% endif %}
+{% endblock %}

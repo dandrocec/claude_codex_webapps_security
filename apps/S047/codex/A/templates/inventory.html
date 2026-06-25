@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Inventory - Inventory Tracker{% endblock %}
+
+{% block content %}
+<section class="toolbar">
+    <div>
+        <h1>Inventory</h1>
+        <p class="muted">Items at {{ low_stock_threshold }} units or fewer are highlighted.</p>
+    </div>
+    <form method="get" class="search-form">
+        <input name="q" value="{{ query }}" placeholder="Search name, SKU, or location">
+        <button type="submit">Search</button>
+        {% if query %}
+            <a class="secondary-action" href="{{ url_for('inventory') }}">Clear</a>
+        {% endif %}
+    </form>
+</section>
+
+<section class="add-panel">
+    <h2>Add item</h2>
+    <form method="post" class="add-grid">
+        <label>
+            Name
+            <input name="name" required>
+        </label>
+        <label>
+            SKU
+            <input name="sku" required>
+        </label>
+        <label>
+            Quantity
+            <input name="quantity" type="number" min="0" value="0" required>
+        </label>
+        <label>
+            Location
+            <input name="location" required>
+        </label>
+        <button type="submit">Add item</button>
+    </form>
+</section>
+
+<section class="table-panel">
+    {% if items %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>SKU</th>
+                    <th>Quantity</th>
+                    <th>Location</th>
+                    <th>Adjust</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr class="{{ 'low-stock' if item['quantity'] <= low_stock_threshold else '' }}">
+                        <td>
+                            <strong>{{ item["name"] }}</strong>
+                            {% if item["quantity"] <= low_stock_threshold %}
+                                <span class="stock-badge">Low stock</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item["sku"] }}</td>
+                        <td>{{ item["quantity"] }}</td>
+                        <td>{{ item["location"] }}</td>
+                        <td>
+                            <form action="{{ url_for('adjust_item', item_id=item['id']) }}" method="post" class="adjust-form">
+                                <input type="hidden" name="q" value="{{ query }}">
+                                <button name="delta" value="-1" type="submit">-1</button>
+                                <button name="delta" value="1" type="submit">+1</button>
+                                <input name="delta" type="number" placeholder="+/-">
+                                <button type="submit">Apply</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty-state">
+            {% if query %}
+                No items match "{{ query }}".
+            {% else %}
+                No inventory items yet.
+            {% endif %}
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

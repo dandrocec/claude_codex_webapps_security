@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} Event{% endblock %}
+{% block content %}
+  <section class="form-panel">
+    <h1>{{ action }} Event</h1>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>
+        Title
+        <input name="title" maxlength="120" value="{{ event.title or '' }}" required>
+      </label>
+      <label>
+        Date
+        <input name="event_date" type="date" value="{{ event.event_date or '' }}" required>
+      </label>
+      <label>
+        Location
+        <input name="location" maxlength="160" value="{{ event.location or '' }}" required>
+      </label>
+      <label>
+        Description
+        <textarea name="description" minlength="10" maxlength="2000" required>{{ event.description or '' }}</textarea>
+      </label>
+      <div class="actions">
+        <button type="submit">{{ action }}</button>
+        <a class="button secondary" href="{{ url_for('dashboard') }}">Cancel</a>
+      </div>
+    </form>
+  </section>
+{% endblock %}

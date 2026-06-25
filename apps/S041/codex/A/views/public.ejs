@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FAQ</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">Help Center</p>
+        <h1>Frequently Asked Questions</h1>
+      </div>
+      <a class="button secondary" href="/login">Editor Login</a>
+    </header>
+
+    <main class="page">
+      <form class="filter-bar" method="get" action="/">
+        <label for="q">Search FAQs</label>
+        <div class="search-row">
+          <input id="q" name="q" type="search" value="<%= query %>" placeholder="Filter by keyword, answer, or category">
+          <button class="button" type="submit">Search</button>
+          <% if (query) { %>
+            <a class="button secondary" href="/">Clear</a>
+          <% } %>
+        </div>
+      </form>
+
+      <% if (categories.length === 0) { %>
+        <section class="empty-state">
+          <h2>No matching FAQs</h2>
+          <p>Try a different keyword or clear the search filter.</p>
+        </section>
+      <% } %>
+
+      <% categories.forEach((category) => { %>
+        <section class="faq-group">
+          <h2><%= category.name %></h2>
+          <div class="faq-list">
+            <% category.faqs.forEach((faq) => { %>
+              <article class="faq-item">
+                <h3><%= faq.question %></h3>
+                <p><%= faq.answer %></p>
+              </article>
+            <% }) %>
+          </div>
+        </section>
+      <% }) %>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "express-habit-tracker",
+  "version": "1.0.0",
+  "description": "A Node.js/Express habit tracker with login, daily habit checkoffs, and streak counts.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.9.1",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

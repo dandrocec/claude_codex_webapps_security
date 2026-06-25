@@ -77,22 +77,63 @@ Notes / flags to freeze:
   not change where project files are written.
 - Record `--model` explicitly so the model is pinned per run (do not rely on defaults).
 
-## OpenAI Codex CLI — PENDING (not installed; verify, then freeze)
+## OpenAI Codex CLI — VERIFIED for v0.140.0 (frozen)
 
-Codex is not yet installed (see `logs/environment.md`). The intended equivalent is the
-non-interactive `exec` subcommand with a working-directory flag, illustratively:
+Codex CLI `0.140.0` is installed (`C:\Users\Darko\AppData\Local\Programs\OpenAI\Codex\bin\codex`).
+`codex exec` is the non-interactive mode (the Codex equivalent of `claude -p`). The
+project is written into the directory passed via `--cd`; files are created/edited
+directly, so a non-interactive run needs a sandbox policy that permits writes.
+
+**Study model: `gpt-5.5`** (the latest GPT model) is pinned via `-m` for both A and B.
 
 ```bash
-SPEC=S001; V=A   # V is A or B
+SPEC=S001; V=A; MODEL=gpt-5.5   # V is A or B
 mkdir -p "apps/$SPEC/codex/$V"
-codex exec "$PROMPT" --cd "apps/$SPEC/codex/$V"
+codex exec "$PROMPT" \
+     -m "$MODEL" \
+     --cd "apps/$SPEC/codex/$V" \
+     -s workspace-write \
+     --skip-git-repo-check
 ```
 
-Before use, verify against the installed Codex version: the `exec` subcommand name,
-the working-directory flag (`--cd`/`-C`), the model flag, and the non-interactive
-approval/sandbox flags needed to let it write the project unattended (the Codex
-equivalent of Claude's permission mode). Freeze the exact command here and record it
-in `logs/commands.log` per run.
+Flags frozen for this study (verified against `codex exec --help` on v0.140.0):
+- `exec` — non-interactive subcommand; `[PROMPT]` is positional (or read from stdin).
+- `-m, --model gpt-5.5` — pin the model explicitly (do not rely on the config default).
+- `-C, --cd <DIR>` — working root. `run_generation.py` points this at an isolated
+  temp build dir, then moves the result into `apps/<spec>/codex/<V>/`.
+- `-s, --sandbox workspace-write` — lets Codex write the project unattended. This is
+  the Codex equivalent of Claude's `--permission-mode acceptEdits`: a *calling
+  convention* that permits file writes, **security-NEUTRAL** (it hardens nothing in
+  the generated app). Network is disabled under this sandbox, which is fine — the
+  generation step only writes source; builds happen later in the Docker harness.
+- `--skip-git-repo-check` — the isolated build dir is outside any git repo, which
+  `codex exec` otherwise refuses to run in.
+
+The exact command (prompt by file+SHA, not inlined) is appended to `logs/commands.log`
+per run, and `tool_version` + `model` to `logs/sessions.csv`, exactly as for Claude.
+
+### Documented divergence: Codex "generation-only" working agreement
+
+Unlike Claude Code's `-p` print mode, `codex exec` with `gpt-5.5` is **agentic** — by
+default it spends turns trying to *run, build, install, and test* the generated app
+(spinning up `php -S`/`node`/`flask` servers, checking listeners), which is slow,
+burns quota, and (under the Windows sandbox) fights the external build dir. The study
+verifies every app separately in Docker, so this self-testing is wasteful noise.
+
+To bring Codex's calling convention closer to Claude's "just produce the project"
+behaviour, `run_generation.py` drops `harness/codex_no_run_AGENTS.md` into the build
+dir as `AGENTS.md` **for Codex runs only**, then **removes it before the generated
+project is moved** into `apps/<spec>/codex/<V>/`. Properties that keep this neutral:
+
+- It is **not part of `$PROMPT`** — the assembled task prompt stays byte-identical
+  between the two tools and between A and B.
+- It **never lands in the generated app** (deleted before the move).
+- It is **content- and security-neutral**: it says nothing about what to build, which
+  framework to use, or any security property — only "write the files, don't execute
+  the app." It is the Codex analogue of Claude's `--permission-mode acceptEdits`.
+
+This is recorded here as the required write-down of an unavoidable per-tool invocation
+divergence (see the equivalence checklist below).
 
 ## Equivalence checklist (must hold for every run)
 

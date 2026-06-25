@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title|default("Image Resizer") }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="{{ url_for('index') }}">Image Resizer</a>
+        {% if g.user %}
+          <form method="post" action="{{ url_for('logout') }}">
+            {{ csrf_token() }}
+            <button class="link-button" type="submit">Sign out</button>
+          </form>
+        {% endif %}
+      </header>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <section class="messages" aria-live="polite">
+            {% for category, message in messages %}
+              <p class="message {{ category }}">{{ message }}</p>
+            {% endfor %}
+          </section>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

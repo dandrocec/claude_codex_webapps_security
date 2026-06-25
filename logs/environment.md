@@ -25,18 +25,22 @@
 | node | v24.16.0 | located at `D:\claude_code\tools\node-v24.16.0-win-x64` |
 | npm | 11.13.0 | `npm --version` |
 
-### Missing tools (not installed — left as-is)
+### Codex CLI — INSTALLED 2026-06-23 (was missing at the 2026-06-09 capture)
 
-| Tool | Status |
-| --- | --- |
-| **Codex CLI** | **Not found.** Not on PATH under `codex`, `codex-cli`, `codex.cmd`, or `codex.exe`, and not present as a global npm package (`@openai/codex`). Must be installed before any `codex` generation sessions can run. |
+| Tool | Version | Notes |
+| --- | --- | --- |
+| **Codex CLI** | **0.140.0** | `codex --version` → `codex-cli 0.140.0`; located at `C:\Users\Darko\AppData\Local\Programs\OpenAI\Codex\bin\codex`, now on PATH. Invocation frozen in `harness/invocation.md`: `codex exec -m gpt-5.5 --cd <dir> -s workspace-write --skip-git-repo-check`. |
+
+**Study model for Codex generation (both A and B variants): `gpt-5.5`** — the latest
+GPT model, pinned via `-m gpt-5.5` per run, mirroring how Claude runs pin
+`claude-opus-4-8`.
 
 ## AI coding tool versions
 
 | Tool | CLI version | How obtained |
 | --- | --- | --- |
 | Claude Code | 2.1.169 | `claude --version` |
-| Codex CLI | (not installed) | `codex --version` once installed |
+| Codex CLI | 0.140.0 (installed 2026-06-23; model `gpt-5.5`) | `codex --version` → `codex-cli 0.140.0` |
 
 ## How to capture the model name + version for each session
 

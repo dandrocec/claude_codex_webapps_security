@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editor Login</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="auth-page">
+      <form class="auth-card" method="post" action="/login">
+        <p class="eyebrow">Editor</p>
+        <h1>Sign in</h1>
+        <% if (error) { %>
+          <p class="error"><%= error %></p>
+        <% } %>
+        <label for="username">Username</label>
+        <input id="username" name="username" value="<%= username %>" autocomplete="username" required>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button class="button" type="submit">Log in</button>
+        <a href="/">Back to FAQ</a>
+      </form>
+    </main>
+  </body>
+</html>

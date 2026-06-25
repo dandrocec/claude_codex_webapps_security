@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}My Events{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <div>
+        <h1>My Events</h1>
+        <p>Create, edit, and remove the events you organise.</p>
+    </div>
+    <a class="button" href="{{ url_for('create_event') }}">Create event</a>
+</section>
+
+{% if events %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th class="actions-col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                    <tr>
+                        <td>{{ event.title }}</td>
+                        <td>{{ event.event_date }}</td>
+                        <td>{{ event.location }}</td>
+                        <td class="actions">
+                            <a class="button button-secondary" href="{{ url_for('edit_event', event_id=event.id) }}">Edit</a>
+                            <form method="post" action="{{ url_for('delete_event', event_id=event.id) }}">
+                                <button class="button button-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p class="empty-state">You have not created any events.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Convert Currency{% endblock %}
+
+{% block content %}
+  <section class="panel">
+    <h1>Convert currency</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+
+      <div class="field">
+        {{ form.amount.label }}
+        {{ form.amount(inputmode="decimal", autocomplete="off") }}
+        {% for error in form.amount.errors %}
+          <span class="error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="grid two">
+        <div class="field">
+          {{ form.source_currency.label }}
+          {{ form.source_currency }}
+          {% for error in form.source_currency.errors %}
+            <span class="error">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="field">
+          {{ form.target_currency.label }}
+          {{ form.target_currency }}
+          {% for error in form.target_currency.errors %}
+            <span class="error">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      {{ form.submit(class="primary") }}
+    </form>
+
+    {% if result %}
+      <div class="result" aria-live="polite">
+        <span>{{ result.amount }} {{ result.source }}</span>
+        <strong>{{ result.converted }} {{ result.target }}</strong>
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}

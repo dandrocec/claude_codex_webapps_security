@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Newsletter Manager{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <div>
+      <p class="eyebrow">Editor workspace</p>
+      <h1>Dashboard</h1>
+    </div>
+    <a class="button primary" href="{{ url_for('new_draft') }}">New draft</a>
+  </section>
+
+  <section class="stats-grid">
+    <article class="stat-card">
+      <span>Subscribers</span>
+      <strong>{{ subscriber_count }}</strong>
+    </article>
+    <article class="stat-card">
+      <span>Drafts</span>
+      <strong>{{ draft_count }}</strong>
+    </article>
+  </section>
+
+  <section class="content-panel">
+    <div class="panel-title">
+      <h2>Recent drafts</h2>
+      <a href="{{ url_for('drafts') }}">View all</a>
+    </div>
+    {% if latest_drafts %}
+      <ul class="list">
+        {% for draft in latest_drafts %}
+          <li>
+            <div>
+              <strong>{{ draft.subject }}</strong>
+              <span>Updated {{ draft.updated_at }}</span>
+            </div>
+            <a class="button" href="{{ url_for('preview_draft', draft_id=draft.id) }}">Preview</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">No drafts yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

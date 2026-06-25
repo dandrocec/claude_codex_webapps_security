@@ -1,0 +1,28 @@
+<%- include('partials/header', { title: heading }) %>
+
+<section class="panel narrow">
+  <h1><%= heading %></h1>
+  <% if (typeof error !== 'undefined' && error) { %>
+    <p class="alert"><%= error %></p>
+  <% } %>
+  <form method="post" action="<%= action %>" class="stack">
+    <label>
+      Title
+      <input name="title" value="<%= bookmark.title %>" required>
+    </label>
+    <label>
+      URL
+      <input name="url" value="<%= bookmark.url %>" placeholder="https://example.com" required>
+    </label>
+    <label>
+      Tags
+      <input name="tags" value="<%= bookmark.tags %>" placeholder="work, reference, reading">
+    </label>
+    <div class="actions">
+      <button type="submit">Save bookmark</button>
+      <a class="secondary" href="/bookmarks">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,73 @@
+<%- include("partials/header", { title }) %>
+
+<main class="layout">
+  <section class="panel generator">
+    <div>
+      <p class="eyebrow">Secure palette studio</p>
+      <h1>Generate five related shades from one base colour.</h1>
+    </div>
+
+    <% if (!user) { %>
+      <div class="notice">
+        Sign in or create an account to generate and save palettes.
+      </div>
+    <% } %>
+
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+
+    <form method="post" action="/palette" class="colour-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="baseHex">Base hex colour</label>
+      <div class="input-row">
+        <input
+          id="baseHex"
+          name="baseHex"
+          type="text"
+          inputmode="text"
+          pattern="#?[0-9A-Fa-f]{6}"
+          maxlength="7"
+          value="<%= baseHex %>"
+          placeholder="#4F46E5"
+          autocomplete="off"
+          required
+        >
+        <button type="submit" <% if (!user) { %>disabled<% } %>>Generate</button>
+      </div>
+    </form>
+
+    <div class="palette" aria-label="Generated palette">
+      <% shades.forEach((shade) => { %>
+        <div class="swatch">
+          <img class="colour" src="/swatch/<%= shade.slice(1) %>.svg" alt="">
+          <strong><%= shade %></strong>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+  <aside class="panel history">
+    <h2>Recent palettes</h2>
+    <% if (user && palettes.length) { %>
+      <ul>
+        <% palettes.forEach((palette) => { %>
+          <li>
+            <a href="/palette/<%= palette.id %>">
+              <span class="mini-row">
+                <% palette.shades.forEach((shade) => { %>
+                  <img src="/swatch/<%= shade.slice(1) %>.svg" alt="">
+                <% }) %>
+              </span>
+              <span><%= palette.base_hex %></span>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p class="muted">Saved palettes appear here after generation.</p>
+    <% } %>
+  </aside>
+</main>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{% if recipe %}Edit{% else %}Add{% endif %} Recipe{% endblock %}
+{% block content %}
+  <section class="form-panel">
+    <h1>{% if recipe %}Edit recipe{% else %}Add recipe{% endif %}</h1>
+    <form method="post" enctype="multipart/form-data" class="form">
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" value="{{ recipe.title if recipe else '' }}" required>
+
+      <label for="ingredients">Ingredients</label>
+      <textarea id="ingredients" name="ingredients" rows="8" required>{{ recipe.ingredients if recipe else '' }}</textarea>
+
+      <label for="steps">Steps</label>
+      <textarea id="steps" name="steps" rows="10" required>{{ recipe.steps if recipe else '' }}</textarea>
+
+      <label for="photo">Photo</label>
+      <input id="photo" name="photo" type="file" accept="image/png,image/jpeg,image/gif,image/webp">
+      {% if recipe and recipe.photo_filename %}
+        <p class="helper">Uploading a new photo will replace the current one.</p>
+      {% endif %}
+
+      <div class="actions">
+        <button type="submit" class="primary-button">{% if recipe %}Save changes{% else %}Add recipe{% endif %}</button>
+        <a class="secondary-button" href="{{ url_for('index') }}">Cancel</a>
+      </div>
+    </form>
+  </section>
+{% endblock %}

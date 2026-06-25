@@ -1,0 +1,11 @@
+{
+  "name": "local/email-subscription-app",
+  "description": "A small PHP email subscription app.",
+  "type": "project",
+  "require": {
+    "php": ">=8.1"
+  },
+  "scripts": {
+    "serve": "php -S localhost:5025"
+  }
+}

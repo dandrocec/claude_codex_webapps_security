@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Wiki{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}">Wiki</a>
+    <nav>
+      <a href="{{ url_for('index') }}">Pages</a>
+      {% if g.user %}
+        <a href="{{ url_for('create_page') }}">New Page</a>
+        <span class="user">{{ g.user.username }}</span>
+        <form class="inline" method="post" action="{{ url_for('logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit">Log out</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <section class="messages" aria-label="Messages">
+          {% for category, message in messages %}
+            <p class="message {{ category }}">{{ message }}</p>
+          {% endfor %}
+        </section>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

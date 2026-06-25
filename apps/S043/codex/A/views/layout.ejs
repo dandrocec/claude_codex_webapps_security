@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title || 'Polls' %></title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">Polls</a>
+      <nav>
+        <% if (currentUser) { %>
+          <a href="/polls/new">Create Poll</a>
+          <span class="user"><%= currentUser.username %></span>
+          <form action="/logout" method="post" class="inline">
+            <button type="submit">Log Out</button>
+          </form>
+        <% } else { %>
+          <a href="/login">Log In</a>
+          <a class="button-link" href="/register">Register</a>
+        <% } %>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <% if (flash) { %>
+        <div class="flash <%= flash.type %>"><%= flash.message %></div>
+      <% } %>
+      <%- body %>
+    </main>
+  </body>
+</html>

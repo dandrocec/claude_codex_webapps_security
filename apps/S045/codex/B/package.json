@@ -1,0 +1,27 @@
+{
+  "name": "secure-file-sharing-app",
+  "version": "1.0.0",
+  "description": "Secure Node.js/Express file-sharing app with local uploads and SQLite metadata.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^11.7.0",
+    "connect-sqlite3": "^0.9.15",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "file-type": "^19.6.0",
+    "helmet": "^8.0.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

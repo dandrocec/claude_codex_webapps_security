@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Public Recipes{% endblock %}
+{% block content %}
+  <section class="section-heading">
+    <div>
+      <h1>Public recipes</h1>
+      <p>Browse recipes shared by everyone.</p>
+    </div>
+    {% if g.user %}
+      <a class="primary-button" href="{{ url_for('create_recipe') }}">Add recipe</a>
+    {% endif %}
+  </section>
+
+  {% if recipes %}
+    <div class="recipe-grid">
+      {% for recipe in recipes %}
+        <article class="recipe-card">
+          {% if recipe.photo_filename %}
+            <img src="{{ url_for('uploaded_file', filename=recipe.photo_filename) }}" alt="{{ recipe.title }}">
+          {% else %}
+            <div class="recipe-placeholder">No photo</div>
+          {% endif %}
+          <div class="recipe-card-body">
+            <h2><a href="{{ url_for('recipe_detail', recipe_id=recipe.id) }}">{{ recipe.title }}</a></h2>
+            <p class="meta">By {{ recipe.username }}</p>
+            <p>{{ recipe.ingredients[:140] }}{% if recipe.ingredients|length > 140 %}...{% endif %}</p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <h2>No recipes yet</h2>
+      <p>{% if g.user %}Add the first recipe to get started.{% else %}Register or log in to add the first recipe.{% endif %}</p>
+    </div>
+  {% endif %}
+{% endblock %}

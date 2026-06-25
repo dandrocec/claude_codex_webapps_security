@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Paste {{ paste.id }} | Flask Pastebin{% endblock %}
+
+{% block content %}
+  <section class="panel">
+    <div class="paste-heading">
+      <div>
+        <h1>Paste {{ paste.id }}</h1>
+        <p class="meta">Created {{ paste.created_at }}</p>
+      </div>
+      <a class="button-link" href="{{ url_for('show_paste', paste_id=paste.id, _external=True) }}">Permanent URL</a>
+    </div>
+    <pre class="paste-content">{{ paste.content }}</pre>
+  </section>
+{% endblock %}

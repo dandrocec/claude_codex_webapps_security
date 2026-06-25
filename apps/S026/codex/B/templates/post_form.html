@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} Post{% endblock %}
+{% block content %}
+  <section class="form-panel">
+    <h1>{{ action }} post</h1>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="title">Title</label>
+      <input id="title" name="title" maxlength="140" required value="{{ title }}">
+
+      <label for="body">Body</label>
+      <textarea id="body" name="body" maxlength="10000" rows="14" required>{{ body }}</textarea>
+
+      <button type="submit">{{ action }} post</button>
+    </form>
+  </section>
+{% endblock %}

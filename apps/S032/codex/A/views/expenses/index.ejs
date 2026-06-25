@@ -1,0 +1,88 @@
+<%- include('../partials/header') %>
+
+<section class="page-heading">
+  <div>
+    <h1>Expenses</h1>
+    <p class="muted">Track spending by month.</p>
+  </div>
+  <form method="get" action="/expenses" class="month-picker">
+    <label>
+      Month
+      <input type="month" name="month" value="<%= selectedMonth %>">
+    </label>
+    <button type="submit">View</button>
+  </form>
+</section>
+
+<section class="summary">
+  <span>Monthly total</span>
+  <strong>$<%= Number(monthlyTotal).toFixed(2) %></strong>
+</section>
+
+<section class="entry-grid">
+  <div>
+    <h2>Add expense</h2>
+    <% if (errors.length) { %>
+      <div class="alert error">
+        <% errors.forEach((error) => { %><p><%= error %></p><% }) %>
+      </div>
+    <% } %>
+    <form method="post" action="/expenses" class="expense-form">
+      <input type="hidden" name="month" value="<%= selectedMonth %>">
+      <label>
+        Amount
+        <input name="amount" type="number" min="0.01" step="0.01" value="<%= form.amount %>" required>
+      </label>
+      <label>
+        Category
+        <input name="category" value="<%= form.category %>" list="categories" required>
+      </label>
+      <datalist id="categories">
+        <option value="Food"></option>
+        <option value="Transport"></option>
+        <option value="Housing"></option>
+        <option value="Utilities"></option>
+        <option value="Health"></option>
+        <option value="Entertainment"></option>
+      </datalist>
+      <label>
+        Date
+        <input name="expenseDate" type="date" value="<%= form.expenseDate %>" required>
+      </label>
+      <label class="wide">
+        Note
+        <textarea name="note" rows="3"><%= form.note %></textarea>
+      </label>
+      <button class="wide" type="submit">Add expense</button>
+    </form>
+  </div>
+
+  <div>
+    <h2>Entries</h2>
+    <% if (!expenses.length) { %>
+      <p class="empty">No expenses recorded for this month.</p>
+    <% } else { %>
+      <div class="expense-list">
+        <% expenses.forEach((expense) => { %>
+          <article class="expense-item">
+            <div>
+              <strong><%= expense.category %></strong>
+              <span><%= expense.expense_date %></span>
+              <% if (expense.note) { %><p><%= expense.note %></p><% } %>
+            </div>
+            <div class="item-actions">
+              <strong>$<%= Number(expense.amount).toFixed(2) %></strong>
+              <a href="/expenses/<%= expense.id %>/edit">Edit</a>
+              <form method="post" action="/expenses/<%= expense.id %>/delete">
+                <input type="hidden" name="month" value="<%= selectedMonth %>">
+                <button class="link-button danger" type="submit">Delete</button>
+              </form>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

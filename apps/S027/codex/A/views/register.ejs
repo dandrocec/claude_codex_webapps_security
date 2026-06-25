@@ -1,0 +1,22 @@
+<%- include("partials/page_start", { title: "Register" }) %>
+
+<section class="auth-panel">
+  <h1>Create account</h1>
+  <% if (typeof error !== "undefined" && error) { %>
+    <p class="notice"><%= error %></p>
+  <% } %>
+  <form action="/register" method="post" class="stack">
+    <label>
+      Username
+      <input name="username" autocomplete="username" minlength="3" required>
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" autocomplete="new-password" minlength="6" required>
+    </label>
+    <button type="submit">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="/login">Log in</a></p>
+</section>
+
+<%- include("partials/page_end") %>

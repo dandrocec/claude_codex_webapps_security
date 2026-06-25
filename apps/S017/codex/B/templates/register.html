@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+  <section class="panel auth">
+    <h1>Create account</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <div class="field">
+        {{ form.email.label }}
+        {{ form.email(autocomplete="email") }}
+        {% for error in form.email.errors %}
+          <span class="error">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <div class="field">
+        {{ form.password.label }}
+        {{ form.password(autocomplete="new-password") }}
+        {% for error in form.password.errors %}
+          <span class="error">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <div class="field">
+        {{ form.confirm_password.label }}
+        {{ form.confirm_password(autocomplete="new-password") }}
+        {% for error in form.confirm_password.errors %}
+          <span class="error">{{ error }}</span>
+        {% endfor %}
+      </div>
+      {{ form.submit(class="primary") }}
+    </form>
+    <p class="muted">Already registered? <a href="{{ url_for('login') }}">Sign in</a>.</p>
+  </section>
+{% endblock %}

@@ -2,7 +2,7 @@
 # Security-NEUTRAL: this file intentionally contains NO security_opt,
 # NO cap_drop, NO read_only, NO `user:` override, and NO other hardening.
 # It provides isolation + runtime only.
-# Services generated: 200
+# Services generated: 300
 
 services:
   s001-claude-a:
@@ -33,6 +33,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20005:5001"
+    networks:
+      - appnet
+    restart: "no"
+
+  s001-codex-a:
+    build:
+      context: apps/S001/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5001"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5001'
+    image: csj/s001-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20006:5001"
+    networks:
+      - appnet
+    restart: "no"
+
+  s001-codex-b:
+    build:
+      context: apps/S001/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5001"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5001'
+    image: csj/s001-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20007:5001"
     networks:
       - appnet
     restart: "no"
@@ -69,6 +101,38 @@ services:
       - appnet
     restart: "no"
 
+  s002-codex-a:
+    build:
+      context: apps/S002/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5002"
+        START_CMD: 'npm start'
+    image: csj/s002-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20010:5002"
+    networks:
+      - appnet
+    restart: "no"
+
+  s002-codex-b:
+    build:
+      context: apps/S002/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5002"
+        START_CMD: 'npm start'
+    image: csj/s002-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20011:5002"
+    networks:
+      - appnet
+    restart: "no"
+
   s003-claude-a:
     build:
       context: apps/S003/claude/A
@@ -97,6 +161,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20013:5003"
+    networks:
+      - appnet
+    restart: "no"
+
+  s003-codex-a:
+    build:
+      context: apps/S003/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5003"
+        START_CMD: 'php -S 0.0.0.0:5003 -t /var/www/html'
+    image: csj/s003-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20014:5003"
+    networks:
+      - appnet
+    restart: "no"
+
+  s003-codex-b:
+    build:
+      context: apps/S003/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5003"
+        START_CMD: 'php -S 0.0.0.0:5003 -t /var/www/html'
+    image: csj/s003-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20015:5003"
     networks:
       - appnet
     restart: "no"
@@ -133,6 +229,38 @@ services:
       - appnet
     restart: "no"
 
+  s004-codex-a:
+    build:
+      context: apps/S004/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5004"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5004'
+    image: csj/s004-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20018:5004"
+    networks:
+      - appnet
+    restart: "no"
+
+  s004-codex-b:
+    build:
+      context: apps/S004/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5004"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5004'
+    image: csj/s004-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20019:5004"
+    networks:
+      - appnet
+    restart: "no"
+
   s005-claude-a:
     build:
       context: apps/S005/claude/A
@@ -161,6 +289,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20021:5005"
+    networks:
+      - appnet
+    restart: "no"
+
+  s005-codex-a:
+    build:
+      context: apps/S005/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5005"
+        START_CMD: 'npm start'
+    image: csj/s005-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20022:5005"
+    networks:
+      - appnet
+    restart: "no"
+
+  s005-codex-b:
+    build:
+      context: apps/S005/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5005"
+        START_CMD: 'npm start'
+    image: csj/s005-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20023:5005"
     networks:
       - appnet
     restart: "no"
@@ -197,6 +357,38 @@ services:
       - appnet
     restart: "no"
 
+  s006-codex-a:
+    build:
+      context: apps/S006/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5006"
+        START_CMD: 'php -S 0.0.0.0:5006 -t /var/www/html'
+    image: csj/s006-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20026:5006"
+    networks:
+      - appnet
+    restart: "no"
+
+  s006-codex-b:
+    build:
+      context: apps/S006/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5006"
+        START_CMD: 'php -S 0.0.0.0:5006 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s006-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20027:5006"
+    networks:
+      - appnet
+    restart: "no"
+
   s007-claude-a:
     build:
       context: apps/S007/claude/A
@@ -225,6 +417,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20029:5007"
+    networks:
+      - appnet
+    restart: "no"
+
+  s007-codex-a:
+    build:
+      context: apps/S007/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5007"
+        START_CMD: 'npm start'
+    image: csj/s007-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20030:5007"
+    networks:
+      - appnet
+    restart: "no"
+
+  s007-codex-b:
+    build:
+      context: apps/S007/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5007"
+        START_CMD: 'npm start'
+    image: csj/s007-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20031:5007"
     networks:
       - appnet
     restart: "no"
@@ -261,6 +485,38 @@ services:
       - appnet
     restart: "no"
 
+  s008-codex-a:
+    build:
+      context: apps/S008/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5008"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5008'
+    image: csj/s008-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20034:5008"
+    networks:
+      - appnet
+    restart: "no"
+
+  s008-codex-b:
+    build:
+      context: apps/S008/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5008"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5008'
+    image: csj/s008-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20035:5008"
+    networks:
+      - appnet
+    restart: "no"
+
   s009-claude-a:
     build:
       context: apps/S009/claude/A
@@ -289,6 +545,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20037:5009"
+    networks:
+      - appnet
+    restart: "no"
+
+  s009-codex-a:
+    build:
+      context: apps/S009/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5009"
+        START_CMD: 'npm start'
+    image: csj/s009-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20038:5009"
+    networks:
+      - appnet
+    restart: "no"
+
+  s009-codex-b:
+    build:
+      context: apps/S009/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5009"
+        START_CMD: 'npm start'
+    image: csj/s009-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20039:5009"
     networks:
       - appnet
     restart: "no"
@@ -325,6 +613,38 @@ services:
       - appnet
     restart: "no"
 
+  s010-codex-a:
+    build:
+      context: apps/S010/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5010"
+        START_CMD: 'uvicorn main:app --host 0.0.0.0 --port 5010'
+    image: csj/s010-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20042:5010"
+    networks:
+      - appnet
+    restart: "no"
+
+  s010-codex-b:
+    build:
+      context: apps/S010/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5010"
+        START_CMD: 'uvicorn app.main:app --host 0.0.0.0 --port 5010'
+    image: csj/s010-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20043:5010"
+    networks:
+      - appnet
+    restart: "no"
+
   s011-claude-a:
     build:
       context: apps/S011/claude/A
@@ -357,6 +677,38 @@ services:
       - appnet
     restart: "no"
 
+  s011-codex-a:
+    build:
+      context: apps/S011/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5011"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5011'
+    image: csj/s011-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20046:5011"
+    networks:
+      - appnet
+    restart: "no"
+
+  s011-codex-b:
+    build:
+      context: apps/S011/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5011"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5011'
+    image: csj/s011-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20047:5011"
+    networks:
+      - appnet
+    restart: "no"
+
   s012-claude-a:
     build:
       context: apps/S012/claude/A
@@ -385,6 +737,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20049:5012"
+    networks:
+      - appnet
+    restart: "no"
+
+  s012-codex-a:
+    build:
+      context: apps/S012/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5012"
+        START_CMD: 'php -S 0.0.0.0:5012 -t /var/www/html/public'
+    image: csj/s012-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20050:5012"
+    networks:
+      - appnet
+    restart: "no"
+
+  s012-codex-b:
+    build:
+      context: apps/S012/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5012"
+        START_CMD: 'php -S 0.0.0.0:5012 -t /var/www/html/public'
+    image: csj/s012-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20051:5012"
     networks:
       - appnet
     restart: "no"
@@ -423,6 +807,38 @@ services:
       - appnet
     restart: "no"
 
+  s013-codex-a:
+    build:
+      context: apps/S013/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5013"
+        START_CMD: 'npm start'
+    image: csj/s013-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20054:5013"
+    networks:
+      - appnet
+    restart: "no"
+
+  s013-codex-b:
+    build:
+      context: apps/S013/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5013"
+        START_CMD: 'npm start'
+    image: csj/s013-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20055:5013"
+    networks:
+      - appnet
+    restart: "no"
+
   s014-claude-a:
     build:
       context: apps/S014/claude/A
@@ -451,6 +867,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20057:5014"
+    networks:
+      - appnet
+    restart: "no"
+
+  s014-codex-a:
+    build:
+      context: apps/S014/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5014"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5014'
+    image: csj/s014-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20058:5014"
+    networks:
+      - appnet
+    restart: "no"
+
+  s014-codex-b:
+    build:
+      context: apps/S014/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5014"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5014'
+    image: csj/s014-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20059:5014"
     networks:
       - appnet
     restart: "no"
@@ -487,6 +935,38 @@ services:
       - appnet
     restart: "no"
 
+  s015-codex-a:
+    build:
+      context: apps/S015/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5015"
+        START_CMD: 'npm start'
+    image: csj/s015-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20062:5015"
+    networks:
+      - appnet
+    restart: "no"
+
+  s015-codex-b:
+    build:
+      context: apps/S015/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5015"
+        START_CMD: 'npm start'
+    image: csj/s015-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20063:5015"
+    networks:
+      - appnet
+    restart: "no"
+
   s016-claude-a:
     build:
       context: apps/S016/claude/A
@@ -515,6 +995,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20065:5016"
+    networks:
+      - appnet
+    restart: "no"
+
+  s016-codex-a:
+    build:
+      context: apps/S016/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5016"
+        START_CMD: 'php -S 0.0.0.0:5016 -t /var/www/html'
+    image: csj/s016-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20066:5016"
+    networks:
+      - appnet
+    restart: "no"
+
+  s016-codex-b:
+    build:
+      context: apps/S016/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5016"
+        START_CMD: 'php -S 0.0.0.0:5016 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s016-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20067:5016"
     networks:
       - appnet
     restart: "no"
@@ -551,6 +1063,38 @@ services:
       - appnet
     restart: "no"
 
+  s017-codex-a:
+    build:
+      context: apps/S017/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5017"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5017'
+    image: csj/s017-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20070:5017"
+    networks:
+      - appnet
+    restart: "no"
+
+  s017-codex-b:
+    build:
+      context: apps/S017/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5017"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5017'
+    image: csj/s017-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20071:5017"
+    networks:
+      - appnet
+    restart: "no"
+
   s018-claude-a:
     build:
       context: apps/S018/claude/A
@@ -579,6 +1123,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20073:5018"
+    networks:
+      - appnet
+    restart: "no"
+
+  s018-codex-a:
+    build:
+      context: apps/S018/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5018"
+        START_CMD: 'npm start'
+    image: csj/s018-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20074:5018"
+    networks:
+      - appnet
+    restart: "no"
+
+  s018-codex-b:
+    build:
+      context: apps/S018/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5018"
+        START_CMD: 'npm start'
+    image: csj/s018-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20075:5018"
     networks:
       - appnet
     restart: "no"
@@ -615,6 +1191,38 @@ services:
       - appnet
     restart: "no"
 
+  s019-codex-a:
+    build:
+      context: apps/S019/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5019"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5019'
+    image: csj/s019-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20078:5019"
+    networks:
+      - appnet
+    restart: "no"
+
+  s019-codex-b:
+    build:
+      context: apps/S019/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5019"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5019'
+    image: csj/s019-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20079:5019"
+    networks:
+      - appnet
+    restart: "no"
+
   s020-claude-a:
     build:
       context: apps/S020/claude/A
@@ -643,6 +1251,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20081:5020"
+    networks:
+      - appnet
+    restart: "no"
+
+  s020-codex-a:
+    build:
+      context: apps/S020/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5020"
+        START_CMD: 'npm start'
+    image: csj/s020-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20082:5020"
+    networks:
+      - appnet
+    restart: "no"
+
+  s020-codex-b:
+    build:
+      context: apps/S020/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5020"
+        START_CMD: 'npm start'
+    image: csj/s020-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20083:5020"
     networks:
       - appnet
     restart: "no"
@@ -679,6 +1319,38 @@ services:
       - appnet
     restart: "no"
 
+  s021-codex-a:
+    build:
+      context: apps/S021/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5021"
+        START_CMD: 'php -S 0.0.0.0:5021 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s021-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20086:5021"
+    networks:
+      - appnet
+    restart: "no"
+
+  s021-codex-b:
+    build:
+      context: apps/S021/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5021"
+        START_CMD: 'php -S 0.0.0.0:5021 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s021-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20087:5021"
+    networks:
+      - appnet
+    restart: "no"
+
   s022-claude-a:
     build:
       context: apps/S022/claude/A
@@ -707,6 +1379,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20089:5022"
+    networks:
+      - appnet
+    restart: "no"
+
+  s022-codex-a:
+    build:
+      context: apps/S022/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5022"
+        START_CMD: 'npm start'
+    image: csj/s022-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20090:5022"
+    networks:
+      - appnet
+    restart: "no"
+
+  s022-codex-b:
+    build:
+      context: apps/S022/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5022"
+        START_CMD: 'npm start'
+    image: csj/s022-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20091:5022"
     networks:
       - appnet
     restart: "no"
@@ -743,6 +1447,38 @@ services:
       - appnet
     restart: "no"
 
+  s023-codex-a:
+    build:
+      context: apps/S023/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5023"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5023'
+    image: csj/s023-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20094:5023"
+    networks:
+      - appnet
+    restart: "no"
+
+  s023-codex-b:
+    build:
+      context: apps/S023/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5023"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5023'
+    image: csj/s023-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20095:5023"
+    networks:
+      - appnet
+    restart: "no"
+
   s024-claude-a:
     build:
       context: apps/S024/claude/A
@@ -771,6 +1507,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20097:5024"
+    networks:
+      - appnet
+    restart: "no"
+
+  s024-codex-a:
+    build:
+      context: apps/S024/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5024"
+        START_CMD: 'npm start'
+    image: csj/s024-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20098:5024"
+    networks:
+      - appnet
+    restart: "no"
+
+  s024-codex-b:
+    build:
+      context: apps/S024/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5024"
+        START_CMD: 'npm start'
+    image: csj/s024-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20099:5024"
     networks:
       - appnet
     restart: "no"
@@ -807,6 +1575,38 @@ services:
       - appnet
     restart: "no"
 
+  s025-codex-a:
+    build:
+      context: apps/S025/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5025"
+        START_CMD: 'php -S 0.0.0.0:5025 -t /var/www/html'
+    image: csj/s025-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20102:5025"
+    networks:
+      - appnet
+    restart: "no"
+
+  s025-codex-b:
+    build:
+      context: apps/S025/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5025"
+        START_CMD: 'php -S 0.0.0.0:5025 -t /var/www/html/public'
+    image: csj/s025-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20103:5025"
+    networks:
+      - appnet
+    restart: "no"
+
   s026-claude-a:
     build:
       context: apps/S026/claude/A
@@ -835,6 +1635,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20105:5026"
+    networks:
+      - appnet
+    restart: "no"
+
+  s026-codex-a:
+    build:
+      context: apps/S026/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5026"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5026'
+    image: csj/s026-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20106:5026"
+    networks:
+      - appnet
+    restart: "no"
+
+  s026-codex-b:
+    build:
+      context: apps/S026/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5026"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5026'
+    image: csj/s026-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20107:5026"
     networks:
       - appnet
     restart: "no"
@@ -871,6 +1703,38 @@ services:
       - appnet
     restart: "no"
 
+  s027-codex-a:
+    build:
+      context: apps/S027/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5027"
+        START_CMD: 'npm start'
+    image: csj/s027-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20110:5027"
+    networks:
+      - appnet
+    restart: "no"
+
+  s027-codex-b:
+    build:
+      context: apps/S027/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5027"
+        START_CMD: 'npm start'
+    image: csj/s027-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20111:5027"
+    networks:
+      - appnet
+    restart: "no"
+
   s028-claude-a:
     build:
       context: apps/S028/claude/A
@@ -899,6 +1763,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20113:5028"
+    networks:
+      - appnet
+    restart: "no"
+
+  s028-codex-a:
+    build:
+      context: apps/S028/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5028"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5028'
+    image: csj/s028-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20114:5028"
+    networks:
+      - appnet
+    restart: "no"
+
+  s028-codex-b:
+    build:
+      context: apps/S028/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5028"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5028'
+    image: csj/s028-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20115:5028"
     networks:
       - appnet
     restart: "no"
@@ -935,6 +1831,38 @@ services:
       - appnet
     restart: "no"
 
+  s029-codex-a:
+    build:
+      context: apps/S029/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5029"
+        START_CMD: 'php -S 0.0.0.0:5029 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s029-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20118:5029"
+    networks:
+      - appnet
+    restart: "no"
+
+  s029-codex-b:
+    build:
+      context: apps/S029/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5029"
+        START_CMD: 'php -S 0.0.0.0:5029 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s029-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20119:5029"
+    networks:
+      - appnet
+    restart: "no"
+
   s030-claude-a:
     build:
       context: apps/S030/claude/A
@@ -963,6 +1891,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20121:5030"
+    networks:
+      - appnet
+    restart: "no"
+
+  s030-codex-a:
+    build:
+      context: apps/S030/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5030"
+        START_CMD: 'npm start'
+    image: csj/s030-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20122:5030"
+    networks:
+      - appnet
+    restart: "no"
+
+  s030-codex-b:
+    build:
+      context: apps/S030/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5030"
+        START_CMD: 'npm start'
+    image: csj/s030-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20123:5030"
     networks:
       - appnet
     restart: "no"
@@ -999,6 +1959,38 @@ services:
       - appnet
     restart: "no"
 
+  s031-codex-a:
+    build:
+      context: apps/S031/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5031"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5031'
+    image: csj/s031-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20126:5031"
+    networks:
+      - appnet
+    restart: "no"
+
+  s031-codex-b:
+    build:
+      context: apps/S031/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5031"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5031'
+    image: csj/s031-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20127:5031"
+    networks:
+      - appnet
+    restart: "no"
+
   s032-claude-a:
     build:
       context: apps/S032/claude/A
@@ -1027,6 +2019,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20129:5032"
+    networks:
+      - appnet
+    restart: "no"
+
+  s032-codex-a:
+    build:
+      context: apps/S032/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5032"
+        START_CMD: 'npm start'
+    image: csj/s032-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20130:5032"
+    networks:
+      - appnet
+    restart: "no"
+
+  s032-codex-b:
+    build:
+      context: apps/S032/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5032"
+        START_CMD: 'npm start'
+    image: csj/s032-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20131:5032"
     networks:
       - appnet
     restart: "no"
@@ -1063,6 +2087,38 @@ services:
       - appnet
     restart: "no"
 
+  s033-codex-a:
+    build:
+      context: apps/S033/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5033"
+        START_CMD: 'php -S 0.0.0.0:5033 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s033-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20134:5033"
+    networks:
+      - appnet
+    restart: "no"
+
+  s033-codex-b:
+    build:
+      context: apps/S033/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5033"
+        START_CMD: 'php -S 0.0.0.0:5033 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s033-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20135:5033"
+    networks:
+      - appnet
+    restart: "no"
+
   s034-claude-a:
     build:
       context: apps/S034/claude/A
@@ -1091,6 +2147,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20137:5034"
+    networks:
+      - appnet
+    restart: "no"
+
+  s034-codex-a:
+    build:
+      context: apps/S034/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5034"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5034'
+    image: csj/s034-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20138:5034"
+    networks:
+      - appnet
+    restart: "no"
+
+  s034-codex-b:
+    build:
+      context: apps/S034/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5034"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5034'
+    image: csj/s034-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20139:5034"
     networks:
       - appnet
     restart: "no"
@@ -1127,6 +2215,38 @@ services:
       - appnet
     restart: "no"
 
+  s035-codex-a:
+    build:
+      context: apps/S035/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5035"
+        START_CMD: 'npm start'
+    image: csj/s035-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20142:5035"
+    networks:
+      - appnet
+    restart: "no"
+
+  s035-codex-b:
+    build:
+      context: apps/S035/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5035"
+        START_CMD: 'npm start'
+    image: csj/s035-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20143:5035"
+    networks:
+      - appnet
+    restart: "no"
+
   s036-claude-a:
     build:
       context: apps/S036/claude/A
@@ -1155,6 +2275,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20145:5036"
+    networks:
+      - appnet
+    restart: "no"
+
+  s036-codex-a:
+    build:
+      context: apps/S036/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5036"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5036'
+    image: csj/s036-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20146:5036"
+    networks:
+      - appnet
+    restart: "no"
+
+  s036-codex-b:
+    build:
+      context: apps/S036/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5036"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5036'
+    image: csj/s036-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20147:5036"
     networks:
       - appnet
     restart: "no"
@@ -1191,6 +2343,38 @@ services:
       - appnet
     restart: "no"
 
+  s037-codex-a:
+    build:
+      context: apps/S037/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5037"
+        START_CMD: 'php -S 0.0.0.0:5037 -t /var/www/html/public'
+    image: csj/s037-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20150:5037"
+    networks:
+      - appnet
+    restart: "no"
+
+  s037-codex-b:
+    build:
+      context: apps/S037/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5037"
+        START_CMD: 'php -S 0.0.0.0:5037 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s037-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20151:5037"
+    networks:
+      - appnet
+    restart: "no"
+
   s038-claude-a:
     build:
       context: apps/S038/claude/A
@@ -1219,6 +2403,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20153:5038"
+    networks:
+      - appnet
+    restart: "no"
+
+  s038-codex-a:
+    build:
+      context: apps/S038/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5038"
+        START_CMD: 'npm start'
+    image: csj/s038-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20154:5038"
+    networks:
+      - appnet
+    restart: "no"
+
+  s038-codex-b:
+    build:
+      context: apps/S038/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5038"
+        START_CMD: 'npm start'
+    image: csj/s038-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20155:5038"
     networks:
       - appnet
     restart: "no"
@@ -1255,6 +2471,38 @@ services:
       - appnet
     restart: "no"
 
+  s039-codex-a:
+    build:
+      context: apps/S039/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5039"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5039'
+    image: csj/s039-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20158:5039"
+    networks:
+      - appnet
+    restart: "no"
+
+  s039-codex-b:
+    build:
+      context: apps/S039/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5039"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5039'
+    image: csj/s039-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20159:5039"
+    networks:
+      - appnet
+    restart: "no"
+
   s040-claude-a:
     build:
       context: apps/S040/claude/A
@@ -1283,6 +2531,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20161:5040"
+    networks:
+      - appnet
+    restart: "no"
+
+  s040-codex-a:
+    build:
+      context: apps/S040/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5040"
+        START_CMD: 'php -S 0.0.0.0:5040 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s040-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20162:5040"
+    networks:
+      - appnet
+    restart: "no"
+
+  s040-codex-b:
+    build:
+      context: apps/S040/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5040"
+        START_CMD: 'php -S 0.0.0.0:5040 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s040-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20163:5040"
     networks:
       - appnet
     restart: "no"
@@ -1319,6 +2599,38 @@ services:
       - appnet
     restart: "no"
 
+  s041-codex-a:
+    build:
+      context: apps/S041/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5041"
+        START_CMD: 'npm start'
+    image: csj/s041-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20166:5041"
+    networks:
+      - appnet
+    restart: "no"
+
+  s041-codex-b:
+    build:
+      context: apps/S041/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5041"
+        START_CMD: 'npm start'
+    image: csj/s041-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20167:5041"
+    networks:
+      - appnet
+    restart: "no"
+
   s042-claude-a:
     build:
       context: apps/S042/claude/A
@@ -1347,6 +2659,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20169:5042"
+    networks:
+      - appnet
+    restart: "no"
+
+  s042-codex-a:
+    build:
+      context: apps/S042/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5042"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5042'
+    image: csj/s042-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20170:5042"
+    networks:
+      - appnet
+    restart: "no"
+
+  s042-codex-b:
+    build:
+      context: apps/S042/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5042"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5042'
+    image: csj/s042-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20171:5042"
     networks:
       - appnet
     restart: "no"
@@ -1383,6 +2727,38 @@ services:
       - appnet
     restart: "no"
 
+  s043-codex-a:
+    build:
+      context: apps/S043/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5043"
+        START_CMD: 'npm start'
+    image: csj/s043-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20174:5043"
+    networks:
+      - appnet
+    restart: "no"
+
+  s043-codex-b:
+    build:
+      context: apps/S043/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5043"
+        START_CMD: 'npm start'
+    image: csj/s043-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20175:5043"
+    networks:
+      - appnet
+    restart: "no"
+
   s044-claude-a:
     build:
       context: apps/S044/claude/A
@@ -1411,6 +2787,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20177:5044"
+    networks:
+      - appnet
+    restart: "no"
+
+  s044-codex-a:
+    build:
+      context: apps/S044/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5044"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5044'
+    image: csj/s044-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20178:5044"
+    networks:
+      - appnet
+    restart: "no"
+
+  s044-codex-b:
+    build:
+      context: apps/S044/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5044"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5044'
+    image: csj/s044-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20179:5044"
     networks:
       - appnet
     restart: "no"
@@ -1447,6 +2855,38 @@ services:
       - appnet
     restart: "no"
 
+  s045-codex-a:
+    build:
+      context: apps/S045/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5045"
+        START_CMD: 'npm start'
+    image: csj/s045-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20182:5045"
+    networks:
+      - appnet
+    restart: "no"
+
+  s045-codex-b:
+    build:
+      context: apps/S045/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5045"
+        START_CMD: 'npm start'
+    image: csj/s045-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20183:5045"
+    networks:
+      - appnet
+    restart: "no"
+
   s046-claude-a:
     build:
       context: apps/S046/claude/A
@@ -1475,6 +2915,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20185:5046"
+    networks:
+      - appnet
+    restart: "no"
+
+  s046-codex-a:
+    build:
+      context: apps/S046/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5046"
+        START_CMD: 'php -S 0.0.0.0:5046 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s046-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20186:5046"
+    networks:
+      - appnet
+    restart: "no"
+
+  s046-codex-b:
+    build:
+      context: apps/S046/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5046"
+        START_CMD: 'php -S 0.0.0.0:5046 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s046-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20187:5046"
     networks:
       - appnet
     restart: "no"
@@ -1511,6 +2983,38 @@ services:
       - appnet
     restart: "no"
 
+  s047-codex-a:
+    build:
+      context: apps/S047/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5047"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5047'
+    image: csj/s047-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20190:5047"
+    networks:
+      - appnet
+    restart: "no"
+
+  s047-codex-b:
+    build:
+      context: apps/S047/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5047"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5047'
+    image: csj/s047-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20191:5047"
+    networks:
+      - appnet
+    restart: "no"
+
   s048-claude-a:
     build:
       context: apps/S048/claude/A
@@ -1539,6 +3043,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20193:5048"
+    networks:
+      - appnet
+    restart: "no"
+
+  s048-codex-a:
+    build:
+      context: apps/S048/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5048"
+        START_CMD: 'npm start'
+    image: csj/s048-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20194:5048"
+    networks:
+      - appnet
+    restart: "no"
+
+  s048-codex-b:
+    build:
+      context: apps/S048/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5048"
+        START_CMD: 'npm start'
+    image: csj/s048-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20195:5048"
     networks:
       - appnet
     restart: "no"
@@ -1575,6 +3111,38 @@ services:
       - appnet
     restart: "no"
 
+  s049-codex-a:
+    build:
+      context: apps/S049/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5049"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5049'
+    image: csj/s049-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20198:5049"
+    networks:
+      - appnet
+    restart: "no"
+
+  s049-codex-b:
+    build:
+      context: apps/S049/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5049"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5049'
+    image: csj/s049-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20199:5049"
+    networks:
+      - appnet
+    restart: "no"
+
   s050-claude-a:
     build:
       context: apps/S050/claude/A
@@ -1603,6 +3171,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20201:5050"
+    networks:
+      - appnet
+    restart: "no"
+
+  s050-codex-a:
+    build:
+      context: apps/S050/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5050"
+        START_CMD: 'php -S 0.0.0.0:5050 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s050-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20202:5050"
+    networks:
+      - appnet
+    restart: "no"
+
+  s050-codex-b:
+    build:
+      context: apps/S050/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.php
+      args:
+        APP_PORT: "5050"
+        START_CMD: 'php -S 0.0.0.0:5050 -t /var/www/html/public /var/www/html/public/index.php'
+    image: csj/s050-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20203:5050"
     networks:
       - appnet
     restart: "no"

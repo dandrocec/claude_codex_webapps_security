@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Reading List{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">Personal book tracking</p>
+        <h1>Keep every book and every status in one focused list.</h1>
+        <p class="lede">Track what you plan to read, what is in progress, and what you have finished with ratings and notes.</p>
+        <div class="actions">
+            <a class="button" href="{{ url_for('register') }}">Create account</a>
+            <a class="button secondary" href="{{ url_for('login') }}">Log in</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

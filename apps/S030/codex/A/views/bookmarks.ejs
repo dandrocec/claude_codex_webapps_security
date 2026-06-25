@@ -1,0 +1,51 @@
+<%- include('partials/header', { title: 'Your bookmarks' }) %>
+
+<section class="toolbar">
+  <div>
+    <h1>Your bookmarks</h1>
+    <p class="muted"><%= selectedTag ? `Filtered by "${selectedTag}"` : 'All saved links' %></p>
+  </div>
+  <a class="button" href="/bookmarks/new">Add bookmark</a>
+</section>
+
+<% if (tags.length) { %>
+  <nav class="tags" aria-label="Filter by tag">
+    <a class="<%= !selectedTag ? 'active' : '' %>" href="/bookmarks">All</a>
+    <% tags.forEach((tag) => { %>
+      <a class="<%= selectedTag === tag ? 'active' : '' %>" href="/bookmarks?tag=<%= encodeURIComponent(tag) %>"><%= tag %></a>
+    <% }) %>
+  </nav>
+<% } %>
+
+<section class="bookmark-list">
+  <% if (!bookmarks.length) { %>
+    <div class="empty">
+      <h2>No bookmarks found</h2>
+      <p class="muted">Add a bookmark or clear the current tag filter.</p>
+    </div>
+  <% } %>
+
+  <% bookmarks.forEach((bookmark) => { %>
+    <article class="bookmark">
+      <div>
+        <h2><a href="<%= bookmark.url %>" target="_blank" rel="noopener noreferrer"><%= bookmark.title %></a></h2>
+        <p class="url"><%= bookmark.url %></p>
+        <% if (bookmark.tagList.length) { %>
+          <div class="tag-row">
+            <% bookmark.tagList.forEach((tag) => { %>
+              <a href="/bookmarks?tag=<%= encodeURIComponent(tag) %>"><%= tag %></a>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+      <div class="bookmark-actions">
+        <a class="secondary" href="/bookmarks/<%= bookmark.id %>/edit">Edit</a>
+        <form method="post" action="/bookmarks/<%= bookmark.id %>/delete">
+          <button type="submit" class="danger">Delete</button>
+        </form>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<%- include('partials/footer') %>

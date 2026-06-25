@@ -1,0 +1,10 @@
+<%- include('layout', {
+  title: 'Error',
+  body: `
+    <section class="auth-card">
+      <h1>Error</h1>
+      <p class="error">${escapeHtml(message)}</p>
+      <p><a href="/">Return home</a></p>
+    </section>
+  `
+}) %>

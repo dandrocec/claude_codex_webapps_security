@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="panel result-panel">
+  <div class="header">
+    <p class="eyebrow">QR Code Generator</p>
+    <h1>Your QR code</h1>
+  </div>
+
+  <div class="qr-preview">
+    <img src="{{ image_url }}" alt="Generated QR code">
+  </div>
+
+  <div class="encoded-content">
+    <span>Encoded content</span>
+    <p>{{ qr_data }}</p>
+  </div>
+
+  <div class="actions">
+    <a class="button secondary" href="{{ url_for('index') }}">Create another</a>
+    <a class="button" href="{{ download_url }}">Download PNG</a>
+  </div>
+</section>
+{% endblock %}

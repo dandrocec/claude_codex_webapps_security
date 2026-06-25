@@ -1,0 +1,183 @@
+:root {
+  color-scheme: light;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  color: #18202a;
+  background: #f5f7fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: #1d4f91;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.site-header {
+  align-items: center;
+  background: #ffffff;
+  border-bottom: 1px solid #d9e0e8;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem max(1rem, calc((100vw - 960px) / 2));
+}
+
+.brand {
+  color: #18202a;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+nav {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 2rem 1rem;
+}
+
+.page-heading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+.event-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.event-card,
+.auth-panel,
+.form-panel {
+  background: #ffffff;
+  border: 1px solid #d9e0e8;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.event-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.meta,
+.empty {
+  color: #5d6875;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+.inline {
+  display: inline;
+}
+
+label {
+  display: grid;
+  font-weight: 700;
+  gap: 0.35rem;
+}
+
+input,
+textarea {
+  border: 1px solid #aab5c2;
+  border-radius: 6px;
+  font: inherit;
+  padding: 0.65rem;
+  width: 100%;
+}
+
+textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+button,
+.button {
+  background: #1d4f91;
+  border: 1px solid #1d4f91;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.55rem 0.85rem;
+  text-align: center;
+}
+
+button:hover,
+.button:hover {
+  background: #163e72;
+  text-decoration: none;
+}
+
+.secondary {
+  background: #ffffff;
+  color: #1d4f91;
+}
+
+.danger {
+  background: #9d2431;
+  border-color: #9d2431;
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.messages {
+  margin-bottom: 1rem;
+}
+
+.message {
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+.message.error {
+  background: #ffe8e9;
+  color: #7a1722;
+}
+
+.message.success {
+  background: #e7f5ed;
+  color: #155b32;
+}
+
+@media (max-width: 640px) {
+  .site-header,
+  .page-heading,
+  nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

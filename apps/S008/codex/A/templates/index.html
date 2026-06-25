@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="panel">
+  <div class="header">
+    <p class="eyebrow">QR Code Generator</p>
+    <h1>Create a QR code</h1>
+    <p class="intro">Enter text or a URL, then generate a scannable PNG.</p>
+  </div>
+
+  <form action="{{ url_for('generate') }}" method="post" class="qr-form">
+    <label for="qr_data">Text or URL</label>
+    <textarea
+      id="qr_data"
+      name="qr_data"
+      rows="6"
+      placeholder="https://example.com"
+      required
+    >{{ qr_data or "" }}</textarea>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <button type="submit">Generate QR Code</button>
+  </form>
+</section>
+{% endblock %}

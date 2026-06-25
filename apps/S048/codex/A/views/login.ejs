@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+
+<section class="panel auth-panel">
+  <div class="section-head">
+    <h1>Reviewer login</h1>
+    <p>Use the reviewer account to view submitted feedback.</p>
+  </div>
+
+  <% if (error) { %>
+    <div class="notice error"><%= error %></div>
+  <% } %>
+
+  <form class="stack" method="post" action="/login">
+    <label>
+      <span>Username</span>
+      <input type="text" name="username" value="<%= username %>" autocomplete="username" required>
+    </label>
+
+    <label>
+      <span>Password</span>
+      <input type="password" name="password" autocomplete="current-password" required>
+    </label>
+
+    <button type="submit">Log in</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,19 @@
+{
+  "name": "visit-counter",
+  "version": "1.0.0",
+  "description": "A secure Express app that counts page visits and persists the count to disk.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.18.3",
+    "express-rate-limit": "^7.2.0",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

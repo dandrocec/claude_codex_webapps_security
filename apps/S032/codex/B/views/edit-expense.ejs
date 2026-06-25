@@ -1,0 +1,27 @@
+<%- include("partials/header", { title: "Edit Expense", user, csrfToken }) %>
+  <section class="panel">
+    <h1>Edit expense</h1>
+    <%- include("partials/errors", { errors }) %>
+    <form method="post" action="/expenses/<%= expense.id %>/edit" class="expense-form" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>
+        Amount
+        <input name="amount" inputmode="decimal" maxlength="12" required value="<%= expense.amount %>">
+      </label>
+      <label>
+        Category
+        <input name="category" maxlength="60" required value="<%= expense.category %>">
+      </label>
+      <label>
+        Date
+        <input name="date" type="date" required value="<%= expense.expense_date %>">
+      </label>
+      <label class="wide">
+        Note
+        <input name="note" maxlength="500" value="<%= expense.note || "" %>">
+      </label>
+      <button type="submit">Save</button>
+      <a class="secondary" href="/expenses?month=<%= expense.expense_date.slice(0, 7) %>">Cancel</a>
+    </form>
+  </section>
+<%- include("partials/footer") %>

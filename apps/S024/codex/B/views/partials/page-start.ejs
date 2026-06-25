@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.5;
+        background: #f6f7f9;
+        color: #17202a;
+      }
+      body { margin: 0; }
+      header {
+        background: #17202a;
+        color: #fff;
+        padding: 1rem 1.5rem;
+      }
+      header a { color: #fff; }
+      main {
+        max-width: 920px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .panel {
+        background: #fff;
+        border: 1px solid #d8dee6;
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      label {
+        display: block;
+        font-weight: 700;
+        margin-top: 1rem;
+      }
+      input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0.7rem;
+        border: 1px solid #aeb7c2;
+        border-radius: 6px;
+        font: inherit;
+      }
+      button, .button {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.65rem 0.95rem;
+        border: 0;
+        border-radius: 6px;
+        background: #1f6feb;
+        color: #fff;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .secondary { background: #59636e; }
+      .inline { display: inline; }
+      .flash {
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.75rem;
+      }
+      .flash.error {
+        background: #fde7e9;
+        color: #8a041a;
+      }
+      .flash.success {
+        background: #daf5e4;
+        color: #0b5e31;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        word-break: break-word;
+      }
+      th, td {
+        text-align: left;
+        border-bottom: 1px solid #d8dee6;
+        padding: 0.75rem;
+        vertical-align: top;
+      }
+      th { background: #eef2f6; }
+      code {
+        background: #eef2f6;
+        border-radius: 4px;
+        padding: 0.1rem 0.3rem;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      @media (max-width: 640px) {
+        table, thead, tbody, tr, th, td { display: block; }
+        th { display: none; }
+        td { padding-left: 0; padding-right: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="topbar">
+        <strong>Redirect Registry</strong>
+        <% if (currentUser && csrfToken) { %>
+          <form class="inline" method="post" action="/logout">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <span>Signed in as <%= currentUser.username %></span>
+            <button class="secondary" type="submit">Sign out</button>
+          </form>
+        <% } %>
+      </div>
+    </header>
+    <main>
+      <% messages.forEach((message) => { %>
+        <div class="flash <%= message.type %>"><%= message.text %></div>
+      <% }) %>

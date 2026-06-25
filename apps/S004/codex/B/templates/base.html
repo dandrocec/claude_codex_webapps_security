@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Temperature Converter{% endblock %}</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+    }
+    body {
+      margin: 0;
+    }
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #d8deea;
+      padding: 16px 24px;
+    }
+    nav {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    nav a, button.link-button {
+      color: #1a5fb4;
+      font: inherit;
+      text-decoration: none;
+    }
+    button.link-button {
+      background: none;
+      border: 0;
+      cursor: pointer;
+      padding: 0;
+    }
+    main {
+      max-width: 860px;
+      margin: 32px auto;
+      padding: 0 24px;
+    }
+    .panel {
+      background: #ffffff;
+      border: 1px solid #d8deea;
+      border-radius: 8px;
+      padding: 24px;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 16px 0 8px;
+    }
+    input[type="text"], input[type="password"] {
+      border: 1px solid #9aa7bd;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font: inherit;
+      max-width: 420px;
+      padding: 10px 12px;
+      width: 100%;
+    }
+    .radio-list label {
+      font-weight: 400;
+      margin: 8px 0;
+    }
+    button, input[type="submit"] {
+      background: #1f7a4f;
+      border: 0;
+      border-radius: 6px;
+      color: #ffffff;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      margin-top: 18px;
+      padding: 10px 14px;
+    }
+    .danger {
+      background: #b3261e;
+      margin-top: 0;
+    }
+    .result {
+      background: #e7f4ed;
+      border-left: 4px solid #1f7a4f;
+      font-size: 1.25rem;
+      margin-top: 24px;
+      padding: 16px;
+    }
+    .flash {
+      border-radius: 6px;
+      margin-bottom: 16px;
+      padding: 12px;
+    }
+    .flash.error {
+      background: #fce8e6;
+    }
+    .flash.warning {
+      background: #fff4ce;
+    }
+    .errors {
+      color: #b3261e;
+      margin: 6px 0 0;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border-bottom: 1px solid #d8deea;
+      padding: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="{{ url_for('index') }}"><strong>Temperature Converter</strong></a>
+      <div>
+        <a href="{{ url_for('index') }}">Convert</a>
+        {% if g.user %}
+          <a href="{{ url_for('history') }}">History</a>
+          <form action="{{ url_for('logout') }}" method="post" style="display:inline">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="link-button" type="submit">Sign out</button>
+          </form>
+        {% else %}
+          <a href="{{ url_for('login') }}">Sign in</a>
+          <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+  <main>
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

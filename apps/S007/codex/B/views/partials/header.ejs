@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Palette Generator</a>
+    <nav>
+      <% if (user) { %>
+        <span><%= user.username %></span>
+        <form method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="link-button">Sign out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Sign in</a>
+        <a class="button-link" href="/register">Create account</a>
+      <% } %>
+    </nav>
+  </header>

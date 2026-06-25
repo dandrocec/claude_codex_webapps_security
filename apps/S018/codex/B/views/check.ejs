@@ -1,0 +1,19 @@
+<%- include('layout/header') %>
+
+<section class="panel">
+  <h1>Saved check</h1>
+  <dl>
+    <dt>Rating</dt>
+    <dd><%= check.rating %></dd>
+    <dt>Feedback</dt>
+    <dd><%= check.feedback %></dd>
+    <dt>Created</dt>
+    <dd><%= check.created_at %></dd>
+  </dl>
+  <form method="post" action="/checks/<%= check.id %>/delete">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button type="submit" class="danger">Delete</button>
+  </form>
+</section>
+
+<%- include('layout/footer') %>

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Publish - Daily Ledger{% endblock %}
+
+{% block content %}
+  <section class="form-panel wide">
+    <h1>Publish article</h1>
+    <form method="post">
+      <label for="title">Title</label>
+      <input id="title" name="title" maxlength="180" required>
+
+      <label for="body">Article body</label>
+      <textarea id="body" name="body" rows="14" required></textarea>
+
+      <button type="submit">Publish</button>
+    </form>
+  </section>
+{% endblock %}

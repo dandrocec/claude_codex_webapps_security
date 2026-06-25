@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ code }} - Wiki{% endblock %}
+
+{% block content %}
+  <section class="error-page">
+    <h1>{{ code }} {{ title }}</h1>
+    <p>The request could not be completed.</p>
+    <a class="button" href="{{ url_for('index') }}">Back to pages</a>
+  </section>
+{% endblock %}

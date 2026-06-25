@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+  <section class="panel narrow">
+    <h1>Sign in</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <label>
+        Username
+        {{ form.username(autocomplete="username") }}
+      </label>
+      {% for error in form.username.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+      <label>
+        Password
+        {{ form.password(autocomplete="current-password") }}
+      </label>
+      {% for error in form.password.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+      <button type="submit">Sign in</button>
+    </form>
+  </section>
+{% endblock %}

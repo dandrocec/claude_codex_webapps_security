@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Paste by {{ paste["username"] }}{% endblock %}
+{% block content %}
+  <section class="panel paste-view">
+    <div class="paste-header">
+      <div>
+        <h1>Paste</h1>
+        <p>Created by {{ paste["username"] }} on {{ paste["created_at"] }}</p>
+      </div>
+      {% if owner %}
+        <form method="post" action="{{ url_for('delete_paste', token=paste['token']) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="danger">Delete</button>
+        </form>
+      {% endif %}
+    </div>
+    <pre>{{ paste["body"] }}</pre>
+  </section>
+{% endblock %}

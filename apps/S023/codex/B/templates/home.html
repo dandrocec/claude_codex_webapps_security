@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Secure Pastebin{% endblock %}
+{% block content %}
+  <section class="panel">
+    <h1>Share text with a unique URL</h1>
+    <p>Create an account to save pastes in SQLite and manage your own entries.</p>
+    <div class="actions">
+      <a class="button" href="{{ url_for('register') }}">Create account</a>
+      <a class="button secondary" href="{{ url_for('login') }}">Log in</a>
+    </div>
+  </section>
+{% endblock %}

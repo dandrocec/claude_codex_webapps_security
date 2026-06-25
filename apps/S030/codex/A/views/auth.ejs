@@ -1,0 +1,26 @@
+<%- include('partials/header', { title }) %>
+
+<section class="panel narrow">
+  <h1><%= title %></h1>
+  <% if (typeof error !== 'undefined' && error) { %>
+    <p class="alert"><%= error %></p>
+  <% } %>
+  <form method="post" action="<%= action %>" class="stack">
+    <label>
+      Username
+      <input name="username" autocomplete="username" required>
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" autocomplete="<%= mode === 'register' ? 'new-password' : 'current-password' %>" required>
+    </label>
+    <button type="submit"><%= mode === 'register' ? 'Create account' : 'Sign in' %></button>
+  </form>
+  <% if (mode === 'register') { %>
+    <p class="muted">Already have an account? <a href="/login">Sign in</a>.</p>
+  <% } else { %>
+    <p class="muted">Need an account? <a href="/register">Create one</a>.</p>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

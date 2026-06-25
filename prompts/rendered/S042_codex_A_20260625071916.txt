@@ -1,0 +1,3 @@
+Build a Flask news site. Logged-in authors publish articles; visitors read articles and post comments under each one. Comments appear below the article. Store articles and comments in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5042.

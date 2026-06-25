@@ -26,9 +26,13 @@ COPY . /var/www/html
 # hardening — it adds no security control and is applied identically to every
 # PHP app and to both A and B variants. pdo_sqlite needs the sqlite3 dev headers
 # (libsqlite3-dev); gd needs the png/jpeg/freetype dev headers to compile.
+# `unzip` lets composer extract dist (zip) packages when an app declares real
+# composer dependencies (e.g. vlucas/phpdotenv); without it composer aborts with
+# "zip extension and unzip/7z commands are both missing". This is dependency
+# tooling, not hardening, applied identically to every PHP image.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        libsqlite3-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
+        unzip libsqlite3-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_sqlite gd \
     && rm -rf /var/lib/apt/lists/*

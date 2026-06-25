@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Feedback Portal</a>
+    <nav>
+      <% if (currentUser) { %>
+        <a href="/reviewer/feedback">Review</a>
+        <form class="inline" method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Sign out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Reviewer login</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">
+    <% if (notice) { %><p class="notice"><%= notice %></p><% } %>
+    <% if (error) { %><p class="error"><%= error %></p><% } %>

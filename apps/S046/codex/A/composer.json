@@ -1,0 +1,13 @@
+{
+  "name": "quotes/php-quotes-app",
+  "description": "A small PHP quotes app with login, submissions, approval, editing, and author filtering.",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "ext-pdo": "*",
+    "ext-pdo_sqlite": "*"
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:5046 -t public"
+  }
+}

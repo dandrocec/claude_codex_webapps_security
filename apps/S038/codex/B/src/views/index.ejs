@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+  <h1>Open roles</h1>
+  <form class="search" method="get" action="/">
+    <input name="q" maxlength="100" value="<%= q || '' %>" placeholder="Search by title, company, keyword, or location">
+    <button type="submit">Search</button>
+  </form>
+</section>
+
+<% if (errors && errors.length) { %>
+  <div class="alert">
+    <% errors.forEach((error) => { %><p><%= error %></p><% }) %>
+  </div>
+<% } %>
+
+<section class="jobs">
+  <% if (!jobs.length) { %>
+    <p class="empty">No job listings found.</p>
+  <% } %>
+  <% jobs.forEach((job) => { %>
+    <article class="job">
+      <div>
+        <h2><%= job.title %></h2>
+        <p class="meta"><%= job.company %> · <%= job.location %></p>
+      </div>
+      <p><%= job.description %></p>
+      <div class="job-footer">
+        <small>Posted by <%= job.poster_email %> on <%= job.created_at %></small>
+        <% if (currentUser && currentUser.id === job.user_id) { %>
+          <div class="actions">
+            <a href="/jobs/<%= job.id %>/edit">Edit</a>
+            <form class="inline" method="post" action="/jobs/<%= job.id %>/delete">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button class="danger" type="submit">Delete</button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<%- include('partials/footer') %>

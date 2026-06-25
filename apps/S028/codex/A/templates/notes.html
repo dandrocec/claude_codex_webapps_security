@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}My Notes{% endblock %}
+
+{% block content %}
+<div class="page-heading">
+    <div>
+        <h1>My notes</h1>
+        <p class="muted">Only notes created by your account are shown here.</p>
+    </div>
+    <a class="button" href="{{ url_for('create_note') }}">New note</a>
+</div>
+
+{% if notes %}
+    <div class="notes-grid">
+        {% for note in notes %}
+            <article class="note-card">
+                <h2>{{ note["title"] }}</h2>
+                <p>{{ note["body"] or "No body text." }}</p>
+                <div class="note-actions">
+                    <a href="{{ url_for('edit_note', note_id=note['id']) }}">Edit</a>
+                    <form action="{{ url_for('delete_note', note_id=note['id']) }}" method="post" onsubmit="return confirm('Delete this note?');">
+                        <button type="submit" class="danger">Delete</button>
+                    </form>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+{% else %}
+    <section class="empty-state">
+        <h2>No notes yet</h2>
+        <p>Create your first note to get started.</p>
+        <a class="button" href="{{ url_for('create_note') }}">Create note</a>
+    </section>
+{% endif %}
+{% endblock %}

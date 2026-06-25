@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f6f7f9;
+  color: #1f2933;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px clamp(16px, 4vw, 48px);
+  background: #ffffff;
+  border-bottom: 1px solid #d9dee7;
+}
+
+.brand {
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+nav form {
+  margin: 0;
+}
+
+a {
+  color: #0b5cad;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  min-height: 40px;
+  border: 0;
+  border-radius: 6px;
+  background: #0b5cad;
+  color: #ffffff;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+button.danger {
+  background: #a11d33;
+}
+
+main {
+  width: min(1120px, calc(100% - 32px));
+  margin: 28px auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #d9dee7;
+  border-radius: 8px;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #e7ebf0;
+}
+
+.card-body {
+  padding: 12px;
+}
+
+.card p {
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.card small,
+.hint {
+  color: #5b6777;
+}
+
+.panel {
+  width: min(440px, 100%);
+  margin: 0 auto;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #d9dee7;
+  border-radius: 8px;
+}
+
+.panel h1,
+.detail h1 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin: 14px 0;
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 6px;
+  border: 1px solid #aeb7c4;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.notice {
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: #e9f5ee;
+  border: 1px solid #b9dec8;
+}
+
+.notice.error {
+  background: #fcecee;
+  border-color: #efb9c1;
+}
+
+.detail {
+  background: #ffffff;
+  border: 1px solid #d9dee7;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.detail img {
+  display: block;
+  max-width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  margin: 0 auto 18px;
+}
+
+.inline-form {
+  display: inline-block;
+}
+
+.empty {
+  text-align: center;
+  color: #5b6777;
+}
+
+@media (max-width: 640px) {
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+}

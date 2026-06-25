@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% set title = "Dashboard" %}
+{% block content %}
+<div class="page-heading">
+  <h1>Dashboard</h1>
+  <a class="button" href="{{ url_for('new_draft') }}">New draft</a>
+</div>
+
+<section class="grid">
+  <div>
+    <h2>Subscribers</h2>
+    <form class="panel-form" method="post" action="{{ url_for('create_subscriber') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Email
+        <input name="email" type="email" maxlength="254" required>
+      </label>
+      <label>Name
+        <input name="name" maxlength="80">
+      </label>
+      <button type="submit">Add subscriber</button>
+    </form>
+
+    <div class="list">
+      {% for subscriber in subscribers %}
+        <article class="row">
+          <div>
+            <strong>{{ subscriber.email }}</strong>
+            {% if subscriber.name %}<span>{{ subscriber.name }}</span>{% endif %}
+            <small>{{ "Active" if subscriber.active else "Inactive" }}</small>
+          </div>
+          <div class="actions">
+            <form method="post" action="{{ url_for('toggle_subscriber', subscriber_id=subscriber.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit">{{ "Disable" if subscriber.active else "Enable" }}</button>
+            </form>
+            <form method="post" action="{{ url_for('delete_subscriber', subscriber_id=subscriber.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </article>
+      {% else %}
+        <p class="empty">No subscribers yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div>
+    <h2>Drafts</h2>
+    <div class="list">
+      {% for draft in drafts %}
+        <article class="row">
+          <div>
+            <strong>{{ draft.subject }}</strong>
+            <small>Updated {{ draft.updated_at }}</small>
+          </div>
+          <div class="actions">
+            <a class="button secondary" href="{{ url_for('edit_draft', draft_id=draft.id) }}">Edit</a>
+            <a class="button secondary" href="{{ url_for('preview_draft', draft_id=draft.id) }}">Preview</a>
+            <form method="post" action="{{ url_for('delete_draft', draft_id=draft.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </article>
+      {% else %}
+        <p class="empty">No drafts yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

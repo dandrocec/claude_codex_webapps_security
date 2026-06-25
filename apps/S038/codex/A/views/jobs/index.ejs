@@ -1,0 +1,55 @@
+<%- include('../partials/header') %>
+
+<section class="toolbar">
+  <div>
+    <h1>Open Jobs</h1>
+    <p class="muted">Browse listings or search by title, company, description, or location.</p>
+  </div>
+  <% if (currentUser) { %>
+    <a class="button" href="/jobs/new">Post a Job</a>
+  <% } %>
+</section>
+
+<form method="get" action="/" class="search">
+  <input type="search" name="q" value="<%= q %>" placeholder="Search jobs">
+  <button type="submit">Search</button>
+  <% if (q) { %>
+    <a href="/" class="clear-link">Clear</a>
+  <% } %>
+</form>
+
+<% if (jobs.length === 0) { %>
+  <section class="empty">
+    <h2>No listings found</h2>
+    <p class="muted">Try a different keyword or post the first listing.</p>
+  </section>
+<% } else { %>
+  <section class="job-list">
+    <% jobs.forEach((job) => { %>
+      <article class="job-card">
+        <div class="job-card-header">
+          <div>
+            <h2><%= job.title %></h2>
+            <p class="company"><%= job.company %></p>
+          </div>
+          <span class="location"><%= job.location %></span>
+        </div>
+        <p class="description"><%= job.description %></p>
+        <div class="job-meta">
+          <span>Posted by <%= job.poster %></span>
+          <span><%= new Date(job.created_at).toLocaleDateString() %></span>
+        </div>
+        <% if (currentUser && currentUser.id === job.user_id) { %>
+          <div class="job-actions">
+            <a href="/jobs/<%= job.id %>/edit">Edit</a>
+            <form method="post" action="/jobs/<%= job.id %>/delete" onsubmit="return confirm('Delete this listing?');">
+              <button type="submit" class="danger">Delete</button>
+            </form>
+          </div>
+        <% } %>
+      </article>
+    <% }) %>
+  </section>
+<% } %>
+
+<%- include('../partials/footer') %>
