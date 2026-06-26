@@ -1,0 +1,70 @@
+<%- include("partials/header") %>
+<section class="panel">
+  <div class="row">
+    <div>
+      <h1><%= service.name %></h1>
+      <p class="muted"><%= service.repository_url %></p>
+    </div>
+    <% if (user.role === "operator") { %>
+      <div class="nav">
+        <a class="button secondary" href="/services/<%= service.id %>/edit">Edit</a>
+        <form method="post" action="/services/<%= service.id %>/deploy">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Deploy</button>
+        </form>
+      </div>
+    <% } %>
+  </div>
+  <h2>Deployment steps</h2>
+  <pre><%= deploySteps %></pre>
+</section>
+
+<% if (user.role === "operator") { %>
+  <section class="panel">
+    <h2>Secrets</h2>
+    <form method="post" action="/services/<%= service.id %>/secrets">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="name">Name</label>
+      <input id="name" name="name" placeholder="API_TOKEN" maxlength="80" required>
+      <label for="value">Value</label>
+      <input id="value" name="value" type="password" maxlength="4000" required>
+      <p><button type="submit">Save secret</button></p>
+    </form>
+    <table>
+      <thead><tr><th>Name</th><th>Updated</th><th></th></tr></thead>
+      <tbody>
+        <% secrets.forEach((secret) => { %>
+          <tr>
+            <td><%= secret.name %></td>
+            <td><%= secret.updated_at %></td>
+            <td>
+              <form method="post" action="/services/<%= service.id %>/secrets/<%= secret.id %>/delete">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button class="danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+<% } %>
+
+<section class="panel">
+  <h2>Deployments</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Status</th><th>Triggered by</th><th>Started</th><th>Finished</th></tr></thead>
+    <tbody>
+      <% deployments.forEach((deployment) => { %>
+        <tr>
+          <td><a href="/deployments/<%= deployment.id %>">#<%= deployment.id %></a></td>
+          <td><span class="badge <%= deployment.status %>"><%= deployment.status %></span></td>
+          <td><%= deployment.triggered_by_email %></td>
+          <td><%= deployment.started_at || "" %></td>
+          <td><%= deployment.finished_at || "" %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include("partials/footer") %>

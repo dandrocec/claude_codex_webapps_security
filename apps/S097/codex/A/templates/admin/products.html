@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-head">
+  <h1>Products</h1>
+  <a class="button" href="{{ url_for('admin_product_new') }}">New product</a>
+</div>
+<table>
+  <thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Inventory</th><th>Status</th><th></th></tr></thead>
+  <tbody>
+    {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price_cents|money }}</td>
+        <td>{{ product.inventory }}</td>
+        <td>{{ "Active" if product.active else "Hidden" }}</td>
+        <td><a href="{{ url_for('admin_product_edit', product_id=product.id) }}">Edit</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

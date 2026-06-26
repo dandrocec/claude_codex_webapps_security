@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Admin Order #{{ order.id }}{% endblock %}
+{% block content %}
+<h1>Order #{{ order.id }}</h1>
+<p>Customer: {{ order.email }}</p>
+<p>Ship to: {{ order.shipping_name }}, {{ order.shipping_address }}</p>
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Status
+    <select name="status">
+      {% for status in statuses|sort %}
+      <option value="{{ status }}" {% if order.status == status %}selected{% endif %}>{{ status }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button type="submit">Update</button>
+</form>
+<table>
+  <thead><tr><th>Product</th><th>Unit</th><th>Qty</th><th>Total</th></tr></thead>
+  <tbody>
+    {% for item in items %}
+    <tr><td>{{ item.product_name }}</td><td>{{ item.unit_price_cents|money }}</td><td>{{ item.quantity }}</td><td>{{ item.line_total_cents|money }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p class="price">Total: {{ order.total_cents|money }}</p>
+{% endblock %}

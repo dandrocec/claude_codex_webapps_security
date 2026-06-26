@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+  <h1>Your profile</h1>
+  <p>{{ user.full_name }} &lt;{{ user.email }}&gt;</p>
+  {% if request.session.get("new_client_secret") %}
+    <p><strong>New client secret. Store it now; it will not be shown again.</strong></p>
+    <p class="secret">Client ID: {{ request.session.pop("new_client_id") }}</p>
+    <p class="secret">Client Secret: {{ request.session.pop("new_client_secret") }}</p>
+  {% endif %}
+</section>
+<section class="panel">
+  <h2>Register client application</h2>
+  <form method="post" action="/clients">
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <label for="name">Name</label>
+    <input id="name" name="name" maxlength="80" required>
+    <label for="redirect_uri">Redirect URI</label>
+    <input id="redirect_uri" name="redirect_uri" type="url" maxlength="500" required>
+    <button type="submit">Create client</button>
+  </form>
+</section>
+<section>
+  <h2>Your clients</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Client ID</th><th>Redirect URI</th><th>Status</th></tr></thead>
+    <tbody>
+    {% for client in clients %}
+      <tr>
+        <td>{{ client.name }}</td>
+        <td>{{ client.client_id }}</td>
+        <td>{{ client.redirect_uri }}</td>
+        <td>{{ "active" if client.is_active else "disabled" }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="4">No clients yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

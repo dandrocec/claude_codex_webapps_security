@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+<h1>Admin dashboard</h1>
+<div class="stats">
+  <div>Products <strong>{{ stats.products }}</strong></div>
+  <div>Orders <strong>{{ stats.orders }}</strong></div>
+  <div>Revenue <strong>{{ stats.revenue|money }}</strong></div>
+</div>
+<p><a class="button" href="{{ url_for('admin_products') }}">Manage products</a> <a class="button" href="{{ url_for('admin_orders') }}">Manage orders</a></p>
+<h2>Recent orders</h2>
+<table>
+  <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th>Total</th></tr></thead>
+  <tbody>
+    {% for order in orders %}
+    <tr><td><a href="{{ url_for('admin_order_detail', order_id=order.id) }}">#{{ order.id }}</a></td><td>{{ order.email }}</td><td>{{ order.status }}</td><td>{{ order.total_cents|money }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

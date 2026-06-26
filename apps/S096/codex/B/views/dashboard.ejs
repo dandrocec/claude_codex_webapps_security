@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard | Secure API Gateway</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <strong>Secure API Gateway</strong>
+        <span><%= currentUser.email %></span>
+      </div>
+      <form method="post" action="/logout">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="button-secondary" type="submit">Sign out</button>
+      </form>
+    </header>
+
+    <main class="page">
+      <% if (flash) { %>
+        <div class="alert <%= flash.type === 'error' ? 'alert-error' : 'alert-success' %>">
+          <p><%= flash.message %></p>
+          <% if (flash.apiKey) { %>
+            <code class="new-key"><%= flash.apiKey %></code>
+          <% } %>
+        </div>
+      <% } %>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <h1>Gateway settings</h1>
+          <p class="muted">Requests to <code>/gateway/*</code> are forwarded to this backend.</p>
+        </div>
+        <form class="inline-form" method="post" action="/backend">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label>
+            Backend URL
+            <input type="url" name="backend_url" maxlength="2048" value="<%= developer.backend_url || '' %>" placeholder="https://api.example.com" required>
+          </label>
+          <button type="submit">Save backend</button>
+        </form>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Create API key</h2>
+            <p class="muted">The raw key is displayed once after creation.</p>
+          </div>
+          <form method="post" action="/keys">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <label>
+              Key name
+              <input type="text" name="name" maxlength="80" pattern="[a-zA-Z0-9 ._-]+" required>
+            </label>
+            <label>
+              Rate limit per minute
+              <input type="number" name="rate_limit_per_minute" min="1" max="10000" value="60" required>
+            </label>
+            <button type="submit">Generate key</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Key summary</h2>
+            <p class="muted"><%= keys.length %> key<%= keys.length === 1 ? '' : 's' %> configured.</p>
+          </div>
+          <div class="metric-row">
+            <div>
+              <span>Total requests</span>
+              <strong><%= keys.reduce((sum, key) => sum + Number(key.total_requests || 0), 0) %></strong>
+            </div>
+            <div>
+              <span>Last 24 hours</span>
+              <strong><%= keys.reduce((sum, key) => sum + Number(key.requests_24h || 0), 0) %></strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <h2>API keys</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Prefix</th>
+                <th>Limit</th>
+                <th>24h</th>
+                <th>Avg 24h</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (keys.length === 0) { %>
+                <tr><td colspan="7" class="empty">No API keys yet.</td></tr>
+              <% } %>
+              <% keys.forEach((key) => { %>
+                <tr>
+                  <td><%= key.name %></td>
+                  <td><code><%= key.key_prefix %>...</code></td>
+                  <td><%= key.rate_limit_per_minute %>/min</td>
+                  <td><%= key.requests_24h %></td>
+                  <td><%= Math.round(Number(key.avg_response_ms_24h || 0)) %> ms</td>
+                  <td><span class="status <%= key.enabled ? 'status-on' : 'status-off' %>"><%= key.enabled ? 'Enabled' : 'Disabled' %></span></td>
+                  <td class="actions">
+                    <form method="post" action="/keys/<%= key.id %>/toggle">
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                      <button class="button-secondary" type="submit"><%= key.enabled ? 'Disable' : 'Enable' %></button>
+                    </form>
+                    <form method="post" action="/keys/<%= key.id %>/delete">
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                      <button class="button-danger" type="submit">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <h2>Recent usage</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Key</th>
+                <th>Method</th>
+                <th>Path</th>
+                <th>Status</th>
+                <th>Latency</th>
+                <th>Bytes out</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (recentUsage.length === 0) { %>
+                <tr><td colspan="7" class="empty">No gateway requests recorded.</td></tr>
+              <% } %>
+              <% recentUsage.forEach((event) => { %>
+                <tr>
+                  <td><%= event.created_at %></td>
+                  <td><%= event.key_name %></td>
+                  <td><%= event.method %></td>
+                  <td><code><%= event.path %></code></td>
+                  <td><%= event.status_code %></td>
+                  <td><%= event.response_ms %> ms</td>
+                  <td><%= event.bytes_out %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "devops-dashboard",
+  "version": "1.0.0",
+  "description": "Node.js/Express DevOps dashboard for service deployments, logs, and environment secrets.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-sqlite3": "^0.9.15",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

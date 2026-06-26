@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="split">
+  <div>
+    <h1>Checkout</h1>
+    <form method="post" class="panel-form">
+      <label>Shipping name <input name="shipping_name" value="{{ g.user.name }}" required></label>
+      <label>Shipping address <textarea name="shipping_address" rows="5" required></textarea></label>
+      <button>Place order</button>
+    </form>
+  </div>
+  <div>
+    <h2>Order summary</h2>
+    {% for item in cart.items %}
+      <div class="summary-line">
+        <span>{{ item.product.name }} x {{ item.quantity }}</span>
+        <strong>{{ item.line_total_cents|money }}</strong>
+      </div>
+    {% endfor %}
+    {% include "_totals.html" %}
+  </div>
+</section>
+{% endblock %}

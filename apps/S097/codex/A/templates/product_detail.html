@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="detail-layout">
+  <img class="detail-image" src="{{ product.image_url }}" alt="{{ product.name }}">
+  <div>
+    <p class="eyebrow">{{ product.category }}</p>
+    <h1>{{ product.name }}</h1>
+    <p class="lead">{{ product.description }}</p>
+    <p class="price">{{ product.price_cents|money }}</p>
+    <p>{{ product.inventory }} available{% if average %} - {{ "%.1f"|format(average) }} average rating{% endif %}</p>
+    <form class="inline-form" method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+      <input type="number" name="quantity" min="1" max="{{ product.inventory }}" value="1">
+      <button {% if product.inventory == 0 %}disabled{% endif %}>Add to cart</button>
+    </form>
+  </div>
+</section>
+
+<section class="split">
+  <div>
+    <h2>Reviews</h2>
+    {% for review in reviews %}
+      <article class="review">
+        <strong>{{ review.user_name }}</strong>
+        <span>{{ review.rating }}/5</span>
+        <p>{{ review.comment }}</p>
+      </article>
+    {% else %}
+      <p>No reviews yet.</p>
+    {% endfor %}
+  </div>
+  <div>
+    <h2>Write a review</h2>
+    {% if g.user %}
+      <form method="post" action="{{ url_for('add_review', product_id=product.id) }}" class="panel-form">
+        <label>Rating
+          <select name="rating">
+            {% for rating in [5,4,3,2,1] %}
+              <option value="{{ rating }}">{{ rating }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>Comment
+          <textarea name="comment" rows="4" required></textarea>
+        </label>
+        <button>Post review</button>
+      </form>
+    {% else %}
+      <p><a href="{{ url_for('login') }}">Sign in</a> to review this product.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+<%- include("partials/header") %>
+<div class="row">
+  <h1>Services</h1>
+  <% if (user.role === "operator") { %><a class="button" href="/services/new">New service</a><% } %>
+</div>
+<section class="grid">
+  <% services.forEach((service) => { %>
+    <article class="card">
+      <div class="row">
+        <h2><a href="/services/<%= service.id %>"><%= service.name %></a></h2>
+        <% if (service.last_status) { %><span class="badge <%= service.last_status %>"><%= service.last_status %></span><% } %>
+      </div>
+      <p class="muted"><%= service.repository_url %></p>
+      <% if (service.last_deployment_id) { %>
+        <a href="/deployments/<%= service.last_deployment_id %>">Latest deployment</a>
+      <% } %>
+    </article>
+  <% }) %>
+  <% if (services.length === 0) { %>
+    <p class="muted">No services registered.</p>
+  <% } %>
+</section>
+<%- include("partials/footer") %>

@@ -1,0 +1,273 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --text: #1f2937;
+  --muted: #667085;
+  --line: #d9dee7;
+  --accent: #0f766e;
+  --accent-dark: #115e59;
+  --danger: #b42318;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: var(--accent-dark);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  padding: 0.7rem 1rem;
+}
+
+button:hover {
+  background: var(--accent-dark);
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 700;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 0.7rem 0.8rem;
+}
+
+.topbar {
+  align-items: center;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  min-height: 64px;
+  padding: 0 1.5rem;
+}
+
+.brand {
+  color: var(--text);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.topbar form {
+  align-items: center;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.user,
+.muted,
+.owner,
+small {
+  color: var(--muted);
+}
+
+.link-button {
+  background: transparent;
+  color: var(--accent-dark);
+  padding: 0;
+}
+
+.link-button:hover {
+  background: transparent;
+  text-decoration: underline;
+}
+
+.danger {
+  color: var(--danger);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 980px;
+  padding: 2rem;
+}
+
+.auth-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+}
+
+.auth-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  max-width: 420px;
+  padding: 2rem;
+  width: min(92vw, 420px);
+}
+
+.auth-panel form,
+.create-form,
+.invite-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.toolbar {
+  align-items: end;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr minmax(280px, 420px);
+  margin-bottom: 1.5rem;
+}
+
+.toolbar h1,
+.editor-title h1 {
+  margin: 0;
+}
+
+.create-form {
+  grid-template-columns: 1fr auto;
+}
+
+.alert {
+  background: #fff1f0;
+  border: 1px solid #fecdca;
+  border-radius: 8px;
+  color: var(--danger);
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+}
+
+.alert p {
+  margin: 0.25rem 0;
+}
+
+.doc-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.doc-row {
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.doc-row:hover {
+  border-color: var(--accent);
+}
+
+.editor-shell {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  height: calc(100vh - 64px);
+  padding: 1.5rem;
+}
+
+.editor-main,
+.access-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.editor-main {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+}
+
+.editor-title {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+#saveState {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+#editor {
+  border: 0;
+  border-radius: 0 0 8px 8px;
+  line-height: 1.55;
+  min-height: 380px;
+  outline: none;
+  padding: 1rem;
+  resize: none;
+  width: 100%;
+}
+
+.access-panel {
+  overflow: auto;
+  padding: 1rem;
+}
+
+.access-panel h2 {
+  margin-top: 0;
+}
+
+.collaborators {
+  display: grid;
+  gap: 0.7rem;
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.collaborators li {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 0.25rem;
+  padding-top: 0.7rem;
+}
+
+.collaborators span {
+  color: var(--muted);
+  text-transform: capitalize;
+}
+
+@media (max-width: 800px) {
+  .toolbar,
+  .editor-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-shell {
+    height: auto;
+  }
+
+  .create-form {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<article class="panel">
+  <h1>{{ product.name }}</h1>
+  <p>{{ product.description }}</p>
+  <p class="price">{{ product.price_cents|money }}</p>
+  <p>{{ product.inventory }} in stock</p>
+  {% if user %}
+  <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="number" name="quantity" value="1" min="1" max="99" aria-label="Quantity">
+    <button type="submit" {% if product.inventory < 1 %}disabled{% endif %}>Add to cart</button>
+  </form>
+  {% endif %}
+</article>
+<section>
+  <h2>Reviews</h2>
+  {% if user %}
+  <form method="post" action="{{ url_for('add_review', product_id=product.id) }}" class="panel">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>Rating <input type="number" name="rating" min="1" max="5" required></label>
+    <label>Review <textarea name="body" maxlength="1000" required></textarea></label>
+    <button type="submit">Save review</button>
+  </form>
+  {% endif %}
+  {% for review in reviews %}
+  <article class="review">
+    <strong>{{ review.name }}</strong> · {{ review.rating }}/5
+    <p>{{ review.body }}</p>
+  </article>
+  {% else %}
+  <p>No reviews yet.</p>
+  {% endfor %}
+</section>
+{% endblock %}

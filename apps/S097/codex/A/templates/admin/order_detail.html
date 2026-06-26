@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-head">
+  <div>
+    <h1>Order #{{ order.id }}</h1>
+    <p>{{ order.email }} - {{ order.created_at[:10] }}</p>
+  </div>
+  <form method="post" class="status-form">
+    <select name="status">
+      {% for option in ["pending", "paid", "packed", "shipped", "cancelled"] %}
+        <option value="{{ option }}" {% if order.status == option %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+    <button>Update</button>
+  </form>
+</div>
+<p><strong>Ship to:</strong> {{ order.shipping_name }}, {{ order.shipping_address }}</p>
+<table>
+  <thead><tr><th>Product</th><th>Unit</th><th>Quantity</th><th>Total</th></tr></thead>
+  <tbody>
+    {% for item in items %}
+      <tr>
+        <td>{{ item.product_name }}</td>
+        <td>{{ item.unit_price_cents|money }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.line_total_cents|money }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% set cart = {"subtotal_cents": order.subtotal_cents, "tax_cents": order.tax_cents, "shipping_cents": order.shipping_cents, "total_cents": order.total_cents} %}
+{% include "_totals.html" %}
+{% endblock %}

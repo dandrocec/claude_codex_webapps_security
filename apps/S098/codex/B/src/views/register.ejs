@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="auth-page">
+  <main class="auth-panel">
+    <h1>Create account</h1>
+    <% if (errors && errors.length) { %>
+      <div class="alert"><% errors.forEach(function(error) { %><p><%= error %></p><% }) %></div>
+    <% } %>
+    <form method="post" action="/register" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Username
+        <input name="username" autocomplete="username" maxlength="32" value="<%= form.username || '' %>" required>
+      </label>
+      <label>Password
+        <input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required>
+      </label>
+      <button type="submit">Create account</button>
+    </form>
+    <p class="muted">Already registered? <a href="/login">Sign in</a>.</p>
+  </main>
+</body>
+</html>

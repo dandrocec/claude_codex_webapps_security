@@ -1,0 +1,16 @@
+<%- include("partials/header") %>
+<section class="panel">
+  <div class="row">
+    <div>
+      <h1>Deployment #<%= deployment.id %></h1>
+      <p><a href="/services/<%= deployment.service_id %>"><%= deployment.service_name %></a></p>
+    </div>
+    <span data-status class="badge <%= deployment.status %>"><%= deployment.status %></span>
+  </div>
+  <div class="log-box" data-log-stream="/deployments/<%= deployment.id %>/stream">
+    <% logs.forEach((log) => { %>
+      <div class="log-line <%= log.stream %>">[<%= log.stream %>] <%= log.content %></div>
+    <% }) %>
+  </div>
+</section>
+<%- include("partials/footer") %>

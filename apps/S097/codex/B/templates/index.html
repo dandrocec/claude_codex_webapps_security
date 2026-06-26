@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Storefront{% endblock %}
+{% block content %}
+<h1>Storefront</h1>
+<div class="grid">
+  {% for product in products %}
+  <article class="card">
+    <h2><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h2>
+    <p>{{ product.description }}</p>
+    <p class="price">{{ product.price_cents|money }}</p>
+    <p>{{ product.inventory }} in stock · {{ "%.1f"|format(product.avg_rating) }} stars ({{ product.review_count }})</p>
+    {% if user %}
+    <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="number" name="quantity" value="1" min="1" max="99" aria-label="Quantity">
+      <button type="submit" {% if product.inventory < 1 %}disabled{% endif %}>Add to cart</button>
+    </form>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

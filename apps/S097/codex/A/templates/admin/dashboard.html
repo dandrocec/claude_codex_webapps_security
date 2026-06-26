@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-head">
+  <h1>Admin dashboard</h1>
+  <a class="button" href="{{ url_for('admin_product_new') }}">New product</a>
+</div>
+<section class="stat-grid">
+  <div><span>Orders</span><strong>{{ stats.orders }}</strong></div>
+  <div><span>Revenue</span><strong>{{ stats.revenue|money }}</strong></div>
+  <div><span>Products</span><strong>{{ stats.products }}</strong></div>
+  <div><span>Low stock</span><strong>{{ stats.low_stock }}</strong></div>
+</section>
+<nav class="admin-tabs">
+  <a href="{{ url_for('admin_products') }}">Products</a>
+  <a href="{{ url_for('admin_orders') }}">Orders</a>
+</nav>
+<h2>Recent orders</h2>
+<table>
+  <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th>Total</th></tr></thead>
+  <tbody>
+    {% for order in recent_orders %}
+      <tr>
+        <td><a href="{{ url_for('admin_order_detail', order_id=order.id) }}">#{{ order.id }}</a></td>
+        <td>{{ order.email }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.total_cents|money }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="4">No orders yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

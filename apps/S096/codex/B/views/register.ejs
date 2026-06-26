@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register | Secure API Gateway</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="auth-page">
+    <main class="auth-panel">
+      <h1>Create account</h1>
+      <p class="muted">Passwords must be at least 12 characters.</p>
+      <% if (typeof error !== 'undefined') { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+      <form method="post" action="/register" novalidate>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label>
+          Email
+          <input type="email" name="email" autocomplete="email" maxlength="254" required>
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" autocomplete="new-password" minlength="12" maxlength="128" required>
+        </label>
+        <button type="submit">Create account</button>
+      </form>
+      <p class="switch-link">Already registered? <a href="/login">Sign in</a></p>
+    </main>
+  </body>
+</html>

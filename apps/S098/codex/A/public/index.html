@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Collaborative Editor</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="mark">CE</div>
+        <div>
+          <h1>Collaborative Editor</h1>
+          <p>Shared documents with live access control</p>
+        </div>
+      </div>
+
+      <form id="userForm" class="panel">
+        <label for="userName">Current user</label>
+        <div class="inline">
+          <input id="userName" name="userName" autocomplete="name" placeholder="Ada">
+          <button type="submit">Use</button>
+        </div>
+      </form>
+
+      <form id="createForm" class="panel">
+        <label for="newTitle">New document</label>
+        <div class="inline">
+          <input id="newTitle" name="newTitle" placeholder="Project notes">
+          <button type="submit">Create</button>
+        </div>
+      </form>
+
+      <section class="panel grow">
+        <div class="sectionHead">
+          <h2>Documents</h2>
+          <button id="refreshButton" type="button">Refresh</button>
+        </div>
+        <div id="documentList" class="documentList"></div>
+      </section>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div>
+          <input id="titleInput" class="titleInput" disabled value="Select or create a document">
+          <p id="documentMeta">Sign in with any user name to begin.</p>
+        </div>
+        <div id="status" class="status">Offline</div>
+      </header>
+
+      <section class="editorShell">
+        <textarea id="editor" disabled spellcheck="true" placeholder="Document content appears here."></textarea>
+      </section>
+    </main>
+
+    <aside class="accessPanel">
+      <section class="panel">
+        <h2>Invite</h2>
+        <form id="inviteForm">
+          <label for="inviteName">Collaborator</label>
+          <input id="inviteName" name="inviteName" placeholder="Grace">
+          <label for="inviteRole">Access</label>
+          <select id="inviteRole" name="inviteRole">
+            <option value="edit">Can edit</option>
+            <option value="view">Can view</option>
+          </select>
+          <button type="submit">Invite</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Access list</h2>
+        <div id="accessList" class="accessList"></div>
+      </section>
+    </aside>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

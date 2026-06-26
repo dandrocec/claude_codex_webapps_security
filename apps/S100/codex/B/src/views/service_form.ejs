@@ -1,0 +1,17 @@
+<%- include("partials/header") %>
+<section class="panel">
+  <h1><%= service ? "Edit service" : "New service" %></h1>
+  <form method="post" action="<%= service ? `/services/${service.id}` : "/services" %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="name">Name</label>
+    <input id="name" name="name" maxlength="80" value="<%= service ? service.name : "" %>" required>
+    <label for="repository_url">Repository URL</label>
+    <input id="repository_url" name="repository_url" type="url" maxlength="500" value="<%= service ? service.repository_url : "" %>" required>
+    <label for="working_directory">Working directory</label>
+    <input id="working_directory" name="working_directory" maxlength="500" value="<%= service && service.working_directory ? service.working_directory : "" %>">
+    <label for="deploy_steps">Deployment steps</label>
+    <textarea id="deploy_steps" name="deploy_steps" maxlength="4000" required><%= deploySteps %></textarea>
+    <p><button type="submit">Save service</button></p>
+  </form>
+</section>
+<%- include("partials/footer") %>

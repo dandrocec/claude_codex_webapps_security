@@ -1,0 +1,6 @@
+<aside class="totals">
+  <div><span>Subtotal</span><strong>{{ cart.subtotal_cents|money }}</strong></div>
+  <div><span>Tax</span><strong>{{ cart.tax_cents|money }}</strong></div>
+  <div><span>Shipping</span><strong>{{ cart.shipping_cents|money }}</strong></div>
+  <div class="grand"><span>Total</span><strong>{{ cart.total_cents|money }}</strong></div>
+</aside>

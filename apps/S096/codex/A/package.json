@@ -1,0 +1,19 @@
+{
+  "name": "express-api-gateway-dashboard",
+  "version": "1.0.0",
+  "description": "Node.js/Express API gateway with developer API keys, per-key rate limits, usage tracking, and dashboard.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.9.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

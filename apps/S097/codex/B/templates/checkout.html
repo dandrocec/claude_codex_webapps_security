@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<h1>Checkout</h1>
+<ul>
+  {% for item in items %}
+  <li>{{ item.quantity }} × {{ item.name }}: {{ (item.quantity * item.price_cents)|money }}</li>
+  {% endfor %}
+</ul>
+<p class="price">Total: {{ total|money }}</p>
+<form method="post" class="form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Shipping name <input name="shipping_name" required maxlength="100"></label>
+  <label>Shipping address <textarea name="shipping_address" required maxlength="500"></textarea></label>
+  <button type="submit">Place order</button>
+</form>
+{% endblock %}

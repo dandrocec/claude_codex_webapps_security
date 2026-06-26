@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Orders Admin{% endblock %}
+{% block content %}
+<h1>Orders</h1>
+<table>
+  <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th>Total</th><th>Date</th></tr></thead>
+  <tbody>
+    {% for order in orders %}
+    <tr><td><a href="{{ url_for('admin_order_detail', order_id=order.id) }}">#{{ order.id }}</a></td><td>{{ order.email }}</td><td>{{ order.status }}</td><td>{{ order.total_cents|money }}</td><td>{{ order.created_at }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

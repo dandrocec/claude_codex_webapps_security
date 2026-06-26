@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documents</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/documents">Collaborative Editor</a>
+    <form method="post" action="/logout">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <span class="user"><%= user.username %></span>
+      <button type="submit" class="link-button">Sign out</button>
+    </form>
+  </header>
+  <main class="container">
+    <section class="toolbar">
+      <h1>Documents</h1>
+      <form method="post" action="/documents" class="create-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input name="title" maxlength="120" placeholder="New document title" value="<%= form.title || '' %>" required>
+        <button type="submit">Create</button>
+      </form>
+    </section>
+    <% if (errors && errors.length) { %>
+      <div class="alert"><% errors.forEach(function(error) { %><p><%= error %></p><% }) %></div>
+    <% } %>
+    <section class="doc-list">
+      <% if (!documents.length) { %>
+        <p class="muted">No documents yet.</p>
+      <% } %>
+      <% documents.forEach(function(doc) { %>
+        <a class="doc-row" href="/documents/<%= doc.id %>">
+          <span><%= doc.title %></span>
+          <small><%= doc.role %> · <%= doc.updated_at %></small>
+        </a>
+      <% }) %>
+    </section>
+  </main>
+</body>
+</html>

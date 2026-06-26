@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">Small-batch goods for home, work, and travel</p>
+    <h1>Shop practical pieces with live inventory.</h1>
+  </div>
+  <form class="search-form" method="get">
+    <input name="q" value="{{ search }}" placeholder="Search products">
+    <select name="category">
+      <option value="">All categories</option>
+      {% for row in categories %}
+        <option value="{{ row.category }}" {% if selected_category == row.category %}selected{% endif %}>{{ row.category }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+  </form>
+</section>
+
+<section class="product-grid">
+  {% for product in products %}
+    <article class="product-card">
+      <a href="{{ url_for('product_detail', product_id=product.id) }}">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+      </a>
+      <div class="product-body">
+        <span class="tag">{{ product.category }}</span>
+        <h2><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h2>
+        <p>{{ product.description }}</p>
+        <div class="row">
+          <strong>{{ product.price_cents|money }}</strong>
+          <span>{{ product.inventory }} in stock</span>
+        </div>
+        <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+          <input type="number" name="quantity" min="1" max="{{ product.inventory }}" value="1">
+          <button {% if product.inventory == 0 %}disabled{% endif %}>Add to cart</button>
+        </form>
+      </div>
+    </article>
+  {% else %}
+    <p>No products matched your filters.</p>
+  {% endfor %}
+</section>
+{% endblock %}

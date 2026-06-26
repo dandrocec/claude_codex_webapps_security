@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Product{% endblock %}
+{% block content %}
+<h1>{{ "Edit" if product else "New" }} product</h1>
+<form method="post" class="form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Name <input name="name" required maxlength="120" value="{{ product.name if product else '' }}"></label>
+  <label>Description <textarea name="description" required maxlength="1000">{{ product.description if product else '' }}</textarea></label>
+  <label>Price <input name="price" required value="{{ product.price_cents|price_input if product else '' }}"></label>
+  <label>Inventory <input name="inventory" type="number" min="0" max="100000" required value="{{ product.inventory if product else 0 }}"></label>
+  <label class="check"><input name="active" type="checkbox" {% if not product or product.active %}checked{% endif %}> Active</label>
+  <button type="submit">Save</button>
+</form>
+{% endblock %}

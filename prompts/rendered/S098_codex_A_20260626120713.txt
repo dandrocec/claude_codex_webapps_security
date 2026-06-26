@@ -1,0 +1,3 @@
+Build a Node.js/Express collaborative editor. Users create documents, invite collaborators with view or edit rights, and edit shared documents that update for everyone viewing them. Maintain a list of who has access to each document. Store data in a database.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5098.

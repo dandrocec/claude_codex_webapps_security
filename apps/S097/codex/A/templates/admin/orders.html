@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Orders</h1>
+<form method="get" class="search-form compact">
+  <select name="status">
+    <option value="">All statuses</option>
+    {% for option in ["pending", "paid", "packed", "shipped", "cancelled"] %}
+      <option value="{{ option }}" {% if status == option %}selected{% endif %}>{{ option }}</option>
+    {% endfor %}
+  </select>
+  <button>Filter</button>
+</form>
+<table>
+  <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th>Date</th><th>Total</th></tr></thead>
+  <tbody>
+    {% for order in orders %}
+      <tr>
+        <td><a href="{{ url_for('admin_order_detail', order_id=order.id) }}">#{{ order.id }}</a></td>
+        <td>{{ order.email }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.created_at[:10] }}</td>
+        <td>{{ order.total_cents|money }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="5">No orders found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

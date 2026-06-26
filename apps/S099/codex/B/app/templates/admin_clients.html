@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+  <h1>Client administration</h1>
+  {% if request.session.get("new_client_secret") %}
+    <p><strong>New client secret. Store it now; it will not be shown again.</strong></p>
+    <p class="secret">Client ID: {{ request.session.pop("new_client_id") }}</p>
+    <p class="secret">Client Secret: {{ request.session.pop("new_client_secret") }}</p>
+  {% endif %}
+  <form method="post" action="/admin/clients">
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <label for="owner_id">Owner</label>
+    <select id="owner_id" name="owner_id" required>
+      {% for account in users %}
+        <option value="{{ account.id }}">{{ account.email }}</option>
+      {% endfor %}
+    </select>
+    <label for="name">Name</label>
+    <input id="name" name="name" maxlength="80" required>
+    <label for="redirect_uri">Redirect URI</label>
+    <input id="redirect_uri" name="redirect_uri" type="url" maxlength="500" required>
+    <button type="submit">Create client</button>
+  </form>
+</section>
+<section>
+  <h2>Clients</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Owner</th><th>Client ID</th><th>Redirect URI</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for client in clients %}
+      <tr>
+        <td>{{ client.name }}</td>
+        <td>{{ client.owner.email }}</td>
+        <td>{{ client.client_id }}</td>
+        <td>{{ client.redirect_uri }}</td>
+        <td>{{ "active" if client.is_active else "disabled" }}</td>
+        <td>
+          <form method="post" action="/admin/clients/{{ client.id }}/toggle" class="inline">
+            <input type="hidden" name="csrf" value="{{ csrf_token }}">
+            <button type="submit">{{ "Disable" if client.is_active else "Enable" }}</button>
+          </form>
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6">No clients registered.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= doc.title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/documents">Collaborative Editor</a>
+    <form method="post" action="/logout">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <span class="user"><%= user.username %></span>
+      <button type="submit" class="link-button">Sign out</button>
+    </form>
+  </header>
+  <main class="editor-shell">
+    <section class="editor-main">
+      <div class="editor-title">
+        <h1><%= doc.title %></h1>
+        <span id="saveState"><%= doc.role === 'edit' ? 'Ready' : 'View only' %></span>
+      </div>
+      <textarea id="editor" data-document-id="<%= doc.id %>" data-role="<%= doc.role %>" maxlength="200000" <%= doc.role === 'edit' ? '' : 'readonly' %>><%= doc.content %></textarea>
+    </section>
+    <aside class="access-panel">
+      <h2>Access</h2>
+      <p class="owner">Owner document #<%= doc.id %></p>
+      <% if (doc.owner_id === user.id) { %>
+        <form method="post" action="/documents/<%= doc.id %>/invite" class="invite-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label>Username
+            <input name="username" maxlength="32" required>
+          </label>
+          <label>Permission
+            <select name="role">
+              <option value="view">View</option>
+              <option value="edit">Edit</option>
+            </select>
+          </label>
+          <button type="submit">Invite</button>
+        </form>
+      <% } %>
+      <ul class="collaborators">
+        <li><strong><%= doc.owner_username %></strong><span>owner</span></li>
+        <% collaborators.forEach(function(collab) { %>
+          <li>
+            <strong><%= collab.username %></strong>
+            <span><%= collab.role %></span>
+            <% if (doc.owner_id === user.id) { %>
+              <form method="post" action="/documents/<%= doc.id %>/collaborators/<%= collab.id %>/remove">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="link-button danger">Remove</button>
+              </form>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    </aside>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/editor.js"></script>
+</body>
+</html>

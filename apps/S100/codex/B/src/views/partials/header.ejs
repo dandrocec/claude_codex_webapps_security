@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DevOps Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <a href="/services"><strong>DevOps Dashboard</strong></a>
+    <nav class="nav">
+      <% if (user) { %>
+        <span><%= user.email %> (<%= user.role %>)</span>
+        <form class="inline" method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="secondary" type="submit">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main>
+    <% if (flash) { %><div class="flash"><%= flash %></div><% } %>
