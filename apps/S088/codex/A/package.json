@@ -1,0 +1,22 @@
+{
+  "name": "express-document-management",
+  "version": "1.0.0",
+  "description": "Node.js/Express document management system with folders, sharing, and version history.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.9.1",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "method-override": "^3.0.0",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^11.0.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

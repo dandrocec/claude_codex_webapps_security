@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title || 'Document Manager' %></title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">DocManager</a>
+    <% if (currentUser) { %>
+      <nav>
+        <a href="/">Documents</a>
+        <a href="/groups">Groups</a>
+      </nav>
+      <form action="/logout" method="post">
+        <span><%= currentUser.name %></span>
+        <button type="submit">Sign out</button>
+      </form>
+    <% } %>
+  </header>
+  <main class="shell">
+    <% if (flash) { %>
+      <div class="flash <%= flash.type %>"><%= flash.message %></div>
+    <% } %>

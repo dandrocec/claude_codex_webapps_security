@@ -1,0 +1,54 @@
+<%- include('partials/head', { title: 'Groups' }) %>
+<section class="grid">
+  <div>
+    <h1>Groups</h1>
+    <h2>Groups You Own</h2>
+    <div class="list">
+      <% groups.forEach((group) => { %>
+        <div class="row">
+          <strong>#<%= group.id %> <%= group.name %></strong>
+          <span>
+            <% members.filter((m) => m.group_id === group.id).forEach((m) => { %>
+              <%= m.display_name %> (<%= m.email %>) 
+            <% }) %>
+          </span>
+        </div>
+      <% }) %>
+      <% if (!groups.length) { %><p class="muted">No groups yet.</p><% } %>
+    </div>
+    <h2>Your Memberships</h2>
+    <div class="list">
+      <% memberOf.forEach((group) => { %>
+        <div class="row"><strong>#<%= group.id %> <%= group.name %></strong><span>Member</span></div>
+      <% }) %>
+      <% if (!memberOf.length) { %><p class="muted">You are not a member of another group.</p><% } %>
+    </div>
+    <h2>Users</h2>
+    <div class="list">
+      <% users.forEach((u) => { %>
+        <div class="row"><strong>#<%= u.id %> <%= u.display_name %></strong><span><%= u.email %></span></div>
+      <% }) %>
+    </div>
+  </div>
+  <aside class="panel">
+    <h2>Create Group</h2>
+    <form method="post" action="/groups">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Name <input name="name" maxlength="120" required></label>
+      <button type="submit">Create</button>
+    </form>
+    <h2>Add Member</h2>
+    <% groups.forEach((group) => { %>
+      <form method="post" action="/groups/<%= group.id %>/members" class="compact">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label><%= group.name %>
+          <select name="userId">
+            <% users.forEach((u) => { %><option value="<%= u.id %>"><%= u.email %></option><% }) %>
+          </select>
+        </label>
+        <button type="submit">Add</button>
+      </form>
+    <% }) %>
+  </aside>
+</section>
+<%- include('partials/foot') %>

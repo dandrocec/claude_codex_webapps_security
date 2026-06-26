@@ -1,0 +1,24 @@
+<%- include('partials/head', { title: mode === 'login' ? 'Sign in' : 'Create account' }) %>
+<section class="panel narrow">
+  <h1><%= mode === 'login' ? 'Sign in' : 'Create account' %></h1>
+  <% if (errors.length) { %>
+    <div class="flash error"><%= errors[0].msg %></div>
+  <% } %>
+  <form method="post" action="/<%= mode %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% if (mode === 'register') { %>
+      <label>Name <input name="displayName" maxlength="80" required></label>
+    <% } %>
+    <label>Email <input name="email" type="email" maxlength="254" autocomplete="email" required></label>
+    <label>Password <input name="password" type="password" minlength="<%= mode === 'register' ? 12 : 1 %>" maxlength="200" autocomplete="<%= mode === 'login' ? 'current-password' : 'new-password' %>" required></label>
+    <button type="submit"><%= mode === 'login' ? 'Sign in' : 'Create account' %></button>
+  </form>
+  <p>
+    <% if (mode === 'login') { %>
+      Need an account? <a href="/register">Register</a>
+    <% } else { %>
+      Already registered? <a href="/login">Sign in</a>
+    <% } %>
+  </p>
+</section>
+<%- include('partials/foot') %>

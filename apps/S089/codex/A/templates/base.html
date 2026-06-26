@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Flask Shop{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('products') }}">Market Lane</a>
+    <nav>
+      <a href="{{ url_for('products') }}">Products</a>
+      <a href="{{ url_for('cart') }}">Cart ({{ cart_count }})</a>
+      {% if current_user %}
+        <a href="{{ url_for('orders') }}">Orders</a>
+        {% if current_user.is_admin %}
+          <a href="{{ url_for('admin_orders') }}">Admin</a>
+        {% endif %}
+        <form class="inline" action="{{ url_for('logout') }}" method="post">
+          <button class="link-button" type="submit">Sign out</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('login') }}">Sign in</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-stack">
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

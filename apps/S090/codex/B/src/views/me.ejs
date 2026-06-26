@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">OAuth Profile</a>
+      <form method="post" action="/logout">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit">Sign out</button>
+      </form>
+    </header>
+    <main class="shell">
+      <section class="profile">
+        <% if (user.avatar_url) { %>
+          <img src="<%= user.avatar_url %>" alt="" class="avatar">
+        <% } %>
+        <div>
+          <h1>Hello, <%= user.display_name %></h1>
+          <p><%= user.email || 'No email address was provided.' %></p>
+          <p class="muted">Signed in with <%= user.provider %></p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Provider account data</h2>
+        <% if (!accountData.configured) { %>
+          <p class="muted">Set OAUTH_ACCOUNT_API_URL to display additional account data.</p>
+        <% } else if (accountData.error) { %>
+          <p class="notice"><%= accountData.error %></p>
+        <% } else { %>
+          <pre><%= JSON.stringify(accountData.data, null, 2) %></pre>
+        <% } %>
+      </section>
+
+      <section class="panel">
+        <h2>Set local account password</h2>
+        <% if (typeof formError !== 'undefined') { %>
+          <p class="notice"><%= formError %></p>
+        <% } %>
+        <form method="post" action="/me/password" class="stack">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" minlength="12" maxlength="128" autocomplete="new-password" required>
+          <button type="submit">Save password hash</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<%- include('partials/page-start', { title: 'Sign in' }) %>
+<section class="auth-panel">
+  <h1>Document Manager</h1>
+  <form action="/login" method="post" class="stack">
+    <label>Email
+      <input type="email" name="email" value="alice@example.com" required>
+    </label>
+    <label>Password
+      <input type="password" name="password" value="password" required>
+    </label>
+    <button type="submit">Sign in</button>
+  </form>
+</section>
+<%- include('partials/page-end') %>

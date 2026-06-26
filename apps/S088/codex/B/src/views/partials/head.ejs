@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title || 'Documents' %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/dashboard">SecureDocs</a>
+    <% if (user) { %>
+      <nav>
+        <a href="/dashboard">Documents</a>
+        <a href="/groups">Groups</a>
+        <form method="post" action="/logout" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Sign out</button>
+        </form>
+      </nav>
+    <% } %>
+  </header>
+  <main class="page">
+    <% if (flash) { %><div class="flash <%= flash.type %>"><%= flash.message %></div><% } %>

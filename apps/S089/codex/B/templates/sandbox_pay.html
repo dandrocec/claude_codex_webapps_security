@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Sandbox payment - Flask Shop{% endblock %}
+{% block content %}
+<h1>Sandbox payment</h1>
+<p>Order #{{ order.id }} total: <strong>{{ order.total_cents|money }}</strong></p>
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button type="submit">Pay in sandbox</button>
+</form>
+{% endblock %}

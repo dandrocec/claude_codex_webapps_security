@@ -1,0 +1,75 @@
+<%- include('partials/page-start', { title: 'Documents' }) %>
+<section class="page-head">
+  <div>
+    <h1><%= folder ? folder.name : 'My documents' %></h1>
+    <p>
+      <a href="/">Home</a>
+      <% breadcrumbs.forEach(function(crumb) { %>
+        / <a href="/?folder=<%= crumb.id %>"><%= crumb.name %></a>
+      <% }) %>
+    </p>
+  </div>
+</section>
+
+<section class="grid two">
+  <form action="/folders" method="post" class="panel stack">
+    <h2>New folder</h2>
+    <input type="hidden" name="parent_id" value="<%= folder ? folder.id : '' %>">
+    <label>Name <input name="name" required></label>
+    <button type="submit">Create folder</button>
+  </form>
+
+  <form action="/documents" method="post" enctype="multipart/form-data" class="panel stack">
+    <h2>Upload document</h2>
+    <input type="hidden" name="folder_id" value="<%= folder ? folder.id : '' %>">
+    <label>Title <input name="title" placeholder="Optional; defaults to filename"></label>
+    <label>File <input type="file" name="document" required></label>
+    <button type="submit">Upload</button>
+  </form>
+</section>
+
+<section class="panel">
+  <h2>Folders</h2>
+  <% if (!folders.length) { %>
+    <p class="muted">No folders here.</p>
+  <% } %>
+  <div class="list">
+    <% folders.forEach(function(item) { %>
+      <a class="row" href="/?folder=<%= item.id %>">
+        <strong><%= item.name %></strong>
+        <span>Folder</span>
+      </a>
+    <% }) %>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Documents</h2>
+  <% if (!documents.length) { %>
+    <p class="muted">No documents in this folder.</p>
+  <% } %>
+  <div class="list">
+    <% documents.forEach(function(doc) { %>
+      <a class="row" href="/documents/<%= doc.id %>">
+        <strong><%= doc.title %></strong>
+        <span>v<%= doc.version_number %> · <%= Math.ceil(doc.size / 1024) %> KB · owned by <%= doc.owner_name %></span>
+      </a>
+    <% }) %>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Shared with me</h2>
+  <% if (!shared.length) { %>
+    <p class="muted">No shared documents yet.</p>
+  <% } %>
+  <div class="list">
+    <% shared.forEach(function(doc) { %>
+      <a class="row" href="/documents/<%= doc.id %>">
+        <strong><%= doc.title %></strong>
+        <span>v<%= doc.version_number %> · owned by <%= doc.owner_name %></span>
+      </a>
+    <% }) %>
+  </div>
+</section>
+<%- include('partials/page-end') %>

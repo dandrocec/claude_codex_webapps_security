@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Cart - Flask Shop{% endblock %}
+{% block content %}
+<h1>Cart</h1>
+{% if items %}
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <table>
+      <thead><tr><th>Product</th><th>Quantity</th><th>Line total</th></tr></thead>
+      <tbody>
+        {% for item in items %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td><input type="number" name="qty_{{ item.product.id }}" min="0" max="20" value="{{ item.quantity }}"></td>
+            <td>{{ item.line_total|money }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="total">Total: {{ total|money }}</p>
+    <button type="submit">Update cart</button>
+  </form>
+  <form method="post" action="{{ url_for('checkout') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit">Checkout</button>
+  </form>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+<%- include("partials/head", { title }) %>
+<%- include("partials/header") %>
+<main class="page narrow">
+  <div class="page-title">
+    <div>
+      <h1><%= title %></h1>
+      <p class="muted"><%= user ? "Update account details." : "Create a database-backed user account." %></p>
+    </div>
+    <a class="button button-secondary" href="/dashboard">Back</a>
+  </div>
+
+  <form class="form-panel" method="post" action="<%= action %>" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" value="<%= formData.name || "" %>" required minlength="2" maxlength="80">
+    <% if (fieldErrors.name) { %><p class="field-error"><%= fieldErrors.name %></p><% } %>
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" value="<%= formData.email || "" %>" required maxlength="254">
+    <% if (fieldErrors.email) { %><p class="field-error"><%= fieldErrors.email %></p><% } %>
+
+    <label for="role">Role</label>
+    <select id="role" name="role" required>
+      <option value="user" <%= (formData.role || "user") === "user" ? "selected" : "" %>>User</option>
+      <option value="admin" <%= formData.role === "admin" ? "selected" : "" %>>Admin</option>
+    </select>
+    <% if (fieldErrors.role) { %><p class="field-error"><%= fieldErrors.role %></p><% } %>
+
+    <label for="password">Password <%= user ? "(leave blank to keep current password)" : "" %></label>
+    <input id="password" name="password" type="password" autocomplete="new-password" <%= user ? "" : "required" %> minlength="12" maxlength="200">
+    <% if (fieldErrors.password) { %><p class="field-error"><%= fieldErrors.password %></p><% } %>
+
+    <div class="form-actions">
+      <button class="button button-primary" type="submit"><%= submitLabel %></button>
+      <a class="button button-secondary" href="/dashboard">Cancel</a>
+    </div>
+  </form>
+</main>
+<%- include("partials/foot") %>

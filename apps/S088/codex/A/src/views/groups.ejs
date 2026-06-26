@@ -1,0 +1,35 @@
+<%- include('partials/page-start', { title: 'Groups' }) %>
+<section class="page-head">
+  <div>
+    <h1>Groups</h1>
+    <p>Groups can receive document view or edit access.</p>
+  </div>
+</section>
+
+<section class="grid two">
+  <form action="/groups" method="post" class="panel stack">
+    <h2>New group</h2>
+    <label>Name <input name="name" required></label>
+    <label>Members
+      <select name="user_ids" multiple size="5">
+        <% users.forEach(function(user) { %>
+          <option value="<%= user.id %>"><%= user.name %> (<%= user.email %>)</option>
+        <% }) %>
+      </select>
+    </label>
+    <button type="submit">Create group</button>
+  </form>
+
+  <div class="panel">
+    <h2>Existing groups</h2>
+    <div class="list">
+      <% groups.forEach(function(group) { %>
+        <div class="row">
+          <strong><%= group.name %></strong>
+          <span><%= group.members || 'No members' %></span>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<%- include('partials/page-end') %>

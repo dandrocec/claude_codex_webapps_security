@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Register - Flask Shop{% endblock %}
+{% block content %}
+<h1>Create account</h1>
+<form class="form" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label>Username <input name="username" required minlength="3" maxlength="32" autocomplete="username"></label>
+  <label>Email <input type="email" name="email" required autocomplete="email"></label>
+  <label>Password <input type="password" name="password" required minlength="12" autocomplete="new-password"></label>
+  <button type="submit">Register</button>
+</form>
+{% endblock %}

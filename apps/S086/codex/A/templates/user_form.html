@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% set title = action ~ " User" %}
+
+{% block content %}
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">User account</p>
+      <h1>{{ action }} user</h1>
+    </div>
+    <a class="secondary-button" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+  </header>
+
+  <section class="form-panel">
+    <form class="form" method="post">
+      <label>
+        Full name
+        <input name="name" value="{{ user.name if user else '' }}" required>
+      </label>
+      <label>
+        Email
+        <input name="email" type="email" value="{{ user.email if user else '' }}" required>
+      </label>
+      <label>
+        Role
+        <input name="role" value="{{ user.role if user else 'Member' }}" required>
+      </label>
+      {% if user %}
+        <label>
+          Status
+          <select name="status">
+            <option value="active" {% if user.status == "active" %}selected{% endif %}>Active</option>
+            <option value="inactive" {% if user.status == "inactive" %}selected{% endif %}>Inactive</option>
+          </select>
+        </label>
+      {% endif %}
+      <button class="primary-button" type="submit">{{ action }} user</button>
+    </form>
+  </section>
+{% endblock %}

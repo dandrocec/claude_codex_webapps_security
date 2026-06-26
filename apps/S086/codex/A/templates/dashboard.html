@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% set title = "Dashboard" %}
+
+{% block content %}
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Overview</p>
+      <h1>Dashboard</h1>
+    </div>
+    <a class="primary-button" href="{{ url_for('create_user') }}">Create user</a>
+  </header>
+
+  <section class="stats-grid" aria-label="Site statistics">
+    <article class="stat-card">
+      <span>Total users</span>
+      <strong>{{ stats.total }}</strong>
+    </article>
+    <article class="stat-card">
+      <span>Active users</span>
+      <strong>{{ stats.active }}</strong>
+    </article>
+    <article class="stat-card">
+      <span>Inactive users</span>
+      <strong>{{ stats.inactive }}</strong>
+    </article>
+    <article class="stat-card">
+      <span>Admin accounts</span>
+      <strong>{{ stats.admins }}</strong>
+    </article>
+  </section>
+
+  <section class="table-section">
+    <div class="section-heading">
+      <h2>User accounts</h2>
+      <span>{{ users|length }} records</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            <tr>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role }}</td>
+              <td><span class="status {{ user.status }}">{{ user.status }}</span></td>
+              <td>{{ user.created_at }}</td>
+              <td class="actions">
+                <a class="small-button" href="{{ url_for('edit_user', user_id=user.id) }}">Edit</a>
+                {% if user.status == "active" %}
+                  <form action="{{ url_for('deactivate_user', user_id=user.id) }}" method="post">
+                    <button class="small-button danger" type="submit">Deactivate</button>
+                  </form>
+                {% endif %}
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="6" class="empty">No users yet.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endblock %}

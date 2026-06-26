@@ -1,0 +1,3 @@
+Build a Node.js/Express document-management system. Users upload documents into folders, share them with specific users or groups with view/edit rights, and keep version history with the ability to restore a previous version. Store data and files appropriately.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5088.

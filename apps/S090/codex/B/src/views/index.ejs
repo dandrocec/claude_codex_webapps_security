@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">OAuth Profile</a>
+    </header>
+    <main class="shell centered">
+      <section class="panel">
+        <h1>Sign in</h1>
+        <% if (loginRequired) { %>
+          <p class="notice">Please sign in to continue.</p>
+        <% } %>
+        <p>Use your OAuth provider account to access your personalised page.</p>
+        <form method="post" action="/auth/start">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Continue with provider</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

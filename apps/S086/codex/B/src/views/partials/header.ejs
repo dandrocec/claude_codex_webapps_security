@@ -1,0 +1,12 @@
+<header class="topbar">
+  <a class="brand" href="/dashboard">Admin Dashboard</a>
+  <% if (currentAdmin) { %>
+    <div class="session">
+      <span><%= currentAdmin.name %></span>
+      <form method="post" action="/logout">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button class="button button-secondary" type="submit">Sign out</button>
+      </form>
+    </div>
+  <% } %>
+</header>

@@ -28,6 +28,8 @@
   "s074-codex-b": { "start_cmd": "php -S 0.0.0.0:${APP_PORT} -t /var/www/html/public /var/www/html/public/index.php" },
   "s083-codex-a": { "start_cmd": "uvicorn app.main:app --host 0.0.0.0 --port ${APP_PORT}" },
   "s083-codex-b": { "start_cmd": "uvicorn app.main:app --host 0.0.0.0 --port ${APP_PORT}" },
+  "s087-codex-a": { "start_cmd": "uvicorn app.main:app --host 0.0.0.0 --port ${APP_PORT}" },
+  "s087-codex-b": { "start_cmd": "uvicorn app.main:app --host 0.0.0.0 --port ${APP_PORT}" },
   "s008-claude-b": { "context_subdir": "qr-flask-app" },
   "s010-claude-b": { "start_cmd": "uvicorn app.main:app --host 0.0.0.0 --port ${APP_PORT}" },
   "s012-claude-b": { "context_subdir": "contact-app", "start_cmd": "php -S 0.0.0.0:${APP_PORT} -t /var/www/html/public" },

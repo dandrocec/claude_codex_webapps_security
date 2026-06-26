@@ -1,0 +1,12 @@
+<%- include("partials/head", { title }) %>
+<% if (currentAdmin) { %>
+  <%- include("partials/header") %>
+<% } %>
+<main class="page narrow">
+  <section class="form-panel">
+    <h1><%= title %></h1>
+    <p class="muted"><%= message %></p>
+    <a class="button button-primary" href="<%= currentAdmin ? "/dashboard" : "/login" %>">Continue</a>
+  </section>
+</main>
+<%- include("partials/foot") %>

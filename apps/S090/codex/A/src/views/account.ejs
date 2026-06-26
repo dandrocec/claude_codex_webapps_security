@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your account</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel">
+        <div class="profile-header">
+          <% if (profile.avatar_url) { %>
+            <img class="avatar" src="<%= profile.avatar_url %>" alt="">
+          <% } %>
+          <div>
+            <p class="eyebrow">Signed in with <%= profile.provider %></p>
+            <h1>Hello, <%= profile.display_name || profile.username %></h1>
+            <a href="<%= profile.profile_url %>">View provider profile</a>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <span class="label">Username</span>
+            <strong><%= accountData.login %></strong>
+          </div>
+          <div>
+            <span class="label">Public repos</span>
+            <strong><%= accountData.public_repos %></strong>
+          </div>
+          <div>
+            <span class="label">Followers</span>
+            <strong><%= accountData.followers %></strong>
+          </div>
+          <div>
+            <span class="label">Following</span>
+            <strong><%= accountData.following %></strong>
+          </div>
+        </div>
+
+        <form method="post" action="/logout">
+          <button class="button secondary" type="submit">Sign out</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

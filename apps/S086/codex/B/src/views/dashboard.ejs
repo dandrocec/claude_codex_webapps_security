@@ -1,0 +1,82 @@
+<%- include("partials/head", { title }) %>
+<%- include("partials/header") %>
+<main class="page">
+  <div class="page-title">
+    <div>
+      <h1>Dashboard</h1>
+      <p class="muted">User management and site statistics.</p>
+    </div>
+    <a class="button button-primary" href="/users/new">Create user</a>
+  </div>
+
+  <section class="stats-grid" aria-label="Site statistics">
+    <article class="stat">
+      <span>Total users</span>
+      <strong><%= stats.totalUsers %></strong>
+    </article>
+    <article class="stat">
+      <span>Active users</span>
+      <strong><%= stats.activeUsers %></strong>
+    </article>
+    <article class="stat">
+      <span>Admins</span>
+      <strong><%= stats.admins %></strong>
+    </article>
+    <article class="stat">
+      <span>Created today</span>
+      <strong><%= stats.createdToday %></strong>
+    </article>
+  </section>
+
+  <section class="table-shell">
+    <div class="section-heading">
+      <h2>Users</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach((user) => { %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><span class="pill"><%= user.role %></span></td>
+              <td>
+                <% if (user.active) { %>
+                  <span class="status status-active">Active</span>
+                <% } else { %>
+                  <span class="status status-inactive">Inactive</span>
+                <% } %>
+              </td>
+              <td><%= user.created_at %></td>
+              <td class="actions">
+                <a class="button button-secondary" href="/users/<%= user.id %>/edit">Edit</a>
+                <% if (user.active) { %>
+                  <form method="post" action="/users/<%= user.id %>/deactivate">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="button button-danger" type="submit">Deactivate</button>
+                  </form>
+                <% } else { %>
+                  <form method="post" action="/users/<%= user.id %>/activate">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="button button-secondary" type="submit">Activate</button>
+                  </form>
+                <% } %>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<%- include("partials/foot") %>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Orders - Flask Shop{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <h1>Order History</h1>
+</section>
+
+{% if orders %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td>#{{ order.id }}</td>
+            <td>{{ order.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+            <td><span class="status {{ order.status }}">{{ order.status }}</span></td>
+            <td>{{ order.total_cents|money }}</td>
+            <td><a href="{{ url_for('order_detail', order_id=order.id) }}">View</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p class="empty">No orders yet.</p>
+{% endif %}
+{% endblock %}

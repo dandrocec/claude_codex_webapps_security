@@ -1,0 +1,109 @@
+<%- include('partials/page-start', { title: document.title }) %>
+<section class="page-head">
+  <div>
+    <h1><%= document.title %></h1>
+    <p>Owned by <%= document.owner_name %> · current version <%= document.version_number %> · your access: <%= rights %></p>
+  </div>
+  <a class="button" href="/documents/<%= document.id %>/download">Download current</a>
+</section>
+
+<section class="grid two">
+  <div class="panel">
+    <h2>Details</h2>
+    <dl class="details">
+      <dt>Filename</dt><dd><%= document.original_name %></dd>
+      <dt>Size</dt><dd><%= Math.ceil(document.size / 1024) %> KB</dd>
+      <dt>Updated</dt><dd><%= document.updated_at %></dd>
+    </dl>
+  </div>
+
+  <% if (rights === 'edit') { %>
+    <form action="/documents/<%= document.id %>/versions" method="post" enctype="multipart/form-data" class="panel stack">
+      <h2>Upload new version</h2>
+      <label>File <input type="file" name="document" required></label>
+      <label>Note <input name="note" placeholder="What changed?"></label>
+      <button type="submit">Upload version</button>
+    </form>
+  <% } %>
+</section>
+
+<section class="panel">
+  <h2>Version history</h2>
+  <div class="list">
+    <% versions.forEach(function(version) { %>
+      <div class="row split">
+        <div>
+          <strong>Version <%= version.version_number %></strong>
+          <span><%= version.original_name %> · <%= Math.ceil(version.size / 1024) %> KB · <%= version.uploaded_by_name %> · <%= version.created_at %></span>
+          <% if (version.note) { %><small><%= version.note %></small><% } %>
+        </div>
+        <div class="actions">
+          <a class="button secondary" href="/documents/<%= document.id %>/download?version=<%= version.id %>">Download</a>
+          <% if (rights === 'edit' && version.id !== document.current_version_id) { %>
+            <form action="/documents/<%= document.id %>/restore/<%= version.id %>" method="post">
+              <button type="submit">Restore</button>
+            </form>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<% if (isOwner) { %>
+  <section class="grid two">
+    <div class="panel stack">
+      <h2>Share document</h2>
+      <form action="/documents/<%= document.id %>/shares" method="post" class="stack">
+        <input type="hidden" name="target_type" value="user">
+        <label>User
+          <select name="target_id">
+            <% users.forEach(function(user) { %>
+              <option value="<%= user.id %>"><%= user.name %> (<%= user.email %>)</option>
+            <% }) %>
+          </select>
+        </label>
+        <label>Rights
+          <select name="rights">
+            <option value="view">View</option>
+            <option value="edit">Edit</option>
+          </select>
+        </label>
+        <button type="submit">Share with user</button>
+      </form>
+      <form action="/documents/<%= document.id %>/shares" method="post" class="stack">
+        <input type="hidden" name="target_type" value="group">
+        <label>Group
+          <select name="target_id">
+            <% groups.forEach(function(group) { %>
+              <option value="<%= group.id %>"><%= group.name %></option>
+            <% }) %>
+          </select>
+        </label>
+        <label>Rights
+          <select name="rights">
+            <option value="view">View</option>
+            <option value="edit">Edit</option>
+          </select>
+        </label>
+        <button type="submit">Share with group</button>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2>Current shares</h2>
+      <% if (!shares.length) { %><p class="muted">This document is private.</p><% } %>
+      <div class="list compact">
+        <% shares.forEach(function(share) { %>
+          <div class="row split">
+            <span><%= share.target_type %>: <%= share.target_name %> <%= share.target_email ? '(' + share.target_email + ')' : '' %> · <%= share.rights %></span>
+            <form action="/documents/<%= document.id %>/shares/<%= share.id %>/delete" method="post">
+              <button type="submit" class="danger">Remove</button>
+            </form>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+<% } %>
+<%- include('partials/page-end') %>

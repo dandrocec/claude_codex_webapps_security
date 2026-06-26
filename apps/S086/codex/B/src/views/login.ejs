@@ -1,0 +1,21 @@
+<%- include("partials/head", { title }) %>
+<main class="auth-shell">
+  <section class="auth-panel">
+    <h1>Admin sign in</h1>
+    <p class="muted">Use your administrator account to manage users and site activity.</p>
+    <% if (error) { %>
+      <div class="alert" role="alert"><%= error %></div>
+    <% } %>
+    <form method="post" action="/login" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="username" required maxlength="254">
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="200">
+
+      <button class="button button-primary full-width" type="submit">Sign in</button>
+    </form>
+  </section>
+</main>
+<%- include("partials/foot") %>

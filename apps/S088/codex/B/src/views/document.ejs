@@ -1,0 +1,56 @@
+<%- include('partials/head', { title: doc.title }) %>
+<section class="grid">
+  <div>
+    <h1><%= doc.title %></h1>
+    <p class="muted">Original name: <%= doc.original_name %></p>
+    <p><a class="button" href="/documents/<%= doc.id %>/download">Download current version</a></p>
+    <h2>Version History</h2>
+    <div class="list">
+      <% versions.forEach((version) => { %>
+        <div class="row">
+          <strong>v<%= version.version_no %></strong>
+          <span><%= version.created_at %> by <%= version.created_by_name %></span>
+          <span><%= Math.ceil(version.size_bytes / 1024) %> KB</span>
+          <% if (canEdit && doc.current_version_id !== version.id) { %>
+            <form method="post" action="/documents/<%= doc.id %>/restore/<%= version.id %>" class="inline">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit">Restore</button>
+            </form>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+  <aside class="panel">
+    <% if (canEdit) { %>
+      <h2>New Version</h2>
+      <form method="post" action="/documents/<%= doc.id %>/versions" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label>Note <input name="note" maxlength="240"></label>
+        <label>File <input name="document" type="file" required></label>
+        <button type="submit">Upload Version</button>
+      </form>
+    <% } %>
+    <% if (isOwner) { %>
+      <h2>Share Document</h2>
+      <p class="muted">Use numeric user or group IDs from the Groups page.</p>
+      <form method="post" action="/shares">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="resourceType" value="document">
+        <input type="hidden" name="resourceId" value="<%= doc.id %>">
+        <label>Target
+          <select name="targetType">
+            <option value="user">User</option>
+            <option value="group">Group</option>
+          </select>
+        </label>
+        <label>Target ID <input name="targetId" type="number" min="1" required></label>
+        <label>Role
+          <select name="role"><option value="view">View</option><option value="edit">Edit</option></select>
+        </label>
+        <button type="submit">Share</button>
+      </form>
+    <% } %>
+  </aside>
+</section>
+<%- include('partials/foot') %>

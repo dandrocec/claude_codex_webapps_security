@@ -1,0 +1,73 @@
+<%- include('partials/head', { title: 'Documents' }) %>
+<section class="grid">
+  <div>
+    <h1><%= folder.name %></h1>
+    <div class="toolbar">
+      <% if (folder.parent_id) { %><a class="button secondary" href="/dashboard?folder=<%= folder.parent_id %>">Up</a><% } %>
+    </div>
+    <h2>Folders</h2>
+    <div class="list">
+      <% folders.forEach((item) => { %>
+        <a class="row" href="/dashboard?folder=<%= item.id %>"><strong><%= item.name %></strong><span>Open</span></a>
+      <% }) %>
+      <% if (!folders.length) { %><p class="muted">No folders here.</p><% } %>
+    </div>
+    <h2>Documents</h2>
+    <div class="list">
+      <% docs.forEach((doc) => { %>
+        <a class="row" href="/documents/<%= doc.id %>">
+          <strong><%= doc.title %></strong>
+          <span>v<%= doc.version_no || 1 %></span>
+        </a>
+      <% }) %>
+      <% if (!docs.length) { %><p class="muted">No documents here.</p><% } %>
+    </div>
+    <h2>Shared With Me</h2>
+    <div class="list">
+      <% sharedDocs.forEach((doc) => { %>
+        <a class="row" href="/documents/<%= doc.id %>"><strong><%= doc.title %></strong><span>v<%= doc.version_no || 1 %></span></a>
+      <% }) %>
+      <% if (!sharedDocs.length) { %><p class="muted">No shared documents.</p><% } %>
+    </div>
+  </div>
+  <aside class="panel">
+    <% if (canEditFolder) { %>
+      <h2>New Folder</h2>
+      <form method="post" action="/folders">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="parentId" value="<%= folder.id %>">
+        <label>Name <input name="name" maxlength="120" required></label>
+        <button type="submit">Create</button>
+      </form>
+      <h2>Upload Document</h2>
+      <form method="post" action="/documents" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="folderId" value="<%= folder.id %>">
+        <label>Title <input name="title" maxlength="180"></label>
+        <label>Version note <input name="note" maxlength="240"></label>
+        <label>File <input name="document" type="file" required></label>
+        <button type="submit">Upload</button>
+      </form>
+      <h2>Share Folder</h2>
+      <form method="post" action="/shares">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="resourceType" value="folder">
+        <input type="hidden" name="resourceId" value="<%= folder.id %>">
+        <label>Target
+          <select name="targetType">
+            <option value="user">User</option>
+            <option value="group">Group</option>
+          </select>
+        </label>
+        <label>Target ID <input name="targetId" type="number" min="1" required></label>
+        <label>Role
+          <select name="role"><option value="view">View</option><option value="edit">Edit</option></select>
+        </label>
+        <button type="submit">Share</button>
+      </form>
+    <% } else { %>
+      <p class="muted">You have view-only access.</p>
+    <% } %>
+  </aside>
+</section>
+<%- include('partials/foot') %>
