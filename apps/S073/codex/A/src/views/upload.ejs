@@ -1,0 +1,16 @@
+<%- include("layout", { body: `
+  <section class="form-panel">
+    <h1>Upload Photo</h1>
+    <form action="/photos" method="post" enctype="multipart/form-data">
+      <div class="field">
+        <label for="photo">Image</label>
+        <input id="photo" name="photo" type="file" accept="image/*" required>
+      </div>
+      <div class="field">
+        <label for="caption">Caption</label>
+        <textarea id="caption" name="caption" maxlength="500" placeholder="What is happening in this photo?"></textarea>
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+  </section>
+` }) %>

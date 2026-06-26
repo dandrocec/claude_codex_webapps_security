@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+  <section class="page-head">
+    <p class="eyebrow">{{ "Administrator" if g.user["is_admin"] else "Member" }}</p>
+    <h1>Welcome, {{ g.user["name"] }}</h1>
+    <p class="lead">Your current tier is <strong>{{ g.user["tier"]|title }}</strong>.</p>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>Member Updates</h2>
+      <p>Free members can access account updates, community notes, and standard resources.</p>
+    </article>
+    <article class="card">
+      <h2>Premium Access</h2>
+      {% if g.user["tier"] == "premium" or g.user["is_admin"] %}
+        <p>Your account can view the premium library.</p>
+        <a href="{{ url_for('premium') }}">Open premium library</a>
+      {% else %}
+        <p>Upgrade your account to view premium-only guides and downloads.</p>
+        <a href="{{ url_for('upgrade') }}">View upgrade options</a>
+      {% endif %}
+    </article>
+  </section>
+{% endblock %}

@@ -1,0 +1,47 @@
+<% if (!photos.length) { %>
+  <div class="empty">No photos to show yet.</div>
+<% } else { %>
+  <section class="grid">
+    <% photos.forEach((photo) => { %>
+      <article class="photo-card">
+        <a href="/users/<%= photo.username %>">
+          <img src="/uploads/<%= photo.filename %>" alt="<%= photo.caption || photo.original_name %>">
+        </a>
+        <div class="photo-body">
+          <div class="photo-meta">
+            <strong><a href="/users/<%= photo.username %>">@<%= photo.username %></a></strong>
+            <span class="muted"><%= new Date(photo.created_at).toLocaleString() %></span>
+          </div>
+          <% if (photo.caption) { %>
+            <p class="caption"><%= photo.caption %></p>
+          <% } %>
+          <div class="actions">
+            <span class="muted"><%= photo.like_count %> likes · <%= photo.comment_count %> comments</span>
+            <% if (currentUser) { %>
+              <% if (photo.liked_by_me) { %>
+                <form action="/photos/<%= photo.id %>/like?_method=DELETE" method="post">
+                  <button class="secondary" type="submit">Unlike</button>
+                </form>
+              <% } else { %>
+                <form action="/photos/<%= photo.id %>/like" method="post">
+                  <button type="submit">Like</button>
+                </form>
+              <% } %>
+            <% } %>
+          </div>
+          <div class="comments">
+            <% (commentsByPhoto.get(photo.id) || []).forEach((comment) => { %>
+              <p class="comment"><strong>@<%= comment.username %></strong> <%= comment.body %></p>
+            <% }) %>
+            <% if (currentUser) { %>
+              <form class="comment-form" action="/photos/<%= photo.id %>/comments" method="post">
+                <input name="body" maxlength="300" placeholder="Add a comment" required>
+                <button type="submit">Post</button>
+              </form>
+            <% } %>
+          </div>
+        </div>
+      </article>
+    <% }) %>
+  </section>
+<% } %>

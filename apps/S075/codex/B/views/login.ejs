@@ -1,0 +1,16 @@
+<%- include("partials/header", { title: "Sign in" }) %>
+<section class="panel narrow">
+  <h1>Sign in</h1>
+  <form action="/login" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Username
+      <input name="username" autocomplete="username" maxlength="40" value="<%= values.username || "" %>" required>
+    </label>
+    <label>Password
+      <input name="password" type="password" autocomplete="current-password" maxlength="128" required>
+    </label>
+    <button type="submit">Sign in</button>
+  </form>
+  <p>Need an account? <a href="/register">Register</a>.</p>
+</section>
+<%- include("partials/footer") %>

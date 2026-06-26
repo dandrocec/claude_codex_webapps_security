@@ -1,0 +1,10 @@
+<%- include("layout", { body: `
+  <section class="page-title">
+    <div>
+      <h1>Share photos with people you follow.</h1>
+      <p class="muted">Create an account to upload, follow other photographers, like photos, and join the conversation.</p>
+    </div>
+    <a class="button" href="/register">Get started</a>
+  </section>
+  ${include("partials/photos", { photos, commentsByPhoto, currentUser })}
+` }) %>

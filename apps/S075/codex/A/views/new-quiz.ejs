@@ -1,0 +1,56 @@
+<%- include('partials/header', { title: 'Create Quiz' }) %>
+
+<section class="panel">
+  <h1>Create a quiz</h1>
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/teacher/quizzes" method="post" id="quizForm">
+    <label>
+      Quiz title
+      <input name="title" required value="<%= values.title || '' %>">
+    </label>
+
+    <label>
+      Description
+      <textarea name="description" rows="3"><%= values.description || '' %></textarea>
+    </label>
+
+    <div class="section-heading">
+      <h2>Questions</h2>
+      <button class="secondary" type="button" id="addQuestion">Add question</button>
+    </div>
+
+    <div id="questions">
+      <fieldset class="question-editor">
+        <legend>Question 1</legend>
+        <label>
+          Prompt
+          <textarea name="prompt" rows="2" required></textarea>
+        </label>
+        <div class="option-grid">
+          <label>A <input name="option_a" required></label>
+          <label>B <input name="option_b" required></label>
+          <label>C <input name="option_c" required></label>
+          <label>D <input name="option_d" required></label>
+        </div>
+        <label>
+          Correct answer
+          <select name="correct_option" required>
+            <option value="">Select</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+          </select>
+        </label>
+      </fieldset>
+    </div>
+
+    <button class="button" type="submit">Save quiz</button>
+  </form>
+</section>
+
+<script src="/quiz-form.js"></script>
+<%- include('partials/footer') %>

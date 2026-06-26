@@ -1,0 +1,30 @@
+<%- include("partials/header", { title: "Available quizzes" }) %>
+<h1>Available quizzes</h1>
+<section class="grid">
+  <% if (!quizzes.length) { %>
+    <p>No quizzes are available.</p>
+  <% } %>
+  <% quizzes.forEach(function(quiz) { %>
+    <article class="card">
+      <h2><a href="/student/quizzes/<%= quiz.id %>"><%= quiz.title %></a></h2>
+      <p><%= quiz.description %></p>
+      <p class="meta">By <%= quiz.teacher_name %> · <%= quiz.question_count %> questions</p>
+    </article>
+  <% }) %>
+</section>
+<section class="panel">
+  <h2>Your recent attempts</h2>
+  <% if (!attempts.length) { %>
+    <p>No submissions yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Quiz ID</th><th>Score</th><th>Submitted</th></tr></thead>
+      <tbody>
+      <% attempts.forEach(function(attempt) { %>
+        <tr><td><%= attempt.quiz_id %></td><td><%= attempt.score %>/<%= attempt.total %></td><td><%= attempt.submitted_at %></td></tr>
+      <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<%- include("partials/footer") %>

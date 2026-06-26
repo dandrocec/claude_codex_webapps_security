@@ -1,0 +1,34 @@
+<%- include('partials/header', { title: 'Quiz Platform' }) %>
+
+<section class="hero">
+  <div>
+    <h1>Classroom quizzes with automatic scoring</h1>
+    <p>Teachers create multiple-choice quizzes. Students answer without seeing the answer key until after submission.</p>
+  </div>
+  <a class="button" href="/teacher/quizzes/new">Create a quiz</a>
+</section>
+
+<section>
+  <h2>Available quizzes</h2>
+  <% if (quizzes.length === 0) { %>
+    <p class="empty">No quizzes yet. Create the first one.</p>
+  <% } else { %>
+    <div class="quiz-list">
+      <% quizzes.forEach((quiz) => { %>
+        <article class="card">
+          <h3><%= quiz.title %></h3>
+          <% if (quiz.description) { %>
+            <p><%= quiz.description %></p>
+          <% } %>
+          <p class="meta"><%= quiz.question_count %> question<%= quiz.question_count === 1 ? '' : 's' %></p>
+          <div class="actions">
+            <a class="button" href="/quizzes/<%= quiz.id %>">Take quiz</a>
+            <a href="/teacher/quizzes/<%= quiz.id %>">Teacher view</a>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

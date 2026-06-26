@@ -1,0 +1,37 @@
+<%- include("partials/header", { title: "Explore" }) %>
+<section class="section-head">
+  <h1>Explore</h1>
+</section>
+<section class="people">
+  <h2>People</h2>
+  <% if (!users.length) { %><p class="empty">No other users yet.</p><% } %>
+  <% users.forEach((user) => { %>
+    <div class="person">
+      <span>@<%= user.username %></span>
+      <% if (user.followed) { %>
+        <form method="post" action="/users/<%= user.id %>/unfollow">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Unfollow</button>
+        </form>
+      <% } else { %>
+        <form method="post" action="/users/<%= user.id %>/follow">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Follow</button>
+        </form>
+      <% } %>
+    </div>
+  <% }) %>
+</section>
+<section>
+  <h2>All photos</h2>
+  <div class="photo-grid compact">
+    <% photos.forEach((photo) => { %>
+      <article class="photo-card">
+        <div class="photo-meta"><strong>@<%= photo.username %></strong><time><%= photo.created_at %></time></div>
+        <img src="/media/<%= photo.stored_name %>" alt="Photo by <%= photo.username %>">
+        <% if (photo.caption) { %><p><%= photo.caption %></p><% } %>
+      </article>
+    <% }) %>
+  </div>
+</section>
+<%- include("partials/footer") %>

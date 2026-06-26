@@ -1,0 +1,21 @@
+<%- include("partials/header", { title: "Register" }) %>
+<section class="panel narrow">
+  <h1>Register</h1>
+  <form action="/register" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Username
+      <input name="username" autocomplete="username" maxlength="40" pattern="[a-zA-Z0-9_.-]{3,40}" value="<%= values.username || "" %>" required>
+    </label>
+    <label>Password
+      <input name="password" type="password" autocomplete="new-password" minlength="10" maxlength="128" required>
+    </label>
+    <label>Role
+      <select name="role" required>
+        <option value="student" <%= values.role === "student" ? "selected" : "" %>>Student</option>
+        <option value="teacher" <%= values.role === "teacher" ? "selected" : "" %>>Teacher</option>
+      </select>
+    </label>
+    <button type="submit">Create account</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

@@ -1,0 +1,25 @@
+<%- include('partials/header', { title: 'Quiz Result' }) %>
+
+<section class="panel result">
+  <p class="meta"><%= submission.student_name %></p>
+  <h1><%= submission.title %></h1>
+  <div class="score"><%= submission.score %> / <%= submission.total %></div>
+  <p>Submitted at <%= submission.submitted_at %></p>
+</section>
+
+<section class="panel">
+  <h2>Review</h2>
+  <div class="question-list">
+    <% answers.forEach((answer, index) => { %>
+      <article class="question-review">
+        <h3><%= index + 1 %>. <%= answer.prompt %></h3>
+        <p class="<%= answer.is_correct ? 'correct' : 'incorrect' %>">
+          Your answer: <%= answer.selected_option || 'No answer' %>
+        </p>
+        <p>Correct answer: <strong><%= answer.correct_option %></strong></p>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

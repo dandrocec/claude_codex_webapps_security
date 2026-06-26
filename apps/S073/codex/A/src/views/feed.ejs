@@ -1,0 +1,10 @@
+<%- include("layout", { body: `
+  <section class="page-title">
+    <div>
+      <h1>${title}</h1>
+      <p class="muted">${title === "Feed" ? "Recent photos from you and people you follow." : "Recent photos from everyone."}</p>
+    </div>
+    ${currentUser ? '<a class="button" href="/upload">Upload photo</a>' : '<a class="button" href="/register">Register</a>'}
+  </section>
+  ${include("partials/photos", { photos, commentsByPhoto, currentUser })}
+` }) %>

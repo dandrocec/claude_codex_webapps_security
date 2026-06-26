@@ -1,0 +1,50 @@
+<%- include("partials/header", { title: auction.title }) %>
+<article class="auction-detail">
+  <div>
+    <h1><%= auction.title %></h1>
+    <p class="muted">Seller: <%= auction.seller_name %></p>
+    <p><%= auction.description %></p>
+    <p>Current price: <strong><%= money(auction.current_price_cents) %></strong></p>
+    <% if (isEnded(auction.end_time)) { %>
+      <p class="ended">Ended <time datetime="<%= auction.end_time %>"><%= new Date(auction.end_time).toLocaleString() %></time></p>
+      <% if (auction.highest_bidder_name) { %>
+        <p>Winner: <strong><%= auction.highest_bidder_name %></strong></p>
+      <% } else { %>
+        <p>No bids were placed.</p>
+      <% } %>
+    <% } else { %>
+      <p class="active">Ends <time datetime="<%= auction.end_time %>"><%= new Date(auction.end_time).toLocaleString() %></time></p>
+    <% } %>
+  </div>
+  <aside>
+    <h2>Place bid</h2>
+    <%- include("partials/errors", { errors }) %>
+    <% if (user && !isEnded(auction.end_time) && user.id !== auction.seller_id) { %>
+      <form action="/auctions/<%= auction.id %>/bids" method="post" class="panel">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <label>Bid amount
+          <input name="amount" inputmode="decimal" required placeholder="<%= ((auction.current_price_cents + 100) / 100).toFixed(2) %>">
+        </label>
+        <button type="submit">Bid</button>
+      </form>
+    <% } else if (!user) { %>
+      <p><a href="/login">Log in</a> to bid.</p>
+    <% } else if (user.id === auction.seller_id) { %>
+      <p>You own this auction.</p>
+    <% } else { %>
+      <p>Bidding is closed.</p>
+    <% } %>
+  </aside>
+</article>
+<section>
+  <h2>Bid history</h2>
+  <% if (bids.length === 0) { %>
+    <p class="empty">No bids yet.</p>
+  <% } %>
+  <ul class="bid-list">
+    <% bids.forEach(bid => { %>
+      <li><strong><%= money(bid.amount_cents) %></strong> by <%= bid.username %> <time datetime="<%= bid.created_at %>"><%= new Date(bid.created_at).toLocaleString() %></time></li>
+    <% }) %>
+  </ul>
+</section>
+<%- include("partials/footer") %>

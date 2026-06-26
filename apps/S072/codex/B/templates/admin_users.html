@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Admin Users{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>User tiers</h1>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Email</th>
+          <th>Tier</th>
+          <th>Change tier</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.tier }}</td>
+            <td>
+              <form method="post" action="{{ url_for('change_tier', user_id=user.id) }}" class="tier-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <select name="tier" required>
+                  {% for tier in ["free", "premium", "admin"] %}
+                    <option value="{{ tier }}" {% if user.tier == tier %}selected{% endif %}>{{ tier }}</option>
+                  {% endfor %}
+                </select>
+                <button type="submit">Update</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

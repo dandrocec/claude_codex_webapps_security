@@ -1,0 +1,21 @@
+<%- include("partials/header", { title: quiz.title }) %>
+<section class="panel">
+  <h1><%= quiz.title %></h1>
+  <p><%= quiz.description %></p>
+  <form action="/student/quizzes/<%= quiz.id %>/submit" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% questions.forEach(function(question, index) { %>
+      <fieldset>
+        <legend><%= index + 1 %>. <%= question.prompt %></legend>
+        <% question.options.forEach(function(option) { %>
+          <label class="choice">
+            <input type="radio" name="question_<%= question.id %>" value="<%= option.id %>">
+            <span><%= option.text %></span>
+          </label>
+        <% }) %>
+      </fieldset>
+    <% }) %>
+    <button type="submit">Submit quiz</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

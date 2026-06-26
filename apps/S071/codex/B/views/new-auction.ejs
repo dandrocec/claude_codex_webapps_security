@@ -1,0 +1,22 @@
+<%- include("partials/header", { title: "List item" }) %>
+<section class="narrow">
+  <h1>List an item</h1>
+  <%- include("partials/errors", { errors }) %>
+  <form action="/auctions" method="post" class="panel">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Title
+      <input name="title" required minlength="3" maxlength="100" value="<%= form.title || "" %>">
+    </label>
+    <label>Description
+      <textarea name="description" required maxlength="1000"><%= form.description || "" %></textarea>
+    </label>
+    <label>Starting price
+      <input name="startingPrice" inputmode="decimal" placeholder="25.00" required value="<%= form.startingPrice || "" %>">
+    </label>
+    <label>End time
+      <input name="endTime" type="datetime-local" required value="<%= form.endTime || "" %>">
+    </label>
+    <button type="submit">Create auction</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

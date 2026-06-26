@@ -1,0 +1,33 @@
+<%- include("partials/header", { title: quiz.title }) %>
+<section class="panel">
+  <h1><%= quiz.title %></h1>
+  <p><%= quiz.description %></p>
+  <% let currentQuestion = null; %>
+  <% questions.forEach(function(row) { %>
+    <% if (currentQuestion !== row.id) { %>
+      <% currentQuestion = row.id; %>
+      <h2><%= row.prompt %></h2>
+    <% } %>
+    <p class="<%= row.is_correct ? "correct" : "" %>"><%= row.option_text %><%= row.is_correct ? " (correct)" : "" %></p>
+  <% }) %>
+</section>
+<section class="panel">
+  <h2>Attempts</h2>
+  <% if (!attempts.length) { %>
+    <p>No submissions yet.</p>
+  <% } else { %>
+    <table>
+      <thead><tr><th>Student</th><th>Score</th><th>Submitted</th></tr></thead>
+      <tbody>
+      <% attempts.forEach(function(attempt) { %>
+        <tr>
+          <td><%= attempt.username %></td>
+          <td><%= attempt.score %>/<%= attempt.total %></td>
+          <td><%= attempt.submitted_at %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+<%- include("partials/footer") %>

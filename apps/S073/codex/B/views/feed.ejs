@@ -1,0 +1,43 @@
+<%- include("partials/header", { title: "Feed" }) %>
+<section class="section-head">
+  <h1>Recent photos</h1>
+  <a class="button-link" href="/upload">Upload</a>
+</section>
+<% if (!photos.length) { %>
+  <p class="empty">Follow people or upload a photo to start your feed.</p>
+<% } %>
+<div class="photo-grid">
+  <% photos.forEach((photo) => { %>
+    <article class="photo-card">
+      <div class="photo-meta">
+        <strong>@<%= photo.username %></strong>
+        <time><%= photo.created_at %></time>
+      </div>
+      <img src="/media/<%= photo.stored_name %>" alt="Photo by <%= photo.username %>">
+      <% if (photo.caption) { %><p><%= photo.caption %></p><% } %>
+      <div class="actions">
+        <form method="post" action="/photos/<%= photo.id %>/like">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit"><%= photo.liked_by_me ? "Unlike" : "Like" %> (<%= photo.like_count %>)</button>
+        </form>
+        <% if (photo.user_id === currentUser.id) { %>
+          <form method="post" action="/photos/<%= photo.id %>/delete">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="danger">Delete</button>
+          </form>
+        <% } %>
+      </div>
+      <div class="comments">
+        <% comments.filter((comment) => comment.photo_id === photo.id).forEach((comment) => { %>
+          <p><strong>@<%= comment.username %></strong> <%= comment.body %></p>
+        <% }) %>
+      </div>
+      <form method="post" action="/photos/<%= photo.id %>/comments" class="comment-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input name="body" maxlength="500" required placeholder="Add a comment">
+        <button type="submit">Post</button>
+      </form>
+    </article>
+  <% }) %>
+</div>
+<%- include("partials/footer") %>

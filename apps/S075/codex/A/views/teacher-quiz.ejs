@@ -1,0 +1,56 @@
+<%- include('partials/header', { title: quiz.title }) %>
+
+<section class="panel">
+  <div class="split-heading">
+    <div>
+      <h1><%= quiz.title %></h1>
+      <% if (quiz.description) { %>
+        <p><%= quiz.description %></p>
+      <% } %>
+    </div>
+    <a class="button" href="/quizzes/<%= quiz.id %>">Student link</a>
+  </div>
+
+  <h2>Answer key</h2>
+  <div class="question-list">
+    <% questions.forEach((question) => { %>
+      <article class="question-review">
+        <h3><%= question.position %>. <%= question.prompt %></h3>
+        <ol type="A">
+          <li class="<%= question.correct_option === 'A' ? 'correct' : '' %>"><%= question.option_a %></li>
+          <li class="<%= question.correct_option === 'B' ? 'correct' : '' %>"><%= question.option_b %></li>
+          <li class="<%= question.correct_option === 'C' ? 'correct' : '' %>"><%= question.option_c %></li>
+          <li class="<%= question.correct_option === 'D' ? 'correct' : '' %>"><%= question.option_d %></li>
+        </ol>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Recent submissions</h2>
+  <% if (submissions.length === 0) { %>
+    <p class="empty">No submissions yet.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Score</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% submissions.forEach((submission) => { %>
+          <tr>
+            <td><%= submission.student_name %></td>
+            <td><%= submission.score %> / <%= submission.total %></td>
+            <td><%= submission.submitted_at %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

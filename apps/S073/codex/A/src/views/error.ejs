@@ -1,0 +1,7 @@
+<%- include("layout", { body: `
+  <section class="form-panel">
+    <h1>${title}</h1>
+    <p class="muted">${message}</p>
+    <a class="button" href="${currentUser ? "/feed" : "/"}">Go back</a>
+  </section>
+` }) %>

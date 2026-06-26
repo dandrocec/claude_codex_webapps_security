@@ -1,0 +1,18 @@
+<%- include("partials/header", { title: "My quizzes" }) %>
+<div class="heading-row">
+  <h1>My quizzes</h1>
+  <a class="button" href="/teacher/quizzes/new">New quiz</a>
+</div>
+<section class="grid">
+  <% if (!quizzes.length) { %>
+    <p>No quizzes yet.</p>
+  <% } %>
+  <% quizzes.forEach(function(quiz) { %>
+    <article class="card">
+      <h2><a href="/teacher/quizzes/<%= quiz.id %>"><%= quiz.title %></a></h2>
+      <p><%= quiz.description %></p>
+      <p class="meta"><%= quiz.question_count %> questions</p>
+    </article>
+  <% }) %>
+</section>
+<%- include("partials/footer") %>

@@ -1,0 +1,12 @@
+<%- include("partials/header", { title: "Upload" }) %>
+<section class="auth-panel">
+  <h1>Upload photo</h1>
+  <% if (typeof error !== "undefined" && error) { %><p class="error"><%= error %></p><% } %>
+  <form method="post" action="/photos?_csrf=<%= encodeURIComponent(csrfToken) %>" enctype="multipart/form-data" class="stack">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Photo <input type="file" name="photo" accept="image/jpeg,image/png,image/webp" required></label>
+    <label>Caption <textarea name="caption" maxlength="240" rows="3"></textarea></label>
+    <button type="submit">Share</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

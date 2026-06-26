@@ -1,0 +1,14 @@
+<%- include("layout", { body: `
+  <section class="page-title">
+    <div>
+      <h1>@${profileUser.username}</h1>
+      <p class="muted">${profileUser.bio || "Photo Share member"}</p>
+    </div>
+    ${currentUser && currentUser.id !== profileUser.id ? (
+      isFollowing
+        ? `<form action="/users/${profileUser.id}/follow?_method=DELETE" method="post"><button class="secondary" type="submit">Unfollow</button></form>`
+        : `<form action="/users/${profileUser.id}/follow" method="post"><button type="submit">Follow</button></form>`
+    ) : ""}
+  </section>
+  ${include("partials/photos", { photos, commentsByPhoto, currentUser })}
+` }) %>

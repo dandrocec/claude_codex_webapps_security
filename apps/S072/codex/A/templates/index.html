@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}MemberSpace{% endblock %}
+{% block content %}
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Free and premium membership</p>
+      <h1>Useful content for every member tier.</h1>
+      <p class="lead">Create a free account, explore member resources, and unlock the premium library when your account is upgraded.</p>
+      <div class="actions">
+        {% if g.user %}
+          <a class="button" href="{{ url_for('dashboard') }}">Open Dashboard</a>
+        {% else %}
+          <a class="button" href="{{ url_for('register') }}">Join Free</a>
+          <a class="button secondary" href="{{ url_for('login') }}">Sign In</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="tier-panel">
+      <div class="tier">
+        <strong>Free</strong>
+        <span>Member dashboard and public resources</span>
+      </div>
+      <div class="tier premium">
+        <strong>Premium</strong>
+        <span>Premium library, advanced guides, and downloads</span>
+      </div>
+    </div>
+  </section>
+{% endblock %}

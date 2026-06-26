@@ -1,0 +1,35 @@
+<%- include("partials/header", { title: "New quiz" }) %>
+<section class="panel">
+  <h1>New quiz</h1>
+  <form action="/teacher/quizzes" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Title
+      <input name="title" maxlength="120" value="<%= values.title || "" %>" required>
+    </label>
+    <label>Description
+      <textarea name="description" maxlength="500"><%= values.description || "" %></textarea>
+    </label>
+    <% for (let i = 0; i < 5; i += 1) { %>
+      <fieldset>
+        <legend>Question <%= i + 1 %></legend>
+        <label>Prompt
+          <textarea name="question_prompt" maxlength="500"><%= Array.isArray(values.question_prompt) ? (values.question_prompt[i] || "") : "" %></textarea>
+        </label>
+        <% for (let j = 0; j < 4; j += 1) { %>
+          <label>Option <%= j + 1 %>
+            <input name="option_<%= j %>" maxlength="250" value="<%= Array.isArray(values["option_" + j]) ? (values["option_" + j][i] || "") : "" %>">
+          </label>
+        <% } %>
+        <label>Correct answer
+          <select name="correct_answer">
+            <% for (let j = 0; j < 4; j += 1) { %>
+              <option value="<%= j %>" <%= Array.isArray(values.correct_answer) && values.correct_answer[i] === String(j) ? "selected" : "" %>>Option <%= j + 1 %></option>
+            <% } %>
+          </select>
+        </label>
+      </fieldset>
+    <% } %>
+    <button type="submit">Create quiz</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

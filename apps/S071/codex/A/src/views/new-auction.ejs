@@ -1,0 +1,51 @@
+<%- include('partials/header', { title: 'List an Item' }) %>
+
+<section class="form-shell">
+  <div>
+    <p class="eyebrow">Seller tools</p>
+    <h1>List an auction item</h1>
+  </div>
+
+  <% if (errors.length) { %>
+    <div class="alert" role="alert">
+      <% errors.forEach((error) => { %>
+        <p><%= error %></p>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <form class="panel-form" action="/auctions" method="post">
+    <label>
+      <span>Item title</span>
+      <input name="title" value="<%= values.title || '' %>" maxlength="120" required>
+    </label>
+
+    <label>
+      <span>Description</span>
+      <textarea name="description" rows="5" required><%= values.description || '' %></textarea>
+    </label>
+
+    <div class="field-row">
+      <label>
+        <span>Seller name</span>
+        <input name="sellerName" value="<%= values.sellerName || '' %>" maxlength="80" required>
+      </label>
+      <label>
+        <span>Starting price</span>
+        <input name="startingPrice" inputmode="decimal" placeholder="125.00" value="<%= values.startingPrice || '' %>" required>
+      </label>
+    </div>
+
+    <label>
+      <span>End time</span>
+      <input type="datetime-local" name="endTime" value="<%= values.endTime || '' %>" required>
+    </label>
+
+    <div class="actions">
+      <a class="secondary" href="/">Cancel</a>
+      <button class="button" type="submit">Create auction</button>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

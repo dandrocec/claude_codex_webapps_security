@@ -1,0 +1,13 @@
+<%- include("partials/header", { title: "Register" }) %>
+<section class="auth-panel">
+  <h1>Create account</h1>
+  <% if (typeof error !== "undefined" && error) { %><p class="error"><%= error %></p><% } %>
+  <form method="post" action="/register" class="stack">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Username <input name="username" autocomplete="username" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]+" required></label>
+    <label>Password <input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+    <button type="submit">Register</button>
+  </form>
+  <p>Already registered? <a href="/login">Log in</a></p>
+</section>
+<%- include("partials/footer") %>

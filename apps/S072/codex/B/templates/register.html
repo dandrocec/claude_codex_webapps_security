@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<section class="panel narrow">
+  <h1>Create account</h1>
+  <form method="post" action="{{ url_for('register') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Email
+      <input type="email" name="email" maxlength="320" required autocomplete="email">
+    </label>
+    <label>Username
+      <input type="text" name="username" maxlength="40" required autocomplete="username">
+    </label>
+    <label>Password
+      <input type="password" name="password" minlength="12" maxlength="256" required autocomplete="new-password">
+    </label>
+    <button type="submit">Register</button>
+  </form>
+</section>
+{% endblock %}

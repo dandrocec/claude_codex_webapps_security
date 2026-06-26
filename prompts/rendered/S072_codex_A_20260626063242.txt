@@ -1,0 +1,3 @@
+Build a Flask membership site with free and premium tiers. Premium content is accessible only to premium members; an admin can change a user's tier. Show different navigation per tier. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5072.

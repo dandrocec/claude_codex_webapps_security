@@ -1,0 +1,19 @@
+{
+  "name": "codex/php-multi-vendor-marketplace",
+  "description": "Secure PHP multi-vendor marketplace with SQLite storage.",
+  "type": "project",
+  "require": {
+    "php": ">=8.2",
+    "ext-pdo": "*",
+    "ext-pdo_sqlite": "*",
+    "ext-mbstring": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Marketplace\\": "src/"
+    }
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:5074 -t public"
+  }
+}

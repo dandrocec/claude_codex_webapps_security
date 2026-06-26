@@ -1,0 +1,34 @@
+<%- include('partials/header', { title: quiz.title }) %>
+
+<section class="panel">
+  <h1><%= quiz.title %></h1>
+  <% if (quiz.description) { %>
+    <p><%= quiz.description %></p>
+  <% } %>
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/quizzes/<%= quiz.id %>/submissions" method="post">
+    <label>
+      Your name
+      <input name="student_name" required>
+    </label>
+
+    <div class="question-list">
+      <% questions.forEach((question) => { %>
+        <fieldset class="student-question">
+          <legend><%= question.position %>. <%= question.prompt %></legend>
+          <label><input type="radio" name="answer_<%= question.id %>" value="A"> <%= question.option_a %></label>
+          <label><input type="radio" name="answer_<%= question.id %>" value="B"> <%= question.option_b %></label>
+          <label><input type="radio" name="answer_<%= question.id %>" value="C"> <%= question.option_c %></label>
+          <label><input type="radio" name="answer_<%= question.id %>" value="D"> <%= question.option_d %></label>
+        </fieldset>
+      <% }) %>
+    </div>
+
+    <button class="button" type="submit">Submit quiz</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

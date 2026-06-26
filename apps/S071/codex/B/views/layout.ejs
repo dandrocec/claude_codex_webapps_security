@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title || "Auction House" %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Auction House</a>
+    <nav>
+      <% if (user) { %>
+        <a href="/auctions/new">List item</a>
+        <a href="/my-auctions">My auctions</a>
+        <span class="user"><%= user.username %></span>
+        <form action="/logout" method="post" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">
+    <%- body %>
+  </main>
+</body>
+</html>

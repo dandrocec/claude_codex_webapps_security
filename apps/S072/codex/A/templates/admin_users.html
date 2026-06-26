@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Admin Users{% endblock %}
+{% block content %}
+  <section class="page-head">
+    <p class="eyebrow">Admin</p>
+    <h1>User tiers</h1>
+    <p class="lead">Change a member between free and premium access.</p>
+  </section>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Tier</th>
+          <th>Change Tier</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user["name"] }}</td>
+            <td>{{ user["email"] }}</td>
+            <td>{{ "Admin" if user["is_admin"] else "Member" }}</td>
+            <td><span class="pill {{ user['tier'] }}">{{ user["tier"]|title }}</span></td>
+            <td>
+              <form class="inline-form" method="post">
+                <input type="hidden" name="user_id" value="{{ user['id'] }}">
+                <select name="tier" aria-label="Tier for {{ user['email'] }}">
+                  <option value="free" {% if user["tier"] == "free" %}selected{% endif %}>Free</option>
+                  <option value="premium" {% if user["tier"] == "premium" %}selected{% endif %}>Premium</option>
+                </select>
+                <button class="button small" type="submit">Save</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

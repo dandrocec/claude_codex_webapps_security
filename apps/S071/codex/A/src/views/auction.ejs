@@ -1,0 +1,87 @@
+<%- include('partials/header', { title: auction.title }) %>
+
+<section class="detail-layout">
+  <article class="detail-main">
+    <div class="card-head">
+      <span class="status <%= auction.is_ended ? 'ended' : 'live' %>"><%= auction.status_label %></span>
+      <span>Seller: <%= auction.seller_name %></span>
+    </div>
+    <h1><%= auction.title %></h1>
+    <p class="description"><%= auction.description %></p>
+
+    <dl class="facts detail-facts">
+      <div>
+        <dt>Starting price</dt>
+        <dd><%= formatMoney(auction.starting_price_cents) %></dd>
+      </div>
+      <div>
+        <dt>Current price</dt>
+        <dd><%= formatMoney(auction.current_price_cents) %></dd>
+      </div>
+      <div>
+        <dt>End time</dt>
+        <dd><%= formatDate(auction.end_time) %></dd>
+      </div>
+    </dl>
+
+    <% if (auction.is_ended && auction.high_bidder_name) { %>
+      <div class="result-banner">Winner: <strong><%= auction.high_bidder_name %></strong> with <%= formatMoney(auction.high_bid_cents) %></div>
+    <% } else if (auction.is_ended) { %>
+      <div class="result-banner">Auction ended with no bids.</div>
+    <% } %>
+  </article>
+
+  <aside class="bid-panel">
+    <h2><%= auction.is_ended ? 'Auction closed' : 'Place a bid' %></h2>
+
+    <% if (errors.length) { %>
+      <div class="alert" role="alert">
+        <% errors.forEach((error) => { %>
+          <p><%= error %></p>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <% if (!auction.is_ended) { %>
+      <form class="panel-form" action="/auctions/<%= auction.id %>/bids" method="post">
+        <label>
+          <span>Bidder name</span>
+          <input name="bidderName" value="<%= values.bidderName || '' %>" maxlength="80" required>
+        </label>
+        <label>
+          <span>Bid amount</span>
+          <input name="amount" inputmode="decimal" placeholder="<%= ((auction.current_price_cents + 100) / 100).toFixed(2) %>" value="<%= values.amount || '' %>" required>
+        </label>
+        <button class="button full" type="submit">Submit bid</button>
+      </form>
+    <% } %>
+  </aside>
+</section>
+
+<section class="history">
+  <h2>Bid history</h2>
+  <% if (bids.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Bidder</th>
+          <th>Amount</th>
+          <th>Placed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bids.forEach((bid) => { %>
+          <tr>
+            <td><%= bid.bidder_name %></td>
+            <td><%= formatMoney(bid.amount_cents) %></td>
+            <td><%= formatDate(bid.created_at) %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p class="muted">No bids have been placed yet.</p>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

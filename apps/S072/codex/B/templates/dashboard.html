@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Dashboard</h1>
+  <p>Signed in as {{ g.user.username }}. Current tier: <strong>{{ g.user.tier }}</strong>.</p>
+  <div class="grid">
+    <article>
+      <h2>Your note</h2>
+      {% if note %}
+        <p class="note">{{ note.body }}</p>
+      {% else %}
+        <p>No note saved yet.</p>
+      {% endif %}
+      <form method="post" action="{{ url_for('save_note') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label>Private note
+          <textarea name="body" maxlength="500" rows="5" required></textarea>
+        </label>
+        <button type="submit">Save note</button>
+      </form>
+    </article>
+    <article>
+      <h2>Tier navigation</h2>
+      <p>Your navigation only shows areas available to your membership tier.</p>
+      <a class="button secondary" href="{{ url_for('free_content') }}">Open free content</a>
+      {% if g.user.tier in ["premium", "admin"] %}
+        <a class="button secondary" href="{{ url_for('premium_content') }}">Open premium content</a>
+      {% endif %}
+    </article>
+  </div>
+</section>
+{% endblock %}

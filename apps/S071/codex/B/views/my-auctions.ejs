@@ -1,0 +1,21 @@
+<%- include("partials/header", { title: "My auctions" }) %>
+<section class="page-head">
+  <h1>My auctions</h1>
+  <a class="button" href="/auctions/new">List item</a>
+</section>
+<% if (auctions.length === 0) { %>
+  <p class="empty">You have not listed any items.</p>
+<% } %>
+<div class="grid">
+  <% auctions.forEach(auction => { %>
+    <article class="card">
+      <h2><a href="/auctions/<%= auction.id %>"><%= auction.title %></a></h2>
+      <p>Current price: <strong><%= money(auction.current_price_cents) %></strong></p>
+      <p class="<%= isEnded(auction.end_time) ? "ended" : "active" %>">
+        <%= isEnded(auction.end_time) ? "Ended" : "Ends" %>:
+        <time datetime="<%= auction.end_time %>"><%= new Date(auction.end_time).toLocaleString() %></time>
+      </p>
+    </article>
+  <% }) %>
+</div>
+<%- include("partials/footer") %>
