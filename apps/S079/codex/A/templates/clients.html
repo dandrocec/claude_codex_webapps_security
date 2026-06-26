@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Clients{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">Clients</p>
+    <h1>Your clients</h1>
+  </div>
+  <a class="button" href="{{ url_for('client_new') }}">New client</a>
+</div>
+
+<section class="panel">
+  <table>
+    <thead><tr><th>Name</th><th>Email</th><th>Tax ID</th><th></th></tr></thead>
+    <tbody>
+      {% for client in clients %}
+        <tr>
+          <td>{{ client.name }}</td>
+          <td>{{ client.email or "-" }}</td>
+          <td>{{ client.tax_id or "-" }}</td>
+          <td class="right"><a href="{{ url_for('client_edit', client_id=client.id) }}">Edit</a></td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" class="empty">No clients yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

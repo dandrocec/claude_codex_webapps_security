@@ -1,0 +1,27 @@
+<%- include("partials/header", { title: "Users" }) %>
+<section class="section-heading">
+  <div>
+    <h1>Users</h1>
+    <p>Current staff accounts and roles.</p>
+  </div>
+</section>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach((staff) => { %>
+      <tr>
+        <td><%= staff.id %></td>
+        <td><%= staff.username %></td>
+        <td><span class="pill"><%= staff.role %></span></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<%- include("partials/footer") %>

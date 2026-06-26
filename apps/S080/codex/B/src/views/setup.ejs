@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<section class="panel narrow">
+  <h1>Create initial manager</h1>
+  <% if (errors.length) { %>
+    <ul class="errors">
+      <% errors.forEach((error) => { %><li><%= error %></li><% }) %>
+    </ul>
+  <% } %>
+  <form method="post" action="/setup">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Username
+      <input name="username" autocomplete="username" required minlength="3" maxlength="40">
+    </label>
+    <label>Password
+      <input name="password" type="password" autocomplete="new-password" required minlength="12" maxlength="128">
+    </label>
+    <button type="submit">Create manager</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

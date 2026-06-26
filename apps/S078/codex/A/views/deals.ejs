@@ -1,0 +1,70 @@
+<%- include("partials/start", { title }) %>
+<section class="page-head">
+  <div>
+    <h1>Deals</h1>
+    <p>Create, edit, and assign pipeline opportunities.</p>
+  </div>
+  <a class="button" href="/board">View board</a>
+</section>
+
+<section class="split">
+  <form method="post" action="/deals" class="panel stack">
+    <h2>Add deal</h2>
+    <% if (currentUser.role === "manager") { %>
+      <label>Owner
+        <select name="owner_id"><% users.forEach((user) => { %><option value="<%= user.id %>"><%= user.name %></option><% }) %></select>
+      </label>
+    <% } else { %><input type="hidden" name="owner_id" value="<%= currentUser.id %>"><% } %>
+    <label>Contact
+      <select name="contact_id">
+        <option value="">No contact</option>
+        <% contacts.forEach((contact) => { %><option value="<%= contact.id %>"><%= contact.label %></option><% }) %>
+      </select>
+    </label>
+    <label>Title <input name="title" required></label>
+    <label>Value <input name="value" type="number" min="0" step="100" value="0"></label>
+    <label>Stage
+      <select name="stage"><% stages.forEach((stage) => { %><option value="<%= stage %>"><%= stage %></option><% }) %></select>
+    </label>
+    <label>Close date <input name="close_date" type="date"></label>
+    <label>Notes <textarea name="notes"></textarea></label>
+    <button type="submit">Create deal</button>
+  </form>
+
+  <div class="list">
+    <% deals.forEach((deal) => { %>
+      <details class="row-card">
+        <summary>
+          <strong><%= deal.title %></strong>
+          <span>$<%= Number(deal.value || 0).toLocaleString() %> · <%= deal.stage %></span>
+          <small><%= deal.owner_name %></small>
+        </summary>
+        <form method="post" action="/deals/<%= deal.id %>" class="grid-form">
+          <% if (currentUser.role === "manager") { %>
+            <label>Owner
+              <select name="owner_id"><% users.forEach((user) => { %><option value="<%= user.id %>" <%= user.id === deal.owner_id ? "selected" : "" %>><%= user.name %></option><% }) %></select>
+            </label>
+          <% } else { %><input type="hidden" name="owner_id" value="<%= currentUser.id %>"><% } %>
+          <label>Contact
+            <select name="contact_id">
+              <option value="">No contact</option>
+              <% contacts.forEach((contact) => { %><option value="<%= contact.id %>" <%= contact.id === deal.contact_id ? "selected" : "" %>><%= contact.label %></option><% }) %>
+            </select>
+          </label>
+          <label>Title <input name="title" value="<%= deal.title %>" required></label>
+          <label>Value <input name="value" type="number" min="0" step="100" value="<%= deal.value %>"></label>
+          <label>Stage
+            <select name="stage"><% stages.forEach((stage) => { %><option value="<%= stage %>" <%= stage === deal.stage ? "selected" : "" %>><%= stage %></option><% }) %></select>
+          </label>
+          <label>Close date <input name="close_date" type="date" value="<%= deal.close_date || "" %>"></label>
+          <label class="wide">Notes <textarea name="notes"><%= deal.notes || "" %></textarea></label>
+          <button type="submit">Save</button>
+        </form>
+        <form method="post" action="/deals/<%= deal.id %>?_method=DELETE">
+          <button type="submit" class="danger">Delete</button>
+        </form>
+      </details>
+    <% }) %>
+  </div>
+</section>
+<%- include("partials/end") %>

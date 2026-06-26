@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title || "Express Room Chat" %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/rooms">Room Chat</a>
+    <% if (currentUser) { %>
+      <div class="account">
+        <span><%= currentUser.username %></span>
+        <form method="post" action="/logout">
+          <button type="submit" class="ghost">Log out</button>
+        </form>
+      </div>
+    <% } %>
+  </header>
+  <main class="shell">

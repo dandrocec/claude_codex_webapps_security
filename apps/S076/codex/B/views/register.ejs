@@ -1,0 +1,18 @@
+<%- include("partials/header") %>
+<section class="panel narrow">
+  <h1>Register</h1>
+  <form method="post" action="/register" autocomplete="on">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Username
+      <input name="username" type="text" minlength="3" maxlength="30" pattern="[A-Za-z0-9_]+" required autocomplete="username">
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" minlength="12" maxlength="128" required autocomplete="new-password">
+    </label>
+    <button type="submit">Create account</button>
+  </form>
+  <p class="muted">Already registered? <a href="/login">Sign in</a></p>
+</section>
+<%- include("partials/footer") %>

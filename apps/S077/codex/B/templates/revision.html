@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Revision {{ revision.revision_number }} - Flask Wiki{% endblock %}
+{% block content %}
+  <article class="panel">
+    <div class="page-head">
+      <div>
+        <h1>{{ revision.title }}</h1>
+        <p class="meta">Revision {{ revision.revision_number }} by {{ revision.edited_by_name }} on {{ revision.edited_at }}</p>
+      </div>
+      <a href="{{ url_for('history', slug=page.slug) }}">Back to history</a>
+    </div>
+    <pre class="wiki-content">{{ revision.content }}</pre>
+    {% if current_user() and current_user().role == "editor" %}
+      <form method="post" action="{{ url_for('restore_revision', slug=page.slug, revision_id=revision.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit">Restore this revision</button>
+      </form>
+    {% endif %}
+  </article>
+{% endblock %}

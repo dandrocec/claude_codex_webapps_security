@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+<section class="section-head">
+  <div>
+    <h1>Pipeline</h1>
+    <p><%= user.role === 'manager' ? 'Full team board' : 'Your active deals' %></p>
+  </div>
+  <a class="button" href="/deals/new">New deal</a>
+</section>
+<section class="board">
+  <% stages.forEach(function(stage) { %>
+    <div class="lane">
+      <h2><%= stage %></h2>
+      <% byStage[stage].forEach(function(deal) { %>
+        <article class="deal">
+          <div class="deal-top">
+            <strong><%= deal.title %></strong>
+            <span>$<%= money(deal.value_cents) %></span>
+          </div>
+          <p><%= deal.contact_name || 'No contact' %></p>
+          <p>Owner: <%= deal.owner_name %></p>
+          <div class="deal-actions">
+            <a href="/deals/<%= deal.id %>/edit">Edit</a>
+            <form method="post" action="/deals/<%= deal.id %>/stage">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <select name="stage">
+                <% stages.forEach(function(nextStage) { %>
+                  <option value="<%= nextStage %>" <%= nextStage === deal.stage ? 'selected' : '' %>><%= nextStage %></option>
+                <% }) %>
+              </select>
+              <button type="submit">Move</button>
+            </form>
+            <form method="post" action="/deals/<%= deal.id %>/delete">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit">Delete</button>
+            </form>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  <% }) %>
+</section>
+<%- include('partials/footer') %>

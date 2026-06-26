@@ -1,0 +1,45 @@
+<%- include("partials/header") %>
+<section class="grid">
+  <div class="panel">
+    <h1>Rooms</h1>
+    <% if (!rooms.length) { %>
+      <p class="muted">No rooms have been created yet.</p>
+    <% } %>
+    <div class="room-list">
+      <% rooms.forEach(function(room) { %>
+        <article class="room-card">
+          <div>
+            <h2><%= room.name %></h2>
+            <% if (room.description) { %><p><%= room.description %></p><% } %>
+            <small>Created by <%= room.owner_name %></small>
+          </div>
+          <% if (room.joined) { %>
+            <a class="button" href="/rooms/<%= room.id %>">Open</a>
+          <% } else { %>
+            <form method="post" action="/rooms/<%= room.id %>/join">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit">Join</button>
+            </form>
+          <% } %>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+
+  <aside class="panel">
+    <h2>Create room</h2>
+    <form method="post" action="/rooms">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>
+        Name
+        <input name="name" type="text" minlength="2" maxlength="60" required>
+      </label>
+      <label>
+        Description
+        <textarea name="description" maxlength="240" rows="4"></textarea>
+      </label>
+      <button type="submit">Create</button>
+    </form>
+  </aside>
+</section>
+<%- include("partials/footer") %>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Revision #{{ revision.id }} · {{ page.title }}{% endblock %}
+
+{% block content %}
+  <article>
+    <section class="page-head">
+      <div>
+        <h1>{{ revision.title }}</h1>
+        <p>
+          Revision #{{ revision.id }} by {{ revision.author }} on {{ revision.created_at }}
+          {% if revision.restored_from_revision_id %}
+            · restored from #{{ revision.restored_from_revision_id }}
+          {% endif %}
+          {% if revision.editor_only %}<span class="badge inline">Editor-only</span>{% endif %}
+        </p>
+      </div>
+      <div class="actions">
+        <a class="button secondary" href="{{ url_for('history', slug=page.slug) }}">Back to history</a>
+        {% if is_editor %}
+          <form method="post" action="{{ url_for('restore_revision', slug=page.slug, revision_id=revision.id) }}">
+            <button type="submit">Restore</button>
+          </form>
+        {% endif %}
+      </div>
+    </section>
+
+    {% if revision.note %}
+      <p class="note">{{ revision.note }}</p>
+    {% endif %}
+    <div class="wiki-body">{{ revision.body }}</div>
+  </article>
+{% endblock %}

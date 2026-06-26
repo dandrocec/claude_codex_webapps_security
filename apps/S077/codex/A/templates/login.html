@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Sign in · Wiki{% endblock %}
+
+{% block content %}
+  <section class="narrow">
+    <h1>Sign in</h1>
+    <form method="post" class="form">
+      <label>
+        Display name
+        <input name="name" value="{{ current_user.name if current_user.name != 'Guest' else '' }}" placeholder="Ada">
+      </label>
+      <label>
+        Role
+        <select name="role">
+          <option value="viewer" {% if current_user.role == "viewer" %}selected{% endif %}>Viewer</option>
+          <option value="editor" {% if current_user.role == "editor" %}selected{% endif %}>Editor</option>
+        </select>
+      </label>
+      <button type="submit">Sign in</button>
+    </form>
+  </section>
+{% endblock %}

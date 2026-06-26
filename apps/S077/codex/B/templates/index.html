@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Pages - Flask Wiki{% endblock %}
+{% block content %}
+  <section class="panel">
+    <h1>Pages</h1>
+    {% if pages %}
+      <ul class="page-list">
+        {% for page in pages %}
+          <li>
+            <a href="{{ url_for('view_page', slug=page.slug) }}">{{ page.title }}</a>
+            {% if page.editor_only %}<span class="badge">editor-only</span>{% endif %}
+            <small>Updated {{ page.updated_at }} by {{ page.updated_by_name }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No pages are available.</p>
+    {% endif %}
+  </section>
+{% endblock %}

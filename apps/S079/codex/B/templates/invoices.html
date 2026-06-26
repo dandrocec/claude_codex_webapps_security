@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topline">
+  <h1>Invoices</h1>
+  <a class="button" href="{{ url_for('invoice_new') }}">New invoice</a>
+</div>
+<section class="panel">
+  {% if invoice_rows %}
+    <table>
+      <thead><tr><th>Number</th><th>Client</th><th>Issued</th><th>Total</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for invoice, totals in invoice_rows %}
+          <tr>
+            <td>{{ invoice.invoice_number }}</td>
+            <td>{{ invoice.client_name }}</td>
+            <td>{{ invoice.issue_date }}</td>
+            <td>{{ "%.2f"|format(totals.total) }}</td>
+            <td class="actions">
+              <a class="button secondary" href="{{ url_for('invoice_print', invoice_id=invoice.id) }}">Print</a>
+              <a class="button secondary" href="{{ url_for('invoice_edit', invoice_id=invoice.id) }}">Edit</a>
+              <form class="inline" method="post" action="{{ url_for('invoice_delete', invoice_id=invoice.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="muted">No invoices yet. Create a client first, then add an invoice.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">Dashboard</p>
+    <h1>Invoice overview</h1>
+  </div>
+  <a class="button" href="{{ url_for('invoice_new') }}">New invoice</a>
+</div>
+
+<section class="stats">
+  <article><span>Total billed</span><strong>{{ stats.total_cents|money }}</strong></article>
+  <article><span>Paid</span><strong>{{ stats.paid_cents|money }}</strong></article>
+  <article><span>Invoices</span><strong>{{ stats.invoice_count }}</strong></article>
+  <article><span>Clients</span><strong>{{ client_count }}</strong></article>
+</section>
+
+<section class="panel">
+  <div class="section-heading">
+    <h2>Recent invoices</h2>
+    <a href="{{ url_for('invoices') }}">View all</a>
+  </div>
+  {% include "_invoice_table.html" %}
+</section>
+{% endblock %}

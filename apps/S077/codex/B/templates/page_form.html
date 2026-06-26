@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{% if page %}Edit {{ page.title }}{% else %}New page{% endif %} - Flask Wiki{% endblock %}
+{% block content %}
+  <section class="panel">
+    <h1>{% if page %}Edit {{ page.title }}{% else %}New page{% endif %}</h1>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Title
+        <input name="title" required maxlength="80" pattern="[A-Za-z0-9][A-Za-z0-9 _.\-]{0,79}" value="{{ page.title if page else '' }}">
+      </label>
+      <label>Content
+        <textarea name="content" rows="18" maxlength="100000">{{ page.content if page else '' }}</textarea>
+      </label>
+      <label class="check">
+        <input type="checkbox" name="editor_only" {% if page and page.editor_only %}checked{% endif %}>
+        Editor-only page
+      </label>
+      <label>Edit summary
+        <input name="summary" maxlength="200">
+      </label>
+      <button type="submit">Save page</button>
+    </form>
+  </section>
+{% endblock %}

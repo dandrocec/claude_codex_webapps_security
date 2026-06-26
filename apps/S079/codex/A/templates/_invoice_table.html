@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr><th>Number</th><th>Client</th><th>Issued</th><th>Status</th><th>Total</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for invoice in invoices %}
+      <tr>
+        <td>{{ invoice.invoice_number }}</td>
+        <td>{{ invoice.client_name }}</td>
+        <td>{{ invoice.issue_date }}</td>
+        <td><span class="pill">{{ invoice.status }}</span></td>
+        <td>{{ invoice.total_cents|money }}</td>
+        <td class="right">
+          <a href="{{ url_for('invoice_print', invoice_id=invoice.id) }}">Print</a>
+          <a href="{{ url_for('invoice_edit', invoice_id=invoice.id) }}">Edit</a>
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6" class="empty">No invoices yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>

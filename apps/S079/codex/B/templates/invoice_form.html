@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+  <h1>{{ "Edit invoice" if invoice else "New invoice" }}</h1>
+  {% if not clients %}
+    <p>Create a client before adding invoices.</p>
+    <a class="button" href="{{ url_for('client_new') }}">New client</a>
+  {% else %}
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="grid">
+        <div>
+          <label for="client_id">Client</label>
+          <select id="client_id" name="client_id" required>
+            {% for client in clients %}
+              <option value="{{ client.id }}" {% if invoice and invoice.client_id == client.id %}selected{% endif %}>{{ client.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="invoice_number">Invoice number</label>
+          <input id="invoice_number" name="invoice_number" required maxlength="40" value="{{ invoice.invoice_number if invoice else '' }}">
+        </div>
+        <div>
+          <label for="issue_date">Issue date</label>
+          <input id="issue_date" name="issue_date" type="date" required value="{{ invoice.issue_date if invoice else '' }}">
+        </div>
+        <div>
+          <label for="due_date">Due date</label>
+          <input id="due_date" name="due_date" type="date" value="{{ invoice.due_date if invoice else '' }}">
+        </div>
+        <div>
+          <label for="tax_rate">Tax rate (%)</label>
+          <input id="tax_rate" name="tax_rate" inputmode="decimal" required value="{{ invoice.tax_rate if invoice else '0.00' }}">
+        </div>
+      </div>
+      <h2>Line items</h2>
+      {% for item in items %}
+        <div class="line-grid">
+          <div>
+            <label>Description</label>
+            <input name="description" maxlength="200" value="{{ item.description or '' }}">
+          </div>
+          <div>
+            <label>Quantity</label>
+            <input name="quantity" inputmode="decimal" value="{{ item.quantity or '1.00' }}">
+          </div>
+          <div>
+            <label>Unit price</label>
+            <input name="unit_price" inputmode="decimal" value="{{ item.unit_price or '0.00' }}">
+          </div>
+        </div>
+      {% endfor %}
+      {% for _ in range(4 - items|length) %}
+        <div class="line-grid">
+          <div><label>Description</label><input name="description" maxlength="200"></div>
+          <div><label>Quantity</label><input name="quantity" inputmode="decimal" value="1.00"></div>
+          <div><label>Unit price</label><input name="unit_price" inputmode="decimal" value="0.00"></div>
+        </div>
+      {% endfor %}
+      <label for="notes">Notes</label>
+      <textarea id="notes" name="notes" maxlength="1000">{{ invoice.notes if invoice else '' }}</textarea>
+      <p class="actions">
+        <button type="submit">Save invoice</button>
+        <a class="button secondary" href="{{ url_for('invoices') }}">Cancel</a>
+      </p>
+    </form>
+  {% endif %}
+</section>
+{% endblock %}

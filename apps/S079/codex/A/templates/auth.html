@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ "Register" if mode == "register" else "Sign in" }}{% endblock %}
+{% block content %}
+<section class="panel narrow">
+  <h1>{{ "Create account" if mode == "register" else "Sign in" }}</h1>
+  <form method="post" class="stack">
+    <label>Email
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+    <label>Password
+      <input type="password" name="password" required autocomplete="{{ 'new-password' if mode == 'register' else 'current-password' }}">
+    </label>
+    <button class="button" type="submit">{{ "Register" if mode == "register" else "Sign in" }}</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,51 @@
+<%- include("partials/header", { title: "Orders" }) %>
+<section class="section-heading">
+  <div>
+    <h1>Orders</h1>
+    <p>Rejected orders do not decrement stock.</p>
+  </div>
+  <a class="button" href="/orders/new">New order</a>
+</section>
+
+<% if (orders.length === 0) { %>
+  <p class="muted">No orders have been processed.</p>
+<% } %>
+
+<div class="orders">
+  <% orders.forEach((order) => { %>
+    <article class="order-card">
+      <div class="order-card-header">
+        <h2>Order #<%= order.id %></h2>
+        <span class="pill <%= order.status === "fulfilled" ? "ok" : "danger" %>"><%= order.status %></span>
+      </div>
+      <p class="muted">Processed by <%= order.username %> on <%= order.created_at %></p>
+      <% if (order.note) { %><p><%= order.note %></p><% } %>
+      <% const items = itemsByOrder[order.id] || []; %>
+      <% if (items.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>SKU</th>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Before</th>
+              <th>After</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% items.forEach((item) => { %>
+              <tr>
+                <td><%= item.sku %></td>
+                <td><%= item.name %></td>
+                <td><%= item.quantity %></td>
+                <td><%= item.stock_before %></td>
+                <td><%= item.stock_after %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } %>
+    </article>
+  <% }) %>
+</div>
+<%- include("partials/footer") %>

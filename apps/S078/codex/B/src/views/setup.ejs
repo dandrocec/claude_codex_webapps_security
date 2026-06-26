@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+<section class="auth">
+  <h1>Create manager account</h1>
+  <%- include('partials/errors') %>
+  <form method="post" action="/setup" class="panel">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Name <input name="name" maxlength="80" required value="<%= form.name || '' %>"></label>
+    <label>Email <input name="email" type="email" required value="<%= form.email || '' %>"></label>
+    <label>Password <input name="password" type="password" minlength="12" required></label>
+    <button type="submit">Create account</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

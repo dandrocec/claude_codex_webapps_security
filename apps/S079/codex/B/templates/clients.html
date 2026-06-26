@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="topline">
+  <h1>Clients</h1>
+  <a class="button" href="{{ url_for('client_new') }}">New client</a>
+</div>
+<section class="panel">
+  {% if clients %}
+    <table>
+      <thead><tr><th>Name</th><th>Email</th><th>Address</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for client in clients %}
+          <tr>
+            <td>{{ client.name }}</td>
+            <td>{{ client.email or "" }}</td>
+            <td>{{ client.address or "" }}</td>
+            <td class="actions">
+              <a class="button secondary" href="{{ url_for('client_edit', client_id=client.id) }}">Edit</a>
+              <form class="inline" method="post" action="{{ url_for('client_delete', client_id=client.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="muted">No clients yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

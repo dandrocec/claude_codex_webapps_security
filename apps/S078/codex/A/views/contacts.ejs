@@ -1,0 +1,61 @@
+<%- include("partials/start", { title }) %>
+<section class="page-head">
+  <div>
+    <h1>Contacts</h1>
+    <p><%= currentUser.role === "manager" ? "Team contact database" : "Your contact database" %></p>
+  </div>
+  <form method="get" class="search">
+    <input name="q" value="<%= q %>" placeholder="Search contacts">
+    <button type="submit" class="ghost">Search</button>
+  </form>
+</section>
+
+<section class="split">
+  <form method="post" action="/contacts" class="panel stack">
+    <h2>Add contact</h2>
+    <% if (currentUser.role === "manager") { %>
+      <label>Owner
+        <select name="owner_id"><% users.forEach((user) => { %><option value="<%= user.id %>"><%= user.name %></option><% }) %></select>
+      </label>
+    <% } else { %>
+      <input type="hidden" name="owner_id" value="<%= currentUser.id %>">
+    <% } %>
+    <label>First name <input name="first_name" required></label>
+    <label>Last name <input name="last_name" required></label>
+    <label>Company <input name="company" required></label>
+    <label>Email <input name="email" type="email"></label>
+    <label>Phone <input name="phone"></label>
+    <label>Notes <textarea name="notes"></textarea></label>
+    <button type="submit">Create contact</button>
+  </form>
+
+  <div class="list">
+    <% contacts.forEach((contact) => { %>
+      <details class="row-card">
+        <summary>
+          <strong><%= contact.first_name %> <%= contact.last_name %></strong>
+          <span><%= contact.company %></span>
+          <small><%= contact.owner_name %></small>
+        </summary>
+        <form method="post" action="/contacts/<%= contact.id %>" class="grid-form">
+          <% if (currentUser.role === "manager") { %>
+            <label>Owner
+              <select name="owner_id"><% users.forEach((user) => { %><option value="<%= user.id %>" <%= user.id === contact.owner_id ? "selected" : "" %>><%= user.name %></option><% }) %></select>
+            </label>
+          <% } else { %><input type="hidden" name="owner_id" value="<%= currentUser.id %>"><% } %>
+          <label>First name <input name="first_name" value="<%= contact.first_name %>" required></label>
+          <label>Last name <input name="last_name" value="<%= contact.last_name %>" required></label>
+          <label>Company <input name="company" value="<%= contact.company %>" required></label>
+          <label>Email <input name="email" type="email" value="<%= contact.email || "" %>"></label>
+          <label>Phone <input name="phone" value="<%= contact.phone || "" %>"></label>
+          <label class="wide">Notes <textarea name="notes"><%= contact.notes || "" %></textarea></label>
+          <button type="submit">Save</button>
+        </form>
+        <form method="post" action="/contacts/<%= contact.id %>?_method=DELETE">
+          <button type="submit" class="danger">Delete</button>
+        </form>
+      </details>
+    <% }) %>
+  </div>
+</section>
+<%- include("partials/end") %>

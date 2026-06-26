@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoice {{ invoice.invoice_number }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="print-body">
+  <main class="invoice-page">
+    <div class="print-actions">
+      <a href="{{ url_for('invoices') }}">Back</a>
+      <a href="{{ url_for('invoice_edit', invoice_id=invoice.id) }}">Edit</a>
+      <button onclick="window.print()">Print</button>
+    </div>
+    <header class="invoice-header">
+      <div>
+        <p class="eyebrow">Invoice</p>
+        <h1>{{ invoice.invoice_number }}</h1>
+      </div>
+      <div class="invoice-meta">
+        <p><strong>Issued:</strong> {{ invoice.issue_date }}</p>
+        <p><strong>Due:</strong> {{ invoice.due_date or "-" }}</p>
+        <p><strong>Status:</strong> {{ invoice.status.title() }}</p>
+      </div>
+    </header>
+
+    <section class="bill-to">
+      <p class="eyebrow">Bill to</p>
+      <h2>{{ client.name }}</h2>
+      <p>{{ client.email }}</p>
+      <p>{{ client.address|replace('\n', '<br>')|safe }}</p>
+      {% if client.tax_id %}<p>Tax ID: {{ client.tax_id }}</p>{% endif %}
+    </section>
+
+    <table class="print-table">
+      <thead><tr><th>Description</th><th>Qty</th><th>Unit</th><th>Total</th></tr></thead>
+      <tbody>
+        {% for line in lines %}
+          <tr>
+            <td>{{ line.description }}</td>
+            <td>{{ line.quantity }}</td>
+            <td>{{ line.unit_price_cents|money }}</td>
+            <td>{{ line.line_total_cents|money }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <section class="totals">
+      <p><span>Subtotal</span><strong>{{ invoice.subtotal_cents|money }}</strong></p>
+      <p><span>Tax {{ invoice.tax_rate }}%</span><strong>{{ invoice.tax_cents|money }}</strong></p>
+      <p class="grand"><span>Total</span><strong>{{ invoice.total_cents|money }}</strong></p>
+    </section>
+
+    {% if invoice.notes %}
+      <section class="notes">
+        <p class="eyebrow">Notes</p>
+        <p>{{ invoice.notes }}</p>
+      </section>
+    {% endif %}
+  </main>
+</body>
+</html>

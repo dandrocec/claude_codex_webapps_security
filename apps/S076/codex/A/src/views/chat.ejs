@@ -1,0 +1,32 @@
+<%- include("partials/head", { title: room.name }) %>
+<section class="chat-view" data-room-id="<%= room.id %>">
+  <div class="chat-header">
+    <div>
+      <a class="back-link" href="/rooms">Rooms</a>
+      <h1><%= room.name %></h1>
+      <p><%= room.description || "Created by " + room.creator %></p>
+    </div>
+  </div>
+
+  <ol id="messages" class="messages">
+    <% messages.forEach((message) => { %>
+      <li class="message">
+        <div class="message-meta">
+          <strong><%= message.username %></strong>
+          <time datetime="<%= message.created_at %>"><%= message.created_at %></time>
+        </div>
+        <p><%= message.body %></p>
+      </li>
+    <% }) %>
+  </ol>
+
+  <form id="message-form" class="composer">
+    <input id="message-input" name="body" maxlength="1000" autocomplete="off" placeholder="Write a message" required>
+    <button type="submit">Send</button>
+  </form>
+  <p id="socket-error" class="inline-error" role="status"></p>
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/chat.js"></script>
+<%- include("partials/foot") %>

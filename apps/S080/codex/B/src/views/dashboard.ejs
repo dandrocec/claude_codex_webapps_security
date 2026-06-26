@@ -1,0 +1,90 @@
+<%- include('partials/header') %>
+<section class="heading">
+  <div>
+    <h1>Stock</h1>
+    <p>Signed in as <%= currentUser.username %> (<%= currentUser.role %>)</p>
+  </div>
+</section>
+
+<% if (errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach((error) => { %><li><%= error %></li><% }) %>
+  </ul>
+<% } %>
+
+<section class="grid">
+  <div class="panel">
+    <h2>Inventory</h2>
+    <% if (currentUser.role === 'manager') { %>
+      <form method="post" action="/items" class="row-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input name="sku" placeholder="SKU" required maxlength="40">
+        <input name="name" placeholder="Item name" required maxlength="120">
+        <input name="quantity" type="number" min="0" max="1000000" required placeholder="Qty">
+        <button type="submit">Add</button>
+      </form>
+    <% } %>
+    <table>
+      <thead>
+        <tr><th>SKU</th><th>Name</th><th>Qty</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% items.forEach((item) => { %>
+          <tr>
+            <td><%= item.sku %></td>
+            <td><%= item.name %></td>
+            <td><%= item.quantity %></td>
+            <td>
+              <% if (currentUser.role === 'manager') { %>
+                <form method="post" action="/items/<%= item.id %>" class="inline edit-stock">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <input name="quantity" type="number" min="0" max="1000000" value="<%= item.quantity %>" required>
+                  <button type="submit">Update</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2>Fulfill order</h2>
+    <form method="post" action="/orders">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Item
+        <select name="itemId" required>
+          <% items.forEach((item) => { %>
+            <option value="<%= item.id %>"><%= item.sku %> - <%= item.name %> (<%= item.quantity %> available)</option>
+          <% }) %>
+        </select>
+      </label>
+      <label>Quantity
+        <input name="quantity" type="number" min="1" max="1000000" required>
+      </label>
+      <button type="submit" <%= items.length ? '' : 'disabled' %>>Fulfill</button>
+    </form>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Recent orders</h2>
+  <table>
+    <thead>
+      <tr><th>Order</th><th>Created</th><th>User</th><th>Item</th><th>Qty</th></tr>
+    </thead>
+    <tbody>
+      <% orders.forEach((order) => { %>
+        <tr>
+          <td><a href="/orders/<%= order.id %>">#<%= order.id %></a></td>
+          <td><%= order.created_at %></td>
+          <td><%= order.username %></td>
+          <td><%= order.sku %> - <%= order.name %></td>
+          <td><%= order.quantity %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include('partials/footer') %>

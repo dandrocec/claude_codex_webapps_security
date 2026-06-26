@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+<section class="narrow">
+  <h1><%= deal ? 'Edit deal' : 'New deal' %></h1>
+  <%- include('partials/errors') %>
+  <form method="post" action="<%= deal ? '/deals/' + deal.id : '/deals' %>" class="panel">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% if (user.role === 'manager') { %>
+      <label>Owner
+        <select name="owner_id" required>
+          <% users.forEach(function(owner) { %>
+            <option value="<%= owner.id %>" <%= Number(form.owner_id) === owner.id ? 'selected' : '' %>><%= owner.name %></option>
+          <% }) %>
+        </select>
+      </label>
+    <% } %>
+    <label>Title <input name="title" maxlength="120" required value="<%= form.title || '' %>"></label>
+    <label>Contact
+      <select name="contact_id">
+        <option value="">No contact</option>
+        <% contacts.forEach(function(contact) { %>
+          <option value="<%= contact.id %>" <%= Number(form.contact_id) === contact.id ? 'selected' : '' %>><%= contact.name %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Value <input name="value" type="number" step="0.01" min="0" value="<%= form.value || '0.00' %>"></label>
+    <label>Stage
+      <select name="stage" required>
+        <% stages.forEach(function(stage) { %>
+          <option value="<%= stage %>" <%= form.stage === stage ? 'selected' : '' %>><%= stage %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Expected close <input name="expected_close" type="date" value="<%= form.expected_close || '' %>"></label>
+    <label>Notes <textarea name="notes" maxlength="1000"><%= form.notes || '' %></textarea></label>
+    <button type="submit">Save deal</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

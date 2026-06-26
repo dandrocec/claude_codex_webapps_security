@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} · Wiki{% endblock %}
+
+{% block content %}
+  <article>
+    <section class="page-head">
+      <div>
+        <h1>{{ page.title }}</h1>
+        <p>
+          Revision #{{ revision.id }} by {{ revision.author }} on {{ revision.created_at }}
+          {% if page.editor_only %}<span class="badge inline">Editor-only</span>{% endif %}
+        </p>
+      </div>
+      <div class="actions">
+        <a class="button secondary" href="{{ url_for('history', slug=page.slug) }}">History</a>
+        {% if is_editor %}
+          <a class="button" href="{{ url_for('edit_page', slug=page.slug) }}">Edit</a>
+        {% endif %}
+      </div>
+    </section>
+
+    <div class="wiki-body">{{ revision.body }}</div>
+  </article>
+{% endblock %}

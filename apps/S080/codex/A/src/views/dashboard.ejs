@@ -1,0 +1,77 @@
+<%- include("partials/header", { title: "Inventory" }) %>
+<section class="section-heading">
+  <div>
+    <h1>Inventory</h1>
+    <p>Track quantities and spot items at or below reorder level.</p>
+  </div>
+  <a class="button" href="/orders/new">Process order</a>
+</section>
+
+<table>
+  <thead>
+    <tr>
+      <th>SKU</th>
+      <th>Product</th>
+      <th>Available</th>
+      <th>Reorder level</th>
+      <th>Status</th>
+      <% if (user.role === "manager") { %><th>Manager controls</th><% } %>
+    </tr>
+  </thead>
+  <tbody>
+    <% products.forEach((product) => { %>
+      <tr>
+        <td><%= product.sku %></td>
+        <td><%= product.name %></td>
+        <td><strong><%= product.quantity %></strong></td>
+        <td><%= product.reorder_level %></td>
+        <td>
+          <% if (product.quantity <= product.reorder_level) { %>
+            <span class="pill warning">Reorder</span>
+          <% } else { %>
+            <span class="pill ok">Stocked</span>
+          <% } %>
+        </td>
+        <% if (user.role === "manager") { %>
+          <td>
+            <form method="post" action="/products/<%= product.id %>/adjust" class="inline-form">
+              <input type="number" min="0" name="quantity" value="<%= product.quantity %>" aria-label="Quantity">
+              <input type="number" min="0" name="reorder_level" value="<%= product.reorder_level %>" aria-label="Reorder level">
+              <button type="submit">Update</button>
+            </form>
+          </td>
+        <% } %>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<% if (user.role === "manager") { %>
+  <section class="panel">
+    <h2>Add product</h2>
+    <form method="post" action="/products" class="grid-form">
+      <label>SKU<input name="sku" required></label>
+      <label>Name<input name="name" required></label>
+      <label>Quantity<input type="number" min="0" name="quantity" value="0" required></label>
+      <label>Reorder level<input type="number" min="0" name="reorder_level" value="0" required></label>
+      <button type="submit">Create product</button>
+    </form>
+  </section>
+<% } %>
+
+<section class="panel">
+  <h2>Recent orders</h2>
+  <% if (recentOrders.length === 0) { %>
+    <p class="muted">No orders yet.</p>
+  <% } else { %>
+    <ul class="order-list">
+      <% recentOrders.forEach((order) => { %>
+        <li>
+          <span class="pill <%= order.status === "fulfilled" ? "ok" : "danger" %>"><%= order.status %></span>
+          Order #<%= order.id %> by <%= order.username %> on <%= order.created_at %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</section>
+<%- include("partials/footer") %>

@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+<section class="heading">
+  <h1>Users</h1>
+</section>
+<section class="grid">
+  <div class="panel">
+    <h2>Create user</h2>
+    <% if (errors.length) { %>
+      <ul class="errors">
+        <% errors.forEach((error) => { %><li><%= error %></li><% }) %>
+      </ul>
+    <% } %>
+    <form method="post" action="/users">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Username
+        <input name="username" required minlength="3" maxlength="40">
+      </label>
+      <label>Password
+        <input name="password" type="password" required minlength="12" maxlength="128">
+      </label>
+      <label>Role
+        <select name="role" required>
+          <option value="clerk">Clerk</option>
+          <option value="manager">Manager</option>
+        </select>
+      </label>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+  <div class="panel">
+    <h2>Existing users</h2>
+    <table>
+      <thead><tr><th>Username</th><th>Role</th><th>Created</th></tr></thead>
+      <tbody>
+        <% users.forEach((user) => { %>
+          <tr><td><%= user.username %></td><td><%= user.role %></td><td><%= user.created_at %></td></tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+<%- include('partials/footer') %>

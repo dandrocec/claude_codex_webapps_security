@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Register - Flask Wiki{% endblock %}
+{% block content %}
+  <section class="panel narrow">
+    <h1>Register</h1>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Username
+        <input name="username" autocomplete="username" required minlength="3" maxlength="40" pattern="[A-Za-z0-9_.-]+">
+      </label>
+      <label>Password
+        <input type="password" name="password" autocomplete="new-password" required minlength="12" maxlength="256">
+      </label>
+      <button type="submit">Create account</button>
+    </form>
+  </section>
+{% endblock %}

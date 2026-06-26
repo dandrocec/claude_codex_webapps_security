@@ -1,0 +1,20 @@
+{
+  "name": "pipeline-crm",
+  "version": "1.0.0",
+  "description": "A small Node.js/Express CRM with role-based contacts and pipeline deals.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "method-override": "^3.0.0",
+    "sql.js": "^1.10.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

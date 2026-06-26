@@ -1,0 +1,3 @@
+Build a Flask wiki with page history. Editors create and edit pages; every edit is saved as a revision that can be viewed and restored. Some pages can be marked editor-only. Roles: viewer and editor. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5077.

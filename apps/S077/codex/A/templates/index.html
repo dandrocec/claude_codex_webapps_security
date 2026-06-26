@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Pages · Wiki{% endblock %}
+
+{% block content %}
+  <section class="page-head">
+    <div>
+      <h1>Pages</h1>
+      <p>Browse wiki pages{% if not is_editor %}. Editor-only pages are hidden{% endif %}.</p>
+    </div>
+    {% if is_editor %}
+      <a class="button" href="{{ url_for('new_page') }}">Create page</a>
+    {% endif %}
+  </section>
+
+  {% if pages %}
+    <div class="page-list">
+      {% for page in pages %}
+        <article class="page-row">
+          <div>
+            <h2><a href="{{ url_for('view_page', slug=page.slug) }}">{{ page.title }}</a></h2>
+            <p>Updated {{ page.updated_at }}</p>
+          </div>
+          {% if page.editor_only %}
+            <span class="badge">Editor-only</span>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty">
+      <p>No pages yet.</p>
+      {% if is_editor %}
+        <a href="{{ url_for('new_page') }}">Create the first page</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

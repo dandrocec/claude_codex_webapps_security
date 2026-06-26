@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+<section class="section-head">
+  <div>
+    <h1>Contacts</h1>
+    <p><%= user.role === 'manager' ? 'Team contacts' : 'Your contacts' %></p>
+  </div>
+  <a class="button" href="/contacts/new">New contact</a>
+</section>
+<section class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Owner</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% contacts.forEach(function(contact) { %>
+        <tr>
+          <td><%= contact.name %></td>
+          <td><%= contact.company || '' %></td>
+          <td><%= contact.email || '' %></td>
+          <td><%= contact.phone || '' %></td>
+          <td><%= contact.owner_name %></td>
+          <td class="actions">
+            <a href="/contacts/<%= contact.id %>/edit">Edit</a>
+            <form method="post" action="/contacts/<%= contact.id %>/delete" class="inline">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include('partials/footer') %>

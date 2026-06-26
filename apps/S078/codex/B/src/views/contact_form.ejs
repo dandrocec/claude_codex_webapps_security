@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+<section class="narrow">
+  <h1><%= contact ? 'Edit contact' : 'New contact' %></h1>
+  <%- include('partials/errors') %>
+  <form method="post" action="<%= contact ? '/contacts/' + contact.id : '/contacts' %>" class="panel">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% if (user.role === 'manager') { %>
+      <label>Owner
+        <select name="owner_id" required>
+          <% users.forEach(function(owner) { %>
+            <option value="<%= owner.id %>" <%= Number(form.owner_id) === owner.id ? 'selected' : '' %>><%= owner.name %></option>
+          <% }) %>
+        </select>
+      </label>
+    <% } %>
+    <label>Name <input name="name" maxlength="100" required value="<%= form.name || '' %>"></label>
+    <label>Company <input name="company" maxlength="100" value="<%= form.company || '' %>"></label>
+    <label>Email <input name="email" type="email" value="<%= form.email || '' %>"></label>
+    <label>Phone <input name="phone" maxlength="40" value="<%= form.phone || '' %>"></label>
+    <label>Notes <textarea name="notes" maxlength="1000"><%= form.notes || '' %></textarea></label>
+    <button type="submit">Save contact</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

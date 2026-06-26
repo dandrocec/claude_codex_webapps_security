@@ -1,0 +1,162 @@
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --ink: #20242a;
+  --muted: #626b76;
+  --line: #d9dee5;
+  --accent: #176b5b;
+  --accent-dark: #0e493e;
+  --danger: #b42318;
+  --shadow: 0 10px 24px rgba(22, 31, 44, 0.08);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+a { color: inherit; text-decoration: none; }
+
+.topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 14px 28px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand { font-weight: 800; color: var(--accent-dark); }
+nav { display: flex; gap: 16px; color: var(--muted); }
+.topbar form { display: flex; gap: 12px; align-items: center; color: var(--muted); }
+
+.shell { padding: 28px; }
+.auth-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.login-panel, .panel, .row-card, .deal-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+.login-panel { width: min(430px, 100%); padding: 32px; }
+.login-panel h1 { margin-top: 0; }
+.login-panel p, .demo-users, .page-head p, small { color: var(--muted); }
+.demo-users { margin-top: 18px; font-size: 0.9rem; line-height: 1.5; }
+
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 6px; }
+h2 { font-size: 1rem; }
+
+button, .button {
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.ghost {
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--ink);
+}
+.danger { background: var(--danger); margin-top: 10px; }
+
+input, select, textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 11px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+}
+textarea { min-height: 92px; resize: vertical; }
+label { display: grid; gap: 6px; color: var(--muted); font-weight: 650; font-size: 0.9rem; }
+.stack { display: grid; gap: 14px; }
+.panel { padding: 20px; }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(220px, 1fr));
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+.stage {
+  min-height: 65vh;
+  background: #eceff3;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+.stage-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.stage-head h2 { margin: 0; }
+.stage-head span { color: var(--accent-dark); font-weight: 800; white-space: nowrap; }
+.deal-card { padding: 14px; margin-bottom: 12px; box-shadow: none; }
+.deal-card h3 { margin-bottom: 8px; font-size: 1rem; }
+.money { font-weight: 800; color: var(--accent-dark); margin-bottom: 8px; }
+.move-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 12px; }
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 18px;
+  align-items: start;
+}
+.list { display: grid; gap: 12px; }
+.row-card { padding: 0; box-shadow: none; overflow: hidden; }
+.row-card summary {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(130px, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+}
+.grid-form {
+  border-top: 1px solid var(--line);
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 14px;
+}
+.wide { grid-column: 1 / -1; }
+.search { display: flex; gap: 8px; min-width: min(430px, 100%); }
+.flash, .error {
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+}
+.flash { background: #e6f4ef; border: 1px solid #b7dfd1; }
+.error { background: #fff0ee; border: 1px solid #f5b6ad; color: var(--danger); }
+
+@media (max-width: 900px) {
+  .topbar { grid-template-columns: 1fr; gap: 10px; }
+  nav, .topbar form, .page-head { flex-wrap: wrap; }
+  .split { grid-template-columns: 1fr; }
+  .row-card summary, .grid-form { grid-template-columns: 1fr; }
+  .shell { padding: 18px; }
+}

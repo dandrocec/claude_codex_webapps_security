@@ -1,0 +1,35 @@
+<%- include("partials/header") %>
+<section class="panel chat">
+  <div class="room-heading">
+    <div>
+      <h1><%= room.name %></h1>
+      <% if (room.description) { %><p class="muted"><%= room.description %></p><% } %>
+    </div>
+    <a class="button secondary" href="/rooms">All rooms</a>
+  </div>
+
+  <div class="messages" aria-live="polite">
+    <% if (!messages.length) { %>
+      <p class="muted">No messages yet.</p>
+    <% } %>
+    <% messages.forEach(function(message) { %>
+      <article class="message">
+        <header>
+          <strong><%= message.username %></strong>
+          <time datetime="<%= message.created_at %>"><%= message.created_at %></time>
+        </header>
+        <p><%= message.body %></p>
+      </article>
+    <% }) %>
+  </div>
+
+  <form class="composer" method="post" action="/rooms/<%= room.id %>/messages">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Message
+      <textarea name="body" maxlength="2000" rows="3" required></textarea>
+    </label>
+    <button type="submit">Send</button>
+  </form>
+</section>
+<%- include("partials/footer") %>

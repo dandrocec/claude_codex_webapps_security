@@ -1,0 +1,36 @@
+<%- include("partials/start", { title }) %>
+<section class="page-head">
+  <div>
+    <h1>Pipeline board</h1>
+    <p><%= currentUser.role === "manager" ? "All team-owned deals" : "Deals assigned to you" %></p>
+  </div>
+  <a class="button" href="/deals">Manage deals</a>
+</section>
+
+<section class="board">
+  <% stages.forEach((stage) => { %>
+    <div class="stage">
+      <div class="stage-head">
+        <h2><%= stage %></h2>
+        <span>$<%= Number(totals[stage] || 0).toLocaleString() %></span>
+      </div>
+      <% deals.filter((deal) => deal.stage === stage).forEach((deal) => { %>
+        <article class="deal-card">
+          <h3><%= deal.title %></h3>
+          <div class="money">$<%= Number(deal.value || 0).toLocaleString() %></div>
+          <p><%= deal.company || "No company" %></p>
+          <small><%= deal.owner_name %><% if (deal.close_date) { %> · closes <%= deal.close_date %><% } %></small>
+          <form method="post" action="/deals/<%= deal.id %>/stage" class="move-form">
+            <select name="stage" aria-label="Move stage">
+              <% stages.forEach((option) => { %>
+                <option value="<%= option %>" <%= option === deal.stage ? "selected" : "" %>><%= option %></option>
+              <% }) %>
+            </select>
+            <button type="submit" class="ghost">Move</button>
+          </form>
+        </article>
+      <% }) %>
+    </div>
+  <% }) %>
+</section>
+<%- include("partials/end") %>

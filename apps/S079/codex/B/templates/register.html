@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+  <h1>Create account</h1>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="email" required maxlength="254">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="new-password" required minlength="12" maxlength="128">
+    <p class="muted">Use at least 12 characters.</p>
+    <p><button type="submit">Create account</button></p>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoice {{ invoice.invoice_number }}</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; color: #1f2937; background: #f6f7f9; }
+    main { max-width: 860px; margin: 30px auto; padding: 42px; background: #fff; border: 1px solid #d6d9df; }
+    header { display: flex; justify-content: space-between; gap: 20px; border-bottom: 2px solid #1f2937; padding-bottom: 18px; margin-bottom: 24px; }
+    h1 { margin: 0; font-size: 34px; }
+    h2 { font-size: 16px; margin-top: 0; color: #667085; text-transform: uppercase; letter-spacing: .04em; }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+    th, td { padding: 11px; border-bottom: 1px solid #d6d9df; text-align: left; }
+    th { background: #f2f4f7; }
+    .right { text-align: right; }
+    .totals { margin-left: auto; width: 320px; }
+    .actions { max-width: 860px; margin: 20px auto; display: flex; gap: 8px; }
+    .button { display: inline-flex; padding: 9px 13px; border-radius: 6px; background: #155eef; color: #fff; text-decoration: none; border: 0; font: inherit; cursor: pointer; }
+    .secondary { background: #fff; color: #155eef; border: 1px solid #155eef; }
+    @media print { body { background: #fff; } main { border: 0; margin: 0; max-width: none; } .actions { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="actions">
+    <button class="button" onclick="window.print()">Print</button>
+    <a class="button secondary" href="{{ url_for('invoices') }}">Back</a>
+  </div>
+  <main>
+    <header>
+      <div>
+        <h1>Invoice</h1>
+        <p><strong>{{ invoice.invoice_number }}</strong></p>
+      </div>
+      <div>
+        <p><strong>Issue date:</strong> {{ invoice.issue_date }}</p>
+        {% if invoice.due_date %}<p><strong>Due date:</strong> {{ invoice.due_date }}</p>{% endif %}
+      </div>
+    </header>
+    <section>
+      <h2>Bill to</h2>
+      <p><strong>{{ invoice.client_name }}</strong><br>
+      {% if invoice.client_email %}{{ invoice.client_email }}<br>{% endif %}
+      {{ invoice.client_address or "" }}</p>
+    </section>
+    <table>
+      <thead><tr><th>Description</th><th class="right">Qty</th><th class="right">Unit price</th><th class="right">Amount</th></tr></thead>
+      <tbody>
+        {% for item in items %}
+          <tr>
+            <td>{{ item.description }}</td>
+            <td class="right">{{ item.quantity }}</td>
+            <td class="right">{{ item.unit_price }}</td>
+            <td class="right">{{ "%.2f"|format(item.quantity|float * item.unit_price|float) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <table class="totals">
+      <tr><th>Subtotal</th><td class="right">{{ "%.2f"|format(totals.subtotal) }}</td></tr>
+      <tr><th>Tax ({{ invoice.tax_rate }}%)</th><td class="right">{{ "%.2f"|format(totals.tax) }}</td></tr>
+      <tr><th>Total</th><td class="right"><strong>{{ "%.2f"|format(totals.total) }}</strong></td></tr>
+    </table>
+    {% if invoice.notes %}
+      <section>
+        <h2>Notes</h2>
+        <p>{{ invoice.notes }}</p>
+      </section>
+    {% endif %}
+  </main>
+</body>
+</html>

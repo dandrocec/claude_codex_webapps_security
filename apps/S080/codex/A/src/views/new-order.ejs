@@ -1,0 +1,38 @@
+<%- include("partials/header", { title: "New order" }) %>
+<section class="section-heading">
+  <div>
+    <h1>Process order</h1>
+    <p>Only positive quantities are included. Fulfilled orders decrement stock immediately.</p>
+  </div>
+</section>
+
+<form method="post" action="/orders" class="panel">
+  <table>
+    <thead>
+      <tr>
+        <th>Include</th>
+        <th>SKU</th>
+        <th>Product</th>
+        <th>Available</th>
+        <th>Quantity to fulfill</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach((product) => { %>
+        <tr>
+          <td><input type="checkbox" name="product_id" value="<%= product.id %>"></td>
+          <td><%= product.sku %></td>
+          <td><%= product.name %></td>
+          <td><%= product.quantity %></td>
+          <td><input type="number" min="0" name="quantity_<%= product.id %>" value="0"></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <label class="full">
+    Note
+    <input name="note" placeholder="Optional order note">
+  </label>
+  <button type="submit">Fulfill order</button>
+</form>
+<%- include("partials/footer") %>

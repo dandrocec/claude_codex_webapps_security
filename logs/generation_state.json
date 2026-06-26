@@ -2108,5 +2108,65 @@
     "run_id": "S075_codex_B_20260626065424",
     "exit": 0,
     "updated": "2026-06-26T06:57:49Z"
+  },
+  "S076|codex|A": {
+    "status": "done",
+    "run_id": "S076_codex_A_20260626071247",
+    "exit": 0,
+    "updated": "2026-06-26T07:15:27Z"
+  },
+  "S076|codex|B": {
+    "status": "done",
+    "run_id": "S076_codex_B_20260626071527",
+    "exit": 0,
+    "updated": "2026-06-26T07:18:22Z"
+  },
+  "S077|codex|A": {
+    "status": "done",
+    "run_id": "S077_codex_A_20260626071822",
+    "exit": 0,
+    "updated": "2026-06-26T07:20:51Z"
+  },
+  "S077|codex|B": {
+    "status": "done",
+    "run_id": "S077_codex_B_20260626072051",
+    "exit": 0,
+    "updated": "2026-06-26T07:24:04Z"
+  },
+  "S078|codex|A": {
+    "status": "done",
+    "run_id": "S078_codex_A_20260626072404",
+    "exit": 0,
+    "updated": "2026-06-26T07:27:19Z"
+  },
+  "S078|codex|B": {
+    "status": "done",
+    "run_id": "S078_codex_B_20260626072719",
+    "exit": 0,
+    "updated": "2026-06-26T07:31:21Z"
+  },
+  "S079|codex|A": {
+    "status": "done",
+    "run_id": "S079_codex_A_20260626073121",
+    "exit": 0,
+    "updated": "2026-06-26T07:34:33Z"
+  },
+  "S079|codex|B": {
+    "status": "done",
+    "run_id": "S079_codex_B_20260626073433",
+    "exit": 0,
+    "updated": "2026-06-26T07:39:07Z"
+  },
+  "S080|codex|A": {
+    "status": "done",
+    "run_id": "S080_codex_A_20260626073907",
+    "exit": 0,
+    "updated": "2026-06-26T07:53:06Z"
+  },
+  "S080|codex|B": {
+    "status": "done",
+    "run_id": "S080_codex_B_20260626075306",
+    "exit": 0,
+    "updated": "2026-06-26T07:56:39Z"
   }
 }

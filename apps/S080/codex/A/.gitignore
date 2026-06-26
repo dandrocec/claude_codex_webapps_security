@@ -1,0 +1,4 @@
+node_modules/
+warehouse.db
+sessions.sqlite
+npm-debug.log*

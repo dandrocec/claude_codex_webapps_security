@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ "Edit" if page else "New page" }} · Wiki{% endblock %}
+
+{% block content %}
+  <section class="page-head">
+    <div>
+      <h1>{{ "Edit page" if page else "New page" }}</h1>
+      {% if page %}
+        <p>Saving creates a new revision.</p>
+      {% endif %}
+    </div>
+    {% if page %}
+      <a class="button secondary" href="{{ url_for('view_page', slug=page.slug) }}">Cancel</a>
+    {% endif %}
+  </section>
+
+  <form method="post" class="form editor-form">
+    <label>
+      Title
+      <input name="title" required value="{{ request.form.title or revision.title if revision else request.form.title }}">
+    </label>
+    <label>
+      Body
+      <textarea name="body" rows="18">{{ request.form.body or revision.body if revision else request.form.body }}</textarea>
+    </label>
+    <label>
+      Revision note
+      <input name="note" value="{{ request.form.note }}" placeholder="What changed?">
+    </label>
+    <label class="check">
+      <input type="checkbox" name="editor_only" {% if request.form.editor_only or (page and page.editor_only) %}checked{% endif %}>
+      Editor-only page
+    </label>
+    <button type="submit">Save revision</button>
+  </form>
+{% endblock %}

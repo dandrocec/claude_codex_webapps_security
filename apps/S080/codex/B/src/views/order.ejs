@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+<section class="panel narrow">
+  <h1>Order #<%= order.id %></h1>
+  <dl>
+    <dt>Created</dt>
+    <dd><%= order.created_at %></dd>
+    <dt>User</dt>
+    <dd><%= order.username %></dd>
+    <dt>Item</dt>
+    <dd><%= order.sku %> - <%= order.name %></dd>
+    <dt>Quantity</dt>
+    <dd><%= order.quantity %></dd>
+  </dl>
+  <a class="button" href="/dashboard">Dashboard</a>
+</section>
+<%- include('partials/footer') %>

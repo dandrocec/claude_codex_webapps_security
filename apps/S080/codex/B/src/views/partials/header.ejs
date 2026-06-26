@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Warehouse</a>
+    <% if (currentUser) { %>
+      <nav>
+        <a href="/dashboard">Dashboard</a>
+        <% if (currentUser.role === 'manager') { %>
+          <a href="/users">Users</a>
+        <% } %>
+        <form method="post" action="/logout" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Sign out</button>
+        </form>
+      </nav>
+    <% } %>
+  </header>
+  <main class="page">
+    <% if (flash) { %>
+      <div class="flash <%= flash.type %>"><%= flash.message %></div>
+    <% } %>

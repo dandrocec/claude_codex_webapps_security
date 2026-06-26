@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}History for {{ page.title }} - Flask Wiki{% endblock %}
+{% block content %}
+  <section class="panel">
+    <div class="page-head">
+      <h1>History for {{ page.title }}</h1>
+      <a href="{{ url_for('view_page', slug=page.slug) }}">Back to page</a>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Revision</th>
+          <th>Edited</th>
+          <th>Editor</th>
+          <th>Summary</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for revision in revisions %}
+          <tr>
+            <td>{{ revision.revision_number }}</td>
+            <td>{{ revision.edited_at }}</td>
+            <td>{{ revision.edited_by_name }}</td>
+            <td>{{ revision.summary }}</td>
+            <td><a href="{{ url_for('revision', slug=page.slug, revision_id=revision.id) }}">View</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}

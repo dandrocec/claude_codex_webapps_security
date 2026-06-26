@@ -1,0 +1,17 @@
+<%- include("partials/header", { title: "Sign in" }) %>
+<section class="auth-panel">
+  <h1>Warehouse sign in</h1>
+  <form method="post" action="/login" class="stack">
+    <label>
+      Username
+      <input name="username" autocomplete="username" required>
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" autocomplete="current-password" required>
+    </label>
+    <button type="submit">Sign in</button>
+  </form>
+  <p class="muted">Manager: manager / manager123<br>Clerk: clerk / clerk123</p>
+</section>
+<%- include("partials/footer") %>

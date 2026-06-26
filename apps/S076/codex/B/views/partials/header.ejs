@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secure Chat</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/rooms">Secure Chat</a>
+    <nav>
+      <% if (currentUser) { %>
+        <span class="user"><%= currentUser.username %></span>
+        <form class="inline" method="post" action="/logout">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Sign out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Sign in</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="shell">
+    <% if (errors && errors.length) { %>
+      <section class="notice error">
+        <% errors.forEach(function(error) { %><p><%= error %></p><% }) %>
+      </section>
+    <% } %>
+    <% if (info && info.length) { %>
+      <section class="notice">
+        <% info.forEach(function(message) { %><p><%= message %></p><% }) %>
+      </section>
+    <% } %>

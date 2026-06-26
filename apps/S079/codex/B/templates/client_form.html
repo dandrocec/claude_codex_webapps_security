@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel">
+  <h1>{{ "Edit client" if client else "New client" }}</h1>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="name">Name</label>
+    <input id="name" name="name" required maxlength="120" value="{{ client.name if client else '' }}">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" maxlength="254" value="{{ client.email if client else '' }}">
+    <label for="address">Address</label>
+    <textarea id="address" name="address" maxlength="1000">{{ client.address if client else '' }}</textarea>
+    <p class="actions">
+      <button type="submit">Save client</button>
+      <a class="button secondary" href="{{ url_for('clients') }}">Cancel</a>
+    </p>
+  </form>
+</section>
+{% endblock %}

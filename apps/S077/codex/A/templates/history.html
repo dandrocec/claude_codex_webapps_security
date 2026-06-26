@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}History · {{ page.title }}{% endblock %}
+
+{% block content %}
+  <section class="page-head">
+    <div>
+      <h1>History</h1>
+      <p><a href="{{ url_for('view_page', slug=page.slug) }}">{{ page.title }}</a></p>
+    </div>
+    {% if is_editor %}
+      <a class="button" href="{{ url_for('edit_page', slug=page.slug) }}">Edit current</a>
+    {% endif %}
+  </section>
+
+  <div class="history">
+    {% for revision in revisions %}
+      <article class="revision-row">
+        <div>
+          <h2>
+            <a href="{{ url_for('view_revision', slug=page.slug, revision_id=revision.id) }}">
+              Revision #{{ revision.id }}
+            </a>
+          </h2>
+          <p>
+            {{ revision.created_at }} by {{ revision.author }}
+            {% if revision.note %} · {{ revision.note }}{% endif %}
+          </p>
+        </div>
+        {% if is_editor %}
+          <form method="post" action="{{ url_for('restore_revision', slug=page.slug, revision_id=revision.id) }}">
+            <button type="submit" class="secondary">Restore</button>
+          </form>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+{% endblock %}

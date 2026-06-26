@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Invoices{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">Invoices</p>
+    <h1>Your invoices</h1>
+  </div>
+  <a class="button" href="{{ url_for('invoice_new') }}">New invoice</a>
+</div>
+<section class="panel">
+  {% include "_invoice_table.html" %}
+</section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit client" if client else "New client" }}{% endblock %}
+{% block content %}
+<section class="panel narrow">
+  <h1>{{ "Edit client" if client else "New client" }}</h1>
+  <form method="post" class="stack">
+    <label>Name
+      <input name="name" value="{{ client.name if client else '' }}" required>
+    </label>
+    <label>Email
+      <input type="email" name="email" value="{{ client.email if client else '' }}">
+    </label>
+    <label>Address
+      <textarea name="address" rows="4">{{ client.address if client else '' }}</textarea>
+    </label>
+    <label>Tax ID
+      <input name="tax_id" value="{{ client.tax_id if client else '' }}">
+    </label>
+    <button class="button" type="submit">Save client</button>
+  </form>
+</section>
+{% endblock %}

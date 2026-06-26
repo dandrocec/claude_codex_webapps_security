@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Ledgerly Invoicing{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">SQLite invoicing</p>
+    <h1>Invoices, clients, tax, and print-ready pages in one focused app.</h1>
+    <p>Create a private account, manage only your own clients, and issue invoices with automatic subtotals, tax, and totals.</p>
+    <div class="actions">
+      <a class="button" href="{{ url_for('register') }}">Create account</a>
+      <a class="button secondary" href="{{ url_for('login') }}">Sign in</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

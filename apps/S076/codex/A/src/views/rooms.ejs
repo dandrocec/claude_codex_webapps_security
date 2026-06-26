@@ -1,0 +1,49 @@
+<%- include("partials/head", { title: "Rooms" }) %>
+<section class="rooms-layout">
+  <aside class="create-room">
+    <h1>Rooms</h1>
+    <% if (typeof error !== "undefined" && error) { %>
+      <p class="alert"><%= error %></p>
+    <% } %>
+    <form method="post" action="/rooms" class="stack">
+      <label>
+        Room name
+        <input name="name" required minlength="2" maxlength="50" placeholder="general">
+      </label>
+      <label>
+        Description
+        <textarea name="description" maxlength="160" rows="4" placeholder="Optional"></textarea>
+      </label>
+      <button type="submit">Create room</button>
+    </form>
+  </aside>
+
+  <section class="room-list" aria-label="Available rooms">
+    <% if (rooms.length === 0) { %>
+      <div class="empty">
+        <h2>No rooms yet</h2>
+        <p>Create the first room to start chatting.</p>
+      </div>
+    <% } %>
+
+    <% rooms.forEach((room) => { %>
+      <a class="room-card" href="/rooms/<%= room.id %>">
+        <div>
+          <h2><%= room.name %></h2>
+          <p><%= room.description || "No description" %></p>
+        </div>
+        <dl>
+          <div>
+            <dt>Messages</dt>
+            <dd><%= room.message_count || 0 %></dd>
+          </div>
+          <div>
+            <dt>Created by</dt>
+            <dd><%= room.creator || "Unknown" %></dd>
+          </div>
+        </dl>
+      </a>
+    <% }) %>
+  </section>
+</section>
+<%- include("partials/foot") %>
