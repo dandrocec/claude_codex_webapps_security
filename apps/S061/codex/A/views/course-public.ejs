@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+
+<section class="panel">
+  <h1 class="page-title"><%= course.title %></h1>
+  <p class="lead"><%= course.description %></p>
+  <p class="muted">Instructor: <%= course.instructor_name %></p>
+  <p>Enrol to access lessons and track completion.</p>
+  <form action="/courses/<%= course.id %>/enrol" method="post">
+    <button type="submit">Enrol in course</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

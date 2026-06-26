@@ -1,0 +1,48 @@
+<%- include("partials/open", { title }) %>
+<section>
+  <div class="section-head">
+    <div>
+      <h1>Availability</h1>
+      <p class="muted">Signed in as <%= currentUser.email %></p>
+    </div>
+    <form method="get" action="/availability" class="date-form">
+      <label>
+        Date
+        <input type="date" name="date" value="<%= selectedDate %>" required>
+      </label>
+      <button type="submit">View</button>
+    </form>
+  </div>
+
+  <div class="availability-grid">
+    <% rooms.forEach((room) => { %>
+      <article class="room">
+        <h2><%= room.name %></h2>
+        <p class="muted">Capacity <%= room.capacity %></p>
+        <div class="slots">
+          <% timeSlots.forEach(([start, end]) => {
+            const booking = booked.get(`${room.id}:${start}:${end}`);
+          %>
+            <% if (booking) { %>
+              <div class="slot unavailable">
+                <span><%= start %>-<%= end %></span>
+                <strong>Booked</strong>
+              </div>
+            <% } else { %>
+              <form method="post" action="/bookings" class="slot available">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="hidden" name="room_id" value="<%= room.id %>">
+                <input type="hidden" name="booking_date" value="<%= selectedDate %>">
+                <input type="hidden" name="start_time" value="<%= start %>">
+                <input type="hidden" name="end_time" value="<%= end %>">
+                <span><%= start %>-<%= end %></span>
+                <button type="submit">Book</button>
+              </form>
+            <% } %>
+          <% }) %>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>
+<%- include("partials/close") %>

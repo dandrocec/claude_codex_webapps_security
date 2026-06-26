@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Signed in as <%= currentUser.username %></p>
+      <h1>Movie Watchlist</h1>
+    </div>
+    <form method="post" action="/logout">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="secondary" type="submit">Log out</button>
+    </form>
+  </header>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="add-title">
+      <h2 id="add-title">Add Movie</h2>
+
+      <% if (errors.length) { %>
+        <div class="alert alert-error" role="alert">
+          <% errors.forEach(function(error) { %>
+            <p><%= error %></p>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <% if (flash) { %>
+        <div class="alert alert-<%= flash.type %>" role="status">
+          <p><%= flash.message %></p>
+        </div>
+      <% } %>
+
+      <form method="post" action="/movies" novalidate>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <label for="title">Title</label>
+        <input id="title" name="title" maxlength="120" required value="<%= typeof form !== 'undefined' ? form.title : '' %>">
+
+        <div class="form-grid">
+          <div>
+            <label for="year">Year</label>
+            <input id="year" name="year" type="number" min="1888" max="2100" required value="<%= typeof form !== 'undefined' ? form.year : '' %>">
+          </div>
+          <div>
+            <label for="rating">Rating</label>
+            <input id="rating" name="rating" type="number" min="1" max="10" value="<%= typeof form !== 'undefined' && form.rating !== null ? form.rating : '' %>">
+          </div>
+        </div>
+
+        <label for="status">Status</label>
+        <select id="status" name="status" required>
+          <option value="plan_to_watch" <%= typeof form !== 'undefined' && form.status === 'plan_to_watch' ? 'selected' : '' %>>Plan to watch</option>
+          <option value="watching" <%= typeof form !== 'undefined' && form.status === 'watching' ? 'selected' : '' %>>Watching</option>
+          <option value="completed" <%= typeof form !== 'undefined' && form.status === 'completed' ? 'selected' : '' %>>Completed</option>
+        </select>
+
+        <button type="submit">Add movie</button>
+      </form>
+    </section>
+
+    <section class="panel list-panel" aria-labelledby="list-title">
+      <div class="list-heading">
+        <h2 id="list-title">Your List</h2>
+        <form method="get" action="/movies" class="filter-form">
+          <label for="filter-status">Filter</label>
+          <select id="filter-status" name="status" onchange="this.form.submit()">
+            <option value="" <%= !status ? 'selected' : '' %>>All</option>
+            <option value="plan_to_watch" <%= status === 'plan_to_watch' ? 'selected' : '' %>>Plan to watch</option>
+            <option value="watching" <%= status === 'watching' ? 'selected' : '' %>>Watching</option>
+            <option value="completed" <%= status === 'completed' ? 'selected' : '' %>>Completed</option>
+          </select>
+        </form>
+      </div>
+
+      <% if (movies.length === 0) { %>
+        <p class="empty">No movies match this view.</p>
+      <% } else { %>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Status</th>
+                <th>Rating</th>
+                <th><span class="visually-hidden">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% movies.forEach(function(movie) { %>
+                <tr>
+                  <td><%= movie.title %></td>
+                  <td><%= movie.year %></td>
+                  <td><span class="status"><%= movie.status.replace(/_/g, ' ') %></span></td>
+                  <td><%= movie.rating || 'Not rated' %></td>
+                  <td>
+                    <form method="post" action="/movies/<%= movie.id %>/delete">
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                      <button class="danger" type="submit">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

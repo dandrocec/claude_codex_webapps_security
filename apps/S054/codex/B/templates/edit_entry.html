@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Edit entry - Time Tracker{% endblock %}
+{% block content %}
+<section class="auth-panel">
+  <h1>Edit entry</h1>
+  <form method="post" class="entry-form" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Project
+      <input type="text" name="project" maxlength="80" value="{{ entry.project }}" required>
+    </label>
+    <label>Date
+      <input type="date" name="entry_date" value="{{ entry.entry_date }}" required>
+    </label>
+    <label>Hours
+      <input type="number" name="hours" min="0.01" max="24" step="0.01" value="{{ '%.2f'|format(entry.hours) }}" required>
+    </label>
+    <label>Note
+      <textarea name="note" maxlength="500" rows="4">{{ entry.note }}</textarea>
+    </label>
+    <button type="submit">Update entry</button>
+    <a class="secondary" href="{{ url_for('dashboard', week=entry.entry_date) }}">Cancel</a>
+  </form>
+</section>
+{% endblock %}

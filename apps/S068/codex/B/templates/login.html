@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+<section class="panel narrow">
+  <h1>Sign in</h1>
+  <form method="post" action="{{ url_for('login') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>
+      Username
+      <input name="username" value="{{ username|default('') }}" required maxlength="40" autocomplete="username">
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" required maxlength="256" autocomplete="current-password">
+    </label>
+    <button type="submit" class="primary">Sign in</button>
+  </form>
+</section>
+{% endblock %}

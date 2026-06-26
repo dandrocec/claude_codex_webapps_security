@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<section class="panel narrow">
+  <h1>Create account</h1>
+  <form method="post" action="{{ url_for('register') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>
+      Username
+      <input name="username" value="{{ username|default('') }}" required minlength="3" maxlength="40" pattern="[A-Za-z0-9_.-]{3,40}" autocomplete="username">
+    </label>
+    <label>
+      Display name
+      <input name="display_name" value="{{ display_name|default('') }}" required minlength="2" maxlength="80" autocomplete="name">
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" required minlength="12" maxlength="256" autocomplete="new-password">
+    </label>
+    <label>
+      Role
+      <select name="role" required>
+        <option value="">Choose role</option>
+        <option value="provider" {% if role|default('') == 'provider' %}selected{% endif %}>Provider</option>
+        <option value="client" {% if role|default('') == 'client' %}selected{% endif %}>Client</option>
+      </select>
+    </label>
+    <button type="submit" class="primary">Register</button>
+  </form>
+</section>
+{% endblock %}

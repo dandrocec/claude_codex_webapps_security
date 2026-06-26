@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> | StatusHub</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="<%= currentUser ? '/feed' : '/' %>">StatusHub</a>
+    <nav class="nav">
+      <% if (currentUser) { %>
+        <a href="/feed">Feed</a>
+        <a href="/discover">Discover</a>
+        <a href="/users/<%= currentUser.username %>">Profile</a>
+        <a href="/profile/edit">Settings</a>
+        <form action="/logout" method="post">
+          <button class="link-button" type="submit">Sign out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Sign in</a>
+        <a class="button small" href="/register">Create account</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">
+    <% if (messages.error.length) { %>
+      <div class="flash error"><%= messages.error[0] %></div>
+    <% } %>
+    <% if (messages.success.length) { %>
+      <div class="flash success"><%= messages.success[0] %></div>
+    <% } %>

@@ -1,0 +1,23 @@
+<%- include('partials/header', { title: 'New survey' }) %>
+<section class="panel">
+  <h1>New survey</h1>
+  <form method="post" action="/surveys" class="stack">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Title
+      <input name="title" maxlength="120" required>
+    </label>
+    <label>Description
+      <textarea name="description" maxlength="800" rows="3"></textarea>
+    </label>
+    <fieldset>
+      <legend>Questions</legend>
+      <% for (let i = 0; i < 5; i += 1) { %>
+        <label>Question <%= i + 1 %>
+          <input name="questions" maxlength="240" <%= i === 0 ? 'required' : '' %>>
+        </label>
+      <% } %>
+    </fieldset>
+    <button type="submit">Create survey</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

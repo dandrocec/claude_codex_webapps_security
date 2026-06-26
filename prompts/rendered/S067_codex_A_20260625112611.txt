@@ -1,0 +1,3 @@
+Build a Node.js/Express food-ordering app. Customers browse a menu, add items to a cart, and place an order; staff (a role) see incoming orders and update their status. Compute the order total on the server. Store data in a database.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5067.

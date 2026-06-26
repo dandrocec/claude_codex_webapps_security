@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Not found - Simple Shop{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Not found</h1>
+    <p>The requested product could not be found.</p>
+    <a href="{{ url_for('catalogue') }}">Return to catalogue</a>
+  </section>
+{% endblock %}

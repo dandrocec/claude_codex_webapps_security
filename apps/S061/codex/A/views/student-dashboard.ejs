@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<div class="row">
+  <div>
+    <h1 class="page-title">Student Dashboard</h1>
+    <p class="lead">Continue your enrolled courses and mark lessons complete.</p>
+  </div>
+  <a class="button" href="/courses">Find courses</a>
+</div>
+
+<% if (courses.length === 0) { %>
+  <div class="empty">You have not enrolled in any courses yet.</div>
+<% } else { %>
+  <div class="grid">
+    <% courses.forEach((course) => { %>
+      <% const percent = course.lesson_count ? Math.round((course.completed_count / course.lesson_count) * 100) : 0; %>
+      <article class="course-card">
+        <div>
+          <h3><%= course.title %></h3>
+          <p class="muted">By <%= course.instructor_name %></p>
+          <p><%= course.completed_count %> of <%= course.lesson_count %> lessons complete</p>
+          <div class="progress"><span style="width: <%= percent %>%"></span></div>
+        </div>
+        <a class="button secondary" href="/courses/<%= course.id %>">Continue</a>
+      </article>
+    <% }) %>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

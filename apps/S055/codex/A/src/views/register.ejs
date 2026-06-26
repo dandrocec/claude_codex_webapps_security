@@ -1,0 +1,14 @@
+<%- include("partials/start", { title: "Register" }) %>
+<section class="auth-panel">
+  <h1>Create account</h1>
+  <form method="post" action="/register" class="stack">
+    <label>Email
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+    <label>Password
+      <input type="password" name="password" minlength="6" required autocomplete="new-password">
+    </label>
+    <button class="button" type="submit">Register</button>
+  </form>
+</section>
+<%- include("partials/end") %>

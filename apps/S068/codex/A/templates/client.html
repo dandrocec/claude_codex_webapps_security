@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Client Dashboard · Scheduler{% endblock %}
+{% block content %}
+<div class="grid">
+    <section class="panel">
+        <h1>Available slots</h1>
+        {% if available_slots %}
+            <div class="stack">
+                {% for slot in available_slots %}
+                    <article class="appointment">
+                        <div>
+                            <strong>{{ slot.starts_at }}</strong>
+                            <p>Provider: {{ slot.provider_name }}</p>
+                            {% if slot.notes %}<p>{{ slot.notes }}</p>{% endif %}
+                        </div>
+                        <form action="{{ url_for('book', slot_id=slot.id) }}" method="post">
+                            <button type="submit">Book</button>
+                        </form>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="muted">No open slots are available.</p>
+        {% endif %}
+    </section>
+
+    <section class="panel">
+        <h1>Your appointments</h1>
+        {% if appointments %}
+            <div class="stack">
+                {% for item in appointments %}
+                    <article class="appointment">
+                        <div>
+                            <strong>{{ item.starts_at }}</strong>
+                            <p>Provider: {{ item.provider_name }} ({{ item.provider_email }})</p>
+                            {% if item.notes %}<p>{{ item.notes }}</p>{% endif %}
+                            <p>Confirmation: <code>{{ item.confirmation_code }}</code></p>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="muted">You have no booked appointments.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

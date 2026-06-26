@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title || 'Portfolio' %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Portfolio</a>
+    <nav class="nav">
+      <% if (typeof currentUser !== 'undefined' && currentUser) { %>
+        <a href="/dashboard">Dashboard</a>
+        <form method="post" action="/logout" class="inline-form">
+          <input type="hidden" name="_csrf" value="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>">
+          <button type="submit">Log out</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Owner login</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="page">

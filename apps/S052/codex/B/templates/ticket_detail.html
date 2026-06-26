@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Ticket #{{ ticket.id }} | Support Tickets{% endblock %}
+{% block content %}
+  <article class="panel">
+    <a href="{{ url_for('tickets') }}">Back to tickets</a>
+    <h1>{{ ticket.subject }}</h1>
+    <dl class="meta">
+      <div><dt>Status</dt><dd>{{ ticket.status }}</dd></div>
+      <div><dt>Priority</dt><dd>{{ ticket.priority }}</dd></div>
+      <div><dt>Created</dt><dd>{{ ticket.created_at }}</dd></div>
+      <div><dt>Updated</dt><dd>{{ ticket.updated_at }}</dd></div>
+    </dl>
+    <h2>Description</h2>
+    <p class="description">{{ ticket.description }}</p>
+  </article>
+{% endblock %}

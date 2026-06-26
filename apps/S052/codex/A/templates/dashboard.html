@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}My Tickets - Support Tickets{% endblock %}
+
+{% block content %}
+  <section class="page-header">
+    <div>
+      <h1>My tickets</h1>
+      <p class="muted">Track submitted support requests and their current status.</p>
+    </div>
+    <a class="button" href="{{ url_for('new_ticket') }}">Submit ticket</a>
+  </section>
+
+  {% if tickets %}
+    <div class="ticket-list">
+      {% for ticket in tickets %}
+        <a class="ticket-row" href="{{ url_for('ticket_detail', ticket_id=ticket['id']) }}">
+          <div>
+            <h2>{{ ticket["subject"] }}</h2>
+            <span class="meta">Created {{ ticket["created_at"][:10] }}</span>
+          </div>
+          <div class="ticket-badges">
+            <span class="badge priority-{{ ticket['priority']|lower }}">{{ ticket["priority"] }}</span>
+            <span class="badge status">{{ ticket["status"] }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <section class="empty-state">
+      <h2>No tickets yet</h2>
+      <p class="muted">Submit your first support request when you need help.</p>
+      <a class="button" href="{{ url_for('new_ticket') }}">Submit ticket</a>
+    </section>
+  {% endif %}
+{% endblock %}

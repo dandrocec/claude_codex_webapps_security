@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} | Secure Shop{% endblock %}
+{% block content %}
+  <article class="product-detail">
+    <a href="{{ url_for('index') }}">Back to catalogue</a>
+    <h1>{{ product.name }}</h1>
+    <p class="price">{{ product.price_cents | money }}</p>
+    <p>{{ product.description }}</p>
+    <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>
+        Quantity
+        <input type="number" name="quantity" min="1" max="20" value="1" inputmode="numeric">
+      </label>
+      <button type="submit">Add to cart</button>
+    </form>
+  </article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    {% if current_user() %}
+      <form class="comment-form" method="post" action="{{ url_for('add_comment', product_id=product.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label for="body">Post a comment</label>
+        <textarea id="body" name="body" rows="4" minlength="2" maxlength="800" required></textarea>
+        <button type="submit">Post comment</button>
+      </form>
+    {% else %}
+      <p><a href="{{ url_for('login', next=request.path) }}">Sign in</a> to post a comment.</p>
+    {% endif %}
+
+    {% if comments %}
+      <ol class="comment-list">
+        {% for comment in comments %}
+          <li>
+            <div class="comment-meta">
+              <strong>{{ comment.username }}</strong>
+              <time datetime="{{ comment.created_at }}">{{ comment.created_at }}</time>
+            </div>
+            <p>{{ comment.body }}</p>
+            {% if current_user() and current_user().id == comment.user_id %}
+              <form method="post" action="{{ url_for('delete_comment', comment_id=comment.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="secondary" type="submit">Delete</button>
+              </form>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p>No comments yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

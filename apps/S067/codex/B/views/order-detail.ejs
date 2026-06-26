@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<section class="section-head">
+  <h1>Order #<%= order.id %></h1>
+  <p>Status: <span class="status"><%= order.status %></span></p>
+</section>
+
+<% if (staffView) { %>
+  <p>Customer: <%= order.email %></p>
+  <form method="post" action="/staff/orders/<%= order.id %>/status" class="status-form detail-status">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <select name="status" required>
+      <% statuses.forEach((status) => { %>
+        <option value="<%= status %>" <%= status === order.status ? 'selected' : '' %>><%= status %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Update Status</button>
+  </form>
+<% } %>
+
+<table>
+  <thead><tr><th>Item</th><th>Unit price</th><th>Quantity</th><th>Total</th></tr></thead>
+  <tbody>
+    <% items.forEach((item) => { %>
+      <tr>
+        <td><%= item.item_name %></td>
+        <td><%= money(item.unit_price_cents) %></td>
+        <td><%= item.quantity %></td>
+        <td><%= money(item.unit_price_cents * item.quantity) %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<div class="total">Order total: <%= money(order.total_cents) %></div>
+
+<% if (order.customer_note) { %>
+  <section class="note">
+    <h2>Order Note</h2>
+    <p><%= order.customer_note %></p>
+  </section>
+<% } %>
+
+<%- include('partials/footer') %>

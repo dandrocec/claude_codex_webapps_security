@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<section class="panel narrow">
+  <h1>Create account</h1>
+  <form method="post">
+    <label>Name
+      <input name="name" required>
+    </label>
+    <label>Email
+      <input type="email" name="email" required>
+    </label>
+    <label>Password
+      <input type="password" name="password" required>
+    </label>
+    <fieldset>
+      <legend>Account type</legend>
+      <label class="choice"><input type="radio" name="role" value="applicant" required> Applicant</label>
+      <label class="choice"><input type="radio" name="role" value="employer" required> Employer</label>
+    </fieldset>
+    <button class="button" type="submit">Register</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{
+  "name": "crowdfund-express-site",
+  "version": "1.0.0",
+  "description": "A Node.js/Express crowdfunding site with SQLite persistence.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

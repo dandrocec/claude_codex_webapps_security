@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}New Ticket - Support Tickets{% endblock %}
+
+{% block content %}
+  <section class="form-panel">
+    <div class="page-header compact">
+      <div>
+        <h1>Submit ticket</h1>
+        <p class="muted">Describe the issue clearly so support can triage it.</p>
+      </div>
+    </div>
+    <form method="post" class="form">
+      <label>
+        Subject
+        <input name="subject" maxlength="140" required>
+      </label>
+      <label>
+        Priority
+        <select name="priority" required>
+          {% for priority in priorities %}
+            <option value="{{ priority }}" {% if priority == "Medium" %}selected{% endif %}>{{ priority }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>
+        Description
+        <textarea name="description" rows="8" required></textarea>
+      </label>
+      <div class="actions">
+        <a class="secondary-button" href="{{ url_for('dashboard') }}">Cancel</a>
+        <button class="button" type="submit">Submit ticket</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}

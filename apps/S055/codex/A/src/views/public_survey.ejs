@@ -1,0 +1,24 @@
+<%- include("partials/start", { title: survey.title }) %>
+<section class="public-form">
+  <div class="page-heading">
+    <div>
+      <p class="eyebrow">Survey</p>
+      <h1><%= survey.title %></h1>
+      <% if (survey.description) { %><p><%= survey.description %></p><% } %>
+    </div>
+  </div>
+
+  <form method="post" action="/s/<%= survey.slug %>" class="stack panel">
+    <% questions.forEach((question) => { %>
+      <label><%= question.prompt %><% if (question.required) { %> <span class="required">*</span><% } %>
+        <% if (question.question_type === "textarea") { %>
+          <textarea name="q_<%= question.id %>" rows="4" <%= question.required ? "required" : "" %>><%= values[`q_${question.id}`] || "" %></textarea>
+        <% } else { %>
+          <input type="text" name="q_<%= question.id %>" value="<%= values[`q_${question.id}`] || "" %>" <%= question.required ? "required" : "" %>>
+        <% } %>
+      </label>
+    <% }) %>
+    <button class="button" type="submit">Submit response</button>
+  </form>
+</section>
+<%- include("partials/end") %>

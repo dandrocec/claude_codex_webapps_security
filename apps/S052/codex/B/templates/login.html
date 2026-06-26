@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Sign in | Support Tickets{% endblock %}
+{% block content %}
+  <section class="panel narrow">
+    <h1>Sign in</h1>
+    <form method="post" novalidate>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="username">Username</label>
+      <input id="username" name="username" value="{{ form.username.data or '' }}" maxlength="40" required>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" maxlength="128" required>
+      <button type="submit">Sign in</button>
+    </form>
+  </section>
+{% endblock %}

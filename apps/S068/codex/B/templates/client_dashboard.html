@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Client dashboard{% endblock %}
+{% block content %}
+<section class="grid">
+  <div class="panel">
+    <h1>Available slots</h1>
+    {% if open_slots %}
+      <table>
+        <thead>
+          <tr><th>Provider</th><th>Start</th><th>End</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for slot in open_slots %}
+            <tr>
+              <td>{{ slot.provider_name }}</td>
+              <td>{{ slot.starts_at }}</td>
+              <td>{{ slot.ends_at }}</td>
+              <td>
+                <form method="post" action="{{ url_for('book_slot', slot_id=slot.id) }}" class="inline">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="primary">Book</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No open slots right now.</p>
+    {% endif %}
+  </div>
+  <div class="panel">
+    <h1>Your appointments</h1>
+    {% if appointments %}
+      <table>
+        <thead>
+          <tr><th>Provider</th><th>Start</th><th>End</th><th>Confirmation</th></tr>
+        </thead>
+        <tbody>
+          {% for appointment in appointments %}
+            <tr>
+              <td>{{ appointment.provider_name }}</td>
+              <td>{{ appointment.starts_at }}</td>
+              <td>{{ appointment.ends_at }}</td>
+              <td><code>{{ appointment.confirmation_code }}</code></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>You have not booked any appointments.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

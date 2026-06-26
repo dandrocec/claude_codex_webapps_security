@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Reject Post{% endblock %}
+{% block content %}
+  <section class="form-panel wide">
+    <h1>Reject post</h1>
+    <p class="meta">{{ post.title }} by {{ post.author }}</p>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      {% include "_field.html" with context %}
+      <button class="danger" type="submit">Reject post</button>
+    </form>
+  </section>
+{% endblock %}

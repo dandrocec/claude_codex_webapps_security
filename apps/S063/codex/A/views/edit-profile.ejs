@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<section class="panel narrow">
+  <h1>Edit profile</h1>
+  <form class="stack" method="post" action="/profile/edit">
+    <label>Display name
+      <input name="display_name" maxlength="60" value="<%= currentUser.display_name %>" required>
+    </label>
+    <label>Location
+      <input name="location" maxlength="80" value="<%= currentUser.location %>">
+    </label>
+    <label>Bio
+      <textarea name="bio" maxlength="240" rows="5"><%= currentUser.bio %></textarea>
+    </label>
+    <button class="button" type="submit">Save profile</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

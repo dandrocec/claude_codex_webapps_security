@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Public Posts{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Approved posts</h1>
+    <p>Published posts reviewed by editors.</p>
+  </section>
+  {% if posts %}
+    <div class="post-list">
+      {% for post in posts %}
+        <article class="post-card">
+          <h2><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></h2>
+          <p class="meta">By {{ post.author }} · {{ post.updated_at[:10] }}</p>
+          <p>{{ post.body[:220] }}{% if post.body|length > 220 %}...{% endif %}</p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty">No approved posts yet.</p>
+  {% endif %}
+{% endblock %}

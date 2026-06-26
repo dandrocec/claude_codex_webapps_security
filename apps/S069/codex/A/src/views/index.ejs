@@ -1,0 +1,37 @@
+<%- include("partials/head", { title: "Crowdfund" }) %>
+<section class="hero">
+  <div>
+    <p class="eyebrow">Community-backed projects</p>
+    <h1>Fund ideas with clear goals and real deadlines.</h1>
+  </div>
+  <a class="button" href="/campaigns/new">Launch a campaign</a>
+</section>
+
+<section class="campaign-grid">
+  <% if (campaigns.length === 0) { %>
+    <div class="empty-state">
+      <h2>No campaigns yet</h2>
+      <p>Start the first project and invite backers to pledge.</p>
+    </div>
+  <% } %>
+
+  <% campaigns.forEach((campaign) => { %>
+    <article class="campaign-card">
+      <div class="card-topline">
+        <span><%= campaign.creator_name %></span>
+        <span><%= campaign.daysRemaining %> days left</span>
+      </div>
+      <h2><a href="/campaigns/<%= campaign.id %>"><%= campaign.title %></a></h2>
+      <p><%= campaign.description %></p>
+      <div class="progress">
+        <div class="progress-fill" style="width: <%= campaign.progress %>%"></div>
+      </div>
+      <div class="stats">
+        <strong><%= campaign.totalRaised %></strong>
+        <span><%= campaign.progress %>% of <%= campaign.goal %></span>
+      </div>
+      <a class="text-link" href="/campaigns/<%= campaign.id %>">View campaign</a>
+    </article>
+  <% }) %>
+</section>
+<%- include("partials/foot") %>

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ heading }}{% endblock %}
+{% block content %}
+  <section class="form-panel wide">
+    <h1>{{ heading }}</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      {% include "_field.html" with context %}
+      <button type="submit">Save draft</button>
+    </form>
+  </section>
+{% endblock %}

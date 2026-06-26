@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+<section class="panel">
+  <div class="section-heading">
+    <h1>Discover people</h1>
+    <form class="search" method="get" action="/discover">
+      <input name="q" value="<%= query %>" placeholder="Search profiles">
+      <button class="button small" type="submit">Search</button>
+    </form>
+  </div>
+  <div class="user-grid">
+    <% users.forEach((user) => { %>
+      <article class="user-card">
+        <a class="post-name" href="/users/<%= user.username %>"><%= user.display_name %></a>
+        <p class="muted">@<%= user.username %> · <%= user.followers_count %> followers</p>
+        <% if (user.location) { %><p><%= user.location %></p><% } %>
+        <% if (user.bio) { %><p><%= user.bio %></p><% } %>
+        <% if (user.is_following) { %>
+          <form method="post" action="/users/<%= user.username %>/follow?_method=DELETE">
+            <button class="secondary compact" type="submit">Following</button>
+          </form>
+        <% } else { %>
+          <form method="post" action="/users/<%= user.username %>/follow">
+            <button class="button small" type="submit">Follow</button>
+          </form>
+        <% } %>
+      </article>
+    <% }) %>
+  </div>
+  <% if (!users.length) { %>
+    <p class="muted">No matching users found.</p>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= mode === "login" ? "Log in" : "Register" %> | Movie Watchlist</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="auth-page">
+    <main class="auth-shell">
+      <section class="auth-panel">
+        <div>
+          <p class="eyebrow">Movie Watchlist</p>
+          <h1><%= mode === "login" ? "Log in" : "Create your account" %></h1>
+        </div>
+
+        <% if (error) { %>
+          <p class="alert"><%= error %></p>
+        <% } %>
+
+        <form method="post" action="/<%= mode %>" class="stack">
+          <label>
+            Username
+            <input name="username" autocomplete="username" required minlength="3">
+          </label>
+          <label>
+            Password
+            <input name="password" type="password" autocomplete="<%= mode === "login" ? "current-password" : "new-password" %>" required minlength="6">
+          </label>
+          <button type="submit"><%= mode === "login" ? "Log in" : "Register" %></button>
+        </form>
+
+        <% if (mode === "login") { %>
+          <p class="muted">Need an account? <a href="/register">Register</a></p>
+        <% } else { %>
+          <p class="muted">Already have an account? <a href="/login">Log in</a></p>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>

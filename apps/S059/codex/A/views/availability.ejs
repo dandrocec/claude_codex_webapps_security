@@ -1,0 +1,55 @@
+<%- include("partials/header", { title: "Availability", currentUser, error, info }) %>
+<section class="heading-row">
+  <div>
+    <p class="eyebrow">Daily schedule</p>
+    <h1>Availability</h1>
+  </div>
+  <form method="get" action="/availability" class="date-picker">
+    <label for="date">Date</label>
+    <input id="date" type="date" name="date" value="<%= selectedDate %>">
+    <button type="submit" class="button small">View</button>
+  </form>
+</section>
+
+<section class="schedule-wrap">
+  <table class="schedule">
+    <thead>
+      <tr>
+        <th>Room</th>
+        <% slots.forEach((slot) => { %>
+          <th><%= slot.start_time %><span><%= slot.end_time %></span></th>
+        <% }) %>
+      </tr>
+    </thead>
+    <tbody>
+      <% rooms.forEach((room) => { %>
+        <tr>
+          <th>
+            <strong><%= room.name %></strong>
+            <span><%= room.location %> · <%= room.capacity %> seats</span>
+          </th>
+          <% slots.forEach((slot) => {
+            const booking = bookingMap.get(`${room.id}:${slot.id}`);
+          %>
+            <td>
+              <% if (booking) { %>
+                <span class="status booked">Booked</span>
+                <% if (booking.user_id === currentUser.id) { %>
+                  <span class="owner">You</span>
+                <% } %>
+              <% } else { %>
+                <form method="post" action="/bookings">
+                  <input type="hidden" name="date" value="<%= selectedDate %>">
+                  <input type="hidden" name="room_id" value="<%= room.id %>">
+                  <input type="hidden" name="slot_id" value="<%= slot.id %>">
+                  <button type="submit" class="slot-button">Book</button>
+                </form>
+              <% } %>
+            </td>
+          <% }) %>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include("partials/footer") %>

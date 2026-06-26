@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ job.title }}{% endblock %}
+
+{% block content %}
+<article class="panel">
+  <p class="muted">{{ job.employer_name }} · {{ job.location }}</p>
+  <h1>{{ job.title }}</h1>
+  <div class="job-description">{{ job.description }}</div>
+  <div class="actions">
+    {% if current_user and current_user.role == "applicant" %}
+      {% if already_applied %}
+        <span class="status">Already applied</span>
+      {% else %}
+        <a class="button" href="{{ url_for('apply', job_id=job.id) }}">Apply</a>
+      {% endif %}
+    {% elif not current_user %}
+      <a class="button" href="{{ url_for('login') }}">Login to apply</a>
+    {% endif %}
+  </div>
+</article>
+{% endblock %}

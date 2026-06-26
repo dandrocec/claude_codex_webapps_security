@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} · Role Blog{% endblock %}
+{% block content %}
+  <article class="article">
+    <a href="{{ url_for('index') }}" class="back-link">Back to posts</a>
+    <div class="meta">By {{ post.author_name }} · {{ post.created_at }}</div>
+    <h1>{{ post.title }}</h1>
+    <div class="body-text">{{ post.body }}</div>
+  </article>
+{% endblock %}

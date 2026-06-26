@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Reader Dashboard · Role Blog{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Reader dashboard</h1>
+    <p>Browse the latest approved posts.</p>
+  </section>
+  <div class="post-list">
+    {% for post in posts %}
+      <article class="post-card">
+        <div class="meta">By {{ post.author_name }} · {{ post.created_at }}</div>
+        <h2><a href="{{ url_for('public_post', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <p>{{ post.body[:180] }}{% if post.body|length > 180 %}...{% endif %}</p>
+      </article>
+    {% else %}
+      <p class="empty">No approved posts are available.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+

@@ -1,0 +1,16 @@
+<%- include("partials/header") %>
+
+<section class="panel">
+  <h1><%= title %></h1>
+  <% if (errors.length) { %>
+    <div class="alert"><% errors.forEach((error) => { %><p><%= error %></p><% }) %></div>
+  <% } %>
+  <form method="post" action="<%= action %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Title <input name="title" maxlength="120" required value="<%= form.title || "" %>"></label>
+    <label>Description <textarea name="description" maxlength="1000" required><%= form.description || "" %></textarea></label>
+    <button type="submit">Save course</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

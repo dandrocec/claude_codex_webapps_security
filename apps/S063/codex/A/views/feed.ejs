@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<div class="layout">
+  <section class="panel composer">
+    <h1>Your feed</h1>
+    <form method="post" action="/posts">
+      <textarea name="body" maxlength="280" rows="4" placeholder="What is happening?" required></textarea>
+      <div class="form-row">
+        <span class="muted">280 characters max</span>
+        <button class="button" type="submit">Post</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="timeline">
+    <% if (!posts.length) { %>
+      <article class="empty panel">
+        <h2>No posts yet</h2>
+        <p>Follow people from Discover or publish your first status update.</p>
+      </article>
+    <% } %>
+    <% posts.forEach((post) => { %>
+      <article class="post">
+        <div class="post-header">
+          <div>
+            <a class="post-name" href="/users/<%= post.username %>"><%= post.display_name %></a>
+            <span class="muted">@<%= post.username %></span>
+          </div>
+          <time><%= post.created_label %></time>
+        </div>
+        <p><%= post.body %></p>
+        <% if (currentUser && currentUser.username === post.username) { %>
+          <form method="post" action="/posts/<%= post.id %>?_method=DELETE">
+            <button class="link-button danger" type="submit">Delete</button>
+          </form>
+        <% } %>
+      </article>
+    <% }) %>
+  </section>
+</div>
+
+<%- include('partials/footer') %>

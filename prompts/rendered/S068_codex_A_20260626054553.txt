@@ -1,0 +1,3 @@
+Build a Flask scheduling app. Providers publish available slots; clients book a free slot and receive a confirmation; a slot cannot be booked twice. Both roles see their own appointments. Store data in SQLite.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5068.

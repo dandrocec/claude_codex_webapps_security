@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+  <section class="form-panel">
+    <h1>Sign in</h1>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      {% include "_field.html" with context %}
+      <button type="submit">Sign in</button>
+    </form>
+  </section>
+{% endblock %}

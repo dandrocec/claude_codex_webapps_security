@@ -1,0 +1,19 @@
+<%- include('partials/header', { title: survey.title }) %>
+<section class="panel">
+  <div class="heading-row">
+    <div>
+      <h1><%= survey.title %></h1>
+      <p class="muted"><%= survey.description || 'No description' %></p>
+    </div>
+    <a class="button" href="/surveys/<%= survey.id %>/responses">View responses</a>
+  </div>
+  <h2>Public response link</h2>
+  <p><a href="<%= shareUrl %>"><%= shareUrl %></a></p>
+  <h2>Questions</h2>
+  <ol>
+    <% questions.forEach((question) => { %>
+      <li><%= question.prompt %></li>
+    <% }) %>
+  </ol>
+</section>
+<%- include('partials/footer') %>

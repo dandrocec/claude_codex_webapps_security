@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+<section class="panel">
+  <h1>Your feed</h1>
+  <form method="post" action="/posts" class="composer" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Status update
+      <textarea name="body" maxlength="280" required><%= form.body || '' %></textarea>
+    </label>
+    <button type="submit">Post</button>
+  </form>
+</section>
+
+<section class="stream">
+  <% if (!posts.length) { %>
+    <p class="empty">No posts yet. Follow people to build your feed.</p>
+  <% } %>
+  <% posts.forEach(function(post) { %>
+    <article class="post">
+      <div class="post-head">
+        <a href="/users/<%= post.user_id %>"><strong><%= post.display_name %></strong> @<%= post.username %></a>
+        <time><%= post.created_at %></time>
+      </div>
+      <p><%= post.body %></p>
+      <% if (currentUser && currentUser.id === post.user_id) { %>
+        <form method="post" action="/posts/<%= post.id %>/delete" class="inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="danger">Delete</button>
+        </form>
+      <% } %>
+    </article>
+  <% }) %>
+</section>
+<%- include('partials/footer') %>

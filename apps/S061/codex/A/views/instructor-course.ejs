@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+
+<div class="row">
+  <div>
+    <h1 class="page-title"><%= course.title %></h1>
+    <p class="lead"><%= course.description %></p>
+    <span class="badge"><%= course.published ? 'Published' : 'Draft' %></span>
+  </div>
+  <a class="button secondary" href="/instructor/courses/<%= course.id %>/edit">Edit course</a>
+</div>
+
+<section class="panel">
+  <h2>Add lesson</h2>
+  <form action="/instructor/courses/<%= course.id %>/lessons" method="post">
+    <label>
+      Lesson title
+      <input name="title" required>
+    </label>
+    <label>
+      Content
+      <textarea name="content" required></textarea>
+    </label>
+    <button type="submit">Add lesson</button>
+  </form>
+</section>
+
+<section class="stack">
+  <h2>Lessons</h2>
+  <% if (lessons.length === 0) { %>
+    <div class="empty">No lessons have been added.</div>
+  <% } else { %>
+    <% lessons.forEach((lesson) => { %>
+      <article class="lesson">
+        <div class="row">
+          <h3><%= lesson.position %>. <%= lesson.title %></h3>
+          <form action="/instructor/lessons/<%= lesson.id %>/delete" method="post">
+            <button class="danger" type="submit">Delete</button>
+          </form>
+        </div>
+        <p class="lesson-content"><%= lesson.content %></p>
+      </article>
+    <% }) %>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

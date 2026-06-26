@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+<section class="page-head">
+  <div>
+    <h1>Open campaigns</h1>
+    <p class="muted">Fund useful work from independent creators.</p>
+  </div>
+  <% if (currentUser) { %>
+    <a class="button" href="/campaigns/new">Launch campaign</a>
+  <% } %>
+</section>
+
+<% if (!campaigns.length) { %>
+  <section class="panel">
+    <h2>No campaigns yet</h2>
+    <p class="muted">Create an account and launch the first campaign.</p>
+  </section>
+<% } %>
+
+<section class="grid">
+  <% campaigns.forEach((campaign) => { %>
+    <article class="card">
+      <h2><a href="/campaigns/<%= campaign.id %>"><%= campaign.title %></a></h2>
+      <p class="muted">By <%= campaign.creator_name %> · Deadline <%= formatDate(campaign.deadline) %></p>
+      <div class="progress" aria-label="Funding progress">
+        <span style="width: <%= progressPercent(campaign.raised_cents, campaign.goal_cents) %>%"></span>
+      </div>
+      <p>
+        <strong>$<%= dollars(campaign.raised_cents) %></strong>
+        raised of $<%= dollars(campaign.goal_cents) %>
+      </p>
+      <p class="muted"><%= campaign.pledge_count %> pledges</p>
+    </article>
+  <% }) %>
+</section>
+<%- include('partials/footer') %>

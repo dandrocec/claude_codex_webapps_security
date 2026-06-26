@@ -1,0 +1,36 @@
+<%- include('partials/header', { title: 'Dashboard' }) %>
+
+<section class="toolbar">
+  <div>
+    <h1>Projects</h1>
+    <p>Signed in as <%= currentUser.email %></p>
+  </div>
+  <a class="button" href="/projects/new">New project</a>
+</section>
+
+<section class="list" aria-label="Managed projects">
+  <% if (projects.length === 0) { %>
+    <p class="empty">No projects yet.</p>
+  <% } %>
+
+  <% projects.forEach((project) => { %>
+    <article class="row-card">
+      <% if (project.image) { %>
+        <img src="<%= project.image %>" alt="">
+      <% } %>
+      <div>
+        <h2><%= project.title %></h2>
+        <p><%= project.description %></p>
+      </div>
+      <div class="actions">
+        <a class="button secondary" href="/projects/<%= project.id %>/edit">Edit</a>
+        <form method="post" action="/projects/<%= project.id %>/delete">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="danger" type="submit">Delete</button>
+        </form>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<%- include('partials/footer') %>

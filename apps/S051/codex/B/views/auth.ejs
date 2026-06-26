@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="panel auth-panel" aria-labelledby="page-title">
+      <h1 id="page-title"><%= title %></h1>
+
+      <% if (errors.length) { %>
+        <div class="alert alert-error" role="alert">
+          <% errors.forEach(function(error) { %>
+            <p><%= error %></p>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <form method="post" action="<%= action %>" novalidate>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <label for="username">Username</label>
+        <input id="username" name="username" autocomplete="username" minlength="3" maxlength="40" required>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="<%= mode === 'register' ? 'new-password' : 'current-password' %>" minlength="12" maxlength="128" required>
+
+        <button type="submit"><%= mode === 'register' ? 'Create account' : 'Log in' %></button>
+      </form>
+
+      <% if (mode === 'register') { %>
+        <p class="switch-link">Already have an account? <a href="/login">Log in</a></p>
+      <% } else { %>
+        <p class="switch-link">Need an account? <a href="/register">Create one</a></p>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

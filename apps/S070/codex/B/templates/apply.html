@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Apply for {{ job.title }}</h1>
+  <p class="meta">{{ job.company }} · {{ job.location }}</p>
+  <form class="stack" method="post" action="{{ url_for('apply', job_id=job.id) }}" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>Cover letter
+      <textarea name="cover_letter" maxlength="4000" required>{{ form.get('cover_letter', '') }}</textarea>
+    </label>
+    <label>Resume
+      <input name="resume" type="file" accept=".pdf,.docx,.txt" required>
+    </label>
+    <p class="meta">Accepted files: PDF, DOCX, or UTF-8 TXT. Maximum size: 2 MB.</p>
+    <button type="submit">Submit application</button>
+  </form>
+{% endblock %}

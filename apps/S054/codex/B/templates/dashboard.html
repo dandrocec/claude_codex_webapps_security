@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Time Tracker{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <div>
+    <h1>Weekly time</h1>
+    <p>{{ week_start.isoformat() }} to {{ week_end.isoformat() }}</p>
+  </div>
+  <nav class="week-nav" aria-label="Week navigation">
+    <a href="{{ url_for('dashboard', week=prev_week) }}">Previous</a>
+    <a href="{{ url_for('dashboard', week=today) }}">Current</a>
+    <a href="{{ url_for('dashboard', week=next_week) }}">Next</a>
+  </nav>
+</section>
+
+<section class="grid">
+  <div class="panel">
+    <h2>Add entry</h2>
+    <form method="post" class="entry-form" novalidate>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Project
+        <input type="text" name="project" maxlength="80" required>
+      </label>
+      <label>Date
+        <input type="date" name="entry_date" value="{{ today }}" required>
+      </label>
+      <label>Hours
+        <input type="number" name="hours" min="0.01" max="24" step="0.01" required>
+      </label>
+      <label>Note
+        <textarea name="note" maxlength="500" rows="4"></textarea>
+      </label>
+      <button type="submit">Save entry</button>
+    </form>
+  </div>
+
+  <div class="panel">
+    <h2>Totals</h2>
+    {% if totals %}
+      <table>
+        <thead>
+          <tr><th>Project</th><th>Hours</th></tr>
+        </thead>
+        <tbody>
+          {% for total in totals %}
+            <tr>
+              <td>{{ total.project }}</td>
+              <td>{{ "%.2f"|format(total.total_hours) }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr><th>Total</th><th>{{ "%.2f"|format(week_total) }}</th></tr>
+        </tfoot>
+      </table>
+    {% else %}
+      <p class="empty">No entries for this week.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="panel entries-panel">
+  <h2>Entries</h2>
+  {% if entries %}
+    <table>
+      <thead>
+        <tr><th>Date</th><th>Project</th><th>Hours</th><th>Note</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        {% for entry in entries %}
+          <tr>
+            <td>{{ entry.entry_date }}</td>
+            <td>{{ entry.project }}</td>
+            <td>{{ "%.2f"|format(entry.hours) }}</td>
+            <td>{{ entry.note }}</td>
+            <td class="actions">
+              <a href="{{ url_for('edit_entry', entry_id=entry.id) }}">Edit</a>
+              <form method="post" action="{{ url_for('delete_entry', entry_id=entry.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="empty">No time entries yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

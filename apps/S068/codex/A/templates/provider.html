@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Provider Dashboard · Scheduler{% endblock %}
+{% block content %}
+<div class="grid">
+    <section class="panel">
+        <h1>Publish a slot</h1>
+        <form method="post">
+            <label>
+                Start time
+                <input type="datetime-local" name="starts_at" required>
+            </label>
+            <label>
+                Notes
+                <textarea name="notes" rows="4" placeholder="Optional appointment details"></textarea>
+            </label>
+            <button type="submit">Publish slot</button>
+        </form>
+    </section>
+
+    <section class="panel">
+        <h1>Your appointments</h1>
+        {% if appointments %}
+            <div class="stack">
+                {% for item in appointments %}
+                    <article class="appointment">
+                        <div>
+                            <strong>{{ item.starts_at }}</strong>
+                            {% if item.notes %}<p>{{ item.notes }}</p>{% endif %}
+                        </div>
+                        {% if item.client_name %}
+                            <span class="badge booked">Booked</span>
+                            <p>Client: {{ item.client_name }} ({{ item.client_email }})</p>
+                            <p>Confirmation: <code>{{ item.confirmation_code }}</code></p>
+                        {% else %}
+                            <span class="badge open">Open</span>
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="muted">No slots published yet.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

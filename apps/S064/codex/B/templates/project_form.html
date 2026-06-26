@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}New project{% endblock %}
+{% block content %}
+<section class="panel narrow">
+  <h1>New project</h1>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Name
+      <input name="name" required maxlength="80">
+    </label>
+    <label>Description
+      <textarea name="description" maxlength="500"></textarea>
+    </label>
+    <button type="submit">Create project</button>
+  </form>
+</section>
+{% endblock %}

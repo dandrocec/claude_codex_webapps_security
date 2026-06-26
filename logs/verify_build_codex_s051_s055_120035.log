@@ -1,0 +1,694 @@
+ Image csj/s052-codex-b Building 
+ Image csj/s055-codex-a Building 
+ Image csj/s053-codex-b Building 
+ Image csj/s052-codex-a Building 
+ Image csj/s051-codex-a Building 
+ Image csj/s054-codex-a Building 
+ Image csj/s051-codex-b Building 
+ Image csj/s054-codex-b Building 
+ Image csj/s053-codex-a Building 
+ Image csj/s055-codex-b Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 6.32kB done
+#1 DONE 0.0s
+
+#2 [s053-codex-a internal] load build definition from Dockerfile.node
+#2 DONE 0.0s
+
+#3 [s052-codex-a internal] load build definition from Dockerfile.python
+#3 transferring dockerfile: 1.76kB done
+#3 DONE 0.0s
+
+#2 [s053-codex-a internal] load build definition from Dockerfile.node
+#2 transferring dockerfile: 1.84kB done
+#2 DONE 0.0s
+
+#4 [s051-codex-a internal] load metadata for docker.io/library/node:22-slim
+#4 DONE 1.3s
+
+#5 [s052-codex-a internal] load metadata for docker.io/library/python:3.12-slim
+#5 DONE 1.3s
+
+#6 [s051-codex-a internal] load .dockerignore
+#6 transferring context: 2B 0.0s done
+#6 DONE 0.0s
+
+#7 [s055-codex-a internal] load .dockerignore
+#7 transferring context: 2B 0.0s done
+#7 DONE 0.1s
+
+#8 [s053-codex-a internal] load .dockerignore
+#8 transferring context: 2B 0.0s done
+#8 DONE 0.1s
+
+#9 [s051-codex-b internal] load .dockerignore
+#9 transferring context: 2B 0.0s done
+#9 DONE 0.1s
+
+#10 [s053-codex-b internal] load .dockerignore
+#10 transferring context: 2B 0.0s done
+#10 DONE 0.1s
+
+#11 [s055-codex-b internal] load .dockerignore
+#11 transferring context: 2B 0.0s done
+#11 DONE 0.1s
+
+#12 [s054-codex-a internal] load .dockerignore
+#12 transferring context: 2B done
+#12 DONE 0.1s
+
+#13 [s052-codex-b internal] load .dockerignore
+#13 transferring context: 2B done
+#13 DONE 0.1s
+
+#14 [s051-codex-a 1/4] FROM docker.io/library/node:22-slim@sha256:813a7480f28fdadac1f7f5c824bcdad435b5bc1322a5968bbbdef8d058f9dff4
+#14 resolve docker.io/library/node:22-slim@sha256:813a7480f28fdadac1f7f5c824bcdad435b5bc1322a5968bbbdef8d058f9dff4 0.0s done
+#14 DONE 0.0s
+
+#15 [s053-codex-b internal] load build context
+#15 transferring context: 20.47kB 0.0s done
+#15 DONE 0.1s
+
+#14 [s055-codex-b 1/4] FROM docker.io/library/node:22-slim@sha256:813a7480f28fdadac1f7f5c824bcdad435b5bc1322a5968bbbdef8d058f9dff4
+#14 resolve docker.io/library/node:22-slim@sha256:813a7480f28fdadac1f7f5c824bcdad435b5bc1322a5968bbbdef8d058f9dff4 0.0s done
+#14 DONE 0.0s
+
+#16 [s052-codex-a internal] load .dockerignore
+#16 transferring context: 2B done
+#16 DONE 0.1s
+
+#17 [s054-codex-b internal] load .dockerignore
+#17 transferring context: 2B done
+#17 DONE 0.1s
+
+#18 [s054-codex-a 1/4] FROM docker.io/library/python:3.12-slim@sha256:6c4dd321d176d61ea848dc8c73a4f7dbae8f70e0ee48bb411ea2f045b599fa8e
+#18 resolve docker.io/library/python:3.12-slim@sha256:6c4dd321d176d61ea848dc8c73a4f7dbae8f70e0ee48bb411ea2f045b599fa8e 0.0s done
+#18 DONE 0.0s
+
+#19 [s053-codex-a internal] load build context
+#19 transferring context: 18.34kB 0.0s done
+#19 DONE 0.0s
+
+#20 [s051-codex-b internal] load build context
+#20 transferring context: 23.18kB 0.0s done
+#20 DONE 0.1s
+
+#21 [s051-codex-a internal] load build context
+#21 transferring context: 19.38kB 0.0s done
+#21 DONE 0.1s
+
+#22 [s055-codex-b internal] load build context
+#22 transferring context: 26.46kB 0.0s done
+#22 DONE 0.1s
+
+#23 [s055-codex-a internal] load build context
+#23 transferring context: 27.79kB 0.0s done
+#23 DONE 0.1s
+
+#24 [s053-codex-b 2/4] WORKDIR /app
+#24 CACHED
+
+#25 [s053-codex-b 3/4] COPY . /app
+#25 DONE 0.1s
+
+#26 [s054-codex-a internal] load build context
+#26 transferring context: 18.88kB 0.0s done
+#26 DONE 0.0s
+
+#27 [s052-codex-b 2/4] WORKDIR /app
+#27 CACHED
+
+#28 [s052-codex-b internal] load build context
+#28 transferring context: 22.29kB 0.0s done
+#28 DONE 0.1s
+
+#29 [s052-codex-a internal] load build context
+#29 transferring context: 18.78kB 0.0s done
+#29 DONE 0.1s
+
+#30 [s054-codex-b internal] load build context
+#30 transferring context: 22.72kB 0.0s done
+#30 DONE 0.1s
+
+#31 [s051-codex-b 3/4] COPY . /app
+#31 DONE 0.1s
+
+#32 [s051-codex-a 3/4] COPY . /app
+#32 DONE 0.1s
+
+#33 [s053-codex-a 3/4] COPY . /app
+#33 DONE 0.1s
+
+#34 [s055-codex-b 3/4] COPY . /app
+#34 DONE 0.1s
+
+#35 [s055-codex-a 3/4] COPY . /app
+#35 DONE 0.2s
+
+#36 [s055-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#36 ...
+
+#37 [s052-codex-a 3/4] COPY . /app
+#37 DONE 0.1s
+
+#38 [s054-codex-b 3/4] COPY . /app
+#38 DONE 0.1s
+
+#39 [s054-codex-a 3/4] COPY . /app
+#39 DONE 0.2s
+
+#40 [s052-codex-b 3/4] COPY . /app
+#40 DONE 0.1s
+
+#41 [s052-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#41 2.611 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#41 2.674   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#41 2.720 Collecting Flask-Bcrypt==1.0.1 (from -r requirements.txt (line 2))
+#41 2.739   Downloading Flask_Bcrypt-1.0.1-py3-none-any.whl.metadata (2.6 kB)
+#41 2.782 Collecting Flask-WTF==1.2.1 (from -r requirements.txt (line 3))
+#41 2.807   Downloading flask_wtf-1.2.1-py3-none-any.whl.metadata (3.4 kB)
+#41 2.885 Collecting WTForms==3.1.2 (from -r requirements.txt (line 4))
+#41 2.905   Downloading wtforms-3.1.2-py3-none-any.whl.metadata (5.3 kB)
+#41 2.975 Collecting bleach==6.1.0 (from -r requirements.txt (line 5))
+#41 3.000   Downloading bleach-6.1.0-py3-none-any.whl.metadata (30 kB)
+#41 3.069 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#41 3.089   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#41 3.150 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#41 3.167   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#41 3.211 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#41 3.227   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#41 3.294 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#41 3.317   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#41 3.391 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#41 3.411   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#41 3.509 Collecting bcrypt>=3.1.1 (from Flask-Bcrypt==1.0.1->-r requirements.txt (line 2))
+#41 3.526   Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (10 kB)
+#41 3.617 Collecting markupsafe (from WTForms==3.1.2->-r requirements.txt (line 4))
+#41 3.639   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#41 3.690 Collecting six>=1.9.0 (from bleach==6.1.0->-r requirements.txt (line 5))
+#41 3.710   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+#41 3.767 Collecting webencodings (from bleach==6.1.0->-r requirements.txt (line 5))
+#41 3.785   Downloading webencodings-0.5.1-py2.py3-none-any.whl.metadata (2.1 kB)
+#41 3.823 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#41 3.864 Downloading Flask_Bcrypt-1.0.1-py3-none-any.whl (6.0 kB)
+#41 3.895 Downloading flask_wtf-1.2.1-py3-none-any.whl (12 kB)
+#41 3.923 Downloading wtforms-3.1.2-py3-none-any.whl (145 kB)
+#41 3.966 Downloading bleach-6.1.0-py3-none-any.whl (162 kB)
+#41 4.004 Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (278 kB)
+#41 4.065 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#41 4.095 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#41 4.133 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#41 4.156 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#41 4.191 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#41 4.217 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#41 4.243 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#41 4.290 Downloading webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
+#41 4.325 Installing collected packages: webencodings, six, markupsafe, itsdangerous, click, blinker, bcrypt, WTForms, Werkzeug, Jinja2, bleach, Flask, Flask-WTF, Flask-Bcrypt
+#41 ...
+
+#42 [s054-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#42 2.612 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#42 2.679   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#42 2.736 Collecting Werkzeug==3.0.3 (from -r requirements.txt (line 2))
+#42 2.755   Downloading werkzeug-3.0.3-py3-none-any.whl.metadata (3.7 kB)
+#42 2.806 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 2.825   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#42 2.898 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 2.916   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#42 2.980 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 3.001   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#42 3.046 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 3.063   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#42 3.191 Collecting MarkupSafe>=2.1.1 (from Werkzeug==3.0.3->-r requirements.txt (line 2))
+#42 3.209   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#42 3.242 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#42 3.320 Downloading werkzeug-3.0.3-py3-none-any.whl (227 kB)
+#42 3.377 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#42 3.409 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#42 3.452 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#42 3.484 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#42 3.531 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#42 3.574 Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, Flask
+#42 4.130 Successfully installed Flask-3.0.3 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.0.3 blinker-1.9.0 click-8.4.2 itsdangerous-2.2.0
+#42 4.131 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#42 4.250 
+#42 4.250 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#42 4.250 [notice] To update, run: pip install --upgrade pip
+#42 DONE 4.5s
+
+#43 [s052-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 2.650 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#43 2.711   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#43 2.767 Collecting Werkzeug==3.0.3 (from -r requirements.txt (line 2))
+#43 2.789   Downloading werkzeug-3.0.3-py3-none-any.whl.metadata (3.7 kB)
+#43 2.863 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#43 2.880   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#43 2.938 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#43 2.958   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#43 3.015 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#43 3.035   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#43 3.085 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#43 3.105   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#43 3.218 Collecting MarkupSafe>=2.1.1 (from Werkzeug==3.0.3->-r requirements.txt (line 2))
+#43 3.234   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#43 3.273 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#43 3.330 Downloading werkzeug-3.0.3-py3-none-any.whl (227 kB)
+#43 3.403 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#43 3.439 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#43 3.483 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#43 3.525 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#43 3.567 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#43 3.605 Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, Flask
+#43 4.154 Successfully installed Flask-3.0.3 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.0.3 blinker-1.9.0 click-8.4.2 itsdangerous-2.2.0
+#43 4.154 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#43 4.275 
+#43 4.275 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#43 4.275 [notice] To update, run: pip install --upgrade pip
+#43 DONE 4.5s
+
+#44 [s052-codex-a] exporting to image
+#44 exporting layers
+#44 ...
+
+#45 [s054-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 2.642 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#45 2.707   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#45 2.765 Collecting argon2-cffi==23.1.0 (from -r requirements.txt (line 2))
+#45 2.785   Downloading argon2_cffi-23.1.0-py3-none-any.whl.metadata (5.2 kB)
+#45 2.878 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#45 2.898   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#45 2.961 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#45 2.980   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#45 3.028 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#45 3.046   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#45 3.104 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#45 3.127   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#45 3.176 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#45 3.191   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#45 3.241 Collecting argon2-cffi-bindings (from argon2-cffi==23.1.0->-r requirements.txt (line 2))
+#45 3.257   Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (7.4 kB)
+#45 3.380 Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->Flask==3.0.3->-r requirements.txt (line 1))
+#45 3.400   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#45 3.554 Collecting cffi>=1.0.1 (from argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 2))
+#45 3.583   Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#45 3.633 Collecting pycparser (from cffi>=1.0.1->argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 2))
+#45 3.653   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#45 3.693 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#45 3.748 Downloading argon2_cffi-23.1.0-py3-none-any.whl (15 kB)
+#45 3.783 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#45 3.812 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#45 3.854 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#45 3.880 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#45 3.928 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#45 3.976 Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (87 kB)
+#45 4.008 Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
+#45 4.057 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#45 4.087 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#45 4.127 Installing collected packages: pycparser, MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, cffi, Flask, argon2-cffi-bindings, argon2-cffi
+#45 4.889 Successfully installed Flask-3.0.3 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.8 argon2-cffi-23.1.0 argon2-cffi-bindings-25.1.0 blinker-1.9.0 cffi-2.0.0 click-8.4.2 itsdangerous-2.2.0 pycparser-3.0
+#45 4.889 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#45 5.046 
+#45 5.046 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#45 5.046 [notice] To update, run: pip install --upgrade pip
+#45 DONE 5.3s
+
+#41 [s052-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#41 5.355 Successfully installed Flask-3.0.3 Flask-Bcrypt-1.0.1 Flask-WTF-1.2.1 Jinja2-3.1.6 WTForms-3.1.2 Werkzeug-3.1.8 bcrypt-5.0.0 bleach-6.1.0 blinker-1.9.0 click-8.4.2 itsdangerous-2.2.0 markupsafe-3.0.3 six-1.17.0 webencodings-0.5.1
+#41 5.356 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#41 5.481 
+#41 5.481 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#41 5.481 [notice] To update, run: pip install --upgrade pip
+#41 DONE 5.7s
+
+#44 [s052-codex-a] exporting to image
+#44 exporting layers 0.9s done
+#44 exporting manifest sha256:062693248d700f8dbefd289bdd180917ca29d05e38b72d3e85ccc2faf42ecaf6 0.0s done
+#44 exporting config sha256:450f35b0c18b1a488a97285ffedc29a5e3c455c881dd6d2a6fb98e395a0e903b 0.0s done
+#44 exporting attestation manifest sha256:269cfa5fec9731679e65fef2a7bd29ac4cc99b2f9d1f859d131c29a09a7bdc37 0.0s done
+#44 exporting manifest list sha256:b6c42c3938ce643825e0573ac38f6720b2750fc2014672567c140b91ee1e89db 0.0s done
+#44 naming to docker.io/csj/s052-codex-a:latest done
+#44 unpacking to docker.io/csj/s052-codex-a:latest
+#44 unpacking to docker.io/csj/s052-codex-a:latest 0.3s done
+#44 DONE 1.5s
+
+#46 [s054-codex-a] exporting to image
+#46 exporting layers 0.9s done
+#46 exporting manifest sha256:f3c22522a32a71c2f2ab96fc4b1bd8ec83fad5247fa14d25179a3f91f6a666b6 0.0s done
+#46 exporting config sha256:4fa02e69a71d2fb62d8608d4d0affe6ac191252e92f827aa5e5ad015faacb195 0.0s done
+#46 exporting attestation manifest sha256:36b1ca3bb78b0bb1363878c9d7970f2440dd1b6de52b303a634c5abb99133baa 0.1s done
+#46 exporting manifest list sha256:fd853b03e1d6007193b58b65d29d94b00670bc5d05ad750fd646017465ad5eca 0.0s done
+#46 naming to docker.io/csj/s054-codex-a:latest done
+#46 unpacking to docker.io/csj/s054-codex-a:latest 0.3s done
+#46 DONE 1.5s
+
+#47 [s052-codex-b] exporting to image
+#47 ...
+
+#48 [s054-codex-a] resolving provenance for metadata file
+#48 DONE 0.0s
+
+#49 [s052-codex-a] resolving provenance for metadata file
+#49 DONE 0.0s
+
+#50 [s054-codex-b] exporting to image
+#50 exporting layers 1.0s done
+#50 exporting manifest sha256:870900fd0f03d1666b3482eb69317b97d9636a40e104111075ea54921fe18e98 0.0s done
+#50 exporting config sha256:9f813844f0845cc0ddb98175bda1e677fbf682f2574d7c92cba225d2913bc1da 0.0s done
+#50 exporting attestation manifest sha256:26ab63dcc192706ae99059132766999e9df00802c59e87a52449807a0352e4be 0.1s done
+#50 exporting manifest list sha256:85a30584dccd4aa345dce63af7a7611e0151f34c9a9ed5d8090e66d35c8b66c7 0.0s done
+#50 naming to docker.io/csj/s054-codex-b:latest done
+#50 unpacking to docker.io/csj/s054-codex-b:latest
+#50 unpacking to docker.io/csj/s054-codex-b:latest 0.5s done
+#50 DONE 1.8s
+
+#51 [s055-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#51 ...
+
+#47 [s052-codex-b] exporting to image
+#47 exporting layers 1.3s done
+#47 exporting manifest sha256:f8809c4bf61301148f053faa05b6448f6c5dfd18f409afc45f0ef695bc970e23 0.1s done
+#47 exporting config sha256:d6b7c35414612de12aa1252a0a92e8ffe8835b694da37f7970a855d7df09d601 0.1s done
+#47 exporting attestation manifest sha256:ecb5254fa4b6328ae1dfb185be0463b4859c0dd2b7f7f3dd25fa5086d3fff4ff 0.1s done
+#47 exporting manifest list sha256:6da87ef9c32ef0c54b4755ffb3a047e34733dfb08f10493c18c2854d59383e45
+#47 exporting manifest list sha256:6da87ef9c32ef0c54b4755ffb3a047e34733dfb08f10493c18c2854d59383e45 0.0s done
+#47 naming to docker.io/csj/s052-codex-b:latest 0.0s done
+#47 unpacking to docker.io/csj/s052-codex-b:latest
+#47 ...
+
+#52 [s054-codex-b] resolving provenance for metadata file
+#52 DONE 0.0s
+
+#53 [s053-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#53 7.961 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#53 ...
+
+#36 [s055-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#36 8.078 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#36 ...
+
+#47 [s052-codex-b] exporting to image
+#47 unpacking to docker.io/csj/s052-codex-b:latest 0.7s done
+#47 DONE 2.4s
+
+#53 [s053-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#53 8.099 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#53 8.157 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#53 8.320 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#53 8.327 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#53 8.393 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#53 ...
+
+#54 [s052-codex-b] resolving provenance for metadata file
+#54 DONE 0.1s
+
+#53 [s053-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#53 8.722 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#53 8.829 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#53 9.039 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#53 ...
+
+#55 [s053-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#55 8.054 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#55 8.333 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#55 8.517 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#55 8.550 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#55 8.584 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#55 8.586 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#55 8.591 npm warn deprecated csurf@1.11.0: This package is archived and no longer maintained. For support, visit https://github.com/expressjs/express/discussions
+#55 8.676 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#55 9.041 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#55 ...
+
+#56 [s051-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#56 8.010 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#56 8.355 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#56 8.549 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#56 8.551 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#56 8.783 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#56 8.840 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#56 8.854 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#56 8.873 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#56 8.922 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#56 8.953 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#56 9.208 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#56 9.374 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#56 ...
+
+#57 [s051-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#57 8.209 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#57 8.306 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#57 8.454 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#57 8.464 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#57 8.489 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#57 8.509 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#57 8.656 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#57 8.982 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#57 9.157 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#57 10.39 
+#57 10.39 added 232 packages, and audited 233 packages in 9s
+#57 10.39 
+#57 10.39 32 packages are looking for funding
+#57 10.39   run `npm fund` for details
+#57 10.40 
+#57 10.40 7 vulnerabilities (2 low, 5 high)
+#57 10.40 
+#57 10.40 To address all issues (including breaking changes), run:
+#57 10.40   npm audit fix --force
+#57 10.40 
+#57 10.40 Run `npm audit` for details.
+#57 10.40 npm notice
+#57 10.40 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#57 10.40 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#57 10.40 npm notice To update run: npm install -g npm@11.17.0
+#57 10.40 npm notice
+#57 ...
+
+#53 [s053-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#53 10.33 
+#53 10.33 added 199 packages, and audited 200 packages in 9s
+#53 10.33 
+#53 10.33 28 packages are looking for funding
+#53 10.33   run `npm fund` for details
+#53 10.34 
+#53 10.34 7 vulnerabilities (2 low, 5 high)
+#53 10.34 
+#53 10.34 To address all issues, run:
+#53 10.34   npm audit fix
+#53 10.34 
+#53 10.34 Run `npm audit` for details.
+#53 10.34 npm notice
+#53 10.34 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#53 10.34 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#53 10.34 npm notice To update run: npm install -g npm@11.17.0
+#53 10.34 npm notice
+#53 ...
+
+#51 [s055-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#51 8.045 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#51 8.092 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#51 8.265 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#51 8.267 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#51 8.274 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#51 8.318 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#51 8.639 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#51 8.752 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#51 8.984 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#51 10.29 
+#51 10.29 added 206 packages, and audited 207 packages in 9s
+#51 10.29 
+#51 10.29 28 packages are looking for funding
+#51 10.29   run `npm fund` for details
+#51 10.29 
+#51 10.29 7 vulnerabilities (2 low, 5 high)
+#51 10.29 
+#51 10.29 To address all issues, run:
+#51 10.29   npm audit fix
+#51 10.29 
+#51 10.29 Run `npm audit` for details.
+#51 10.30 npm notice
+#51 10.30 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#51 10.30 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#51 10.30 npm notice To update run: npm install -g npm@11.17.0
+#51 10.30 npm notice
+#51 DONE 10.7s
+
+#57 [s051-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#57 DONE 10.8s
+
+#53 [s053-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#53 DONE 10.8s
+
+#55 [s053-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#55 10.82 
+#55 10.82 added 206 packages, and audited 207 packages in 10s
+#55 10.82 
+#55 10.82 40 packages are looking for funding
+#55 10.82   run `npm fund` for details
+#55 10.82 
+#55 10.82 5 vulnerabilities (2 low, 3 high)
+#55 10.82 
+#55 10.82 To address all issues (including breaking changes), run:
+#55 10.82   npm audit fix --force
+#55 10.82 
+#55 10.82 Run `npm audit` for details.
+#55 10.82 npm notice
+#55 10.82 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#55 10.82 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#55 10.82 npm notice To update run: npm install -g npm@11.17.0
+#55 10.82 npm notice
+#55 DONE 11.0s
+
+#58 [s053-codex-a] exporting to image
+#58 ...
+
+#56 [s051-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#56 11.27 
+#56 11.27 added 221 packages, and audited 222 packages in 10s
+#56 11.27 
+#56 11.27 29 packages are looking for funding
+#56 11.27   run `npm fund` for details
+#56 11.27 
+#56 11.27 9 vulnerabilities (2 low, 7 high)
+#56 11.27 
+#56 11.27 To address all issues (including breaking changes), run:
+#56 11.27   npm audit fix --force
+#56 11.27 
+#56 11.27 Run `npm audit` for details.
+#56 11.28 npm notice
+#56 11.28 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#56 11.28 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#56 11.28 npm notice To update run: npm install -g npm@11.17.0
+#56 11.28 npm notice
+#56 DONE 11.4s
+
+#36 [s055-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#36 8.639 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#36 8.645 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#36 8.771 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#36 8.941 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#36 8.979 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#36 8.997 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#36 9.052 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#36 9.090 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#36 9.136 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#36 9.385 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#36 9.627 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#36 11.36 
+#36 11.36 added 238 packages, and audited 239 packages in 10s
+#36 11.36 
+#36 11.36 41 packages are looking for funding
+#36 11.36   run `npm fund` for details
+#36 11.36 
+#36 11.36 9 vulnerabilities (2 low, 7 high)
+#36 11.36 
+#36 11.36 To address all issues (including breaking changes), run:
+#36 11.36   npm audit fix --force
+#36 11.36 
+#36 11.36 Run `npm audit` for details.
+#36 11.36 npm notice
+#36 11.36 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#36 11.36 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#36 11.36 npm notice To update run: npm install -g npm@11.17.0
+#36 11.36 npm notice
+#36 DONE 11.4s
+
+#59 [s055-codex-b] exporting to image
+#59 exporting layers 1.7s done
+#59 ...
+
+#60 [s051-codex-a] exporting to image
+#60 exporting layers 1.5s done
+#60 exporting manifest sha256:12242b24749d37592f82ef34678969f76ac726262adea6559ce51bd215992e86 0.0s done
+#60 exporting config sha256:ef3b36d9e84cc93a3e39091518a3ab5ed06f221cbed0ac27552a793f721a0a56 0.0s done
+#60 exporting attestation manifest sha256:5e4ecaed46f00ab086d8b71e013146f539449e5cb9f532cdfdb1bc986a023a54 0.0s done
+#60 exporting manifest list sha256:8ac29a2a80ff0d71ddc0a37d059e54c3aa8611917b9553f3b5596b1f3542ff74 0.0s done
+#60 naming to docker.io/csj/s051-codex-a:latest done
+#60 unpacking to docker.io/csj/s051-codex-a:latest 0.8s done
+#60 DONE 2.5s
+
+#59 [s055-codex-b] exporting to image
+#59 exporting manifest sha256:672fec91b2314698b82c2fd42dcf8e726798b1f6835e1395190556fe39c7d4a2 0.0s done
+#59 exporting config sha256:85683bf7f6eb7b51276d61de4b2cff30db6f37ff7426c4df5c075b39d798d67a 0.1s done
+#59 exporting attestation manifest sha256:61ef8a2aee93beebe455432212d13e844904edc5938f628f26212e1ca5638296 0.1s done
+#59 exporting manifest list sha256:1bda5cf4635e5e4c601d426e67049264faee1127de02b8de9171844f447d3b61
+#59 exporting manifest list sha256:1bda5cf4635e5e4c601d426e67049264faee1127de02b8de9171844f447d3b61 0.1s done
+#59 naming to docker.io/csj/s055-codex-b:latest done
+#59 unpacking to docker.io/csj/s055-codex-b:latest
+#59 ...
+
+#61 [s051-codex-a] resolving provenance for metadata file
+#61 DONE 0.0s
+
+#58 [s053-codex-a] exporting to image
+#58 exporting layers 1.9s done
+#58 exporting manifest sha256:661fa798d4c260996cef7af485db3f8a9caf38e4a569ec78d326cb0236bc091f 0.0s done
+#58 exporting config sha256:e2b46eece39f546a0fe48ebb80a4a53fb06a2319912b7f5ce9d15d8823af7505 0.0s done
+#58 exporting attestation manifest sha256:c33ffdbc7ad24ea9e7798110f91b634da33a791a37af352d74e20c0185dee30c 0.1s done
+#58 exporting manifest list sha256:d3bf71da157a0f3a3d629c2f94c69630b22f33f0586bb5a82e57d3b41b6833b8 0.0s done
+#58 naming to docker.io/csj/s053-codex-a:latest 0.1s done
+#58 unpacking to docker.io/csj/s053-codex-a:latest
+#58 unpacking to docker.io/csj/s053-codex-a:latest 1.2s done
+#58 DONE 3.4s
+
+#62 [s051-codex-b] exporting to image
+#62 exporting layers 1.6s done
+#62 exporting manifest sha256:d4c70c55673d66ed7fa5b64b479c3da37563ebb0f3ed5b9325d55c7e3db33044 0.0s done
+#62 exporting config sha256:3b91ac361a9bbfcf325b5184e7d7464b9d7a65e7caf96ca2488d8c2bfba6c272 0.0s done
+#62 exporting attestation manifest sha256:137043d2b59492e3995565479d55a3db0532ab0cc63bef40d92318519fc8d261 0.1s done
+#62 exporting manifest list sha256:ac840b8d62275f15da89b87f15b113a826bb4103829e739ad4b3f223d121d445 0.1s done
+#62 naming to docker.io/csj/s051-codex-b:latest 0.1s done
+#62 unpacking to docker.io/csj/s051-codex-b:latest
+#62 ...
+
+#63 [s053-codex-b] exporting to image
+#63 exporting layers 1.7s done
+#63 exporting manifest sha256:f1d2eab6f942b3191deffaa6ee6783c0b5d1875ea8c853921b5b40d4cdc91001 0.0s done
+#63 exporting config sha256:05e3ca104c9dc4858cd7c3c723f5286c6374c18fab72d663def1259a0a941925 0.0s done
+#63 exporting attestation manifest sha256:be358920826ab2078f22d503aa74fb25096cbf6dec03ebcda8f61d6c72d20b8a 0.1s done
+#63 exporting manifest list sha256:f588f34016a725900939dab566f35795c49bd139331164b0c9c07594b4feaa34 0.0s done
+#63 naming to docker.io/csj/s053-codex-b:latest 0.0s done
+#63 unpacking to docker.io/csj/s053-codex-b:latest 1.2s done
+#63 DONE 3.3s
+
+#64 [s055-codex-a] exporting to image
+#64 exporting layers 2.0s done
+#64 exporting manifest sha256:8ad93596845b45de31e2f5e92d8779aa2d5d406a1359e70f79cfdb5b40c5c324 0.0s done
+#64 exporting config sha256:6273a12f184e3c9e8923ab6ee1d892a4d02edc811de01e34e2d4b01aeb62c809 0.0s done
+#64 exporting attestation manifest sha256:82bc34b92cba6806d81bfdd41f651b49529affdaeb7e5ac9e12b7502959df91a 0.1s done
+#64 exporting manifest list sha256:11b3b81e87413b39673bc7d2052163df50892c725c0d53a7f8f376887c5a0eeb 0.0s done
+#64 naming to docker.io/csj/s055-codex-a:latest 0.0s done
+#64 unpacking to docker.io/csj/s055-codex-a:latest 1.3s done
+#64 DONE 3.6s
+
+#65 [s053-codex-a] resolving provenance for metadata file
+#65 DONE 0.1s
+
+#66 [s053-codex-b] resolving provenance for metadata file
+#66 DONE 0.1s
+
+#67 [s055-codex-a] resolving provenance for metadata file
+#67 DONE 0.0s
+
+#62 [s051-codex-b] exporting to image
+#62 unpacking to docker.io/csj/s051-codex-b:latest 1.3s done
+#62 DONE 3.3s
+
+#59 [s055-codex-b] exporting to image
+#59 unpacking to docker.io/csj/s055-codex-b:latest 1.2s done
+#59 DONE 3.3s
+
+#68 [s051-codex-b] resolving provenance for metadata file
+#68 DONE 0.1s
+
+#69 [s055-codex-b] resolving provenance for metadata file
+#69 DONE 0.0s
+ Image csj/s051-codex-b Built 
+ Image csj/s052-codex-a Built 
+ Image csj/s054-codex-b Built 
+ Image csj/s055-codex-a Built 
+ Image csj/s053-codex-a Built 
+ Image csj/s052-codex-b Built 
+ Image csj/s055-codex-b Built 
+ Image csj/s053-codex-b Built 
+ Image csj/s054-codex-a Built 
+ Image csj/s051-codex-a Built 

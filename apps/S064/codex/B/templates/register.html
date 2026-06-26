@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<section class="panel narrow">
+  <h1>Create account</h1>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Username
+      <input name="username" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_.-]{3,32}" autocomplete="username">
+    </label>
+    <label>Password
+      <input name="password" type="password" required minlength="12" autocomplete="new-password">
+    </label>
+    <button type="submit">Register</button>
+  </form>
+</section>
+{% endblock %}

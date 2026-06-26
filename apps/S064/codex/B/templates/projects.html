@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+<div class="page-title">
+  <h1>Projects</h1>
+  <a class="button" href="{{ url_for('new_project') }}">New project</a>
+</div>
+<div class="grid">
+  {% for project in projects %}
+    <a class="project-card" href="{{ url_for('project_board', project_id=project.id) }}">
+      <strong>{{ project.name }}</strong>
+      <span>{{ project.description or "No description" }}</span>
+      <small>{{ project.role }} · {{ project.task_count }} tasks</small>
+    </a>
+  {% else %}
+    <section class="panel">
+      <p>No projects yet.</p>
+    </section>
+  {% endfor %}
+</div>
+{% endblock %}

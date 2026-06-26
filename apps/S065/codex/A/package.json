@@ -1,0 +1,18 @@
+{
+  "name": "express-qa-site",
+  "version": "1.0.0",
+  "description": "A small Node.js/Express question-and-answer site with SQLite persistence.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

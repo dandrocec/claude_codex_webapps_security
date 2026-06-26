@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Error · Helpdesk{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Request could not be completed</h1>
+  <p>{{ message }}</p>
+  <a class="button" href="{{ url_for('tickets') }}">Back to tickets</a>
+</section>
+{% endblock %}

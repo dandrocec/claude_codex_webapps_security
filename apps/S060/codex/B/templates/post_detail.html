@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+  <article class="post-detail">
+    <p class="meta">{{ post.status|capitalize }} · By {{ post.author }} · Updated {{ post.updated_at[:10] }}</p>
+    <h1>{{ post.title }}</h1>
+    <div class="body">{{ post.body|nl2br }}</div>
+    {% if post.rejection_reason %}
+      <section class="notice">
+        <h2>Rejection reason</h2>
+        <p>{{ post.rejection_reason }}</p>
+      </section>
+    {% endif %}
+  </article>
+{% endblock %}

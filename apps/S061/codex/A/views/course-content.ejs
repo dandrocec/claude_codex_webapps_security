@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<section class="stack">
+  <div>
+    <h1 class="page-title"><%= course.title %></h1>
+    <p class="lead"><%= course.description %></p>
+    <p class="muted">Instructor: <%= course.instructor_name %></p>
+  </div>
+
+  <% if (lessons.length === 0) { %>
+    <div class="empty">This course has no lessons yet.</div>
+  <% } else { %>
+    <% lessons.forEach((lesson) => { %>
+      <article class="lesson">
+        <div class="row">
+          <h3><%= lesson.position %>. <%= lesson.title %></h3>
+          <% if (lesson.completed) { %>
+            <span class="badge">Complete</span>
+          <% } else { %>
+            <form action="/lessons/<%= lesson.id %>/complete" method="post">
+              <button type="submit">Mark complete</button>
+            </form>
+          <% } %>
+        </div>
+        <p class="lesson-content"><%= lesson.content %></p>
+      </article>
+    <% }) %>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

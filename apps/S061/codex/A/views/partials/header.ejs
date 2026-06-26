@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %> | LearnDeck</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav">
+        <a class="brand" href="/">LearnDeck</a>
+        <div class="nav-links">
+          <a href="/courses">Courses</a>
+          <% if (user) { %>
+            <a href="/dashboard">Dashboard</a>
+            <span class="muted"><%= user.name %> (<%= user.role %>)</span>
+            <form action="/logout" method="post">
+              <button class="secondary" type="submit">Sign out</button>
+            </form>
+          <% } else { %>
+            <a href="/login">Sign in</a>
+            <a class="button" href="/register">Create account</a>
+          <% } %>
+        </div>
+      </nav>
+    </header>
+    <main class="main">
+      <% if (flash) { %>
+        <div class="flash <%= flash.type === 'error' ? 'error' : '' %>"><%= flash.message %></div>
+      <% } %>

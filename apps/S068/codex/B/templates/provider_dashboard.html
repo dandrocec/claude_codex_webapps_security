@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Provider dashboard{% endblock %}
+{% block content %}
+<section class="grid">
+  <div class="panel">
+    <h1>Publish slot</h1>
+    <form method="post" action="{{ url_for('create_slot') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>
+        Starts
+        <input type="datetime-local" name="starts_at" required>
+      </label>
+      <label>
+        Ends
+        <input type="datetime-local" name="ends_at" required>
+      </label>
+      <button type="submit" class="primary">Publish</button>
+    </form>
+  </div>
+  <div class="panel">
+    <h1>Your appointments</h1>
+    {% if slots %}
+      <table>
+        <thead>
+          <tr><th>Start</th><th>End</th><th>Status</th><th>Client</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for slot in slots %}
+            <tr>
+              <td>{{ slot.starts_at }}</td>
+              <td>{{ slot.ends_at }}</td>
+              <td>{{ slot.status }}</td>
+              <td>{{ slot.client_name or "-" }}</td>
+              <td>
+                {% if slot.status == 'available' %}
+                  <form method="post" action="{{ url_for('delete_slot', slot_id=slot.id) }}" class="inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit">Remove</button>
+                  </form>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No slots published yet.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

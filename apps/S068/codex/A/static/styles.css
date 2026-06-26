@@ -1,0 +1,259 @@
+:root {
+    color-scheme: light;
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --text: #1d2430;
+    --muted: #667085;
+    --line: #d8dee8;
+    --primary: #176b87;
+    --primary-dark: #0f5268;
+    --success: #18794e;
+    --danger: #b42318;
+    --warning: #a15c07;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+}
+
+.brand {
+    color: var(--text);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.container {
+    width: min(1120px, calc(100% - 2rem));
+    margin: 2rem auto;
+}
+
+.hero,
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+h1 {
+    margin: 0 0 1rem;
+    font-size: 1.6rem;
+}
+
+p {
+    line-height: 1.45;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.8fr) minmax(320px, 1.2fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.narrow {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+form {
+    display: grid;
+    gap: 1rem;
+}
+
+label {
+    display: grid;
+    gap: 0.4rem;
+    color: var(--text);
+    font-weight: 700;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.7rem 0.8rem;
+    color: var(--text);
+    font: inherit;
+    font-weight: 400;
+    background: #fff;
+}
+
+button,
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    background: var(--primary);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover,
+.button:hover {
+    background: var(--primary-dark);
+    text-decoration: none;
+}
+
+.button.secondary {
+    background: #e8eef3;
+    color: var(--text);
+}
+
+.actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.inline {
+    display: inline;
+}
+
+.link-button {
+    padding: 0;
+    background: transparent;
+    color: var(--primary);
+    font-weight: 400;
+}
+
+.link-button:hover {
+    background: transparent;
+    text-decoration: underline;
+}
+
+.messages {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.message {
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    background: #eef4ff;
+    border: 1px solid #c7d7fe;
+}
+
+.message.success {
+    background: #ecfdf3;
+    border-color: #abefc6;
+    color: var(--success);
+}
+
+.message.danger {
+    background: #fef3f2;
+    border-color: #fecdca;
+    color: var(--danger);
+}
+
+.message.warning {
+    background: #fffaeb;
+    border-color: #fedf89;
+    color: var(--warning);
+}
+
+.stack {
+    display: grid;
+    gap: 1rem;
+}
+
+.appointment {
+    display: grid;
+    gap: 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.appointment p {
+    margin: 0.35rem 0 0;
+}
+
+.badge {
+    width: max-content;
+    border-radius: 999px;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.badge.open {
+    background: #ecfdf3;
+    color: var(--success);
+}
+
+.badge.booked {
+    background: #eff8ff;
+    color: var(--primary);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+code {
+    background: #eef2f6;
+    border-radius: 4px;
+    padding: 0.15rem 0.3rem;
+}
+
+@media (max-width: 760px) {
+    .topbar,
+    .hero {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

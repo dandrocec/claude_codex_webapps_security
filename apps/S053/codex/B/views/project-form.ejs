@@ -1,0 +1,37 @@
+<%- include('partials/header', { title: heading }) %>
+
+<section class="panel">
+  <h1><%= heading %></h1>
+  <% if (errors.length) { %>
+    <div class="alert">
+      <% errors.forEach((error) => { %>
+        <p><%= error %></p>
+      <% }) %>
+    </div>
+  <% } %>
+  <form method="post" action="<%= action %>" class="stack">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Title
+      <input name="title" value="<%= project.title %>" required maxlength="120">
+    </label>
+    <label>
+      Description
+      <textarea name="description" rows="7" required maxlength="2000"><%= project.description %></textarea>
+    </label>
+    <label>
+      Project link
+      <input type="url" name="link" value="<%= project.link %>" placeholder="https://example.com">
+    </label>
+    <label>
+      Image URL
+      <input type="url" name="image" value="<%= project.image %>" placeholder="https://example.com/image.jpg">
+    </label>
+    <div class="form-actions">
+      <button type="submit">Save</button>
+      <a class="button secondary" href="/dashboard">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

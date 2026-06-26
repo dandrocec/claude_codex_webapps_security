@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<section class="panel">
+  <h1>Launch campaign</h1>
+  <%- include('partials/errors') %>
+  <form action="/campaigns" method="post" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label for="title">Title</label>
+    <input id="title" name="title" value="<%= values.title || '' %>" maxlength="120" required>
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description" maxlength="2500" required><%= values.description || '' %></textarea>
+
+    <label for="goal">Goal amount in dollars</label>
+    <input id="goal" name="goal" type="number" min="1" max="10000000" step="0.01" value="<%= values.goal || '' %>" required>
+
+    <label for="deadline">Deadline</label>
+    <input id="deadline" name="deadline" type="date" value="<%= values.deadline || '' %>" required>
+
+    <p><button type="submit">Launch campaign</button></p>
+  </form>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<h1 class="page-title">Create Account</h1>
+<form class="form-panel" action="/register" method="post">
+  <label>
+    Name
+    <input name="name" autocomplete="name" required>
+  </label>
+  <label>
+    Email
+    <input type="email" name="email" autocomplete="email" required>
+  </label>
+  <label>
+    Password
+    <input type="password" name="password" autocomplete="new-password" required>
+  </label>
+  <label>
+    Role
+    <select name="role" required>
+      <option value="student">Student</option>
+      <option value="instructor">Instructor</option>
+    </select>
+  </label>
+  <button type="submit">Create account</button>
+</form>
+
+<%- include('partials/footer') %>

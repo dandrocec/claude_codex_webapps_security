@@ -1,0 +1,36 @@
+<%- include("partials/start", { title: "Dashboard" }) %>
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">Dashboard</p>
+    <h1>Your surveys</h1>
+  </div>
+  <a class="button" href="/surveys/new">New survey</a>
+</div>
+
+<% if (surveys.length === 0) { %>
+  <section class="empty">
+    <h2>No surveys yet</h2>
+    <p>Create your first survey to start collecting responses.</p>
+    <a class="button" href="/surveys/new">Create survey</a>
+  </section>
+<% } else { %>
+  <div class="survey-list">
+    <% surveys.forEach((survey) => { %>
+      <article class="survey-card">
+        <div>
+          <h2><a href="/surveys/<%= survey.id %>"><%= survey.title %></a></h2>
+          <p><%= survey.description || "No description" %></p>
+        </div>
+        <div class="metrics">
+          <span><strong><%= survey.question_count %></strong> questions</span>
+          <span><strong><%= survey.response_count %></strong> responses</span>
+        </div>
+        <div class="card-actions">
+          <a href="/surveys/<%= survey.id %>">View responses</a>
+          <a href="/s/<%= survey.slug %>" target="_blank" rel="noreferrer">Public link</a>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+<% } %>
+<%- include("partials/end") %>

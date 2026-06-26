@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+
+<section class="auth-panel">
+  <h1>Create Account</h1>
+  <% if (errors.length) { %>
+    <ul class="errors"><% errors.forEach((error) => { %><li><%= error %></li><% }) %></ul>
+  <% } %>
+  <form method="post" action="/register">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Email <input type="email" name="email" maxlength="254" required autocomplete="email"></label>
+    <label>Password <input type="password" name="password" minlength="12" maxlength="128" required autocomplete="new-password"></label>
+    <button type="submit">Register</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

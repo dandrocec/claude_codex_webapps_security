@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Recruiting Portal{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>Hiring and applications in one focused workspace.</h1>
+    <p>Employers can publish roles and review candidates. Applicants can apply with a resume and track each submission.</p>
+    <div class="actions">
+      <a class="button" href="{{ url_for('register') }}">Create account</a>
+      <a class="button secondary" href="{{ url_for('jobs') }}">Browse jobs</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-heading">
+    <h2>Recent jobs</h2>
+    <a href="{{ url_for('jobs') }}">View all</a>
+  </div>
+  <div class="grid">
+    {% for job in jobs %}
+      <article class="card">
+        <h3>{{ job.title }}</h3>
+        <p class="muted">{{ job.employer_name }} · {{ job.location }}</p>
+        <p>{{ job.description[:160] }}{% if job.description|length > 160 %}...{% endif %}</p>
+        <a href="{{ url_for('job_detail', job_id=job.id) }}">View role</a>
+      </article>
+    {% else %}
+      <p class="empty">No jobs have been posted yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

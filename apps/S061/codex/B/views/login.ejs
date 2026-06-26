@@ -1,0 +1,16 @@
+<%- include("partials/header") %>
+
+<section class="panel">
+  <h1>Log in</h1>
+  <% if (errors.length) { %>
+    <div class="alert"><% errors.forEach((error) => { %><p><%= error %></p><% }) %></div>
+  <% } %>
+  <form method="post" action="/login">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Email <input type="email" name="email" maxlength="254" required value="<%= form.email || "" %>"></label>
+    <label>Password <input type="password" name="password" maxlength="256" required></label>
+    <button type="submit">Log in</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

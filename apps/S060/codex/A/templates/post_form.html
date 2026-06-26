@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit post" if post else "New post" }} · Role Blog{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>{{ "Edit post" if post else "New post" }}</h1>
+    <p>Save a draft or submit the post for editorial review.</p>
+  </section>
+
+  <form class="editor-form" method="post">
+    <label for="title">Title</label>
+    <input id="title" name="title" value="{{ post.title if post else '' }}" required>
+
+    <label for="body">Body</label>
+    <textarea id="body" name="body" rows="14" required>{{ post.body if post else '' }}</textarea>
+
+    <div class="form-actions">
+      <button class="ghost" type="submit" name="action" value="draft">Save draft</button>
+      <button type="submit" name="action" value="submit">Submit for review</button>
+    </div>
+  </form>
+{% endblock %}
+

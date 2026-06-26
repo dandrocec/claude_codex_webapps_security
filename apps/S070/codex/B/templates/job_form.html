@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Post a job</h1>
+  <form class="stack" method="post" action="{{ url_for('new_job') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>Title
+      <input name="title" maxlength="120" required value="{{ form.get('title', '') }}">
+    </label>
+    <label>Company
+      <input name="company" maxlength="120" required value="{{ form.get('company', '') }}">
+    </label>
+    <label>Location
+      <input name="location" maxlength="120" required value="{{ form.get('location', '') }}">
+    </label>
+    <label>Description
+      <textarea name="description" maxlength="4000" required>{{ form.get('description', '') }}</textarea>
+    </label>
+    <button type="submit">Publish job</button>
+  </form>
+{% endblock %}

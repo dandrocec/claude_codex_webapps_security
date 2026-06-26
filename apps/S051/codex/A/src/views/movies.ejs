@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Movies | Movie Watchlist</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Movie Watchlist</p>
+        <h1>Your movies</h1>
+      </div>
+      <div class="account">
+        <span><%= currentUser.username %></span>
+        <form method="post" action="/logout">
+          <button class="secondary" type="submit">Log out</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <h2>Add a movie</h2>
+        <% if (error) { %>
+          <p class="alert"><%= error %></p>
+        <% } %>
+        <form method="post" action="/movies" class="movie-form">
+          <label>
+            Title
+            <input name="title" value="<%= form.title || "" %>" required>
+          </label>
+          <label>
+            Year
+            <input name="year" type="number" min="1888" max="2100" value="<%= form.year || "" %>">
+          </label>
+          <label>
+            Status
+            <select name="status">
+              <% statuses.forEach((status) => { %>
+                <option value="<%= status %>" <%= (form.status || "Want to Watch") === status ? "selected" : "" %>><%= status %></option>
+              <% }) %>
+            </select>
+          </label>
+          <label>
+            Rating
+            <select name="rating">
+              <option value="">Not rated</option>
+              <% [1, 2, 3, 4, 5].forEach((rating) => { %>
+                <option value="<%= rating %>" <%= Number(form.rating) === rating ? "selected" : "" %>><%= rating %></option>
+              <% }) %>
+            </select>
+          </label>
+          <button type="submit">Add movie</button>
+        </form>
+      </section>
+
+      <section class="content">
+        <nav class="filters" aria-label="Filter movies by status">
+          <a class="<%= !selectedStatus ? "active" : "" %>" href="/movies">All</a>
+          <% statuses.forEach((status) => { %>
+            <a class="<%= selectedStatus === status ? "active" : "" %>" href="/movies?status=<%= encodeURIComponent(status) %>">
+              <%= status %>
+              <span><%= counts[status] || 0 %></span>
+            </a>
+          <% }) %>
+        </nav>
+
+        <% if (movies.length === 0) { %>
+          <div class="empty">
+            <h2>No movies found</h2>
+            <p class="muted">Add a movie or clear the current filter.</p>
+          </div>
+        <% } else { %>
+          <div class="movie-list">
+            <% movies.forEach((movie) => { %>
+              <article class="movie-card">
+                <div>
+                  <h2><%= movie.title %></h2>
+                  <p class="muted">
+                    <%= movie.year || "Year unknown" %>
+                    <% if (movie.rating) { %>
+                      · <%= movie.rating %>/5
+                    <% } %>
+                  </p>
+                </div>
+                <form method="post" action="/movies/<%= movie.id %>/status" class="status-form">
+                  <select name="status" aria-label="Status for <%= movie.title %>" onchange="this.form.submit()">
+                    <% statuses.forEach((status) => { %>
+                      <option value="<%= status %>" <%= movie.status === status ? "selected" : "" %>><%= status %></option>
+                    <% }) %>
+                  </select>
+                </form>
+                <form method="post" action="/movies/<%= movie.id %>/delete">
+                  <button class="danger" type="submit">Delete</button>
+                </form>
+              </article>
+            <% }) %>
+          </div>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<%- include('partials/header') %>
+<article class="panel">
+  <h1><%= campaign.title %></h1>
+  <p class="muted">By <%= campaign.creator_name %> · Deadline <%= formatDate(campaign.deadline) %></p>
+  <div class="stats">
+    <div class="stat">
+      <strong>$<%= dollars(campaign.raised_cents) %></strong>
+      <span class="muted">raised</span>
+    </div>
+    <div class="stat">
+      <strong>$<%= dollars(campaign.goal_cents) %></strong>
+      <span class="muted">goal</span>
+    </div>
+    <div class="stat">
+      <strong><%= progressPercent(campaign.raised_cents, campaign.goal_cents) %>%</strong>
+      <span class="muted">funded</span>
+    </div>
+  </div>
+  <div class="progress" aria-label="Funding progress">
+    <span style="width: <%= progressPercent(campaign.raised_cents, campaign.goal_cents) %>%"></span>
+  </div>
+  <p class="description"><%= campaign.description %></p>
+
+  <% if (currentUser && currentUser.id === campaign.creator_id) { %>
+    <form class="inline-form" action="/campaigns/<%= campaign.id %>/delete" method="post">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="danger" type="submit">Delete campaign</button>
+    </form>
+  <% } %>
+</article>
+
+<section class="panel">
+  <h2>Back this campaign</h2>
+  <%- include('partials/errors') %>
+  <% if (currentUser && currentUser.id !== campaign.creator_id) { %>
+    <form action="/campaigns/<%= campaign.id %>/pledges" method="post" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="amount">Pledge amount in dollars</label>
+      <input id="amount" name="amount" type="number" min="1" max="1000000" step="0.01" required>
+      <p><button type="submit">Pledge</button></p>
+    </form>
+  <% } else if (!currentUser) { %>
+    <p><a href="/login">Sign in</a> to pledge.</p>
+  <% } else { %>
+    <p class="muted">Creators cannot pledge to their own campaigns.</p>
+  <% } %>
+</section>
+
+<section class="panel">
+  <h2>Pledges</h2>
+  <% if (!pledges.length) { %>
+    <p class="muted">No pledges yet.</p>
+  <% } %>
+  <ul class="pledges">
+    <% pledges.forEach((pledge) => { %>
+      <li>
+        <span><%= pledge.backer_name %></span>
+        <strong>$<%= dollars(pledge.amount_cents) %></strong>
+      </li>
+    <% }) %>
+  </ul>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Applicant dashboard</h1>
+  {% if applications %}
+    <table>
+      <thead><tr><th>Job</th><th>Employer</th><th>Submitted</th><th>Resume</th></tr></thead>
+      <tbody>
+      {% for application in applications %}
+        <tr>
+          <td>{{ application.title }}<br><span class="meta">{{ application.location }}</span></td>
+          <td>{{ application.employer_name }}</td>
+          <td>{{ application.created_at }}</td>
+          <td><a href="{{ url_for('download_resume', application_id=application.id) }}">Download</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You have not submitted any applications yet.</p>
+  {% endif %}
+{% endblock %}

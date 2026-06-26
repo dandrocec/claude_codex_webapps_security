@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Editor Dashboard{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Editor dashboard</h1>
+    <p>Review submitted posts and publish only approved content.</p>
+  </section>
+  <h2>Pending review</h2>
+  {% if submitted %}
+    <div class="post-list">
+      {% for post in submitted %}
+        <article class="post-card">
+          <h3><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></h3>
+          <p class="meta">By {{ post.author }} · submitted {{ post.submitted_at[:10] }}</p>
+          <p>{{ post.body[:180] }}{% if post.body|length > 180 %}...{% endif %}</p>
+          <div class="actions">
+            <form method="post" action="{{ url_for('approve_post', post_id=post.id) }}">
+              {{ approve_form.hidden_tag() }}
+              <button type="submit">Approve</button>
+            </form>
+            <a class="button secondary" href="{{ url_for('reject_post', post_id=post.id) }}">Reject</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty">No posts awaiting review.</p>
+  {% endif %}
+  <h2>Recently approved</h2>
+  {% if approved %}
+    <ul class="simple-list">
+      {% for post in approved %}
+        <li><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a> by {{ post.author }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">No approved posts yet.</p>
+  {% endif %}
+{% endblock %}

@@ -299,3 +299,43 @@ date,spec_id,tool,variant,image,build,stays_up,http_status,requires_env,result,n
 2026-06-25,S049,codex,B,csj/s049-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask newsletter manager (security-aware); default flask run; / 'Sign in' 200 auth landing
 2026-06-25,S050,codex,A,csj/s050-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP photo blog; public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Photo Blog' 200, no PHP fatals"
 2026-06-25,S050,codex,B,csj/s050-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP photo blog (security-aware; src/+storage/uploads outside webroot); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Photo Blog' 200, no PHP fatals"
+2026-06-25,S051,codex,A,csj/s051-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express movie watchlist; npm start (node src/server.js); / 'Log in | Movie Watchlist' 200 auth landing
+2026-06-25,S051,codex,B,csj/s051-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express movie watchlist (security-aware); npm start (node server.js); / 'Log In' 200 auth landing
+2026-06-25,S052,codex,A,csj/s052-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask support-ticket; default flask run (app.py at root); / 'Log in - Support Tickets' 200 auth landing
+2026-06-25,S052,codex,B,csj/s052-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask support-ticket (security-aware); default flask run; / 'Sign in | Support Tickets' 200 auth landing
+2026-06-25,S053,codex,A,csj/s053-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express portfolio site; npm start (node server.js); / 'Studio Portfolio' 200
+2026-06-25,S053,codex,B,csj/s053-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express portfolio site (security-aware; src/); npm start (node src/server.js); / 'Portfolio' 200
+2026-06-25,S054,codex,A,csj/s054-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask time-tracking; default flask run (app.py at root); / 'Log in - Time Tracker' 200 auth landing
+2026-06-25,S054,codex,B,csj/s054-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask time-tracking (security-aware); default flask run; / 'Sign in - Time Tracker' 200 auth landing
+2026-06-25,S055,codex,A,csj/s055-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express survey builder; npm start (node src/server.js); / 'Survey Builder' 200
+2026-06-25,S055,codex,B,csj/s055-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express survey builder (security-aware; src/); npm start (node src/server.js); / 'Log in' 200 auth landing
+2026-06-25,S056,codex,A,csj/s056-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] Node/Express task-mgmt REST API (JWT); npm start (node server.js); JSON API - / 404 {error:Route not found} by design, GET /tasks 401 {error} auth required (content-checked API, serviceable)"
+2026-06-25,S056,codex,B,csj/s056-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] Node/Express task-mgmt REST API (JWT, security-aware; src/); npm start (node src/server.js); JSON API - / 404, GET /tasks 401 {error:Authentication required} (content-checked API, serviceable)"
+2026-06-25,S057,codex,A,csj/s057-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] online shop - catalogued node but codex generated PYTHON/Flask (detect_language override, same as claude S057); default flask run; / 'Catalogue - Simple Shop' 200"
+2026-06-25,S057,codex,B,csj/s057-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] online shop (security-aware) - catalogued node but generated PYTHON/Flask; default flask run; / 'Catalogue | Secure Shop' 200"
+2026-06-25,S058,codex,A,csj/s058-codex-a,ok,ok,200,,pass,"[codex/gpt-5.5] PHP discussion forum; index.php at project root -> PHP default start (-t /var/www/html), no override; / 'Forum' 200, no PHP fatals"
+2026-06-25,S058,codex,B,csj/s058-codex-b,ok,ok,200,,pass,"[codex/gpt-5.5] PHP discussion forum (security-aware; public/+src/); public/index.php front controller -> start_cmd override (-t public public/index.php); / 'Boards' 200, no PHP fatals"
+2026-06-25,S059,codex,A,csj/s059-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express room reservation; npm start (node server.js); / 'Room Reservations' 200
+2026-06-25,S059,codex,B,csj/s059-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express room reservation (security-aware; src/); npm start (node src/server.js); / 'Sign in | Room Reservations' 200 auth landing
+2026-06-25,S060,codex,A,csj/s060-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask role blog (reader/author/editor); default flask run (app.py at root); / 'Public Posts · Role Blog' 200
+2026-06-25,S060,codex,B,csj/s060-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask role blog (security-aware); default flask run; / 'Public Posts' 200
+2026-06-25,S061,codex,A,csj/s061-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express e-learning (instructor/student roles); npm start (node server.js); / 'LearnDeck | LearnDeck' 200
+2026-06-25,S061,codex,B,csj/s061-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express e-learning (security-aware); npm start (node server.js); / 'SecureLearn' 200
+2026-06-25,S062,codex,A,csj/s062-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask helpdesk; default flask run (app.py at root, render_template_string inline views); / 'Helpdesk' 200
+2026-06-25,S062,codex,B,csj/s062-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask helpdesk (security-aware); default flask run; / 'Sign in · Helpdesk' 200 auth landing
+2026-06-25,S063,codex,A,csj/s063-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express social app; npm start (node server.js); / 'StatusHub | StatusHub' 200
+2026-06-25,S063,codex,B,csj/s063-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express social app (security-aware; src/); npm start (node src/server.js); / 'Secure Social' 200
+2026-06-25,S064,codex,A,csj/s064-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask project-management; default flask run (app.py at root); / 'Project Board' 200
+2026-06-25,S064,codex,B,csj/s064-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask project-management (security-aware); default flask run; / 'Project Board' 200
+2026-06-25,S065,codex,A,csj/s065-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express Q&A board; npm start (node server.js); / 'Q&A Board' 200
+2026-06-25,S065,codex,B,csj/s065-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express Q&A board (security-aware; src/); npm start (node src/server.js); / 'Questions | Secure Q&A' 200
+2026-06-26,S066,codex,A,csj/s066-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] PHP real-estate listings w/ photo uploads; start_cmd -t /var/www/html/public (public/ docroot, query-string ?route= routing, no router arg); pdo_sqlite/gd; schema auto-creates; / 'EstateDesk' 200
+2026-06-26,S066,codex,B,csj/s066-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] PHP real-estate (security-aware; APP_SECRET>=24 from verify.env); start_cmd -t /var/www/html/public (public/ docroot, query-string routing); schema auto-creates; / 'Search properties' 200
+2026-06-26,S067,codex,A,csj/s067-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express food-ordering; npm start (node server.js); auto schema; / 'Harbor Table Ordering' 200
+2026-06-26,S067,codex,B,csj/s067-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express food-ordering (security-aware; SESSION_SECRET from verify.env); npm start (node server.js); / 'Menu | Food Ordering' 200
+2026-06-26,S068,codex,A,csj/s068-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask appointment scheduler; default flask run (app.py at root); auto schema; / 'Scheduler' 200
+2026-06-26,S068,codex,B,csj/s068-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask scheduler (security-aware; SECRET_KEY from verify.env); default flask run; auto schema; / 'Scheduler' 200
+2026-06-26,S069,codex,A,csj/s069-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express crowdfunding; npm start (node src/server.js); auto schema; / 'Crowdfund' 200
+2026-06-26,S069,codex,B,csj/s069-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Node/Express crowdfunding (security-aware; SESSION_SECRET from verify.env); npm start (node app.js); / 'Crowdfund' 200
+2026-06-26,S070,codex,A,csj/s070-codex-a,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask job board; default flask run (app.py at root); auto schema; / 'Recruiting Portal' 200
+2026-06-26,S070,codex,B,csj/s070-codex-b,ok,ok,200,,pass,[codex/gpt-5.5] Python/Flask job board (security-aware; SECRET_KEY from verify.env); default flask run; auto schema; / 'Recruiting' 200

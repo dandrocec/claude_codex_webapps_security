@@ -1,0 +1,62 @@
+<%- include('partials/header') %>
+
+<article class="question-detail">
+  <h1><%= question.title %></h1>
+  <p class="meta">Asked by <%= question.username %> on <%= new Date(question.created_at).toLocaleString() %></p>
+  <p class="body"><%= question.body %></p>
+</article>
+
+<h2><%= answers.length %> Answer<%= answers.length === 1 ? '' : 's' %></h2>
+
+<div class="answers">
+  <% answers.forEach(function(answer) { %>
+    <article class="answer <%= question.accepted_answer_id === answer.id ? 'accepted' : '' %>">
+      <div class="vote-box">
+        <% if (currentUser) { %>
+          <form method="post" action="/answers/<%= answer.id %>/vote">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="value" value="1">
+            <button class="<%= answer.current_user_vote === 1 ? 'selected' : '' %>" type="submit" aria-label="Vote up">▲</button>
+          </form>
+        <% } %>
+        <strong><%= answer.score %></strong>
+        <% if (currentUser) { %>
+          <form method="post" action="/answers/<%= answer.id %>/vote">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="value" value="-1">
+            <button class="<%= answer.current_user_vote === -1 ? 'selected' : '' %>" type="submit" aria-label="Vote down">▼</button>
+          </form>
+        <% } %>
+      </div>
+      <div class="answer-content">
+        <% if (question.accepted_answer_id === answer.id) { %>
+          <span class="accepted-label">Accepted</span>
+        <% } %>
+        <p class="body"><%= answer.body %></p>
+        <p class="meta">Answered by <%= answer.username %> on <%= new Date(answer.created_at).toLocaleString() %></p>
+        <% if (currentUser && currentUser.id === question.user_id && question.accepted_answer_id !== answer.id) { %>
+          <form method="post" action="/answers/<%= answer.id %>/accept">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit">Accept answer</button>
+          </form>
+        <% } %>
+      </div>
+    </article>
+  <% }) %>
+</div>
+
+<% if (currentUser) { %>
+  <section class="answer-form">
+    <h2>Your answer</h2>
+    <%- include('partials/errors') %>
+    <form class="form" method="post" action="/questions/<%= question.id %>/answers">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <textarea name="body" rows="8" minlength="10" maxlength="5000" required><%= form.body || '' %></textarea>
+      <button type="submit">Post answer</button>
+    </form>
+  </section>
+<% } else { %>
+  <p><a href="/login">Log in</a> to answer or vote.</p>
+<% } %>
+
+<%- include('partials/footer') %>

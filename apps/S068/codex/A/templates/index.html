@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Scheduler{% endblock %}
+{% block content %}
+<section class="hero">
+    <div>
+        <h1>Simple appointment scheduling</h1>
+        <p>Providers publish available times. Clients reserve open slots and receive confirmation codes.</p>
+    </div>
+    <div class="actions">
+        <a class="button" href="{{ url_for('register') }}">Create account</a>
+        <a class="button secondary" href="{{ url_for('login') }}">Sign in</a>
+    </div>
+</section>
+{% endblock %}

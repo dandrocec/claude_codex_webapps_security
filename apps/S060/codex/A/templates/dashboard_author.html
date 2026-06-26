@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Author Dashboard · Role Blog{% endblock %}
+{% block content %}
+  <section class="page-heading split">
+    <div>
+      <h1>Author dashboard</h1>
+      <p>Draft posts, submit them for review, and track editorial decisions.</p>
+    </div>
+    <a class="button" href="{{ url_for('new_post') }}">New post</a>
+  </section>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Updated</th>
+          <th>Notes</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in posts %}
+          <tr>
+            <td>{{ post.title }}</td>
+            <td><span class="status {{ post.status }}">{{ post.status }}</span></td>
+            <td>{{ post.updated_at }}</td>
+            <td>{{ post.rejection_reason or "" }}</td>
+            <td class="actions">
+              {% if post.status != "approved" %}
+                <a class="button small ghost" href="{{ url_for('edit_post', post_id=post.id) }}">Edit</a>
+              {% endif %}
+              {% if post.status in ["draft", "rejected"] %}
+                <form method="post" action="{{ url_for('submit_post', post_id=post.id) }}">
+                  <button class="small" type="submit">Submit</button>
+                </form>
+              {% endif %}
+              {% if post.status == "approved" %}
+                <a class="button small ghost" href="{{ url_for('public_post', post_id=post.id) }}">View</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="empty">You have not written any posts yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+

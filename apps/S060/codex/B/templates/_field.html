@@ -1,0 +1,11 @@
+{% for field in form if field.type not in ("CSRFTokenField", "SubmitField", "HiddenField") %}
+  <label for="{{ field.id }}">{{ field.label.text }}</label>
+  {{ field }}
+  {% if field.errors %}
+    <ul class="errors">
+      {% for error in field.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endfor %}

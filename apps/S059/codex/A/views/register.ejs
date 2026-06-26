@@ -1,0 +1,21 @@
+<%- include("partials/page", {
+  title: "Create account",
+  body: `
+    <section class="panel narrow">
+      <h1>Create account</h1>
+      <form method="post" action="/register" class="stack">
+        <label>Name
+          <input required type="text" name="name" autocomplete="name">
+        </label>
+        <label>Email
+          <input required type="email" name="email" autocomplete="email">
+        </label>
+        <label>Password
+          <input required minlength="6" type="password" name="password" autocomplete="new-password">
+        </label>
+        <button type="submit" class="button">Create account</button>
+      </form>
+      <p class="muted">Already registered? <a href="/login">Log in</a>.</p>
+    </section>
+  `
+}) %>

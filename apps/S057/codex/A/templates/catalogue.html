@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Catalogue - Simple Shop{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Catalogue</h1>
+    <p>Browse practical goods for everyday work and home routines.</p>
+  </section>
+
+  <div class="product-grid">
+    {% for product in products %}
+      <article class="product-card">
+        <div>
+          <h2><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h2>
+          <p class="price">{{ product.price_cents | money }}</p>
+          <p>{{ product.description }}</p>
+        </div>
+        <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+          <button type="submit">Add to cart</button>
+        </form>
+      </article>
+    {% endfor %}
+  </div>
+{% endblock %}

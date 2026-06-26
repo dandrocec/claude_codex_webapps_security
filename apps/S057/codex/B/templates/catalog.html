@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Catalogue | Secure Shop{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Catalogue</h1>
+    <p>Browse practical goods for home, work, and everyday carry.</p>
+  </section>
+
+  <div class="product-grid">
+    {% for product in products %}
+      <article class="product-card">
+        <h2><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h2>
+        <p class="price">{{ product.price_cents | money }}</p>
+        <p>{{ product.description }}</p>
+        <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <label>
+            Quantity
+            <input type="number" name="quantity" min="1" max="20" value="1" inputmode="numeric">
+          </label>
+          <button type="submit">Add to cart</button>
+        </form>
+      </article>
+    {% endfor %}
+  </div>
+{% endblock %}

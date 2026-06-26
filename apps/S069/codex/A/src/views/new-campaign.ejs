@@ -1,0 +1,38 @@
+<%- include("partials/head", { title: "Launch a Campaign" }) %>
+<section class="form-shell">
+  <div>
+    <p class="eyebrow">Creator tools</p>
+    <h1>Launch a campaign</h1>
+    <p class="muted">Set a funding goal, describe the project, and choose the deadline backers will see.</p>
+  </div>
+
+  <form class="panel" action="/campaigns" method="post">
+    <% if (error) { %>
+      <p class="alert"><%= error %></p>
+    <% } %>
+    <label>
+      Creator name
+      <input name="creatorName" value="<%= values.creatorName || "" %>" required>
+    </label>
+    <label>
+      Campaign title
+      <input name="title" value="<%= values.title || "" %>" required>
+    </label>
+    <label>
+      Description
+      <textarea name="description" rows="5" required><%= values.description || "" %></textarea>
+    </label>
+    <div class="field-row">
+      <label>
+        Goal amount
+        <input name="goal" type="number" min="1" step="0.01" value="<%= values.goal || "" %>" required>
+      </label>
+      <label>
+        Deadline
+        <input name="deadline" type="date" value="<%= values.deadline || "" %>" required>
+      </label>
+    </div>
+    <button class="button" type="submit">Create campaign</button>
+  </form>
+</section>
+<%- include("partials/foot") %>

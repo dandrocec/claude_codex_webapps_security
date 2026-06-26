@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+
+<h1 class="page-title">Sign In</h1>
+<form class="form-panel" action="/login" method="post">
+  <label>
+    Email
+    <input type="email" name="email" autocomplete="email" required>
+  </label>
+  <label>
+    Password
+    <input type="password" name="password" autocomplete="current-password" required>
+  </label>
+  <button type="submit">Sign in</button>
+</form>
+
+<%- include('partials/footer') %>

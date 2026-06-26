@@ -1,0 +1,26 @@
+<%- include("partials/header") %>
+
+<section class="page-head">
+  <h1>Courses</h1>
+  <p>Browse courses. Students must enrol before viewing lesson content.</p>
+</section>
+
+<div class="grid">
+  <% courses.forEach((course) => { %>
+    <article class="card">
+      <h2><a href="/courses/<%= course.id %>"><%= course.title %></a></h2>
+      <p><%= course.description %></p>
+      <p class="muted">Instructor: <%= course.instructor_name %></p>
+      <% if (course.owned) { %>
+        <span class="badge">Your course</span>
+      <% } else if (course.enrolled) { %>
+        <span class="badge">Enrolled</span>
+      <% } %>
+    </article>
+  <% }) %>
+  <% if (courses.length === 0) { %>
+    <p>No courses have been created yet.</p>
+  <% } %>
+</div>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+
+<section class="panel narrow">
+  <h1>Not found</h1>
+  <p>The page or profile you requested does not exist.</p>
+  <a class="button" href="<%= currentUser ? '/feed' : '/' %>">Go back</a>
+</section>
+
+<%- include('partials/footer') %>

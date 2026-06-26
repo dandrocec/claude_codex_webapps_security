@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+  <div>
+    <h1>LearnDeck</h1>
+    <p class="lead">A focused e-learning workspace where instructors publish structured courses and enrolled students track lesson progress.</p>
+    <div class="actions">
+      <a class="button" href="/courses">Browse courses</a>
+      <% if (!user) { %>
+        <a class="button secondary" href="/register">Create account</a>
+      <% } %>
+    </div>
+  </div>
+  <div class="panel">
+    <h2>Role-based learning</h2>
+    <p class="muted">Instructor accounts create courses and lessons. Student accounts enrol before course content is revealed.</p>
+  </div>
+</section>
+
+<section class="stack">
+  <div class="row">
+    <h2>Published courses</h2>
+    <a href="/courses">View all</a>
+  </div>
+  <% if (featuredCourses.length === 0) { %>
+    <div class="empty">No published courses yet.</div>
+  <% } else { %>
+    <div class="grid">
+      <% featuredCourses.forEach((course) => { %>
+        <article class="course-card">
+          <div>
+            <span class="badge"><%= course.lesson_count %> lessons</span>
+            <h3><%= course.title %></h3>
+            <p class="muted">By <%= course.instructor_name %></p>
+            <p><%= course.description %></p>
+          </div>
+          <a class="button secondary" href="/courses/<%= course.id %>">Open course</a>
+        </article>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

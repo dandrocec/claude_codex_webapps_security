@@ -1,0 +1,15 @@
+<%- include('partials/header', { title: survey.title }) %>
+<section class="panel narrow">
+  <h1><%= survey.title %></h1>
+  <p class="muted"><%= survey.description %></p>
+  <form method="post" action="/s/<%= token %>" class="stack">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <% questions.forEach((question) => { %>
+      <label><%= question.prompt %>
+        <textarea name="q_<%= question.id %>" maxlength="2000" rows="4" required></textarea>
+      </label>
+    <% }) %>
+    <button type="submit">Submit response</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

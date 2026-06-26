@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<h1 class="page-title"><%= course.id ? 'Edit Course' : 'New Course' %></h1>
+<form class="form-panel" action="<%= action %>" method="post">
+  <label>
+    Title
+    <input name="title" value="<%= course.title || '' %>" required>
+  </label>
+  <label>
+    Description
+    <textarea name="description" required><%= course.description || '' %></textarea>
+  </label>
+  <label class="checkbox">
+    <input type="checkbox" name="published" <%= course.published ? 'checked' : '' %>>
+    Publish course
+  </label>
+  <button type="submit">Save course</button>
+</form>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Cart | Secure Shop{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Shopping Cart</h1>
+  </section>
+
+  {% if items %}
+    <div class="cart-table" role="table" aria-label="Shopping cart">
+      <div class="cart-row cart-head" role="row">
+        <span role="columnheader">Product</span>
+        <span role="columnheader">Price</span>
+        <span role="columnheader">Quantity</span>
+        <span role="columnheader">Line total</span>
+      </div>
+      {% for item in items %}
+        <div class="cart-row" role="row">
+          <span role="cell"><a href="{{ url_for('product_detail', product_id=item.product.id) }}">{{ item.product.name }}</a></span>
+          <span role="cell">{{ item.product.price_cents | money }}</span>
+          <span role="cell">
+            <form method="post" action="{{ url_for('update_cart', product_id=item.product.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="number" name="quantity" min="0" max="99" value="{{ item.quantity }}" inputmode="numeric" aria-label="Quantity for {{ item.product.name }}">
+              <button type="submit">Update</button>
+            </form>
+          </span>
+          <span role="cell">{{ item.line_total | money }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <p class="cart-total">Total: <strong>{{ total | money }}</strong></p>
+  {% else %}
+    <p>Your cart is empty.</p>
+  {% endif %}
+{% endblock %}

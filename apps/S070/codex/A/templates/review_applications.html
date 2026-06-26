@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Applications for {{ job.title }}{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <p class="muted">{{ job.location }}</p>
+  <h1>Applications for {{ job.title }}</h1>
+
+  <div class="stack">
+    {% for application in applications %}
+      <article class="application">
+        <div class="section-heading compact">
+          <div>
+            <h2>{{ application.applicant_name }}</h2>
+            <p class="muted">{{ application.applicant_email }} · submitted {{ application.created_at }}</p>
+          </div>
+          <a href="{{ url_for('resume', filename=application.resume_filename) }}">{{ application.resume_original_name }}</a>
+        </div>
+        <p>{{ application.cover_letter }}</p>
+        <form method="post" action="{{ url_for('update_application_status', application_id=application.id) }}" class="inline-form">
+          <label>Status
+            <select name="status">
+              {% for status in ["Submitted", "Reviewing", "Interview", "Rejected", "Hired"] %}
+                <option value="{{ status }}" {% if application.status == status %}selected{% endif %}>{{ status }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <button class="button button-small" type="submit">Update</button>
+        </form>
+      </article>
+    {% else %}
+      <p class="empty">No applications for this job yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Post Job{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h1>Post a job</h1>
+  <form method="post">
+    <label>Title
+      <input name="title" required>
+    </label>
+    <label>Location
+      <input name="location" required>
+    </label>
+    <label>Description
+      <textarea name="description" rows="10" required></textarea>
+    </label>
+    <button class="button" type="submit">Publish job</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+<section class="panel">
+  <h1>People</h1>
+  <form method="get" action="/users" class="search">
+    <input name="q" value="<%= search || '' %>" maxlength="60" placeholder="Search users">
+    <button type="submit">Search</button>
+  </form>
+</section>
+
+<section class="grid">
+  <% users.forEach(function(user) { %>
+    <article class="person">
+      <h2><a href="/users/<%= user.id %>"><%= user.display_name %></a></h2>
+      <p>@<%= user.username %></p>
+      <p><%= user.bio %></p>
+      <% if (following.includes(user.id)) { %>
+        <form method="post" action="/users/<%= user.id %>/unfollow">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Unfollow</button>
+        </form>
+      <% } else { %>
+        <form method="post" action="/users/<%= user.id %>/follow">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Follow</button>
+        </form>
+      <% } %>
+    </article>
+  <% }) %>
+</section>
+<%- include('partials/footer') %>

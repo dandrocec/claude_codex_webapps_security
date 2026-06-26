@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Sign in · Helpdesk{% endblock %}
+{% block content %}
+<section class="auth">
+  <h1>Sign in</h1>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="current-password" required>
+    <div class="actions">
+      <button type="submit">Sign in</button>
+      <a href="{{ url_for('register') }}">Create customer account</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

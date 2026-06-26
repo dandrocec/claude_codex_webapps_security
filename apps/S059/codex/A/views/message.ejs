@@ -1,0 +1,10 @@
+<%- include("partials/page", {
+  title,
+  body: `
+    <section class="panel narrow">
+      <h1>${title}</h1>
+      <p class="lede">${message}</p>
+      <a class="button" href="${backHref}">Go back</a>
+    </section>
+  `
+}) %>

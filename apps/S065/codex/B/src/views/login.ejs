@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<h1>Log in</h1>
+<%- include('partials/errors') %>
+
+<form class="form" method="post" action="/login">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <label>
+    Username
+    <input name="username" value="<%= form.username || '' %>" required>
+  </label>
+  <label>
+    Password
+    <input name="password" type="password" required>
+  </label>
+  <button type="submit">Log in</button>
+</form>
+
+<%- include('partials/footer') %>

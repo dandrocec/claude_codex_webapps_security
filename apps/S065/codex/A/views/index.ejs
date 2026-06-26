@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Q&A Board</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">Q&A Board</a>
+    </header>
+
+    <main class="shell">
+      <section class="panel ask-panel">
+        <h1>Ask a question</h1>
+        <% if (error) { %>
+          <p class="error"><%= error %></p>
+        <% } %>
+        <form action="/questions" method="post" class="stack">
+          <label>
+            <span>Title</span>
+            <input name="title" maxlength="160" value="<%= values.title || '' %>" required>
+          </label>
+          <label>
+            <span>Details</span>
+            <textarea name="body" rows="5" maxlength="3000" required><%= values.body || '' %></textarea>
+          </label>
+          <label>
+            <span>Your name</span>
+            <input name="author" maxlength="80" value="<%= values.author || '' %>" placeholder="Anonymous">
+          </label>
+          <button type="submit">Post question</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <h2>Recent questions</h2>
+          <span><%= questions.length %> total</span>
+        </div>
+
+        <% if (!questions.length) { %>
+          <p class="muted">No questions yet.</p>
+        <% } %>
+
+        <div class="question-list">
+          <% questions.forEach((question) => { %>
+            <article class="question-row">
+              <div class="scorebox">
+                <strong><%= question.score %></strong>
+                <span>score</span>
+              </div>
+              <div class="question-summary">
+                <a href="/questions/<%= question.id %>" class="question-title"><%= question.title %></a>
+                <p><%= question.body.length > 180 ? question.body.slice(0, 180) + '...' : question.body %></p>
+                <div class="meta">
+                  <span><%= question.answer_count %> answers</span>
+                  <span>asked by <%= question.author %></span>
+                  <% if (question.accepted_answer_id) { %>
+                    <span class="accepted">accepted</span>
+                  <% } %>
+                </div>
+              </div>
+            </article>
+          <% }) %>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Cart - Simple Shop{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Cart</h1>
+    <p>Your cart is stored in this browser session.</p>
+  </section>
+
+  {% if cart.items %}
+    <div class="cart-list">
+      {% for item in cart.items %}
+        <form class="cart-row" method="post">
+          <input type="hidden" name="product_id" value="{{ item.product.id }}">
+          <div>
+            <h2>{{ item.product.name }}</h2>
+            <p>{{ item.product.price_cents | money }} each</p>
+          </div>
+          <label>
+            Qty
+            <input type="number" name="quantity" value="{{ item.quantity }}" min="0" max="99">
+          </label>
+          <strong>{{ item.line_total_cents | money }}</strong>
+          <button name="action" value="update" type="submit">Update</button>
+          <button name="action" value="remove" type="submit" class="secondary">Remove</button>
+        </form>
+      {% endfor %}
+    </div>
+
+    <section class="cart-total">
+      <span>Total</span>
+      <strong>{{ cart.total_cents | money }}</strong>
+      <form method="post">
+        <button name="action" value="clear" type="submit" class="secondary">Clear cart</button>
+      </form>
+    </section>
+  {% else %}
+    <p class="empty-state">Your cart is empty.</p>
+  {% endif %}
+{% endblock %}

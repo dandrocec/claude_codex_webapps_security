@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Open ticket · Helpdesk{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Open ticket</h1>
+  <form method="post" action="{{ url_for('tickets') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="title">Title</label>
+    <input id="title" name="title" maxlength="120" required>
+    <label for="body">Message</label>
+    <textarea id="body" name="body" maxlength="4000" required></textarea>
+    <div class="actions">
+      <button type="submit">Create ticket</button>
+      <a class="button secondary" href="{{ url_for('tickets') }}">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

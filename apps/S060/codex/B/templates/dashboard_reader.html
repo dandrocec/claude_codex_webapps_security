@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Reader Dashboard{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Reader dashboard</h1>
+    <p>Browse approved posts.</p>
+  </section>
+  {% if posts %}
+    <ul class="simple-list">
+      {% for post in posts %}
+        <li><a href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a> by {{ post.author }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">No approved posts yet.</p>
+  {% endif %}
+{% endblock %}

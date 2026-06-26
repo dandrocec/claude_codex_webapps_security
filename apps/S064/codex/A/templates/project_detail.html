@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+<section class="project-header">
+  <div>
+    <a class="back-link" href="{{ url_for('projects') }}">Back to projects</a>
+    <h1>{{ project.name }}</h1>
+    <p>{{ project.description or "No description yet." }}</p>
+  </div>
+  <form method="post" action="{{ url_for('invite_member', project_id=project.id) }}" class="invite-form">
+    <input name="username" placeholder="Invite by username" required>
+    <button type="submit" class="button">Invite</button>
+  </form>
+</section>
+
+<section class="members">
+  <strong>Members</strong>
+  {% for member in members %}
+    <span class="user-chip">{{ member.username }}</span>
+  {% endfor %}
+</section>
+
+<section class="task-composer panel">
+  <h2>Add task</h2>
+  <form method="post" action="{{ url_for('create_task', project_id=project.id) }}" class="task-form">
+    <input name="title" placeholder="Task title" required maxlength="180">
+    <select name="assignee_id">
+      <option value="">Unassigned</option>
+      {% for member in members %}
+        <option value="{{ member.id }}">{{ member.username }}</option>
+      {% endfor %}
+    </select>
+    <textarea name="details" rows="2" placeholder="Details"></textarea>
+    <button type="submit" class="button">Add task</button>
+  </form>
+</section>
+
+<section class="board">
+  {% for status in statuses %}
+    <div class="column">
+      <h2>{{ status|capitalize }}</h2>
+      {% for task in columns[status] %}
+        <article class="task">
+          <h3>{{ task.title }}</h3>
+          {% if task.details %}
+            <p>{{ task.details }}</p>
+          {% endif %}
+          <form method="post" action="{{ url_for('update_task', project_id=project.id, task_id=task.id) }}" class="task-controls">
+            <select name="status">
+              {% for option in statuses %}
+                <option value="{{ option }}" {% if task.status == option %}selected{% endif %}>{{ option|capitalize }}</option>
+              {% endfor %}
+            </select>
+            <select name="assignee_id">
+              <option value="">Unassigned</option>
+              {% for member in members %}
+                <option value="{{ member.id }}" {% if task.assignee_id == member.id %}selected{% endif %}>{{ member.username }}</option>
+              {% endfor %}
+            </select>
+            <button type="submit" class="button small">Save</button>
+          </form>
+          <form method="post" action="{{ url_for('delete_task', project_id=project.id, task_id=task.id) }}">
+            <button type="submit" class="danger-link">Delete</button>
+          </form>
+        </article>
+      {% else %}
+        <div class="empty-column">No {{ status }} tasks.</div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}

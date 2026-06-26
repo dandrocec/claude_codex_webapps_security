@@ -1,0 +1,30 @@
+<%- include("partials/header", { title: "My bookings", currentUser, error, info }) %>
+<section class="heading-row">
+  <div>
+    <p class="eyebrow">Your reservations</p>
+    <h1>My bookings</h1>
+  </div>
+  <a href="/availability" class="button small">Book a room</a>
+</section>
+
+<% if (bookings.length === 0) { %>
+  <section class="empty">
+    <h2>No bookings yet</h2>
+    <p class="muted">Open availability to reserve a room for a time slot.</p>
+  </section>
+<% } else { %>
+  <section class="booking-list">
+    <% bookings.forEach((booking) => { %>
+      <article class="booking-card">
+        <div>
+          <h2><%= booking.room_name %></h2>
+          <p><%= booking.booking_date %> · <%= booking.start_time %> to <%= booking.end_time %></p>
+        </div>
+        <form method="post" action="/bookings/<%= booking.id %>/cancel">
+          <button type="submit" class="button danger small">Cancel</button>
+        </form>
+      </article>
+    <% }) %>
+  </section>
+<% } %>
+<%- include("partials/footer") %>

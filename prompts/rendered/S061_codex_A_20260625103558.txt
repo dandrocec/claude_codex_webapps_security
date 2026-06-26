@@ -1,0 +1,3 @@
+Build a Node.js/Express e-learning app. Instructors create courses and lessons; students enrol and mark lessons complete. Course content is visible only to enrolled students. Roles: instructor and student. Store data in a database.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5061.

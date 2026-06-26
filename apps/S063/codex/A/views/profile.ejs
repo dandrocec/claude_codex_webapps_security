@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<section class="profile-header panel">
+  <div>
+    <h1><%= profile.display_name %></h1>
+    <p class="muted">@<%= profile.username %></p>
+    <% if (profile.location) { %><p><%= profile.location %></p><% } %>
+    <% if (profile.bio) { %><p><%= profile.bio %></p><% } %>
+    <p class="muted"><%= profile.posts_count %> posts · <%= profile.followers_count %> followers · <%= profile.following_count %> following</p>
+  </div>
+  <% if (currentUser && currentUser.id !== profile.id) { %>
+    <% if (profile.is_following) { %>
+      <form method="post" action="/users/<%= profile.username %>/follow?_method=DELETE">
+        <button class="secondary" type="submit">Unfollow</button>
+      </form>
+    <% } else { %>
+      <form method="post" action="/users/<%= profile.username %>/follow">
+        <button class="button" type="submit">Follow</button>
+      </form>
+    <% } %>
+  <% } %>
+</section>
+
+<section class="timeline">
+  <% posts.forEach((post) => { %>
+    <article class="post">
+      <div class="post-header">
+        <strong><%= post.display_name %></strong>
+        <time><%= post.created_label %></time>
+      </div>
+      <p><%= post.body %></p>
+    </article>
+  <% }) %>
+  <% if (!posts.length) { %>
+    <article class="empty panel">
+      <h2>No posts yet</h2>
+      <p>This profile has not posted any status updates.</p>
+    </article>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

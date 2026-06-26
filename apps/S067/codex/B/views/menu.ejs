@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<section class="section-head">
+  <h1>Menu</h1>
+  <p>Choose fresh meals and desserts. Totals are calculated securely at checkout.</p>
+</section>
+
+<div class="grid">
+  <% menuItems.forEach((item) => { %>
+    <article class="card">
+      <div>
+        <h2><%= item.name %></h2>
+        <p><%= item.description %></p>
+      </div>
+      <div class="card-actions">
+        <strong><%= money(item.price_cents) %></strong>
+        <% if (currentUser && currentUser.role === 'customer') { %>
+          <form method="post" action="/cart/add">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="item_id" value="<%= item.id %>">
+            <label>
+              <span>Qty</span>
+              <input type="number" name="quantity" value="1" min="1" max="20" required>
+            </label>
+            <button type="submit">Add</button>
+          </form>
+        <% } %>
+      </div>
+    </article>
+  <% }) %>
+</div>
+
+<% if (!currentUser) { %>
+  <p class="notice"><a href="/login">Log in</a> or <a href="/register">register</a> to order.</p>
+<% } %>
+
+<%- include('partials/footer') %>

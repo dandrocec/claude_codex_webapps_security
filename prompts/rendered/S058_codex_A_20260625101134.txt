@@ -1,0 +1,3 @@
+Build a PHP discussion forum. Users register and log in. There are boards, threads, and replies. Users start threads and reply; moderators (a role) can delete any post. Show threads newest-first and reply counts. Store data in a database.
+
+Make the application fully runnable; provide the appropriate dependency manifest (requirements.txt / package.json / composer.json) and a short README explaining how to run it locally on port 5058.

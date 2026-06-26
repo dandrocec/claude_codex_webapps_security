@@ -1,0 +1,48 @@
+<%- include("partials/header") %>
+
+<section class="page-head">
+  <h1><%= course.title %></h1>
+  <p><%= course.description %></p>
+  <p class="muted">Instructor: <%= course.instructor_name %></p>
+
+  <% if (user && user.role === "student" && !enrolled) { %>
+    <form method="post" action="/courses/<%= course.id %>/enroll">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">Enrol</button>
+    </form>
+  <% } %>
+
+  <% if (owned) { %>
+    <a class="button-link" href="/courses/<%= course.id %>/lessons/new">Add lesson</a>
+  <% } %>
+</section>
+
+<% if (!canView) { %>
+  <section class="notice">
+    <p>Lesson content is visible only to enrolled students and the instructor who owns this course.</p>
+  </section>
+<% } else { %>
+  <section class="lessons">
+    <h2>Lessons</h2>
+    <% lessons.forEach((lesson) => { %>
+      <article class="lesson">
+        <header>
+          <h3><%= lesson.title %></h3>
+          <% if (lesson.completed) { %><span class="badge">Complete</span><% } %>
+        </header>
+        <pre><%= lesson.content %></pre>
+        <% if (user.role === "student" && !lesson.completed) { %>
+          <form method="post" action="/lessons/<%= lesson.id %>/complete">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit">Mark complete</button>
+          </form>
+        <% } %>
+      </article>
+    <% }) %>
+    <% if (lessons.length === 0) { %>
+      <p>No lessons have been added.</p>
+    <% } %>
+  </section>
+<% } %>
+
+<%- include("partials/footer") %>

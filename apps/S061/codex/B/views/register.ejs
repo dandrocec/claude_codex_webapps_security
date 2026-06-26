@@ -1,0 +1,23 @@
+<%- include("partials/header") %>
+
+<section class="panel">
+  <h1>Create account</h1>
+  <% if (errors.length) { %>
+    <div class="alert"><% errors.forEach((error) => { %><p><%= error %></p><% }) %></div>
+  <% } %>
+  <form method="post" action="/register">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Name <input name="name" maxlength="80" required value="<%= form.name || "" %>"></label>
+    <label>Email <input type="email" name="email" maxlength="254" required value="<%= form.email || "" %>"></label>
+    <label>Password <input type="password" name="password" minlength="12" maxlength="256" required></label>
+    <label>Role
+      <select name="role" required>
+        <option value="student" <%= form.role === "student" ? "selected" : "" %>>Student</option>
+        <option value="instructor" <%= form.role === "instructor" ? "selected" : "" %>>Instructor</option>
+      </select>
+    </label>
+    <button type="submit">Register</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

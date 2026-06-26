@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Editor Dashboard · Role Blog{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <h1>Editor dashboard</h1>
+    <p>Review submitted posts and publish approved work.</p>
+  </section>
+
+  <h2 class="section-title">Pending review</h2>
+  <div class="review-list">
+    {% for post in pending %}
+      <article class="review-card">
+        <div class="meta">By {{ post.author_name }} · submitted {{ post.created_at }}</div>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.body }}</p>
+        <div class="review-actions">
+          <form method="post" action="{{ url_for('approve_post', post_id=post.id) }}">
+            <button type="submit">Approve</button>
+          </form>
+          <form method="post" action="{{ url_for('reject_post', post_id=post.id) }}" class="reject-form">
+            <input name="reason" placeholder="Reason for rejection">
+            <button class="danger" type="submit">Reject</button>
+          </form>
+        </div>
+      </article>
+    {% else %}
+      <p class="empty">No posts are waiting for review.</p>
+    {% endfor %}
+  </div>
+
+  <h2 class="section-title">Recent decisions</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Status</th>
+          <th>Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in recent %}
+          <tr>
+            <td>{{ post.title }}</td>
+            <td>{{ post.author_name }}</td>
+            <td><span class="status {{ post.status }}">{{ post.status }}</span></td>
+            <td>{{ post.updated_at }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="4" class="empty">No editorial decisions yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+

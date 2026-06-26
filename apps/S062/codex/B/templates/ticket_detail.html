@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ ticket.title }} · Helpdesk{% endblock %}
+{% block content %}
+<div class="grid">
+  <section class="panel">
+    <div class="actions" style="justify-content: space-between; margin-top: 0;">
+      <h1>{{ ticket.title }}</h1>
+      <span class="status">{{ ticket.status }}</span>
+    </div>
+    <p class="meta">
+      Customer: {{ ticket.customer_name }} · Agent: {{ ticket.agent_name or "Unassigned" }} · Updated: {{ ticket.updated_at }}
+    </p>
+    <div class="body-text">{{ ticket.body }}</div>
+  </section>
+
+  {% if g.user.role == "agent" %}
+    <section class="agent-tools">
+      <form class="panel" method="post" action="{{ url_for('assign_ticket', ticket_id=ticket.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <h2>Assignment</h2>
+        <label for="agent_id">Agent</label>
+        <select id="agent_id" name="agent_id">
+          <option value="">Unassigned</option>
+          {% for agent in agents %}
+            <option value="{{ agent.id }}" {% if ticket.agent_id == agent.id %}selected{% endif %}>{{ agent.name }} ({{ agent.email }})</option>
+          {% endfor %}
+        </select>
+        <div class="actions"><button type="submit">Update assignment</button></div>
+      </form>
+      <form class="panel" method="post" action="{{ url_for('change_status', ticket_id=ticket.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <h2>Status</h2>
+        <label for="status">Status</label>
+        <select id="status" name="status">
+          {% for status in statuses %}
+            <option value="{{ status }}" {% if ticket.status == status %}selected{% endif %}>{{ status }}</option>
+          {% endfor %}
+        </select>
+        <div class="actions"><button type="submit">Update status</button></div>
+      </form>
+    </section>
+  {% endif %}
+
+  <section class="panel">
+    <h2>Replies</h2>
+    <div class="grid">
+      {% for reply in replies %}
+        <article class="reply">
+          <p class="meta">{{ reply.name }} · {{ reply.role }} · {{ reply.created_at }}</p>
+          <div class="body-text">{{ reply.body }}</div>
+        </article>
+      {% else %}
+        <p class="meta">No replies yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Add reply</h2>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" maxlength="4000" required></textarea>
+      <div class="actions"><button type="submit">Send reply</button></div>
+    </form>
+  </section>
+</div>
+{% endblock %}

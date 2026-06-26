@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+
+<section class="panel narrow">
+  <h1>Create account</h1>
+  <form class="stack" method="post" action="/register">
+    <label>Username
+      <input name="username" autocomplete="username" maxlength="24" required>
+    </label>
+    <label>Email
+      <input type="email" name="email" autocomplete="email" maxlength="120" required>
+    </label>
+    <label>Display name
+      <input name="display_name" autocomplete="name" maxlength="60" required>
+    </label>
+    <label>Password
+      <input type="password" name="password" autocomplete="new-password" minlength="8" required>
+    </label>
+    <button class="button" type="submit">Create account</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

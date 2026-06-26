@@ -1,0 +1,13 @@
+{
+  "name": "local/real-estate-site",
+  "description": "A small PHP real-estate listing site with agent listing management and visitor search.",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "ext-pdo": "*",
+    "ext-pdo_sqlite": "*"
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:5066 -t public"
+  }
+}

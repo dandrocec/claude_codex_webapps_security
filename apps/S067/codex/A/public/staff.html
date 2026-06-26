@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Staff Orders | Harbor Table</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script defer src="/staff.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Staff role</p>
+        <h1>Incoming Orders</h1>
+      </div>
+      <a class="staff-link" href="/">Customer menu</a>
+    </header>
+
+    <main class="staff-layout">
+      <section class="orders-panel" aria-labelledby="orders-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Kitchen queue</p>
+            <h2 id="orders-title">Orders</h2>
+          </div>
+          <button id="refreshOrders" type="button">Refresh</button>
+        </div>
+        <div id="ordersList" class="orders-list"></div>
+      </section>
+    </main>
+  </body>
+</html>

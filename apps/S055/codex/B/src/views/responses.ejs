@@ -1,0 +1,33 @@
+<%- include('partials/header', { title: 'Responses' }) %>
+<section class="panel">
+  <div class="heading-row">
+    <div>
+      <h1>Responses for <%= survey.title %></h1>
+      <p class="muted"><%= responses.length %> collected responses</p>
+    </div>
+    <a class="button secondary" href="/surveys/<%= survey.id %>">Back to survey</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Submitted</th>
+          <% questions.forEach((question) => { %>
+            <th><%= question.prompt %></th>
+          <% }) %>
+        </tr>
+      </thead>
+      <tbody>
+        <% responses.forEach((response) => { %>
+          <tr>
+            <td><%= response.created_at %></td>
+            <% questions.forEach((question) => { %>
+              <td><%= answerMap.get(`${response.id}:${question.id}`) || '' %></td>
+            <% }) %>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+<%- include('partials/footer') %>

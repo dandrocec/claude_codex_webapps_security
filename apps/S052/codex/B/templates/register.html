@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Register | Support Tickets{% endblock %}
+{% block content %}
+  <section class="panel narrow">
+    <h1>Create account</h1>
+    <form method="post" novalidate>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="username">Username</label>
+      <input id="username" name="username" value="{{ form.username.data or '' }}" minlength="3" maxlength="40" required>
+      {% if form.username.errors %}<p class="field-error">{{ form.username.errors[0] }}</p>{% endif %}
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" minlength="12" maxlength="128" required>
+      {% if form.password.errors %}<p class="field-error">{{ form.password.errors[0] }}</p>{% endif %}
+
+      <label for="confirm_password">Confirm password</label>
+      <input id="confirm_password" name="confirm_password" type="password" minlength="12" maxlength="128" required>
+      {% if form.confirm_password.errors %}<p class="field-error">{{ form.confirm_password.errors[0] }}</p>{% endif %}
+
+      <button type="submit">Create account</button>
+    </form>
+  </section>
+{% endblock %}

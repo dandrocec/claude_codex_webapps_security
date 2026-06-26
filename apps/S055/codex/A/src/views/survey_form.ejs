@@ -1,0 +1,71 @@
+<%- include("partials/start", { title: "New Survey" }) %>
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">Builder</p>
+    <h1>New survey</h1>
+  </div>
+</div>
+
+<form method="post" action="/surveys" class="builder">
+  <section class="panel stack">
+    <label>Survey title
+      <input type="text" name="title" value="<%= form.title || "" %>" required>
+    </label>
+    <label>Description
+      <textarea name="description" rows="3"><%= form.description || "" %></textarea>
+    </label>
+  </section>
+
+  <section class="panel">
+    <div class="section-heading">
+      <h2>Questions</h2>
+      <button class="button secondary small" type="button" id="add-question">Add question</button>
+    </div>
+    <div id="questions" class="question-list">
+      <% questions.forEach((question, index) => { %>
+        <div class="question-row">
+          <label>Prompt
+            <input type="text" name="prompt" value="<%= question.prompt %>" required>
+          </label>
+          <label>Type
+            <select name="question_type">
+              <option value="text" <%= question.question_type === "text" ? "selected" : "" %>>Short text</option>
+              <option value="textarea" <%= question.question_type === "textarea" ? "selected" : "" %>>Long text</option>
+            </select>
+          </label>
+          <label class="check">
+            <input type="checkbox" name="required" value="<%= index %>" <%= question.required ? "checked" : "" %>>
+            Required
+          </label>
+          <button class="remove" type="button" aria-label="Remove question">Remove</button>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="button" type="submit">Create survey</button>
+    <a class="button secondary" href="/dashboard">Cancel</a>
+  </div>
+</form>
+
+<template id="question-template">
+  <div class="question-row">
+    <label>Prompt
+      <input type="text" name="prompt" required>
+    </label>
+    <label>Type
+      <select name="question_type">
+        <option value="text">Short text</option>
+        <option value="textarea">Long text</option>
+      </select>
+    </label>
+    <label class="check">
+      <input type="checkbox" name="required" value="0" checked>
+      Required
+    </label>
+    <button class="remove" type="button" aria-label="Remove question">Remove</button>
+  </div>
+</template>
+<script src="/builder.js"></script>
+<%- include("partials/end") %>

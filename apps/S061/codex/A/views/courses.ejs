@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<h1 class="page-title">Courses</h1>
+<p class="lead">Students can enrol in published courses. Lesson content stays hidden until enrolment.</p>
+
+<% if (courses.length === 0) { %>
+  <div class="empty">No published courses are available.</div>
+<% } else { %>
+  <div class="grid">
+    <% courses.forEach((course) => { %>
+      <article class="course-card">
+        <div>
+          <span class="badge"><%= course.lesson_count %> lessons</span>
+          <h3><%= course.title %></h3>
+          <p class="muted">By <%= course.instructor_name %></p>
+          <p><%= course.description %></p>
+        </div>
+        <a class="button secondary" href="/courses/<%= course.id %>">View</a>
+      </article>
+    <% }) %>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

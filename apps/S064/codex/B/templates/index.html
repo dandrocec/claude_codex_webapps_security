@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Project Board{% endblock %}
+{% block content %}
+<section class="panel hero">
+  <h1>Project Board</h1>
+  <p>Manage private project boards with invited teammates, task assignees, and clear status columns.</p>
+  <div class="actions">
+    <a class="button" href="{{ url_for('register') }}">Create account</a>
+    <a class="button secondary" href="{{ url_for('login') }}">Sign in</a>
+  </div>
+</section>
+{% endblock %}

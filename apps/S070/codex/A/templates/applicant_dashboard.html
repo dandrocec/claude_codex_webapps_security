@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}My Applications{% endblock %}
+
+{% block content %}
+<div class="section-heading">
+  <h1>My applications</h1>
+  <a class="button" href="{{ url_for('jobs') }}">Find jobs</a>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Job</th>
+        <th>Employer</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>Submitted</th>
+        <th>Resume</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for application in applications %}
+        <tr>
+          <td>{{ application.title }}</td>
+          <td>{{ application.employer_name }}</td>
+          <td>{{ application.location }}</td>
+          <td><span class="status">{{ application.status }}</span></td>
+          <td>{{ application.created_at }}</td>
+          <td><a href="{{ url_for('resume', filename=application.resume_filename) }}">{{ application.resume_original_name }}</a></td>
+        </tr>
+      {% else %}
+        <tr><td colspan="6" class="empty">You have not submitted any applications.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

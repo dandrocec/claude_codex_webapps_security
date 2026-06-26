@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<section class="page-head">
+  <h1>Questions</h1>
+  <% if (currentUser) { %>
+    <a class="button" href="/questions/new">Ask a question</a>
+  <% } %>
+</section>
+
+<% if (!questions.length) { %>
+  <p class="empty">No questions yet.</p>
+<% } %>
+
+<div class="question-list">
+  <% questions.forEach(function(question) { %>
+    <article class="list-item">
+      <div class="stats">
+        <strong><%= question.score %></strong>
+        <span>score</span>
+        <strong><%= question.answer_count %></strong>
+        <span>answers</span>
+      </div>
+      <div>
+        <h2><a href="/questions/<%= question.id %>"><%= question.title %></a></h2>
+        <p><%= question.body.length > 220 ? question.body.slice(0, 220) + '...' : question.body %></p>
+        <p class="meta">Asked by <%= question.username %> on <%= new Date(question.created_at).toLocaleString() %></p>
+      </div>
+    </article>
+  <% }) %>
+</div>
+
+<%- include('partials/footer') %>

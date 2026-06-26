@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Time Tracker{% endblock %}
+
+{% block content %}
+<section class="dashboard-heading">
+  <div>
+    <h1>Weekly timesheet</h1>
+    <p>{{ week_start.strftime("%b %d, %Y") }} to {{ week_end.strftime("%b %d, %Y") }}</p>
+  </div>
+  <div class="week-nav">
+    <a href="{{ url_for('dashboard', week=previous_week.isoformat()) }}">Previous</a>
+    <a href="{{ url_for('dashboard', week=today) }}">Current</a>
+    <a href="{{ url_for('dashboard', week=next_week.isoformat()) }}">Next</a>
+  </div>
+</section>
+
+<section class="layout">
+  <div class="panel">
+    <h2>Add time</h2>
+    <form method="post" class="entry-form">
+      <label>
+        Project
+        <input name="project" maxlength="80" required>
+      </label>
+      <label>
+        Date
+        <input name="entry_date" type="date" value="{{ today }}" required>
+      </label>
+      <label>
+        Hours
+        <input name="hours" type="number" min="0.1" max="24" step="0.1" required>
+      </label>
+      <label>
+        Note
+        <textarea name="note" rows="4" maxlength="500"></textarea>
+      </label>
+      <button type="submit">Save entry</button>
+    </form>
+  </div>
+
+  <div class="panel totals-panel">
+    <h2>Totals</h2>
+    <div class="weekly-total">
+      <span>Total hours</span>
+      <strong>{{ "%.1f"|format(weekly_total) }}</strong>
+    </div>
+    <h3>By day</h3>
+    <div class="daily-grid">
+      {% for day, hours in daily_totals.items() %}
+        <div>
+          <span>{{ day.strftime("%a") }}</span>
+          <strong>{{ "%.1f"|format(hours) }}</strong>
+        </div>
+      {% endfor %}
+    </div>
+    <h3>By project</h3>
+    {% if project_totals %}
+      <ul class="project-totals">
+        {% for row in project_totals %}
+          <li><span>{{ row["project"] }}</span><strong>{{ "%.1f"|format(row["total_hours"]) }}</strong></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">No entries this week.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="panel entries-panel">
+  <h2>Entries</h2>
+  {% if entries %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Project</th>
+            <th>Hours</th>
+            <th>Note</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in entries %}
+            <tr>
+              <td>{{ entry["entry_date"] }}</td>
+              <td>{{ entry["project"] }}</td>
+              <td>{{ "%.1f"|format(entry["hours"]) }}</td>
+              <td>{{ entry["note"] or "" }}</td>
+              <td>
+                <form action="{{ url_for('delete_entry', entry_id=entry['id']) }}" method="post">
+                  <button class="danger" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">No time entries for this week.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+  "name": "express-food-ordering-app",
+  "version": "1.0.0",
+  "description": "Node.js/Express food-ordering app with customer cart and staff order management.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.10.0",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

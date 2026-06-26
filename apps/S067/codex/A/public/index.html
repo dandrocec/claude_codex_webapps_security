@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Harbor Table Ordering</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script defer src="/app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Food ordering</p>
+        <h1>Harbor Table</h1>
+      </div>
+      <a class="staff-link" href="/staff">Staff orders</a>
+    </header>
+
+    <main class="customer-layout">
+      <section class="menu-panel" aria-labelledby="menu-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Browse</p>
+            <h2 id="menu-title">Menu</h2>
+          </div>
+          <div id="categoryFilters" class="filters" aria-label="Menu categories"></div>
+        </div>
+        <div id="menuGrid" class="menu-grid"></div>
+      </section>
+
+      <aside class="cart-panel" aria-labelledby="cart-title">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">Checkout</p>
+            <h2 id="cart-title">Cart</h2>
+          </div>
+          <strong id="cartTotal">$0.00</strong>
+        </div>
+
+        <div id="cartItems" class="cart-items empty">Your cart is empty.</div>
+
+        <form id="orderForm" class="order-form">
+          <label>
+            Name
+            <input id="customerName" name="customerName" autocomplete="name" required>
+          </label>
+          <label>
+            Phone
+            <input id="customerPhone" name="customerPhone" autocomplete="tel" required>
+          </label>
+          <button type="submit">Place order</button>
+        </form>
+        <p id="orderMessage" class="message" role="status"></p>
+      </aside>
+    </main>
+  </body>
+</html>

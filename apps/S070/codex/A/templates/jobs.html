@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Jobs{% endblock %}
+
+{% block content %}
+<div class="section-heading">
+  <h1>Open jobs</h1>
+  {% if current_user and current_user.role == "employer" %}
+    <a class="button" href="{{ url_for('new_job') }}">Post job</a>
+  {% endif %}
+</div>
+
+<div class="grid">
+  {% for job in jobs %}
+    <article class="card">
+      <h2>{{ job.title }}</h2>
+      <p class="muted">{{ job.employer_name }} · {{ job.location }}</p>
+      <p>{{ job.description[:220] }}{% if job.description|length > 220 %}...{% endif %}</p>
+      <a href="{{ url_for('job_detail', job_id=job.id) }}">View details</a>
+    </article>
+  {% else %}
+    <p class="empty">There are no jobs yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

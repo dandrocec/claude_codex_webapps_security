@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= question.title %> - Q&A Board</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">Q&A Board</a>
+    </header>
+
+    <main class="shell">
+      <article class="panel detail">
+        <div class="vote-column">
+          <form action="/vote" method="post">
+            <input type="hidden" name="target_type" value="question">
+            <input type="hidden" name="target_id" value="<%= question.id %>">
+            <input type="hidden" name="value" value="1">
+            <input type="hidden" name="redirect_to" value="/questions/<%= question.id %>">
+            <button aria-label="Upvote question" class="vote-button">▲</button>
+          </form>
+          <strong><%= question.score %></strong>
+          <form action="/vote" method="post">
+            <input type="hidden" name="target_type" value="question">
+            <input type="hidden" name="target_id" value="<%= question.id %>">
+            <input type="hidden" name="value" value="-1">
+            <input type="hidden" name="redirect_to" value="/questions/<%= question.id %>">
+            <button aria-label="Downvote question" class="vote-button">▼</button>
+          </form>
+        </div>
+        <div class="post-body">
+          <h1><%= question.title %></h1>
+          <p class="preserve"><%= question.body %></p>
+          <p class="meta">asked by <%= question.author %></p>
+        </div>
+      </article>
+
+      <section class="panel">
+        <div class="section-heading">
+          <h2><%= answers.length %> answers</h2>
+          <span>sorted by score</span>
+        </div>
+
+        <% if (!answers.length) { %>
+          <p class="muted">No answers yet.</p>
+        <% } %>
+
+        <% answers.forEach((answer) => { %>
+          <article class="answer">
+            <div class="vote-column">
+              <form action="/vote" method="post">
+                <input type="hidden" name="target_type" value="answer">
+                <input type="hidden" name="target_id" value="<%= answer.id %>">
+                <input type="hidden" name="value" value="1">
+                <input type="hidden" name="redirect_to" value="/questions/<%= question.id %>">
+                <button aria-label="Upvote answer" class="vote-button">▲</button>
+              </form>
+              <strong><%= answer.score %></strong>
+              <form action="/vote" method="post">
+                <input type="hidden" name="target_type" value="answer">
+                <input type="hidden" name="target_id" value="<%= answer.id %>">
+                <input type="hidden" name="value" value="-1">
+                <input type="hidden" name="redirect_to" value="/questions/<%= question.id %>">
+                <button aria-label="Downvote answer" class="vote-button">▼</button>
+              </form>
+            </div>
+            <div class="post-body">
+              <% if (Number(question.accepted_answer_id) === Number(answer.id)) { %>
+                <div class="accepted-banner">Accepted answer</div>
+              <% } %>
+              <p class="preserve"><%= answer.body %></p>
+              <div class="answer-footer">
+                <p class="meta">answered by <%= answer.author %></p>
+                <% if (question.owner_id === visitorId) { %>
+                  <form action="/questions/<%= question.id %>/accept/<%= answer.id %>" method="post">
+                    <button type="submit" class="secondary">
+                      <%= Number(question.accepted_answer_id) === Number(answer.id) ? 'Unaccept' : 'Accept' %>
+                    </button>
+                  </form>
+                <% } %>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </section>
+
+      <section class="panel">
+        <h2>Your answer</h2>
+        <% if (error) { %>
+          <p class="error"><%= error %></p>
+        <% } %>
+        <form action="/questions/<%= question.id %>/answers" method="post" class="stack">
+          <label>
+            <span>Answer</span>
+            <textarea name="body" rows="6" maxlength="3000" required><%= values.body || '' %></textarea>
+          </label>
+          <label>
+            <span>Your name</span>
+            <input name="author" maxlength="80" value="<%= values.author || '' %>" placeholder="Anonymous">
+          </label>
+          <button type="submit">Post answer</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

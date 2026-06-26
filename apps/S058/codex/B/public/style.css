@@ -1,0 +1,201 @@
+:root {
+  color-scheme: light;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7f8;
+  color: #1c2226;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  background: #ffffff;
+  border-bottom: 1px solid #d9e0e4;
+}
+
+nav {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+nav span {
+  margin-left: auto;
+  color: #50606a;
+}
+
+a {
+  color: #0b5cad;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 28px 20px 56px;
+}
+
+h1,
+h2 {
+  line-height: 1.2;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.board-list,
+.thread-list {
+  display: grid;
+  gap: 12px;
+}
+
+.board,
+.thread,
+.post,
+form {
+  background: #ffffff;
+  border: 1px solid #d9e0e4;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.board,
+.thread {
+  display: grid;
+  gap: 6px;
+}
+
+.board span,
+.thread span,
+.meta {
+  color: #596a73;
+}
+
+.board em,
+.thread em {
+  color: #39454c;
+  font-style: normal;
+  font-size: 14px;
+}
+
+.post {
+  margin-bottom: 14px;
+}
+
+.reply {
+  margin-left: 18px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+input,
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #b9c4ca;
+  border-radius: 6px;
+  padding: 10px;
+  font: inherit;
+}
+
+textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+button,
+.button {
+  display: inline-block;
+  border: 0;
+  border-radius: 6px;
+  background: #0b5cad;
+  color: #ffffff;
+  padding: 10px 14px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover,
+.button:hover {
+  background: #084887;
+  text-decoration: none;
+}
+
+.danger {
+  background: #b42318;
+}
+
+.danger:hover {
+  background: #8f1c13;
+}
+
+.inline {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  margin-top: 12px;
+}
+
+.nav-form {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.nav-form button {
+  background: transparent;
+  color: #0b5cad;
+  padding: 0;
+  font-weight: 400;
+}
+
+.nav-form button:hover {
+  background: transparent;
+  color: #084887;
+  text-decoration: underline;
+}
+
+.error {
+  border: 1px solid #f0b7b2;
+  background: #fff1f0;
+  color: #8f1c13;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+@media (max-width: 640px) {
+  nav span {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .title-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .reply {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,50 @@
+<%- include("partials/start", { title: survey.title }) %>
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">Survey</p>
+    <h1><%= survey.title %></h1>
+    <% if (survey.description) { %><p><%= survey.description %></p><% } %>
+  </div>
+  <a class="button secondary" href="/dashboard">Back</a>
+</div>
+
+<section class="panel share-panel">
+  <div>
+    <h2>Public response link</h2>
+    <p><a href="/s/<%= survey.slug %>" target="_blank" rel="noreferrer">/s/<%= survey.slug %></a></p>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="section-heading">
+    <h2>Responses</h2>
+    <span><%= responses.length %> total</span>
+  </div>
+  <% if (responses.length === 0) { %>
+    <p class="muted">No responses have been submitted yet.</p>
+  <% } else { %>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Submitted</th>
+            <% questions.forEach((question) => { %>
+              <th><%= question.prompt %></th>
+            <% }) %>
+          </tr>
+        </thead>
+        <tbody>
+          <% responses.forEach((response) => { %>
+            <tr>
+              <td><%= response.submitted_at %></td>
+              <% questions.forEach((question) => { %>
+                <td><%= answerMap.get(`${response.id}:${question.id}`) || "" %></td>
+              <% }) %>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>
+<%- include("partials/end") %>

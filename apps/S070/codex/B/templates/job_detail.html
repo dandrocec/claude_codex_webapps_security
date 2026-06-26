@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  <article class="card">
+    <h1>{{ job.title }}</h1>
+    <p class="meta">{{ job.company }} · {{ job.location }} · Posted by {{ job.employer_name }}</p>
+    <div class="prewrap">{{ job.description }}</div>
+    {% if current_user and current_user.role == "applicant" %}
+      {% if existing %}
+        <p class="meta">You have already applied to this job.</p>
+      {% else %}
+        <p><a class="button" href="{{ url_for('apply', job_id=job.id) }}">Apply</a></p>
+      {% endif %}
+    {% elif not current_user %}
+      <p><a class="button" href="{{ url_for('login') }}">Sign in to apply</a></p>
+    {% endif %}
+  </article>
+{% endblock %}

@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+
+<div class="row">
+  <div>
+    <h1 class="page-title">Instructor Dashboard</h1>
+    <p class="lead">Create courses, publish them, and manage lessons.</p>
+  </div>
+  <a class="button" href="/courses/new">New course</a>
+</div>
+
+<% if (courses.length === 0) { %>
+  <div class="empty">You have not created any courses yet.</div>
+<% } else { %>
+  <div class="grid">
+    <% courses.forEach((course) => { %>
+      <article class="course-card">
+        <div>
+          <span class="badge"><%= course.published ? 'Published' : 'Draft' %></span>
+          <h3><%= course.title %></h3>
+          <p class="muted"><%= course.lesson_count %> lessons · <%= course.student_count %> students</p>
+          <p><%= course.description %></p>
+        </div>
+        <a class="button secondary" href="/instructor/courses/<%= course.id %>">Manage</a>
+      </article>
+    <% }) %>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

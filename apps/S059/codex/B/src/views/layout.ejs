@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %> | Room Reservations</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/availability">Room Reservations</a>
+      <nav>
+        <% if (currentUser) { %>
+          <a href="/availability">Availability</a>
+          <a href="/bookings">My bookings</a>
+          <form method="post" action="/logout" class="inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit">Sign out</button>
+          </form>
+        <% } else { %>
+          <a href="/login">Sign in</a>
+          <a href="/register">Create account</a>
+        <% } %>
+      </nav>
+    </header>
+    <main class="container">
+      <% if (flash) { %>
+        <div class="flash <%= flash.type %>"><%= flash.message %></div>
+      <% } %>
+      <%- body %>
+    </main>
+  </body>
+</html>

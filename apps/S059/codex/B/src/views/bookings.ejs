@@ -1,0 +1,31 @@
+<%- include("partials/open", { title }) %>
+<section>
+  <div class="section-head">
+    <div>
+      <h1>My bookings</h1>
+      <p class="muted">Only bookings owned by your account are shown here.</p>
+    </div>
+    <a class="button-link" href="/availability">Book another slot</a>
+  </div>
+
+  <% if (bookings.length === 0) { %>
+    <div class="empty">You do not have any bookings.</div>
+  <% } else { %>
+    <div class="booking-list">
+      <% bookings.forEach((booking) => { %>
+        <article class="booking">
+          <div>
+            <h2><%= booking.room_name %></h2>
+            <p><%= booking.booking_date %>, <%= booking.start_time %>-<%= booking.end_time %></p>
+            <p class="muted">Capacity <%= booking.capacity %></p>
+          </div>
+          <form method="post" action="/bookings/<%= booking.id %>/cancel">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="danger" type="submit">Cancel</button>
+          </form>
+        </article>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+<%- include("partials/close") %>

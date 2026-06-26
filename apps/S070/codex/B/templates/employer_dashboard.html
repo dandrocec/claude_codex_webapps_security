@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Employer dashboard</h1>
+  <p><a class="button" href="{{ url_for('new_job') }}">Post a job</a></p>
+  {% if jobs %}
+    <table>
+      <thead><tr><th>Job</th><th>Location</th><th>Applications</th><th>Actions</th></tr></thead>
+      <tbody>
+      {% for job in jobs %}
+        <tr>
+          <td>{{ job.title }}<br><span class="meta">{{ job.company }}</span></td>
+          <td>{{ job.location }}</td>
+          <td>{{ job.application_count }}</td>
+          <td><a href="{{ url_for('job_applications', job_id=job.id) }}">Review</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You have not posted any jobs yet.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<section class="panel">
+  <h1><%= profile.display_name %></h1>
+  <p>@<%= profile.username %></p>
+  <p><%= profile.bio %></p>
+  <% if (currentUser.id === profile.id) { %>
+    <a class="button secondary" href="/profile/edit">Edit profile</a>
+  <% } else if (isFollowing) { %>
+    <form method="post" action="/users/<%= profile.id %>/unfollow">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">Unfollow</button>
+    </form>
+  <% } else { %>
+    <form method="post" action="/users/<%= profile.id %>/follow">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">Follow</button>
+    </form>
+  <% } %>
+</section>
+
+<section class="stream">
+  <% posts.forEach(function(post) { %>
+    <article class="post">
+      <div class="post-head">
+        <strong><%= profile.display_name %></strong>
+        <time><%= post.created_at %></time>
+      </div>
+      <p><%= post.body %></p>
+    </article>
+  <% }) %>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title || "Room Reservations" %></title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">Room Reservations</a>
+      <nav>
+        <% if (currentUser) { %>
+          <a href="/availability">Availability</a>
+          <a href="/bookings">My bookings</a>
+          <form method="post" action="/logout" class="inline">
+            <button type="submit" class="link-button">Log out</button>
+          </form>
+        <% } else { %>
+          <a href="/login">Log in</a>
+          <a class="button small" href="/register">Create account</a>
+        <% } %>
+      </nav>
+    </header>
+    <main class="shell">
+      <% if (typeof error !== "undefined" && error) { %>
+        <div class="alert error"><%= error %></div>
+      <% } %>
+      <% if (typeof info !== "undefined" && info) { %>
+        <div class="alert info"><%= info %></div>
+      <% } %>

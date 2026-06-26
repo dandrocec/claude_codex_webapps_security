@@ -1,0 +1,55 @@
+<%- include("partials/head", { title: campaign.title }) %>
+<article class="campaign-detail">
+  <div class="detail-main">
+    <p class="eyebrow"><%= campaign.creator_name %></p>
+    <h1><%= campaign.title %></h1>
+    <p class="description"><%= campaign.description %></p>
+  </div>
+
+  <aside class="pledge-panel">
+    <div class="amount-raised"><%= campaign.totalRaised %></div>
+    <p class="muted">raised of <%= campaign.goal %> goal</p>
+    <div class="progress large">
+      <div class="progress-fill" style="width: <%= campaign.progress %>%"></div>
+    </div>
+    <div class="metrics">
+      <span><strong><%= campaign.progress %>%</strong> funded</span>
+      <span><strong><%= campaign.pledge_count %></strong> pledges</span>
+      <span><strong><%= campaign.daysRemaining %></strong> days left</span>
+    </div>
+
+    <% if (error) { %>
+      <p class="alert"><%= error %></p>
+    <% } %>
+
+    <% if (campaign.expired) { %>
+      <p class="alert neutral">This campaign has ended.</p>
+    <% } else { %>
+      <form action="/campaigns/<%= campaign.id %>/pledges" method="post">
+        <label>
+          Backer name
+          <input name="backerName" value="<%= values.backerName || "" %>" required>
+        </label>
+        <label>
+          Pledge amount
+          <input name="amount" type="number" min="1" step="0.01" value="<%= values.amount || "" %>" required>
+        </label>
+        <button class="button full" type="submit">Pledge now</button>
+      </form>
+    <% } %>
+  </aside>
+</article>
+
+<section class="pledges">
+  <h2>Recent pledges</h2>
+  <% if (pledges.length === 0) { %>
+    <p class="muted">No pledges yet.</p>
+  <% } %>
+  <% pledges.forEach((pledge) => { %>
+    <div class="pledge-row">
+      <span><%= pledge.backer_name %></span>
+      <strong><%= pledge.amount %></strong>
+    </div>
+  <% }) %>
+</section>
+<%- include("partials/foot") %>

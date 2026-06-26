@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+
+<section class="section-head">
+  <h1>Your Cart</h1>
+</section>
+
+<% if (errors.length) { %>
+  <ul class="errors"><% errors.forEach((error) => { %><li><%= error %></li><% }) %></ul>
+<% } %>
+
+<% if (cart.items.length === 0) { %>
+  <p class="notice">Your cart is empty.</p>
+<% } else { %>
+  <table>
+    <thead><tr><th>Item</th><th>Price</th><th>Quantity</th><th>Total</th><th></th></tr></thead>
+    <tbody>
+      <% cart.items.forEach((item) => { %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= money(item.price_cents) %></td>
+          <td>
+            <form method="post" action="/cart/update" class="quantity-form">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="item_id" value="<%= item.id %>">
+              <input type="number" name="quantity" min="0" max="20" value="<%= item.quantity %>" required>
+              <button type="submit">Update</button>
+            </form>
+          </td>
+          <td><%= money(item.lineTotalCents) %></td>
+          <td>
+            <form method="post" action="/cart/update">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="item_id" value="<%= item.id %>">
+              <input type="hidden" name="quantity" value="0">
+              <button type="submit">Remove</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <form method="post" action="/orders" class="checkout">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Order note <textarea name="customer_note" maxlength="300"></textarea></label>
+    <div class="total">Total: <%= money(cart.totalCents) %></div>
+    <button type="submit">Place Order</button>
+  </form>
+<% } %>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}New ticket | Support Tickets{% endblock %}
+{% block content %}
+  <section class="panel">
+    <h1>New ticket</h1>
+    <form method="post" novalidate>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="subject">Subject</label>
+      <input id="subject" name="subject" value="{{ form.subject.data or '' }}" minlength="3" maxlength="120" required>
+      {% if form.subject.errors %}<p class="field-error">{{ form.subject.errors[0] }}</p>{% endif %}
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="8" minlength="10" maxlength="4000" required>{{ form.description.data or '' }}</textarea>
+      {% if form.description.errors %}<p class="field-error">{{ form.description.errors[0] }}</p>{% endif %}
+
+      <label for="priority">Priority</label>
+      <select id="priority" name="priority" required>
+        {% for value, label in form.priority.choices %}
+          <option value="{{ value }}" {% if form.priority.data == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+      {% if form.priority.errors %}<p class="field-error">{{ form.priority.errors[0] }}</p>{% endif %}
+
+      <button type="submit">Submit ticket</button>
+    </form>
+  </section>
+{% endblock %}

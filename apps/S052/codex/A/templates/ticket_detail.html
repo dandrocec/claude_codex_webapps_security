@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ ticket["subject"] }} - Support Tickets{% endblock %}
+
+{% block content %}
+  <article class="ticket-detail">
+    <a class="back-link" href="{{ url_for('dashboard') }}">Back to tickets</a>
+    <header class="detail-header">
+      <div>
+        <h1>{{ ticket["subject"] }}</h1>
+        <p class="muted">Created {{ ticket["created_at"][:10] }} · Updated {{ ticket["updated_at"][:10] }}</p>
+      </div>
+      <div class="ticket-badges">
+        <span class="badge priority-{{ ticket['priority']|lower }}">{{ ticket["priority"] }}</span>
+        <span class="badge status">{{ ticket["status"] }}</span>
+      </div>
+    </header>
+    <section class="description">
+      <h2>Description</h2>
+      <p>{{ ticket["description"] }}</p>
+    </section>
+  </article>
+{% endblock %}
