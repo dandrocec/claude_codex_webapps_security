@@ -1,0 +1,1092 @@
+ Image csj/s095-codex-a Building 
+ Image csj/s093-codex-a Building 
+ Image csj/s094-codex-b Building 
+ Image csj/s093-codex-b Building 
+ Image csj/s094-codex-a Building 
+ Image csj/s092-codex-a Building 
+ Image csj/s095-codex-b Building 
+ Image csj/s091-codex-b Building 
+ Image csj/s092-codex-b Building 
+ Image csj/s091-codex-a Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 6.42kB done
+#1 DONE 0.0s
+
+#2 [s092-codex-b internal] load build definition from Dockerfile.node
+#2 transferring dockerfile: 1.84kB done
+#2 DONE 0.0s
+
+#3 [s095-codex-b internal] load build definition from Dockerfile.python
+#3 transferring dockerfile: 1.76kB done
+#3 DONE 0.0s
+
+#4 [s091-codex-b internal] load metadata for docker.io/library/python:3.12-slim
+#4 DONE 1.6s
+
+#5 [s093-codex-a internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [s091-codex-b internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [s095-codex-b internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [s093-codex-b internal] load .dockerignore
+#8 transferring context: 2B done
+#8 DONE 0.0s
+
+#9 [s095-codex-a internal] load .dockerignore
+#9 transferring context: 2B done
+#9 DONE 0.0s
+
+#10 [s091-codex-a internal] load .dockerignore
+#10 transferring context: 2B done
+#10 DONE 0.0s
+
+#11 [s091-codex-a 1/4] FROM docker.io/library/python:3.12-slim@sha256:6c4dd321d176d61ea848dc8c73a4f7dbae8f70e0ee48bb411ea2f045b599fa8e
+#11 resolve docker.io/library/python:3.12-slim@sha256:6c4dd321d176d61ea848dc8c73a4f7dbae8f70e0ee48bb411ea2f045b599fa8e 0.0s done
+#11 DONE 0.0s
+
+#12 [s095-codex-b internal] load build context
+#12 transferring context: 23.02kB 0.0s done
+#12 DONE 0.0s
+
+#13 [s095-codex-a internal] load build context
+#13 transferring context: 18.96kB 0.0s done
+#13 DONE 0.0s
+
+#14 [s093-codex-b internal] load build context
+#14 transferring context: 24.04kB 0.0s done
+#14 DONE 0.0s
+
+#15 [s093-codex-a internal] load build context
+#15 transferring context: 15.93kB 0.0s done
+#15 DONE 0.0s
+
+#16 [s091-codex-b internal] load build context
+#16 transferring context: 37.76kB 0.0s done
+#16 DONE 0.0s
+
+#17 [s091-codex-a internal] load build context
+#17 transferring context: 25.69kB 0.0s done
+#17 DONE 0.0s
+
+#18 [s095-codex-a 2/4] WORKDIR /app
+#18 CACHED
+
+#19 [s093-codex-b 3/4] COPY . /app
+#19 DONE 0.1s
+
+#20 [s095-codex-b 3/4] COPY . /app
+#20 DONE 0.0s
+
+#21 [s095-codex-a 3/4] COPY . /app
+#21 DONE 0.0s
+
+#22 [s093-codex-a 3/4] COPY . /app
+#22 DONE 0.0s
+
+#23 [s091-codex-b 3/4] COPY . /app
+#23 DONE 0.1s
+
+#24 [s091-codex-a 3/4] COPY . /app
+#24 DONE 0.1s
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 ...
+
+#26 [s094-codex-b internal] load metadata for docker.io/library/node:22-slim
+#26 DONE 1.9s
+
+#27 [s094-codex-b internal] load .dockerignore
+#27 transferring context: 2B done
+#27 DONE 0.0s
+
+#28 [s092-codex-b internal] load .dockerignore
+#28 transferring context: 2B done
+#28 DONE 0.0s
+
+#29 [s094-codex-a internal] load .dockerignore
+#29 transferring context: 2B done
+#29 DONE 0.0s
+
+#30 [s092-codex-a internal] load .dockerignore
+#30 transferring context: 2B done
+#30 DONE 0.0s
+
+#31 [s094-codex-b 1/4] FROM docker.io/library/node:22-slim@sha256:813a7480f28fdadac1f7f5c824bcdad435b5bc1322a5968bbbdef8d058f9dff4
+#31 resolve docker.io/library/node:22-slim@sha256:813a7480f28fdadac1f7f5c824bcdad435b5bc1322a5968bbbdef8d058f9dff4 0.0s done
+#31 DONE 0.0s
+
+#32 [s092-codex-a internal] load build context
+#32 transferring context: 34.02kB done
+#32 DONE 0.0s
+
+#33 [s094-codex-a internal] load build context
+#33 transferring context: 29.74kB done
+#33 DONE 0.0s
+
+#34 [s092-codex-b internal] load build context
+#34 transferring context: 31.65kB done
+#34 DONE 0.0s
+
+#35 [s094-codex-b internal] load build context
+#35 transferring context: 27.03kB done
+#35 DONE 0.0s
+
+#36 [s094-codex-b 2/4] WORKDIR /app
+#36 CACHED
+
+#37 [s092-codex-a 3/4] COPY . /app
+#37 DONE 0.0s
+
+#38 [s094-codex-a 3/4] COPY . /app
+#38 DONE 0.0s
+
+#39 [s094-codex-b 3/4] COPY . /app
+#39 DONE 0.0s
+
+#40 [s092-codex-b 3/4] COPY . /app
+#40 DONE 0.0s
+
+#41 [s092-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#41 ...
+
+#42 [s093-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#42 2.214 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#42 2.598   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#42 2.693 Collecting argon2-cffi==23.1.0 (from -r requirements.txt (line 2))
+#42 2.767   Downloading argon2_cffi-23.1.0-py3-none-any.whl.metadata (5.2 kB)
+#42 2.909 Collecting Werkzeug>=3.0.0 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 2.953   Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+#42 3.136 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 3.358   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#42 3.540 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 3.754   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#42 3.987 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 4.140   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#42 4.250 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#42 4.337   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#42 4.487 Collecting argon2-cffi-bindings (from argon2-cffi==23.1.0->-r requirements.txt (line 2))
+#42 4.540   Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (7.4 kB)
+#42 5.310 Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->Flask==3.0.3->-r requirements.txt (line 1))
+#42 5.580   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#42 7.249 Collecting cffi>=1.0.1 (from argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 2))
+#42 7.424   Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#42 7.742 Collecting pycparser (from cffi>=1.0.1->argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 2))
+#42 7.959   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#42 8.180 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#42 8.816 Downloading argon2_cffi-23.1.0-py3-none-any.whl (15 kB)
+#42 9.029 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#42 9.076 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#42 9.492 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#42 9.612 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#42 ...
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 2.584 Collecting fastapi==0.115.6 (from -r requirements.txt (line 1))
+#43 2.731   Downloading fastapi-0.115.6-py3-none-any.whl.metadata (27 kB)
+#43 2.967 Collecting uvicorn==0.34.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#43 3.020   Downloading uvicorn-0.34.0-py3-none-any.whl.metadata (6.5 kB)
+#43 6.422 Collecting sqlalchemy==2.0.36 (from -r requirements.txt (line 3))
+#43 6.613   Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.7 kB)
+#43 7.920 Collecting jinja2==3.1.5 (from -r requirements.txt (line 4))
+#43 8.089   Downloading jinja2-3.1.5-py3-none-any.whl.metadata (2.6 kB)
+#43 8.679 Collecting python-multipart==0.0.20 (from -r requirements.txt (line 5))
+#43 8.806   Downloading python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+#43 9.086 Collecting itsdangerous==2.2.0 (from -r requirements.txt (line 6))
+#43 9.125   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#43 9.768 Collecting argon2-cffi==23.1.0 (from -r requirements.txt (line 7))
+#43 9.981   Downloading argon2_cffi-23.1.0-py3-none-any.whl.metadata (5.2 kB)
+#43 ...
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 2.461 Collecting fastapi==0.115.6 (from -r requirements.txt (line 1))
+#44 2.670   Downloading fastapi-0.115.6-py3-none-any.whl.metadata (27 kB)
+#44 2.880 Collecting uvicorn==0.34.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#44 2.952   Downloading uvicorn-0.34.0-py3-none-any.whl.metadata (6.5 kB)
+#44 4.043 Collecting sqlalchemy==2.0.36 (from -r requirements.txt (line 3))
+#44 4.171   Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.7 kB)
+#44 4.291 Collecting jinja2==3.1.5 (from -r requirements.txt (line 4))
+#44 4.372   Downloading jinja2-3.1.5-py3-none-any.whl.metadata (2.6 kB)
+#44 4.515 Collecting python-multipart==0.0.20 (from -r requirements.txt (line 5))
+#44 4.578   Downloading python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+#44 4.749 Collecting passlib==1.7.4 (from passlib[bcrypt]==1.7.4->-r requirements.txt (line 6))
+#44 5.741   Downloading passlib-1.7.4-py2.py3-none-any.whl.metadata (1.7 kB)
+#44 6.547 Collecting starlette<0.42.0,>=0.40.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#44 7.119   Downloading starlette-0.41.3-py3-none-any.whl.metadata (6.0 kB)
+#44 8.203 Collecting pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#44 8.496   Downloading pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+#44 9.141 Collecting typing-extensions>=4.8.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#44 9.201   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#44 9.365 Collecting click>=7.0 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#44 9.520   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#44 9.599 Collecting h11>=0.8 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#44 9.640   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#44 ...
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 2.482 Collecting fastapi==0.115.6 (from -r requirements.txt (line 1))
+#45 2.649   Downloading fastapi-0.115.6-py3-none-any.whl.metadata (27 kB)
+#45 2.857 Collecting uvicorn==0.34.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#45 2.934   Downloading uvicorn-0.34.0-py3-none-any.whl.metadata (6.5 kB)
+#45 4.677 Collecting SQLAlchemy==2.0.36 (from -r requirements.txt (line 3))
+#45 4.922   Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.7 kB)
+#45 5.614 Collecting pydantic-settings==2.7.1 (from -r requirements.txt (line 4))
+#45 5.815   Downloading pydantic_settings-2.7.1-py3-none-any.whl.metadata (3.5 kB)
+#45 6.177 Collecting python-multipart==0.0.20 (from -r requirements.txt (line 5))
+#45 6.248   Downloading python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+#45 6.430 Collecting jinja2==3.1.5 (from -r requirements.txt (line 6))
+#45 6.686   Downloading jinja2-3.1.5-py3-none-any.whl.metadata (2.6 kB)
+#45 7.010 Collecting itsdangerous==2.2.0 (from -r requirements.txt (line 7))
+#45 7.203   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#45 7.392 Collecting passlib==1.7.4 (from passlib[bcrypt]==1.7.4->-r requirements.txt (line 8))
+#45 7.696   Downloading passlib-1.7.4-py2.py3-none-any.whl.metadata (1.7 kB)
+#45 7.998 Collecting redis==5.2.1 (from -r requirements.txt (line 9))
+#45 8.191   Downloading redis-5.2.1-py3-none-any.whl.metadata (9.1 kB)
+#45 8.642 Collecting rq==2.0.0 (from -r requirements.txt (line 10))
+#45 8.768   Downloading rq-2.0.0-py3-none-any.whl.metadata (5.8 kB)
+#45 8.991 Collecting httpx==0.28.1 (from -r requirements.txt (line 11))
+#45 9.041   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#45 9.120 Collecting bleach==6.2.0 (from -r requirements.txt (line 12))
+#45 9.175   Downloading bleach-6.2.0-py3-none-any.whl.metadata (30 kB)
+#45 9.364 Collecting email-validator==2.2.0 (from -r requirements.txt (line 13))
+#45 9.547   Downloading email_validator-2.2.0-py3-none-any.whl.metadata (25 kB)
+#45 9.714 Collecting starlette<0.42.0,>=0.40.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#45 9.913   Downloading starlette-0.41.3-py3-none-any.whl.metadata (6.0 kB)
+#45 ...
+
+#46 [s093-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#46 2.528 Collecting Flask==3.0.3 (from -r requirements.txt (line 1))
+#46 2.679   Downloading flask-3.0.3-py3-none-any.whl.metadata (3.2 kB)
+#46 2.884 Collecting Werkzeug==3.0.3 (from -r requirements.txt (line 2))
+#46 2.962   Downloading werkzeug-3.0.3-py3-none-any.whl.metadata (3.7 kB)
+#46 3.284 Collecting Jinja2>=3.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#46 3.411   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+#46 3.613 Collecting itsdangerous>=2.1.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#46 3.816   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+#46 4.090 Collecting click>=8.1.3 (from Flask==3.0.3->-r requirements.txt (line 1))
+#46 4.196   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#46 4.346 Collecting blinker>=1.6.2 (from Flask==3.0.3->-r requirements.txt (line 1))
+#46 4.465   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+#46 5.477 Collecting MarkupSafe>=2.1.1 (from Werkzeug==3.0.3->-r requirements.txt (line 2))
+#46 5.730   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#46 6.200 Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+#46 7.004 Downloading werkzeug-3.0.3-py3-none-any.whl (227 kB)
+#46 9.074 Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#46 9.129 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#46 9.761 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#46 10.12 Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#46 ...
+
+#47 [s092-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#47 ...
+
+#48 [s094-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#48 ...
+
+#49 [s094-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#49 ...
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 10.76 Collecting greenlet!=0.4.17 (from sqlalchemy==2.0.36->-r requirements.txt (line 3))
+#44 10.98   Downloading greenlet-3.5.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#44 11.32 Collecting MarkupSafe>=2.0 (from jinja2==3.1.5->-r requirements.txt (line 4))
+#44 11.46   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#44 11.96 Collecting bcrypt>=3.1.0 (from passlib[bcrypt]==1.7.4->-r requirements.txt (line 6))
+#44 12.05   Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (10 kB)
+#44 ...
+
+#46 [s093-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#46 11.24 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#46 11.41 Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, Flask
+#46 11.65 Successfully installed Flask-3.0.3 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.0.3 blinker-1.9.0 click-8.4.2 itsdangerous-2.2.0
+#46 11.65 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#46 12.13 
+#46 12.13 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#46 12.13 [notice] To update, run: pip install --upgrade pip
+#46 DONE 12.4s
+
+#50 [s093-codex-a] exporting to image
+#50 exporting layers
+#50 ...
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 2.614 Collecting fastapi==0.115.6 (from -r requirements.txt (line 1))
+#25 2.756   Downloading fastapi-0.115.6-py3-none-any.whl.metadata (27 kB)
+#25 2.969 Collecting uvicorn==0.34.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#25 3.069   Downloading uvicorn-0.34.0-py3-none-any.whl.metadata (6.5 kB)
+#25 7.530 Collecting sqlalchemy==2.0.36 (from -r requirements.txt (line 3))
+#25 7.777   Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.7 kB)
+#25 9.895 Collecting pydantic==2.10.4 (from -r requirements.txt (line 4))
+#25 10.13   Downloading pydantic-2.10.4-py3-none-any.whl.metadata (29 kB)
+#25 10.48 Collecting python-multipart==0.0.20 (from -r requirements.txt (line 5))
+#25 10.67   Downloading python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+#25 10.95 Collecting jinja2==3.1.5 (from -r requirements.txt (line 6))
+#25 11.10   Downloading jinja2-3.1.5-py3-none-any.whl.metadata (2.6 kB)
+#25 11.49 Collecting redis==5.2.1 (from -r requirements.txt (line 7))
+#25 11.71   Downloading redis-5.2.1-py3-none-any.whl.metadata (9.1 kB)
+#25 11.98 Collecting rq==2.1.0 (from -r requirements.txt (line 8))
+#25 12.12   Downloading rq-2.1.0-py3-none-any.whl.metadata (5.8 kB)
+#25 12.66 Collecting requests==2.32.3 (from -r requirements.txt (line 9))
+#25 12.75   Downloading requests-2.32.3-py3-none-any.whl.metadata (4.6 kB)
+#25 ...
+
+#50 [s093-codex-a] exporting to image
+#50 exporting layers 0.4s done
+#50 exporting manifest sha256:050936f26602295536313b4acce45248770d96876a66b8b87b206ca0afadfa0d done
+#50 exporting config sha256:6d69ab858ac99188adbb201b529296dfb506d9524418db03ea624dbbb2a9c312 done
+#50 exporting attestation manifest sha256:2be5d121864f6a81ff87795c81cd725e501f9e4c32db4c99e68f262306fb3cc7 0.0s done
+#50 exporting manifest list sha256:747d85ea7814fb2f25da8109cd5acf3a510f4250b43e4ceadb46762b21265929 done
+#50 naming to docker.io/csj/s093-codex-a:latest done
+#50 unpacking to docker.io/csj/s093-codex-a:latest 0.1s done
+#50 DONE 0.6s
+
+#51 [s093-codex-a] resolving provenance for metadata file
+#51 DONE 0.0s
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 12.63 Collecting httptools>=0.6.3 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#44 12.72   Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+#44 13.57 Collecting python-dotenv>=0.13 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#44 13.79   Downloading python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+#44 15.19 Collecting pyyaml>=5.1 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#44 15.29   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#44 16.32 Collecting uvloop!=0.15.0,!=0.15.1,>=0.14.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#44 16.40   Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+#44 17.49 Collecting watchfiles>=0.13 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#44 17.61   Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#44 ...
+
+#42 [s093-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#42 10.48 Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+#42 11.95 Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (87 kB)
+#42 12.76 Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
+#42 16.00 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#42 16.24 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#42 16.81 Installing collected packages: pycparser, MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, cffi, Flask, argon2-cffi-bindings, argon2-cffi
+#42 17.15 Successfully installed Flask-3.0.3 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.8 argon2-cffi-23.1.0 argon2-cffi-bindings-25.1.0 blinker-1.9.0 cffi-2.0.0 click-8.4.2 itsdangerous-2.2.0 pycparser-3.0
+#42 17.15 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#42 17.51 
+#42 17.51 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#42 17.51 [notice] To update, run: pip install --upgrade pip
+#42 DONE 17.6s
+
+#52 [s093-codex-b] exporting to image
+#52 exporting layers 0.5s done
+#52 exporting manifest sha256:2cef3074ead27b759c3ae505f8100e432f784a2bc91a414654c342d98649563b done
+#52 exporting config sha256:9caac7350a48e14b088ac2479546e56b16e6ed9f572c485acc829f64f6dc5426 0.0s done
+#52 exporting attestation manifest sha256:837b16ed7afd15f6db884f1ed7d7adb78583a025ec6121eb884c6f95215ee82f 0.0s done
+#52 exporting manifest list sha256:ee495abe86c18a07efaef29a54a17bcb9af89d2c6bab2324b1980eb0d71e186c done
+#52 naming to docker.io/csj/s093-codex-b:latest done
+#52 unpacking to docker.io/csj/s093-codex-b:latest
+#52 unpacking to docker.io/csj/s093-codex-b:latest 0.2s done
+#52 DONE 0.7s
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 13.23 Collecting beautifulsoup4==4.12.3 (from -r requirements.txt (line 10))
+#25 13.37   Downloading beautifulsoup4-4.12.3-py3-none-any.whl.metadata (3.8 kB)
+#25 13.93 Collecting starlette<0.42.0,>=0.40.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#25 14.05   Downloading starlette-0.41.3-py3-none-any.whl.metadata (6.0 kB)
+#25 14.89 Collecting typing-extensions>=4.8.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#25 14.96   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#25 15.33 Collecting click>=7.0 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#25 15.47   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#25 15.74 Collecting h11>=0.8 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#25 15.99   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#25 17.95 Collecting greenlet!=0.4.17 (from sqlalchemy==2.0.36->-r requirements.txt (line 3))
+#25 18.13   Downloading greenlet-3.5.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#25 18.31 Collecting annotated-types>=0.6.0 (from pydantic==2.10.4->-r requirements.txt (line 4))
+#25 ...
+
+#53 [s093-codex-b] resolving provenance for metadata file
+#53 DONE 0.0s
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 18.45   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+#25 ...
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 11.22 Collecting pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#45 11.32   Downloading pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+#45 11.92 Collecting typing-extensions>=4.8.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#45 11.99   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#45 13.55 Collecting click>=7.0 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#45 13.78   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#45 14.05 Collecting h11>=0.8 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#45 14.12   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#45 16.57 Collecting greenlet!=0.4.17 (from SQLAlchemy==2.0.36->-r requirements.txt (line 3))
+#45 16.67   Downloading greenlet-3.5.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#45 16.90 Collecting python-dotenv>=0.21.0 (from pydantic-settings==2.7.1->-r requirements.txt (line 4))
+#45 16.95   Downloading python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+#45 17.50 Collecting MarkupSafe>=2.0 (from jinja2==3.1.5->-r requirements.txt (line 6))
+#45 17.60   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#45 17.78 Collecting anyio (from httpx==0.28.1->-r requirements.txt (line 11))
+#45 17.87   Downloading anyio-4.14.1-py3-none-any.whl.metadata (4.6 kB)
+#45 18.13 Collecting certifi (from httpx==0.28.1->-r requirements.txt (line 11))
+#45 18.28   Downloading certifi-2026.6.17-py3-none-any.whl.metadata (2.5 kB)
+#45 18.50 Collecting httpcore==1.* (from httpx==0.28.1->-r requirements.txt (line 11))
+#45 18.64   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#45 ...
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 18.71 Collecting websockets>=10.4 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#44 18.79   Downloading websockets-16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.8 kB)
+#44 18.97 Collecting annotated-types>=0.6.0 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+#44 19.06   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+#44 ...
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 11.17 Collecting starlette<0.42.0,>=0.40.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#43 11.24   Downloading starlette-0.41.3-py3-none-any.whl.metadata (6.0 kB)
+#43 16.90 Collecting pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#43 16.94   Downloading pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+#43 17.50 Collecting typing-extensions>=4.8.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+#43 17.62   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#43 17.82 Collecting click>=7.0 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#43 17.92   Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+#43 18.14 Collecting h11>=0.8 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#43 18.29   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#43 20.23 Collecting greenlet!=0.4.17 (from sqlalchemy==2.0.36->-r requirements.txt (line 3))
+#43 20.38   Downloading greenlet-3.5.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#43 ...
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 18.80 Collecting idna (from httpx==0.28.1->-r requirements.txt (line 11))
+#45 18.93   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+#45 19.04 Collecting webencodings (from bleach==6.2.0->-r requirements.txt (line 12))
+#45 19.15   Downloading webencodings-0.5.1-py2.py3-none-any.whl.metadata (2.1 kB)
+#45 19.24 Collecting dnspython>=2.0.0 (from email-validator==2.2.0->-r requirements.txt (line 13))
+#45 19.30   Downloading dnspython-2.8.0-py3-none-any.whl.metadata (5.7 kB)
+#45 19.70 Collecting bcrypt>=3.1.0 (from passlib[bcrypt]==1.7.4->-r requirements.txt (line 8))
+#45 19.82   Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (10 kB)
+#45 20.34 Collecting httptools>=0.6.3 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#45 20.49   Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+#45 21.43 Collecting pyyaml>=5.1 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#45 21.68   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#45 24.62 Collecting uvloop!=0.15.0,!=0.15.1,>=0.14.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#45 ...
+
+#48 [s094-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#48 23.07 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#48 23.43 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#48 23.55 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#48 23.64 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#48 23.77 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#48 24.11 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#48 24.21 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#48 24.28 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#48 24.29 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#48 ...
+
+#41 [s092-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#41 22.30 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#41 22.53 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#41 24.21 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#41 24.42 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#41 24.53 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#41 24.82 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#41 26.45 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#41 26.49 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#41 28.28 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#41 28.41 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#41 28.47 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#41 28.51 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#41 ...
+
+#49 [s094-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#49 29.99 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#49 30.11 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#49 30.50 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#49 30.50 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#49 30.52 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#49 ...
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 21.65 Collecting MarkupSafe>=2.0 (from jinja2==3.1.5->-r requirements.txt (line 4))
+#43 21.92   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#43 22.91 Collecting argon2-cffi-bindings (from argon2-cffi==23.1.0->-r requirements.txt (line 7))
+#43 23.14   Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (7.4 kB)
+#43 25.04 Collecting httptools>=0.6.3 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#43 25.25   Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+#43 26.00 Collecting python-dotenv>=0.13 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#43 26.21   Downloading python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+#43 29.70 Collecting pyyaml>=5.1 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#43 29.78   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#43 31.00 Collecting uvloop!=0.15.0,!=0.15.1,>=0.14.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#43 31.14   Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+#43 ...
+
+#47 [s092-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#47 21.39 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#47 21.39 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#47 22.63 npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+#47 23.12 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#47 23.23 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#47 23.30 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#47 23.45 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#47 23.98 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#47 24.60 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#47 ...
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 24.83   Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+#45 27.44 Collecting watchfiles>=0.13 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#45 27.67   Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#45 30.08 Collecting websockets>=10.4 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#45 30.31   Downloading websockets-16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.8 kB)
+#45 31.11 Collecting annotated-types>=0.6.0 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+#45 31.31   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+#45 ...
+
+#49 [s094-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#49 31.73 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#49 31.77 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#49 31.77 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#49 31.80 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#49 32.97 npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+#49 33.89 npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+#49 33.91 npm warn deprecated gauge@4.0.4: This package is no longer supported.
+#49 ...
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 39.69 Collecting pydantic-core==2.27.2 (from pydantic==2.10.4->-r requirements.txt (line 4))
+#25 39.77   Downloading pydantic_core-2.27.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#25 ...
+
+#41 [s092-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#41 39.55 
+#41 39.55 added 223 packages, and audited 224 packages in 39s
+#41 39.55 
+#41 39.55 31 packages are looking for funding
+#41 39.55   run `npm fund` for details
+#41 39.55 
+#41 39.55 9 vulnerabilities (2 low, 7 high)
+#41 39.55 
+#41 39.55 To address all issues (including breaking changes), run:
+#41 39.55   npm audit fix --force
+#41 39.55 
+#41 39.55 Run `npm audit` for details.
+#41 39.55 npm notice
+#41 39.55 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#41 39.55 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#41 39.55 npm notice To update run: npm install -g npm@11.17.0
+#41 39.55 npm notice
+#41 DONE 39.7s
+
+#54 [s092-codex-b] exporting to image
+#54 exporting layers
+#54 exporting layers 0.9s done
+#54 exporting manifest sha256:f88ecb1afdceca173ed36837b32838ee71d1e6bfb391bcc50f776afd27dc0281 done
+#54 exporting config sha256:ec6f42b2f4d2816d6eb23b3393ca9cf942097ba43314aba1750948c9eaebdbe7 done
+#54 exporting attestation manifest sha256:8dbd2ebffa05a4725427c3b53cda794b415416d42b36d67f39a35e40b9debd67 0.0s done
+#54 exporting manifest list sha256:7477bc50df6636a55c13d6355eca11da6c69180b2d9a781f3c8234af89106d1b done
+#54 naming to docker.io/csj/s092-codex-b:latest done
+#54 unpacking to docker.io/csj/s092-codex-b:latest
+#54 unpacking to docker.io/csj/s092-codex-b:latest 0.5s done
+#54 DONE 1.5s
+
+#55 [s092-codex-b] resolving provenance for metadata file
+#55 DONE 0.0s
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 40.31 Collecting pydantic-core==2.46.4 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+#44 40.42   Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#44 40.69 Collecting typing-inspection>=0.4.2 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+#44 40.92   Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+#44 41.15 Collecting anyio<5,>=3.4.0 (from starlette<0.42.0,>=0.40.0->fastapi==0.115.6->-r requirements.txt (line 1))
+#44 41.28   Downloading anyio-4.14.1-py3-none-any.whl.metadata (4.6 kB)
+#44 41.56 Collecting idna>=2.8 (from anyio<5,>=3.4.0->starlette<0.42.0,>=0.40.0->fastapi==0.115.6->-r requirements.txt (line 1))
+#44 41.78   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+#44 42.02 Downloading fastapi-0.115.6-py3-none-any.whl (94 kB)
+#44 43.21 Downloading uvicorn-0.34.0-py3-none-any.whl (62 kB)
+#44 ...
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 33.41 Collecting watchfiles>=0.13 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#43 33.70   Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#43 37.20 Collecting websockets>=10.4 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#43 37.38   Downloading websockets-16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.8 kB)
+#43 37.59 Collecting annotated-types>=0.6.0 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+#43 37.69   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+#43 ...
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 40.25 Collecting MarkupSafe>=2.0 (from jinja2==3.1.5->-r requirements.txt (line 6))
+#25 40.36   Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#25 42.34 Collecting charset-normalizer<4,>=2 (from requests==2.32.3->-r requirements.txt (line 9))
+#25 42.55   Downloading charset_normalizer-3.4.7-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+#25 43.45 Collecting idna<4,>=2.5 (from requests==2.32.3->-r requirements.txt (line 9))
+#25 43.70   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+#25 44.09 Collecting urllib3<3,>=1.21.1 (from requests==2.32.3->-r requirements.txt (line 9))
+#25 44.14   Downloading urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+#25 44.35 Collecting certifi>=2017.4.17 (from requests==2.32.3->-r requirements.txt (line 9))
+#25 ...
+
+#49 [s094-codex-b 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#49 44.03 
+#49 44.03 added 222 packages, and audited 223 packages in 43s
+#49 44.03 
+#49 44.03 30 packages are looking for funding
+#49 44.03   run `npm fund` for details
+#49 44.03 
+#49 44.03 9 vulnerabilities (2 low, 7 high)
+#49 44.03 
+#49 44.03 To address issues that do not require attention, run:
+#49 44.03   npm audit fix
+#49 44.03 
+#49 44.03 To address all issues (including breaking changes), run:
+#49 44.03   npm audit fix --force
+#49 44.03 
+#49 44.03 Run `npm audit` for details.
+#49 44.03 npm notice
+#49 44.03 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#49 44.03 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#49 44.03 npm notice To update run: npm install -g npm@11.17.0
+#49 44.03 npm notice
+#49 DONE 44.1s
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 44.40   Downloading certifi-2026.6.17-py3-none-any.whl.metadata (2.5 kB)
+#25 44.57 Collecting soupsieve>1.2 (from beautifulsoup4==4.12.3->-r requirements.txt (line 10))
+#25 44.62   Downloading soupsieve-2.8.4-py3-none-any.whl.metadata (4.6 kB)
+#25 44.87 Collecting httptools>=0.6.3 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#25 44.96   Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+#25 45.10 Collecting python-dotenv>=0.13 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#25 45.18   Downloading python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+#25 45.65 Collecting pyyaml>=5.1 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#25 45.79   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#25 ...
+
+#56 [s094-codex-b] exporting to image
+#56 exporting layers 1.2s done
+#56 exporting manifest sha256:19f68a215a842cdaf7cf2cbe930f63c0749e1f385fe2a2673b67bd5bbb63f512 done
+#56 exporting config sha256:1690345039d3358091cbb07e4ab23f0684221ecfece07a2d814b114c94eaec53 done
+#56 exporting attestation manifest sha256:ddce07ecfdb62abe4bf40a0620536baaaeebc99f060713f2749036d104bfc61b 0.0s done
+#56 exporting manifest list sha256:df84bacd629ea2b42dbc778faa859b9282745658cf5de1ef201744e6dba78b19 done
+#56 naming to docker.io/csj/s094-codex-b:latest done
+#56 unpacking to docker.io/csj/s094-codex-b:latest 0.6s done
+#56 DONE 1.9s
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 46.42 Collecting uvloop!=0.15.0,!=0.15.1,>=0.14.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#25 ...
+
+#57 [s094-codex-b] resolving provenance for metadata file
+#57 DONE 0.0s
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 46.58   Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+#25 47.13 Collecting watchfiles>=0.13 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#25 47.28   Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#25 48.85 Collecting websockets>=10.4 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+#25 49.09   Downloading websockets-16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.8 kB)
+#25 49.51 Collecting anyio<5,>=3.4.0 (from starlette<0.42.0,>=0.40.0->fastapi==0.115.6->-r requirements.txt (line 1))
+#25 49.57   Downloading anyio-4.14.1-py3-none-any.whl.metadata (4.6 kB)
+#25 49.66 Downloading fastapi-0.115.6-py3-none-any.whl (94 kB)
+#25 49.95 Downloading uvicorn-0.34.0-py3-none-any.whl (62 kB)
+#25 50.43 Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.2 MB)
+#25 ...
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 44.23 Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.2 MB)
+#44 ...
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 47.20 Collecting pydantic-core==2.46.4 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+#43 47.38   Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#43 47.67 Collecting typing-inspection>=0.4.2 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+#43 47.75   Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+#43 48.09 Collecting anyio<5,>=3.4.0 (from starlette<0.42.0,>=0.40.0->fastapi==0.115.6->-r requirements.txt (line 1))
+#43 48.32   Downloading anyio-4.14.1-py3-none-any.whl.metadata (4.6 kB)
+#43 49.92 Collecting cffi>=1.0.1 (from argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 7))
+#43 49.99   Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#43 50.21 Collecting idna>=2.8 (from anyio<5,>=3.4.0->starlette<0.42.0,>=0.40.0->fastapi==0.115.6->-r requirements.txt (line 1))
+#43 50.41   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+#43 50.69 Collecting pycparser (from cffi>=1.0.1->argon2-cffi-bindings->argon2-cffi==23.1.0->-r requirements.txt (line 7))
+#43 50.86   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#43 51.16 Downloading fastapi-0.115.6-py3-none-any.whl (94 kB)
+#43 52.16 Downloading uvicorn-0.34.0-py3-none-any.whl (62 kB)
+#43 52.95 Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.2 MB)
+#43 ...
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 45.00 Collecting pydantic-core==2.46.4 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+#45 45.09   Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#45 45.23 Collecting typing-inspection>=0.4.2 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+#45 45.36   Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+#45 45.45 Downloading fastapi-0.115.6-py3-none-any.whl (94 kB)
+#45 46.16 Downloading uvicorn-0.34.0-py3-none-any.whl (62 kB)
+#45 46.53 Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.2 MB)
+#45 ...
+
+#48 [s094-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#48 56.13 
+#48 56.13 added 205 packages, and audited 206 packages in 55s
+#48 56.13 
+#48 56.13 27 packages are looking for funding
+#48 56.13   run `npm fund` for details
+#48 56.13 
+#48 56.13 7 vulnerabilities (2 low, 5 high)
+#48 56.13 
+#48 56.13 To address all issues (including breaking changes), run:
+#48 56.13   npm audit fix --force
+#48 56.13 
+#48 56.13 Run `npm audit` for details.
+#48 56.13 npm notice
+#48 56.13 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#48 56.13 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#48 56.13 npm notice To update run: npm install -g npm@11.17.0
+#48 56.13 npm notice
+#48 DONE 56.2s
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 ...
+
+#58 [s094-codex-a] exporting to image
+#58 exporting layers
+#58 ...
+
+#47 [s092-codex-a 4/4] RUN if [ -f package-lock.json ]; then npm ci;     elif [ -f package.json ]; then npm install; fi
+#47 56.77 
+#47 56.77 added 207 packages, and audited 208 packages in 56s
+#47 56.77 
+#47 56.77 27 packages are looking for funding
+#47 56.77   run `npm fund` for details
+#47 56.78 
+#47 56.78 7 vulnerabilities (2 low, 5 high)
+#47 56.78 
+#47 56.78 To address all issues (including breaking changes), run:
+#47 56.78   npm audit fix --force
+#47 56.78 
+#47 56.78 Run `npm audit` for details.
+#47 56.78 npm notice
+#47 56.78 npm notice New major version of npm available! 10.9.8 -> 11.17.0
+#47 56.78 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+#47 56.78 npm notice To update run: npm install -g npm@11.17.0
+#47 56.78 npm notice
+#47 DONE 56.9s
+
+#58 [s094-codex-a] exporting to image
+#58 exporting layers 0.8s done
+#58 exporting manifest sha256:e7c7404452e5c9326dd0c8e85bd6a0c4a97910c970d99047f0103453db0da322 0.0s done
+#58 exporting config sha256:f5572bea2d56ceb1fea6bb79a4e7bafc786975a80c8bd3635517e4f1e78cb781 0.0s done
+#58 exporting attestation manifest sha256:39c9d999a4767d9e47ed34518e0d99935703bd3b376048d0a1a77afd911dec19 0.0s done
+#58 exporting manifest list sha256:44ebafb693b262bc293be32f5da70f4f8f8f274fe9157f94dfc871e620e278a5 0.0s done
+#58 naming to docker.io/csj/s094-codex-a:latest
+#58 naming to docker.io/csj/s094-codex-a:latest done
+#58 unpacking to docker.io/csj/s094-codex-a:latest
+#58 unpacking to docker.io/csj/s094-codex-a:latest 0.4s done
+#58 DONE 1.4s
+
+#59 [s094-codex-a] resolving provenance for metadata file
+#59 DONE 0.0s
+
+#60 [s092-codex-a] exporting to image
+#60 exporting layers 0.9s done
+#60 exporting manifest sha256:3028e0a7715d3dd93a23492ac1224183911210f7e6aa57dabc21bbb745878a58 0.0s done
+#60 exporting config sha256:b892dff2b929b8e7c7893386842263c05d38ef3c3065ada31a292a7b4df102f2 0.0s done
+#60 exporting attestation manifest sha256:a2bd37941a997a3b0942bfded1695bb66953e83647b565118f906a625063eb4e 0.0s done
+#60 exporting manifest list sha256:a5f8e144ea0044e1f07bf6493d1c1178b11c5b732514128bb39692ea89e1d34c 0.0s done
+#60 naming to docker.io/csj/s092-codex-a:latest
+#60 naming to docker.io/csj/s092-codex-a:latest done
+#60 unpacking to docker.io/csj/s092-codex-a:latest
+#60 unpacking to docker.io/csj/s092-codex-a:latest 0.7s done
+#60 DONE 1.7s
+
+#61 [s092-codex-a] resolving provenance for metadata file
+#61 DONE 0.0s
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 ...
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 62.26    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 196.4 kB/s eta 0:00:00
+#45 62.41 Downloading pydantic_settings-2.7.1-py3-none-any.whl (29 kB)
+#45 62.65 Downloading python_multipart-0.0.20-py3-none-any.whl (24 kB)
+#45 62.89 Downloading jinja2-3.1.5-py3-none-any.whl (134 kB)
+#45 63.87 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#45 64.01 Downloading passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+#45 66.36    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 525.6/525.6 kB 391.2 kB/s eta 0:00:00
+#45 66.53 Downloading redis-5.2.1-py3-none-any.whl (261 kB)
+#45 68.50 Downloading rq-2.0.0-py3-none-any.whl (95 kB)
+#45 ...
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 66.15    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 291.5 kB/s eta 0:00:00
+#43 66.32 Downloading jinja2-3.1.5-py3-none-any.whl (134 kB)
+#43 67.48 Downloading python_multipart-0.0.20-py3-none-any.whl (24 kB)
+#43 67.98 Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#43 68.21 Downloading argon2_cffi-23.1.0-py3-none-any.whl (15 kB)
+#43 68.48 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#43 69.70 Downloading greenlet-3.5.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (613 kB)
+#43 ...
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 63.70    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 174.8 kB/s eta 0:00:00
+#44 63.92 Downloading jinja2-3.1.5-py3-none-any.whl (134 kB)
+#44 64.58 Downloading python_multipart-0.0.20-py3-none-any.whl (24 kB)
+#44 65.57 Downloading passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+#44 67.82    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 525.6/525.6 kB 194.3 kB/s eta 0:00:00
+#44 68.03 Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (278 kB)
+#44 69.63 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#44 70.00 Downloading greenlet-3.5.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (613 kB)
+#44 74.88    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 613.7/613.7 kB 182.2 kB/s eta 0:00:00
+#44 74.92 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#44 75.02 Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+#44 ...
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 75.16    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 613.7/613.7 kB 414.7 kB/s eta 0:00:00
+#43 75.20 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#43 75.30 Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+#43 ...
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 65.15    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 259.4 kB/s eta 0:00:00
+#25 65.25 Downloading pydantic-2.10.4-py3-none-any.whl (431 kB)
+#25 68.19 Downloading python_multipart-0.0.20-py3-none-any.whl (24 kB)
+#25 68.74 Downloading jinja2-3.1.5-py3-none-any.whl (134 kB)
+#25 70.65 Downloading redis-5.2.1-py3-none-any.whl (261 kB)
+#25 74.79 Downloading rq-2.1.0-py3-none-any.whl (96 kB)
+#25 75.01 Downloading requests-2.32.3-py3-none-any.whl (64 kB)
+#25 75.18 Downloading beautifulsoup4-4.12.3-py3-none-any.whl (147 kB)
+#25 ...
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 69.70 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#45 70.58 Downloading bleach-6.2.0-py3-none-any.whl (163 kB)
+#45 74.31 Downloading email_validator-2.2.0-py3-none-any.whl (33 kB)
+#45 74.57 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#45 74.83 Downloading bcrypt-5.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (278 kB)
+#45 75.38 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#45 ...
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 75.48 Downloading pydantic_core-2.27.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+#25 79.17    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 538.9 kB/s eta 0:00:00
+#25 79.25 Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+#25 79.37 Downloading certifi-2026.6.17-py3-none-any.whl (133 kB)
+#25 79.71 Downloading charset_normalizer-3.4.7-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (216 kB)
+#25 80.33 Downloading click-8.4.2-py3-none-any.whl (119 kB)
+#25 80.79 Downloading greenlet-3.5.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (613 kB)
+#25 ...
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 75.68 Downloading dnspython-2.8.0-py3-none-any.whl (331 kB)
+#45 76.42 Downloading greenlet-3.5.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (613 kB)
+#45 77.60    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 613.7/613.7 kB 544.9 kB/s eta 0:00:00
+#45 77.68 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#45 77.81 Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+#45 78.98 Downloading idna-3.18-py3-none-any.whl (65 kB)
+#45 79.20 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#45 79.32 Downloading pydantic-2.13.4-py3-none-any.whl (472 kB)
+#45 80.76 Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#45 ...
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 82.74    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 613.7/613.7 kB 374.3 kB/s eta 0:00:00
+#25 82.81 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#25 82.96 Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+#25 83.99 Downloading idna-3.18-py3-none-any.whl (65 kB)
+#25 84.22 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#25 84.35 Downloading python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+#25 84.49 Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+#25 ...
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 75.89 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#44 75.98 Downloading pydantic-2.13.4-py3-none-any.whl (472 kB)
+#44 76.92 Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#44 81.17    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 489.1 kB/s eta 0:00:00
+#44 81.29 Downloading python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+#44 81.43 Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+#44 83.12    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 713.4 kB/s eta 0:00:00
+#44 83.18 Downloading starlette-0.41.3-py3-none-any.whl (73 kB)
+#44 83.34 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#44 83.48 Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+#44 ...
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 76.34 Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#43 76.46 Downloading pydantic-2.13.4-py3-none-any.whl (472 kB)
+#43 77.45 Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#43 81.28    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 550.6 kB/s eta 0:00:00
+#43 81.36 Downloading python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+#43 81.73 Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+#43 83.32    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 638.6 kB/s eta 0:00:00
+#43 83.35 Downloading starlette-0.41.3-py3-none-any.whl (73 kB)
+#43 83.52 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#43 83.67 Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+#43 ...
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 86.31    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 471.9 kB/s eta 0:00:00
+#25 86.41 Downloading soupsieve-2.8.4-py3-none-any.whl (37 kB)
+#25 86.55 Downloading starlette-0.41.3-py3-none-any.whl (73 kB)
+#25 87.14 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#25 87.59 Downloading urllib3-2.7.0-py3-none-any.whl (131 kB)
+#25 87.89 Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+#25 ...
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 86.52    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 422.3 kB/s eta 0:00:00
+#45 86.93 Downloading python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+#45 87.12 Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+#45 89.48    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 381.3 kB/s eta 0:00:00
+#45 89.65 Downloading starlette-0.41.3-py3-none-any.whl (73 kB)
+#45 90.32 Downloading anyio-4.14.1-py3-none-any.whl (124 kB)
+#45 91.44 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#45 93.14 Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+#45 ...
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 90.79    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 598.0 kB/s eta 0:00:00
+#44 90.92 Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+#44 93.12 Downloading websockets-16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (184 kB)
+#44 94.92 Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+#44 95.14 Downloading anyio-4.14.1-py3-none-any.whl (124 kB)
+#44 96.85 Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+#44 97.53 Downloading idna-3.18-py3-none-any.whl (65 kB)
+#44 98.19 Installing collected packages: passlib, websockets, uvloop, typing-extensions, pyyaml, python-multipart, python-dotenv, MarkupSafe, idna, httptools, h11, greenlet, click, bcrypt, annotated-types, uvicorn, typing-inspection, sqlalchemy, pydantic-core, jinja2, anyio, watchfiles, starlette, pydantic, fastapi
+#44 99.79 Successfully installed MarkupSafe-3.0.3 annotated-types-0.7.0 anyio-4.14.1 bcrypt-5.0.0 click-8.4.2 fastapi-0.115.6 greenlet-3.5.2 h11-0.16.0 httptools-0.8.0 idna-3.18 jinja2-3.1.5 passlib-1.7.4 pydantic-2.13.4 pydantic-core-2.46.4 python-dotenv-1.2.2 python-multipart-0.0.20 pyyaml-6.0.3 sqlalchemy-2.0.36 starlette-0.41.3 typing-extensions-4.15.0 typing-inspection-0.4.2 uvicorn-0.34.0 uvloop-0.22.1 watchfiles-1.2.0 websockets-16.0
+#44 99.79 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#44 ...
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 99.97    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 262.8 kB/s eta 0:00:00
+#43 100.0 Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+#43 ...
+
+#44 [s095-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#44 100.0 
+#44 100.0 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#44 100.0 [notice] To update, run: pip install --upgrade pip
+#44 DONE 100.2s
+
+#62 [s095-codex-a] exporting to image
+#62 exporting layers
+#62 exporting layers 2.0s done
+#62 exporting manifest sha256:d53f1f987f5e6dcdea6e29a11354325f2ddb690c09f187c71886a189c35e76f7 done
+#62 exporting config sha256:0426cdbe21d0656d1a1caa79cdf22bb027c30741626bcd1d4354672a82ecafa5 done
+#62 exporting attestation manifest sha256:3e8fa6a7a4eac29aef86c8144120047d69a2cd6567237399d2c274672bd9f3a5 0.0s done
+#62 exporting manifest list sha256:dfed445d683282bab2e475d254c9aee8ece3c1e754364d6c72a7847debce074e done
+#62 naming to docker.io/csj/s095-codex-a:latest done
+#62 unpacking to docker.io/csj/s095-codex-a:latest
+#62 unpacking to docker.io/csj/s095-codex-a:latest 0.4s done
+#62 DONE 2.5s
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 100.9 Downloading websockets-16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (184 kB)
+#43 101.3 Downloading argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (87 kB)
+#43 101.5 Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+#43 101.6 Downloading anyio-4.14.1-py3-none-any.whl (124 kB)
+#43 101.9 Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
+#43 102.4 Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+#43 102.6 Downloading idna-3.18-py3-none-any.whl (65 kB)
+#43 ...
+
+#63 [s095-codex-a] resolving provenance for metadata file
+#63 DONE 0.0s
+
+#43 [s095-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#43 102.8 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#43 102.9 Installing collected packages: websockets, uvloop, typing-extensions, pyyaml, python-multipart, python-dotenv, pycparser, MarkupSafe, itsdangerous, idna, httptools, h11, greenlet, click, annotated-types, uvicorn, typing-inspection, sqlalchemy, pydantic-core, jinja2, cffi, anyio, watchfiles, starlette, pydantic, argon2-cffi-bindings, fastapi, argon2-cffi
+#43 104.9 Successfully installed MarkupSafe-3.0.3 annotated-types-0.7.0 anyio-4.14.1 argon2-cffi-23.1.0 argon2-cffi-bindings-25.1.0 cffi-2.0.0 click-8.4.2 fastapi-0.115.6 greenlet-3.5.2 h11-0.16.0 httptools-0.8.0 idna-3.18 itsdangerous-2.2.0 jinja2-3.1.5 pycparser-3.0 pydantic-2.13.4 pydantic-core-2.46.4 python-dotenv-1.2.2 python-multipart-0.0.20 pyyaml-6.0.3 sqlalchemy-2.0.36 starlette-0.41.3 typing-extensions-4.15.0 typing-inspection-0.4.2 uvicorn-0.34.0 uvloop-0.22.1 watchfiles-1.2.0 websockets-16.0
+#43 104.9 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#43 105.2 
+#43 105.2 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#43 105.2 [notice] To update, run: pip install --upgrade pip
+#43 DONE 105.9s
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 104.9    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 602.8 kB/s eta 0:00:00
+#45 105.0 Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+#45 105.7 Downloading websockets-16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (184 kB)
+#45 105.9 Downloading certifi-2026.6.17-py3-none-any.whl (133 kB)
+#45 106.1 Downloading webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
+#45 106.1 Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+#45 106.2 Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+#45 106.3 Installing collected packages: webencodings, passlib, websockets, uvloop, typing-extensions, redis, pyyaml, python-multipart, python-dotenv, MarkupSafe, itsdangerous, idna, httptools, h11, greenlet, dnspython, click, certifi, bleach, bcrypt, annotated-types, uvicorn, typing-inspection, SQLAlchemy, rq, pydantic-core, jinja2, httpcore, email-validator, anyio, watchfiles, starlette, pydantic, httpx, pydantic-settings, fastapi
+#45 ...
+
+#25 [s091-codex-a 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#25 103.9    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 269.6 kB/s eta 0:00:00
+#25 104.0 Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+#25 104.5 Downloading websockets-16.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (184 kB)
+#25 104.8 Downloading anyio-4.14.1-py3-none-any.whl (124 kB)
+#25 104.9 Installing collected packages: websockets, uvloop, urllib3, typing-extensions, soupsieve, redis, pyyaml, python-multipart, python-dotenv, MarkupSafe, idna, httptools, h11, greenlet, click, charset-normalizer, certifi, annotated-types, uvicorn, sqlalchemy, rq, requests, pydantic-core, jinja2, beautifulsoup4, anyio, watchfiles, starlette, pydantic, fastapi
+#25 107.2 Successfully installed MarkupSafe-3.0.3 annotated-types-0.7.0 anyio-4.14.1 beautifulsoup4-4.12.3 certifi-2026.6.17 charset-normalizer-3.4.7 click-8.4.2 fastapi-0.115.6 greenlet-3.5.2 h11-0.16.0 httptools-0.8.0 idna-3.18 jinja2-3.1.5 pydantic-2.10.4 pydantic-core-2.27.2 python-dotenv-1.2.2 python-multipart-0.0.20 pyyaml-6.0.3 redis-5.2.1 requests-2.32.3 rq-2.1.0 soupsieve-2.8.4 sqlalchemy-2.0.36 starlette-0.41.3 typing-extensions-4.15.0 urllib3-2.7.0 uvicorn-0.34.0 uvloop-0.22.1 watchfiles-1.2.0 websockets-16.0
+#25 107.2 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#25 107.4 
+#25 107.4 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#25 107.4 [notice] To update, run: pip install --upgrade pip
+#25 DONE 107.9s
+
+#64 [s091-codex-a] exporting to image
+#64 exporting layers
+#64 ...
+
+#65 [s095-codex-b] exporting to image
+#65 exporting layers 2.2s done
+#65 exporting manifest sha256:5403843ccb886ec5ae56b5758056b837ff1434e9e0ae3ce522a0a04bc628c255 0.0s done
+#65 exporting config sha256:90b68a03bcb7b255477f641430b195d7a2ffba56db7693d36fc405ed06914fc3 0.0s done
+#65 exporting attestation manifest sha256:27a2b6558587b6e5dbe471640df06faf0844d31db14e929378a4ff94e653bd52 0.0s done
+#65 exporting manifest list sha256:8fed6f3453fff884fd8f270e4e3f81d9d066f9764f628c88d458115c65b72a2a 0.0s done
+#65 naming to docker.io/csj/s095-codex-b:latest done
+#65 unpacking to docker.io/csj/s095-codex-b:latest 0.5s done
+#65 DONE 2.7s
+
+#66 [s095-codex-b] resolving provenance for metadata file
+#66 DONE 0.0s
+
+#45 [s091-codex-b 4/4] RUN if [ -f requirements.txt ]; then pip install -r requirements.txt;     elif [ -f pyproject.toml ]; then pip install .; fi
+#45 108.6 Successfully installed MarkupSafe-3.0.3 SQLAlchemy-2.0.36 annotated-types-0.7.0 anyio-4.14.1 bcrypt-5.0.0 bleach-6.2.0 certifi-2026.6.17 click-8.4.2 dnspython-2.8.0 email-validator-2.2.0 fastapi-0.115.6 greenlet-3.5.2 h11-0.16.0 httpcore-1.0.9 httptools-0.8.0 httpx-0.28.1 idna-3.18 itsdangerous-2.2.0 jinja2-3.1.5 passlib-1.7.4 pydantic-2.13.4 pydantic-core-2.46.4 pydantic-settings-2.7.1 python-dotenv-1.2.2 python-multipart-0.0.20 pyyaml-6.0.3 redis-5.2.1 rq-2.0.0 starlette-0.41.3 typing-extensions-4.15.0 typing-inspection-0.4.2 uvicorn-0.34.0 uvloop-0.22.1 watchfiles-1.2.0 webencodings-0.5.1 websockets-16.0
+#45 108.6 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#45 108.9 
+#45 108.9 [notice] A new release of pip is available: 25.0.1 -> 26.1.2
+#45 108.9 [notice] To update, run: pip install --upgrade pip
+#45 DONE 109.5s
+
+#64 [s091-codex-a] exporting to image
+#64 exporting layers 2.6s done
+#64 exporting manifest sha256:b564dd20ddcc295d6b940a67a4820e24e50dad52bc5f316a977fe619e40eeb72 0.0s done
+#64 exporting config sha256:27b31b554f8bedf0d3502c13b883e9335a39200c16af7c00e94730aabe00e116 0.0s done
+#64 exporting attestation manifest sha256:dc45cef34fce14be011c5c60f966a41f497234333f606a324657ec5d617f93f2 0.0s done
+#64 exporting manifest list sha256:d7ae6704c4a3989712e420f2e549899a4d44c50035f889055f0c003534e5d033 0.0s done
+#64 naming to docker.io/csj/s091-codex-a:latest
+#64 naming to docker.io/csj/s091-codex-a:latest done
+#64 unpacking to docker.io/csj/s091-codex-a:latest
+#64 unpacking to docker.io/csj/s091-codex-a:latest 0.6s done
+#64 DONE 3.4s
+
+#67 [s091-codex-a] resolving provenance for metadata file
+#67 DONE 0.0s
+
+#68 [s091-codex-b] exporting to image
+#68 exporting layers 3.0s done
+#68 exporting manifest sha256:7e81b94de201dcfe83f18485806616937e9eba640370d7ef204d66f0310864ab 0.0s done
+#68 exporting config sha256:0a5fefb2700ba98cdc479a5ddad8c7034d79823c25a56022e75a40fd6e423ed9 0.0s done
+#68 exporting attestation manifest sha256:6376c080a7f0b7be48affcb3f78cf78e2e1e1a84436705cde8a1358c115acc86 0.0s done
+#68 exporting manifest list sha256:f55a1b74a7d954b8a764b42f5b03003dcf71703ff0310aa23d4eb352e802f150 0.0s done
+#68 naming to docker.io/csj/s091-codex-b:latest done
+#68 unpacking to docker.io/csj/s091-codex-b:latest
+#68 unpacking to docker.io/csj/s091-codex-b:latest 0.7s done
+#68 DONE 3.8s
+
+#69 [s091-codex-b] resolving provenance for metadata file
+#69 DONE 0.0s
+ Image csj/s093-codex-a Built 
+ Image csj/s094-codex-a Built 
+ Image csj/s093-codex-b Built 
+ Image csj/s091-codex-a Built 
+ Image csj/s092-codex-a Built 
+ Image csj/s092-codex-b Built 
+ Image csj/s095-codex-a Built 
+ Image csj/s094-codex-b Built 
+ Image csj/s095-codex-b Built 
+ Image csj/s091-codex-b Built 

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-grid">
+  <form class="panel" method="post" action="/login">
+    <h1>Sign in</h1>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>Username or email<input required name="username" autocomplete="username"></label>
+    <label>Password<input required name="password" type="password" autocomplete="current-password"></label>
+    <button type="submit">Sign in</button>
+  </form>
+
+  <form class="panel" method="post" action="/register">
+    <h1>Create account</h1>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>Username<input required name="username" pattern="[A-Za-z0-9_]{3,32}" autocomplete="username"></label>
+    <label>Email<input required name="email" type="email" autocomplete="email"></label>
+    <label>Password<input required name="password" type="password" minlength="12" autocomplete="new-password"></label>
+    <button type="submit">Create account</button>
+  </form>
+</section>
+{% endblock %}

@@ -2,7 +2,7 @@
 # Security-NEUTRAL: this file intentionally contains NO security_opt,
 # NO cap_drop, NO read_only, NO `user:` override, and NO other hardening.
 # It provides isolation + runtime only.
-# Services generated: 380
+# Services generated: 390
 
 services:
   s001-claude-a:
@@ -5799,6 +5799,38 @@ services:
       - appnet
     restart: "no"
 
+  s091-codex-a:
+    build:
+      context: apps/S091/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5091"
+        START_CMD: 'uvicorn app.main:app --host 0.0.0.0 --port 5091'
+    image: csj/s091-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20366:5091"
+    networks:
+      - appnet
+    restart: "no"
+
+  s091-codex-b:
+    build:
+      context: apps/S091/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5091"
+        START_CMD: 'uvicorn app.main:app --host 0.0.0.0 --port 5091'
+    image: csj/s091-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20367:5091"
+    networks:
+      - appnet
+    restart: "no"
+
   s092-claude-a:
     build:
       context: apps/S092/claude/A
@@ -5827,6 +5859,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20369:5092"
+    networks:
+      - appnet
+    restart: "no"
+
+  s092-codex-a:
+    build:
+      context: apps/S092/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5092"
+        START_CMD: 'npm start'
+    image: csj/s092-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20370:5092"
+    networks:
+      - appnet
+    restart: "no"
+
+  s092-codex-b:
+    build:
+      context: apps/S092/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5092"
+        START_CMD: 'npm start'
+    image: csj/s092-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20371:5092"
     networks:
       - appnet
     restart: "no"
@@ -5863,6 +5927,38 @@ services:
       - appnet
     restart: "no"
 
+  s093-codex-a:
+    build:
+      context: apps/S093/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5093"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5093'
+    image: csj/s093-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20374:5093"
+    networks:
+      - appnet
+    restart: "no"
+
+  s093-codex-b:
+    build:
+      context: apps/S093/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5093"
+        START_CMD: 'flask run --host=0.0.0.0 --port=5093'
+    image: csj/s093-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20375:5093"
+    networks:
+      - appnet
+    restart: "no"
+
   s094-claude-a:
     build:
       context: apps/S094/claude/A
@@ -5895,6 +5991,38 @@ services:
       - appnet
     restart: "no"
 
+  s094-codex-a:
+    build:
+      context: apps/S094/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5094"
+        START_CMD: 'npm start'
+    image: csj/s094-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20378:5094"
+    networks:
+      - appnet
+    restart: "no"
+
+  s094-codex-b:
+    build:
+      context: apps/S094/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.node
+      args:
+        APP_PORT: "5094"
+        START_CMD: 'npm start'
+    image: csj/s094-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20379:5094"
+    networks:
+      - appnet
+    restart: "no"
+
   s095-claude-a:
     build:
       context: apps/S095/claude/A
@@ -5923,6 +6051,38 @@ services:
       - harness/docker/verify.env
     ports:
       - "127.0.0.1:20381:5095"
+    networks:
+      - appnet
+    restart: "no"
+
+  s095-codex-a:
+    build:
+      context: apps/S095/codex/A
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5095"
+        START_CMD: 'uvicorn app.main:app --host 0.0.0.0 --port 5095'
+    image: csj/s095-codex-a
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20382:5095"
+    networks:
+      - appnet
+    restart: "no"
+
+  s095-codex-b:
+    build:
+      context: apps/S095/codex/B
+      dockerfile: ../../../../harness/docker/Dockerfile.python
+      args:
+        APP_PORT: "5095"
+        START_CMD: 'uvicorn app.main:app --host 0.0.0.0 --port 5095'
+    image: csj/s095-codex-b
+    env_file:
+      - harness/docker/verify.env
+    ports:
+      - "127.0.0.1:20383:5095"
     networks:
       - appnet
     restart: "no"

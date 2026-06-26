@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title || 'Clinic Portal' %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Clinic Portal</a>
+    <% if (currentUser) { %>
+      <nav class="nav">
+        <span><%= currentUser.fullName %> · <%= currentUser.role %></span>
+        <form action="/logout" method="post">
+          <button class="button secondary" type="submit">Sign out</button>
+        </form>
+      </nav>
+    <% } %>
+  </header>
+  <main class="page">
+    <% if (flash) { %>
+      <div class="flash <%= flash.type %>"><%= flash.message %></div>
+    <% } %>

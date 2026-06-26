@@ -1,0 +1,56 @@
+<%- include('partials/header', { title: 'Patient Record' }) %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Assigned patient</p>
+    <h1><%= patient.full_name %></h1>
+    <p class="lede">DOB <%= patient.date_of_birth %> · <%= patient.phone %></p>
+  </div>
+  <a class="button secondary" href="/doctor">Back</a>
+</section>
+
+<section class="grid two">
+  <form class="panel form" action="/doctor/patients/<%= patient.id %>/records" method="post">
+    <h2>Add record</h2>
+    <label>
+      Diagnosis
+      <input name="diagnosis" required>
+    </label>
+    <label>
+      Treatment
+      <textarea name="treatment" rows="3" required></textarea>
+    </label>
+    <label>
+      Notes
+      <textarea name="notes" rows="4" required></textarea>
+    </label>
+    <button class="button" type="submit">Save record</button>
+  </form>
+
+  <div class="panel">
+    <h2>Clinical history</h2>
+    <div class="stack">
+      <% records.forEach((record) => { %>
+        <form class="record form" action="/doctor/records/<%= record.id %>" method="post">
+          <label>
+            Diagnosis
+            <input name="diagnosis" value="<%= record.diagnosis %>" required>
+          </label>
+          <label>
+            Treatment
+            <textarea name="treatment" rows="3" required><%= record.treatment %></textarea>
+          </label>
+          <label>
+            Notes
+            <textarea name="notes" rows="3" required><%= record.notes %></textarea>
+          </label>
+          <small><%= record.doctor_name %> · <%= record.updated_at %></small>
+          <button class="button small" type="submit">Update record</button>
+        </form>
+      <% }) %>
+      <% if (!records.length) { %><p class="muted">No records yet.</p><% } %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

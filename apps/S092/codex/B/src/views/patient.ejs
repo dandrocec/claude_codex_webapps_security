@@ -1,0 +1,51 @@
+<%- include('partials/start', { title }) %>
+<h1>Patient portal</h1>
+<section class="grid">
+  <article class="panel">
+    <h2>Book appointment</h2>
+    <form method="post" action="/patient/appointments">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Doctor
+        <select name="doctorId" required>
+          <% doctors.forEach((doctor) => { %>
+            <option value="<%= doctor.id %>"><%= doctor.full_name %></option>
+          <% }) %>
+        </select>
+      </label>
+      <label>Date and time
+        <input name="startsAt" type="datetime-local" required>
+      </label>
+      <label>Reason
+        <textarea name="reason" maxlength="300" required></textarea>
+      </label>
+      <button type="submit">Request appointment</button>
+    </form>
+  </article>
+  <article class="panel">
+    <h2>Your records</h2>
+    <% records.forEach((record) => { %>
+      <div class="item">
+        <strong><%= record.title %></strong>
+        <p><%= record.notes %></p>
+        <small><%= record.doctor_name %> · <%= record.updated_at %></small>
+      </div>
+    <% }) %>
+  </article>
+</section>
+<section class="panel">
+  <h2>Your appointments</h2>
+  <table>
+    <thead><tr><th>When</th><th>Doctor</th><th>Reason</th><th>Status</th></tr></thead>
+    <tbody>
+      <% appointments.forEach((appointment) => { %>
+        <tr>
+          <td><%= appointment.starts_at %></td>
+          <td><%= appointment.doctor_name %></td>
+          <td><%= appointment.reason %></td>
+          <td><%= appointment.status %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include('partials/end') %>

@@ -1,0 +1,47 @@
+<%- include('partials/header', { title: 'Doctor Portal' }) %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Doctor workspace</p>
+    <h1>Assigned patients and schedule</h1>
+  </div>
+</section>
+
+<section class="grid two">
+  <div class="panel">
+    <h2>My patients</h2>
+    <div class="stack">
+      <% patients.forEach((patient) => { %>
+        <a class="list-row" href="/doctor/patients/<%= patient.id %>">
+          <span>
+            <strong><%= patient.full_name %></strong>
+            <small>DOB <%= patient.date_of_birth %> · <%= patient.phone %></small>
+          </span>
+          <span>Open</span>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>My schedule</h2>
+    <div class="stack">
+      <% appointments.forEach((appointment) => { %>
+        <form class="appointment-row" action="/doctor/appointments/<%= appointment.id %>/status" method="post">
+          <div>
+            <strong><%= appointment.starts_at %></strong>
+            <small><%= appointment.patient_name %> · <%= appointment.reason %></small>
+          </div>
+          <select name="status">
+            <% ['booked', 'checked-in', 'completed', 'cancelled'].forEach((status) => { %>
+              <option value="<%= status %>" <%= status === appointment.status ? 'selected' : '' %>><%= status %></option>
+            <% }) %>
+          </select>
+          <button class="button small" type="submit">Update</button>
+        </form>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

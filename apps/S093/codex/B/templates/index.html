@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Ledger{% endblock %}
+{% block content %}
+  <section class="panel stack">
+    <div>
+      <h1>Secure SQLite ledger</h1>
+      <p>Open an account, transfer funds to another user, and review your own immutable transaction history.</p>
+    </div>
+    <div>
+      <a class="button" href="{{ url_for('register') }}">Create account</a>
+      <a class="button secondary" href="{{ url_for('login') }}">Sign in</a>
+    </div>
+  </section>
+{% endblock %}

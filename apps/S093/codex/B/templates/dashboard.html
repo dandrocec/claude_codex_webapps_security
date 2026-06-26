@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Transaction history{% endblock %}
+{% block content %}
+  <div class="grid">
+    <section class="panel">
+      <p class="muted">Signed in as {{ g.user.username }}</p>
+      <h1>Balance</h1>
+      <p class="balance">{{ format_money(g.user.balance_cents) }}</p>
+      <p><a class="button" href="{{ url_for('transfer') }}">Send funds</a></p>
+    </section>
+
+    <section class="panel">
+      <h2>Account rules</h2>
+      <p>Transfers are recorded permanently and balances are updated in one database transaction.</p>
+    </section>
+  </div>
+
+  <section style="margin-top: 24px;">
+    <h2>Transaction history</h2>
+    {% if transactions %}
+      <table>
+        <thead>
+          <tr>
+            <th>When</th>
+            <th>Type</th>
+            <th>Counterparty</th>
+            <th>Amount</th>
+            <th>Memo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tx in transactions %}
+            <tr>
+              <td>{{ tx.created_at }}</td>
+              <td>{{ tx.direction|capitalize }}</td>
+              <td>
+                {% if tx.direction == "sent" %}
+                  {{ tx.recipient_username }}
+                {% else %}
+                  {{ tx.sender_username }}
+                {% endif %}
+              </td>
+              <td class="amount-{{ tx.direction }}">
+                {% if tx.direction == "sent" %}-{% else %}+{% endif %}{{ format_money(tx.amount_cents) }}
+              </td>
+              <td>{{ tx.memo or "" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="muted">No transactions yet.</p>
+    {% endif %}
+  </section>
+{% endblock %}

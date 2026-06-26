@@ -1,0 +1,66 @@
+<%- include('partials/header', { title: 'Patient Portal' }) %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Patient workspace</p>
+    <h1>Appointments and records</h1>
+  </div>
+</section>
+
+<section class="grid two">
+  <form class="panel form" action="/patient/appointments" method="post">
+    <h2>Book appointment</h2>
+    <label>
+      Doctor
+      <select name="doctor_id" required>
+        <% doctors.forEach((doctor) => { %>
+          <option value="<%= doctor.id %>"><%= doctor.full_name %> · <%= doctor.specialty %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>
+      Date and time
+      <input name="starts_at" type="datetime-local" required>
+    </label>
+    <label>
+      Reason
+      <textarea name="reason" rows="3" required></textarea>
+    </label>
+    <button class="button" type="submit">Book</button>
+  </form>
+
+  <div class="panel">
+    <h2>My records</h2>
+    <div class="stack">
+      <% records.forEach((record) => { %>
+        <article class="record">
+          <strong><%= record.diagnosis %></strong>
+          <p><%= record.treatment %></p>
+          <small><%= record.doctor_name %> · <%= record.updated_at %></small>
+        </article>
+      <% }) %>
+      <% if (!records.length) { %><p class="muted">No records yet.</p><% } %>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>My appointments</h2>
+  <table>
+    <thead>
+      <tr><th>When</th><th>Doctor</th><th>Reason</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <% appointments.forEach((appointment) => { %>
+        <tr>
+          <td><%= appointment.starts_at %></td>
+          <td><%= appointment.doctor_name %></td>
+          <td><%= appointment.reason %></td>
+          <td><span class="status"><%= appointment.status %></span></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+
+<%- include('partials/footer') %>

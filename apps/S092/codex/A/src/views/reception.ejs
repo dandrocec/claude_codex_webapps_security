@@ -1,0 +1,77 @@
+<%- include('partials/header', { title: 'Reception Portal' }) %>
+
+<section class="section-heading">
+  <div>
+    <p class="eyebrow">Reception workspace</p>
+    <h1>Schedule management</h1>
+  </div>
+</section>
+
+<form class="panel form inline-form" action="/reception/appointments" method="post">
+  <h2>Create appointment</h2>
+  <label>
+    Patient
+    <select name="patient_id" required>
+      <% patients.forEach((patient) => { %>
+        <option value="<%= patient.id %>"><%= patient.full_name %></option>
+      <% }) %>
+    </select>
+  </label>
+  <label>
+    Doctor
+    <select name="doctor_id" required>
+      <% doctors.forEach((doctor) => { %>
+        <option value="<%= doctor.id %>"><%= doctor.full_name %> · <%= doctor.specialty %></option>
+      <% }) %>
+    </select>
+  </label>
+  <label>
+    Date and time
+    <input name="starts_at" type="datetime-local" required>
+  </label>
+  <label>
+    Reason
+    <input name="reason" required>
+  </label>
+  <label>
+    Status
+    <select name="status">
+      <option>booked</option>
+      <option>checked-in</option>
+      <option>completed</option>
+      <option>cancelled</option>
+    </select>
+  </label>
+  <button class="button" type="submit">Create</button>
+</form>
+
+<section class="panel">
+  <h2>All appointments</h2>
+  <div class="stack">
+    <% appointments.forEach((appointment) => { %>
+      <form class="schedule-row" action="/reception/appointments/<%= appointment.id %>" method="post">
+        <select name="patient_id" aria-label="Patient">
+          <% patients.forEach((patient) => { %>
+            <option value="<%= patient.id %>" <%= patient.id === appointment.patient_id ? 'selected' : '' %>><%= patient.full_name %></option>
+          <% }) %>
+        </select>
+        <select name="doctor_id" aria-label="Doctor">
+          <% doctors.forEach((doctor) => { %>
+            <option value="<%= doctor.id %>" <%= doctor.id === appointment.doctor_id ? 'selected' : '' %>><%= doctor.full_name %></option>
+          <% }) %>
+        </select>
+        <input name="starts_at" type="datetime-local" value="<%= appointment.starts_at %>" aria-label="Date and time" required>
+        <input name="reason" value="<%= appointment.reason %>" aria-label="Reason" required>
+        <select name="status" aria-label="Status">
+          <% ['booked', 'checked-in', 'completed', 'cancelled'].forEach((status) => { %>
+            <option value="<%= status %>" <%= status === appointment.status ? 'selected' : '' %>><%= status %></option>
+          <% }) %>
+        </select>
+        <button class="button small" type="submit">Save</button>
+        <button class="button danger small" type="submit" formaction="/reception/appointments/<%= appointment.id %>/delete">Delete</button>
+      </form>
+    <% }) %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

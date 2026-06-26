@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Ledger{% endblock %}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f7fb;
+        color: #172033;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; }
+      header {
+        background: #ffffff;
+        border-bottom: 1px solid #d9e0ec;
+        padding: 16px clamp(16px, 4vw, 48px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      main {
+        width: min(980px, calc(100% - 32px));
+        margin: 32px auto;
+      }
+      a { color: #195db5; }
+      .brand { font-weight: 750; color: #172033; text-decoration: none; font-size: 1.15rem; }
+      nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+      nav form { margin: 0; }
+      .button, button {
+        border: 0;
+        border-radius: 6px;
+        background: #195db5;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        font: inherit;
+        font-weight: 650;
+        text-decoration: none;
+      }
+      .button.secondary, button.secondary {
+        background: #e9edf5;
+        color: #172033;
+      }
+      .panel {
+        background: #ffffff;
+        border: 1px solid #d9e0ec;
+        border-radius: 8px;
+        padding: clamp(20px, 4vw, 32px);
+      }
+      .stack { display: grid; gap: 18px; }
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+        gap: 24px;
+        align-items: start;
+      }
+      h1, h2 { margin: 0 0 14px; line-height: 1.15; }
+      p { line-height: 1.55; }
+      label { display: grid; gap: 8px; font-weight: 650; }
+      input, textarea {
+        border: 1px solid #c8d1df;
+        border-radius: 6px;
+        font: inherit;
+        min-height: 44px;
+        padding: 10px 12px;
+        width: 100%;
+      }
+      textarea { min-height: 96px; resize: vertical; }
+      .flash {
+        background: #fff6d8;
+        border: 1px solid #e5c766;
+        border-radius: 6px;
+        margin-bottom: 18px;
+        padding: 12px 14px;
+      }
+      .balance {
+        font-size: clamp(2rem, 6vw, 3.4rem);
+        font-weight: 800;
+        margin: 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border: 1px solid #d9e0ec;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th, td {
+        border-bottom: 1px solid #e5eaf2;
+        padding: 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th { background: #eef3fa; font-size: .9rem; }
+      tr:last-child td { border-bottom: 0; }
+      .amount-sent { color: #a12b2b; font-weight: 700; }
+      .amount-received { color: #12643b; font-weight: 700; }
+      .muted { color: #63708a; }
+      @media (max-width: 760px) {
+        header { align-items: flex-start; flex-direction: column; }
+        .grid { grid-template-columns: 1fr; }
+        table, thead, tbody, th, td, tr { display: block; }
+        thead { display: none; }
+        td { border-bottom: 0; padding: 8px 12px; }
+        tr { border-bottom: 1px solid #e5eaf2; padding: 8px 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="{{ url_for('index') }}">Ledger</a>
+      <nav aria-label="Main navigation">
+        {% if g.user %}
+          <a href="{{ url_for('dashboard') }}">History</a>
+          <a href="{{ url_for('transfer') }}">Transfer</a>
+          <form method="post" action="{{ url_for('logout') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="secondary" type="submit">Sign out</button>
+          </form>
+        {% else %}
+          <a href="{{ url_for('login') }}">Sign in</a>
+          <a class="button" href="{{ url_for('register') }}">Create account</a>
+        {% endif %}
+      </nav>
+    </header>
+    <main>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="flash" role="status">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

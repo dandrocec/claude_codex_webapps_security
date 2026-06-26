@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Job {{ job.id }}{% endblock %}
+{% block content %}
+<p><a href="/">Back to jobs</a></p>
+<section class="panel">
+  <h1>Job #{{ job.id }}</h1>
+  <p><span class="status {{ job.status }}">{{ job.status }}</span></p>
+  <p class="muted">Type: {{ job.kind }} | Exit code: {{ job.exit_code if job.exit_code is not none else "not available" }}</p>
+  <h2>Submitted content</h2>
+  <pre>{{ job.command }}</pre>
+  <h2>Output</h2>
+  <pre>{{ job.output if job.output else "No output captured yet." }}</pre>
+</section>
+{% endblock %}

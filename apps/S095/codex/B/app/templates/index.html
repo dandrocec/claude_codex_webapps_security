@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Jobs{% endblock %}
+{% block content %}
+<div class="grid">
+  <section class="panel">
+    <h1>Submit job</h1>
+    <form method="post" action="/jobs">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <label for="kind">Type</label>
+      <select id="kind" name="kind" required>
+        <option value="command">Command</option>
+        <option value="python">Python script</option>
+      </select>
+      <label for="command">Script or command</label>
+      <textarea id="command" name="command" maxlength="2000" required></textarea>
+      <p class="muted">Commands are parsed without a shell. Jobs time out automatically.</p>
+      <button type="submit">Run job</button>
+    </form>
+  </section>
+  <section>
+    <h1>History</h1>
+    {% if jobs %}
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Status</th><th>Type</th><th>Created</th><th></th></tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+          <tr>
+            <td>#{{ job.id }}</td>
+            <td><span class="status {{ job.status }}">{{ job.status }}</span></td>
+            <td>{{ job.kind }}</td>
+            <td>{{ job.created_at }}</td>
+            <td><a href="/jobs/{{ job.id }}">View</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="card">No jobs yet.</div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

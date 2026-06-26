@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+<div class="panel" style="max-width: 420px; margin: 0 auto;">
+  <h1>Sign in</h1>
+  <form method="post" action="/login" autocomplete="on">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label for="username">Username</label>
+    <input id="username" name="username" maxlength="64" required>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required>
+    <p><button type="submit">Sign in</button></p>
+  </form>
+  <p class="muted">Need an account? <a href="/register">Register</a>.</p>
+</div>
+{% endblock %}

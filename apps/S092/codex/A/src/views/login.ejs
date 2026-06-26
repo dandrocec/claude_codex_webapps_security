@@ -1,0 +1,22 @@
+<%- include('partials/header', { title: 'Sign in' }) %>
+
+<section class="auth">
+  <div>
+    <p class="eyebrow">Secure clinic access</p>
+    <h1>Sign in to your portal</h1>
+    <p class="lede">Use one of the demo accounts from the README. Each role lands in a scoped workspace.</p>
+  </div>
+  <form class="panel form" action="/login" method="post">
+    <label>
+      Username
+      <input name="username" autocomplete="username" required>
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" autocomplete="current-password" required>
+    </label>
+    <button class="button" type="submit">Sign in</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Send funds{% endblock %}
+{% block content %}
+  <section class="panel">
+    <h1>Send funds</h1>
+    <form class="stack" method="post" action="{{ url_for('transfer') }}" autocomplete="off">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>
+        Recipient username
+        <input name="recipient" pattern="[A-Za-z0-9_]{3,32}" maxlength="32" required>
+      </label>
+      <label>
+        Amount
+        <input name="amount" inputmode="decimal" pattern="^[0-9]+(\.[0-9]{1,2})?$" placeholder="10.00" required>
+      </label>
+      <label>
+        Memo
+        <textarea name="memo" maxlength="160"></textarea>
+      </label>
+      <button type="submit">Send transfer</button>
+    </form>
+  </section>
+{% endblock %}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - Integration Hub</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Integration Hub</h1>
+        <p><%= user.email %></p>
+      </div>
+      <form method="post" action="/logout"><button class="secondary">Sign out</button></form>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Webhooks</h2>
+          <form method="post" action="/webhooks" class="inline-form">
+            <input name="name" placeholder="Webhook name" required>
+            <button>Create</button>
+          </form>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Inbound URL</th><th>Actions</th><th></th></tr>
+            </thead>
+            <tbody>
+              <% webhooks.forEach((hook) => { %>
+                <tr>
+                  <td><a href="/webhooks/<%= hook.id %>"><%= hook.name %></a></td>
+                  <td><code><%= baseUrl %>/hooks/<%= hook.token %></code></td>
+                  <td><%= hook.action_count %></td>
+                  <td>
+                    <form method="post" action="/webhooks/<%= hook.id %>/delete">
+                      <button class="danger compact">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+              <% if (!webhooks.length) { %>
+                <tr><td colspan="4" class="empty">Create a webhook to receive events.</td></tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>Recent Events</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>ID</th><th>Webhook</th><th>Method</th><th>Received</th></tr>
+              </thead>
+              <tbody>
+                <% events.forEach((event) => { %>
+                  <tr>
+                    <td>#<%= event.id %></td>
+                    <td><%= event.webhook_name %></td>
+                    <td><%= event.method %></td>
+                    <td><%= event.created_at %></td>
+                  </tr>
+                <% }) %>
+                <% if (!events.length) { %>
+                  <tr><td colspan="4" class="empty">No events received yet.</td></tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Recent Deliveries</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>ID</th><th>Action</th><th>Status</th><th>Code</th><th></th></tr>
+              </thead>
+              <tbody>
+                <% deliveries.forEach((delivery) => { %>
+                  <tr>
+                    <td>#<%= delivery.id %></td>
+                    <td title="<%= delivery.target_url %>"><%= delivery.action_name %></td>
+                    <td><span class="status <%= delivery.status %>"><%= delivery.status %></span></td>
+                    <td><%= delivery.status_code || "-" %></td>
+                    <td>
+                      <form method="post" action="/deliveries/<%= delivery.id %>/retry">
+                        <button class="compact secondary">Retry</button>
+                      </form>
+                    </td>
+                  </tr>
+                <% }) %>
+                <% if (!deliveries.length) { %>
+                  <tr><td colspan="5" class="empty">No deliveries attempted yet.</td></tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

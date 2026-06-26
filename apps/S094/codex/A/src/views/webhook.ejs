@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= webhook.name %> - Integration Hub</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <a href="/dashboard" class="back">Back to dashboard</a>
+        <h1><%= webhook.name %></h1>
+        <p><code><%= baseUrl %>/hooks/<%= webhook.token %></code></p>
+      </div>
+      <form method="post" action="/logout"><button class="secondary">Sign out</button></form>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <h2>Add outbound action</h2>
+        <% if (error) { %><p class="alert"><%= error %></p><% } %>
+        <% if (notice) { %><p class="notice"><%= notice %></p><% } %>
+        <form method="post" action="/webhooks/<%= webhook.id %>/actions" class="action-form">
+          <label>
+            Name
+            <input name="name" placeholder="Notify billing service">
+          </label>
+          <label>
+            Destination URL
+            <input name="target_url" type="url" placeholder="https://example.com/events" required>
+          </label>
+          <button>Create action</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Actions</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Destination</th><th>Status</th><th></th></tr>
+            </thead>
+            <tbody>
+              <% actions.forEach((action) => { %>
+                <tr>
+                  <td><%= action.name %></td>
+                  <td><code><%= action.target_url %></code></td>
+                  <td><span class="status <%= action.is_active ? "success" : "failed" %>"><%= action.is_active ? "active" : "paused" %></span></td>
+                  <td>
+                    <form method="post" action="/actions/<%= action.id %>/toggle">
+                      <button class="compact secondary"><%= action.is_active ? "Pause" : "Resume" %></button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+              <% if (!actions.length) { %>
+                <tr><td colspan="4" class="empty">No actions configured for this webhook.</td></tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

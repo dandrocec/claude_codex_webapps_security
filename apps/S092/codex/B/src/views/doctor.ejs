@@ -1,0 +1,24 @@
+<%- include('partials/start', { title }) %>
+<h1>Doctor portal</h1>
+<section class="grid">
+  <article class="panel">
+    <h2>Assigned patients</h2>
+    <% patients.forEach((patient) => { %>
+      <div class="item row">
+        <span><%= patient.full_name %><br><small><%= patient.email %></small></span>
+        <a class="button" href="/doctor/patients/<%= patient.id %>">Records</a>
+      </div>
+    <% }) %>
+  </article>
+  <article class="panel">
+    <h2>Your schedule</h2>
+    <% appointments.forEach((appointment) => { %>
+      <div class="item">
+        <strong><%= appointment.patient_name %></strong>
+        <p><%= appointment.reason %></p>
+        <small><%= appointment.starts_at %> · <%= appointment.status %></small>
+      </div>
+    <% }) %>
+  </article>
+</section>
+<%- include('partials/end') %>

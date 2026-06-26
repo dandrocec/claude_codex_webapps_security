@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="layout">
+  <div class="feed">
+    <form class="composer" method="post" action="/posts">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <textarea name="body" maxlength="280" required placeholder="Post a message"></textarea>
+      <button type="submit">Post</button>
+    </form>
+
+    {% for post in posts %}
+      <article class="post">
+        <div class="post-head">
+          <strong>@{{ post.author.username }}</strong>
+          <time datetime="{{ post.created_at.isoformat() }}">{{ post.created_at.strftime("%Y-%m-%d %H:%M") }}</time>
+        </div>
+        <p>{{ post.body }}</p>
+        {% for preview in post.previews %}
+          <a class="preview" href="{{ preview.url }}" rel="noopener noreferrer nofollow">
+            <strong>{{ preview.title }}</strong>
+            {% if preview.description %}<span>{{ preview.description }}</span>{% endif %}
+          </a>
+        {% endfor %}
+        {% if post.author_id == viewer.id %}
+          <form method="post" action="/posts/{{ post.id }}/delete">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button class="link-button" type="submit">Delete</button>
+          </form>
+        {% endif %}
+      </article>
+    {% else %}
+      <p class="empty">Your timeline is empty.</p>
+    {% endfor %}
+  </div>
+
+  <aside class="panel people">
+    <h2>People</h2>
+    {% for user in suggestions %}
+      <div class="person">
+        <span>@{{ user.username }}</span>
+        {% if user.id in following %}
+          <form method="post" action="/unfollow/{{ user.id }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button type="submit">Unfollow</button>
+          </form>
+        {% else %}
+          <form method="post" action="/follow/{{ user.id }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button type="submit">Follow</button>
+          </form>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </aside>
+</section>
+{% endblock %}

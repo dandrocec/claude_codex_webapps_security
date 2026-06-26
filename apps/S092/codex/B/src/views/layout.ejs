@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %> | Clinic Portal</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">Clinic Portal</a>
+      <% if (user) { %>
+        <nav>
+          <span><%= user.fullName %> (<%= user.role %>)</span>
+          <form method="post" action="/logout">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit">Sign out</button>
+          </form>
+        </nav>
+      <% } %>
+    </header>
+    <main class="page">
+      <% if (errors && errors.length) { %>
+        <section class="alert">
+          <% errors.forEach((error) => { %><p><%= error %></p><% }) %>
+        </section>
+      <% } %>
+      <%- body %>
+    </main>
+  </body>
+</html>

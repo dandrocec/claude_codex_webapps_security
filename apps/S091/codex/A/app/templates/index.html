@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Microblog</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Microblog</h1>
+      {% if selected %}
+        <form method="get" action="/" class="switcher">
+          <label for="user_id">Viewing as</label>
+          <select id="user_id" name="user_id" onchange="this.form.submit()">
+            {% for user in users %}
+              <option value="{{ user.id }}" {% if selected and selected.id == user.id %}selected{% endif %}>
+                {{ user.display_name }} (@{{ user.username }})
+              </option>
+            {% endfor %}
+          </select>
+        </form>
+      {% endif %}
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <h2>Create user</h2>
+        <form method="post" action="/ui/users" class="stack">
+          <input name="username" placeholder="username" pattern="[a-zA-Z0-9_]+" required>
+          <input name="display_name" placeholder="display name" required>
+          <button type="submit">Create</button>
+        </form>
+
+        {% if selected %}
+          <h2>Post as {{ selected.display_name }}</h2>
+          <form method="post" action="/ui/posts" class="stack">
+            <input type="hidden" name="user_id" value="{{ selected.id }}">
+            <textarea name="body" maxlength="500" rows="5" placeholder="Share a message or URL" required></textarea>
+            <button type="submit">Post</button>
+          </form>
+        {% endif %}
+      </section>
+
+      <section class="feed">
+        <div class="section-title">
+          <h2>Timeline</h2>
+          {% if selected %}
+            <span>@{{ selected.username }}</span>
+          {% endif %}
+        </div>
+
+        {% if not selected %}
+          <p class="empty">Create a user to start posting.</p>
+        {% elif timeline %}
+          {% for item in timeline %}
+            <article class="post">
+              <div class="post-meta">
+                <strong>{{ item.post.author.display_name }}</strong>
+                <span>@{{ item.post.author.username }}</span>
+                <time>{{ item.post.created_at.strftime("%Y-%m-%d %H:%M") }}</time>
+              </div>
+              <p>{{ item.post.body }}</p>
+              {% for preview in item.post.previews %}
+                <a class="preview" href="{{ preview.url }}" target="_blank" rel="noreferrer">
+                  <span class="preview-title">{{ preview.title or preview.url }}</span>
+                  {% if preview.description %}
+                    <span>{{ preview.description }}</span>
+                  {% endif %}
+                  <small>{{ preview.status }}</small>
+                </a>
+              {% endfor %}
+            </article>
+          {% endfor %}
+        {% else %}
+          <p class="empty">No feed items yet. Post something or follow another user.</p>
+        {% endif %}
+      </section>
+
+      <aside class="panel">
+        <h2>People</h2>
+        {% if selected %}
+          <ul class="people">
+            {% for user in users %}
+              {% if user.id != selected.id %}
+                <li>
+                  <div>
+                    <strong>{{ user.display_name }}</strong>
+                    <span>@{{ user.username }}</span>
+                  </div>
+                  {% if user.id in following_ids %}
+                    <form method="post" action="/ui/unfollow">
+                      <input type="hidden" name="follower_id" value="{{ selected.id }}">
+                      <input type="hidden" name="followee_id" value="{{ user.id }}">
+                      <button type="submit" class="secondary">Unfollow</button>
+                    </form>
+                  {% else %}
+                    <form method="post" action="/ui/follows">
+                      <input type="hidden" name="follower_id" value="{{ selected.id }}">
+                      <input type="hidden" name="followee_id" value="{{ user.id }}">
+                      <button type="submit">Follow</button>
+                    </form>
+                  {% endif %}
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="empty">No users yet.</p>
+        {% endif %}
+      </aside>
+    </main>
+  </body>
+</html>

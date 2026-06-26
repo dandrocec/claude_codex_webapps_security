@@ -1,0 +1,28 @@
+<%- include('partials/start', { title }) %>
+<h1><%= patient.full_name %></h1>
+<section class="grid">
+  <article class="panel">
+    <h2>Add record</h2>
+    <form method="post" action="/doctor/patients/<%= patient.id %>/records">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Title
+        <input name="title" maxlength="120" required>
+      </label>
+      <label>Notes
+        <textarea name="notes" maxlength="2000" required></textarea>
+      </label>
+      <button type="submit">Save record</button>
+    </form>
+  </article>
+  <article class="panel">
+    <h2>Records</h2>
+    <% records.forEach((record) => { %>
+      <div class="item">
+        <strong><%= record.title %></strong>
+        <p><%= record.notes %></p>
+        <small><%= record.updated_at %></small>
+      </div>
+    <% }) %>
+  </article>
+</section>
+<%- include('partials/end') %>

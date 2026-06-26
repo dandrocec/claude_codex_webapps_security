@@ -1,0 +1,57 @@
+<%- include('partials/start', { title }) %>
+<h1>Reception schedule</h1>
+<section class="panel">
+  <h2>Create appointment</h2>
+  <form class="inline-form" method="post" action="/reception/appointments">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>Patient
+      <select name="patientId" required>
+        <% patients.forEach((patient) => { %>
+          <option value="<%= patient.id %>"><%= patient.full_name %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Doctor
+      <select name="doctorId" required>
+        <% doctors.forEach((doctor) => { %>
+          <option value="<%= doctor.id %>"><%= doctor.full_name %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Date and time
+      <input name="startsAt" type="datetime-local" required>
+    </label>
+    <label>Reason
+      <input name="reason" maxlength="300" required>
+    </label>
+    <button type="submit">Schedule</button>
+  </form>
+</section>
+<section class="panel">
+  <h2>All appointments</h2>
+  <table>
+    <thead><tr><th>When</th><th>Patient</th><th>Doctor</th><th>Reason</th><th>Status</th></tr></thead>
+    <tbody>
+      <% appointments.forEach((appointment) => { %>
+        <tr>
+          <td><%= appointment.starts_at %></td>
+          <td><%= appointment.patient_name %></td>
+          <td><%= appointment.doctor_name %></td>
+          <td><%= appointment.reason %></td>
+          <td>
+            <form method="post" action="/reception/appointments/<%= appointment.id %>/status">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <select name="status">
+                <% ['requested', 'scheduled', 'completed', 'cancelled'].forEach((status) => { %>
+                  <option value="<%= status %>" <%= appointment.status === status ? 'selected' : '' %>><%= status %></option>
+                <% }) %>
+              </select>
+              <button type="submit">Update</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include('partials/end') %>

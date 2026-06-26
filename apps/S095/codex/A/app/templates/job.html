@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} - Job Runner{% endblock %}
+{% block content %}
+<p><a href="/">&larr; Back to jobs</a></p>
+<h1>{{ job.title }}</h1>
+<div class="job-meta">
+  <div class="meta-item">
+    <span class="meta-label">Status</span>
+    <span class="status {{ job.status.value }}">{{ job.status.value }}</span>
+  </div>
+  <div class="meta-item">
+    <span class="meta-label">Mode</span>
+    {{ job.mode }}
+  </div>
+  <div class="meta-item">
+    <span class="meta-label">Exit Code</span>
+    {{ job.exit_code if job.exit_code is not none else "-" }}
+  </div>
+  <div class="meta-item">
+    <span class="meta-label">Created</span>
+    {{ job.created_at.strftime("%Y-%m-%d %H:%M:%S") }}
+  </div>
+</div>
+
+<div class="stack">
+  <section class="panel">
+    <h2>Submitted Payload</h2>
+    <pre>{{ job.payload }}</pre>
+  </section>
+  <section class="panel">
+    <h2>stdout</h2>
+    <pre>{{ job.stdout or "" }}</pre>
+  </section>
+  <section class="panel">
+    <h2>stderr</h2>
+    <pre>{{ job.stderr or "" }}</pre>
+  </section>
+</div>
+{% if job.status.value in ["queued", "running"] %}
+<script>
+  setTimeout(function () { window.location.reload(); }, 1500);
+</script>
+{% endif %}
+{% endblock %}

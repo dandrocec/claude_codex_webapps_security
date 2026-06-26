@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Jobs - Job Runner{% endblock %}
+{% block content %}
+<div class="layout">
+  <section class="panel">
+    <h1>Submit Job</h1>
+    <form method="post" action="/jobs">
+      <div class="field">
+        <label for="title">Title</label>
+        <input id="title" name="title" placeholder="Nightly report" required>
+      </div>
+      <div class="field">
+        <label for="mode">Run as</label>
+        <select id="mode" name="mode">
+          <option value="command">Shell command</option>
+          <option value="python">Python script</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="payload">Command or script</label>
+        <textarea id="payload" name="payload" spellcheck="false" placeholder="echo Hello from the server" required></textarea>
+      </div>
+      <button type="submit">Run job</button>
+    </form>
+  </section>
+
+  <section>
+    <h1>Job History</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Job</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Exit</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for job in jobs %}
+        <tr>
+          <td><a href="/jobs/{{ job.id }}">{{ job.title }}</a></td>
+          <td><span class="status {{ job.status.value }}">{{ job.status.value }}</span></td>
+          <td>{{ job.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+          <td>{{ job.exit_code if job.exit_code is not none else "-" }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4" class="muted">No jobs submitted yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+{% endblock %}

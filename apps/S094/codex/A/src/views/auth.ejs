@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= mode === "login" ? "Login" : "Register" %> - Integration Hub</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="auth-page">
+    <main class="auth-panel">
+      <h1>Integration Hub</h1>
+      <h2><%= mode === "login" ? "Sign in" : "Create account" %></h2>
+      <% if (typeof error !== "undefined" && error) { %>
+        <p class="alert"><%= error %></p>
+      <% } %>
+      <form method="post" action="/<%= mode %>" class="stack">
+        <label>
+          Email
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" autocomplete="<%= mode === "login" ? "current-password" : "new-password" %>" minlength="8" required>
+        </label>
+        <button type="submit"><%= mode === "login" ? "Sign in" : "Register" %></button>
+      </form>
+      <% if (mode === "login") { %>
+        <p class="muted">No account yet? <a href="/register">Register</a></p>
+      <% } else { %>
+        <p class="muted">Already registered? <a href="/login">Sign in</a></p>
+      <% } %>
+    </main>
+  </body>
+</html>
