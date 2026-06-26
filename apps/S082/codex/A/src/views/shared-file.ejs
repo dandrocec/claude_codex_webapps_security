@@ -1,0 +1,13 @@
+<%- include('partials/open', { title: 'Shared file' }) %>
+<section class="auth-panel">
+  <h1><%= share.original_name %></h1>
+  <p>This link grants read access to this file.</p>
+  <dl>
+    <dt>Size</dt>
+    <dd><%= Math.ceil(share.size / 1024) %> KB</dd>
+    <dt>Type</dt>
+    <dd><%= share.mime_type %></dd>
+  </dl>
+  <a class="button-link" href="/s/<%= share.token %>/download">Download file</a>
+</section>
+<%- include('partials/close') %>

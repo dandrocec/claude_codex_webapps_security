@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+
+<section class="page-head">
+  <div>
+    <h1>My tickets</h1>
+    <p>Only tickets purchased by your account are shown here.</p>
+  </div>
+</section>
+
+<section class="ticket-list">
+  <% if (!tickets.length) { %>
+    <p class="empty">You have not purchased any tickets yet.</p>
+  <% } %>
+  <% tickets.forEach((ticket) => { %>
+    <article class="ticket">
+      <div>
+        <h2><a href="/events/<%= ticket.event_id %>"><%= ticket.title %></a></h2>
+        <p class="muted"><%= new Date(ticket.starts_at).toLocaleString() %></p>
+      </div>
+      <div class="ticket-code">
+        <span>Ticket code</span>
+        <strong><%= ticket.ticket_code %></strong>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<%- include("partials/footer") %>

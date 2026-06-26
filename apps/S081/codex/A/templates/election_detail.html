@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ election["title"] }}{% endblock %}
+{% block content %}
+  <section class="page-head">
+    <div>
+      <h1>{{ election["title"] }}</h1>
+      <p>{{ election["description"] or "No description provided." }}</p>
+    </div>
+    <span class="badge {{ election_status(election) }}">{{ election_status(election) }}</span>
+  </section>
+
+  <section class="panel">
+    <dl class="meta wide">
+      <div><dt>Opens</dt><dd>{{ election["opens_at"].replace("T", " ") }}</dd></div>
+      <div><dt>Closes</dt><dd>{{ election["closes_at"].replace("T", " ") }}</dd></div>
+    </dl>
+  </section>
+
+  {% if election_status(election) == "closed" %}
+    <section class="panel">
+      <h2>Results</h2>
+      <div class="results">
+        {% for row in results %}
+          {% set percent = (row["votes"] / total_votes * 100) if total_votes else 0 %}
+          <div class="result-row">
+            <div class="result-label">
+              <strong>{{ row["name"] }}</strong>
+              <span>{{ row["votes"] }} vote{{ "" if row["votes"] == 1 else "s" }} · {{ "%.1f"|format(percent) }}%</span>
+            </div>
+            <div class="bar"><span style="width: {{ percent }}%"></span></div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% elif election_status(election) == "open" %}
+    <section class="panel">
+      <h2>Cast your vote</h2>
+      {% if not g.user %}
+        <p><a href="{{ url_for('login', next=request.path) }}">Log in</a> to vote in this election.</p>
+      {% elif user_vote %}
+        <p class="notice">You have already voted in this election.</p>
+      {% else %}
+        <form method="post" action="{{ url_for('vote', election_id=election['id']) }}" class="vote-form">
+          {% for candidate in candidates %}
+            <label class="choice">
+              <input type="radio" name="candidate_id" value="{{ candidate['id'] }}" required>
+              <span>
+                <strong>{{ candidate["name"] }}</strong>
+                {% if candidate["statement"] %}<small>{{ candidate["statement"] }}</small>{% endif %}
+              </span>
+            </label>
+          {% endfor %}
+          <button class="button" type="submit">Submit vote</button>
+        </form>
+      {% endif %}
+    </section>
+  {% else %}
+    <section class="panel">
+      <h2>Candidates</h2>
+      <ul class="candidate-list">
+        {% for candidate in candidates %}
+          <li>{{ candidate["name"] }}</li>
+        {% endfor %}
+      </ul>
+      <p class="notice">Voting has not opened yet.</p>
+    </section>
+  {% endif %}
+{% endblock %}

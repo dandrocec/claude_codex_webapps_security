@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Edit profile{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Edit profile</h1>
+  <form method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <label>Full name
+      <input name="full_name" maxlength="120" value="{{ profile.full_name }}" required>
+    </label>
+    <label>Headline
+      <input name="headline" maxlength="160" value="{{ profile.headline }}">
+    </label>
+    <label>Skills
+      <textarea name="skills" maxlength="500" rows="4">{{ profile.skills }}</textarea>
+    </label>
+    <label>Experience
+      <textarea name="experience" maxlength="3000" rows="8">{{ profile.experience }}</textarea>
+    </label>
+    <label>Resume (PDF, DOCX, or UTF-8 TXT; max 5 MB)
+      <input name="resume" type="file" accept=".pdf,.docx,.txt">
+    </label>
+    <button class="primary" type="submit">Save profile</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Create election{% endblock %}
+{% block content %}
+  <section class="auth-panel wide-form">
+    <h1>Create election</h1>
+    <form method="post">
+      <label>Title<input name="title" required></label>
+      <label>Description<textarea name="description" rows="3"></textarea></label>
+      <div class="two-col">
+        <label>Open time<input type="datetime-local" name="opens_at" required></label>
+        <label>Close time<input type="datetime-local" name="closes_at" required></label>
+      </div>
+      <label>Candidates<textarea name="candidates" rows="7" placeholder="One candidate per line" required></textarea></label>
+      <button class="button" type="submit">Create election</button>
+    </form>
+  </section>
+{% endblock %}

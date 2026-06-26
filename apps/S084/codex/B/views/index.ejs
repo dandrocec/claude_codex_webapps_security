@@ -1,0 +1,32 @@
+<%- include("partials/header") %>
+
+<section class="page-head">
+  <div>
+    <h1>Events</h1>
+    <p>Browse available events and buy tickets while inventory remains.</p>
+  </div>
+  <% if (currentUser) { %>
+    <a class="button" href="/events/new">Create event</a>
+  <% } %>
+</section>
+
+<section class="event-grid">
+  <% if (!events.length) { %>
+    <p class="empty">No events have been created yet.</p>
+  <% } %>
+  <% events.forEach((event) => { %>
+    <article class="card">
+      <div class="card-main">
+        <h2><a href="/events/<%= event.id %>"><%= event.title %></a></h2>
+        <p class="muted">Organised by <%= event.organiser_name %></p>
+        <p><%= event.description %></p>
+      </div>
+      <div class="meta-row">
+        <span><%= new Date(event.starts_at).toLocaleString() %></span>
+        <strong><%= event.ticket_limit - event.sold_count %> / <%= event.ticket_limit %> left</strong>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<%- include("partials/footer") %>

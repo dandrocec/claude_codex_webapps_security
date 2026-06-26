@@ -1,0 +1,27 @@
+<%- include("partials/header") %>
+
+<article class="detail">
+  <div>
+    <h1><%= event.title %></h1>
+    <p class="muted">Organised by <%= event.organiser_name %> · <%= new Date(event.starts_at).toLocaleString() %></p>
+    <p class="description"><%= event.description %></p>
+  </div>
+  <aside class="purchase-box">
+    <p class="inventory"><strong><%= event.ticket_limit - event.sold_count %></strong> tickets left</p>
+    <p class="muted"><%= event.sold_count %> sold from <%= event.ticket_limit %></p>
+    <% if (currentUser) { %>
+      <% if (event.ticket_limit > event.sold_count) { %>
+        <form method="post" action="/events/<%= event.id %>/buy">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="button full">Buy ticket</button>
+        </form>
+      <% } else { %>
+        <button class="button full" disabled>Sold out</button>
+      <% } %>
+    <% } else { %>
+      <a class="button full" href="/login">Sign in to buy</a>
+    <% } %>
+  </aside>
+</article>
+
+<%- include("partials/footer") %>

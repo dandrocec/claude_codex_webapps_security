@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Voting Platform{% endblock %}</title>
+  <style>
+    :root { color-scheme: light; font-family: Arial, sans-serif; background: #f5f7f9; color: #17202a; }
+    body { margin: 0; }
+    header { background: #17324d; color: white; padding: 1rem 1.5rem; display: flex; gap: 1rem; align-items: center; justify-content: space-between; }
+    header a { color: white; text-decoration: none; font-weight: 700; }
+    nav { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+    main { max-width: 920px; margin: 2rem auto; padding: 0 1rem; }
+    .panel, .election { background: white; border: 1px solid #d9e1e8; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    label { display: block; font-weight: 700; margin-top: .8rem; }
+    input, textarea, select { width: 100%; box-sizing: border-box; padding: .65rem; border: 1px solid #9aa8b4; border-radius: 6px; margin-top: .3rem; }
+    button, .button { background: #1f6f50; border: 0; color: white; padding: .65rem .95rem; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-block; }
+    button.secondary, .button.secondary { background: #4f5f6f; }
+    .flash { padding: .75rem; border-radius: 6px; margin-bottom: 1rem; }
+    .flash.error { background: #fde8e8; border: 1px solid #e09a9a; }
+    .flash.success { background: #e8f6ef; border: 1px solid #8ac2a6; }
+    .muted { color: #5b6773; }
+    .actions { margin-top: 1rem; display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { text-align: left; border-bottom: 1px solid #d9e1e8; padding: .6rem; }
+    .radio-row { display: flex; gap: .5rem; align-items: center; padding: .45rem 0; }
+    .radio-row input { width: auto; margin: 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="{{ url_for('index') }}">Voting Platform</a>
+    <nav>
+      {% if g.user %}
+        <span>{{ g.user.name }}</span>
+        {% if g.user.is_admin %}
+          <a href="{{ url_for('new_election') }}">New election</a>
+        {% endif %}
+        <form method="post" action="{{ url_for('logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="secondary">Sign out</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('login') }}">Sign in</a>
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

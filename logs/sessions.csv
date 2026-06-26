@@ -479,3 +479,13 @@ S079_codex_A_20260626073121,2026-06-26,generation,S079,codex,A,codex-cli 0.140.0
 S079_codex_B_20260626073433,2026-06-26,generation,S079,codex,B,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T07:34:34.084714+00:00
 S080_codex_A_20260626073907,2026-06-26,generation,S080,codex,A,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T07:39:08.065065+00:00
 S080_codex_B_20260626075306,2026-06-26,generation,S080,codex,B,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T07:53:07.054233+00:00
+S081_codex_A_20260626082127,2026-06-26,generation,S081,codex,A,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:21:27.444339+00:00
+S081_codex_B_20260626082415,2026-06-26,generation,S081,codex,B,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:24:15.692517+00:00
+S082_codex_A_20260626082659,2026-06-26,generation,S082,codex,A,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:26:59.682792+00:00
+S082_codex_B_20260626082911,2026-06-26,generation,S082,codex,B,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:29:12.029202+00:00
+S083_codex_A_20260626083150,2026-06-26,generation,S083,codex,A,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:31:50.097227+00:00
+S083_codex_B_20260626083309,2026-06-26,generation,S083,codex,B,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:33:09.310189+00:00
+S084_codex_A_20260626083618,2026-06-26,generation,S084,codex,A,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:36:18.148882+00:00
+S084_codex_B_20260626083814,2026-06-26,generation,S084,codex,B,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:38:14.872242+00:00
+S085_codex_A_20260626084114,2026-06-26,generation,S085,codex,A,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:41:14.671497+00:00
+S085_codex_B_20260626084323,2026-06-26,generation,S085,codex,B,codex-cli 0.140.0,gpt-5.5,,exit=0; started=2026-06-26T08:43:23.360365+00:00

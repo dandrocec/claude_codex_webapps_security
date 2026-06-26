@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Candidate Search{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Candidate search</h1>
+  <form method="get" class="search-form">
+    <label>
+      Skill
+      <input name="skill" value="{{ skill }}" placeholder="Python">
+    </label>
+    <button type="submit">Search</button>
+  </form>
+</section>
+
+<section class="results">
+  {% if candidates %}
+    {% for candidate in candidates %}
+      <article class="candidate-card">
+        <div>
+          <h2>{{ candidate.name }}</h2>
+          <p class="headline">{{ candidate.headline or "No headline yet" }}</p>
+          <p class="muted">{{ candidate.location or "Location not listed" }}</p>
+          <p><strong>Skills:</strong> {{ candidate.skills or "No skills listed" }}</p>
+        </div>
+        <a class="button-link" href="{{ url_for('view_candidate', user_id=candidate.user_id) }}">View profile</a>
+      </article>
+    {% endfor %}
+  {% else %}
+    <p class="empty-state">No candidates found.</p>
+  {% endif %}
+</section>
+{% endblock %}

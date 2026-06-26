@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{ election.title }}{% endblock %}
+{% block content %}
+  <section class="panel">
+    <h1>{{ election.title }}</h1>
+    <p>{{ election.description }}</p>
+    <p class="muted">Open: {{ format_dt(election.opens_at) }} | Close: {{ format_dt(election.closes_at) }}</p>
+  </section>
+
+  {% if results %}
+    <section class="panel">
+      <h2>Results</h2>
+      <table>
+        <thead><tr><th>Candidate</th><th>Votes</th></tr></thead>
+        <tbody>
+          {% for row in results %}
+            <tr><td>{{ row.name }}</td><td>{{ row.votes }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  {% elif not g.user %}
+    <div class="panel">Sign in to vote while this election is open.</div>
+  {% elif user_vote %}
+    <div class="panel">Your vote has been recorded. Results will be shown after the election closes.</div>
+  {% elif election_is_open(election) %}
+    <section class="panel">
+      <h2>Cast your vote</h2>
+      <form method="post" action="{{ url_for('vote', election_id=election.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {% for candidate in candidates %}
+          <label class="radio-row">
+            <input type="radio" name="candidate_id" value="{{ candidate.id }}" required>
+            <span>{{ candidate.name }}</span>
+          </label>
+        {% endfor %}
+        <div class="actions"><button type="submit">Submit vote</button></div>
+      </form>
+    </section>
+  {% else %}
+    <div class="panel">Voting is not currently open.</div>
+  {% endif %}
+{% endblock %}

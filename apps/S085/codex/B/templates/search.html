@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Search candidates{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Search candidates</h1>
+  <form class="search" method="get">
+    <label>Skill
+      <input name="skill" maxlength="80" value="{{ skill }}">
+    </label>
+    <button class="primary" type="submit">Search</button>
+  </form>
+</section>
+<section class="results">
+  {% for profile in profiles %}
+    <article class="result-card">
+      <h2><a href="{{ url_for('view_candidate', user_id=profile.user_id) }}">{{ profile.full_name }}</a></h2>
+      <p>{{ profile.headline or "No headline provided." }}</p>
+      <p><strong>Skills:</strong> {{ profile.skills or "Not set" }}</p>
+    </article>
+  {% else %}
+    <p class="empty">No candidates found.</p>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}New election{% endblock %}
+{% block content %}
+  <div class="panel">
+    <h1>New election</h1>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="title">Title</label>
+      <input id="title" name="title" maxlength="120" required>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" maxlength="500" rows="4"></textarea>
+      <label for="opens_at">Opens at</label>
+      <input id="opens_at" name="opens_at" type="datetime-local" required>
+      <label for="closes_at">Closes at</label>
+      <input id="closes_at" name="closes_at" type="datetime-local" required>
+      <label>Candidates</label>
+      <input name="candidates" maxlength="100" required>
+      <input name="candidates" maxlength="100" required>
+      <input name="candidates" maxlength="100">
+      <input name="candidates" maxlength="100">
+      <input name="candidates" maxlength="100">
+      <div class="actions"><button type="submit">Create election</button></div>
+    </form>
+  </div>
+{% endblock %}

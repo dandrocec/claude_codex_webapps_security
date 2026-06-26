@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Elections{% endblock %}
+{% block content %}
+  <section class="page-head">
+    <div>
+      <h1>Elections</h1>
+      <p>Vote while elections are open. Results become visible after closing time.</p>
+    </div>
+    {% if g.user and g.user["is_admin"] %}
+      <a class="button" href="{{ url_for('create_election') }}">Create election</a>
+    {% endif %}
+  </section>
+
+  <section class="grid">
+    {% for election in elections %}
+      <article class="card">
+        <div class="card-head">
+          <h2>{{ election["title"] }}</h2>
+          <span class="badge {{ election_status(election) }}">{{ election_status(election) }}</span>
+        </div>
+        {% if election["description"] %}
+          <p>{{ election["description"] }}</p>
+        {% endif %}
+        <dl class="meta">
+          <div><dt>Opens</dt><dd>{{ election["opens_at"].replace("T", " ") }}</dd></div>
+          <div><dt>Closes</dt><dd>{{ election["closes_at"].replace("T", " ") }}</dd></div>
+          <div><dt>Candidates</dt><dd>{{ election["candidate_count"] }}</dd></div>
+          {% if election_status(election) == "closed" %}
+            <div><dt>Votes</dt><dd>{{ election["vote_count"] }}</dd></div>
+          {% endif %}
+        </dl>
+        <a class="button secondary" href="{{ url_for('election_detail', election_id=election['id']) }}">View election</a>
+      </article>
+    {% else %}
+      <p class="empty">No elections have been created yet.</p>
+    {% endfor %}
+  </section>
+{% endblock %}

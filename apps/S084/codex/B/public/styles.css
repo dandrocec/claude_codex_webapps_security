@@ -1,0 +1,308 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --text: #17202a;
+  --muted: #5d6b7a;
+  --line: #dbe1e8;
+  --accent: #146c5f;
+  --accent-dark: #0f5148;
+  --danger: #9f1d35;
+  --success: #176f3d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px clamp(18px, 5vw, 56px);
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  color: var(--text);
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.container {
+  width: min(1080px, calc(100% - 32px));
+  margin: 32px auto;
+}
+
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+.event-grid,
+.ticket-list {
+  display: grid;
+  gap: 16px;
+}
+
+.card,
+.ticket,
+.form-panel,
+.detail,
+.purchase-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(23, 32, 42, 0.05);
+}
+
+.card {
+  padding: 20px;
+}
+
+.card-main p:last-child {
+  margin-bottom: 0;
+}
+
+.meta-row,
+.ticket {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+.meta-row {
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 14px;
+}
+
+.muted,
+.empty {
+  color: var(--muted);
+}
+
+.button,
+button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--accent-dark);
+  color: #fff;
+  text-decoration: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background: #87919c;
+}
+
+.small {
+  min-height: 34px;
+  padding: 7px 12px;
+}
+
+.full {
+  width: 100%;
+}
+
+.inline-form {
+  display: inline;
+}
+
+.link-button {
+  min-height: 0;
+  padding: 0;
+  color: var(--accent);
+  background: transparent;
+  font: inherit;
+  font-weight: 400;
+}
+
+.form-panel {
+  width: min(460px, 100%);
+  margin: 0 auto;
+  padding: 26px;
+}
+
+.form-panel.wide {
+  width: min(680px, 100%);
+}
+
+form {
+  display: grid;
+  gap: 16px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 11px 12px;
+  color: var(--text);
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.error-list,
+.message {
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.error-list {
+  margin-bottom: 18px;
+  border: 1px solid #efb3bf;
+  background: #fff2f4;
+  color: var(--danger);
+}
+
+.error-list p,
+.message {
+  margin: 0;
+}
+
+.messages {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.message.error {
+  background: #fff2f4;
+  color: var(--danger);
+  border: 1px solid #efb3bf;
+}
+
+.message.success {
+  background: #eefaf2;
+  color: var(--success);
+  border: 1px solid #a8dfb9;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 24px;
+  padding: 26px;
+}
+
+.description {
+  white-space: pre-wrap;
+}
+
+.purchase-box {
+  padding: 20px;
+  align-self: start;
+}
+
+.inventory {
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.ticket {
+  padding: 18px 20px;
+}
+
+.ticket h2 {
+  margin-bottom: 4px;
+}
+
+.ticket-code {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+}
+
+.ticket-code span {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 720px) {
+  .topbar,
+  .page-head,
+  .meta-row,
+  .ticket {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .detail {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-code {
+    text-align: left;
+  }
+}

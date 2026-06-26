@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+  <div class="panel">
+    <h1>Register</h1>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="name">Display name</label>
+      <input id="name" name="name" maxlength="100" required>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" maxlength="254" required>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" minlength="12" maxlength="256" required>
+      <div class="actions"><button type="submit">Create account</button></div>
+    </form>
+  </div>
+{% endblock %}

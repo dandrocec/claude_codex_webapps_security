@@ -1,0 +1,23 @@
+<%- include('partials/open', { title: mode === 'login' ? 'Log in' : 'Register' }) %>
+<section class="auth-panel">
+  <h1><%= mode === 'login' ? 'Log in' : 'Create account' %></h1>
+  <form action="/<%= mode %>" method="post" class="stack">
+    <label>
+      Username
+      <input name="username" autocomplete="username" required minlength="3">
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" autocomplete="<%= mode === 'login' ? 'current-password' : 'new-password' %>" required minlength="8">
+    </label>
+    <button type="submit"><%= mode === 'login' ? 'Log in' : 'Register' %></button>
+  </form>
+  <p>
+    <% if (mode === 'login') { %>
+      Need an account? <a href="/register">Register</a>
+    <% } else { %>
+      Already have an account? <a href="/login">Log in</a>
+    <% } %>
+  </p>
+</section>
+<%- include('partials/close') %>

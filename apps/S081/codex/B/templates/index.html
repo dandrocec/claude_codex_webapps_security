@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Elections{% endblock %}
+{% block content %}
+  <h1>Elections</h1>
+  {% if not elections %}
+    <div class="panel">No elections have been created.</div>
+  {% endif %}
+  {% for election in elections %}
+    <section class="election">
+      <h2><a href="{{ url_for('election_detail', election_id=election.id) }}">{{ election.title }}</a></h2>
+      <p>{{ election.description }}</p>
+      <p class="muted">Open: {{ format_dt(election.opens_at) }} | Close: {{ format_dt(election.closes_at) }} | Votes: {{ election.vote_count }}</p>
+      <a class="button" href="{{ url_for('election_detail', election_id=election.id) }}">View</a>
+    </section>
+  {% endfor %}
+{% endblock %}

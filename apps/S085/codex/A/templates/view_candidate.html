@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ profile.name }}{% endblock %}
+{% block content %}
+<section class="panel">
+  <div class="profile-header">
+    <div>
+      <h1>{{ profile.name }}</h1>
+      <p class="headline">{{ profile.headline or "No headline yet" }}</p>
+      <p class="muted">{{ profile.email }}{% if profile.location %} · {{ profile.location }}{% endif %}</p>
+    </div>
+    {% if profile.resume_filename %}
+      <a class="primary-action" href="{{ url_for('resume_file', filename=profile.resume_filename) }}">Download resume</a>
+    {% endif %}
+  </div>
+  <dl class="profile-detail">
+    <dt>Skills</dt>
+    <dd>{{ profile.skills or "No skills listed" }}</dd>
+    <dt>Experience</dt>
+    <dd class="preserve-lines">{{ profile.experience or "No experience summary provided" }}</dd>
+  </dl>
+</section>
+{% endblock %}

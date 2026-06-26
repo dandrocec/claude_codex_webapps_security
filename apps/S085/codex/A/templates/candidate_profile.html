@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>My candidate profile</h1>
+  <form method="post" enctype="multipart/form-data" class="stacked-form">
+    <label>
+      Headline
+      <input name="headline" value="{{ profile.headline if profile else '' }}" placeholder="Senior Flask Developer">
+    </label>
+    <label>
+      Location
+      <input name="location" value="{{ profile.location if profile else '' }}" placeholder="Zagreb, Croatia">
+    </label>
+    <label>
+      Skills
+      <input name="skills" value="{{ profile.skills if profile else '' }}" placeholder="Python, Flask, SQL, Docker">
+    </label>
+    <label>
+      Experience
+      <textarea name="experience" rows="8" placeholder="Summarize your experience">{{ profile.experience if profile else '' }}</textarea>
+    </label>
+    <label>
+      Resume
+      <input type="file" name="resume" accept=".pdf,.doc,.docx,.txt,.rtf">
+    </label>
+    {% if profile and profile.resume_filename %}
+      <p class="muted">Current resume: <a href="{{ url_for('resume_file', filename=profile.resume_filename) }}">{{ profile.resume_original_name }}</a></p>
+    {% endif %}
+    <button type="submit">Save profile</button>
+  </form>
+</section>
+{% endblock %}

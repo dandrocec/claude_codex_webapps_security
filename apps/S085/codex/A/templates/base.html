@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Recruitment Portal{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('index') }}">Recruitment Portal</a>
+    <nav>
+      {% if g.user %}
+        {% if g.user.role == "candidate" %}
+          <a href="{{ url_for('candidate_profile') }}">My Profile</a>
+        {% elif g.user.role == "recruiter" %}
+          <a href="{{ url_for('search_candidates') }}">Candidate Search</a>
+        {% endif %}
+        <span class="user-label">{{ g.user.name }} · {{ g.user.role }}</span>
+        <form class="inline-form" method="post" action="{{ url_for('logout') }}">
+          <button type="submit">Sign out</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('login') }}">Sign in</a>
+        <a class="button-link" href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="page">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <section class="flash-list" aria-label="Messages">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </section>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

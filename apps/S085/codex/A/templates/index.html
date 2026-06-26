@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Recruitment Portal{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>Recruitment Portal</h1>
+    <p>Create a candidate profile, upload a resume, or search the talent pool as a recruiter.</p>
+  </div>
+  <div class="hero-actions">
+    <a class="primary-action" href="{{ url_for('register') }}">Create account</a>
+    <a class="secondary-action" href="{{ url_for('login') }}">Sign in</a>
+  </div>
+</section>
+{% endblock %}

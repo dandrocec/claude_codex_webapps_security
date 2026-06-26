@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Candidate profile{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>{{ profile.full_name }}</h1>
+  <p class="muted">{{ profile.email }}</p>
+  <dl>
+    <dt>Headline</dt>
+    <dd>{{ profile.headline or "Not set" }}</dd>
+    <dt>Skills</dt>
+    <dd>{{ profile.skills or "Not set" }}</dd>
+    <dt>Experience</dt>
+    <dd class="prewrap">{{ profile.experience or "Not set" }}</dd>
+    <dt>Resume</dt>
+    <dd>
+      {% if profile.resume_filename %}
+        <a href="{{ url_for('download_resume', user_id=profile.user_id) }}">Download resume</a>
+      {% else %}
+        Not uploaded
+      {% endif %}
+    </dd>
+  </dl>
+</section>
+{% endblock %}

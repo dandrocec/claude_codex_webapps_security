@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Your candidate profile</h1>
+  <dl>
+    <dt>Name</dt>
+    <dd>{{ profile.full_name }}</dd>
+    <dt>Headline</dt>
+    <dd>{{ profile.headline or "Not set" }}</dd>
+    <dt>Skills</dt>
+    <dd>{{ profile.skills or "Not set" }}</dd>
+    <dt>Resume</dt>
+    <dd>
+      {% if profile.resume_filename %}
+        <a href="{{ url_for('download_resume', user_id=profile.user_id) }}">Download resume</a>
+      {% else %}
+        Not uploaded
+      {% endif %}
+    </dd>
+  </dl>
+  <a class="button primary" href="{{ url_for('edit_profile') }}">Edit profile</a>
+</section>
+{% endblock %}

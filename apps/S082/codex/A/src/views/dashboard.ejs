@@ -1,0 +1,66 @@
+<%- include('partials/open', { title: 'Files' }) %>
+<section class="grid two">
+  <aside class="panel">
+    <h2>Folders</h2>
+    <a class="folder <%= selectedFolder === 'default' ? 'active' : '' %>" href="/?folder=default">default</a>
+    <% folders.forEach(folder => { %>
+      <% if (folder.folder !== 'default') { %>
+        <a class="folder <%= selectedFolder === folder.folder ? 'active' : '' %>" href="/?folder=<%= encodeURIComponent(folder.folder) %>">
+          <span><%= folder.folder %></span>
+          <small><%= folder.file_count %></small>
+        </a>
+      <% } %>
+    <% }) %>
+  </aside>
+
+  <section class="panel">
+    <div class="section-head">
+      <div>
+        <h1>Files</h1>
+        <p>Signed in as <%= user.username %></p>
+      </div>
+    </div>
+    <form class="upload" action="/files" method="post" enctype="multipart/form-data">
+      <input name="folder" value="<%= selectedFolder %>" placeholder="Folder name">
+      <input name="file" type="file" required>
+      <button type="submit">Upload</button>
+    </form>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Folder</th>
+            <th>Size</th>
+            <th>Active links</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (files.length === 0) { %>
+            <tr><td colspan="5" class="empty">No files in this folder.</td></tr>
+          <% } %>
+          <% files.forEach(file => { %>
+            <tr>
+              <td><%= file.original_name %></td>
+              <td><%= file.folder %></td>
+              <td><%= Math.ceil(file.size / 1024) %> KB</td>
+              <td><%= file.active_links %></td>
+              <td class="actions">
+                <a href="/files/<%= file.id %>/download">Download</a>
+                <form action="/files/<%= file.id %>/share-links" method="post">
+                  <button type="submit">Share</button>
+                </form>
+                <form action="/files/<%= file.id %>/delete" method="post" onsubmit="return confirm('Delete this file?')">
+                  <button type="submit" class="danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+<%- include('partials/close') %>

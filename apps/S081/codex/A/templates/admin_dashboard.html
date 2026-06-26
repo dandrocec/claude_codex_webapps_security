@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+  <section class="page-head">
+    <div>
+      <h1>Admin</h1>
+      <p>Create and manage elections.</p>
+    </div>
+    <a class="button" href="{{ url_for('create_election') }}">Create election</a>
+  </section>
+
+  <section class="panel">
+    <table>
+      <thead>
+        <tr>
+          <th>Election</th>
+          <th>Status</th>
+          <th>Candidates</th>
+          <th>Votes</th>
+          <th>Window</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for election in elections %}
+          <tr>
+            <td><a href="{{ url_for('election_detail', election_id=election['id']) }}">{{ election["title"] }}</a></td>
+            <td><span class="badge {{ election_status(election) }}">{{ election_status(election) }}</span></td>
+            <td>{{ election["candidate_count"] }}</td>
+            <td>{{ election["vote_count"] }}</td>
+            <td>{{ election["opens_at"].replace("T", " ") }} to {{ election["closes_at"].replace("T", " ") }}</td>
+            <td>
+              <form method="post" action="{{ url_for('delete_election', election_id=election['id']) }}" onsubmit="return confirm('Delete this election and all votes?')">
+                <button class="link-danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="6">No elections yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}

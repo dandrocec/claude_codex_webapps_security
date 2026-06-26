@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+
+<section class="form-panel wide">
+  <h1>Create event</h1>
+  <%- include("partials/errors", { errors }) %>
+  <form method="post" action="/events" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Title
+      <input name="title" maxlength="120" required value="<%= old.title || "" %>">
+    </label>
+    <label>
+      Description
+      <textarea name="description" maxlength="2000" rows="5" required><%= old.description || "" %></textarea>
+    </label>
+    <label>
+      Starts at
+      <input name="starts_at" type="datetime-local" required value="<%= old.starts_at || "" %>">
+    </label>
+    <label>
+      Ticket limit
+      <input name="ticket_limit" type="number" min="1" max="100000" required value="<%= old.ticket_limit || "" %>">
+    </label>
+    <button type="submit" class="button">Create event</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

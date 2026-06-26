@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+<section class="panel narrow">
+  <h1>Sign in</h1>
+  <form method="post">
+    {{ csrf_field() }}
+    <label>Email
+      <input name="email" type="email" maxlength="254" required>
+    </label>
+    <label>Password
+      <input name="password" type="password" required>
+    </label>
+    <button class="primary" type="submit">Sign in</button>
+  </form>
+</section>
+{% endblock %}

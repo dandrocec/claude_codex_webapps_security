@@ -1,0 +1,43 @@
+<%- include('partials/open', { title: 'Shares' }) %>
+<section class="panel">
+  <div class="section-head">
+    <div>
+      <h1>Share links</h1>
+      <p>Create links from the Files page and revoke them here.</p>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Folder</th>
+          <th>Link</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (shares.length === 0) { %>
+          <tr><td colspan="5" class="empty">No share links yet.</td></tr>
+        <% } %>
+        <% shares.forEach(share => { %>
+          <tr>
+            <td><%= share.original_name %></td>
+            <td><%= share.folder %></td>
+            <td><a href="/s/<%= share.token %>">/s/<%= share.token %></a></td>
+            <td><%= share.revoked_at ? 'Revoked' : 'Active' %></td>
+            <td class="actions">
+              <% if (!share.revoked_at) { %>
+                <form action="/shares/<%= share.id %>/revoke" method="post">
+                  <button type="submit" class="danger">Revoke</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+<%- include('partials/close') %>

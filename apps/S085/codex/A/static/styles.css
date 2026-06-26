@@ -1,0 +1,298 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f8fb;
+  --panel: #ffffff;
+  --text: #1d2733;
+  --muted: #667085;
+  --line: #d9e0ea;
+  --primary: #1f6f5b;
+  --primary-dark: #155242;
+  --danger: #b42318;
+  --success: #137333;
+  --warning: #9a6700;
+  --info: #175cd3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.site-header {
+  align-items: center;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  min-height: 64px;
+  padding: 0 32px;
+}
+
+.brand {
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+nav {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+
+.user-label,
+.muted {
+  color: var(--muted);
+}
+
+.inline-form {
+  display: inline;
+}
+
+.page {
+  margin: 0 auto;
+  max-width: 1040px;
+  padding: 32px 20px;
+}
+
+.hero,
+.panel,
+.candidate-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.hero {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 48px;
+}
+
+.hero h1,
+.panel h1 {
+  margin-top: 0;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 620px;
+}
+
+.hero-actions,
+.profile-header {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.panel {
+  margin-bottom: 24px;
+  padding: 28px;
+}
+
+.narrow {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 520px;
+}
+
+.stacked-form {
+  display: grid;
+  gap: 18px;
+}
+
+.stacked-form label,
+.search-form label {
+  color: #344054;
+  display: grid;
+  font-weight: 700;
+  gap: 6px;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button,
+.button-link,
+.primary-action,
+.secondary-action {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-weight: 700;
+  justify-content: center;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+button,
+.button-link,
+.primary-action {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+button:hover,
+.button-link:hover,
+.primary-action:hover {
+  background: var(--primary-dark);
+  text-decoration: none;
+}
+
+.secondary-action {
+  background: #eef4ff;
+  border-color: #c7d7fe;
+  color: #1849a9;
+}
+
+.search-form {
+  align-items: end;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr auto;
+}
+
+.results {
+  display: grid;
+  gap: 16px;
+}
+
+.candidate-card {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 22px;
+}
+
+.candidate-card h2 {
+  margin: 0;
+}
+
+.headline {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.profile-header {
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.profile-detail {
+  display: grid;
+  gap: 10px 20px;
+  grid-template-columns: 140px 1fr;
+}
+
+.profile-detail dt {
+  color: #344054;
+  font-weight: 700;
+}
+
+.profile-detail dd {
+  margin: 0;
+}
+
+.preserve-lines {
+  white-space: pre-wrap;
+}
+
+.flash-list {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.flash {
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.flash-danger {
+  background: #fef3f2;
+  color: var(--danger);
+}
+
+.flash-success {
+  background: #ecfdf3;
+  color: var(--success);
+}
+
+.flash-warning {
+  background: #fffaeb;
+  color: var(--warning);
+}
+
+.flash-info {
+  background: #eff8ff;
+  color: var(--info);
+}
+
+.empty-state {
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .site-header,
+  .hero,
+  .candidate-card,
+  .profile-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .site-header {
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  nav,
+  .hero-actions {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .hero {
+    padding: 28px;
+  }
+
+  .search-form,
+  .profile-detail {
+    grid-template-columns: 1fr;
+  }
+}

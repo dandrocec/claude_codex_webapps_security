@@ -1,0 +1,20 @@
+<%- include("partials/header") %>
+
+<section class="form-panel">
+  <h1>Sign in</h1>
+  <%- include("partials/errors", { errors }) %>
+  <form method="post" action="/login" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Email
+      <input name="email" type="email" maxlength="254" required value="<%= old.email || "" %>">
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" maxlength="128" required>
+    </label>
+    <button type="submit" class="button">Sign in</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,24 @@
+<%- include("partials/header") %>
+
+<section class="form-panel">
+  <h1>Create account</h1>
+  <%- include("partials/errors", { errors }) %>
+  <form method="post" action="/register" novalidate>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <label>
+      Name
+      <input name="name" maxlength="80" required value="<%= old.name || "" %>">
+    </label>
+    <label>
+      Email
+      <input name="email" type="email" maxlength="254" required value="<%= old.email || "" %>">
+    </label>
+    <label>
+      Password
+      <input name="password" type="password" minlength="12" maxlength="128" required>
+    </label>
+    <button type="submit" class="button">Register</button>
+  </form>
+</section>
+
+<%- include("partials/footer") %>
