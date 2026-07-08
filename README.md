@@ -1,4 +1,4 @@
-# Claude Security Journal
+# Research on Security of Claude Code and Codex CLI generated web application
 
 Infrastructure and data-collection scaffolding for a security research study that
 compares AI coding tools (e.g. `claude` vs `codex`) on the security properties of
